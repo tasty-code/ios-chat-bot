@@ -6,28 +6,19 @@
 //
 
 struct AssistantMessage: GPTMessagable {
-    let role: GPTMessageRole = .assistant
+    let role: GPTMessageRole
     let content: String?
     let name: String?
     let toolCalls: [GPTToolCall]?
     
-    enum CodingKeys: String, CodingKey {
-        case role
-        case content
-        case name
-        case toolCalls = "tool_calls"
+    init(requestMessage: GPTMessage) {
+        self.role = requestMessage.role
+        self.content = requestMessage.content
+        self.name = requestMessage.name
+        self.toolCalls = requestMessage.toolCalls
     }
-}
-
-struct GPTToolCall: Codable {
-    var id: String
-    var type: String
-    var function: Function
-}
-
-extension GPTToolCall {
-    struct Function: Codable {
-        var name: String
-        var arguments: String
+    
+    func asRequestMessage() -> GPTMessage {
+        GPTMessage(role: role, content: content, name: name, toolCalls: toolCalls, toolCallID: nil)
     }
 }
