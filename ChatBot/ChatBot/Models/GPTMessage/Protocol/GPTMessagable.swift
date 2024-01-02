@@ -7,7 +7,7 @@
 
 protocol GPTMessagable: Codable {
     var role: GPTMessageRole { get }
-    var content: String? { get set }
+    var content: String? { get }
 }
 
 enum GPTMessageRole: String, Codable {

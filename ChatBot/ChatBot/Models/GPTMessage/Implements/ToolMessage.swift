@@ -6,9 +6,9 @@
 //
 
 struct ToolMessage: GPTMessagable {
-    var role: GPTMessageRole = .tool
-    var content: String?
-    var toolCallID: String?
+    let role: GPTMessageRole = .tool
+    let content: String?
+    let toolCallID: String?
     
     enum CodingKeys: String, CodingKey {
         case role

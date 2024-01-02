@@ -6,7 +6,7 @@
 //
 
 struct DefaultMessage: GPTMessagable {
-    var role: GPTMessageRole
-    var content: String?
-    var name: String?
+    let role: GPTMessageRole
+    let content: String?
+    let name: String?
 }

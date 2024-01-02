@@ -6,10 +6,10 @@
 //
 
 struct AssistantMessage: GPTMessagable {
-    var role: GPTMessageRole = .assistant
-    var content: String?
-    var name: String?
-    var toolCalls: [GPTToolCall]?
+    let role: GPTMessageRole = .assistant
+    let content: String?
+    let name: String?
+    let toolCalls: [GPTToolCall]?
     
     enum CodingKeys: String, CodingKey {
         case role
