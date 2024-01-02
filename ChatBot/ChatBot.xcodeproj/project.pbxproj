@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0DF9976D2B43B15F0055C836 /* GPTMessagable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF9976C2B43B15F0055C836 /* GPTMessagable.swift */; };
+		0DF997702B43B9890055C836 /* DefaultMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF9976F2B43B9890055C836 /* DefaultMessage.swift */; };
+		0DF997722B43BC590055C836 /* ToolMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF997712B43BC590055C836 /* ToolMessage.swift */; };
+		0DF997742B43BCC50055C836 /* AssistantMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF997732B43BCC50055C836 /* AssistantMessage.swift */; };
 		B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */; };
 		B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */; };
 		B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2C02B42D1BB00818B3C /* ViewController.swift */; };
@@ -16,6 +20,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0DF9976C2B43B15F0055C836 /* GPTMessagable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTMessagable.swift; sourceTree = "<group>"; };
+		0DF9976F2B43B9890055C836 /* DefaultMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMessage.swift; sourceTree = "<group>"; };
+		0DF997712B43BC590055C836 /* ToolMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolMessage.swift; sourceTree = "<group>"; };
+		0DF997732B43BCC50055C836 /* AssistantMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantMessage.swift; sourceTree = "<group>"; };
 		B4B3E2B92B42D1BB00818B3C /* ChatBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +45,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0DF997672B43AD8F0055C836 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0DF9976A2B43B1220055C836 /* GPTMessage */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0DF9976A2B43B1220055C836 /* GPTMessage */ = {
+			isa = PBXGroup;
+			children = (
+				0DF9976E2B43B9370055C836 /* Implements */,
+				0DF9976B2B43B13F0055C836 /* Protocol */,
+			);
+			path = GPTMessage;
+			sourceTree = "<group>";
+		};
+		0DF9976B2B43B13F0055C836 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				0DF9976C2B43B15F0055C836 /* GPTMessagable.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		0DF9976E2B43B9370055C836 /* Implements */ = {
+			isa = PBXGroup;
+			children = (
+				0DF9976F2B43B9890055C836 /* DefaultMessage.swift */,
+				0DF997712B43BC590055C836 /* ToolMessage.swift */,
+				0DF997732B43BCC50055C836 /* AssistantMessage.swift */,
+			);
+			path = Implements;
+			sourceTree = "<group>";
+		};
 		B4B3E2B02B42D1BB00818B3C = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +99,7 @@
 		B4B3E2BB2B42D1BB00818B3C /* ChatBot */ = {
 			isa = PBXGroup;
 			children = (
+				0DF997672B43AD8F0055C836 /* Models */,
 				B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */,
 				B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */,
 				B4B3E2C02B42D1BB00818B3C /* ViewController.swift */,
@@ -138,8 +182,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DF997742B43BCC50055C836 /* AssistantMessage.swift in Sources */,
+				0DF997702B43B9890055C836 /* DefaultMessage.swift in Sources */,
 				B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */,
+				0DF997722B43BC590055C836 /* ToolMessage.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
+				0DF9976D2B43B15F0055C836 /* GPTMessagable.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
