@@ -6,7 +6,7 @@
 //
 
 struct GPTRequestBody: Encodable {
-    var model: String { "gpt-3.5-turbo" }
+    var model: String { "gpt-3.5-turbo-1106" }
     var messages: [GPTMessagable]
     
     func encode(to encoder: Encoder) throws {
