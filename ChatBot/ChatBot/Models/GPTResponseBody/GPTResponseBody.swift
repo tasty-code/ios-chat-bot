@@ -35,7 +35,7 @@ extension GPTResponseBody {
         case choices
         case createdDate = "created"
         case model
-        case systemFingerPrint
+        case systemFingerPrint = "system_fingerprint"
         case object
         case usage
     }
