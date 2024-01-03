@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37847FCD2B45121F00BE5E93 /* ChatCommonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37847FCC2B45121F00BE5E93 /* ChatCommonModel.swift */; };
 		37B6CE872B43B1170075535E /* ChatRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B6CE862B43B1170075535E /* ChatRequest.swift */; };
 		66E5FF792B44FD1A0038398C /* ChatResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E5FF782B44FD1A0038398C /* ChatResponse.swift */; };
 		B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		37847FCC2B45121F00BE5E93 /* ChatCommonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCommonModel.swift; sourceTree = "<group>"; };
 		37B6CE862B43B1170075535E /* ChatRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRequest.swift; sourceTree = "<group>"; };
 		66E5FF782B44FD1A0038398C /* ChatResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponse.swift; sourceTree = "<group>"; };
 		B4B3E2B92B42D1BB00818B3C /* ChatBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,6 +48,7 @@
 			children = (
 				37B6CE862B43B1170075535E /* ChatRequest.swift */,
 				66E5FF782B44FD1A0038398C /* ChatResponse.swift */,
+				37847FCC2B45121F00BE5E93 /* ChatCommonModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -152,6 +155,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37847FCD2B45121F00BE5E93 /* ChatCommonModel.swift in Sources */,
 				66E5FF792B44FD1A0038398C /* ChatResponse.swift in Sources */,
 				B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */,
 				37B6CE872B43B1170075535E /* ChatRequest.swift in Sources */,

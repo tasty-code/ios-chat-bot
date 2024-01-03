@@ -7,13 +7,8 @@
 
 import Foundation
 
-struct ChatRequest: Decodable {
+struct ChatRequest: Encodable {
     let model: String
     let message: [Message]
-  
-}
-
-struct Message: Decodable {
-    let role: String
-    let content: String
+    let stream: Bool?
 }
