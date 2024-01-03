@@ -1,7 +1,6 @@
 import Foundation
 
 extension Bundle {
-    
     var apiKey: String {
         guard let filePath = Bundle.main.path(forResource: "APIKeys", ofType: "plist"),
               let plistDict = NSDictionary(contentsOfFile: filePath) else {
