@@ -11,7 +11,7 @@ struct ToolMessage: GPTMessagable {
     let toolCallID: String?
     
     init(requestMessage: GPTMessage) {
-        self.role = requestMessage.role
+        self.role = .tool
         self.content = requestMessage.content
         self.toolCallID = requestMessage.toolCallID
     }

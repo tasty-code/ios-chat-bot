@@ -12,7 +12,7 @@ struct AssistantMessage: GPTMessagable {
     let toolCalls: [GPTToolCall]?
     
     init(requestMessage: GPTMessage) {
-        self.role = requestMessage.role
+        self.role = .assistant
         self.content = requestMessage.content
         self.name = requestMessage.name
         self.toolCalls = requestMessage.toolCalls

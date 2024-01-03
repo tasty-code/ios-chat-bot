@@ -1,17 +1,17 @@
 //
-//  DefaultMessage.swift
+//  SystemMessage.swift
 //  ChatBot
 //
 //  Created by 김준성 on 1/2/24.
 //
 
-struct DefaultMessage: GPTMessagable {
+struct SystemMessage: GPTMessagable {
     let role: GPTMessageRole
     let content: String?
     let name: String?
     
     init(requestMessage: GPTMessage) {
-        self.role = requestMessage.role
+        self.role = .system
         self.content = requestMessage.content
         self.name = requestMessage.name
     }
