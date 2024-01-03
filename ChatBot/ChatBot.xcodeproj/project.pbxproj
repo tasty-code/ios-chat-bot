@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7F7F43A52B44F0D2000CB9CC /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F7F43A42B44F0D2000CB9CC /* APIKeys.plist */; };
+		7F7F43A82B44F247000CB9CC /* GPTResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7F43A72B44F247000CB9CC /* GPTResponseDTO.swift */; };
 		B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */; };
 		B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */; };
 		B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2C02B42D1BB00818B3C /* ViewController.swift */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		7F7F43A42B44F0D2000CB9CC /* APIKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
+		7F7F43A72B44F247000CB9CC /* GPTResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTResponseDTO.swift; sourceTree = "<group>"; };
 		B4B3E2B92B42D1BB00818B3C /* ChatBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -39,6 +41,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7F7F43A62B44F20D000CB9CC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7F7F43A72B44F247000CB9CC /* GPTResponseDTO.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		B4B3E2B02B42D1BB00818B3C = {
 			isa = PBXGroup;
 			children = (
@@ -59,6 +69,7 @@
 		B4B3E2BB2B42D1BB00818B3C /* ChatBot */ = {
 			isa = PBXGroup;
 			children = (
+				7F7F43A62B44F20D000CB9CC /* Models */,
 				DE584B362B44F02E00B04403 /* Application */,
 				DE584B352B44EFB400B04403 /* Resources */,
 				DE584B342B44EF9D00B04403 /* Extensions */,
@@ -175,6 +186,7 @@
 			files = (
 				B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
+				7F7F43A82B44F247000CB9CC /* GPTResponseDTO.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
 				DE584B302B44EE8C00B04403 /* Bundle+Extension.swift in Sources */,
 			);
