@@ -1,5 +1,5 @@
 //
-//  ChatRequest.swift
+//  ChatRequestModel.swift
 //  ChatBot
 //
 //  Created by Wonji Ha on 1/2/24.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct ChatRequest: Encodable {
+struct ChatRequestModel: Encodable {
     let model: String
-    let message: [Message]
+    let messages: [Message]
     let stream: Bool?
 }

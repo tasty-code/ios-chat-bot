@@ -1,5 +1,5 @@
 //
-//  ChatResponse.swift
+//  ChatResponseModel.swift
 //  ChatBot
 //
 //  Created by 김예준 on 1/3/24.
@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct ChatResponse: Decodable {
+struct ChatResponseModel: Decodable {
     let id: String
     let object: String
     let created: Int
     let model: String
-    let systemFingerprint: String
+    let systemFingerprint: String?
     let choices: [Choice]
     let usage: Usage
     
@@ -36,7 +36,7 @@ struct Choice: Decodable {
 }
 
 struct Usage: Decodable {
-    let promptTokens: Int
+    let promptTokens: Int?
     let completionTokens: Int
     let totalTokens: Int
     
