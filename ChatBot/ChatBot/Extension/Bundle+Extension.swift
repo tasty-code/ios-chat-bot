@@ -7,7 +7,6 @@ extension Bundle {
               let plistDict = NSDictionary(contentsOfFile: filePath) else {
             fatalError("APIKeys.plist를 찾지 못했습니다..")
         }
-        
         guard let value = plistDict.object(forKey: "API_KEY") as? String else {
             fatalError("api key를 찾지 못했습니다.")
         }
