@@ -18,11 +18,10 @@ struct GPTResponseBody: Decodable, Identifiable {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let unixTimeStamp = try container.decode(Int.self, forKey: .created)
         
         self.id = try container.decode(String.self, forKey: .id)
         self.choices = try container.decode([GPTChoice].self, forKey: .choices)
-        self.created = Date(timeIntervalSinceNow: TimeInterval(unixTimeStamp))
+        self.created = Date(unixTimeStamp: try container.decode(UInt.self, forKey: .created))
         self.model = try container.decode(String.self, forKey: .model)
         self.systemFingerPrint = try container.decode(String.self, forKey: .systemFingerPrint)
         self.object = try container.decode(String.self, forKey: .object)
