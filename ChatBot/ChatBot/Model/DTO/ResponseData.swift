@@ -33,11 +33,6 @@ struct Choice: Decodable {
     }
 }
 
-// MARK: - Message
-struct Message: Decodable {
-    let role, content: String
-}
-
 // MARK: - Usage
 struct Usage: Decodable {
     let promptTokens, completionTokens, totalTokens: Int
