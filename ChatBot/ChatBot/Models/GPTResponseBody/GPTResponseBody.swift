@@ -10,7 +10,7 @@ import Foundation
 struct GPTResponseBody: Decodable, Identifiable {
     let id: String
     let choices: [GPTChoice]
-    let created: Date
+    let createdDate: Date
     let model: String
     let systemFingerPrint: String
     let object: String
@@ -21,7 +21,7 @@ struct GPTResponseBody: Decodable, Identifiable {
         
         self.id = try container.decode(String.self, forKey: .id)
         self.choices = try container.decode([GPTChoice].self, forKey: .choices)
-        self.created = Date(unixTimeStamp: try container.decode(UInt.self, forKey: .created))
+        self.createdDate = Date(unixTimeStamp: try container.decode(UInt.self, forKey: .createdDate))
         self.model = try container.decode(String.self, forKey: .model)
         self.systemFingerPrint = try container.decode(String.self, forKey: .systemFingerPrint)
         self.object = try container.decode(String.self, forKey: .object)
@@ -30,10 +30,10 @@ struct GPTResponseBody: Decodable, Identifiable {
 }
 
 extension GPTResponseBody {
-    enum CodingKeys: CodingKey {
+    enum CodingKeys: String, CodingKey {
         case id
         case choices
-        case created
+        case createdDate = "created"
         case model
         case systemFingerPrint
         case object
