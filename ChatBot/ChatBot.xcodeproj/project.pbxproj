@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7F4C9D712B452165006CD685 /* GPTMessageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C9D702B452165006CD685 /* GPTMessageDTO.swift */; };
+		7F4C9D752B452223006CD685 /* GPTMessageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C9D742B452223006CD685 /* GPTMessageable.swift */; };
+		7F4C9D772B4522B5006CD685 /* UserMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C9D762B4522B5006CD685 /* UserMessage.swift */; };
+		7F4C9D792B4522C1006CD685 /* SystemMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C9D782B4522C1006CD685 /* SystemMessage.swift */; };
+		7F4C9D7C2B45237F006CD685 /* MessageRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C9D7B2B45237F006CD685 /* MessageRole.swift */; };
+		7F4C9D7E2B45262B006CD685 /* AssistantMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C9D7D2B45262B006CD685 /* AssistantMessage.swift */; };
+		7F4C9D802B452A89006CD685 /* GPTRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C9D7F2B452A89006CD685 /* GPTRequestDTO.swift */; };
 		7F7F43A52B44F0D2000CB9CC /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F7F43A42B44F0D2000CB9CC /* APIKeys.plist */; };
 		7F7F43A82B44F247000CB9CC /* GPTResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7F43A72B44F247000CB9CC /* GPTResponseDTO.swift */; };
 		B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */; };
@@ -18,6 +25,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7F4C9D702B452165006CD685 /* GPTMessageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTMessageDTO.swift; sourceTree = "<group>"; };
+		7F4C9D742B452223006CD685 /* GPTMessageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTMessageable.swift; sourceTree = "<group>"; };
+		7F4C9D762B4522B5006CD685 /* UserMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMessage.swift; sourceTree = "<group>"; };
+		7F4C9D782B4522C1006CD685 /* SystemMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemMessage.swift; sourceTree = "<group>"; };
+		7F4C9D7B2B45237F006CD685 /* MessageRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRole.swift; sourceTree = "<group>"; };
+		7F4C9D7D2B45262B006CD685 /* AssistantMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantMessage.swift; sourceTree = "<group>"; };
+		7F4C9D7F2B452A89006CD685 /* GPTRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTRequestDTO.swift; sourceTree = "<group>"; };
 		7F7F43A42B44F0D2000CB9CC /* APIKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
 		7F7F43A72B44F247000CB9CC /* GPTResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTResponseDTO.swift; sourceTree = "<group>"; };
 		B4B3E2B92B42D1BB00818B3C /* ChatBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,10 +55,57 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7F4C9D6F2B45214D006CD685 /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				7F4C9D7A2B452320006CD685 /* MessageRole */,
+				7F4C9D732B452198006CD685 /* Implementation */,
+				7F4C9D722B45218B006CD685 /* Interface */,
+			);
+			path = Messages;
+			sourceTree = "<group>";
+		};
+		7F4C9D722B45218B006CD685 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				7F4C9D742B452223006CD685 /* GPTMessageable.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		7F4C9D732B452198006CD685 /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				7F4C9D762B4522B5006CD685 /* UserMessage.swift */,
+				7F4C9D782B4522C1006CD685 /* SystemMessage.swift */,
+				7F4C9D7D2B45262B006CD685 /* AssistantMessage.swift */,
+			);
+			path = Implementation;
+			sourceTree = "<group>";
+		};
+		7F4C9D7A2B452320006CD685 /* MessageRole */ = {
+			isa = PBXGroup;
+			children = (
+				7F4C9D7B2B45237F006CD685 /* MessageRole.swift */,
+			);
+			path = MessageRole;
+			sourceTree = "<group>";
+		};
+		7F4C9D812B453195006CD685 /* DTOs */ = {
+			isa = PBXGroup;
+			children = (
+				7F4C9D702B452165006CD685 /* GPTMessageDTO.swift */,
+				7F7F43A72B44F247000CB9CC /* GPTResponseDTO.swift */,
+				7F4C9D7F2B452A89006CD685 /* GPTRequestDTO.swift */,
+			);
+			path = DTOs;
+			sourceTree = "<group>";
+		};
 		7F7F43A62B44F20D000CB9CC /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				7F7F43A72B44F247000CB9CC /* GPTResponseDTO.swift */,
+				7F4C9D812B453195006CD685 /* DTOs */,
+				7F4C9D6F2B45214D006CD685 /* Messages */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -184,10 +245,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F4C9D792B4522C1006CD685 /* SystemMessage.swift in Sources */,
+				7F4C9D772B4522B5006CD685 /* UserMessage.swift in Sources */,
 				B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */,
+				7F4C9D712B452165006CD685 /* GPTMessageDTO.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
 				7F7F43A82B44F247000CB9CC /* GPTResponseDTO.swift in Sources */,
+				7F4C9D7E2B45262B006CD685 /* AssistantMessage.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
+				7F4C9D7C2B45237F006CD685 /* MessageRole.swift in Sources */,
+				7F4C9D802B452A89006CD685 /* GPTRequestDTO.swift in Sources */,
+				7F4C9D752B452223006CD685 /* GPTMessageable.swift in Sources */,
 				DE584B302B44EE8C00B04403 /* Bundle+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

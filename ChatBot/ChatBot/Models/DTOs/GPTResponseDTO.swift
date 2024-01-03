@@ -35,18 +35,13 @@ struct GPTResponseDTO: Decodable {
 
 struct Choice: Decodable {
     let index: Int
-    let message: Message
+    let message: GPTMessageDTO
     let finishReason: String
     
     enum CodingKeys: String, CodingKey {
         case index, message
         case finishReason = "finish_reason"
     }
-}
-
-struct Message: Decodable {
-    let role: String
-    let content: String
 }
 
 struct Usage: Decodable {
