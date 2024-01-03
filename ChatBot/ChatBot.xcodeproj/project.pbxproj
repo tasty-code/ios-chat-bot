@@ -59,12 +59,20 @@
 				B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */,
 				B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */,
 				B4B3E2C02B42D1BB00818B3C /* ViewController.swift */,
+				E3388FBA2B44E46800175C2C /* Model */,
 				B4B3E2C22B42D1BB00818B3C /* Main.storyboard */,
 				B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */,
 				B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */,
 				B4B3E2CA2B42D1BC00818B3C /* Info.plist */,
 			);
 			path = ChatBot;
+			sourceTree = "<group>";
+		};
+		E3388FBA2B44E46800175C2C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
