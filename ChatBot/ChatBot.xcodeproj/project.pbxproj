@@ -59,15 +59,47 @@
 		B4B3E2BB2B42D1BB00818B3C /* ChatBot */ = {
 			isa = PBXGroup;
 			children = (
-				B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */,
-				B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */,
-				B4B3E2C02B42D1BB00818B3C /* ViewController.swift */,
-				DE584B2F2B44EE8C00B04403 /* Bundle+Extension.swift */,
-				B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */,
-				B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */,
-				B4B3E2CA2B42D1BC00818B3C /* Info.plist */,
+				DE584B362B44F02E00B04403 /* Application */,
+				DE584B352B44EFB400B04403 /* Resources */,
+				DE584B342B44EF9D00B04403 /* Extensions */,
+				DE584B332B44EF8500B04403 /* Controllers */,
 			);
 			path = ChatBot;
+			sourceTree = "<group>";
+		};
+		DE584B332B44EF8500B04403 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B4B3E2C02B42D1BB00818B3C /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		DE584B342B44EF9D00B04403 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DE584B2F2B44EE8C00B04403 /* Bundle+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		DE584B352B44EFB400B04403 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */,
+				B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */,
+				B4B3E2CA2B42D1BC00818B3C /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		DE584B362B44F02E00B04403 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */,
+				B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */,
+			);
+			path = Application;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
