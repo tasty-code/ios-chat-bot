@@ -26,7 +26,14 @@ struct Choice: Codable {
 }
 
 struct Message: Codable {
-    let role, content: String?
+    let role: Role?
+    let content: String?
+}
+
+enum Role: String, Codable {
+    case system = "system"
+    case user = "user"
+    case assistant = "assistant"
 }
 
 struct Usage: Codable {
