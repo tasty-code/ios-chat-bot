@@ -13,6 +13,7 @@
 		B4B3E2C42B42D1BB00818B3C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4B3E2C22B42D1BB00818B3C /* Main.storyboard */; };
 		B4B3E2C62B42D1BC00818B3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */; };
 		B4B3E2C92B42D1BC00818B3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */; };
+		D00C334F2B44ECCE00E57445 /* ResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00C334E2B44ECCE00E57445 /* ResponseData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B4B3E2C82B42D1BC00818B3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B4B3E2CA2B42D1BC00818B3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D00C334E2B44ECCE00E57445 /* ResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,9 +70,18 @@
 			path = ChatBot;
 			sourceTree = "<group>";
 		};
+		D00C334D2B44ECC700E57445 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				D00C334E2B44ECCE00E57445 /* ResponseData.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
 		E3388FBA2B44E46800175C2C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D00C334D2B44ECC700E57445 /* DTO */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -148,6 +159,7 @@
 			files = (
 				B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
+				D00C334F2B44ECCE00E57445 /* ResponseData.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
