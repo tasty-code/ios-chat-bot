@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension URLRequest {
+extension Network {
     enum HTTPMethod: String {
         case get = "GET"
         case post = "POST"
@@ -17,7 +17,7 @@ extension URLRequest {
 protocol HTTPRequestable {
     var paths: [String]? { get }
     var queryStrings: [String: CustomStringConvertible]? { get }
-    var httpMethod: URLRequest.HTTPMethod { get }
+    var httpMethod: Network.HTTPMethod { get }
     
     func asURLRequest(urlString: String) -> URLRequest?
 }
@@ -25,7 +25,7 @@ protocol HTTPRequestable {
 extension HTTPRequestable {
     var paths: [String]? { nil }
     var queryStrings: [String: CustomStringConvertible]? { nil }
-    var httpMethod: URLRequest.HTTPMethod { .get }
+    var httpMethod: Network.HTTPMethod { .get }
     
     func asURLRequest(urlString: String) -> URLRequest? {
         guard var components = URLComponents(string: urlString) else {

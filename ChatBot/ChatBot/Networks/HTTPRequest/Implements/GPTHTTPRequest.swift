@@ -7,6 +7,8 @@
 
 import Foundation
 
-struct GPTHTTPRequest: HTTPRequestable {
-    let paths: [String]? = ["v1", "chat", "completions"]
+extension Network {
+    struct GPTHTTPRequest: HTTPRequestable {
+        let paths: [String]? = ["v1", "chat", "completions"]
+    }
 }

@@ -7,19 +7,20 @@
 
 import Foundation
 
-struct AuthorizeHTTPRequest: HTTPDecoratable {
-    let httpRequest: HTTPRequestable
-    let authorizationType: AuthorizationType
-    let authorizationKey: String
-    
-    func asURLRequest(urlString: String) -> URLRequest? {
-        var request = httpRequest.asURLRequest(urlString: urlString)
-        request?.setValue("\(authorizationType) \(authorizationKey)", forHTTPHeaderField: "Authorization")
-        return request
+extension Network {
+    struct AuthorizeHTTPRequest: HTTPDecoratable {
+        let httpRequest: HTTPRequestable
+        let authorizationType: AuthorizationType
+        let authorizationKey: String
+        
+        func asURLRequest(urlString: String) -> URLRequest? {
+            var request = httpRequest.asURLRequest(urlString: urlString)
+            request?.setValue("\(authorizationType) \(authorizationKey)", forHTTPHeaderField: "Authorization")
+            return request
+        }
     }
 }
-
-extension AuthorizeHTTPRequest {
+extension Network.AuthorizeHTTPRequest {
     enum AuthorizationType: CustomStringConvertible {
         case bearer
         
