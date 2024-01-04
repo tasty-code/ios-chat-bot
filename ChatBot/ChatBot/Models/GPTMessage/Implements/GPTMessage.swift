@@ -13,6 +13,14 @@ extension Model {
         let toolCalls: [GPTToolCall]?
         let toolCallID: String?
         
+        init(role: GPTMessageRole, content: String?, name: String?, toolCalls: [GPTToolCall]?, toolCallID: String?) {
+            self.role = role
+            self.content = content
+            self.name = name
+            self.toolCalls = toolCalls
+            self.toolCallID = toolCallID
+        }
+        
         init(requestMessage: Model.GPTMessage) {
             self.role = requestMessage.role
             self.content = requestMessage.content
