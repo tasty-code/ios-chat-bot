@@ -136,6 +136,7 @@
 		0DF9978F2B46668E0055C836 /* Networks */ = {
 			isa = PBXGroup;
 			children = (
+				0DF997A62B4680BB0055C836 /* Network.swift */,
 				0DF9979D2B467BB50055C836 /* HTTPPublisher */,
 				0DF997902B4666A00055C836 /* HTTPRequest */,
 			);
@@ -147,7 +148,6 @@
 			children = (
 				0DF997912B4666B10055C836 /* Implements */,
 				0DF997922B4666C30055C836 /* Protocols */,
-				0DF997A62B4680BB0055C836 /* Network.swift */,
 			);
 			path = HTTPRequest;
 			sourceTree = "<group>";
