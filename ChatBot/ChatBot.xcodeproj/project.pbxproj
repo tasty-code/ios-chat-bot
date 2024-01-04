@@ -13,6 +13,9 @@
 		B4B3E2C42B42D1BB00818B3C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4B3E2C22B42D1BB00818B3C /* Main.storyboard */; };
 		B4B3E2C62B42D1BC00818B3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */; };
 		B4B3E2C92B42D1BC00818B3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */; };
+		E15CF20F2B464A3B00DFBD44 /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15CF20E2B464A3B00DFBD44 /* APIResponse.swift */; };
+		E15CF2112B464B7200DFBD44 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15CF2102B464B7200DFBD44 /* APIRequest.swift */; };
+		E15CF2132B464BDE00DFBD44 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15CF2122B464BDE00DFBD44 /* Message.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B4B3E2C82B42D1BC00818B3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B4B3E2CA2B42D1BC00818B3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E15CF20E2B464A3B00DFBD44 /* APIResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
+		E15CF2102B464B7200DFBD44 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
+		E15CF2122B464BDE00DFBD44 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,16 +62,44 @@
 		B4B3E2BB2B42D1BB00818B3C /* ChatBot */ = {
 			isa = PBXGroup;
 			children = (
-				B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */,
-				B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */,
-				B4B3E2C02B42D1BB00818B3C /* ViewController.swift */,
-				B4B3E2C22B42D1BB00818B3C /* Main.storyboard */,
-				B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */,
-				B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */,
+				E15CF20D2B464A3B00DFBD44 /* Models */,
+				E17C39C62B46432A00C49CD8 /* Controllers */,
+				E17C39C52B46431E00C49CD8 /* Resources */,
 				B4B3E2CA2B42D1BC00818B3C /* Info.plist */,
 			);
 			path = ChatBot;
 			sourceTree = "<group>";
+		};
+		E15CF20D2B464A3B00DFBD44 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E15CF20E2B464A3B00DFBD44 /* APIResponse.swift */,
+				E15CF2102B464B7200DFBD44 /* APIRequest.swift */,
+				E15CF2122B464BDE00DFBD44 /* Message.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E17C39C52B46431E00C49CD8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B4B3E2C22B42D1BB00818B3C /* Main.storyboard */,
+				B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */,
+				B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */,
+				B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */,
+				B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		E17C39C62B46432A00C49CD8 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B4B3E2C02B42D1BB00818B3C /* ViewController.swift */,
+			);
+			name = Controllers;
+			path = ChatBot/Controllers;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -138,8 +172,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E15CF20F2B464A3B00DFBD44 /* APIResponse.swift in Sources */,
 				B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
+				E15CF2132B464BDE00DFBD44 /* Message.swift in Sources */,
+				E15CF2112B464B7200DFBD44 /* APIRequest.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,7 +329,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W9647FYSN7;
+				DEVELOPMENT_TEAM = VTYRZ4UDHF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChatBot/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -306,7 +343,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tacocat.ChatBot;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.janine-mango";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -321,7 +358,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W9647FYSN7;
+				DEVELOPMENT_TEAM = VTYRZ4UDHF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChatBot/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -335,7 +372,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tacocat.ChatBot;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.janine-mango";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
