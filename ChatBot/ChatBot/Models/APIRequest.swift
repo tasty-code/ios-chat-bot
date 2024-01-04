@@ -12,4 +12,3 @@ struct APIRequest: Encodable {
     let stream: Bool
     let messages: [Message]
 }
-
