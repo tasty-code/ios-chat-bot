@@ -25,23 +25,21 @@ struct ChatResponseModel: Decodable {
 struct Choice: Decodable {
     let index: Int
     let message: Message
-    let logProblems: Int?
     let finishReason: String
     
     enum CodingKeys: String, CodingKey {
         case index, message
-        case logProblems = "logprobs"
         case finishReason = "finish_reason"
     }
 }
 
 struct Usage: Decodable {
-    let promptTokens: Int?
+    let promptTokens: Int
     let completionTokens: Int
     let totalTokens: Int
     
     enum CodingKeys: String, CodingKey {
-        case promptTokens = "prompt_okens"
+        case promptTokens = "prompt_tokens"
         case completionTokens = "completion_tokens"
         case totalTokens = "total_tokens"
     }
