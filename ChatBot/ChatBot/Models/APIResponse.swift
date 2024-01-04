@@ -49,15 +49,15 @@ struct Usage: Decodable {
 struct LogProbs: Decodable {
     let content: [Content]?
     let topLogprobs: [TopLogProbs]?
-    
-    struct Content: Decodable {
-        let token: String
-        let logprob: Double
-        let bytes: [Int]?
-    }
-    
-    struct TopLogProbs: Decodable {
-        let token: String
-        let logprob: Double
-    }
+}
+
+struct Content: Decodable {
+    let token: String
+    let logprob: Double
+    let bytes: [Int]?
+}
+
+struct TopLogProbs: Decodable {
+    let token: String
+    let logprob: Double
 }
