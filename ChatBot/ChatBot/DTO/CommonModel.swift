@@ -8,14 +8,12 @@
 import Foundation
 
 struct Message: Codable {
-    let role: String
+    let role: Role
     let content: String?
-    
-    enum Role {
-        case system
-        case user
-        case assistant
-    }
 }
 
-
+enum Role: String, Codable {
+    case system = "system"
+    case user = "user"
+    case assistant = "assistant"
+}

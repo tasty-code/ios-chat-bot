@@ -16,16 +16,25 @@ struct ResponseModel: Decodable {
 struct Choice: Decodable {
     let index: Int
     let message: Message
-    let finishReason: String
+    let finishReason: FinishReason?
     
     enum CodingKeys: String, CodingKey {
         case finishReason = "finish_reason"
         case index, message
     }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.finishReason = try container.decode(FinishReason.self, forKey: .finishReason)
+        self.index = try container.decode(Int.self, forKey: .index)
+        self.message = try container.decode(Message.self, forKey: .message)
+    }
 }
 
-enum FinishReason {
+enum FinishReason: String, Decodable {
     case stop
     case length
-    case contentFilter
+    case contentFilter = "content_filter"
+    case toolCalls = "tool_calls"
 }
+
