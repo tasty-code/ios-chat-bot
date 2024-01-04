@@ -21,5 +21,6 @@ struct UserQuestionModel: Encodable {
 
 // MARK: - Message
 struct UserMessage: Encodable {
-    let role, content: String
+    let role: String
+    let content: String
 }
