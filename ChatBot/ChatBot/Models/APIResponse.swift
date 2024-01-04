@@ -10,7 +10,7 @@ import Foundation
 struct APIResponse: Decodable {
     let id: String
     let object: String
-    let created: Int
+    let created: Date
     let model: String
     let systemFingerprint: String
     let choices: [Choice]
@@ -26,7 +26,15 @@ struct Choice: Decodable {
     let index: Int
     let message: Message
     let logprobs: LogProbs?
-    let finishReason: String
+    let finishReason: FinishReason
+    
+    enum FinishReason: String, Decodable {
+        case stop
+        case length
+        case contentFilter = "content_filter"
+        case toolCalls = "tool_calls"
+        case functionCall = "function_call"
+    }
     
     private enum CodingKeys: String, CodingKey {
         case index, message, logprobs
