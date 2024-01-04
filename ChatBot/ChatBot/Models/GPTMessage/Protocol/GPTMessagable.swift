@@ -6,17 +6,19 @@
 //
 
 protocol GPTMessagable {
-    var role: GPTMessageRole { get }
+    var role: Model.GPTMessageRole { get }
     var content: String? { get }
     
-    init(requestMessage: GPTMessage)
+    init(requestMessage: Model.GPTMessage)
     
-    func asRequestMessage() -> GPTMessage
+    func asRequestMessage() -> Model.GPTMessage
 }
 
-enum GPTMessageRole: String, Codable {
-    case system = "system"
-    case user = "user"
-    case assistant = "assistant"
-    case tool = "tool"
+extension Model {
+    enum GPTMessageRole: String, Codable {
+        case system = "system"
+        case user = "user"
+        case assistant = "assistant"
+        case tool = "tool"
+    }
 }

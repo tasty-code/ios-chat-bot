@@ -6,17 +6,17 @@
 //
 
 struct UserMessage: GPTMessagable {
-    let role: GPTMessageRole
+    let role: Model.GPTMessageRole
     let content: String?
     let name: String?
     
-    init(requestMessage: GPTMessage) {
+    init(requestMessage: Model.GPTMessage) {
         self.role = .user
         self.content = requestMessage.content
         self.name = requestMessage.name
     }
     
-    func asRequestMessage() -> GPTMessage {
-        GPTMessage(role: role, content: content, name: name, toolCalls: nil, toolCallID: nil)
+    func asRequestMessage() -> Model.GPTMessage {
+        Model.GPTMessage(role: role, content: content, name: name, toolCalls: nil, toolCallID: nil)
     }
 }
