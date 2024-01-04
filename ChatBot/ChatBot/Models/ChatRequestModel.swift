@@ -11,4 +11,5 @@ struct ChatRequestModel: Encodable {
     let model: String
     let messages: [Message]
     let stream: Bool?
+    let logprobs: Bool?
 }
