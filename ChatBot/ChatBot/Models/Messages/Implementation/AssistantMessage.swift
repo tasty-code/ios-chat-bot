@@ -8,20 +8,19 @@
 import Foundation
 
 struct AssistantMessage: GPTMessageable {
-    let role: MessageRole
+    let role: MessageRole = .assistant
     
     var content: String?
     var name: String?
     var toolCalls: [ToolCalls]?
     
-    init(content: String?, name: String?, toolCalls: [ToolCalls]?) {
-        self.role = .assistant
+    init(content: String?, name: String? = nil, toolCalls: [ToolCalls]? = nil) {
         self.content = content
         self.name = name
         self.toolCalls = toolCalls
     }
     
-    func converGPTMessageDTO() -> GPTMessageDTO {
+    func convertGPTMessageDTO() -> GPTMessageDTO {
         return GPTMessageDTO(role: "\(role)", content: content, name: name, toolCalls: toolCalls)
     }
 }

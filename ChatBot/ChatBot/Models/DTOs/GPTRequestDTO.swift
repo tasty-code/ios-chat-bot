@@ -16,7 +16,7 @@ struct GPTRequestDTO: Encodable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(model, forKey: .model)
         try container.encode(stream, forKey: .stream)
-        try container.encode(messages.map { $0.converGPTMessageDTO() }, forKey: .messages)
+        try container.encode(messages.map { $0.convertGPTMessageDTO() }, forKey: .messages)
     }
     
     enum CodingKeys: String, CodingKey {

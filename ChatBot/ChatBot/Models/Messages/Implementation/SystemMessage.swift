@@ -8,18 +8,17 @@
 import Foundation
 
 struct SystemMessage: GPTMessageable {
-    let role: MessageRole
+    let role: MessageRole = .system
     
     var content: String?
     var name: String?
     
-    init(content: String?, name: String?) {
-        self.role = .system
+    init(content: String?, name: String? = nil) {
         self.content = content
         self.name = name
     }
     
-    func converGPTMessageDTO() -> GPTMessageDTO {
+    func convertGPTMessageDTO() -> GPTMessageDTO {
         return GPTMessageDTO(role: "\(role)", content: content, name: name)
     }
 }

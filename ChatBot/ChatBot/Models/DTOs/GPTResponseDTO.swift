@@ -23,9 +23,11 @@ struct GPTResponseDTO: Decodable {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        let timeInterval = try container.decode(Double.self, forKey: .created)
+        
         self.id = try container.decode(String.self, forKey: .id)
         self.object = try container.decode(String.self, forKey: .object)
-        self.created = Date(timeIntervalSince1970: try container.decode(Double.self, forKey: .created))
+        self.created = Date(timeIntervalSince1970: timeInterval)
         self.model = try container.decode(String.self, forKey: .model)
         self.choices = try container.decode([Choice].self, forKey: .choices)
         self.usage = try container.decode(Usage.self, forKey: .usage)

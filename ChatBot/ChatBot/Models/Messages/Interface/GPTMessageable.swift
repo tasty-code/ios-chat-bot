@@ -12,5 +12,5 @@ protocol GPTMessageable {
     var content: String? { get set }
     var name: String? { get set }
     
-    func converGPTMessageDTO() -> GPTMessageDTO
+    func convertGPTMessageDTO() -> GPTMessageDTO
 }
