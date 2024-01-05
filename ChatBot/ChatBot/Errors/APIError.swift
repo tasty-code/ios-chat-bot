@@ -8,6 +8,9 @@
 import Foundation
 
 enum APIError: Error {
-    case URLError
     case unableToCreateURLForURLRequest
+    case invalidRequest(message: String)
+    case invalidResponse(code: Int?)
+    case failToDecodeData
+    case failToEncodeData
 }
