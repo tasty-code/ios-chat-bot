@@ -1,6 +1,6 @@
 import Foundation
 
-struct ResponseModel: Codable {
+struct ResponseModel: Decodable {
     let id, object: String?
     let created: Int?
     let model, systemFingerprint: String?
@@ -14,7 +14,7 @@ struct ResponseModel: Codable {
     }
 }
 
-struct Choice: Codable {
+struct Choice: Decodable {
     let index: Int?
     let message: Message?
     let finishReason: String?
@@ -36,7 +36,7 @@ enum Role: String, Codable {
     case assistant = "assistant"
 }
 
-struct Usage: Codable {
+struct Usage: Decodable {
     let promptTokens, completionTokens, totalTokens: Int?
 
     enum CodingKeys: String, CodingKey {

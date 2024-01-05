@@ -1,6 +1,6 @@
 import Foundation
 
-struct RequestModel: Codable {
+struct RequestModel: Encodable {
     let model: String
     let messages: [Message]
     let stream: Bool?
