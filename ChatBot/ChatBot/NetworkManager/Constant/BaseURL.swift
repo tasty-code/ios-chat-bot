@@ -8,5 +8,5 @@
 import Foundation
 
 enum BaseURL  {
-    static let openAi = "https://api.openai.com/v1/chat/completions"
+    static let openAi = "https://api.openai.com/"
 }

@@ -11,34 +11,46 @@ final class NetworkManager {
     static let shared = NetworkManager()
     
     private init () {}
-    
-    func fetch() {
-        guard let url = URL(string: BaseURL.openAi), let apiKey = Bundle.main.apiKey else { return }
+
+    func makeRequest(builder: NetworkBuilderProtocol) throws -> URLRequest? {
         
-        let requestData = RequestData(messages: [Message(role: "user", content: "HI")])
-        guard let encodedData = try? JSONEncoder().encode(requestData) else { return }
+        let baseUrl = BaseURL.openAi
+        guard let url = URL(string: baseUrl + builder.path) else { return nil }
+      
+        var request = URLRequest(url: url)
         
-        var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = "POST"
-        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        urlRequest.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
-        urlRequest.httpBody = encodedData
-    
-        let urlSession = URLSession.shared
-        urlSession.dataTask(with: urlRequest) { data, response, error in
-            
-            guard let data = data, error == nil else { return }
-            
-            do {
-                let decodedData = try JSONDecoder().decode(ResponseData.self, from: data)
-    
-            } catch {
-                
-                return
+        if builder.method == "POST" {
+            request.httpMethod = builder.method
+            builder.header.forEach { key, value in
+                request.setValue(value, forHTTPHeaderField: key)
             }
+            request.httpBody = builder.body
         }
-        .resume()
+        
+        return request
     }
     
-    
+    func fetch(builder: NetworkBuilderProtocol, completion: @escaping (Result<ResponseData, NetworkError>) -> Void) {
+        
+        do {
+            guard let request = try makeRequest(builder: builder) else { return }
+            let urlSession = URLSession.shared
+            
+            urlSession.dataTask(with: request) { data, response, error in
+                guard let data = data, error == nil else {
+                    return completion(.failure(.invalidResponse))
+                }
+                
+                do {
+                    let decodedData = try JSONDecoder().decode(ResponseData.self, from: data)
+                    completion(.success(decodedData))
+                } catch {
+                    completion(.failure(.faliedDecoding))
+                }
+            }
+            .resume()
+        } catch {
+            
+        }
+    }
 }

@@ -10,6 +10,13 @@ import UIKit
 class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        NetworkManager.shared.fetch()
+        
+        let chatService = ChatService()
+        try? chatService.sendMessage(text: "안녕") { result in
+            switch result {
+            case .success(let success): print(success)
+            case .failure(let error): print(error)
+            }
+        }
     }
 }
