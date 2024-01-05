@@ -8,12 +8,18 @@
 import Foundation
 
 struct NetworkManager {
-    private let apiKey = Bundle.main.apiKey
+    private let session: URLSession
+    private var request: URLRequest?
+
+    init(session: URLSession = URLSession.shared) {
+        self.session = session
+    }
 }
 
 // MARK: - protocol method
 extension NetworkManager: NetworkManagerProtocol {
-    func makeURLRequest(url: URL, httpMethod: HttpMethod, body: Data?) -> URLRequest {
+     mutating func makeURLRequest(url: URL, httpMethod: HttpMethod, body: Data?) {
+        let apiKey = Bundle.main.apiKey
         var urlRequest = URLRequest(url: url)
         
         urlRequest.httpMethod = "\(httpMethod)".uppercased()
@@ -23,6 +29,29 @@ extension NetworkManager: NetworkManagerProtocol {
         
         urlRequest.httpBody = body
         
-        return urlRequest
+        request = urlRequest
+    }
+    
+    func getData (handler: @escaping (Result<Data, NetworkError>) -> Void) {
+        guard let request = request else { return }
+        
+        session.dataTask(with: request) { data, response, error in
+            
+            guard let error = error else {
+                return handler(.failure(.unknown))
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else { return }
+            guard (200..<300) ~= httpResponse.statusCode else {
+                print(httpResponse.statusCode)
+                return handler(.failure(.invalidResponse))
+            }
+            
+            guard let data = data else {
+                return handler(.failure(.invalidData))
+            }
+            
+            handler(.success(data))
+        }
     }
 }

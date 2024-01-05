@@ -8,7 +8,8 @@
 import Foundation
 
 protocol NetworkManagerProtocol {
-    func makeURLRequest(url: URL, httpMethod: HttpMethod, body: Data?) -> URLRequest
+    mutating func makeURLRequest(url: URL, httpMethod: HttpMethod, body: Data?)
+    func getData (handler: @escaping (Result<Data, NetworkError>) -> Void)
 }
 
 enum HttpMethod: String {
