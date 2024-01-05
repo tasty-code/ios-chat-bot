@@ -16,12 +16,18 @@ final class ViewController: UIViewController {
     }
  
     private func fetchMessageForPrompt(prompt: String) {
+        let request = PostChatBotNetworkBuilder(prompt: prompt)
+        guard let makeRequest = try? APIService().makeRequest(request) else {
+            return
+        }
+        
         Task {
             do {
-                let message = try await APIService().fetchMessageForPrompt(prompt)
-                    print(message)
+                let message: APIResponse = try await APIService().execute(request: makeRequest)
+                
+                print(message.choices[0].message.content)
             } catch {
-                print("Error")
+                throw APIError.invalidRequest(message: error.localizedDescription)
             }
         }
     }
