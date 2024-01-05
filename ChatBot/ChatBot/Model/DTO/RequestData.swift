@@ -7,8 +7,7 @@
 import Foundation
 
 // MARK: - RequestData
-struct RequestData: Decodable {
-    let model: String
+struct RequestData: Encodable {
+    let model: String = "gpt-3.5-turbo-1106"
     let messages: [Message]
 }
-

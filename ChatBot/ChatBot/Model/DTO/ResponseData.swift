@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - ResponseData
 struct ResponseData: Decodable {
-    let id, object, model, systemFingerprint: String
+    let id, object, model, systemFingerprint: String?
     let created: Int
     let choices: [Choice]
     let usage: Usage

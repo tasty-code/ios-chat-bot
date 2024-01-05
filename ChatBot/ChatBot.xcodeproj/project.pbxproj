@@ -16,6 +16,10 @@
 		D00C334F2B44ECCE00E57445 /* ResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00C334E2B44ECCE00E57445 /* ResponseData.swift */; };
 		E3388FBC2B44F1AF00175C2C /* RequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3388FBB2B44F1AF00175C2C /* RequestData.swift */; };
 		E3388FBE2B44F30400175C2C /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3388FBD2B44F30400175C2C /* Message.swift */; };
+		E386CBC62B47B89200B84994 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E386CBC52B47B89200B84994 /* NetworkManager.swift */; };
+		E386CBC92B47B95700B84994 /* BaseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = E386CBC82B47B95700B84994 /* BaseURL.swift */; };
+		E386CBCB2B47CB6F00B84994 /* APIKEY.plist in Resources */ = {isa = PBXBuildFile; fileRef = E386CBCA2B47CB6F00B84994 /* APIKEY.plist */; };
+		E386CBCD2B47CBBD00B84994 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E386CBCC2B47CBBD00B84994 /* Bundle+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +34,10 @@
 		D00C334E2B44ECCE00E57445 /* ResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseData.swift; sourceTree = "<group>"; };
 		E3388FBB2B44F1AF00175C2C /* RequestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestData.swift; sourceTree = "<group>"; };
 		E3388FBD2B44F30400175C2C /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		E386CBC52B47B89200B84994 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		E386CBC82B47B95700B84994 /* BaseURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseURL.swift; sourceTree = "<group>"; };
+		E386CBCA2B47CB6F00B84994 /* APIKEY.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APIKEY.plist; sourceTree = "<group>"; };
+		E386CBCC2B47CBBD00B84994 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,11 +73,13 @@
 				B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */,
 				B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */,
 				B4B3E2C02B42D1BB00818B3C /* ViewController.swift */,
+				E386CBC22B47B85000B84994 /* NetworkManager */,
 				E3388FBA2B44E46800175C2C /* Model */,
 				B4B3E2C22B42D1BB00818B3C /* Main.storyboard */,
 				B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */,
 				B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */,
 				B4B3E2CA2B42D1BC00818B3C /* Info.plist */,
+				E386CBCA2B47CB6F00B84994 /* APIKEY.plist */,
 			);
 			path = ChatBot;
 			sourceTree = "<group>";
@@ -90,6 +100,32 @@
 				D00C334D2B44ECC700E57445 /* DTO */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		E386CBC22B47B85000B84994 /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				E386CBCE2B47CBCE00B84994 /* Extension */,
+				E386CBC72B47B93800B84994 /* Constant */,
+				E386CBC52B47B89200B84994 /* NetworkManager.swift */,
+			);
+			path = NetworkManager;
+			sourceTree = "<group>";
+		};
+		E386CBC72B47B93800B84994 /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				E386CBC82B47B95700B84994 /* BaseURL.swift */,
+			);
+			path = Constant;
+			sourceTree = "<group>";
+		};
+		E386CBCE2B47CBCE00B84994 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				E386CBCC2B47CBBD00B84994 /* Bundle+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,6 +187,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4B3E2C92B42D1BC00818B3C /* LaunchScreen.storyboard in Resources */,
+				E386CBCB2B47CB6F00B84994 /* APIKEY.plist in Resources */,
 				B4B3E2C62B42D1BC00818B3C /* Assets.xcassets in Resources */,
 				B4B3E2C42B42D1BB00818B3C /* Main.storyboard in Resources */,
 			);
@@ -164,11 +201,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */,
+				E386CBCD2B47CBBD00B84994 /* Bundle+Extension.swift in Sources */,
 				E3388FBC2B44F1AF00175C2C /* RequestData.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
+				E386CBC62B47B89200B84994 /* NetworkManager.swift in Sources */,
 				E3388FBE2B44F30400175C2C /* Message.swift in Sources */,
 				D00C334F2B44ECCE00E57445 /* ResponseData.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
+				E386CBC92B47B95700B84994 /* BaseURL.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
