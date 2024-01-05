@@ -1,58 +1,47 @@
 import UIKit
 
-class APIService {
+final class APIService {
     
-    func fetchMessageForPrompt(_ prompt: String) async throws -> String {
-        let fetchMessageURL = "https://api.openai.com/v1/chat/completions"
+    func execute<Response:Decodable>(request: URLRequest) async throws -> Response {
         
-        let urlRequest = try createURLRequestFor(httpMethod: "POST", url: fetchMessageURL, prompt: prompt)
+        let (data, httpResponse) = try await URLSession.shared.data(for: request)
         
-        let (data, response)  = try await URLSession.shared.data(for: urlRequest)
+        guard let response = httpResponse as? HTTPURLResponse, response.statusCode == 200 else {
+            throw APIError.invalidResponse(code: (httpResponse as? HTTPURLResponse)?.statusCode)
+        }
         
-        let decoder = JSONDecoder()
+        do {
+            let decoder = JSONDecoder()
+            let result = try decoder.decode(Response.self, from: data)
+            
+            return result
+        } catch {
+            throw APIError.failToDecodeData
+        }
         
-        let result = try decoder.decode(APIResponse.self, from: data)
-        
-        let content = result.choices[0].message.content
-        
-        return content
     }
     
-    
-    private func createURLRequestFor(httpMethod: String, url: String, prompt: String) throws -> URLRequest {
-        guard let url = URL(string: url) else {
+    func makeRequest<Builder: NetworkRequestBuildable>(_ builder: Builder) throws -> URLRequest {
+        guard let baseURL = URL(string: builder.baseURL.url) else {
             throw APIError.unableToCreateURLForURLRequest
         }
         
-        var urlRequest = URLRequest(url: url)
+        let url = baseURL.appendingPathComponent(builder.path)
+        var request = URLRequest(url: url)
         
+        request.httpMethod = builder.httpMethod.rawValue
+        builder.headers.forEach { (key, value) in
+            request.setValue(value as? String, forHTTPHeaderField: key)
+        }
         
-        urlRequest.httpMethod = httpMethod
+        if let authKey = builder.authKey {
+            request.setValue("Bearer \(authKey)", forHTTPHeaderField: "Authorization")
+        }
         
-        urlRequest.addValue("Bearer \(Environment.apiKey)", forHTTPHeaderField: "Authorization")
-        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue(builder.contentType, forHTTPHeaderField: "Content-Type")
         
-        let jsonBody: [String: Any] = [
-            "model": "gpt-3.5-turbo-1106",
-            "stream": false,
-            "messages": [
-                [
-                    "role": "system",
-                    "content": "You are an assistant that occasionally misspells words"
-                ],
-                [
-                    "role": "user",
-                    "content": "\(prompt)"
-                ]
-            ]
-        ]
+        request.httpBody = try JSONEncoder().encode(builder.body)
         
-        urlRequest.httpBody = try JSONSerialization.data(withJSONObject: jsonBody)
-        
-        return urlRequest
-    }
-    
-    private func fetchDataResponse() {
-        
+        return request
     }
 }
