@@ -17,6 +17,11 @@ protocol APIBaseURLProtocol {
 
 extension APIBaseURLProtocol {
     func makeURL() -> URL? {
-        return URL(string: scheme + host + path)
+        var components = URLComponents()
+        components.scheme = scheme
+        components.host = host
+        components.path = path
+
+        return components.url
     }
 }

@@ -23,25 +23,26 @@ extension NetworkManager: NetworkManagerProtocol {
         var urlRequest = URLRequest(url: url)
         
         urlRequest.httpMethod = "\(httpMethod)".uppercased()
-        
+         
         urlRequest.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         urlRequest.httpBody = body
-        
+   
         request = urlRequest
     }
     
     func getData (handler: @escaping (Result<Data, NetworkError>) -> Void) {
         guard let request = request else { return }
-        
+
         session.dataTask(with: request) { data, response, error in
             
-            guard let error = error else {
+            guard error == nil else {
                 return handler(.failure(.unknown))
             }
             
-            guard let httpResponse = response as? HTTPURLResponse else { return }
+            guard let httpResponse = response as? HTTPURLResponse else {
+                return }
             guard (200..<300) ~= httpResponse.statusCode else {
                 print(httpResponse.statusCode)
                 return handler(.failure(.invalidResponse))
@@ -52,6 +53,6 @@ extension NetworkManager: NetworkManagerProtocol {
             }
             
             handler(.success(data))
-        }
+        }.resume()
     }
 }

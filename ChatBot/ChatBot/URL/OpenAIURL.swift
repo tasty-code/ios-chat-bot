@@ -19,7 +19,7 @@ enum Path: String {
     var value: String {
         switch self {
         case .chat:
-            return "v1/chat/completions"
+            return "/v1/chat/completions"
         }
     }
 }

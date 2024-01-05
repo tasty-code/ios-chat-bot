@@ -15,7 +15,7 @@ enum NetworkError: Error, CustomStringConvertible {
     var description: String {
         switch self {
         case .unknown:
-            return "알수없는 에러"
+            return "에러가 존재합니다"
         case .invalidResponse:
             return "잘못된 응답"
         case .invalidData:
