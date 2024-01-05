@@ -14,5 +14,12 @@ struct OpenAIURL: APIBaseURLProtocol {
 }
 
 enum Path: String {
-    case chat = "v1/chat/completions"
+    case chat
+    
+    var value: String {
+        switch self {
+        case .chat:
+            return "v1/chat/completions"
+        }
+    }
 }
