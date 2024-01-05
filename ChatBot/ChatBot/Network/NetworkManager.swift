@@ -7,15 +7,21 @@
 
 import Foundation
 
-struct NetworkManager: NetworkManagerProtocol {
+struct NetworkManager {
     private let apiKey = Bundle.main.apiKey
-    
-    func makeURLRequest(url: URL, httpMethod: HttpMethod) -> URLRequest {
+}
+
+// MARK: - protocol method
+extension NetworkManager: NetworkManagerProtocol {
+    func makeURLRequest(url: URL, httpMethod: HttpMethod, body: Data?) -> URLRequest {
         var urlRequest = URLRequest(url: url)
         
         urlRequest.httpMethod = "\(httpMethod)".uppercased()
+        
         urlRequest.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        urlRequest.httpBody = body
         
         return urlRequest
     }

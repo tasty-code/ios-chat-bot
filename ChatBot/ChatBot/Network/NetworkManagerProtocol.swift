@@ -8,7 +8,7 @@
 import Foundation
 
 protocol NetworkManagerProtocol {
-    func makeURLRequest(url: URL, httpMethod: HttpMethod) -> URLRequest
+    func makeURLRequest(url: URL, httpMethod: HttpMethod, body: Data?) -> URLRequest
 }
 
 enum HttpMethod: String {
