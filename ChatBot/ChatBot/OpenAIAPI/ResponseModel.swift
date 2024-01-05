@@ -1,5 +1,3 @@
-import Foundation
-
 struct ResponseModel: Decodable {
     let id, object: String?
     let created: Int?
