@@ -33,7 +33,7 @@ extension HTTPRequestable {
         }
         
         if let paths = paths {
-            components.path = "/\(paths.joined(separator: "/"))/"
+            components.path = "/\(paths.joined(separator: "/"))"
         }
         
         if let queryStrings = queryStrings {
