@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7F195BA12B47BB5D00C99766 /* APIRequestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F195BA02B47BB5D00C99766 /* APIRequestable.swift */; };
+		7F195BA32B47BC0600C99766 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F195BA22B47BC0600C99766 /* HTTPMethod.swift */; };
 		7F4C9D712B452165006CD685 /* GPTMessageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C9D702B452165006CD685 /* GPTMessageDTO.swift */; };
 		7F4C9D752B452223006CD685 /* GPTMessageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C9D742B452223006CD685 /* GPTMessageable.swift */; };
 		7F4C9D772B4522B5006CD685 /* UserMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C9D762B4522B5006CD685 /* UserMessage.swift */; };
@@ -25,6 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7F195BA02B47BB5D00C99766 /* APIRequestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestable.swift; sourceTree = "<group>"; };
+		7F195BA22B47BC0600C99766 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		7F4C9D702B452165006CD685 /* GPTMessageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTMessageDTO.swift; sourceTree = "<group>"; };
 		7F4C9D742B452223006CD685 /* GPTMessageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTMessageable.swift; sourceTree = "<group>"; };
 		7F4C9D762B4522B5006CD685 /* UserMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMessage.swift; sourceTree = "<group>"; };
@@ -55,6 +59,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7F195B9C2B47BA6400C99766 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				7F195B9D2B47BA7200C99766 /* Request */,
+				7F195BA22B47BC0600C99766 /* HTTPMethod.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		7F195B9D2B47BA7200C99766 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				7F195B9E2B47BA7800C99766 /* Interface */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		7F195B9E2B47BA7800C99766 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				7F195BA02B47BB5D00C99766 /* APIRequestable.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
 		7F4C9D6F2B45214D006CD685 /* Messages */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +133,7 @@
 		7F7F43A62B44F20D000CB9CC /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				7F195B9C2B47BA6400C99766 /* Network */,
 				7F4C9D812B453195006CD685 /* DTOs */,
 				7F4C9D6F2B45214D006CD685 /* Messages */,
 			);
@@ -245,7 +275,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F195BA12B47BB5D00C99766 /* APIRequestable.swift in Sources */,
 				7F4C9D792B4522C1006CD685 /* SystemMessage.swift in Sources */,
+				7F195BA32B47BC0600C99766 /* HTTPMethod.swift in Sources */,
 				7F4C9D772B4522B5006CD685 /* UserMessage.swift in Sources */,
 				B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */,
 				7F4C9D712B452165006CD685 /* GPTMessageDTO.swift in Sources */,
