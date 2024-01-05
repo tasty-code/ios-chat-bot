@@ -8,7 +8,8 @@
 import Foundation
 
 extension Network {
-    struct GPTHTTPRequest: HTTPRequestable {
+    final class GPTHTTPRequest: HTTPRequestable {
+        var urlString: String? = "https://api.openai.com"
         let paths: [String]? = ["v1", "chat", "completions"]
     }
 }

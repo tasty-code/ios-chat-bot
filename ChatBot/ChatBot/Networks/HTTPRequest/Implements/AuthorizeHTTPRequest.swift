@@ -8,14 +8,40 @@
 import Foundation
 
 extension Network {
-    struct AuthorizeHTTPRequest: HTTPDecoratable {
+    final class AuthorizeHTTPRequest: HTTPDecoratable {
         let httpRequest: HTTPRequestable
         let authorizationType: AuthorizationType
         let authorizationKey: String
         
-        func asURLRequest(urlString: String) -> URLRequest? {
-            var request = httpRequest.asURLRequest(urlString: urlString)
-            request?.setValue("\(authorizationType) \(authorizationKey)", forHTTPHeaderField: "Authorization")
+        init(httpRequest: HTTPRequestable, authorizationType: AuthorizationType, authorizationKey: String) {
+            self.httpRequest = httpRequest
+            self.authorizationType = authorizationType
+            self.authorizationKey = authorizationKey
+        }
+        
+        private func attatchAuthorization(request: inout URLRequest) {
+            let key = "Authorization"
+            let value = "\(authorizationType) \(authorizationKey)"
+            if request.allHTTPHeaderFields == nil {
+                request.allHTTPHeaderFields = [key: value]
+            } else {
+                request.allHTTPHeaderFields?.updateValue(value, forKey: key)
+            }
+        }
+        
+        func asGETRequest() -> URLRequest? {
+            guard var request = httpRequest.asGETRequest() else {
+                return nil
+            }
+            attatchAuthorization(request: &request)
+            return request
+        }
+        
+        func asPOSTRequest(contentType: Network.HTTPContentType, httpBody: Data) -> URLRequest? {
+            guard var request = httpRequest.asPOSTRequest(contentType: contentType, httpBody: httpBody) else {
+                return nil
+            }
+            attatchAuthorization(request: &request)
             return request
         }
     }

@@ -10,3 +10,7 @@ import Foundation
 protocol HTTPDecoratable: HTTPRequestable {
     var httpRequest: HTTPRequestable { get }
 }
+
+extension HTTPDecoratable {
+    var urlString: String? { nil }
+}
