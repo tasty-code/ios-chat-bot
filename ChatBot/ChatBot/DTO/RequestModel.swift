@@ -8,7 +8,7 @@
 import Foundation
 
 struct RequestModel: Encodable {
-    let model: String
+    let model: String = "gpt-3.5-turbo-1106"
     let messages: [Message]
     let stream = false
 }
