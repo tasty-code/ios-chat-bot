@@ -12,7 +12,7 @@ struct GPTRequest: APIRequestable {
     let headerFeilds: [String : String]
     let httpBodyData: Data?
     
-    init?(httpBodyData: Encodable) {
+    init?(requestDTO: Encodable) {
         guard let apiKey = Bundle.main.gptAPIKey
         else {
             return nil
@@ -23,7 +23,7 @@ struct GPTRequest: APIRequestable {
             "Content-Type" : "application/json"
         ]
         
-        guard let encodedData = try? JSONEncoder().encode(httpBodyData)
+        guard let encodedData = try? JSONEncoder().encode(requestDTO)
         else {
             self.httpBodyData = nil
             return
