@@ -25,8 +25,9 @@
 		0DF997A72B4680BB0055C836 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF997A62B4680BB0055C836 /* Network.swift */; };
 		0DF997A92B46D8B60055C836 /* HTTPPublishable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF997A82B46D8B60055C836 /* HTTPPublishable.swift */; };
 		0DF997AF2B479BA80055C836 /* GPTError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF997AE2B479BA80055C836 /* GPTError.swift */; };
-		0DF997B22B479BDA0055C836 /* GPTErrorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF997B12B479BDA0055C836 /* GPTErrorable.swift */; };
 		0DF997B52B479C0A0055C836 /* HTTPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF997B42B479C0A0055C836 /* HTTPError.swift */; };
+		0DF997C12B47B72E0055C836 /* GPTTypePublishable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF997C02B47B72E0055C836 /* GPTTypePublishable.swift */; };
+		0DF997C32B47B8400055C836 /* GPTReplyPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF997C22B47B8400055C836 /* GPTReplyPublisher.swift */; };
 		B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */; };
 		B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */; };
 		B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2C02B42D1BB00818B3C /* ViewController.swift */; };
@@ -54,8 +55,9 @@
 		0DF997A62B4680BB0055C836 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		0DF997A82B46D8B60055C836 /* HTTPPublishable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPPublishable.swift; sourceTree = "<group>"; };
 		0DF997AE2B479BA80055C836 /* GPTError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTError.swift; sourceTree = "<group>"; };
-		0DF997B12B479BDA0055C836 /* GPTErrorable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTErrorable.swift; sourceTree = "<group>"; };
 		0DF997B42B479C0A0055C836 /* HTTPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPError.swift; sourceTree = "<group>"; };
+		0DF997C02B47B72E0055C836 /* GPTTypePublishable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTTypePublishable.swift; sourceTree = "<group>"; };
+		0DF997C22B47B8400055C836 /* GPTReplyPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTReplyPublisher.swift; sourceTree = "<group>"; };
 		B4B3E2B92B42D1BB00818B3C /* ChatBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 		0DF9979D2B467BB50055C836 /* HTTPPublisher */ = {
 			isa = PBXGroup;
 			children = (
+				0DF997BF2B47B7100055C836 /* Implements */,
 				0DF9979E2B467BDB0055C836 /* Protocols */,
 			);
 			path = HTTPPublisher;
@@ -191,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				0DF997A82B46D8B60055C836 /* HTTPPublishable.swift */,
+				0DF997C02B47B72E0055C836 /* GPTTypePublishable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -200,23 +204,22 @@
 			children = (
 				0DF997AE2B479BA80055C836 /* GPTError.swift */,
 				0DF997B32B479BF10055C836 /* Implements */,
-				0DF997B02B479BBE0055C836 /* Protocols */,
 			);
 			path = Errors;
-			sourceTree = "<group>";
-		};
-		0DF997B02B479BBE0055C836 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				0DF997B12B479BDA0055C836 /* GPTErrorable.swift */,
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 		0DF997B32B479BF10055C836 /* Implements */ = {
 			isa = PBXGroup;
 			children = (
 				0DF997B42B479C0A0055C836 /* HTTPError.swift */,
+			);
+			path = Implements;
+			sourceTree = "<group>";
+		};
+		0DF997BF2B47B7100055C836 /* Implements */ = {
+			isa = PBXGroup;
+			children = (
+				0DF997C22B47B8400055C836 /* GPTReplyPublisher.swift */,
 			);
 			path = Implements;
 			sourceTree = "<group>";
@@ -332,7 +335,6 @@
 				0DF997A92B46D8B60055C836 /* HTTPPublishable.swift in Sources */,
 				0DF997B52B479C0A0055C836 /* HTTPError.swift in Sources */,
 				0DF997AF2B479BA80055C836 /* GPTError.swift in Sources */,
-				0DF997B22B479BDA0055C836 /* GPTErrorable.swift in Sources */,
 				0DF997772B43FFA10055C836 /* GPTCommentDTO.swift in Sources */,
 				0DF9979A2B4672B00055C836 /* HTTPDecoratable.swift in Sources */,
 				0DF997A52B4680240055C836 /* HTTPRequestable.swift in Sources */,
@@ -343,12 +345,14 @@
 				0DF997962B466D960055C836 /* ContentHTTPRequest.swift in Sources */,
 				0DF997982B46704F0055C836 /* AuthorizeHTTPRequest.swift in Sources */,
 				0DF997A72B4680BB0055C836 /* Network.swift in Sources */,
+				0DF997C12B47B72E0055C836 /* GPTTypePublishable.swift in Sources */,
 				0DF997722B43BC590055C836 /* ToolMessage.swift in Sources */,
 				0DF9977C2B440B890055C836 /* GPTReplyDTO.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
 				0DF9976D2B43B15F0055C836 /* GPTMessagable.swift in Sources */,
 				0DF997812B450E8E0055C836 /* Date+Extention.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
+				0DF997C32B47B8400055C836 /* GPTReplyPublisher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
