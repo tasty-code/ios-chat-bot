@@ -7,8 +7,22 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
+     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        fetchMessageForPrompt(prompt: "Tell me a story")
+    }
+ 
+    private func fetchMessageForPrompt(prompt: String) {
+        Task {
+            do {
+                let message = try await APIService().fetchMessageForPrompt(prompt)
+                    print(message)
+            } catch {
+                print("Error")
+            }
+        }
     }
 }
