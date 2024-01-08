@@ -3,7 +3,7 @@ import Foundation
 protocol NetworkConnectable {
     var jsonDecodeManager: JSONDecodable { get }
     
-    func connect(_ builder: NetworkBuilderProtocol) async throws -> ResponseModel
+    func connect(builder: NetworkBuilderProtocol) async throws -> ResponseModel
 }
 
 extension NetworkConnectable {
@@ -32,7 +32,7 @@ final class NetworkManager: NetworkConnectable {
     }
     
     // MARK: Public
-    func connect(_ builder: NetworkBuilderProtocol) async throws -> ResponseModel {
+    func connect(builder: NetworkBuilderProtocol) async throws -> ResponseModel {
         let request = try builder.build()
         let data = try await downloadData(for: request)
         let responseModel = try jsonDecodeManager.decode(ResponseModel.self, from: data)
