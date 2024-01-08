@@ -20,15 +20,10 @@ class ViewController: UIViewController {
             return
         }
         
-        networkManager.loadData(request: request) { result in
-            switch result {
-            case .success(let data):
-                guard let decodeData = self.jsonDecode(data: data) else { return }
-                print(decodeData)
-                
-            case .failure(let error):
-                print(error)
-            }
+        Task {
+            let data = try await networkManager.loadData(request: request)
+            guard let decodeData = self.jsonDecode(data: data) else { return }
+            print(decodeData)
         }
     }
     
