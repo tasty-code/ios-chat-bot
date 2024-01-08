@@ -10,7 +10,7 @@ import Foundation
 protocol NetworkRequestBuildable {
     associatedtype RequestBody: Encodable
     
-    var baseURL: BaseUrlType { get }
+    var baseURL: String { get }
     var path: String { get }
     var httpMethod: HttpMethod { get }
     var headers: [String: Any] { get }
@@ -20,7 +20,7 @@ protocol NetworkRequestBuildable {
 }
 
 extension NetworkRequestBuildable {
-    var baseURL: BaseUrlType { BaseUrlType.gpt }
+    var baseURL: String { "https://api.openai.com/" }
     var headers: [String: Any] { [:] }
     var contentType: String { "application/json" }
 }

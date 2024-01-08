@@ -22,7 +22,7 @@ final class APIService {
     }
     
     func makeRequest<Builder: NetworkRequestBuildable>(_ builder: Builder) throws -> URLRequest {
-        guard let baseURL = URL(string: builder.baseURL.url) else {
+        guard let baseURL = URL(string: builder.baseURL) else {
             throw APIError.unableToCreateURLForURLRequest
         }
         
