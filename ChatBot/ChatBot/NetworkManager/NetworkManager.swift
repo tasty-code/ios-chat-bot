@@ -12,7 +12,7 @@ final class NetworkManager {
     
     private init () {}
 
-    func makeRequest(builder: NetworkBuilderProtocol) throws -> URLRequest? {
+    func makeRequest(builder: NetworkBuilderProtocol) -> URLRequest? {
         
         let baseUrl = BaseURL.openAiUrl
         guard let url = URL(string: baseUrl + builder.path) else { return nil }
@@ -31,26 +31,22 @@ final class NetworkManager {
     }
     
     func fetch(builder: NetworkBuilderProtocol, completion: @escaping (Result<ResponseData, NetworkError>) -> Void) {
+    
+        guard let request = makeRequest(builder: builder) else { return }
+        let urlSession = URLSession.shared
         
-        do {
-            guard let request = try makeRequest(builder: builder) else { return }
-            let urlSession = URLSession.shared
-            
-            urlSession.dataTask(with: request) { data, response, error in
-                guard let data = data, error == nil else {
-                    return completion(.failure(.invalidResponse))
-                }
-                
-                do {
-                    let decodedData = try JSONDecoder().decode(ResponseData.self, from: data)
-                    completion(.success(decodedData))
-                } catch {
-                    completion(.failure(.faliedDecoding))
-                }
+        urlSession.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {
+                return completion(.failure(.invalidResponse))
             }
-            .resume()
-        } catch {
             
+            do {
+                let decodedData = try JSONDecoder().decode(ResponseData.self, from: data)
+                completion(.success(decodedData))
+            } catch {
+                completion(.failure(.faliedDecoding))
+            }
         }
+        .resume()
     }
 }
