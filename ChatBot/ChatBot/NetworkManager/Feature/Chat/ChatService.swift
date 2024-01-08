@@ -11,7 +11,7 @@ final class ChatService: ChatServiceProtocol {
     
     func sendMessage(text: String, completion: @escaping (Result<ResponseData, Error>) -> Void) throws {
         
-        let requestData = RequestData(model: "gpt-3.5-turbo-1106", messages: [Message(role: "user", content: text)])
+        let requestData = RequestData(model: Gpt.model, messages: [Message(role: "user", content: text)])
         
         guard let encodedData = try? JSONEncoder().encode(requestData) else {
             throw NetworkError.failedEncoding

@@ -8,11 +8,18 @@
 import Foundation
 
 struct ChatSendMessageBuilder: NetworkBuilderProtocol {
-    let method = "POST"
+    let method: HttpMethod = .POST
     let path = "v1/chat/completions"
     var header: [String : String] {
         ["Content-Type" : "application/json",
          "Authorization": "Bearer \(Bundle.main.apiKey ?? "")"]
     }
     var body: Data
+}
+
+enum HttpMethod: String {
+    case POST
+    case GET
+    case PUT
+    case DELETE
 }

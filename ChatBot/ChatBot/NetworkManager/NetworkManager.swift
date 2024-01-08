@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+ 
 final class NetworkManager {
     static let shared = NetworkManager()
     
@@ -14,13 +14,13 @@ final class NetworkManager {
 
     func makeRequest(builder: NetworkBuilderProtocol) throws -> URLRequest? {
         
-        let baseUrl = BaseURL.openAi
+        let baseUrl = BaseURL.openAiUrl
         guard let url = URL(string: baseUrl + builder.path) else { return nil }
       
         var request = URLRequest(url: url)
         
-        if builder.method == "POST" {
-            request.httpMethod = builder.method
+        if builder.method.rawValue == "POST" {
+            request.httpMethod = builder.method.rawValue
             builder.header.forEach { key, value in
                 request.setValue(value, forHTTPHeaderField: key)
             }

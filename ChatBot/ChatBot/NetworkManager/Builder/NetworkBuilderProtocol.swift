@@ -8,7 +8,7 @@
 import Foundation
 
 protocol NetworkBuilderProtocol {
-    var method: String { get }
+    var method: HttpMethod { get }
     var path: String { get }
     var header: [String: String] { get }
     var body: Data {get}
