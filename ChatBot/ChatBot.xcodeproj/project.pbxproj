@@ -16,6 +16,8 @@
 		CB3263042B44F55F00B9518D /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB3263032B44F55F00B9518D /* ApiKeys.plist */; };
 		CB32630A2B44FBE400B9518D /* AIAnswerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3263092B44FBE400B9518D /* AIAnswerModel.swift */; };
 		CB32630C2B44FC1200B9518D /* UserQuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB32630B2B44FC1200B9518D /* UserQuestionModel.swift */; };
+		CBD978FC2B4B8BAF001F2AE8 /* NetworkingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD978FB2B4B8BAF001F2AE8 /* NetworkingError.swift */; };
+		CBD978FF2B4B8BCC001F2AE8 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD978FE2B4B8BCC001F2AE8 /* NetworkingManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		CB3263032B44F55F00B9518D /* ApiKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiKeys.plist; sourceTree = "<group>"; };
 		CB3263092B44FBE400B9518D /* AIAnswerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIAnswerModel.swift; sourceTree = "<group>"; };
 		CB32630B2B44FC1200B9518D /* UserQuestionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserQuestionModel.swift; sourceTree = "<group>"; };
+		CBD978FB2B4B8BAF001F2AE8 /* NetworkingError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingError.swift; sourceTree = "<group>"; };
+		CBD978FE2B4B8BCC001F2AE8 /* NetworkingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 		B4B3E2BB2B42D1BB00818B3C /* ChatBot */ = {
 			isa = PBXGroup;
 			children = (
+				CBD978FD2B4B8BCC001F2AE8 /* Utility */,
+				CBD978F92B4B8BAF001F2AE8 /* Enums */,
 				CB3263052B44FB2C00B9518D /* Controller */,
 				CB3263062B44FB3400B9518D /* Delegate */,
 				CB3263082B44FB8700B9518D /* Models */,
@@ -106,6 +112,30 @@
 				CB32630B2B44FC1200B9518D /* UserQuestionModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		CBD978F92B4B8BAF001F2AE8 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				CBD978FA2B4B8BAF001F2AE8 /* Error */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		CBD978FA2B4B8BAF001F2AE8 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				CBD978FB2B4B8BAF001F2AE8 /* NetworkingError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		CBD978FD2B4B8BCC001F2AE8 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				CBD978FE2B4B8BCC001F2AE8 /* NetworkingManager.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,7 +212,9 @@
 				B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */,
 				C3B9B93A2B44F48200B85140 /* ChatBot++Bundle.swift in Sources */,
 				CB32630C2B44FC1200B9518D /* UserQuestionModel.swift in Sources */,
+				CBD978FC2B4B8BAF001F2AE8 /* NetworkingError.swift in Sources */,
 				CB32630A2B44FBE400B9518D /* AIAnswerModel.swift in Sources */,
+				CBD978FF2B4B8BCC001F2AE8 /* NetworkingManager.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
 			);
