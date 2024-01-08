@@ -18,7 +18,6 @@ final class APIService {
         } catch {
             throw APIError.failToDecodeData
         }
-        
     }
     
     func makeRequest<Builder: NetworkRequestBuildable>(_ builder: Builder) throws -> URLRequest {
