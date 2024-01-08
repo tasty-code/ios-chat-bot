@@ -8,7 +8,6 @@
 import Foundation
 
 final class NetworkManager {
-    let defaultSession = URLSession(configuration: .default)
 
     func loadData(request: URLRequest) async throws -> ChatResponseModel {
         let (data, response) = try await URLSession.shared.data(for: request)
