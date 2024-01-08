@@ -8,12 +8,11 @@
 import Foundation
 
 final class ChatAPI {
+    private let baseURL = "https://api.openai.com/v1/chat/completions"
     
     func makeRequest(body: Data?) async throws -> URLRequest {
         guard let apiKey = Bundle.main.apiKey else { throw NetworkError.invailAPI }
-        guard let url = URL(string: "https://api.openai.com/v1/chat/completions") else {
-            throw NetworkError.invaildURL
-        }
+        guard let url = URL(string: baseURL) else { throw NetworkError.invaildURL }
         var request = URLRequest(url: url)
 
         request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
