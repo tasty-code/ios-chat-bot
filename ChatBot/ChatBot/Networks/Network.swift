@@ -6,3 +6,32 @@
 //
 
 struct Network {}
+
+extension Network {
+    enum HTTPMethod: String {
+        case get = "GET"
+        case post = "POST"
+    }
+    
+    enum AuthorizationType: CustomStringConvertible {
+        case bearer
+        
+        var description: String {
+            switch self {
+            case .bearer:
+                return "Bearer"
+            }
+        }
+    }
+    
+    enum HTTPContentType: CustomStringConvertible {
+        case json
+        
+        var description: String {
+            switch self {
+            case .json:
+                return "application/json"
+            }
+        }
+    }
+}

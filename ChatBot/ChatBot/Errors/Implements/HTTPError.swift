@@ -9,6 +9,7 @@ import Foundation
 
 extension GPTError {
     enum HTTPError: Error {
+        case invalidURL
         case invalidHTTPResponse
         case invalidStatus(statusCode: Int)
         case unknownError(description: String)

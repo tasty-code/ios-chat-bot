@@ -7,32 +7,22 @@
 
 import Foundation
 
-extension Network {
-    enum HTTPContentType: CustomStringConvertible {
-        case json
-        
-        var description: String {
-            switch self {
-            case .json:
-                return "application/json"
-            }
-        }
-    }
-}
-
 protocol HTTPRequestable: AnyObject {
     var urlString: String? { get }
     var paths: [String]? { get }
     var queryStrings: [String: CustomStringConvertible]? { get }
     
+    var headerFields: [String: String]? { get }
+    var httpMethod: Network.HTTPMethod { get }
+    
     func configureURL() -> URL?
-    func asGETRequest() -> URLRequest?
-    func asPOSTRequest(contentType: Network.HTTPContentType, httpBody: Data) -> URLRequest?
+    func asURLRequest() throws -> URLRequest
 }
 
 extension HTTPRequestable {
     var paths: [String]? { nil }
     var queryStrings: [String: CustomStringConvertible]? { nil }
+    var headerFields: [String : String]? { nil }
     
     func configureURL() -> URL? {
         guard let urlString = urlString,
@@ -51,21 +41,15 @@ extension HTTPRequestable {
         return components.url
     }
     
-    func asGETRequest() -> URLRequest? {
+    func asURLRequest() throws -> URLRequest {
         guard let url = configureURL() else {
-            return nil
+            throw GPTError.HTTPError.invalidURL
         }
         
         var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        return request
-    }
-    
-    func asPOSTRequest(contentType: Network.HTTPContentType, httpBody: Data) -> URLRequest? {
-        var request = asGETRequest()
-        request?.httpMethod = "POST"
-        request?.setValue("\(contentType)", forHTTPHeaderField: "Content-Type")
-        request?.httpBody = httpBody
+        request.httpMethod = httpMethod.rawValue
+        request.allHTTPHeaderFields = headerFields
+        
         return request
     }
 }
