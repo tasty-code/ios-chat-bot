@@ -8,9 +8,6 @@
 import Foundation
 
 enum Environment {
-    private enum Keys {
-        static let api_key = "CHAT_API_KEY"
-    }
     
     private static let infoDictionary: [String: Any] = {
         guard let dict = Bundle.main.infoDictionary else {
@@ -20,7 +17,8 @@ enum Environment {
     }()
 
     static let apiKey: String = {
-        guard let string = Environment.infoDictionary[Keys.api_key] as? String else { fatalError("not exists in plist") }
+        guard let string = infoDictionary["CHAT_API_KEY"] as? String else { fatalError("not exists in plist") }
         return string
     }()
 }
+
