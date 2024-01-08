@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     private let networkManager = NetworkManager()
     private let api = ChatAPI()
     
@@ -15,21 +15,21 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         let response = jsonEncode()
-        guard let request = api.makeRequest(body: response) else {
-            print(NetworkError.invaildURL)
-            return
-        }
         
         Task {
-            let data = try await networkManager.loadData(request: request)
-            guard let decodeData = self.jsonDecode(data: data) else { return }
-            print(decodeData)
+            do {
+                let request = try await api.makeRequest(body: response)
+                let data = try await networkManager.loadData(request: request)
+                print(data)
+            } catch {
+                print(error)
+            }
         }
     }
     
     private func jsonEncode() -> Data? {
         let encoder = JSONEncoder()
-        let messages = [Message(role: "user", content: "Say this is a test!", toolCalls: nil)]
+        let messages = [Message(role: "user", content: "안녕 넌 누구야?", toolCalls: nil)]
         let data = ChatRequestModel(model: "gpt-3.5-turbo", messages: messages, stream: false, logprobs: false)
         do {
             let encodeData = try encoder.encode(data)
@@ -39,15 +39,5 @@ class ViewController: UIViewController {
         }
         
         return nil
-    }
-    
-    private func jsonDecode(data: Data) -> ChatResponseModel? {
-        do {
-            let decodeData = try JSONDecoder().decode(ChatResponseModel.self, from: data)
-            return decodeData
-        } catch {
-            print(error)
-            return nil
-        }
     }
 }

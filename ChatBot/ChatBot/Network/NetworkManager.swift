@@ -9,14 +9,18 @@ import Foundation
 
 final class NetworkManager {
     let defaultSession = URLSession(configuration: .default)
-    
-    func loadData(request: URLRequest) async throws -> Data {
-        let (data, response) = try await defaultSession.data(for: request)
+
+    func loadData(request: URLRequest) async throws -> ChatResponseModel {
+        let (data, response) = try await URLSession.shared.data(for: request)
         guard let response = response as? HTTPURLResponse,
-              (200...299) ~= response.statusCode
-        else {
+              (200...299).contains(response.statusCode) else {
             throw NetworkError.outOfRangeSuccessCode
         }
-        return data
+        
+        guard let decodeData = try? JSONDecoder().decode(ChatResponseModel.self, from: data) else {
+            throw DecoderError.failedDeocder
+        }
+        
+        return decodeData
     }
 }

@@ -22,7 +22,17 @@ enum APIKeyError: CustomStringConvertible, Error {
 
 enum NetworkError: Error {
     case invaildURL
-    case failedTask
     case outOfRangeSuccessCode
-    case failedLoadData
+    case invailAPI
+}
+
+enum DecoderError: Error, CustomStringConvertible {
+    case failedDeocder
+    
+    var description: String {
+        switch self {
+        case .failedDeocder:
+            "디코드에 실패하였습니다."
+        }
+    }
 }
