@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct QuestionDeliver {
+struct QuestionEncoder {
     enum Constant {
         static let model = "gpt-3.5-turbo"
         static let stream = false

@@ -19,6 +19,7 @@
 		CB32630C2B44FC1200B9518D /* UserQuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB32630B2B44FC1200B9518D /* UserQuestionModel.swift */; };
 		CBD978FC2B4B8BAF001F2AE8 /* NetworkingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD978FB2B4B8BAF001F2AE8 /* NetworkingError.swift */; };
 		CBD978FF2B4B8BCC001F2AE8 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD978FE2B4B8BCC001F2AE8 /* NetworkingManager.swift */; };
+		CBD979012B4B901E001F2AE8 /* AnswerDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD979002B4B901E001F2AE8 /* AnswerDecoder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		CB32630B2B44FC1200B9518D /* UserQuestionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserQuestionModel.swift; sourceTree = "<group>"; };
 		CBD978FB2B4B8BAF001F2AE8 /* NetworkingError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingError.swift; sourceTree = "<group>"; };
 		CBD978FE2B4B8BCC001F2AE8 /* NetworkingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
+		CBD979002B4B901E001F2AE8 /* AnswerDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerDecoder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				C3CFDE3E2B4B8E3A003CF9CC /* QuestionEncoder.swift */,
+				CBD979002B4B901E001F2AE8 /* AnswerDecoder.swift */,
 			);
 			path = DataTransfer;
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 				CBD978FC2B4B8BAF001F2AE8 /* NetworkingError.swift in Sources */,
 				CB32630A2B44FBE400B9518D /* AIAnswerModel.swift in Sources */,
 				CBD978FF2B4B8BCC001F2AE8 /* NetworkingManager.swift in Sources */,
+				CBD979012B4B901E001F2AE8 /* AnswerDecoder.swift in Sources */,
 				C3CFDE3F2B4B8E3A003CF9CC /* QuestionEncoder.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
