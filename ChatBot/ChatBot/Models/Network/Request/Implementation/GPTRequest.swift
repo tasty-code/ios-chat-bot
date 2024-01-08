@@ -9,8 +9,8 @@ import Foundation
 
 struct GPTRequest: APIRequestable {
     let baseURL: URL? = URL(string: "https://api.openai.com/v1/chat/completions")
-    let headerFeilds: [String : String]
-    let httpBodyData: Data?
+    let headerFields: [String : String]
+    let bodyDTO: Encodable?
     
     init?(requestDTO: Encodable) {
         guard let apiKey = Bundle.main.gptAPIKey
@@ -18,17 +18,11 @@ struct GPTRequest: APIRequestable {
             return nil
         }
         
-        headerFeilds = [
+        headerFields = [
             "Authorization": "Bearer \(apiKey)",
             "Content-Type" : "application/json"
         ]
         
-        guard let encodedData = try? JSONEncoder().encode(requestDTO)
-        else {
-            self.httpBodyData = nil
-            return
-        }
-        
-        self.httpBodyData = encodedData
+        self.bodyDTO = requestDTO
     }
 }

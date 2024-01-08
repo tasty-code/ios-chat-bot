@@ -9,9 +9,9 @@ import Foundation
 
 protocol APIRequestable {
     var baseURL: URL? { get }
-    var headerFeilds: [String: String] { get }
+    var headerFields: [String: String] { get }
     var httpMethod: HTTPMethod { get }
-    var httpBodyData: Data? { get }
+    var bodyDTO: Encodable? { get }
 }
 
 extension APIRequestable {
