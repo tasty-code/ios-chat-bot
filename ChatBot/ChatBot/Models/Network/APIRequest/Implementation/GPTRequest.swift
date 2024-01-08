@@ -8,14 +8,14 @@
 import Foundation
 
 struct GPTRequest: APIRequestable {
-    let baseURL: URL? = URL(string: "https://api.openai.com/v1/chat/completions")
+    let baseURL: String = "https://api.openai.com/v1/chat/completions"
     let headerFields: [String : String]
     let bodyDTO: Encodable?
     
-    init?(requestDTO: Encodable) {
+    init(requestDTO: Encodable) throws {
         guard let apiKey = Bundle.main.gptAPIKey
         else {
-            return nil
+            throw NetworkError.notFoundAPIKey
         }
         
         headerFields = [

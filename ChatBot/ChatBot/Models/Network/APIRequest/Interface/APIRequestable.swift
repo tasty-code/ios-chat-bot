@@ -8,7 +8,7 @@
 import Foundation
 
 protocol APIRequestable {
-    var baseURL: URL? { get }
+    var baseURL: String { get }
     var headerFields: [String: String] { get }
     var httpMethod: HTTPMethod { get }
     var bodyDTO: Encodable? { get }
