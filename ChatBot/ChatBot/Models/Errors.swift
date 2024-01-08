@@ -19,3 +19,10 @@ enum APIKeyError: CustomStringConvertible, Error {
         }
     }
 }
+
+enum NetworkError: Error {
+    case invaildURL
+    case failedTask
+    case outOfRangeSuccessCode
+    case failedLoadData
+}
