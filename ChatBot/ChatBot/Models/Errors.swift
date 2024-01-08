@@ -27,11 +27,11 @@ enum NetworkError: Error {
 }
 
 enum DecoderError: Error, CustomStringConvertible {
-    case failedDeocder
+    case failedDeocde
     
     var description: String {
         switch self {
-        case .failedDeocder:
+        case .failedDeocde:
             "디코드에 실패하였습니다."
         }
     }

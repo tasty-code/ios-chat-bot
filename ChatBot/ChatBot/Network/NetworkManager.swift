@@ -18,7 +18,7 @@ final class NetworkManager {
         }
         
         guard let decodeData = try? JSONDecoder().decode(ChatResponseModel.self, from: data) else {
-            throw DecoderError.failedDeocder
+            throw DecoderError.failedDeocde
         }
         
         return decodeData
