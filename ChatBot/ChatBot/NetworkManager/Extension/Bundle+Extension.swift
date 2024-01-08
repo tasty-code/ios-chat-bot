@@ -8,10 +8,12 @@
 import Foundation
 
 extension Bundle {
-    var apiKey: String? {
-        guard let file = self.path(forResource: "APIKEY", ofType: "plist"),
-              let resource = NSDictionary(contentsOfFile: file),
-              let value = resource["OPENAI_API_KEY"] as? String else { return nil }
-        return value
+    var apiKey: String {
+        get throws {
+            guard let file = self.path(forResource: "APIKEY", ofType: "plist"),
+                  let resource = NSDictionary(contentsOfFile: file),
+                  let value = resource["OPENAI_API_KEY"] as? String else { throw NetworkError.invalidApiKey }
+            return value
+        }
     }
 }
