@@ -22,7 +22,6 @@
 		E15CF2152B479E3A00DFBD44 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15CF2142B479E3A00DFBD44 /* Endpoint.swift */; };
 		E15CF21A2B47A2DF00DFBD44 /* NetworkRequestBuildable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15CF2192B47A2DF00DFBD44 /* NetworkRequestBuildable.swift */; };
 		E15CF21C2B47A32E00DFBD44 /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15CF21B2B47A32E00DFBD44 /* HttpMethod.swift */; };
-		E15CF21E2B47A41600DFBD44 /* BaseUrlType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15CF21D2B47A41600DFBD44 /* BaseUrlType.swift */; };
 		E15CF2212B47BE7000DFBD44 /* PostChatBotNetworkBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15CF2202B47BE7000DFBD44 /* PostChatBotNetworkBuilder.swift */; };
 		E15CF2252B47C22100DFBD44 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15CF2242B47C22100DFBD44 /* Constants.swift */; };
 /* End PBXBuildFile section */
@@ -45,7 +44,6 @@
 		E15CF2142B479E3A00DFBD44 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		E15CF2192B47A2DF00DFBD44 /* NetworkRequestBuildable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestBuildable.swift; sourceTree = "<group>"; };
 		E15CF21B2B47A32E00DFBD44 /* HttpMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
-		E15CF21D2B47A41600DFBD44 /* BaseUrlType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUrlType.swift; sourceTree = "<group>"; };
 		E15CF2202B47BE7000DFBD44 /* PostChatBotNetworkBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostChatBotNetworkBuilder.swift; sourceTree = "<group>"; };
 		E15CF2242B47C22100DFBD44 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E15CF2262B47D54500DFBD44 /* Environment.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Environment.xcconfig; sourceTree = "<group>"; };
@@ -127,7 +125,6 @@
 				0ED22E1F2B479A6C00E9596B /* Environment.swift */,
 				E15CF2142B479E3A00DFBD44 /* Endpoint.swift */,
 				E15CF21B2B47A32E00DFBD44 /* HttpMethod.swift */,
-				E15CF21D2B47A41600DFBD44 /* BaseUrlType.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -250,7 +247,6 @@
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
 				E15CF2132B464BDE00DFBD44 /* Message.swift in Sources */,
 				E15CF2152B479E3A00DFBD44 /* Endpoint.swift in Sources */,
-				E15CF21E2B47A41600DFBD44 /* BaseUrlType.swift in Sources */,
 				0ED22E202B479A6C00E9596B /* Environment.swift in Sources */,
 				E15CF2112B464B7200DFBD44 /* APIRequest.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,

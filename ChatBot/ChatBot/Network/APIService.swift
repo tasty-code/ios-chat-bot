@@ -27,9 +27,10 @@ final class APIService {
         }
         
         let url = baseURL.appendingPathComponent(builder.path)
-        var request = URLRequest(url: url)
         
+        var request = URLRequest(url: url)
         request.httpMethod = builder.httpMethod.rawValue
+        
         builder.headers.forEach { (key, value) in
             request.setValue(value as? String, forHTTPHeaderField: key)
         }
