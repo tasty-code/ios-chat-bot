@@ -53,7 +53,6 @@ final class NetworkingManager {
             }
             
             completion(.success(data))
-            
         }
     }
 }
