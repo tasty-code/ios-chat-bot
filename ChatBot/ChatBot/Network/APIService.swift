@@ -18,18 +18,18 @@ final class APIService {
         } catch {
             throw APIError.failToDecodeData
         }
-        
     }
     
     func makeRequest<Builder: NetworkRequestBuildable>(_ builder: Builder) throws -> URLRequest {
-        guard let baseURL = URL(string: builder.baseURL.url) else {
+        guard let baseURL = URL(string: builder.baseURL) else {
             throw APIError.unableToCreateURLForURLRequest
         }
         
         let url = baseURL.appendingPathComponent(builder.path)
-        var request = URLRequest(url: url)
         
+        var request = URLRequest(url: url)
         request.httpMethod = builder.httpMethod.rawValue
+        
         builder.headers.forEach { (key, value) in
             request.setValue(value as? String, forHTTPHeaderField: key)
         }

@@ -24,10 +24,9 @@ final class ViewController: UIViewController {
         Task {
             do {
                 let message: APIResponse = try await APIService().execute(request: makeRequest)
-                
                 print(message.choices[0].message.content)
-            } catch {
-                throw APIError.invalidRequest(message: error.localizedDescription)
+            } catch let error {
+                print(error.localizedDescription)
             }
         }
     }

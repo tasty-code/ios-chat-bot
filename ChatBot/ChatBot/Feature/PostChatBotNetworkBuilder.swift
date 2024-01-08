@@ -20,10 +20,10 @@ struct PostChatBotNetworkBuilder: NetworkRequestBuildable {
         self.path = "v1/chat/\(Endpoint.completions.rawValue)"
         self.body = APIRequest(
             model: ConstantsForNetworkRequest.model,
-            stream: ConstantsForNetworkRequest.stream,
+            stream: false,
             messages: [
                 ConstantsForNetworkRequest.defaultMessage,
-                Message(role: ConstantsForNetworkRequest.userRole, content: prompt)
+                Message(role: "user", content: prompt)
             ]
         )
     }
