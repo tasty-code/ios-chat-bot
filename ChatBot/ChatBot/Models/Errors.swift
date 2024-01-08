@@ -21,6 +21,7 @@ enum APIKeyError: CustomStringConvertible, Error {
 }
 
 enum NetworkError: Error {
+    case failedTransformHTTPURLResponse
     case invaildURL
     case invailAPI
     case badRequest
