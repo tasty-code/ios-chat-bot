@@ -11,6 +11,7 @@ enum NetworkError: Error {
     case notFoundAPIKey
     case badURL
     case failedEncoding
+    case failedDecoding
     case failedResponseCasting
     case responseError(status: Int)
 }
