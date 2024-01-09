@@ -15,6 +15,7 @@
 		C3B9B93A2B44F48200B85140 /* ChatBot++Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B9B9392B44F48200B85140 /* ChatBot++Bundle.swift */; };
 		C3CFDE452B4CD010003CF9CC /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CFDE442B4CD010003CF9CC /* NetworkingManager.swift */; };
 		C3CFDE4A2B4CD097003CF9CC /* NetworkingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CFDE492B4CD097003CF9CC /* NetworkingError.swift */; };
+		C3CFDE4D2B4CD210003CF9CC /* NetworkGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CFDE4C2B4CD210003CF9CC /* NetworkGenerator.swift */; };
 		CB3263042B44F55F00B9518D /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB3263032B44F55F00B9518D /* ApiKeys.plist */; };
 		CB32630A2B44FBE400B9518D /* AIAnswerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3263092B44FBE400B9518D /* AIAnswerModel.swift */; };
 		CB32630C2B44FC1200B9518D /* UserQuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB32630B2B44FC1200B9518D /* UserQuestionModel.swift */; };
@@ -32,6 +33,7 @@
 		C3B9B9392B44F48200B85140 /* ChatBot++Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatBot++Bundle.swift"; sourceTree = "<group>"; };
 		C3CFDE442B4CD010003CF9CC /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		C3CFDE492B4CD097003CF9CC /* NetworkingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingError.swift; sourceTree = "<group>"; };
+		C3CFDE4C2B4CD210003CF9CC /* NetworkGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkGenerator.swift; sourceTree = "<group>"; };
 		CB3263032B44F55F00B9518D /* ApiKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiKeys.plist; sourceTree = "<group>"; };
 		CB3263092B44FBE400B9518D /* AIAnswerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIAnswerModel.swift; sourceTree = "<group>"; };
 		CB32630B2B44FC1200B9518D /* UserQuestionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserQuestionModel.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				C3CFDE442B4CD010003CF9CC /* NetworkingManager.swift */,
+				C3CFDE4C2B4CD210003CF9CC /* NetworkGenerator.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 			files = (
 				B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */,
 				C3B9B93A2B44F48200B85140 /* ChatBot++Bundle.swift in Sources */,
+				C3CFDE4D2B4CD210003CF9CC /* NetworkGenerator.swift in Sources */,
 				C3CFDE4A2B4CD097003CF9CC /* NetworkingError.swift in Sources */,
 				CB32630C2B44FC1200B9518D /* UserQuestionModel.swift in Sources */,
 				CB32630A2B44FBE400B9518D /* AIAnswerModel.swift in Sources */,
