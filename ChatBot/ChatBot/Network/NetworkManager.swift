@@ -7,38 +7,34 @@
 
 import Foundation
 
-struct NetworkManager {
+final class NetworkManager {
     private let session: URLSession
-    private var request: URLRequest?
-
-    init(session: URLSession = URLSession.shared) {
+    private var urlRequest: URLRequest?
+    
+    init(session: URLSession = URLSession.shared, urlRequest: URLRequest?) {
         self.session = session
+        self.urlRequest = urlRequest
     }
 }
 
 // MARK: - protocol method
 extension NetworkManager: NetworkManagerProtocol {
-    func getData (handler: @escaping (Result<Data, NetworkError>) -> Void) {
-        guard let request = request else { return }
-
-        session.dataTask(with: request) { data, response, error in
-            
-            guard error == nil else {
-                return handler(.failure(.unknown))
-            }
-            
-            guard let httpResponse = response as? HTTPURLResponse else {
-                return }
-            guard (200..<300) ~= httpResponse.statusCode else {
-                print(httpResponse.statusCode)
-                return handler(.failure(.invalidResponse))
-            }
-            
-            guard let data = data else {
-                return handler(.failure(.invalidData))
-            }
-            
-            handler(.success(data))
-        }.resume()
+    func getData(body: Data?) async throws -> Data {
+        guard var urlRequest = urlRequest else {
+            throw NetworkError.invalidURL
+        }
+        urlRequest.httpBody = body
+        
+        let (data, response) = try await session.data(for: urlRequest)
+        
+        guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
+            throw NetworkError.invalidResponse
+        }
+        guard (200..<300) ~= statusCode else {
+            print(statusCode)
+            throw NetworkError.wrongResponse
+        }
+        
+        return data
     }
 }

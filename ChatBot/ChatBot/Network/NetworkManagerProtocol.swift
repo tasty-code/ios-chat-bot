@@ -8,5 +8,5 @@
 import Foundation
 
 protocol NetworkManagerProtocol {
-    func getData (handler: @escaping (Result<Data, NetworkError>) -> Void)
+    func getData(body: Data?) async throws -> Data
 }
