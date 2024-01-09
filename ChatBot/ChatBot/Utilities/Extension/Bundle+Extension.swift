@@ -1,6 +1,7 @@
 import Foundation
 
 extension Bundle {
+    // MARK: Namespace
     enum APIError: Error, CustomDebugStringConvertible {
         case noExistedAPIPlist
         case noExistedAPIKey
@@ -13,6 +14,20 @@ extension Bundle {
         }
     }
     
+    // MARK: Public Propreties
+    var APIKey: String {
+        switch checkAPIKey() {
+        case .success(let APIKey):
+            return APIKey
+        case .failure(let error):
+            print(error)
+            return error.localizedDescription
+        }
+    }
+}
+
+extension Bundle {
+    // MARK: Private methods
     private func checkAPIKey() -> Result<String, APIError> {
         guard let filePath = Bundle.main.path(forResource: "APIKeyList", ofType: "plist") else {
             return .failure(.noExistedAPIPlist)
@@ -23,16 +38,6 @@ extension Bundle {
             return .success(value)
         } else {
             return .failure(.noExistedAPIKey)
-        }
-    }
-    
-    var APIKey: String {
-        switch checkAPIKey() {
-        case .success(let APIKey):
-            return APIKey
-        case .failure(let error):
-            print(error)
-            return error.localizedDescription
         }
     }
 }

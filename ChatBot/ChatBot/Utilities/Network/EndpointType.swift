@@ -2,7 +2,7 @@ import Foundation
 
 enum EndpointType {
     case chatCompletion(apiKey: String)
-    
+
     static let baseURLString: String = "https://api.openai.com/v1/chat/completions"
     
     var header: [String: String] {
