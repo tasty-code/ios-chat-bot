@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7F195BA12B47BB5D00C99766 /* APIRequestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F195BA02B47BB5D00C99766 /* APIRequestable.swift */; };
+		7F195BA32B47BC0600C99766 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F195BA22B47BC0600C99766 /* HTTPMethod.swift */; };
+		7F1ABCC32B4B84BF00864D2D /* URLRequestConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1ABCC22B4B84BF00864D2D /* URLRequestConvertible.swift */; };
+		7F1ABCC52B4B867800864D2D /* URLRequestConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1ABCC42B4B867800864D2D /* URLRequestConverter.swift */; };
+		7F1ABCC92B4B8CC700864D2D /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1ABCC82B4B8CC700864D2D /* NetworkError.swift */; };
 		7F4C9D712B452165006CD685 /* GPTMessageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C9D702B452165006CD685 /* GPTMessageDTO.swift */; };
 		7F4C9D752B452223006CD685 /* GPTMessageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C9D742B452223006CD685 /* GPTMessageable.swift */; };
 		7F4C9D772B4522B5006CD685 /* UserMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C9D762B4522B5006CD685 /* UserMessage.swift */; };
@@ -22,9 +27,15 @@
 		B4B3E2C62B42D1BC00818B3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */; };
 		B4B3E2C92B42D1BC00818B3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */; };
 		DE584B302B44EE8C00B04403 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE584B2F2B44EE8C00B04403 /* Bundle+Extension.swift */; };
+		DEA638532B47BE81006E474C /* GPTRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA638522B47BE81006E474C /* GPTRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7F195BA02B47BB5D00C99766 /* APIRequestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestable.swift; sourceTree = "<group>"; };
+		7F195BA22B47BC0600C99766 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		7F1ABCC22B4B84BF00864D2D /* URLRequestConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestConvertible.swift; sourceTree = "<group>"; };
+		7F1ABCC42B4B867800864D2D /* URLRequestConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestConverter.swift; sourceTree = "<group>"; };
+		7F1ABCC82B4B8CC700864D2D /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		7F4C9D702B452165006CD685 /* GPTMessageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTMessageDTO.swift; sourceTree = "<group>"; };
 		7F4C9D742B452223006CD685 /* GPTMessageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTMessageable.swift; sourceTree = "<group>"; };
 		7F4C9D762B4522B5006CD685 /* UserMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMessage.swift; sourceTree = "<group>"; };
@@ -42,6 +53,7 @@
 		B4B3E2C82B42D1BC00818B3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B4B3E2CA2B42D1BC00818B3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE584B2F2B44EE8C00B04403 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
+		DEA638522B47BE81006E474C /* GPTRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +67,67 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7F195B9C2B47BA6400C99766 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				7F1ABCC62B4B8CB900864D2D /* Error */,
+				7F1ABCBF2B4B846000864D2D /* URLRequestConverter */,
+				7F195B9D2B47BA7200C99766 /* APIRequest */,
+				7F195BA22B47BC0600C99766 /* HTTPMethod.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		7F195B9D2B47BA7200C99766 /* APIRequest */ = {
+			isa = PBXGroup;
+			children = (
+				DEA638512B47BE76006E474C /* Implementation */,
+				7F195B9E2B47BA7800C99766 /* Interface */,
+			);
+			path = APIRequest;
+			sourceTree = "<group>";
+		};
+		7F195B9E2B47BA7800C99766 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				7F195BA02B47BB5D00C99766 /* APIRequestable.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		7F1ABCBF2B4B846000864D2D /* URLRequestConverter */ = {
+			isa = PBXGroup;
+			children = (
+				7F1ABCC12B4B849C00864D2D /* Implementation */,
+				7F1ABCC02B4B848700864D2D /* Interface */,
+			);
+			path = URLRequestConverter;
+			sourceTree = "<group>";
+		};
+		7F1ABCC02B4B848700864D2D /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				7F1ABCC22B4B84BF00864D2D /* URLRequestConvertible.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		7F1ABCC12B4B849C00864D2D /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				7F1ABCC42B4B867800864D2D /* URLRequestConverter.swift */,
+			);
+			path = Implementation;
+			sourceTree = "<group>";
+		};
+		7F1ABCC62B4B8CB900864D2D /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				7F1ABCC82B4B8CC700864D2D /* NetworkError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
 		7F4C9D6F2B45214D006CD685 /* Messages */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +177,7 @@
 		7F7F43A62B44F20D000CB9CC /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				7F195B9C2B47BA6400C99766 /* Network */,
 				7F4C9D812B453195006CD685 /* DTOs */,
 				7F4C9D6F2B45214D006CD685 /* Messages */,
 			);
@@ -172,6 +246,14 @@
 				B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */,
 			);
 			path = Application;
+			sourceTree = "<group>";
+		};
+		DEA638512B47BE76006E474C /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				DEA638522B47BE81006E474C /* GPTRequest.swift */,
+			);
+			path = Implementation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,11 +327,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F195BA12B47BB5D00C99766 /* APIRequestable.swift in Sources */,
 				7F4C9D792B4522C1006CD685 /* SystemMessage.swift in Sources */,
+				7F195BA32B47BC0600C99766 /* HTTPMethod.swift in Sources */,
 				7F4C9D772B4522B5006CD685 /* UserMessage.swift in Sources */,
 				B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */,
 				7F4C9D712B452165006CD685 /* GPTMessageDTO.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
+				7F1ABCC52B4B867800864D2D /* URLRequestConverter.swift in Sources */,
 				7F7F43A82B44F247000CB9CC /* GPTResponseDTO.swift in Sources */,
 				7F4C9D7E2B45262B006CD685 /* AssistantMessage.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
@@ -257,6 +342,9 @@
 				7F4C9D802B452A89006CD685 /* GPTRequestDTO.swift in Sources */,
 				7F4C9D752B452223006CD685 /* GPTMessageable.swift in Sources */,
 				DE584B302B44EE8C00B04403 /* Bundle+Extension.swift in Sources */,
+				7F1ABCC92B4B8CC700864D2D /* NetworkError.swift in Sources */,
+				DEA638532B47BE81006E474C /* GPTRequest.swift in Sources */,
+				7F1ABCC32B4B84BF00864D2D /* URLRequestConvertible.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
