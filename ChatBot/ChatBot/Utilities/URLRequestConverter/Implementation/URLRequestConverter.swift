@@ -20,7 +20,7 @@ struct URLRequestConverter: URLRequestConvertible {
         self.bodyDTO = apiRequest.bodyDTO
     }
     
-    func asURLRequest() throws -> URLRequest {
+    func asURLRequest(with encoder: JSONEncodable) throws -> URLRequest {
         guard let url = URL(string: baseURL)
         else {
             throw NetworkError.badURL

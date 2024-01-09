@@ -12,17 +12,19 @@ final class GPTServiceProvider: ServiceProvidable {
     typealias D = GPTResponseDTO
     
     private let networkManager: NetworkManager
+    private let jsonCoder: JSONCodable
     
-    init(networkManager: NetworkManager) {
+    init(networkManager: NetworkManager, jsonCoder: JSONCodable) {
         self.networkManager = networkManager
+        self.jsonCoder = jsonCoder
     }
     
     func excute(for requestDTO: GPTRequestDTO) async throws -> GPTResponseDTO {
         let gptRequest = try GPTRequest(requestDTO: requestDTO)
-        let urlRequest = try URLRequestConverter(apiRequest: gptRequest).asURLRequest()
+        let urlRequest = try URLRequestConverter(apiRequest: gptRequest).asURLRequest(with: jsonCoder)
         let data = try await networkManager.fetchData(with: urlRequest)
         
-        guard let responseDTO = try? JSONDecoder().decode(GPTResponseDTO.self, from: data)
+        guard let responseDTO = try? jsonCoder.decode(GPTResponseDTO.self, from: data)
         else {
             throw NetworkError.failedDecoding
         }

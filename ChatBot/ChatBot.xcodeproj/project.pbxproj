@@ -33,6 +33,8 @@
 		B4B3E2C92B42D1BC00818B3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */; };
 		DE584B302B44EE8C00B04403 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE584B2F2B44EE8C00B04403 /* Bundle+Extension.swift */; };
 		DEA638532B47BE81006E474C /* GPTRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA638522B47BE81006E474C /* GPTRequest.swift */; };
+		DEB3E5012B4D11FF005206CC /* JSONCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB3E5002B4D11FF005206CC /* JSONCodable.swift */; };
+		DEB3E5032B4D1238005206CC /* JSONCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB3E5022B4D1238005206CC /* JSONCoder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +66,8 @@
 		B4B3E2CA2B42D1BC00818B3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE584B2F2B44EE8C00B04403 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		DEA638522B47BE81006E474C /* GPTRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTRequest.swift; sourceTree = "<group>"; };
+		DEB3E5002B4D11FF005206CC /* JSONCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONCodable.swift; sourceTree = "<group>"; };
+		DEB3E5022B4D1238005206CC /* JSONCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONCoder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +190,7 @@
 		7F7A556D2B4D03ED00368247 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				DEB3E4FD2B4D1198005206CC /* JSON */,
 				7F1ABCBF2B4B846000864D2D /* URLRequestConverter */,
 				7F7A556E2B4D042000368247 /* Network */,
 			);
@@ -319,6 +324,31 @@
 			path = Implementation;
 			sourceTree = "<group>";
 		};
+		DEB3E4FD2B4D1198005206CC /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				DEB3E4FF2B4D11CB005206CC /* Implementation */,
+				DEB3E4FE2B4D11C5005206CC /* interface */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
+		DEB3E4FE2B4D11C5005206CC /* interface */ = {
+			isa = PBXGroup;
+			children = (
+				DEB3E5002B4D11FF005206CC /* JSONCodable.swift */,
+			);
+			path = interface;
+			sourceTree = "<group>";
+		};
+		DEB3E4FF2B4D11CB005206CC /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				DEB3E5022B4D1238005206CC /* JSONCoder.swift */,
+			);
+			path = Implementation;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -397,7 +427,9 @@
 				7F195BA12B47BB5D00C99766 /* APIRequestable.swift in Sources */,
 				7F4C9D792B4522C1006CD685 /* SystemMessage.swift in Sources */,
 				7F195BA32B47BC0600C99766 /* HTTPMethod.swift in Sources */,
+				DEB3E5032B4D1238005206CC /* JSONCoder.swift in Sources */,
 				7F7A557E2B4D0D4F00368247 /* GPTServiceProvider.swift in Sources */,
+				DEB3E5012B4D11FF005206CC /* JSONCodable.swift in Sources */,
 				7F4C9D772B4522B5006CD685 /* UserMessage.swift in Sources */,
 				B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */,
 				7F4C9D712B452165006CD685 /* GPTMessageDTO.swift in Sources */,
