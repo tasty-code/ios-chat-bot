@@ -9,7 +9,7 @@ import Combine
 import Foundation
 
 extension Network {
-    final class GPTHTTPService {
+    final class GPTHTTPService: HTTPServicable {
         let publisher: HTTPPublishable
         let encoder: DataEncoderable
         let decoder: DataDecoderable

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0D843AD82B4B986D00F4EAD2 /* URLSession+HTTPPublishable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843AD72B4B986D00F4EAD2 /* URLSession+HTTPPublishable.swift */; };
-		0D843ADB2B4B98C900F4EAD2 /* HTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843ADA2B4B98C900F4EAD2 /* HTTPService.swift */; };
+		0D843ADB2B4B98C900F4EAD2 /* GPTHTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843ADA2B4B98C900F4EAD2 /* GPTHTTPService.swift */; };
 		0D843ADD2B4B992500F4EAD2 /* DataDecoderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843ADC2B4B992500F4EAD2 /* DataDecoderable.swift */; };
 		0D843AE22B4B99C000F4EAD2 /* JSONDecoder+DataDecoderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843AE12B4B99C000F4EAD2 /* JSONDecoder+DataDecoderable.swift */; };
 		0D843AE72B4BA66600F4EAD2 /* DataEncoderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843AE62B4BA66600F4EAD2 /* DataEncoderable.swift */; };
@@ -16,6 +16,12 @@
 		0D843AEB2B4BDD7100F4EAD2 /* HTTPDecoratable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843AEA2B4BDD7100F4EAD2 /* HTTPDecoratable.swift */; };
 		0D843AED2B4BDDB100F4EAD2 /* GPTBaseReqeust.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843AEC2B4BDDB100F4EAD2 /* GPTBaseReqeust.swift */; };
 		0D843AEF2B4BE17F00F4EAD2 /* AuthorizationDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843AEE2B4BE17F00F4EAD2 /* AuthorizationDecorator.swift */; };
+		0D843AF72B4CE94700F4EAD2 /* ChatBotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843AF62B4CE94700F4EAD2 /* ChatBotTests.swift */; };
+		0D843B072B4D016000F4EAD2 /* HTTPServicable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843B062B4D016000F4EAD2 /* HTTPServicable.swift */; };
+		0D843B092B4D02DB00F4EAD2 /* MockHTTPPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843B082B4D02DB00F4EAD2 /* MockHTTPPublisher.swift */; };
+		0D843B0C2B4D042800F4EAD2 /* GPTReplyMock.json in Resources */ = {isa = PBXBuildFile; fileRef = 0D843B0B2B4D042800F4EAD2 /* GPTReplyMock.json */; };
+		0D843B112B4D0B8100F4EAD2 /* MockHTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843B102B4D0B8100F4EAD2 /* MockHTTPRequest.swift */; };
+		0D843B142B4D142B00F4EAD2 /* JSONFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843B132B4D142B00F4EAD2 /* JSONFetcher.swift */; };
 		0DF9976D2B43B15F0055C836 /* GPTMessagable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF9976C2B43B15F0055C836 /* GPTMessagable.swift */; };
 		0DF997702B43B9890055C836 /* SystemMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF9976F2B43B9890055C836 /* SystemMessage.swift */; };
 		0DF997722B43BC590055C836 /* ToolMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF997712B43BC590055C836 /* ToolMessage.swift */; };
@@ -40,9 +46,19 @@
 		B4B3E2C92B42D1BC00818B3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		0D843AF82B4CE94700F4EAD2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4B3E2B12B42D1BB00818B3C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B4B3E2B82B42D1BB00818B3C;
+			remoteInfo = ChatBot;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		0D843AD72B4B986D00F4EAD2 /* URLSession+HTTPPublishable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+HTTPPublishable.swift"; sourceTree = "<group>"; };
-		0D843ADA2B4B98C900F4EAD2 /* HTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPService.swift; sourceTree = "<group>"; };
+		0D843ADA2B4B98C900F4EAD2 /* GPTHTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTHTTPService.swift; sourceTree = "<group>"; };
 		0D843ADC2B4B992500F4EAD2 /* DataDecoderable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDecoderable.swift; sourceTree = "<group>"; };
 		0D843AE12B4B99C000F4EAD2 /* JSONDecoder+DataDecoderable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+DataDecoderable.swift"; sourceTree = "<group>"; };
 		0D843AE62B4BA66600F4EAD2 /* DataEncoderable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataEncoderable.swift; sourceTree = "<group>"; };
@@ -50,6 +66,14 @@
 		0D843AEA2B4BDD7100F4EAD2 /* HTTPDecoratable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPDecoratable.swift; sourceTree = "<group>"; };
 		0D843AEC2B4BDDB100F4EAD2 /* GPTBaseReqeust.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTBaseReqeust.swift; sourceTree = "<group>"; };
 		0D843AEE2B4BE17F00F4EAD2 /* AuthorizationDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationDecorator.swift; sourceTree = "<group>"; };
+		0D843AF42B4CE94700F4EAD2 /* ChatBotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChatBotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D843AF62B4CE94700F4EAD2 /* ChatBotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotTests.swift; sourceTree = "<group>"; };
+		0D843B062B4D016000F4EAD2 /* HTTPServicable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPServicable.swift; sourceTree = "<group>"; };
+		0D843B082B4D02DB00F4EAD2 /* MockHTTPPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHTTPPublisher.swift; sourceTree = "<group>"; };
+		0D843B0B2B4D042800F4EAD2 /* GPTReplyMock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GPTReplyMock.json; sourceTree = "<group>"; };
+		0D843B102B4D0B8100F4EAD2 /* MockHTTPRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHTTPRequest.swift; sourceTree = "<group>"; };
+		0D843B132B4D142B00F4EAD2 /* JSONFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONFetcher.swift; sourceTree = "<group>"; };
+		0D843B162B4D260800F4EAD2 /* GPTKeys.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = GPTKeys.xcconfig; sourceTree = "<group>"; };
 		0DF9976C2B43B15F0055C836 /* GPTMessagable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTMessagable.swift; sourceTree = "<group>"; };
 		0DF9976F2B43B9890055C836 /* SystemMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemMessage.swift; sourceTree = "<group>"; };
 		0DF997712B43BC590055C836 /* ToolMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolMessage.swift; sourceTree = "<group>"; };
@@ -77,6 +101,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0D843AF12B4CE94700F4EAD2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B4B3E2B62B42D1BB00818B3C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -90,7 +121,8 @@
 		0D843AD92B4B98B200F4EAD2 /* HTTPService */ = {
 			isa = PBXGroup;
 			children = (
-				0D843ADA2B4B98C900F4EAD2 /* HTTPService.swift */,
+				0D843B052B4D015100F4EAD2 /* Protocols */,
+				0D843B042B4D013E00F4EAD2 /* Implements */,
 			);
 			path = HTTPService;
 			sourceTree = "<group>";
@@ -143,6 +175,58 @@
 				0D843AE82B4BA6D300F4EAD2 /* JSONEecoder+DataEecoderable.swift */,
 			);
 			path = Implements;
+			sourceTree = "<group>";
+		};
+		0D843AF52B4CE94700F4EAD2 /* ChatBotTests */ = {
+			isa = PBXGroup;
+			children = (
+				0D843AF62B4CE94700F4EAD2 /* ChatBotTests.swift */,
+				0D843B152B4D169F00F4EAD2 /* Mocks */,
+				0D843B0A2B4D03D200F4EAD2 /* Resources */,
+				0D843B122B4D141900F4EAD2 /* Utilities */,
+			);
+			path = ChatBotTests;
+			sourceTree = "<group>";
+		};
+		0D843B042B4D013E00F4EAD2 /* Implements */ = {
+			isa = PBXGroup;
+			children = (
+				0D843ADA2B4B98C900F4EAD2 /* GPTHTTPService.swift */,
+			);
+			path = Implements;
+			sourceTree = "<group>";
+		};
+		0D843B052B4D015100F4EAD2 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				0D843B062B4D016000F4EAD2 /* HTTPServicable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		0D843B0A2B4D03D200F4EAD2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0D843B0B2B4D042800F4EAD2 /* GPTReplyMock.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		0D843B122B4D141900F4EAD2 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				0D843B132B4D142B00F4EAD2 /* JSONFetcher.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		0D843B152B4D169F00F4EAD2 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				0D843B082B4D02DB00F4EAD2 /* MockHTTPPublisher.swift */,
+				0D843B102B4D0B8100F4EAD2 /* MockHTTPRequest.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		0DF997672B43AD8F0055C836 /* Models */ = {
@@ -294,6 +378,7 @@
 			isa = PBXGroup;
 			children = (
 				B4B3E2BB2B42D1BB00818B3C /* ChatBot */,
+				0D843AF52B4CE94700F4EAD2 /* ChatBotTests */,
 				B4B3E2BA2B42D1BB00818B3C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -302,6 +387,7 @@
 			isa = PBXGroup;
 			children = (
 				B4B3E2B92B42D1BB00818B3C /* ChatBot.app */,
+				0D843AF42B4CE94700F4EAD2 /* ChatBotTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -322,6 +408,7 @@
 				B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */,
 				B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */,
 				B4B3E2CA2B42D1BC00818B3C /* Info.plist */,
+				0D843B162B4D260800F4EAD2 /* GPTKeys.xcconfig */,
 			);
 			path = ChatBot;
 			sourceTree = "<group>";
@@ -329,6 +416,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0D843AF32B4CE94700F4EAD2 /* ChatBotTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0D843AFC2B4CE94700F4EAD2 /* Build configuration list for PBXNativeTarget "ChatBotTests" */;
+			buildPhases = (
+				0D843AF02B4CE94700F4EAD2 /* Sources */,
+				0D843AF12B4CE94700F4EAD2 /* Frameworks */,
+				0D843AF22B4CE94700F4EAD2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0D843AF92B4CE94700F4EAD2 /* PBXTargetDependency */,
+			);
+			name = ChatBotTests;
+			productName = ChatBotTests;
+			productReference = 0D843AF42B4CE94700F4EAD2 /* ChatBotTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		B4B3E2B82B42D1BB00818B3C /* ChatBot */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B4B3E2CD2B42D1BC00818B3C /* Build configuration list for PBXNativeTarget "ChatBot" */;
@@ -353,9 +458,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1500;
+				LastSwiftUpdateCheck = 1510;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
+					0D843AF32B4CE94700F4EAD2 = {
+						CreatedOnToolsVersion = 15.1;
+						TestTargetID = B4B3E2B82B42D1BB00818B3C;
+					};
 					B4B3E2B82B42D1BB00818B3C = {
 						CreatedOnToolsVersion = 15.0.1;
 					};
@@ -375,11 +484,20 @@
 			projectRoot = "";
 			targets = (
 				B4B3E2B82B42D1BB00818B3C /* ChatBot */,
+				0D843AF32B4CE94700F4EAD2 /* ChatBotTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0D843AF22B4CE94700F4EAD2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D843B0C2B4D042800F4EAD2 /* GPTReplyMock.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B4B3E2B72B42D1BB00818B3C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -393,6 +511,17 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0D843AF02B4CE94700F4EAD2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D843B092B4D02DB00F4EAD2 /* MockHTTPPublisher.swift in Sources */,
+				0D843AF72B4CE94700F4EAD2 /* ChatBotTests.swift in Sources */,
+				0D843B112B4D0B8100F4EAD2 /* MockHTTPRequest.swift in Sources */,
+				0D843B142B4D142B00F4EAD2 /* JSONFetcher.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B4B3E2B52B42D1BB00818B3C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -410,9 +539,10 @@
 				0DF997A52B4680240055C836 /* HTTPRequestable.swift in Sources */,
 				0D843AEB2B4BDD7100F4EAD2 /* HTTPDecoratable.swift in Sources */,
 				0DF9979C2B46792B0055C836 /* ContentDecorator.swift in Sources */,
-				0D843ADB2B4B98C900F4EAD2 /* HTTPService.swift in Sources */,
+				0D843ADB2B4B98C900F4EAD2 /* GPTHTTPService.swift in Sources */,
 				0D843AE72B4BA66600F4EAD2 /* DataEncoderable.swift in Sources */,
 				0DF997702B43B9890055C836 /* SystemMessage.swift in Sources */,
+				0D843B072B4D016000F4EAD2 /* HTTPServicable.swift in Sources */,
 				B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */,
 				0DF997832B463C610055C836 /* Model.swift in Sources */,
 				0DF997A72B4680BB0055C836 /* Network.swift in Sources */,
@@ -429,6 +559,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0D843AF92B4CE94700F4EAD2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B4B3E2B82B42D1BB00818B3C /* ChatBot */;
+			targetProxy = 0D843AF82B4CE94700F4EAD2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B4B3E2C22B42D1BB00818B3C /* Main.storyboard */ = {
@@ -450,6 +588,48 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0D843AFA2B4CE94700F4EAD2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kimjunsung.ChatBotTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChatBot.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ChatBot";
+			};
+			name = Debug;
+		};
+		0D843AFB2B4CE94700F4EAD2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kimjunsung.ChatBotTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChatBot.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ChatBot";
+			};
+			name = Release;
+		};
 		B4B3E2CB2B42D1BC00818B3C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -630,6 +810,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0D843AFC2B4CE94700F4EAD2 /* Build configuration list for PBXNativeTarget "ChatBotTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0D843AFA2B4CE94700F4EAD2 /* Debug */,
+				0D843AFB2B4CE94700F4EAD2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B4B3E2B42B42D1BB00818B3C /* Build configuration list for PBXProject "ChatBot" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
