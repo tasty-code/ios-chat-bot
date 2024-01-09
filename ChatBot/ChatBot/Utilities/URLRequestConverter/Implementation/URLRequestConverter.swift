@@ -34,7 +34,7 @@ struct URLRequestConverter: URLRequestConvertible {
             return urlRequest
         }
         
-        guard let encodedBody = try? JSONEncoder().encode(bodyDTO)
+        guard let encodedBody = try? encoder.encode(bodyDTO)
         else {
             throw NetworkError.failedEncoding
         }
