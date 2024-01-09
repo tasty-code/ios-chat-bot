@@ -268,14 +268,14 @@
 		B4B3E2BB2B42D1BB00818B3C /* ChatBot */ = {
 			isa = PBXGroup;
 			children = (
+				DE584B362B44F02E00B04403 /* Application */,
+				DE584B332B44EF8500B04403 /* Controllers */,
 				7F7A55772B4D0C6C00368247 /* ServiceProvider */,
-				7F7A55722B4D06FC00368247 /* Protocols */,
 				7F7A556D2B4D03ED00368247 /* Utilities */,
 				7F7F43A62B44F20D000CB9CC /* Models */,
-				DE584B362B44F02E00B04403 /* Application */,
-				DE584B352B44EFB400B04403 /* Resources */,
+				7F7A55722B4D06FC00368247 /* Protocols */,
 				DE584B342B44EF9D00B04403 /* Extensions */,
-				DE584B332B44EF8500B04403 /* Controllers */,
+				DE584B352B44EFB400B04403 /* Resources */,
 			);
 			path = ChatBot;
 			sourceTree = "<group>";
