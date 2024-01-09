@@ -1,5 +1,5 @@
 //
-//  ConvertError.swift
+//  JSONConvertError.swift
 //  ChatBot
 //
 //  Created by 김수경 on 2024/01/05.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ConvertError: Error, CustomStringConvertible {
+enum JSONConvertError: Error, CustomStringConvertible {
     case wrongEncodig
     case wrongDecoding
     
