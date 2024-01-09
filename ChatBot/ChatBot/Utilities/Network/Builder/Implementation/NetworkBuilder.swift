@@ -6,6 +6,9 @@ struct NetworkBuilder: NetworkBuilderProtocol {
         case buildRequestFailed
     }
     
+    // MARK: Dependencies
+    private let jsonEncodeManager: JSONEncodable
+    
     // MARK: Public Properties
     let baseURLString: String
     let httpMethod: HTTPMethodType
@@ -13,8 +16,9 @@ struct NetworkBuilder: NetworkBuilderProtocol {
     let requestModel: Encodable
     
     // MARK: Life Cycle
-    init(endpointType: EndpointType, httpMethod: HTTPMethodType, requestModel: Encodable) {
-        self.baseURLString = EndpointType.baseURLString
+    init(jsonEncodeManager: JSONEncodable, endpointType: EndpointType, httpMethod: HTTPMethodType, requestModel: Encodable) {
+        self.jsonEncodeManager = jsonEncodeManager
+        self.baseURLString = endpointType.baseURLString
         self.httpMethod = httpMethod
         self.httpHeaderFields = endpointType.header
         self.requestModel = requestModel
