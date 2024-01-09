@@ -12,14 +12,3 @@ struct OpenAIURL: APIBaseURLProtocol {
     var host: String = "api.openai.com"
     var path: String
 }
-
-enum Path: String {
-    case chat
-    
-    var value: String {
-        switch self {
-        case .chat:
-            return "/v1/chat/completions"
-        }
-    }
-}
