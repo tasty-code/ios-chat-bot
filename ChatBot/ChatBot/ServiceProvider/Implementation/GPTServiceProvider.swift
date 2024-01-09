@@ -19,7 +19,7 @@ final class GPTServiceProvider: ServiceProvidable {
         self.jsonCoder = jsonCoder
     }
     
-    func excute(for requestDTO: GPTRequestDTO) async throws -> GPTResponseDTO {
+    func excute(for requestDTO: E) async throws -> D {
         let gptRequest = try GPTRequest(requestDTO: requestDTO)
         let urlRequest = try URLRequestConverter(apiRequest: gptRequest).asURLRequest(with: jsonCoder)
         let data = try await networkManager.fetchData(with: urlRequest)
