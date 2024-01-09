@@ -13,6 +13,13 @@ struct URLRequestConverter: URLRequestConvertible {
     private let httpMethod: HTTPMethod
     private let bodyDTO: Encodable?
     
+    init(apiRequest: APIRequestable) {
+        self.baseURL = apiRequest.baseURL
+        self.headerFields = apiRequest.headerFields
+        self.httpMethod = apiRequest.httpMethod
+        self.bodyDTO = apiRequest.bodyDTO
+    }
+    
     func asURLRequest() throws -> URLRequest {
         guard let url = URL(string: baseURL)
         else {
