@@ -590,6 +590,7 @@
 /* Begin XCBuildConfiguration section */
 		0D843AFA2B4CE94700F4EAD2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0D843B162B4D260800F4EAD2 /* GPTKeys.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -751,6 +752,7 @@
 		};
 		B4B3E2CE2B42D1BC00818B3C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0D843B162B4D260800F4EAD2 /* GPTKeys.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
