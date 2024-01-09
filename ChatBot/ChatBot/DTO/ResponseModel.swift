@@ -18,7 +18,7 @@ struct Choice: Decodable {
     let message: Message
     let finishReason: FinishReason?
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case finishReason = "finish_reason"
         case index, message
     }

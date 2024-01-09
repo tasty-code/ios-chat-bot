@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Path: String {
+enum Path {
     case chat
 
     var value: String {
