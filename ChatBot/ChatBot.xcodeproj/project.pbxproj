@@ -18,6 +18,7 @@
 		CB3263042B44F55F00B9518D /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB3263032B44F55F00B9518D /* ApiKeys.plist */; };
 		CB32630A2B44FBE400B9518D /* AIAnswerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3263092B44FBE400B9518D /* AIAnswerModel.swift */; };
 		CB32630C2B44FC1200B9518D /* UserQuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB32630B2B44FC1200B9518D /* UserQuestionModel.swift */; };
+		CBD979052B4CD197001F2AE8 /* QuestionEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD979042B4CD197001F2AE8 /* QuestionEncoder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		CB3263032B44F55F00B9518D /* ApiKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiKeys.plist; sourceTree = "<group>"; };
 		CB3263092B44FBE400B9518D /* AIAnswerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIAnswerModel.swift; sourceTree = "<group>"; };
 		CB32630B2B44FC1200B9518D /* UserQuestionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserQuestionModel.swift; sourceTree = "<group>"; };
+		CBD979042B4CD197001F2AE8 /* QuestionEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionEncoder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,7 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				C3CFDE472B4CD034003CF9CC /* Network */,
-				C3CFDE442B4CD010003CF9CC /* NetworkingManager.swift */,
+				CBD979032B4CD171001F2AE8 /* DataTransfer */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -92,6 +94,7 @@
 		C3CFDE472B4CD034003CF9CC /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				C3CFDE442B4CD010003CF9CC /* NetworkingManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -100,7 +103,6 @@
 			isa = PBXGroup;
 			children = (
 				C3CFDE4B2B4CD09A003CF9CC /* Error */,
-				C3CFDE492B4CD097003CF9CC /* NetworkingError.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -108,6 +110,7 @@
 		C3CFDE4B2B4CD09A003CF9CC /* Error */ = {
 			isa = PBXGroup;
 			children = (
+				C3CFDE492B4CD097003CF9CC /* NetworkingError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -144,6 +147,14 @@
 				CB32630B2B44FC1200B9518D /* UserQuestionModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		CBD979032B4CD171001F2AE8 /* DataTransfer */ = {
+			isa = PBXGroup;
+			children = (
+				CBD979042B4CD197001F2AE8 /* QuestionEncoder.swift */,
+			);
+			path = DataTransfer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,6 +234,7 @@
 				CB32630C2B44FC1200B9518D /* UserQuestionModel.swift in Sources */,
 				CB32630A2B44FBE400B9518D /* AIAnswerModel.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
+				CBD979052B4CD197001F2AE8 /* QuestionEncoder.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
 				C3CFDE452B4CD010003CF9CC /* NetworkingManager.swift in Sources */,
 			);
