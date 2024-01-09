@@ -18,20 +18,6 @@ struct NetworkManager {
 
 // MARK: - protocol method
 extension NetworkManager: NetworkManagerProtocol {
-     mutating func makeURLRequest(url: URL, httpMethod: HttpMethod, body: Data?) {
-        let apiKey = Bundle.main.apiKey
-        var urlRequest = URLRequest(url: url)
-        
-        urlRequest.httpMethod = "\(httpMethod)".uppercased()
-         
-        urlRequest.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
-        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        urlRequest.httpBody = body
-   
-        request = urlRequest
-    }
-    
     func getData (handler: @escaping (Result<Data, NetworkError>) -> Void) {
         guard let request = request else { return }
 

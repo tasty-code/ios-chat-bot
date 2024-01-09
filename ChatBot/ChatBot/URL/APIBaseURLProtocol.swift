@@ -10,18 +10,35 @@ import Foundation
 protocol APIBaseURLProtocol {
     var scheme: String { get }
     var host: String { get }
-    var path: String { get }
+    var path: Path { get }
+    var parameters: [String: String]? { get }
     
-    func makeURL() -> URL?
+    func makeURLRequest(httpMethod: HttpMethod, contentType: ContentType) -> URLRequest?
 }
 
 extension APIBaseURLProtocol {
-    func makeURL() -> URL? {
+    private func makeURL() -> URL? {
         var components = URLComponents()
         components.scheme = scheme
         components.host = host
-        components.path = path
-
+        components.path = path.value
+        components.queryItems = parameters?.map {
+            URLQueryItem(name: $0.key, value: $0.value)
+        }
+        
         return components.url
     }
+    
+    func makeURLRequest(httpMethod: HttpMethod, contentType: ContentType) -> URLRequest? {
+        let apiKey = Bundle.main.apiKey
+        
+        guard let url = makeURL() else { return nil }
+        var urlRequest = URLRequest(url: url)
+        urlRequest.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        urlRequest.setValue(contentType.value, forHTTPHeaderField: "Content-Type")
+        urlRequest.httpMethod = httpMethod.value
+        
+        return urlRequest
+    }
+    
 }

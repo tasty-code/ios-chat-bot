@@ -10,5 +10,6 @@ import Foundation
 struct OpenAIURL: APIBaseURLProtocol {
     var scheme: String = "https"
     var host: String = "api.openai.com"
-    var path: String
+    var path: Path
+    var parameters: [String : String]?
 }
