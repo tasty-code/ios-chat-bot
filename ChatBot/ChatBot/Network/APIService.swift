@@ -2,6 +2,10 @@ import UIKit
 
 final class APIService {
     
+    static let shared = APIService()
+    
+    private init() {}
+    
     func execute<Response:Decodable>(request: URLRequest) async throws -> Response {
         
         let (data, httpResponse) = try await URLSession.shared.data(for: request)
