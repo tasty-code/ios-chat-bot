@@ -1,18 +1,11 @@
 import Foundation
 
 protocol NetworkConnectable {
-    var jsonDecodeManager: JSONDecodable { get }
-    
     func connect(builder: NetworkBuilderProtocol) async throws -> ResponseModel
 }
 
-extension NetworkConnectable {
-    var jsonDecodeManager: JSONDecodable {
-        JSONDecodeManager()
-    }
-}
-
 final class NetworkManager: NetworkConnectable {
+    // MARK: Namespace
     enum NetworkError: Error, CustomDebugStringConvertible {
         case castingError
         case badClientRequest(statusCode: Int)
@@ -30,8 +23,16 @@ final class NetworkManager: NetworkConnectable {
             }
         }
     }
+        
+    // MARK: Dependencies
+    private let jsonDecodeManager: JSONDecodable
+
+    // MARK: Life Cycle
+    init(jsonDecodeManager: JSONDecodable = JSONDecodeManager()) {
+        self.jsonDecodeManager = jsonDecodeManager
+    }
     
-    // MARK: Public
+    // MARK: Public Methods
     func connect(builder: NetworkBuilderProtocol) async throws -> ResponseModel {
         let request = try builder.build()
         let data = try await downloadData(for: request)
