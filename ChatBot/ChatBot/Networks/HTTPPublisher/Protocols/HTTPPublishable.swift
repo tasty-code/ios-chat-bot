@@ -9,5 +9,5 @@ import Combine
 import Foundation
 
 protocol HTTPPublishable {
-    func publish(urlRequest: URLRequest) -> AnyPublisher<Data, GPTError.HTTPError>
+    func responsePublisher(urlRequest: URLRequest) -> AnyPublisher<Data, GPTError.HTTPError>
 }

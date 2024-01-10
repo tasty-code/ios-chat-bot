@@ -23,7 +23,7 @@ extension Network {
         func request<D: Decodable>(request: HTTPRequestable, type: D.Type) -> AnyPublisher<D, Error> {
             do {
                 let request = try request.asURLRequest()
-                return publisher.publish(urlRequest: request)
+                return publisher.responsePublisher(urlRequest: request)
                     .tryMap { try self.decoder.decodeData($0, to: D.self) }
                     .eraseToAnyPublisher()
             } catch {
@@ -36,7 +36,7 @@ extension Network {
                 var request = try request.asURLRequest()
                 let data = try encoder.encodeType(object)
                 request.httpBody = data
-                return publisher.publish(urlRequest: request)
+                return publisher.responsePublisher(urlRequest: request)
                     .tryMap { try self.decoder.decodeData($0, to: type.self) }
                     .eraseToAnyPublisher()
             } catch {

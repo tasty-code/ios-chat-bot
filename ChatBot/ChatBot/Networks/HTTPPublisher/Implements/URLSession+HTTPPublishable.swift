@@ -9,7 +9,7 @@ import Combine
 import Foundation
 
 extension URLSession: HTTPPublishable {
-    func publish(urlRequest: URLRequest) -> AnyPublisher<Data, GPTError.HTTPError> {
+    func responsePublisher(urlRequest: URLRequest) -> AnyPublisher<Data, GPTError.HTTPError> {
         typealias HTTPError = GPTError.HTTPError
         
         return self.dataTaskPublisher(for: urlRequest)
