@@ -53,12 +53,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		378300342B4BD39200BE0943 /* Extenssions */ = {
+		378300342B4BD39200BE0943 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				378300352B4BD3E700BE0943 /* Bundle+Extension.swift */,
 			);
-			path = Extenssions;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		37B6CE852B43B0BB0075535E /* Models */ = {
@@ -100,7 +100,7 @@
 		B4B3E2BB2B42D1BB00818B3C /* ChatBot */ = {
 			isa = PBXGroup;
 			children = (
-				378300342B4BD39200BE0943 /* Extenssions */,
+				378300342B4BD39200BE0943 /* Extensions */,
 				664D4A512B4BD5BA003765A9 /* Network */,
 				37B6CE852B43B0BB0075535E /* Models */,
 				B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */,
