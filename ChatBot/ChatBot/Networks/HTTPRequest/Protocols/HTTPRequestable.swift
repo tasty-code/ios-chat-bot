@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol HTTPRequestable: AnyObject {
+protocol HTTPRequestable {
     var urlString: String? { get }
     var paths: [String]? { get }
     var queryStrings: [String: CustomStringConvertible]? { get }
