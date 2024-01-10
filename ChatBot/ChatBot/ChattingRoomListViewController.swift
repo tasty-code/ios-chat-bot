@@ -1,6 +1,6 @@
 import UIKit
 
-final class ChatBotViewController: UIViewController {
+final class ChattingRoomListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
