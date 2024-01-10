@@ -7,17 +7,18 @@
 
 import Foundation
  
-final class NetworkManager: URLSessionProtocol {
-    static let shared = NetworkManager()
+final class NetworkManager {
+    let urlSession: URLSession
     
-    private init() {}
+    init(urlSessionManager: URLSessionProtocol) {
+        self.urlSession = urlSessionManager.urlSession
+    }
     
     func fetch(builder: NetworkBuilderProtocol, completion: @escaping (Result<ResponseData, NetworkError>) -> Void) {
     
         guard let request = builder.makeRequest(builder: builder) else {
             return completion(.failure(.invalidHeader))
         }
-        let urlSession = makeURLSession(config: nil)
 
         urlSession.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {

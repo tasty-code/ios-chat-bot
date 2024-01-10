@@ -19,7 +19,9 @@ final class ChatService: ChatServiceProtocol {
         
         let builder = ChatSendMessageBuilder(body: encodedData)
         
-        NetworkManager.shared.fetch(builder: builder) { result in
+        let urlSessionManager = URLSessionManager()
+
+        NetworkManager(urlSessionManager: urlSessionManager).fetch(builder: builder) { result in
             switch result {
             case .success(let data):
                 completion(.success(data))
