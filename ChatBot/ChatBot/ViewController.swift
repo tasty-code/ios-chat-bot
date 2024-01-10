@@ -18,10 +18,12 @@ final class ViewController: UIViewController {
         Task {
             do {
                 let body = try JSONEncoder().encode(requestModel)
-                let request = try await api.makeRequest(body: body)
+                let request = try api.makeRequest(body: body)
                 let responseModel = try await networkManager.loadData(request: request)
+                guard let msg = responseModel.choices.first?.message.content else {return}
                 
-                print(responseModel)
+                print("답변: \n", msg)
+                
             } catch {
                 print(error)
             }
@@ -29,11 +31,13 @@ final class ViewController: UIViewController {
     }
     
     private func makeRequestModel() -> ChatRequestModel {
-        let messages = [Message(role: "user",
-                                content: "안녕 넌 누구야?",
-                                toolCalls: nil)]
+        let messages = [
+            Message(
+                role: "user",
+                content: "swift언어의 특징이 뭐야?",
+                toolCalls: nil)]
         
-        let model = ChatRequestModel(model: "gpt-3.5-turbo",
+        let model = ChatRequestModel(model: "gpt-3.5-turbo-1106",
                                     messages: messages,
                                     stream: false,
                                     logprobs: false)
