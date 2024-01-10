@@ -26,7 +26,7 @@ extension URLSession: HTTPPublishable {
             }
             .mapError { error in
                 guard let networkException = error as? HTTPError else {
-                    return HTTPError.unknownError(description: error.localizedDescription)
+                    return HTTPError.unknownError(error: error)
                 }
                 
                 return networkException

@@ -12,6 +12,6 @@ extension GPTError {
         case invalidURL
         case invalidHTTPResponse
         case invalidStatus(statusCode: Int)
-        case unknownError(description: String)
+        case unknownError(error: Error)
     }
 }
