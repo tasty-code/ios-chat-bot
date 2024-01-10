@@ -20,7 +20,7 @@ final class ChatBotTests: XCTestCase {
         httpService = nil
     }
 
-    func test_코멘트_요청에_대한_인코딩이_제대로_되는지() throws {
+    func test_GPTCommentDTO를_Data로_인코딩하여_요청을_보낸다() throws {
         // given
         let httpRequest = MockHTTPRequest()
         let expectedModel = JSONFetcher.load(type: Model.GPTReplyDTO.self, fileName: "GPTReplyMock")!
@@ -42,7 +42,7 @@ final class ChatBotTests: XCTestCase {
             })
     }
     
-    func test_챗봇_응답에_대한_디코딩이_제대로_되는지() throws {
+    func test_Data를_GPTReplyDTO로_디코딩하여_응답으로_타입을_받는다() throws {
         // given
         let expectedModel = JSONFetcher.load(type: Model.GPTReplyDTO.self, fileName: "GPTReplyMock")!
         let httpRequest = MockHTTPRequest()
@@ -61,7 +61,7 @@ final class ChatBotTests: XCTestCase {
             })
     }
     
-    func test_챗봇_응답에_대한_디코딩이_안될_때_오류를_제대로_만드는지() throws {
+    func test_Data를_GPTReplyDTO로_디코딩하여_응답으로_오류를_받는다() throws {
         // given
         let httpRequest = MockHTTPRequest()
         
