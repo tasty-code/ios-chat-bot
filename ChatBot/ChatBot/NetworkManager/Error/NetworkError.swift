@@ -13,4 +13,5 @@ enum NetworkError: Error {
     case invalidBaseUrl
     case faliedDecoding
     case failedEncoding
+    case invalidHeader
 }

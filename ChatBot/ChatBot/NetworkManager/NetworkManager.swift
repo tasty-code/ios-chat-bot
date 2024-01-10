@@ -7,34 +7,18 @@
 
 import Foundation
  
-final class NetworkManager {
+final class NetworkManager: URLSessionProtocol {
     static let shared = NetworkManager()
     
-    private init () {}
-
-    func makeRequest(builder: NetworkBuilderProtocol) -> URLRequest? {
-        
-        let baseUrl = BaseURL.openAiUrl
-        guard let url = URL(string: baseUrl + builder.path) else { return nil }
-      
-        var request = URLRequest(url: url)
-        
-        if builder.method.rawValue == "POST" {
-            request.httpMethod = builder.method.rawValue
-            builder.header.forEach { key, value in
-                request.setValue(value, forHTTPHeaderField: key)
-            }
-            request.httpBody = builder.body
-        }
-        
-        return request
-    }
+    private init() {}
     
     func fetch(builder: NetworkBuilderProtocol, completion: @escaping (Result<ResponseData, NetworkError>) -> Void) {
     
-        guard let request = makeRequest(builder: builder) else { return }
-        let urlSession = URLSession.shared
-        
+        guard let request = builder.makeRequest(builder: builder) else {
+            return completion(.failure(.invalidHeader))
+        }
+        let urlSession = makeURLSession(config: nil)
+
         urlSession.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
                 return completion(.failure(.invalidResponse))

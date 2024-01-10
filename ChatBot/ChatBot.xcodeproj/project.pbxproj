@@ -25,6 +25,7 @@
 		E386CBC92B47B95700B84994 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E386CBC82B47B95700B84994 /* Constant.swift */; };
 		E386CBCD2B47CBBD00B84994 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E386CBCC2B47CBBD00B84994 /* Bundle+Extension.swift */; };
 		E386CBD02B480BC900B84994 /* APIKEY.plist in Resources */ = {isa = PBXBuildFile; fileRef = E386CBCF2B480BC900B84994 /* APIKEY.plist */; };
+		E38F86102B4E284F003AB81E /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38F860F2B4E284F003AB81E /* URLSessionProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		E386CBC82B47B95700B84994 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		E386CBCC2B47CBBD00B84994 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		E386CBCF2B480BC900B84994 /* APIKEY.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APIKEY.plist; sourceTree = "<group>"; };
+		E38F860F2B4E284F003AB81E /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 				E386CBCE2B47CBCE00B84994 /* Extension */,
 				E386CBC72B47B93800B84994 /* Constant */,
 				E386CBC52B47B89200B84994 /* NetworkManager.swift */,
+				E38F860F2B4E284F003AB81E /* URLSessionProtocol.swift */,
 			);
 			path = NetworkManager;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E38F86102B4E284F003AB81E /* URLSessionProtocol.swift in Sources */,
 				D0F7BFDD2B47E74500329F11 /* NetworkBuilderProtocol.swift in Sources */,
 				B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */,
 				E386CBCD2B47CBBD00B84994 /* Bundle+Extension.swift in Sources */,

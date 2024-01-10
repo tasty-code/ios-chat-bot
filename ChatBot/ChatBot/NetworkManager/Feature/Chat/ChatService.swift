@@ -22,9 +22,9 @@ final class ChatService: ChatServiceProtocol {
         NetworkManager.shared.fetch(builder: builder) { result in
             switch result {
             case .success(let data):
-                print(data)
+                completion(.success(data))
             case .failure(let error):
-                print(error)
+                completion(.failure(error))
             }
         }
     }
