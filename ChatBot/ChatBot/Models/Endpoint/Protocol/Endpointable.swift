@@ -8,9 +8,9 @@
 import Foundation
 
 protocol Endpointable {
-    var url: URL? { get }
+    var url: URL { get }
     var apiKey: String? { get }
     var httpMethod: HTTPMethods { get }
-    var contentType: ContentTypes? { get }
+    var httpHeader: [String: String]? { get }
     var httpBody: Data? { get }
 }

@@ -10,22 +10,17 @@ import Foundation
 struct RequestGenerator {
     
     func generateRequest(_ endpoint: Endpointable) -> URLRequest? {
-        guard let url = endpoint.url else {
-            return nil
+        var request = URLRequest(url: endpoint.url)
+        if let header = endpoint.httpHeader {
+            for (field, value) in header {
+                request.setValue(value, forHTTPHeaderField: field)
+            }
         }
         
-        guard let APIKey = endpoint.apiKey else {
-            return nil
-        }
-        
-        var request = URLRequest(url: url)
         request.httpMethod = endpoint.httpMethod.description
-        request.setValue(endpoint.contentType?.description, forHTTPHeaderField: "Content-Type")
-        
-        request.setValue("Bearer \(APIKey)", forHTTPHeaderField: "Authorization")
-        
         request.httpBody = endpoint.httpBody
         
         return request
     }
 }
+
