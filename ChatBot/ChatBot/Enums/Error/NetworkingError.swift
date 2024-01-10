@@ -13,6 +13,7 @@ enum NetworkingError: Error, CustomDebugStringConvertible {
     case taskingError
     case networkError(statusCode: Int)
     case corruptedData
+    case codableError(whichTranform: String)
     
     var debugDescription: String {
         switch self {
@@ -21,6 +22,7 @@ enum NetworkingError: Error, CustomDebugStringConvertible {
         case .taskingError: "DataTask 작업 중 에러가 발생했습니다."
         case .networkError(let statusCode): "통신 에러가 발생했습니다. Code: \(statusCode)"
         case .corruptedData: "손상된 데이터입니다."
+        case .codableError(let whichTranform): "데이터를 변환하는데 문제가 생겼습니다.\(whichTranform)"
         }
     }
 }

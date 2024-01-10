@@ -36,7 +36,7 @@ final class NetworkingManager {
                 let model = try self.decoder.decode(type.self, from: data)
                 completion(.success(model))
             } catch {
-                print(error)
+                completion(.failure(NetworkingError.codableError(whichTranform: "\(type) 디코딩 실패")))
             }
             
         }.resume()
