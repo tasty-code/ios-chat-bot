@@ -17,7 +17,9 @@ protocol APIBaseURLProtocol {
 }
 
 extension APIBaseURLProtocol {
-    private func makeURL() -> URL? {
+    func makeURLRequest(httpMethod: HttpMethod, contentType: ContentType) -> URLRequest? {
+        let apiKey = Bundle.main.apiKey
+        
         var components = URLComponents()
         components.scheme = scheme
         components.host = host
@@ -26,13 +28,7 @@ extension APIBaseURLProtocol {
             URLQueryItem(name: $0.key, value: $0.value)
         }
         
-        return components.url
-    }
-    
-    func makeURLRequest(httpMethod: HttpMethod, contentType: ContentType) -> URLRequest? {
-        let apiKey = Bundle.main.apiKey
-        
-        guard let url = makeURL() else { return nil }
+        guard let url = components.url else { return nil }
         var urlRequest = URLRequest(url: url)
         urlRequest.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         urlRequest.setValue(contentType.value, forHTTPHeaderField: "Content-Type")
