@@ -1,9 +1,9 @@
 struct ResponseModel: Decodable {
-    let id, object: String?
-    let created: Int?
-    let model, systemFingerprint: String?
-    let choices: [Choice]?
-    let usage: Usage?
+    let id, object: String
+    let created: Int
+    let model, systemFingerprint: String
+    let choices: [Choice]
+    let usage: Usage
 
     enum CodingKeys: String, CodingKey {
         case id, object, created, model
@@ -13,9 +13,9 @@ struct ResponseModel: Decodable {
 }
 
 struct Choice: Decodable {
-    let index: Int?
-    let message: Message?
-    let finishReason: String?
+    let index: Int
+    let message: Message
+    let finishReason: String
 
     enum CodingKeys: String, CodingKey {
         case index, message
@@ -24,8 +24,8 @@ struct Choice: Decodable {
 }
 
 struct Message: Codable {
-    let role: Role?
-    let content: String?
+    let role: Role
+    let content: String
 }
 
 enum Role: String, Codable {
@@ -35,7 +35,7 @@ enum Role: String, Codable {
 }
 
 struct Usage: Decodable {
-    let promptTokens, completionTokens, totalTokens: Int?
+    let promptTokens, completionTokens, totalTokens: Int
 
     enum CodingKeys: String, CodingKey {
         case promptTokens = "prompt_tokens"
