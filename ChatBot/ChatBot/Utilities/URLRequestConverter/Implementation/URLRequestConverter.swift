@@ -13,7 +13,14 @@ struct URLRequestConverter: URLRequestConvertible {
     private let httpMethod: HTTPMethod
     private let bodyDTO: Encodable?
     
-    func asURLRequest() throws -> URLRequest {
+    init(apiRequest: APIRequestable) {
+        self.baseURL = apiRequest.baseURL
+        self.headerFields = apiRequest.headerFields
+        self.httpMethod = apiRequest.httpMethod
+        self.bodyDTO = apiRequest.bodyDTO
+    }
+    
+    func asURLRequest(with encoder: JSONEncodable) throws -> URLRequest {
         guard let url = URL(string: baseURL)
         else {
             throw NetworkError.badURL
@@ -27,7 +34,7 @@ struct URLRequestConverter: URLRequestConvertible {
             return urlRequest
         }
         
-        guard let encodedBody = try? JSONEncoder().encode(bodyDTO)
+        guard let encodedBody = try? encoder.encode(bodyDTO)
         else {
             throw NetworkError.failedEncoding
         }
