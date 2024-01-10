@@ -1,5 +1,5 @@
 //
-//  QuestionEncoder.swift
+//  ContentEncoder.swift
 //  ChatBot
 //
 //  Created by 김경록 on 1/8/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct QuestionEncoder {
+struct ContentEncoder {
     enum Constant {
         static let model = "gpt-3.5-turbo"
         static let stream = false
@@ -16,12 +16,12 @@ struct QuestionEncoder {
         static let UserRole = "user"
     }
     
-    func transformData(_ question: String) -> Data? {
+    func transformData(_ content: String) -> Data? {
         let userMessages: [UserMessage] = [UserMessage(role: Constant.AIRole, content: Constant.AIContent),
-                                           UserMessage(role: Constant.UserRole, content: question)]
-        let userQuestion = UserQuestionModel(model: Constant.model, stream: Constant.stream, userMessage: userMessages)
+                                           UserMessage(role: Constant.UserRole, content: content)]
+        let userContent = UserContentModel(model: Constant.model, stream: Constant.stream, userMessage: userMessages)
         
-        guard let encodedData = try? JSONEncoder().encode(userQuestion) else {
+        guard let encodedData = try? JSONEncoder().encode(userContent) else {
             print("유저 입력값 인코딩 에러")
             return nil
         }

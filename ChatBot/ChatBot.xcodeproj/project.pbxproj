@@ -23,9 +23,9 @@
 		C3CFDE9C2B4E78D0003CF9CC /* Endpointable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CFDE9B2B4E78D0003CF9CC /* Endpointable.swift */; };
 		CB1DA6BB2B4E849300D8BAF6 /* APIName.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1DA6BA2B4E849300D8BAF6 /* APIName.swift */; };
 		CB3263042B44F55F00B9518D /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB3263032B44F55F00B9518D /* ApiKeys.plist */; };
-		CB32630A2B44FBE400B9518D /* AIAnswerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3263092B44FBE400B9518D /* AIAnswerModel.swift */; };
-		CB32630C2B44FC1200B9518D /* UserQuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB32630B2B44FC1200B9518D /* UserQuestionModel.swift */; };
-		CBD979052B4CD197001F2AE8 /* QuestionEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD979042B4CD197001F2AE8 /* QuestionEncoder.swift */; };
+		CB32630A2B44FBE400B9518D /* AIContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3263092B44FBE400B9518D /* AIContentModel.swift */; };
+		CB32630C2B44FC1200B9518D /* UserContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB32630B2B44FC1200B9518D /* UserContentModel.swift */; };
+		CBD979052B4CD197001F2AE8 /* ContentEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD979042B4CD197001F2AE8 /* ContentEncoder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,9 +47,9 @@
 		C3CFDE9B2B4E78D0003CF9CC /* Endpointable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpointable.swift; sourceTree = "<group>"; };
 		CB1DA6BA2B4E849300D8BAF6 /* APIName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIName.swift; sourceTree = "<group>"; };
 		CB3263032B44F55F00B9518D /* ApiKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiKeys.plist; sourceTree = "<group>"; };
-		CB3263092B44FBE400B9518D /* AIAnswerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIAnswerModel.swift; sourceTree = "<group>"; };
-		CB32630B2B44FC1200B9518D /* UserQuestionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserQuestionModel.swift; sourceTree = "<group>"; };
-		CBD979042B4CD197001F2AE8 /* QuestionEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionEncoder.swift; sourceTree = "<group>"; };
+		CB3263092B44FBE400B9518D /* AIContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIContentModel.swift; sourceTree = "<group>"; };
+		CB32630B2B44FC1200B9518D /* UserContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserContentModel.swift; sourceTree = "<group>"; };
+		CBD979042B4CD197001F2AE8 /* ContentEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentEncoder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,8 +145,8 @@
 		C3CFDE992B4E78A6003CF9CC /* DTO */ = {
 			isa = PBXGroup;
 			children = (
-				CB3263092B44FBE400B9518D /* AIAnswerModel.swift */,
-				CB32630B2B44FC1200B9518D /* UserQuestionModel.swift */,
+				CB3263092B44FBE400B9518D /* AIContentModel.swift */,
+				CB32630B2B44FC1200B9518D /* UserContentModel.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -205,7 +205,7 @@
 		CBD979032B4CD171001F2AE8 /* DataTransfer */ = {
 			isa = PBXGroup;
 			children = (
-				CBD979042B4CD197001F2AE8 /* QuestionEncoder.swift */,
+				CBD979042B4CD197001F2AE8 /* ContentEncoder.swift */,
 			);
 			path = DataTransfer;
 			sourceTree = "<group>";
@@ -287,13 +287,13 @@
 				CB1DA6BB2B4E849300D8BAF6 /* APIName.swift in Sources */,
 				C3CFDE4D2B4CD210003CF9CC /* RequestGenerator.swift in Sources */,
 				C3CFDE4A2B4CD097003CF9CC /* NetworkingError.swift in Sources */,
-				CB32630C2B44FC1200B9518D /* UserQuestionModel.swift in Sources */,
-				CB32630A2B44FBE400B9518D /* AIAnswerModel.swift in Sources */,
+				CB32630C2B44FC1200B9518D /* UserContentModel.swift in Sources */,
+				CB32630A2B44FBE400B9518D /* AIContentModel.swift in Sources */,
 				C3CFDE9C2B4E78D0003CF9CC /* Endpointable.swift in Sources */,
 				C3CFDE982B4E3ADF003CF9CC /* ChatBotEndpoint.swift in Sources */,
 				C3CFDE942B4E39E5003CF9CC /* BaseURL.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
-				CBD979052B4CD197001F2AE8 /* QuestionEncoder.swift in Sources */,
+				CBD979052B4CD197001F2AE8 /* ContentEncoder.swift in Sources */,
 				C3CFDE962B4E3A06003CF9CC /* ContentTypes.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
 				C3CFDE452B4CD010003CF9CC /* NetworkingManager.swift in Sources */,

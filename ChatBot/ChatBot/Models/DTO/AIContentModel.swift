@@ -1,5 +1,5 @@
 //
-//  AIAnswerModel.swift
+//  AIContentModel.swift
 //  ChatBot
 //
 //  Created by 전성수 on 1/3/24.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-// MARK: - AIAnswerModel
-struct AIAnswerModel: Decodable {
+// MARK: - AIContentModel
+struct AIContentModel: Decodable {
     let id: String
     let object: String
     let created: Int

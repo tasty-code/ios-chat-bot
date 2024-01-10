@@ -1,5 +1,5 @@
 //
-//  UserQuestionModel.swift
+//  UserContentModel.swift
 //  ChatBot
 //
 //  Created by 전성수 on 1/3/24.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-// MARK: - UserQuestionModel
-struct UserQuestionModel: Encodable {
+// MARK: - UserContentModel
+struct UserContentModel: Encodable {
     let model: String
     let stream: Bool
     let userMessage: [UserMessage]
