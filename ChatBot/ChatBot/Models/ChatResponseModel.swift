@@ -16,7 +16,7 @@ struct ChatResponseModel: Decodable {
     let choices: [Choice]
     let usage: Usage
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case id, object, created, model, choices, usage
         case systemFingerprint = "system_fingerprint"
     }
@@ -28,7 +28,7 @@ struct Choice: Decodable {
     let logproblem: LogProblem?
     let finishReason: String
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case index, message
         case logproblem = "logprobs"
         case finishReason = "finish_reason"
@@ -40,7 +40,7 @@ struct Usage: Decodable {
     let completionTokens: Int
     let totalTokens: Int
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case promptTokens = "prompt_tokens"
         case completionTokens = "completion_tokens"
         case totalTokens = "total_tokens"
@@ -57,7 +57,7 @@ struct Content: Decodable {
     let bytes: [Int]?
     let topLogProblems: [TopLogproblem]
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case token, bytes
         case logProblem = "logprob"
         case topLogProblems = "top_logprobs"
@@ -69,7 +69,7 @@ struct TopLogproblem: Decodable {
     let logProblem: Double
     let bytes: [Int]?
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case token, bytes
         case logProblem = "logprob"
     }
