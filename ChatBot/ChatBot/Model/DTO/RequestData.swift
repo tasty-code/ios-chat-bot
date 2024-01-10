@@ -7,8 +7,7 @@
 import Foundation
 
 // MARK: - RequestData
-struct RequestData: Decodable {
+struct RequestData: Encodable {
     let model: String
     let messages: [Message]
 }
-

@@ -8,6 +8,6 @@
 import Foundation
 
 // MARK: - Message
-struct Message: Decodable {
+struct Message: Codable {
     let role, content: String
 }
