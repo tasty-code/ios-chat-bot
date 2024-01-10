@@ -16,7 +16,8 @@ final class NetworkingManager {
     func downloadData<T: Decodable>(request: URLRequest,to type: T.Type, completion: @escaping (Result<T, Error>) -> Void) {
         
         URLSession.shared.dataTask(with: request) { data, response, error in
-            guard error == nil else {
+            if let error = error {
+                print(error.localizedDescription)
                 return completion(.failure(NetworkingError.taskingError))
             }
             
