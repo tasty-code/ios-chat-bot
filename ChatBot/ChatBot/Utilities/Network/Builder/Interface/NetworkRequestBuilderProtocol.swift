@@ -1,6 +1,6 @@
 import Foundation
 
-protocol NetworkBuilderProtocol {
+protocol NetworkRequestBuilderProtocol {
     var baseURLString: String { get }
     var httpMethod: HTTPMethodType { get }
     var requestModel: Encodable { get }

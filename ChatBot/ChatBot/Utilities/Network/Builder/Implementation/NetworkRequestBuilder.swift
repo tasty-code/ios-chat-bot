@@ -1,6 +1,6 @@
 import Foundation
 
-struct NetworkBuilder: NetworkBuilderProtocol {
+struct NetworkRequestBuilder: NetworkRequestBuilderProtocol {
     // MARK: Namespace
     enum NetworkBuilderError: Error {
         case buildRequestFailed

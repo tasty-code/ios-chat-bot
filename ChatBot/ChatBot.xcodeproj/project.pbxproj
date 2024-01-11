@@ -11,8 +11,8 @@
 		045294912B4519E7000A5FD1 /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045294902B4519E7000A5FD1 /* RequestModel.swift */; };
 		0452954B2B4BFCED000A5FD1 /* HTTPMethodType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045295392B4BFCED000A5FD1 /* HTTPMethodType.swift */; };
 		0452954C2B4BFCED000A5FD1 /* EndpointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452953A2B4BFCED000A5FD1 /* EndpointType.swift */; };
-		0452954D2B4BFCED000A5FD1 /* NetworkBuilderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452953D2B4BFCED000A5FD1 /* NetworkBuilderProtocol.swift */; };
-		0452954E2B4BFCED000A5FD1 /* NetworkBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452953F2B4BFCED000A5FD1 /* NetworkBuilder.swift */; };
+		0452954D2B4BFCED000A5FD1 /* NetworkRequestBuilderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452953D2B4BFCED000A5FD1 /* NetworkRequestBuilderProtocol.swift */; };
+		0452954E2B4BFCED000A5FD1 /* NetworkRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452953F2B4BFCED000A5FD1 /* NetworkRequestBuilder.swift */; };
 		0452954F2B4BFCED000A5FD1 /* JSONDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045295422B4BFCED000A5FD1 /* JSONDecodable.swift */; };
 		045295502B4BFCED000A5FD1 /* JSONEncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045295432B4BFCED000A5FD1 /* JSONEncodable.swift */; };
 		045295512B4BFCED000A5FD1 /* JSONEncoder+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045295452B4BFCED000A5FD1 /* JSONEncoder+Extension.swift */; };
@@ -36,8 +36,8 @@
 		045294902B4519E7000A5FD1 /* RequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
 		045295392B4BFCED000A5FD1 /* HTTPMethodType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethodType.swift; sourceTree = "<group>"; };
 		0452953A2B4BFCED000A5FD1 /* EndpointType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointType.swift; sourceTree = "<group>"; };
-		0452953D2B4BFCED000A5FD1 /* NetworkBuilderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkBuilderProtocol.swift; sourceTree = "<group>"; };
-		0452953F2B4BFCED000A5FD1 /* NetworkBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkBuilder.swift; sourceTree = "<group>"; };
+		0452953D2B4BFCED000A5FD1 /* NetworkRequestBuilderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequestBuilderProtocol.swift; sourceTree = "<group>"; };
+		0452953F2B4BFCED000A5FD1 /* NetworkRequestBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequestBuilder.swift; sourceTree = "<group>"; };
 		045295422B4BFCED000A5FD1 /* JSONDecodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONDecodable.swift; sourceTree = "<group>"; };
 		045295432B4BFCED000A5FD1 /* JSONEncodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONEncodable.swift; sourceTree = "<group>"; };
 		045295452B4BFCED000A5FD1 /* JSONEncoder+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "JSONEncoder+Extension.swift"; sourceTree = "<group>"; };
@@ -112,7 +112,7 @@
 		0452953C2B4BFCED000A5FD1 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				0452953D2B4BFCED000A5FD1 /* NetworkBuilderProtocol.swift */,
+				0452953D2B4BFCED000A5FD1 /* NetworkRequestBuilderProtocol.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -120,7 +120,7 @@
 		0452953E2B4BFCED000A5FD1 /* Implementation */ = {
 			isa = PBXGroup;
 			children = (
-				0452953F2B4BFCED000A5FD1 /* NetworkBuilder.swift */,
+				0452953F2B4BFCED000A5FD1 /* NetworkRequestBuilder.swift */,
 			);
 			path = Implementation;
 			sourceTree = "<group>";
@@ -288,8 +288,8 @@
 				045295512B4BFCED000A5FD1 /* JSONEncoder+Extension.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
 				045295542B4BFCED000A5FD1 /* JSONDecodeManager.swift in Sources */,
-				0452954D2B4BFCED000A5FD1 /* NetworkBuilderProtocol.swift in Sources */,
-				0452954E2B4BFCED000A5FD1 /* NetworkBuilder.swift in Sources */,
+				0452954D2B4BFCED000A5FD1 /* NetworkRequestBuilderProtocol.swift in Sources */,
+				0452954E2B4BFCED000A5FD1 /* NetworkRequestBuilder.swift in Sources */,
 				045295502B4BFCED000A5FD1 /* JSONEncodable.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
 				0452955D2B4E291F000A5FD1 /* GPTModel.swift in Sources */,
