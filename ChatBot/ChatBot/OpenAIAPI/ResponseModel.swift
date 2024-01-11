@@ -1,7 +1,7 @@
 struct ResponseModel: Decodable {
     let id, object: String
     let created: Int
-    let model, systemFingerprint: String
+    let model, systemFingerprint: String?
     let choices: [Choice]
     let usage: Usage
 
