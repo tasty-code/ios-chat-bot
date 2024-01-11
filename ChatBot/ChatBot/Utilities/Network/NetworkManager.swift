@@ -1,7 +1,7 @@
 import Foundation
 
 protocol NetworkRequestable {
-    func request(builder: NetworkBuilderProtocol) async throws -> ResponseModel
+    func request(urlRequest: URLRequest) async throws -> ResponseModel
 }
 
 final class NetworkManager: NetworkRequestable {
@@ -33,9 +33,8 @@ final class NetworkManager: NetworkRequestable {
     }
     
     // MARK: Public Methods
-    func request(builder: NetworkBuilderProtocol) async throws -> ResponseModel {
-        let request = try builder.build()
-        let data = try await downloadData(for: request)
+    func request(urlRequest: URLRequest) async throws -> ResponseModel {
+        let data = try await downloadData(for: urlRequest)
         let responseModel = try jsonDecodeManager.decode(ResponseModel.self, from: data)
         return responseModel
     }
