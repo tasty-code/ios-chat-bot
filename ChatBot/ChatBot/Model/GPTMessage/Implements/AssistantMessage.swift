@@ -12,6 +12,13 @@ extension Model {
         let name: String?
         let toolCalls: [GPTToolCall]?
         
+        init(content: String?, name: String?, toolCalls: [GPTToolCall]?) {
+            self.role = .assistant
+            self.content = content
+            self.name = name
+            self.toolCalls = toolCalls
+        }
+        
         init(requestMessage: GPTMessage) {
             self.role = .assistant
             self.content = requestMessage.content
