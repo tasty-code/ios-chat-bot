@@ -221,14 +221,52 @@
 			path = Mocks;
 			sourceTree = "<group>";
 		};
-		0D843B1D2B4FACB800F4EAD2 /* GPTChatRoom */ = {
+		0D843B1E2B4FAD8500F4EAD2 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */,
+				B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		0D843B1F2B4FAE5700F4EAD2 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */,
+				0D843B162B4D260800F4EAD2 /* GPTKeys.xcconfig */,
+				B4B3E2CA2B42D1BC00818B3C /* Info.plist */,
+				B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		0D843B202B4FAE8B00F4EAD2 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				0D843B212B4FAE9700F4EAD2 /* GPTChatRoom */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		0D843B212B4FAE9700F4EAD2 /* GPTChatRoom */ = {
+			isa = PBXGroup;
+			children = (
+				B4B3E2C02B42D1BB00818B3C /* GPTChatRoomViewController.swift */,
 			);
 			path = GPTChatRoom;
 			sourceTree = "<group>";
 		};
-		0DF997672B43AD8F0055C836 /* Models */ = {
+		0D843B232B4FAF9900F4EAD2 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				0D843ADE2B4B997600F4EAD2 /* DataDecoder */,
+				0D843AE32B4BA64200F4EAD2 /* DataEncoder */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		0DF997672B43AD8F0055C836 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				0DF997822B463C610055C836 /* Model.swift */,
@@ -236,7 +274,7 @@
 				0DF9976A2B43B1220055C836 /* GPTMessage */,
 				0DF9977A2B440A240055C836 /* GPTReplyDTO */,
 			);
-			path = Models;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		0DF9976A2B43B1220055C836 /* GPTMessage */ = {
@@ -284,15 +322,15 @@
 			path = GPTReplyDTO;
 			sourceTree = "<group>";
 		};
-		0DF9977F2B450E4C0055C836 /* Extensions */ = {
+		0DF9977F2B450E4C0055C836 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
 				0DF997802B450E8E0055C836 /* Date+Extention.swift */,
 			);
-			path = Extensions;
+			path = Extension;
 			sourceTree = "<group>";
 		};
-		0DF9978F2B46668E0055C836 /* Networks */ = {
+		0DF9978F2B46668E0055C836 /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				0DF997A62B4680BB0055C836 /* Network.swift */,
@@ -300,7 +338,7 @@
 				0DF997902B4666A00055C836 /* HTTPRequest */,
 				0D843AD92B4B98B200F4EAD2 /* HTTPService */,
 			);
-			path = Networks;
+			path = Network;
 			sourceTree = "<group>";
 		};
 		0DF997902B4666A00055C836 /* HTTPRequest */ = {
@@ -345,13 +383,13 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		0DF997AD2B479B940055C836 /* Errors */ = {
+		0DF997AD2B479B940055C836 /* Error */ = {
 			isa = PBXGroup;
 			children = (
 				0DF997AE2B479BA80055C836 /* GPTError.swift */,
 				0DF997B32B479BF10055C836 /* Implements */,
 			);
-			path = Errors;
+			path = Error;
 			sourceTree = "<group>";
 		};
 		0DF997B32B479BF10055C836 /* Implements */ = {
@@ -391,20 +429,14 @@
 		B4B3E2BB2B42D1BB00818B3C /* ChatBot */ = {
 			isa = PBXGroup;
 			children = (
-				0D843B1D2B4FACB800F4EAD2 /* GPTChatRoom */,
-				0D843AE32B4BA64200F4EAD2 /* DataEncoder */,
-				0D843ADE2B4B997600F4EAD2 /* DataDecoder */,
-				0DF997AD2B479B940055C836 /* Errors */,
-				0DF9978F2B46668E0055C836 /* Networks */,
-				0DF9977F2B450E4C0055C836 /* Extensions */,
-				0DF997672B43AD8F0055C836 /* Models */,
-				B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */,
-				B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */,
-				B4B3E2C02B42D1BB00818B3C /* GPTChatRoomViewController.swift */,
-				B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */,
-				B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */,
-				B4B3E2CA2B42D1BC00818B3C /* Info.plist */,
-				0D843B162B4D260800F4EAD2 /* GPTKeys.xcconfig */,
+				0D843B1E2B4FAD8500F4EAD2 /* Application */,
+				0D843B232B4FAF9900F4EAD2 /* Data */,
+				0DF997AD2B479B940055C836 /* Error */,
+				0DF9977F2B450E4C0055C836 /* Extension */,
+				0DF997672B43AD8F0055C836 /* Model */,
+				0DF9978F2B46668E0055C836 /* Network */,
+				0D843B202B4FAE8B00F4EAD2 /* Presentation */,
+				0D843B1F2B4FAE5700F4EAD2 /* Resource */,
 			);
 			path = ChatBot;
 			sourceTree = "<group>";
