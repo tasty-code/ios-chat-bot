@@ -97,20 +97,3 @@ final class GPTChatRoomViewController: UIViewController {
         return compositionalLayout
     }
 }
-
-extension GPTChatRoomViewController: UITextViewDelegate {
-    func textViewDidChange(_ textView: UITextView) {
-        guard textView.contentSize.height < view.frame.height * 0.15
-        else {
-            textView.isScrollEnabled = true
-            return
-        }
-        
-        textView.isScrollEnabled = false
-        textView.constraints.forEach { constraint in
-            if constraint.firstAttribute == .height {
-                constraint.constant = textView.estimatedSizeHeight
-            }
-        }
-    }
-}
