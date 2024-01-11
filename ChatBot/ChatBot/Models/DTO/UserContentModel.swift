@@ -8,19 +8,15 @@
 import Foundation
 
 // MARK: - UserContentModel
-struct UserContentModel: Encodable {
-    let model: String
-    let stream: Bool
-    let userMessage: [UserMessage]
-    
-    enum CodingKeys: String, CodingKey {
-        case model, stream
-        case userMessage = "messages"
-    }
+struct UserContentModel: Encodable  {
+    let model: String = "gpt-3.5-turbo"
+    let stream: Bool = false
+    var messages: [UserMessage]
 }
 
 // MARK: - Message
 struct UserMessage: Encodable {
     let role: String
-    let content: String
+    var content: String
 }
+

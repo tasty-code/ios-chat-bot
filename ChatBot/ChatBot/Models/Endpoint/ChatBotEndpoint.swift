@@ -12,5 +12,5 @@ struct ChatBotEndpoint: Endpointable {
     var apiKey: String?
     var httpMethod: HTTPMethods
     var httpHeader: [String : String]?
-    var httpBody: Data?
+    var httpBody: Encodable
 }
