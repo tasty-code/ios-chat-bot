@@ -18,6 +18,7 @@ final class NetworkRequestBuilder {
     // MARK: Life Cycle
     init(jsonEncodeManager: JSONEncodable, endpoint: EndpointType) {
         self.jsonEncodeManager = jsonEncodeManager
+        self.httpHeaderFields = endpoint.header
         self.url = URL(string: (endpoint.baseURLString))
     }
     
