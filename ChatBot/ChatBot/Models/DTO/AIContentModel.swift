@@ -1,5 +1,5 @@
 //
-//  AIAnswerModel.swift
+//  AIContentModel.swift
 //  ChatBot
 //
 //  Created by 전성수 on 1/3/24.
@@ -7,15 +7,15 @@
 
 import Foundation
 
-// MARK: - AIAnswerModel
-struct AIAnswerModel: Decodable {
+// MARK: - AIContentModel
+struct AIContentModel: Decodable {
     let id: String
     let object: String
     let created: Int
     let model: String
     let choices: [Choice]
     let usage: Usage
-    let systemFingerprint: String
+    let systemFingerprint: String?
     
     enum CodingKeys: String, CodingKey {
         case id, object, created, model, choices, usage
