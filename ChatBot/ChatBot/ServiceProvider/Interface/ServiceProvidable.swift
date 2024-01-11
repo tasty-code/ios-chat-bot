@@ -8,8 +8,5 @@
 import Foundation
 
 protocol ServiceProvidable {
-    associatedtype E: Encodable
-    associatedtype D: Decodable
-    
-    func excute(for requestDTO: E) async throws -> D
+    func excute<E: RequestDTOEncodable, D: ResponseDTODecodable>(for requestDTO: E) async throws -> D
 }

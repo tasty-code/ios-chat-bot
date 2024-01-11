@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GPTRequestDTO: Encodable {
+struct GPTRequestDTO: RequestDTOEncodable {
     let model: String = "\(GPTModel.basic)"
     let stream: Bool
     let messages: [GPTMessageable]

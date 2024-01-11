@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GPTResponseDTO: Decodable {
+struct GPTResponseDTO: ResponseDTODecodable {
     let id: String
     let object: String
     let created: Date
