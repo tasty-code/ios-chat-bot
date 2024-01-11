@@ -1,6 +1,6 @@
 import Foundation
 
-struct NetworkRequestBuilder: NetworkRequestBuilderProtocol {
+final class NetworkRequestBuilder {
     // MARK: Namespace
     enum NetworkBuilderError: Error {
         case buildRequestFailed
@@ -9,24 +9,35 @@ struct NetworkRequestBuilder: NetworkRequestBuilderProtocol {
     // MARK: Dependencies
     private let jsonEncodeManager: JSONEncodable
     
-    // MARK: Public Properties
-    let baseURLString: String
-    let httpMethod: HTTPMethodType
-    let httpHeaderFields: [String : String]
-    let requestModel: Encodable
+    // MARK: Private Properties
+    private var url: URL?
+    private var httpMethod: HTTPMethodType = .get
+    private var httpHeaderFields: [String : String] = [:]
+    private var requestModel: Encodable? = nil
     
     // MARK: Life Cycle
-    init(jsonEncodeManager: JSONEncodable, endpointType: EndpointType, httpMethod: HTTPMethodType, requestModel: Encodable) {
+    init(jsonEncodeManager: JSONEncodable, endpoint: EndpointType) {
         self.jsonEncodeManager = jsonEncodeManager
-        self.baseURLString = endpointType.baseURLString
-        self.httpMethod = httpMethod
-        self.httpHeaderFields = endpointType.header
-        self.requestModel = requestModel
+        self.url = URL(string: (endpoint.baseURLString))
     }
     
     // MARK: Public Methods
+    func setHttpMethod(httpMethod: HTTPMethodType) {
+        self.httpMethod = httpMethod
+    }
+    
+    func setHttpHeaderFields(httpHeaderFields: [String: String]) {
+        self.httpHeaderFields = httpHeaderFields
+    }
+    
+    func setRequestModel(requestModel: RequestModel) {
+        self.requestModel = requestModel
+    }
+    
     func build() throws -> URLRequest {
-        guard let url = URL(string: baseURLString) else {
+        guard let url = url,
+              let requestModel = requestModel
+        else {
             throw NetworkBuilderError.buildRequestFailed
         }
         
