@@ -1,10 +1,10 @@
 import Foundation
 
-protocol NetworkConnectable {
-    func connect(builder: NetworkBuilderProtocol) async throws -> ResponseModel
+protocol NetworkRequestable {
+    func request(builder: NetworkBuilderProtocol) async throws -> ResponseModel
 }
 
-final class NetworkManager: NetworkConnectable {
+final class NetworkManager: NetworkRequestable {
     // MARK: Namespace
     enum NetworkError: Error, CustomDebugStringConvertible {
         case castingError
@@ -33,7 +33,7 @@ final class NetworkManager: NetworkConnectable {
     }
     
     // MARK: Public Methods
-    func connect(builder: NetworkBuilderProtocol) async throws -> ResponseModel {
+    func request(builder: NetworkBuilderProtocol) async throws -> ResponseModel {
         let request = try builder.build()
         let data = try await downloadData(for: request)
         let responseModel = try jsonDecodeManager.decode(ResponseModel.self, from: data)
