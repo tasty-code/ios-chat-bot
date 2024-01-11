@@ -18,10 +18,8 @@ final class ChatService: ChatServiceProtocol {
         }
         
         let builder = ChatSendMessageBuilder(body: encodedData)
-        
-        let urlSessionManager = URLSessionManager()
 
-        NetworkManager(urlSessionManager: urlSessionManager).fetch(builder: builder) { result in
+        NetworkManager().fetch(builder: builder) { result in
             switch result {
             case .success(let data):
                 completion(.success(data))
