@@ -11,7 +11,6 @@
 		537532A42B47A49400C0CAE5 /* OpenAIURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537532A32B47A49400C0CAE5 /* OpenAIURL.swift */; };
 		537532A72B47F45E00C0CAE5 /* JSONConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537532A62B47F45E00C0CAE5 /* JSONConverter.swift */; };
 		537532AA2B48093500C0CAE5 /* JSONConvertError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537532A92B48093500C0CAE5 /* JSONConvertError.swift */; };
-		538B76CE2B510EF500E7FE87 /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538B76CD2B510EF500E7FE87 /* ChatModel.swift */; };
 		538B76D12B51104A00E7FE87 /* ChatBallon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538B76D02B51104A00E7FE87 /* ChatBallon.swift */; };
 		538B76D32B51177600E7FE87 /* ChatBallonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538B76D22B51177600E7FE87 /* ChatBallonCell.swift */; };
 		539C4C422B44FBDA0082A55C /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 539C4C412B44FBDA0082A55C /* APIKeys.plist */; };
@@ -38,7 +37,6 @@
 		537532A32B47A49400C0CAE5 /* OpenAIURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIURL.swift; sourceTree = "<group>"; };
 		537532A62B47F45E00C0CAE5 /* JSONConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONConverter.swift; sourceTree = "<group>"; };
 		537532A92B48093500C0CAE5 /* JSONConvertError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONConvertError.swift; sourceTree = "<group>"; };
-		538B76CD2B510EF500E7FE87 /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
 		538B76D02B51104A00E7FE87 /* ChatBallon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBallon.swift; sourceTree = "<group>"; };
 		538B76D22B51177600E7FE87 /* ChatBallonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBallonCell.swift; sourceTree = "<group>"; };
 		539C4C412B44FBDA0082A55C /* APIKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
@@ -97,14 +95,6 @@
 				537532A92B48093500C0CAE5 /* JSONConvertError.swift */,
 			);
 			path = Error;
-			sourceTree = "<group>";
-		};
-		538B76CC2B510EC400E7FE87 /* DataModel */ = {
-			isa = PBXGroup;
-			children = (
-				538B76CD2B510EF500E7FE87 /* ChatModel.swift */,
-			);
-			path = DataModel;
 			sourceTree = "<group>";
 		};
 		538B76CF2B51100800E7FE87 /* View */ = {
@@ -173,7 +163,6 @@
 			isa = PBXGroup;
 			children = (
 				538B76CF2B51100800E7FE87 /* View */,
-				538B76CC2B510EC400E7FE87 /* DataModel */,
 				6B36DDD52B4D0F0C0093BDCF /* Enum */,
 				537532A82B48092300C0CAE5 /* Error */,
 				537532A52B47F44900C0CAE5 /* Utility */,
@@ -283,7 +272,6 @@
 				538B76D12B51104A00E7FE87 /* ChatBallon.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
 				6B36DDDB2B4D12130093BDCF /* ContentType.swift in Sources */,
-				538B76CE2B510EF500E7FE87 /* ChatModel.swift in Sources */,
 				538B76D32B51177600E7FE87 /* ChatBallonCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

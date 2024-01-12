@@ -7,12 +7,28 @@
 
 import Foundation
 
-struct Message: Codable, Hashable {
+struct Message: Codable, Identifiable {
+    let id = UUID()
     let role: Role
     let content: String?
+    
+    enum CodingKeys: CodingKey {
+        case role
+        case content
+    }
 }
 
-enum Role: String, Codable, Hashable {
+extension Message: Hashable {
+    static func == (lhs: Message, rhs: Message) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}
+
+enum Role: String, Codable {
     case system = "system"
     case user = "user"
     case assistant = "assistant"

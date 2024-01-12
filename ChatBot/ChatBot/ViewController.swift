@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
 
     private enum Section {
         case main
@@ -18,9 +18,9 @@ class ViewController: UIViewController {
 
         return collectionView
     }()
-    private var dataSource: UICollectionViewDiffableDataSource<Section, ChatModel>?
-    private var snapshot = NSDiffableDataSourceSnapshot<Section, ChatModel>()
-//    private var chatRecord: [ChatModel] = []
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Message>?
+    private var snapshot = NSDiffableDataSourceSnapshot<Section, Message>()
+    private var chatRecord: [Message] = []
 
 
     override func viewDidLoad() {
@@ -39,14 +39,14 @@ extension ViewController {
     }
 
     private func configureDataSource() {
-        let cellRegistration = UICollectionView.CellRegistration<ChatBallonCell, ChatModel> { (cell, indexPath, itemIdentifier) in
+        let cellRegistration = UICollectionView.CellRegistration<ChatBallonCell, Message> { (cell, indexPath, itemIdentifier) in
 
-            guard let text = itemIdentifier.message.content else { return }
+            guard let text = itemIdentifier.content else { return }
             cell.setLabelText(text: text)
             cell.setNeedsUpdateConfiguration()
         }
 
-        dataSource = UICollectionViewDiffableDataSource<Section, ChatModel>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+        dataSource = UICollectionViewDiffableDataSource<Section, Message>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
         })
 
@@ -54,8 +54,9 @@ extension ViewController {
         dataSource?.apply(snapshot, animatingDifferences: false)
     }
 
-    func saveSnapshot(data: ChatModel) {
+    func saveSnapshot(data: Message) {
         snapshot.appendItems([data])
+        chatRecord.append(data)
         dataSource?.apply(snapshot, animatingDifferences: false)
     }
 }
