@@ -18,6 +18,7 @@ final class ViewController: UIViewController {
 
         return collectionView
     }()
+    
     private var dataSource: UICollectionViewDiffableDataSource<Section, Message>?
     private var snapshot = NSDiffableDataSourceSnapshot<Section, Message>()
     private var chatRecord: [Message] = []
