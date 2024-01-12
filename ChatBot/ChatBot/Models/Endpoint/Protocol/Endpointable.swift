@@ -10,17 +10,17 @@ import Foundation
 protocol Endpointable {
     var url: URL { get }
     var apiKey: String? { get }
-    var httpMethod: HTTPMethods { get }
+    var httpMethod: HTTPMethod { get }
     var httpHeader: [String: String]? { get }
     var httpBody: Encodable { get }
-    var encoder: ContentEncoder { get }
+    var encoder: Encoder { get }
     
     func generateRequest() -> URLRequest
 }
 
 extension Endpointable {
     
-    var encoder: ContentEncoder { ContentEncoder() }
+    var encoder: Encoder { Encoder() }
     
     func generateRequest() -> URLRequest {
         var request = URLRequest(url: url)

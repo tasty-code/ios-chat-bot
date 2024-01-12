@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ChatbotHeaderFieldName {
+enum HeaderFieldName {
     case contentType
     case authorization
     

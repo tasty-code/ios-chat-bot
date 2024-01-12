@@ -1,5 +1,5 @@
 //
-//  ContentTypes.swift
+//  ContentType.swift
 //  ChatBot
 //
 //  Created by 김경록 on 1/10/24.
@@ -7,12 +7,12 @@
 
 import Foundation
 
-enum ContentTypes {
+enum ContentType {
     case json
     
     var description: String {
         switch self {
-        case.json: "application/json"
+        case .json: "application/json"
         }
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 struct ChatBotEndpoint: Endpointable {
     var url: URL
     var apiKey: String?
-    var httpMethod: HTTPMethods
+    var httpMethod: HTTPMethod
     var httpHeader: [String : String]?
     var httpBody: Encodable
 }

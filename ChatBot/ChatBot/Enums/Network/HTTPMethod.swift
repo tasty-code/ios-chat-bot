@@ -1,5 +1,5 @@
 //
-//  HTTPMethods.swift
+//  HTTPMethod.swift
 //  ChatBot
 //
 //  Created by 김경록 on 1/10/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum HTTPMethods{
+enum HTTPMethod{
     case get
     case post
     case fetch
