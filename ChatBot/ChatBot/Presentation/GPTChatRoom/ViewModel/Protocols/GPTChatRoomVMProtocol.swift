@@ -6,10 +6,9 @@
 //
 
 import Combine
-import Foundation
 
 protocol GPTChatRoomVMProtocol {
-    var chattingsPublisher: Published<[GPTMessagable]>.Publisher { get }
+    var chattingsPublisher: Published<[Model.GPTMessage]>.Publisher { get }
     
     func sendComment(_ comment: GPTMessagable)
 }
