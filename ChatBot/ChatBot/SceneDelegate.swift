@@ -5,10 +5,17 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         var messages: [Message] = []
+        let text: String = "쫑쫑쫑"
 
-        for _ in 1...20 {
+        for times in 1...20 {
             let randomRole = [Role.user, Role.assistant].randomElement()!
-            let randomContent = "Sample content \(Int.random(in: 1...100))"
+            let randomContent = {
+                var temp = ""
+                for _ in 1..<times {
+                    temp += text
+                }
+                return temp
+            }()
             
             let message = Message(role: randomRole, content: randomContent)
             messages.append(message)

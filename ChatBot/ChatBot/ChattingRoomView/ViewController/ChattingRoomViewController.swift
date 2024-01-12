@@ -6,6 +6,12 @@ final class ChattingRoomViewController: UIViewController {
         case main
     }
     
+    enum Constants {
+        static let textFieldPlaceholder: String = "문자 메세지"
+        static let buttonImageName: String = "arrow.up"
+        static let defaultMargin: CGFloat = 10
+    }
+    
     private struct Item: Hashable {
         let id: String = UUID().uuidString
         let message: Message
@@ -20,7 +26,46 @@ final class ChattingRoomViewController: UIViewController {
     }
     
     // MARK: View Components
-    private var chattingRoomView: UICollectionView! = nil
+    private lazy var chattingRoomView: UICollectionView! = {
+        let chattingRoomView = UICollectionView(frame: view.bounds, collectionViewLayout: configureLayout())
+        chattingRoomView.translatesAutoresizingMaskIntoConstraints = false
+        chattingRoomView.allowsSelection = false
+        return chattingRoomView
+    }()
+    
+    private lazy var bottomStackView: UIStackView! = {
+        let padding = Constants.defaultMargin
+        let stackView = UIStackView()
+        stackView.addArrangedSubviews(textField, messageSendButton)
+        stackView.axis = .horizontal
+        stackView.spacing = padding
+        stackView.distribution = .fill
+        stackView.alignment = .fill
+        stackView.layoutMargins = UIEdgeInsets(top: padding,
+                                               left: padding,
+                                               bottom: padding,
+                                               right: padding)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private lazy var textField: UITextField! = {
+        let textField = UITextField()
+        textField.placeholder = Constants.textFieldPlaceholder
+        textField.autocapitalizationType = .none
+        textField.autocorrectionType = .no
+        textField.borderStyle = .roundedRect
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
+    private lazy var messageSendButton: UIButton! = {
+        let button = UIButton()
+        let image = UIImage(systemName: Constants.buttonImageName)
+        button.setImage(image, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     // MARK: Properties
     private var dataSource: UICollectionViewDiffableDataSource<Section, Item>! = nil
@@ -47,24 +92,26 @@ final class ChattingRoomViewController: UIViewController {
 // MARK: ChattingRoomView Configuration Methods
 extension ChattingRoomViewController {
     private func configureHierarchy() {
-        chattingRoomView = UICollectionView(frame: view.bounds, collectionViewLayout: configureLayout())
-        chattingRoomView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(chattingRoomView)
-        chattingRoomView.delegate = self
-        chattingRoomView.allowsSelection = false
+        view.addSubviews(chattingRoomView, bottomStackView)
     }
     
     private func configureLayout() -> UICollectionViewLayout {
-        let configuration = UICollectionLayoutListConfiguration(appearance: .plain)
-        let layout = UICollectionViewCompositionalLayout.list(using: configuration)
-        return layout
+        var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
+        configuration.showsSeparators = false
+        return UICollectionViewCompositionalLayout.list(using: configuration)
     }
     
     private func configureDataSource() {
         let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Message> { (cell, indexPath, item) in
-            var content = cell.defaultContentConfiguration()
-            content.text = item.content
-            cell.contentConfiguration = content
+            let margin = item.role == .user ? cell.contentView.bounds.width / 3 : Constants.defaultMargin
+            var configuration = cell.defaultContentConfiguration()
+            configuration.directionalLayoutMargins = NSDirectionalEdgeInsets(top: Constants.defaultMargin,
+                                                                             leading: margin,
+                                                                             bottom: Constants.defaultMargin,
+                                                                             trailing: Constants.defaultMargin)
+            configuration.text = item.content
+            configuration.textProperties.numberOfLines = .zero
+            cell.contentConfiguration = configuration
         }
         
         dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: chattingRoomView) { (chattingRoomView, indexPath, itemIdentifier) -> UICollectionViewListCell? in
@@ -81,16 +128,24 @@ extension ChattingRoomViewController {
 // MARK: Autolayout Methods
 extension ChattingRoomViewController {
     private func configureConstraints() {
+        let layoutMargin = Constants.defaultMargin
+        
         NSLayoutConstraint.activate([
             chattingRoomView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            chattingRoomView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            chattingRoomView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            chattingRoomView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+            chattingRoomView.bottomAnchor.constraint(equalTo: bottomStackView.topAnchor),
+            chattingRoomView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: layoutMargin),
+            chattingRoomView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -layoutMargin)
+        ])
+        
+        NSLayoutConstraint.activate([
+            bottomStackView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor),
+            bottomStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: layoutMargin),
+            bottomStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -layoutMargin),
+        ])
+        
+        NSLayoutConstraint.activate([
+            messageSendButton.heightAnchor.constraint(equalTo: bottomStackView.heightAnchor),
+            messageSendButton.widthAnchor.constraint(equalTo: messageSendButton.heightAnchor)
         ])
     }
-}
-
-// MARK: UICollectionView Delegate Protocol Confirmation
-extension ChattingRoomViewController: UICollectionViewDelegate {
-    
 }
