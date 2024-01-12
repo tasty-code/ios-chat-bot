@@ -2,14 +2,14 @@ import UIKit
 
 final class ChattingRoomViewController: UIViewController {
     // MARK: Namespace
-    enum Section: CaseIterable {
-        case main
-    }
-    
     enum Constants {
         static let textFieldPlaceholder: String = "문자 메세지"
         static let buttonImageName: String = "arrow.up"
         static let defaultMargin: CGFloat = 10
+    }
+    
+    enum Section: CaseIterable {
+        case main
     }
     
     private struct Item: Hashable {
