@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct Message: Codable {
+struct Message: Codable, Hashable {
     let role: Role
     let content: String?
 }
 
-enum Role: String, Codable {
+enum Role: String, Codable, Hashable {
     case system = "system"
     case user = "user"
     case assistant = "assistant"
