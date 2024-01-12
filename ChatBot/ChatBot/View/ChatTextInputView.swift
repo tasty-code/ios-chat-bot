@@ -1,5 +1,5 @@
 //
-//  ChatTextInputIView.swift
+//  ChatTextInputView.swift
 //  ChatBot
 //
 //  Created by 최승범 on 2024/01/12.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ChatTextInputIView: UIStackView {
+final class ChatTextInputView: UIStackView {
 
     private lazy var textView: UITextView = {
         let textView = UITextView()
@@ -25,12 +25,25 @@ final class ChatTextInputIView: UIStackView {
         
         button.setImage(UIImage(systemName: "paperplane"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = button.frame.width / 2
+        DispatchQueue.main.async {
+            button.layer.cornerRadius = button.frame.size.width / 2
+        }
+        button.backgroundColor = #colorLiteral(red: 0.7607453465, green: 0.8554189801, blue: 1, alpha: 1)
         
         return button
     }()
-
-    func configure() {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configure()
+    }
+    
+    required init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configure() {
+    
         self.addArrangedSubview(textView)
         self.addArrangedSubview(button)
         
@@ -39,16 +52,19 @@ final class ChatTextInputIView: UIStackView {
         self.spacing = 8
         
         NSLayoutConstraint.activate([
-            textView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7)
+            textView.heightAnchor.constraint(equalToConstant: textView.estimatedSizeHeight),
+            button.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.1),
+            button.widthAnchor.constraint(equalTo: button.heightAnchor, multiplier: 1.0)
         ])
+        
     }
 }
 
-extension ChatTextInputIView: UITextViewDelegate {
+extension ChatTextInputView: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         
-        guard textView.contentSize.height < self.frame.height * 0.15 else {
+        guard textView.contentSize.height < self.frame.width * 0.3 else {
             textView.isScrollEnabled = true
             return
         }
