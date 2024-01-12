@@ -1,11 +1,14 @@
 import UIKit
 
 final class ChattingRoomViewController: UIViewController {
+    private typealias DataSource = UICollectionViewDiffableDataSource<Section, Item>
+    private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Item>
+    
     // MARK: Namespace
     enum Constants {
         static let textFieldPlaceholder: String = "문자 메세지"
         static let buttonImageName: String = "arrow.up"
-        static let defaultMargin: CGFloat = 10
+        static let defaultMargin: CGFloat = 6
     }
     
     enum Section: CaseIterable {
@@ -68,7 +71,7 @@ final class ChattingRoomViewController: UIViewController {
     }()
     
     // MARK: Properties
-    private var dataSource: UICollectionViewDiffableDataSource<Section, Item>! = nil
+    private var dataSource: DataSource! = nil
     private var messages: [Item]?
     
     init(messages: [Message]) {
@@ -102,23 +105,24 @@ extension ChattingRoomViewController {
     }
     
     private func configureDataSource() {
-        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Message> { (cell, indexPath, item) in
-            let margin = item.role == .user ? cell.contentView.bounds.width / 3 : Constants.defaultMargin
+        let cellRegistration = UICollectionView.CellRegistration<MessageCell, Message> { (cell, indexPath, item) in
+            let margin = Constants.defaultMargin
             var configuration = cell.defaultContentConfiguration()
-            configuration.directionalLayoutMargins = NSDirectionalEdgeInsets(top: Constants.defaultMargin,
+            configuration.directionalLayoutMargins = NSDirectionalEdgeInsets(top: margin,
                                                                              leading: margin,
-                                                                             bottom: Constants.defaultMargin,
-                                                                             trailing: Constants.defaultMargin)
-            configuration.text = item.content
-            configuration.textProperties.numberOfLines = .zero
+                                                                             bottom: margin,
+                                                                             trailing: margin)
             cell.contentConfiguration = configuration
+            cell.configureCell(with: item)
         }
         
-        dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: chattingRoomView) { (chattingRoomView, indexPath, itemIdentifier) -> UICollectionViewListCell? in
-            return chattingRoomView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier.message)
+        dataSource = DataSource(collectionView: chattingRoomView) { (chattingRoomView, indexPath, itemIdentifier) -> UICollectionViewListCell? in
+            let cell = chattingRoomView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier.message)
+            cell.configureCell(with: itemIdentifier.message)
+            return cell
         }
         
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
+        var snapshot = Snapshot()
         snapshot.appendSections(Section.allCases)
         snapshot.appendItems(messages ?? []) // ToDo: 보다 확실한 Assertion 방지 대책 필요
         dataSource.apply(snapshot, animatingDifferences: true)
