@@ -8,6 +8,7 @@
 import UIKit
 
 final class ChatBallonCell: UICollectionViewListCell {
+    
     private lazy var chatBallonView: ChatBallon = {
         let view = ChatBallon()
         
@@ -26,6 +27,8 @@ final class ChatBallonCell: UICollectionViewListCell {
     }
     
     private func configure() {
+        self.contentView.addSubview(chatBallonView)
+        
         NSLayoutConstraint.activate([
             chatBallonView.topAnchor.constraint(equalTo: contentView.topAnchor),
             chatBallonView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),

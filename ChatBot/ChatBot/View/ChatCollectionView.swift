@@ -39,6 +39,7 @@ final class ChatCollectionView: UICollectionView {
         })
 
         snapshot.appendSections([.main])
+        snapshot.appendItems(chatRecord)
         diffableDataSource?.apply(snapshot, animatingDifferences: false)
     }
 
@@ -46,5 +47,6 @@ final class ChatCollectionView: UICollectionView {
         snapshot.appendItems([data])
         chatRecord.append(data)
         diffableDataSource?.apply(snapshot, animatingDifferences: false)
+        print(snapshot.numberOfItems)
     }
 }

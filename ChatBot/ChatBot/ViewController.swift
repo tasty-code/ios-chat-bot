@@ -39,11 +39,13 @@ final class ViewController: UIViewController {
     private func collectionViewConfigure() {
         let safeArea = view.safeAreaLayoutGuide
         let chatTextInputView = ChatTextInputView()
+        
+        view.addSubview(chatStackView)
         chatStackView.addArrangedSubview(collectionView)
         chatStackView.addArrangedSubview(chatTextInputView)
-        view.addSubview(chatStackView)
         
         NSLayoutConstraint.activate([
+            collectionView.widthAnchor.constraint(equalTo: chatStackView.widthAnchor, multiplier: 1.0),
             chatStackView.topAnchor.constraint(equalTo: view.topAnchor),
             chatStackView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
             chatStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
