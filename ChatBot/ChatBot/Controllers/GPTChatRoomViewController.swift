@@ -31,13 +31,14 @@ final class GPTChatRoomViewController: UIViewController {
         return textView
     }()
     
-    private let sendButton: UIButton = {
+    private lazy var sendButton: UIButton = {
         let button = UIButton()
         let imageConfiguration = UIImage.SymbolConfiguration(pointSize: 40)
         let buttonImage = UIImage(systemName: "arrow.up.circle.fill", withConfiguration: imageConfiguration)
         button.setImage(buttonImage, for: .normal)
         button.contentMode = .scaleToFill
         button.tintColor = .systemCyan
+        button.addTarget(self, action: #selector(sendButtonTapped(_:)), for: .touchUpInside)
         
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -69,31 +70,53 @@ final class GPTChatRoomViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .white
         
+        setConstraintsCollectionView()
+        setConstraintsStackView()
+        setConstraintsTextView()
+    }
+    
+    private func setConstraintsCollectionView() {
         let safeArea = view.safeAreaLayoutGuide
+        
         view.addSubview(chatCollectionView)
         NSLayoutConstraint.activate([
             chatCollectionView.topAnchor.constraint(equalTo: safeArea.topAnchor),
             chatCollectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 10),
             chatCollectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -10),
         ])
-        
+    }
+    
+    private func setConstraintsStackView() {
         view.addSubview(userInteractionStackView)
         NSLayoutConstraint.activate([
             userInteractionStackView.topAnchor.constraint(equalTo: chatCollectionView.bottomAnchor, constant: 10),
             userInteractionStackView.leadingAnchor.constraint(equalTo: chatCollectionView.leadingAnchor),
             userInteractionStackView.trailingAnchor.constraint(equalTo: chatCollectionView.trailingAnchor),
             view.keyboardLayoutGuide.topAnchor
-                .constraint(equalToSystemSpacingBelow: userInteractionStackView.bottomAnchor, multiplier: 1.0),
-            
+                .constraint(equalToSystemSpacingBelow: userInteractionStackView.bottomAnchor, multiplier: 1.0)
+        ])
+    }
+    
+    private func setConstraintsTextView() {
+        let safeArea = view.safeAreaLayoutGuide
+        
+        NSLayoutConstraint.activate([
             userInputTextView.widthAnchor.constraint(equalTo: safeArea.widthAnchor, multiplier: 0.8),
             userInputTextView.heightAnchor.constraint(equalToConstant: userInputTextView.estimatedSizeHeight)
         ])
     }
     
     private func configureCollectionViewLayout() -> UICollectionViewCompositionalLayout {
-        let listConfiguration = UICollectionLayoutListConfiguration(appearance: .grouped)
+        var listConfiguration = UICollectionLayoutListConfiguration(appearance: .grouped)
+        listConfiguration.showsSeparators = false
         
         let compositionalLayout = UICollectionViewCompositionalLayout.list(using: listConfiguration)
         return compositionalLayout
+    }
+    
+    @objc
+    private func sendButtonTapped(_ sender: UIButton) {
+        // 버튼이 눌렸을 때, 동작하는 함수
+        // 메세지를 구성하고 GPTServiceProvider에게 넘겨줘서 일을 하게 시킨다.
     }
 }
