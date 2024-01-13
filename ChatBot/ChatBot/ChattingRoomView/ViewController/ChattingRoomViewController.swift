@@ -66,17 +66,26 @@ final class ChattingRoomViewController: UIViewController {
         let button = UIButton()
         let image = UIImage(systemName: Constants.buttonImageName)
         button.setImage(image, for: .normal)
+        button.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     // MARK: Properties
     private var dataSource: DataSource! = nil
-    private var messages: [Item]?
+    private var snapshot = Snapshot()
+    private var messages: [Message]? {
+        didSet {
+            guard let messages = messages else { return }
+            updateDataSource(with: messages)
+        }
+    }
+    private var networkManager: NetworkRequestable?
     
-    init(messages: [Message]) {
+    init(messages: [Message], networkManager: NetworkRequestable) {
         super.init(nibName: nil, bundle: nil)
-        self.messages = messages.map({ Item(message: $0) })
+        self.messages = messages
+        self.networkManager = networkManager
     }
     
     required init?(coder: NSCoder) {
@@ -89,6 +98,43 @@ final class ChattingRoomViewController: UIViewController {
         configureHierarchy()
         configureConstraints()
         configureDataSource()
+    }
+}
+
+// MARK: Private Methods
+extension ChattingRoomViewController {
+    @objc private func sendMessage() {
+        guard textField.text?.isEmpty == false,
+              let text = textField.text
+        else { return }
+        
+        var messages: [Message] = []
+        
+        if let lastMessage = messages.last {
+            messages.append(lastMessage)
+        }
+        
+        messages.append(Message(role: .user, content: text))
+        
+        let requestModel = RequestModel(model: .gpt_3_5_turbo, messages: messages, stream: false)
+        let endpoint = EndpointType.chatCompletion(apiKey: Bundle.main.APIKey)
+        let builder = NetworkRequestBuilder(jsonEncodeManager: JSONEncodeManager(), endpoint: endpoint)
+        builder.setHttpHeaderFields(httpHeaderFields: endpoint.header)
+        builder.setHttpMethod(httpMethod: .post)
+        builder.setRequestModel(requestModel: requestModel)
+        
+        do {
+            let request = try builder.build()
+            Task {
+                let responseModel = try await networkManager?.request(urlRequest: request)
+                guard let newMessage = responseModel?.choices.first?.message else { return }
+                self.messages?.append(newMessage)
+            }
+        } catch {
+            print(error)
+        }
+        
+        textField.text = String()
     }
 }
 
@@ -122,9 +168,15 @@ extension ChattingRoomViewController {
             return cell
         }
         
-        var snapshot = Snapshot()
+        updateDataSource(with: messages)
+    }
+    
+    private func updateDataSource(with messages: [Message]?) {
+        guard let messages = messages else { return }
+        let items = messages.map { Item(message: $0) }
+        snapshot.deleteAllItems()
         snapshot.appendSections(Section.allCases)
-        snapshot.appendItems(messages ?? []) // ToDo: 보다 확실한 Assertion 방지 대책 필요
+        snapshot.appendItems(items)
         dataSource.apply(snapshot, animatingDifferences: true)
     }
 }
