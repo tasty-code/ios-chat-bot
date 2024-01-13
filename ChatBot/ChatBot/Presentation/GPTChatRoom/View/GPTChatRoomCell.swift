@@ -8,16 +8,17 @@
 import UIKit
 
 final class GPTChatRoomCell: UICollectionViewCell {
-    private lazy var contentLabel: UILabel = {
-       let label = UILabel()
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    private let chatBubble: UIChatBubbleView = {
+        let bubbleView = UIChatBubbleView()
+        bubbleView.translatesAutoresizingMaskIntoConstraints = false
+        return bubbleView
     }()
+    
+    private var directionConstraint = NSLayoutConstraint()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.addSubview(contentLabel)
+        self.addSubview(chatBubble)
         setConstraints()
     }
     
@@ -27,26 +28,22 @@ final class GPTChatRoomCell: UICollectionViewCell {
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            contentLabel.topAnchor.constraint(equalTo: topAnchor),
-            contentLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            contentLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            contentLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
+            chatBubble.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 12.0),
+            chatBubble.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -12.0),
+            chatBubble.widthAnchor.constraint(lessThanOrEqualTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.66),
         ])
     }
     
-    func configureCell(to message: any GPTMessagable) {
-        switch message.role {
-        case .system:
-            backgroundColor = .blue
-        case .user:
-            backgroundColor = .systemMint
-        case .assistant:
-            backgroundColor = .systemPink
-        case .tool:
-            backgroundColor = .green
-        case .waiting:
-            backgroundColor = .yellow
+    func configureCell(to message: GPTMessagable) {
+        chatBubble.contentLabel.text = message.content
+        directionConstraint.isActive = false
+        if message.role == .user {
+            chatBubble.startDirection = .right
+            directionConstraint = chatBubble.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -12.0)
+        } else {
+            chatBubble.startDirection = .left
+            directionConstraint = chatBubble.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 12.0)
         }
-        contentLabel.text = message.content
+        directionConstraint.isActive = true
     }
 }

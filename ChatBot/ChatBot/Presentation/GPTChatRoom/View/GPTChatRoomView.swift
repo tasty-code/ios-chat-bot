@@ -27,7 +27,7 @@ final class GPTChatRoomView: UIView {
     }()
     
     lazy var commentTextField: UITextField = {
-        let textField = UITextField(frame: .zero)
+        let textField = UITextField()
         textField.font = UIFont.systemFont(ofSize: 32)
         textField.backgroundColor = .red
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -39,6 +39,7 @@ final class GPTChatRoomView: UIView {
         let button = UIButton()
         button.backgroundColor = .cyan
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         button.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         button.setImage(UIImage(systemName: "arrow.up.circle.fill"), for: .normal)
         return button
@@ -64,12 +65,12 @@ final class GPTChatRoomView: UIView {
             chatCollectionView.bottomAnchor.constraint(equalTo: horizontalStackView.topAnchor),
             horizontalStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             horizontalStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            horizontalStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+            horizontalStackView.bottomAnchor.constraint(equalTo: keyboardLayoutGuide.topAnchor)
         ])
     }
     
     private func configureCollectionViewLayout() -> UICollectionViewCompositionalLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(100))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(100))
