@@ -12,7 +12,7 @@ final class GPTChatRoomView: UIView {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(GPTChatRoomCell.self, forCellWithReuseIdentifier: "\(type(of: self))")
-        collectionView.backgroundColor = .brown
+        collectionView.backgroundColor = .clear
         return collectionView
     }()
     
@@ -28,8 +28,9 @@ final class GPTChatRoomView: UIView {
     
     lazy var commentTextField: UITextField = {
         let textField = UITextField()
-        textField.font = UIFont.systemFont(ofSize: 32)
-        textField.backgroundColor = .red
+        textField.font = UIFont.preferredFont(forTextStyle: .body)
+        textField.borderStyle = .roundedRect
+        textField.backgroundColor = .white
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         return textField
@@ -37,11 +38,16 @@ final class GPTChatRoomView: UIView {
     
     lazy var sendButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .cyan
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         button.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
-        button.setImage(UIImage(systemName: "arrow.up.circle.fill"), for: .normal)
+        
+        let imageConfiguration = UIImage.SymbolConfiguration(pointSize: 32)
+        let uiImage = UIImage(systemName: "arrow.up.circle.fill", withConfiguration: imageConfiguration)
+        button.setImage(uiImage, for: .normal)
+        button.contentHorizontalAlignment = .fill
+        button.contentVerticalAlignment = .fill
+        
         return button
     }()
     
@@ -63,9 +69,9 @@ final class GPTChatRoomView: UIView {
             chatCollectionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             chatCollectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             chatCollectionView.bottomAnchor.constraint(equalTo: horizontalStackView.topAnchor),
-            horizontalStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            horizontalStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            horizontalStackView.bottomAnchor.constraint(equalTo: keyboardLayoutGuide.topAnchor)
+            horizontalStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 4),
+            horizontalStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -4),
+            horizontalStackView.bottomAnchor.constraint(equalTo: keyboardLayoutGuide.topAnchor, constant: -4)
         ])
     }
     

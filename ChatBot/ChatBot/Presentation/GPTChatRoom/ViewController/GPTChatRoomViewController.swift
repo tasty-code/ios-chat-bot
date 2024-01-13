@@ -45,10 +45,17 @@ final class GPTChatRoomViewController: UIViewController {
         viewModel.chattingsPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] messages in
+                guard let self else { return }
+                
                 var snapshot = NSDiffableDataSourceSnapshot<Section, Model.GPTMessage>()
                 snapshot.appendSections([.main])
                 snapshot.appendItems(messages)
-                self?.chattingDataSource.apply(snapshot)
+                self.chattingDataSource.apply(snapshot)
+                
+                if !messages.isEmpty {
+                    let indexPath = IndexPath(item: messages.count - 1, section: 0)
+                    self.chatRoomView.chatCollectionView.scrollToItem(at: indexPath, at: .top, animated: true)
+                }
             }
             .store(in: &cancellables)
     }
@@ -64,9 +71,9 @@ final class GPTChatRoomViewController: UIViewController {
     
     @objc
     private func tapSendButton(_ sender: Any) {
-        guard let content = chatRoomView.commentTextField.text else {
-            return
+        if let content = chatRoomView.commentTextField.text {
+            viewModel.sendComment(Model.UserMessage(content: content))
         }
-        viewModel.sendComment(Model.UserMessage(content: content))
+        chatRoomView.commentTextField.text = nil
     }
 }
