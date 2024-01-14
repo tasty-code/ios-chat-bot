@@ -18,24 +18,26 @@ final class MessageCell: UICollectionViewListCell {
                                                                  leading: margin,
                                                                  bottom: margin,
                                                                  trailing: margin)
+        label.preferredMaxLayoutWidth = label.frame.size.width
         return label
     }()
 }
 
 // MARK: Configure Cell Methods
 extension MessageCell {
-    func configureCell(with message: Message) {
+    func configureCell(with message: Message?) {
         contentView.addSubview(bubbleLabel)
         
-        bubbleLabel.text = message.content
+        bubbleLabel.text = message?.content
         
         NSLayoutConstraint.activate([
             bubbleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
             bubbleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            bubbleLabel.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, multiplier: 2/3)
+            bubbleLabel.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, multiplier: 2/3),
+            bubbleLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor)
         ])
         
-        if message.role == .user {
+        if message?.role == .user {
             bubbleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         } else {
             bubbleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true

@@ -1,14 +1,14 @@
 import UIKit
 
 final class ChattingRoomViewController: UIViewController {
-    private typealias DataSource = UICollectionViewDiffableDataSource<Section, Item>
-    private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Item>
+    private typealias DataSource = UICollectionViewDiffableDataSource<Section, Item?>
+    private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Item?>
     
     // MARK: Namespace
     enum Constants {
-        static let textFieldPlaceholder: String = "문자 메세지"
         static let buttonImageName: String = "arrow.up"
         static let defaultMargin: CGFloat = 6
+        static let messageTextViewHeightRatio: CGFloat = 1/6
     }
     
     enum Section: CaseIterable {
@@ -39,7 +39,7 @@ final class ChattingRoomViewController: UIViewController {
     private lazy var bottomStackView: UIStackView! = {
         let padding = Constants.defaultMargin
         let stackView = UIStackView()
-        stackView.addArrangedSubviews(textField, messageSendButton)
+        stackView.addArrangedSubviews(messageTextView, messageSendButton)
         stackView.axis = .horizontal
         stackView.spacing = padding
         stackView.distribution = .fill
@@ -52,44 +52,45 @@ final class ChattingRoomViewController: UIViewController {
         return stackView
     }()
     
-    private lazy var textField: UITextField! = {
-        let textField = UITextField()
-        textField.placeholder = Constants.textFieldPlaceholder
-        textField.autocapitalizationType = .none
-        textField.autocorrectionType = .no
-        textField.borderStyle = .roundedRect
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
+    private lazy var messageTextView: UITextView! = {
+        let textView = UITextView()
+        textView.autocapitalizationType = .none
+        textView.autocorrectionType = .no
+        textView.backgroundColor = .secondarySystemBackground
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        return textView
     }()
     
     private lazy var messageSendButton: UIButton! = {
-        let button = UIButton()
-        let image = UIImage(systemName: Constants.buttonImageName)
-        button.setImage(image, for: .normal)
-        button.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
+        var configuration = UIButton.Configuration.plain()
+        configuration.cornerStyle = .capsule
+        configuration.image = UIImage(systemName: Constants.buttonImageName)
+        let button = UIButton(configuration: configuration)
+        button.addTarget(self, action: #selector(touchUpMessageSendButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     // MARK: Properties
     private var dataSource: DataSource! = nil
-    private var snapshot = Snapshot()
-    private var messages: [Message]? {
+    private var snapshot: Snapshot! = Snapshot()
+    private var messages: [Message] {
         didSet {
-            guard let messages = messages else { return }
             updateDataSource(with: messages)
         }
     }
-    private var networkManager: NetworkRequestable?
+    
+    // MARK: Dependencies
+    private let networkManager: NetworkRequestable!
     
     init(messages: [Message], networkManager: NetworkRequestable) {
-        super.init(nibName: nil, bundle: nil)
         self.messages = messages
         self.networkManager = networkManager
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("init(coder:) 구현되지 않음.")
     }
     
     override func viewDidLoad() {
@@ -103,38 +104,53 @@ final class ChattingRoomViewController: UIViewController {
 
 // MARK: Private Methods
 extension ChattingRoomViewController {
-    @objc private func sendMessage() {
-        guard textField.text?.isEmpty == false,
-              let text = textField.text
+    @objc private func touchUpMessageSendButton() {
+        guard messageTextView.hasText == true,
+              let text = messageTextView.text
         else { return }
         
+        submitMessage(text: text)
+        let preparedMessages: [Message] = prepareMessages(text: text)
+        sendMessage(messages: preparedMessages)
+        messageTextView.text = String()
+    }
+    
+    private func submitMessage(text: String) {
+        let message = Message(role: .user, content: text)
+        messages.append(message)
+    }
+    
+    private func prepareMessages(text: String) -> [Message] {
         var messages: [Message] = []
-        
-        if let lastMessage = messages.last {
-            messages.append(lastMessage)
-        }
-        
-        messages.append(Message(role: .user, content: text))
-        
-        let requestModel = RequestModel(model: .gpt_3_5_turbo, messages: messages, stream: false)
-        let endpoint = EndpointType.chatCompletion(apiKey: Bundle.main.APIKey)
-        let builder = NetworkRequestBuilder(jsonEncodeManager: JSONEncodeManager(), endpoint: endpoint)
-        builder.setHttpHeaderFields(httpHeaderFields: endpoint.header)
-        builder.setHttpMethod(httpMethod: .post)
-        builder.setRequestModel(requestModel: requestModel)
-        
+        let newMessage: Message = Message(role: .user, content: text)
+        let oldMessage: Message? = messages.last
+        if let oldMessage = oldMessage { messages.append(oldMessage) }
+        messages.append(newMessage)
+        return messages
+    }
+    
+    private func sendMessage(messages: [Message]) {
+        let builder = prepareToSend(messages, to: .gpt_3_5_turbo)
         do {
             let request = try builder.build()
             Task {
                 let responseModel = try await networkManager?.request(urlRequest: request)
                 guard let newMessage = responseModel?.choices.first?.message else { return }
-                self.messages?.append(newMessage)
+                self.messages.append(newMessage)
             }
         } catch {
             print(error)
         }
-        
-        textField.text = String()
+    }
+    
+    private func prepareToSend(_ messages: [Message], to gptModel: GPTModel) -> NetworkRequestBuilderProtocol {
+        let requestModel = RequestModel(model: gptModel, messages: messages, stream: false)
+        let endpoint = EndpointType.chatCompletion(apiKey: Bundle.main.APIKey)
+        var builder: NetworkRequestBuilderProtocol = NetworkRequestBuilder(jsonEncodeManager: JSONEncodeManager(), endpoint: endpoint)
+        builder.setHttpHeaderFields(httpHeaderFields: endpoint.header)
+        builder.setHttpMethod(httpMethod: .post)
+        builder.setRequestModel(requestModel: requestModel)
+        return builder
     }
 }
 
@@ -147,7 +163,8 @@ extension ChattingRoomViewController {
     private func configureLayout() -> UICollectionViewLayout {
         var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
         configuration.showsSeparators = false
-        return UICollectionViewCompositionalLayout.list(using: configuration)
+        let layout = UICollectionViewCompositionalLayout.list(using: configuration)
+        return layout
     }
     
     private func configureDataSource() {
@@ -163,17 +180,20 @@ extension ChattingRoomViewController {
         }
         
         dataSource = DataSource(collectionView: chattingRoomView) { (chattingRoomView, indexPath, itemIdentifier) -> UICollectionViewListCell? in
-            let cell = chattingRoomView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier.message)
-            cell.configureCell(with: itemIdentifier.message)
+            let cell = chattingRoomView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier?.message)
+            cell.configureCell(with: itemIdentifier?.message)
             return cell
         }
         
         updateDataSource(with: messages)
     }
     
-    private func updateDataSource(with messages: [Message]?) {
-        guard let messages = messages else { return }
-        let items = messages.map { Item(message: $0) }
+    private func updateDataSource(with messages: [Message?]) {
+        let items: [Item?] = messages.map({ message in
+            guard let message = message else { return nil }
+            return Item(message: message)
+        })
+        
         snapshot.deleteAllItems()
         snapshot.appendSections(Section.allCases)
         snapshot.appendItems(items)
@@ -185,6 +205,7 @@ extension ChattingRoomViewController {
 extension ChattingRoomViewController {
     private func configureConstraints() {
         let layoutMargin = Constants.defaultMargin
+        let messageTextViewHeightRatio = Constants.messageTextViewHeightRatio
         
         NSLayoutConstraint.activate([
             chattingRoomView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -197,6 +218,7 @@ extension ChattingRoomViewController {
             bottomStackView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor),
             bottomStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: layoutMargin),
             bottomStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -layoutMargin),
+            bottomStackView.heightAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: messageTextViewHeightRatio)
         ])
         
         NSLayoutConstraint.activate([
