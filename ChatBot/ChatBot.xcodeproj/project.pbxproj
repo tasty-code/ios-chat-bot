@@ -20,6 +20,8 @@
 		C3CFDE962B4E3A06003CF9CC /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CFDE952B4E3A06003CF9CC /* ContentType.swift */; };
 		C3CFDE982B4E3ADF003CF9CC /* ChatBotEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CFDE972B4E3ADF003CF9CC /* ChatBotEndpoint.swift */; };
 		C3CFDE9C2B4E78D0003CF9CC /* Endpointable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CFDE9B2B4E78D0003CF9CC /* Endpointable.swift */; };
+		CB01BBC92B5106F300565462 /* ChatBubbleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB01BBC82B5106F300565462 /* ChatBubbleCollectionViewCell.swift */; };
+		CB01BBCB2B51100E00565462 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB01BBCA2B51100E00565462 /* Message.swift */; };
 		CB1DA6BB2B4E849300D8BAF6 /* APIName.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1DA6BA2B4E849300D8BAF6 /* APIName.swift */; };
 		CB1DA6BE2B4EC6BA00D8BAF6 /* UserContentConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1DA6BD2B4EC6BA00D8BAF6 /* UserContentConstant.swift */; };
 		CB1DA6C02B4ECC0700D8BAF6 /* HeaderFieldName.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1DA6BF2B4ECC0700D8BAF6 /* HeaderFieldName.swift */; };
@@ -45,6 +47,8 @@
 		C3CFDE952B4E3A06003CF9CC /* ContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentType.swift; sourceTree = "<group>"; };
 		C3CFDE972B4E3ADF003CF9CC /* ChatBotEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotEndpoint.swift; sourceTree = "<group>"; };
 		C3CFDE9B2B4E78D0003CF9CC /* Endpointable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpointable.swift; sourceTree = "<group>"; };
+		CB01BBC82B5106F300565462 /* ChatBubbleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubbleCollectionViewCell.swift; sourceTree = "<group>"; };
+		CB01BBCA2B51100E00565462 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		CB1DA6BA2B4E849300D8BAF6 /* APIName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIName.swift; sourceTree = "<group>"; };
 		CB1DA6BD2B4EC6BA00D8BAF6 /* UserContentConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserContentConstant.swift; sourceTree = "<group>"; };
 		CB1DA6BF2B4ECC0700D8BAF6 /* HeaderFieldName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderFieldName.swift; sourceTree = "<group>"; };
@@ -85,9 +89,10 @@
 		B4B3E2BB2B42D1BB00818B3C /* ChatBot */ = {
 			isa = PBXGroup;
 			children = (
+				CB01BBC72B50D55D00565462 /* UIView */,
+				CB3263052B44FB2C00B9518D /* Controller */,
 				C3CFDE482B4CD04E003CF9CC /* Enums */,
 				C3CFDE462B4CD026003CF9CC /* Utility */,
-				CB3263052B44FB2C00B9518D /* Controller */,
 				CB3263062B44FB3400B9518D /* Delegate */,
 				CB3263082B44FB8700B9518D /* Models */,
 				CB3263072B44FB6B00B9518D /* Extensions */,
@@ -150,6 +155,7 @@
 			children = (
 				CB3263092B44FBE400B9518D /* AIContentModel.swift */,
 				CB32630B2B44FC1200B9518D /* UserContentModel.swift */,
+				CB01BBCA2B51100E00565462 /* Message.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -169,6 +175,14 @@
 				C3CFDE9B2B4E78D0003CF9CC /* Endpointable.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		CB01BBC72B50D55D00565462 /* UIView */ = {
+			isa = PBXGroup;
+			children = (
+				CB01BBC82B5106F300565462 /* ChatBubbleCollectionViewCell.swift */,
+			);
+			path = UIView;
 			sourceTree = "<group>";
 		};
 		CB1DA6BC2B4EC6A400D8BAF6 /* Constant */ = {
@@ -299,7 +313,9 @@
 				CB1DA6BB2B4E849300D8BAF6 /* APIName.swift in Sources */,
 				CB1DA6C02B4ECC0700D8BAF6 /* HeaderFieldName.swift in Sources */,
 				C3CFDE4A2B4CD097003CF9CC /* NetworkingError.swift in Sources */,
+				CB01BBCB2B51100E00565462 /* Message.swift in Sources */,
 				CB32630C2B44FC1200B9518D /* UserContentModel.swift in Sources */,
+				CB01BBC92B5106F300565462 /* ChatBubbleCollectionViewCell.swift in Sources */,
 				CB32630A2B44FBE400B9518D /* AIContentModel.swift in Sources */,
 				C3CFDE9C2B4E78D0003CF9CC /* Endpointable.swift in Sources */,
 				C3CFDE982B4E3ADF003CF9CC /* ChatBotEndpoint.swift in Sources */,
