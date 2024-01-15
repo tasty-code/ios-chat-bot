@@ -8,6 +8,7 @@
 import Foundation
 
 struct GPTMessageDTO: Codable {
+    let uuid: UUID = UUID()
     let role: String
     
     var content: String?

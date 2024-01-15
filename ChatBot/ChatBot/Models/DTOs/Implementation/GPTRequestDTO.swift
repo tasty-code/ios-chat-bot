@@ -10,14 +10,7 @@ import Foundation
 struct GPTRequestDTO: RequestDTOEncodable {
     let model: String = "\(GPTModel.basic)"
     let stream: Bool
-    let messages: [GPTMessageable]
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(model, forKey: .model)
-        try container.encode(stream, forKey: .stream)
-        try container.encode(messages.map { $0.convertGPTMessageDTO() }, forKey: .messages)
-    }
+    let messages: [GPTMessageDTO]
     
     enum CodingKeys: String, CodingKey {
         case model, stream, messages
