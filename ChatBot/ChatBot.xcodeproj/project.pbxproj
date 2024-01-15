@@ -12,6 +12,7 @@
 		B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2C02B42D1BB00818B3C /* ViewController.swift */; };
 		B4B3E2C62B42D1BC00818B3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */; };
 		B4B3E2C92B42D1BC00818B3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */; };
+		C35FB9D22B54C4830084A55B /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35FB9D12B54C4830084A55B /* ChatView.swift */; };
 		C3B9B93A2B44F48200B85140 /* ChatBot++Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B9B9392B44F48200B85140 /* ChatBot++Bundle.swift */; };
 		C3CFDE452B4CD010003CF9CC /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CFDE442B4CD010003CF9CC /* NetworkingManager.swift */; };
 		C3CFDE4A2B4CD097003CF9CC /* NetworkingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CFDE492B4CD097003CF9CC /* NetworkingError.swift */; };
@@ -20,7 +21,7 @@
 		C3CFDE962B4E3A06003CF9CC /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CFDE952B4E3A06003CF9CC /* ContentType.swift */; };
 		C3CFDE982B4E3ADF003CF9CC /* ChatBotEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CFDE972B4E3ADF003CF9CC /* ChatBotEndpoint.swift */; };
 		C3CFDE9C2B4E78D0003CF9CC /* Endpointable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CFDE9B2B4E78D0003CF9CC /* Endpointable.swift */; };
-		CB01BBC92B5106F300565462 /* ChatBubbleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB01BBC82B5106F300565462 /* ChatBubbleCollectionViewCell.swift */; };
+		CB01BBC92B5106F300565462 /* ChatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB01BBC82B5106F300565462 /* ChatCollectionViewCell.swift */; };
 		CB01BBCB2B51100E00565462 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB01BBCA2B51100E00565462 /* Message.swift */; };
 		CB1DA6BB2B4E849300D8BAF6 /* APIName.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1DA6BA2B4E849300D8BAF6 /* APIName.swift */; };
 		CB1DA6BE2B4EC6BA00D8BAF6 /* UserContentConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1DA6BD2B4EC6BA00D8BAF6 /* UserContentConstant.swift */; };
@@ -39,6 +40,7 @@
 		B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B4B3E2C82B42D1BC00818B3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B4B3E2CA2B42D1BC00818B3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C35FB9D12B54C4830084A55B /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		C3B9B9392B44F48200B85140 /* ChatBot++Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatBot++Bundle.swift"; sourceTree = "<group>"; };
 		C3CFDE442B4CD010003CF9CC /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		C3CFDE492B4CD097003CF9CC /* NetworkingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingError.swift; sourceTree = "<group>"; };
@@ -47,7 +49,7 @@
 		C3CFDE952B4E3A06003CF9CC /* ContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentType.swift; sourceTree = "<group>"; };
 		C3CFDE972B4E3ADF003CF9CC /* ChatBotEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotEndpoint.swift; sourceTree = "<group>"; };
 		C3CFDE9B2B4E78D0003CF9CC /* Endpointable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpointable.swift; sourceTree = "<group>"; };
-		CB01BBC82B5106F300565462 /* ChatBubbleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubbleCollectionViewCell.swift; sourceTree = "<group>"; };
+		CB01BBC82B5106F300565462 /* ChatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCollectionViewCell.swift; sourceTree = "<group>"; };
 		CB01BBCA2B51100E00565462 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		CB1DA6BA2B4E849300D8BAF6 /* APIName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIName.swift; sourceTree = "<group>"; };
 		CB1DA6BD2B4EC6BA00D8BAF6 /* UserContentConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserContentConstant.swift; sourceTree = "<group>"; };
@@ -180,7 +182,8 @@
 		CB01BBC72B50D55D00565462 /* UIView */ = {
 			isa = PBXGroup;
 			children = (
-				CB01BBC82B5106F300565462 /* ChatBubbleCollectionViewCell.swift */,
+				CB01BBC82B5106F300565462 /* ChatCollectionViewCell.swift */,
+				C35FB9D12B54C4830084A55B /* ChatView.swift */,
 			);
 			path = UIView;
 			sourceTree = "<group>";
@@ -315,9 +318,10 @@
 				C3CFDE4A2B4CD097003CF9CC /* NetworkingError.swift in Sources */,
 				CB01BBCB2B51100E00565462 /* Message.swift in Sources */,
 				CB32630C2B44FC1200B9518D /* UserContentModel.swift in Sources */,
-				CB01BBC92B5106F300565462 /* ChatBubbleCollectionViewCell.swift in Sources */,
+				CB01BBC92B5106F300565462 /* ChatCollectionViewCell.swift in Sources */,
 				CB32630A2B44FBE400B9518D /* AIContentModel.swift in Sources */,
 				C3CFDE9C2B4E78D0003CF9CC /* Endpointable.swift in Sources */,
+				C35FB9D22B54C4830084A55B /* ChatView.swift in Sources */,
 				C3CFDE982B4E3ADF003CF9CC /* ChatBotEndpoint.swift in Sources */,
 				C3CFDE942B4E39E5003CF9CC /* BaseURL.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
