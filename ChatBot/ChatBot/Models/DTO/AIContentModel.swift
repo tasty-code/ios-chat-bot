@@ -35,12 +35,6 @@ struct Choice: Decodable {
     }
 }
 
-// MARK: - Message
-struct Message: Decodable {
-    let role: String
-    let content: String
-}
-
 // MARK: - Usage
 struct Usage: Decodable {
     let promptTokens: Int
