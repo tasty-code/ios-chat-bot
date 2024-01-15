@@ -37,4 +37,3 @@ enum FinishReason: String, Decodable {
     case contentFilter = "content_filter"
     case toolCalls = "tool_calls"
 }
-

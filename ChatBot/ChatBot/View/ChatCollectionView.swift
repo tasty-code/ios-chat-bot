@@ -15,6 +15,7 @@ final class ChatCollectionView: UICollectionView {
     
     private var diffableDataSource: UICollectionViewDiffableDataSource<Section, Message>?
     private var chatRecord: [Message] = []
+    weak var chatServiceDelegate: ChatServiceDelegate?
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
@@ -27,23 +28,42 @@ final class ChatCollectionView: UICollectionView {
     
     private func configureDataSource() {
         let cellRegistration = UICollectionView.CellRegistration<ChatBallonCell, Message> { (cell, indexPath, itemIdentifier) in
-
+            
             guard let text = itemIdentifier.content else { return }
+            
             cell.setLabelText(text: text)
             cell.setNeedsUpdateConfiguration()
         }
-
+        
         diffableDataSource = UICollectionViewDiffableDataSource<Section, Message>(collectionView: self, cellProvider: { collectionView, indexPath, itemIdentifier in
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
         })
         
         saveSnapshot()
     }
-
+    
     func saveSnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Message>()
         snapshot.appendSections([.main])
         snapshot.appendItems(chatRecord)
         diffableDataSource?.apply(snapshot, animatingDifferences: false)
+    }
+}
+
+extension ChatCollectionView: ChatCollectionViewDelegate {
+    
+    func addChatRecord(text: String) async {
+        chatRecord.append(Message(role: .user, content: text))
+        saveSnapshot()
+        
+        let injectedDelegate = chatServiceDelegate?.injectChatServiceDelegate()
+        do {
+            guard let chatAnswer: ResponseModel = try await injectedDelegate?.getRequestData(inputData: RequestModel(messages: chatRecord)) else { return }
+            chatRecord.append(chatAnswer.choices[0].message)
+            saveSnapshot()
+        }
+        catch {
+            print(error)
+        }
     }
 }

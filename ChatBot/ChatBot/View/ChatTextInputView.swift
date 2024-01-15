@@ -8,12 +8,15 @@
 import UIKit
 
 final class ChatTextInputView: UIStackView {
-
+    
+    weak var delegate: ChatCollectionViewDelegate?
+    
     private lazy var textView: UITextView = {
         let textView = UITextView()
         
         textView.layer.borderWidth = 1
         textView.layer.cornerRadius = 8
+        textView.font = .preferredFont(forTextStyle: .body)
         textView.delegate = self
         textView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -29,6 +32,7 @@ final class ChatTextInputView: UIStackView {
             button.layer.cornerRadius = button.frame.size.width / 2
         }
         button.backgroundColor = #colorLiteral(red: 0.7607453465, green: 0.8554189801, blue: 1, alpha: 1)
+        button.addTarget(self, action: #selector(tappedButton), for: .touchUpInside)
         
         return button
     }()
@@ -37,13 +41,13 @@ final class ChatTextInputView: UIStackView {
         super.init(frame: frame)
         configure()
     }
-    
+
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     private func configure() {
-    
+
         self.addArrangedSubview(textView)
         self.addArrangedSubview(button)
         
@@ -56,7 +60,15 @@ final class ChatTextInputView: UIStackView {
             button.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.1),
             button.widthAnchor.constraint(equalTo: button.heightAnchor, multiplier: 1.0)
         ])
-        
+    }
+}
+
+extension ChatTextInputView {
+    
+    @objc func tappedButton() {
+        Task {
+           await delegate?.addChatRecord(text: textView.text)
+        }
     }
 }
 
@@ -75,6 +87,6 @@ extension ChatTextInputView: UITextViewDelegate {
                 constraint.constant = textView.estimatedSizeHeight
             }
         }
-        
     }
 }
+

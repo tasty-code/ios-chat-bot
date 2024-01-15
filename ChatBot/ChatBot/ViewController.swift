@@ -9,6 +9,7 @@ import UIKit
 
 final class ViewController: UIViewController {
     
+    private let chatService = ChatService(url: OpenAIURL(path: .chat), httpMethod: .post, contentType: .json)
     private lazy var chatStackView: UIStackView = {
         let stackView = UIStackView()
         
@@ -26,6 +27,7 @@ final class ViewController: UIViewController {
         
         let collectionView = ChatCollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.chatServiceDelegate = self
         
         return collectionView
     }()
@@ -38,6 +40,7 @@ final class ViewController: UIViewController {
     private func collectionViewConfigure() {
         let safeArea = view.safeAreaLayoutGuide
         let chatTextInputView = ChatTextInputView()
+        chatTextInputView.delegate = collectionView
         
         view.addSubview(chatStackView)
         chatStackView.addArrangedSubview(collectionView)
@@ -52,5 +55,11 @@ final class ViewController: UIViewController {
             chatTextInputView.leadingAnchor.constraint(equalTo: chatStackView.leadingAnchor, constant: 8),
             chatTextInputView.trailingAnchor.constraint(equalTo: chatStackView.trailingAnchor, constant: -8)
         ])
+    }
+}
+
+extension ViewController: ChatServiceDelegate  {
+    func injectChatServiceDelegate() -> ChatService {
+        return chatService
     }
 }

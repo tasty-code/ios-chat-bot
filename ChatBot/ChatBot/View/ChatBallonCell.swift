@@ -32,7 +32,7 @@ final class ChatBallonCell: UICollectionViewListCell {
         NSLayoutConstraint.activate([
             chatBallonView.topAnchor.constraint(equalTo: contentView.topAnchor),
             chatBallonView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            chatBallonView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            chatBallonView.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, multiplier: 0.8),
             chatBallonView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
     }
