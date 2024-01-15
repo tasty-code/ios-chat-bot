@@ -16,7 +16,7 @@ final class MessageContentView: UIView, UIContentView {
     }
     
     private lazy var chatBubble: ChatBubbleView = {
-       let bubble = ChatBubbleView()
+        let bubble = ChatBubbleView()
         bubble.backgroundColor = .clear
         
         addSubview(bubble)
@@ -26,38 +26,42 @@ final class MessageContentView: UIView, UIContentView {
     
     private var constraint = NSLayoutConstraint()
     
-    init(configuration: MessageContentConfiguration) {
+    init(configuration: UIContentConfiguration) {
         self.configuration = configuration
         super.init(frame: .zero)
-        apply(configuration)
+        setConstraints()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            chatBubble.topAnchor.constraint(equalTo: topAnchor, constant: 12),
-            chatBubble.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12),
-            chatBubble.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor, multiplier: 0.66)
+            chatBubble.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 12),
+            chatBubble.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            chatBubble.widthAnchor.constraint(lessThanOrEqualTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.66)
         ])
     }
     
     private func apply(_ configuration: MessageContentConfiguration) {
-        guard let message = configuration.message else { return }
+        guard let message = configuration.message,
+              let role = MessageRole(rawValue: message.role)
+        else {
+            return
+        }
         chatBubble.chatLabel.text = message.content
         
         constraint.isActive = false
-        switch message.role {
+        switch role {
         case .user:
             chatBubble.direction = .right
-            constraint = chatBubble.trailingAnchor.constraint(equalTo: trailingAnchor)
+            constraint = chatBubble.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
         case .system:
             break
         case .assistant:
             chatBubble.direction = .left
-            constraint = chatBubble.leadingAnchor.constraint(equalTo: leadingAnchor)
+            constraint = chatBubble.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor)
         }
         constraint.isActive = true
     }

@@ -7,12 +7,9 @@
 
 import UIKit
 
-final class MessageCell: UICollectionViewListCell {
-    var message: GPTMessageable?
-    
+final class MessageCell: UICollectionViewCell {
     override func updateConfiguration(using state: UICellConfigurationState) {
-        var configuration = MessageContentConfiguration().updated(for: state)
-        
-        configuration.message = message
+        let configuration = MessageContentConfiguration().updated(for: state)
+        contentConfiguration = configuration
     }
 }

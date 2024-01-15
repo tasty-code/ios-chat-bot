@@ -1,5 +1,5 @@
 //
-//  BubbleView.swift
+//  ChatBubbleView.swift
 //  ChatBot
 //
 //  Created by 김진웅 on 1/12/24.
@@ -32,12 +32,11 @@ final class ChatBubbleView: UIView {
         setupUI()
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setupUI()
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupUI() -> Void {
+    private func setupUI() {
         layer.addSublayer(bubbleLayer)
         
         addSubview(chatLabel)
@@ -83,6 +82,7 @@ final class ChatBubbleView: UIView {
         
         bubbleLayer.fillColor = UIColor.systemBlue.cgColor
         bubbleLayer.path = bezierPath.cgPath
+        chatLabel.textAlignment = .right
     }
     
     func drawBubbleToLeft() {
@@ -107,6 +107,7 @@ final class ChatBubbleView: UIView {
         
         bubbleLayer.fillColor = UIColor.systemOrange.cgColor
         bubbleLayer.path = bezierPath.cgPath
+        chatLabel.textAlignment = .left
     }
 }
 

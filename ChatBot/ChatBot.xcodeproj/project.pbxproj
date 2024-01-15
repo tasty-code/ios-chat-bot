@@ -33,6 +33,8 @@
 		B4B3E2C92B42D1BC00818B3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */; };
 		DE4EC8DB2B4F9D840077E405 /* RequestEncodable+RequestDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4EC8DA2B4F9D840077E405 /* RequestEncodable+RequestDecodable.swift */; };
 		DE584B302B44EE8C00B04403 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE584B2F2B44EE8C00B04403 /* Bundle+Extension.swift */; };
+		DE652B6A2B52546800407705 /* GPTViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE652B692B52546800407705 /* GPTViewModel.swift */; };
+		DE652B6C2B525BC000407705 /* GPTMessageDTO+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE652B6B2B525BC000407705 /* GPTMessageDTO+Extension.swift */; };
 		DE7DA4C02B4FFDFC0073D201 /* UITextView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7DA4BF2B4FFDFC0073D201 /* UITextView+Extension.swift */; };
 		DE7DA4C22B4FFFE50073D201 /* GPTChatRoomViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7DA4C12B4FFFE40073D201 /* GPTChatRoomViewController+Extension.swift */; };
 		DEA638532B47BE81006E474C /* GPTRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA638522B47BE81006E474C /* GPTRequest.swift */; };
@@ -41,7 +43,7 @@
 		DEF3D1DC2B5132CC00FAC500 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF3D1DB2B5132CC00FAC500 /* MessageCell.swift */; };
 		DEF3D1DE2B51332000FAC500 /* MessageContentConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF3D1DD2B51332000FAC500 /* MessageContentConfiguration.swift */; };
 		DEF3D1E02B51333400FAC500 /* MessageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF3D1DF2B51333400FAC500 /* MessageContentView.swift */; };
-		DEF3D1E22B51348200FAC500 /* BubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF3D1E12B51348200FAC500 /* BubbleView.swift */; };
+		DEF3D1E22B51348200FAC500 /* ChatBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF3D1E12B51348200FAC500 /* ChatBubbleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +75,8 @@
 		B4B3E2CA2B42D1BC00818B3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE4EC8DA2B4F9D840077E405 /* RequestEncodable+RequestDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RequestEncodable+RequestDecodable.swift"; sourceTree = "<group>"; };
 		DE584B2F2B44EE8C00B04403 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
+		DE652B692B52546800407705 /* GPTViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTViewModel.swift; sourceTree = "<group>"; };
+		DE652B6B2B525BC000407705 /* GPTMessageDTO+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GPTMessageDTO+Extension.swift"; sourceTree = "<group>"; };
 		DE7DA4BF2B4FFDFC0073D201 /* UITextView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extension.swift"; sourceTree = "<group>"; };
 		DE7DA4C12B4FFFE40073D201 /* GPTChatRoomViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GPTChatRoomViewController+Extension.swift"; sourceTree = "<group>"; };
 		DEA638522B47BE81006E474C /* GPTRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTRequest.swift; sourceTree = "<group>"; };
@@ -81,7 +85,7 @@
 		DEF3D1DB2B5132CC00FAC500 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		DEF3D1DD2B51332000FAC500 /* MessageContentConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContentConfiguration.swift; sourceTree = "<group>"; };
 		DEF3D1DF2B51333400FAC500 /* MessageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContentView.swift; sourceTree = "<group>"; };
-		DEF3D1E12B51348200FAC500 /* BubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleView.swift; sourceTree = "<group>"; };
+		DEF3D1E12B51348200FAC500 /* ChatBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubbleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -283,6 +287,7 @@
 			children = (
 				DE584B362B44F02E00B04403 /* Application */,
 				DE584B332B44EF8500B04403 /* Controllers */,
+				DE0D32792B54C9300018CF5E /* ViewModels */,
 				DEF3D1DA2B5132A600FAC500 /* Views */,
 				7F7A55772B4D0C6C00368247 /* ServiceProvider */,
 				7F7A556D2B4D03ED00368247 /* Utilities */,
@@ -292,6 +297,14 @@
 				DE584B352B44EFB400B04403 /* Resources */,
 			);
 			path = ChatBot;
+			sourceTree = "<group>";
+		};
+		DE0D32792B54C9300018CF5E /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				DE652B692B52546800407705 /* GPTViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		DE4EC8D72B4F9CFF0077E405 /* Common */ = {
@@ -334,6 +347,7 @@
 				DE584B2F2B44EE8C00B04403 /* Bundle+Extension.swift */,
 				7F7A55752B4D076A00368247 /* URLSession+Extension.swift */,
 				DE7DA4BF2B4FFDFC0073D201 /* UITextView+Extension.swift */,
+				DE652B6B2B525BC000407705 /* GPTMessageDTO+Extension.swift */,
 				DE7DA4C12B4FFFE40073D201 /* GPTChatRoomViewController+Extension.swift */,
 			);
 			path = Extensions;
@@ -397,7 +411,7 @@
 				DEF3D1DB2B5132CC00FAC500 /* MessageCell.swift */,
 				DEF3D1DD2B51332000FAC500 /* MessageContentConfiguration.swift */,
 				DEF3D1DF2B51333400FAC500 /* MessageContentView.swift */,
-				DEF3D1E12B51348200FAC500 /* BubbleView.swift */,
+				DEF3D1E12B51348200FAC500 /* ChatBubbleView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -480,6 +494,7 @@
 				DEF3D1DE2B51332000FAC500 /* MessageContentConfiguration.swift in Sources */,
 				7F195BA12B47BB5D00C99766 /* APIRequestable.swift in Sources */,
 				7F4C9D792B4522C1006CD685 /* SystemMessage.swift in Sources */,
+				DE652B6C2B525BC000407705 /* GPTMessageDTO+Extension.swift in Sources */,
 				7F195BA32B47BC0600C99766 /* HTTPMethod.swift in Sources */,
 				DEB3E5032B4D1238005206CC /* JSONCoder.swift in Sources */,
 				7F7A557E2B4D0D4F00368247 /* GPTServiceProvider.swift in Sources */,
@@ -491,7 +506,8 @@
 				7F1ABCC52B4B867800864D2D /* URLRequestConverter.swift in Sources */,
 				7F7F43A82B44F247000CB9CC /* GPTResponseDTO.swift in Sources */,
 				7F4C9D7E2B45262B006CD685 /* AssistantMessage.swift in Sources */,
-				DEF3D1E22B51348200FAC500 /* BubbleView.swift in Sources */,
+				DE652B6A2B52546800407705 /* GPTViewModel.swift in Sources */,
+				DEF3D1E22B51348200FAC500 /* ChatBubbleView.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
 				DEF3D1DC2B5132CC00FAC500 /* MessageCell.swift in Sources */,
 				7F4C9D7C2B45237F006CD685 /* MessageRole.swift in Sources */,
