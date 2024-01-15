@@ -8,14 +8,21 @@
 import UIKit
 
 final class UIChatBubbleView: UIView {
-    let bubbleLayer = CAShapeLayer()
-    let contentLabel: UILabel = {
+    private let emptyWidth: CGFloat = 100
+    private let emptyHeight: CGFloat = 50
+    private let bubbleLayer = CAShapeLayer()
+    private let contentLabel: UILabel = {
         let textLabel = UILabel()
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         textLabel.numberOfLines = 0
         return textLabel
     }()
     
+    var text: String? {
+        didSet {
+            contentLabel.text = text
+        }
+    }
     var startDirection: StartDirection = .right
     
     override init(frame: CGRect) {
@@ -41,8 +48,8 @@ final class UIChatBubbleView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        let width = bounds.size.width
-        let height = bounds.size.height
+        let width = contentLabel.text == nil ? emptyWidth : bounds.size.width
+        let height = contentLabel.text == nil ? emptyHeight : bounds.size.height
         
         let bezierPath = UIBezierPath()
         switch startDirection {
@@ -53,6 +60,11 @@ final class UIChatBubbleView: UIView {
             drawRightChatBubble(to: bezierPath, width: width, height: height)
             bubbleLayer.fillColor = UIColor.systemBlue.cgColor
         }
+        
+        if text == nil {
+            drawWaitingDots(to: bezierPath)
+        }
+        
         bubbleLayer.path = bezierPath.cgPath
     }
     
@@ -86,6 +98,27 @@ final class UIChatBubbleView: UIView {
         bezierPath.addCurve(to: CGPoint(x: width - 11.04, y: height - 4.04), controlPoint1: CGPoint(x: width - 4.07, y: height + 0.43), controlPoint2: CGPoint(x: width - 8.16, y: height - 1.06))
         bezierPath.addCurve(to: CGPoint(x: width - 22, y: height), controlPoint1: CGPoint(x: width - 16, y: height), controlPoint2: CGPoint(x: width - 19, y: height))
         bezierPath.close()
+    }
+    
+    private func drawWaitingDots(to bezierPath: UIBezierPath) {
+        let centerPoint = CGPoint(x: emptyWidth / 2, y: emptyHeight / 2)
+        let startPoint = CGPoint(x: emptyWidth / 2 - 15, y: emptyHeight / 2)
+        let endPoint = CGPoint(x: emptyWidth / 2 + 15, y: emptyHeight / 2)
+        
+        bezierPath.move(to: CGPoint(x: centerPoint.x + 5, y: centerPoint.y))
+        bezierPath.addArc(withCenter: centerPoint, radius: 5, startAngle: 0, endAngle: 2 * .pi, clockwise: true)
+        bezierPath.move(to: CGPoint(x: startPoint.x + 5, y: startPoint.y))
+        bezierPath.addArc(withCenter: startPoint, radius: 5, startAngle: 0, endAngle: 2 * .pi, clockwise: true)
+        bezierPath.move(to: CGPoint(x: endPoint.x + 5, y: endPoint.y))
+        bezierPath.addArc(withCenter: endPoint, radius: 5, startAngle: 0, endAngle: 2 * .pi, clockwise: true)
+        
+        let animation = CABasicAnimation(keyPath: "opacity")
+        animation.fromValue = 0
+        animation.toValue = 1
+        animation.duration = 1
+        animation.repeatCount = .infinity
+        animation.autoreverses = true
+        self.layer.add(animation, forKey: "opacity")
     }
 }
 

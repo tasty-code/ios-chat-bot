@@ -71,7 +71,7 @@ final class GPTChatRoomViewController: UIViewController {
     
     @objc
     private func tapSendButton(_ sender: Any) {
-        if let content = chatRoomView.commentTextField.text {
+        if let content = chatRoomView.commentTextField.text, !content.isEmpty {
             viewModel.sendComment(Model.UserMessage(content: content))
         }
         chatRoomView.commentTextField.text = nil

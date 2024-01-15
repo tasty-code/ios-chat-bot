@@ -35,7 +35,7 @@ final class GPTChatRoomCell: UICollectionViewCell {
     }
     
     func configureCell(to message: GPTMessagable) {
-        chatBubble.contentLabel.text = message.content
+        chatBubble.text = message.content
         directionConstraint.isActive = false
         if message.role == .user {
             chatBubble.startDirection = .right
