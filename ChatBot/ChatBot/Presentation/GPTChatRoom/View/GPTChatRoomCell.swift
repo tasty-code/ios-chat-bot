@@ -9,7 +9,7 @@ import UIKit
 
 final class GPTChatRoomCell: UICollectionViewCell {
     private let chatBubble: UIChatBubbleView = {
-        let bubbleView = UIChatBubbleView()
+        let bubbleView = UIChatBubbleView(emptyWidth: 100, emptyHeight: 50, dotsSpacing: 15, frame: .zero)
         bubbleView.translatesAutoresizingMaskIntoConstraints = false
         return bubbleView
     }()

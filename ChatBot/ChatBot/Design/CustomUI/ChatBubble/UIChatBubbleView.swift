@@ -8,8 +8,9 @@
 import UIKit
 
 final class UIChatBubbleView: UIView {
-    private let emptyWidth: CGFloat = 100
-    private let emptyHeight: CGFloat = 50
+    private let emptyWidth: CGFloat
+    private let emptyHeight: CGFloat
+    private let dotsSpacing: CGFloat
     private let bubbleLayer = CAShapeLayer()
     private let contentLabel: UILabel = {
         let textLabel = UILabel()
@@ -26,12 +27,23 @@ final class UIChatBubbleView: UIView {
     var startDirection: StartDirection = .right
     
     override init(frame: CGRect) {
+        self.emptyWidth = 0
+        self.emptyHeight = 0
+        self.dotsSpacing = 0
         super.init(frame: frame)
         setConstraint()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    init(emptyWidth: CGFloat, emptyHeight: CGFloat, dotsSpacing: CGFloat, frame: CGRect) {
+        self.emptyWidth = emptyWidth
+        self.emptyHeight = emptyHeight
+        self.dotsSpacing = dotsSpacing
+        super.init(frame: frame)
+        setConstraint()
     }
     
     private func setConstraint() {
@@ -102,8 +114,8 @@ final class UIChatBubbleView: UIView {
     
     private func drawWaitingDots(to bezierPath: UIBezierPath) {
         let centerPoint = CGPoint(x: emptyWidth / 2, y: emptyHeight / 2)
-        let startPoint = CGPoint(x: emptyWidth / 2 - 15, y: emptyHeight / 2)
-        let endPoint = CGPoint(x: emptyWidth / 2 + 15, y: emptyHeight / 2)
+        let startPoint = CGPoint(x: emptyWidth / 2 - dotsSpacing, y: emptyHeight / 2)
+        let endPoint = CGPoint(x: emptyWidth / 2 + dotsSpacing, y: emptyHeight / 2)
         
         bezierPath.move(to: CGPoint(x: centerPoint.x + 5, y: centerPoint.y))
         bezierPath.addArc(withCenter: centerPoint, radius: 5, startAngle: 0, endAngle: 2 * .pi, clockwise: true)
