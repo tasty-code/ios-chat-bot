@@ -17,9 +17,17 @@ extension GPTChatRoomViewController: UITextViewDelegate {
         
         textView.isScrollEnabled = false
         textView.constraints.forEach { constraint in
-            if constraint.firstAttribute == .height {
+            guard constraint.firstAttribute != .height 
+            else {
                 constraint.constant = textView.estimatedSizeHeight
+                return
             }
         }
+    }
+}
+
+extension GPTChatRoomViewController {
+    enum Section: Hashable {
+        case main
     }
 }

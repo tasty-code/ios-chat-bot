@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  GPTChatRoomViewController.swift
 //  ChatBot
 //
 //  Created by Tacocat on 1/1/24.
@@ -13,7 +13,7 @@ final class GPTChatRoomViewController: UIViewController {
     
     private lazy var chatCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
-        
+        collectionView.allowsSelection = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
@@ -57,6 +57,38 @@ final class GPTChatRoomViewController: UIViewController {
         return stackView
     }()
     
+    // MARK: - Private Property
+    
+    private let viewModel: GPTViewModel
+    
+    private let cellRegistration: UICollectionView.CellRegistration<MessageCell, GPTMessageDTO> = {
+        return UICollectionView.CellRegistration<MessageCell, GPTMessageDTO> {
+            cell, indexPath, item in
+            var configuration = MessageContentConfiguration()
+            configuration.message = item
+            cell.contentConfiguration = configuration
+        }
+    }()
+    
+    private lazy var dataSource = configureDataSource()
+    
+    // MARK: - Initializer
+    
+    init(viewModel: GPTViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+        
+        viewModel.didMessagesAppend = { [weak self] messages in
+            guard let self else { return }
+            configureSnapshot(with: messages)
+            updateUI()
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
@@ -65,7 +97,7 @@ final class GPTChatRoomViewController: UIViewController {
         setupUI()
     }
     
-    // MARK: - Private Method
+    // MARK: - Auto Layout
     
     private func setupUI() {
         view.backgroundColor = .white
@@ -106,17 +138,60 @@ final class GPTChatRoomViewController: UIViewController {
         ])
     }
     
+    // MARK: - Configure CollectionView
+    
     private func configureCollectionViewLayout() -> UICollectionViewCompositionalLayout {
         var listConfiguration = UICollectionLayoutListConfiguration(appearance: .grouped)
         listConfiguration.showsSeparators = false
+        listConfiguration.backgroundColor = .white
         
         let compositionalLayout = UICollectionViewCompositionalLayout.list(using: listConfiguration)
         return compositionalLayout
     }
     
+    private func configureDataSource() -> UICollectionViewDiffableDataSource<Section, GPTMessageDTO> {
+        let dataSource = UICollectionViewDiffableDataSource<Section, GPTMessageDTO>(collectionView: chatCollectionView) {
+            (collectionView: UICollectionView, indexPath: IndexPath, item: GPTMessageDTO) -> MessageCell? in
+            let cell = collectionView
+                .dequeueConfiguredReusableCell(using: self.cellRegistration, for: indexPath, item: item)
+            return cell
+        }
+        return dataSource
+    }
+    
+    private func configureSnapshot(with messages: [GPTMessageDTO]) {
+        var snapshot = dataSource.snapshot()
+        snapshot.deleteAllItems()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(messages)
+        dataSource.apply(snapshot, animatingDifferences: true)
+    }
+    
+    // MARK: - Action Handler
+    
     @objc
     private func sendButtonTapped(_ sender: UIButton) {
-        // 버튼이 눌렸을 때, 동작하는 함수
-        // 메세지를 구성하고 GPTServiceProvider에게 넘겨줘서 일을 하게 시킨다.
+        guard let userMessageText = userInputTextView.text,
+              !userMessageText.isEmpty
+        else {
+            return
+        }
+        viewModel.fetch(userInput: userMessageText)
+        
+        userInputTextView.text = nil
+        userInputTextView.insertText("")
+        
+        sendButton.isEnabled = false
+    }
+    
+    private func updateUI() {
+        scrollToLast()
+        sendButton.isEnabled = true
+    }
+    
+    private func scrollToLast() {
+        let lastItemIndex = max(0, chatCollectionView.numberOfItems(inSection: 0) - 1)
+        let indexPath = IndexPath(item: lastItemIndex, section: 0)
+        chatCollectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
     }
 }
