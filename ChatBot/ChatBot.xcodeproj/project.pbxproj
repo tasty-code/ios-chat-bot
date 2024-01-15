@@ -16,7 +16,6 @@
 		7F4C9D752B452223006CD685 /* GPTMessageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C9D742B452223006CD685 /* GPTMessageable.swift */; };
 		7F4C9D772B4522B5006CD685 /* UserMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C9D762B4522B5006CD685 /* UserMessage.swift */; };
 		7F4C9D792B4522C1006CD685 /* SystemMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C9D782B4522C1006CD685 /* SystemMessage.swift */; };
-		7F4C9D7C2B45237F006CD685 /* MessageRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C9D7B2B45237F006CD685 /* MessageRole.swift */; };
 		7F4C9D7E2B45262B006CD685 /* AssistantMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C9D7D2B45262B006CD685 /* AssistantMessage.swift */; };
 		7F4C9D802B452A89006CD685 /* GPTRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C9D7F2B452A89006CD685 /* GPTRequestDTO.swift */; };
 		7F7A55702B4D043000368247 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A556F2B4D043000368247 /* NetworkManager.swift */; };
@@ -56,7 +55,6 @@
 		7F4C9D742B452223006CD685 /* GPTMessageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTMessageable.swift; sourceTree = "<group>"; };
 		7F4C9D762B4522B5006CD685 /* UserMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMessage.swift; sourceTree = "<group>"; };
 		7F4C9D782B4522C1006CD685 /* SystemMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemMessage.swift; sourceTree = "<group>"; };
-		7F4C9D7B2B45237F006CD685 /* MessageRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRole.swift; sourceTree = "<group>"; };
 		7F4C9D7D2B45262B006CD685 /* AssistantMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantMessage.swift; sourceTree = "<group>"; };
 		7F4C9D7F2B452A89006CD685 /* GPTRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTRequestDTO.swift; sourceTree = "<group>"; };
 		7F7A556F2B4D043000368247 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -162,7 +160,6 @@
 		7F4C9D6F2B45214D006CD685 /* Messages */ = {
 			isa = PBXGroup;
 			children = (
-				7F4C9D7A2B452320006CD685 /* MessageRole */,
 				7F4C9D732B452198006CD685 /* Implementation */,
 				7F4C9D722B45218B006CD685 /* Interface */,
 			);
@@ -185,14 +182,6 @@
 				7F4C9D7D2B45262B006CD685 /* AssistantMessage.swift */,
 			);
 			path = Implementation;
-			sourceTree = "<group>";
-		};
-		7F4C9D7A2B452320006CD685 /* MessageRole */ = {
-			isa = PBXGroup;
-			children = (
-				7F4C9D7B2B45237F006CD685 /* MessageRole.swift */,
-			);
-			path = MessageRole;
 			sourceTree = "<group>";
 		};
 		7F4C9D812B453195006CD685 /* DTOs */ = {
@@ -510,7 +499,6 @@
 				DEF3D1E22B51348200FAC500 /* ChatBubbleView.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
 				DEF3D1DC2B5132CC00FAC500 /* MessageCell.swift in Sources */,
-				7F4C9D7C2B45237F006CD685 /* MessageRole.swift in Sources */,
 				DE4EC8DB2B4F9D840077E405 /* RequestEncodable+RequestDecodable.swift in Sources */,
 				7F4C9D802B452A89006CD685 /* GPTRequestDTO.swift in Sources */,
 				7F4C9D752B452223006CD685 /* GPTMessageable.swift in Sources */,

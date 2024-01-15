@@ -21,6 +21,6 @@ struct AssistantMessage: GPTMessageable {
     }
     
     func convertGPTMessageDTO() -> GPTMessageDTO {
-        return GPTMessageDTO(role: "\(role)", content: content, name: name, toolCalls: toolCalls)
+        return GPTMessageDTO(role: role, content: content, name: name, toolCalls: toolCalls)
     }
 }

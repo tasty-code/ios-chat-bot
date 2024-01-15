@@ -45,15 +45,14 @@ final class MessageContentView: UIView, UIContentView {
     }
     
     private func apply(_ configuration: MessageContentConfiguration) {
-        guard let message = configuration.message,
-              let role = MessageRole(rawValue: message.role)
+        guard let message = configuration.message
         else {
             return
         }
         chatBubble.chatLabel.text = message.content
         
         constraint.isActive = false
-        switch role {
+        switch message.role {
         case .user:
             chatBubble.direction = .right
             constraint = chatBubble.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)

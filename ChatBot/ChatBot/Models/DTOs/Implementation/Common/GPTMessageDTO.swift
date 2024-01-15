@@ -9,7 +9,7 @@ import Foundation
 
 struct GPTMessageDTO: Codable {
     let uuid: UUID = UUID()
-    let role: String
+    let role: MessageRole
     
     var content: String?
     var name: String?
@@ -19,6 +19,12 @@ struct GPTMessageDTO: Codable {
         case role, content, name
         case toolCalls = "tool_calls"
     }
+}
+
+enum MessageRole: String, Codable {
+    case user
+    case system
+    case assistant
 }
 
 struct ToolCalls: Codable {
