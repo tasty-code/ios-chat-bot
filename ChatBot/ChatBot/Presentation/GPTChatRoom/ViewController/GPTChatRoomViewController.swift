@@ -25,16 +25,18 @@ final class GPTChatRoomViewController: UIViewController {
          stackView.axis = .horizontal
          stackView.translatesAutoresizingMaskIntoConstraints = false
          stackView.distribution = .fill
-         stackView.addArrangedSubview(commentTextField)
+         stackView.addArrangedSubview(commentTextView)
          stackView.addArrangedSubview(sendButton)
          return stackView
      }()
     
-    private lazy var commentTextField: UITextField = {
-        let textField = UITextField()
+    private lazy var commentTextView: UITextView = {
+        let textField = UITextView()
         textField.font = UIFont.preferredFont(forTextStyle: .body)
-        textField.borderStyle = .roundedRect
+        textField.layer.cornerRadius = ((textField.font?.pointSize ?? 24) / 2)
         textField.backgroundColor = .white
+        textField.textColor = .black
+        textField.isScrollEnabled = false
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         return textField
@@ -49,8 +51,7 @@ final class GPTChatRoomViewController: UIViewController {
         let imageConfiguration = UIImage.SymbolConfiguration(pointSize: 32)
         let uiImage = UIImage(systemName: "arrow.up.circle.fill", withConfiguration: imageConfiguration)
         button.setImage(uiImage, for: .normal)
-        button.contentHorizontalAlignment = .fill
-        button.contentVerticalAlignment = .fill
+        button.contentMode = .scaleToFill
         button.addTarget(nil, action: #selector(tapSendButton(_:)), for: .touchUpInside)
         return button
     }()
@@ -148,9 +149,9 @@ extension GPTChatRoomViewController {
 extension GPTChatRoomViewController {
     @objc
     private func tapSendButton(_ sender: Any) {
-        if let content = commentTextField.text, !content.isEmpty {
+        if let content = commentTextView.text, !content.isEmpty {
             viewModel.sendComment(Model.UserMessage(content: content))
         }
-        commentTextField.text = nil
+        commentTextView.text = nil
     }
 }
