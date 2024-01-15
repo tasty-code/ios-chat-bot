@@ -14,6 +14,8 @@
 		664D4A552B4BD625003765A9 /* ChatAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664D4A542B4BD625003765A9 /* ChatAPI.swift */; };
 		664D4A572B4BD674003765A9 /* APIKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = 664D4A562B4BD674003765A9 /* APIKey.plist */; };
 		664D4A592B4BD732003765A9 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664D4A582B4BD732003765A9 /* NetworkManager.swift */; };
+		6666181B2B4CDFC900F96009 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6666181A2B4CDFC900F96009 /* ChatViewController.swift */; };
+		66B0516C2B54C1AB00BFAE4E /* BubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B0516B2B54C1AB00BFAE4E /* BubbleView.swift */; };
 		66E5FF792B44FD1A0038398C /* ChatResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E5FF782B44FD1A0038398C /* ChatResponseModel.swift */; };
 		B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */; };
 		B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */; };
@@ -31,6 +33,8 @@
 		664D4A542B4BD625003765A9 /* ChatAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatAPI.swift; path = ChatBot/ChatAPI.swift; sourceTree = SOURCE_ROOT; };
 		664D4A562B4BD674003765A9 /* APIKey.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APIKey.plist; sourceTree = "<group>"; };
 		664D4A582B4BD732003765A9 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		6666181A2B4CDFC900F96009 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		66B0516B2B54C1AB00BFAE4E /* BubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleView.swift; sourceTree = "<group>"; };
 		66E5FF782B44FD1A0038398C /* ChatResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponseModel.swift; sourceTree = "<group>"; };
 		B4B3E2B92B42D1BB00818B3C /* ChatBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +85,14 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		66B0516D2B54CC3000BFAE4E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				66B0516B2B54C1AB00BFAE4E /* BubbleView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		B4B3E2B02B42D1BB00818B3C = {
 			isa = PBXGroup;
 			children = (
@@ -100,12 +112,14 @@
 		B4B3E2BB2B42D1BB00818B3C /* ChatBot */ = {
 			isa = PBXGroup;
 			children = (
+				66B0516D2B54CC3000BFAE4E /* Views */,
 				378300342B4BD39200BE0943 /* Extensions */,
 				664D4A512B4BD5BA003765A9 /* Network */,
 				37B6CE852B43B0BB0075535E /* Models */,
 				B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */,
 				B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */,
 				B4B3E2C02B42D1BB00818B3C /* ViewController.swift */,
+				6666181A2B4CDFC900F96009 /* ChatViewController.swift */,
 				B4B3E2C22B42D1BB00818B3C /* Main.storyboard */,
 				B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */,
 				B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */,
@@ -187,8 +201,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66B0516C2B54C1AB00BFAE4E /* BubbleView.swift in Sources */,
 				37847FCD2B45121F00BE5E93 /* Message.swift in Sources */,
 				378300362B4BD3E700BE0943 /* Bundle+Extension.swift in Sources */,
+				6666181B2B4CDFC900F96009 /* ChatViewController.swift in Sources */,
 				664D4A592B4BD732003765A9 /* NetworkManager.swift in Sources */,
 				66E5FF792B44FD1A0038398C /* ChatResponseModel.swift in Sources */,
 				B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */,
