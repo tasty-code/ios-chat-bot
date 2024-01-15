@@ -13,7 +13,7 @@ final class GPTChatRoomViewModel: GPTChatRoomVMProtocol {
     
     private var cancellables = Set<AnyCancellable>()
     
-    @Published private var chattings: [Model.GPTMessage]
+    @Published var chattings: [Model.GPTMessage]
     var chattingsPublisher: Published<[Model.GPTMessage]>.Publisher { $chattings }
     
     init(httpService: HTTPServicable, httpRequest: HTTPRequestable, chattings: [Model.GPTMessage]) {
