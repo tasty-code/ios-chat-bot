@@ -20,7 +20,6 @@ final class ViewController: UIViewController {
     }()
     
     private lazy var collectionView: ChatCollectionView = {
-        
         var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
         configuration.showsSeparators = false
         let layout = UICollectionViewCompositionalLayout.list(using: configuration)

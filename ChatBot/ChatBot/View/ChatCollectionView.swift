@@ -14,7 +14,6 @@ final class ChatCollectionView: UICollectionView {
     }
     
     private var diffableDataSource: UICollectionViewDiffableDataSource<Section, Message>?
-    private var snapshot = NSDiffableDataSourceSnapshot<Section, Message>()
     private var chatRecord: [Message] = []
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
@@ -37,16 +36,14 @@ final class ChatCollectionView: UICollectionView {
         diffableDataSource = UICollectionViewDiffableDataSource<Section, Message>(collectionView: self, cellProvider: { collectionView, indexPath, itemIdentifier in
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
         })
+        
+        saveSnapshot()
+    }
 
+    func saveSnapshot() {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Message>()
         snapshot.appendSections([.main])
         snapshot.appendItems(chatRecord)
         diffableDataSource?.apply(snapshot, animatingDifferences: false)
-    }
-
-    func saveSnapshot(data: Message) {
-        snapshot.appendItems([data])
-        chatRecord.append(data)
-        diffableDataSource?.apply(snapshot, animatingDifferences: false)
-        print(snapshot.numberOfItems)
     }
 }
