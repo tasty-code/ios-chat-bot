@@ -32,16 +32,14 @@ final class GPTChatRoomViewModel: GPTChatRoomVMProtocol {
             object: Model.GPTCommentDTO(messages: chattings.filter { $0.role != .waiting }),
             type: Model.GPTReplyDTO.self
         )
+        .map { $0.choices.first?.message }
+        .replaceNil(with: Model.AssistantMessage(content: "내용이 없습니다...", name: nil, toolCalls: nil).asRequestMessage())
         .sink { [weak self] completion in
             if case .failure(let error) = completion {
                 self?.chattings[index] = Model.AssistantMessage(content: "\(error)", name: nil, toolCalls: nil).asRequestMessage()
             }
         } receiveValue: { [weak self] reply in
-            guard let bestMessage = reply.choices.first?.message else {
-                self?.chattings[index] = Model.AssistantMessage(content: "내용이 없습니다...", name: nil, toolCalls: nil).asRequestMessage()
-                return
-            }
-            self?.chattings[index] = Model.AssistantMessage(content: bestMessage.content, name: nil, toolCalls: nil).asRequestMessage()
+            self?.chattings[index] = Model.AssistantMessage(content: reply.content, name: nil, toolCalls: nil).asRequestMessage()
         }
         .store(in: &cancellables)
     }
