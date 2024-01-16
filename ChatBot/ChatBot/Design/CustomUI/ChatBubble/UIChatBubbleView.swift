@@ -22,14 +22,21 @@ final class UIChatBubbleView: UIView {
     var text: String? {
         didSet {
             contentLabel.text = text
+            setNeedsDisplay()
         }
     }
-    var startDirection: StartDirection = .right
+    
+    var startDirection: StartDirection {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
     
     override init(frame: CGRect) {
         self.emptyWidth = 0
         self.emptyHeight = 0
         self.dotsSpacing = 0
+        self.startDirection = .right
         super.init(frame: frame)
         setConstraint()
     }
@@ -42,6 +49,7 @@ final class UIChatBubbleView: UIView {
         self.emptyWidth = emptyWidth
         self.emptyHeight = emptyHeight
         self.dotsSpacing = dotsSpacing
+        self.startDirection = .right
         super.init(frame: frame)
         setConstraint()
     }
@@ -58,8 +66,8 @@ final class UIChatBubbleView: UIView {
         ])
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
         let width = contentLabel.text == nil ? emptyWidth : bounds.size.width
         let height = contentLabel.text == nil ? emptyHeight : bounds.size.height
         
@@ -79,6 +87,28 @@ final class UIChatBubbleView: UIView {
         
         bubbleLayer.path = bezierPath.cgPath
     }
+    
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        let width = contentLabel.text == nil ? emptyWidth : bounds.size.width
+//        let height = contentLabel.text == nil ? emptyHeight : bounds.size.height
+//        
+//        let bezierPath = UIBezierPath()
+//        switch startDirection {
+//        case .left:
+//            drawLeftChatBubble(to: bezierPath, width: width, height: height)
+//            bubbleLayer.fillColor = UIColor.lightGray.cgColor
+//        case .right:
+//            drawRightChatBubble(to: bezierPath, width: width, height: height)
+//            bubbleLayer.fillColor = UIColor.systemBlue.cgColor
+//        }
+//        
+//        if text == nil {
+//            drawWaitingDots(to: bezierPath)
+//        }
+//        
+//        bubbleLayer.path = bezierPath.cgPath
+//    }
     
     private func drawLeftChatBubble(to bezierPath: UIBezierPath, width: Double, height: Double) {
         bezierPath.move(to: CGPoint(x: 22, y: height))
