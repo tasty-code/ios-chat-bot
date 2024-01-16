@@ -10,8 +10,8 @@ final class MessageCellContentView: UIView, UIContentView {
 
     private var appliedConfiguration: MessageCellContentConfiguration!
     
-    var leading: NSLayoutConstraint? = nil
-    var trailing: NSLayoutConstraint? = nil
+    private var leading: NSLayoutConstraint? = nil
+    private var trailing: NSLayoutConstraint? = nil
     
     var configuration: UIContentConfiguration {
         get { appliedConfiguration }

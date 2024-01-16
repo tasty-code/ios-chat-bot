@@ -13,9 +13,7 @@ final class BubbleView: UIView {
     }()
     
     var text: String? {
-        didSet {
-            bubbleLabel.text = text
-        }
+        didSet { bubbleLabel.text = text }
     }
     
     var role: Role? {
@@ -30,17 +28,17 @@ final class BubbleView: UIView {
         setConstraint()
     }
     
-    func setConstraint() {
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) 없음")
+    }
+    
+    private func setConstraint() {
         NSLayoutConstraint.activate([
             bubbleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             bubbleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             bubbleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             bubbleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
         ])
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) 없음")
     }
     
     override func draw(_ rect: CGRect) {
