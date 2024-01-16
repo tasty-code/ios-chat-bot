@@ -47,7 +47,7 @@ final class ChatRoomViewController : UIViewController {
         ChatBubble(message: Message(role: "assistant", content: "d23r5fgwedrftg234r5t234dd")),
         ChatBubble(message: Message(role: "assistant", content: "ddd")),
         ChatBubble(message: Message(role: "assistant", content: "d하워드바보cdd")),
-        ChatBubble(message: Message(role: "user", content: "dd2342345wefg245t235t6235235623624623634634523d")),
+        ChatBubble(message: Message(role: "user", content: "dd2342345wefg245t235t6rthrthyrtrtyrtyrtyrtyryrtyrty450y9i59034jkgh90ertik90ghik9034i90tk9340ktg9034tk9034kt903490i5t9034t9045io90yi4590yk9045y9045y9045ik9o0ti3490-i-9034i0-34ik-235235623624623634634523d")),
         
         
     ]
@@ -96,12 +96,23 @@ final class ChatRoomViewController : UIViewController {
     }
     
     private func configurationCell() {
-        let cellRegistration = UICollectionView.CellRegistration<BubbleCell, ChatBubble> { cell, indexPath, itemIdentifier in
+        let userChatBubbleRegistration = UICollectionView.CellRegistration<BubbleCell, ChatBubble> { cell, indexPath, itemIdentifier in
             cell.setBubbleCell(message: itemIdentifier.message)
         }
-        
+        let assistantChatBubbleRegistration = UICollectionView.CellRegistration<BubbleCell, ChatBubble> { cell, indexPath, itemIdentifier in
+            cell.setBubbleCell(message: itemIdentifier.message)
+        }
+
         dataSource = DataSource(collectionView: collectionView) { (collectionView, indexPath, identifier) -> UICollectionViewCell in
-            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: identifier)
+            
+            switch identifier.message.role {
+            case "user":
+                return collectionView.dequeueConfiguredReusableCell(using: userChatBubbleRegistration, for: indexPath, item: identifier)
+            case "assistant" :
+                return collectionView.dequeueConfiguredReusableCell(using: assistantChatBubbleRegistration, for: indexPath, item: identifier)
+            default :
+                return collectionView.dequeueConfiguredReusableCell(using: assistantChatBubbleRegistration, for: indexPath, item: identifier)
+            }
         }
     }
     

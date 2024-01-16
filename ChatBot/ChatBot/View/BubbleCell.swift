@@ -55,27 +55,34 @@ class BubbleCell: UICollectionViewCell {
         bubbleView.translatesAutoresizingMaskIntoConstraints = false
         paddingLabel.translatesAutoresizingMaskIntoConstraints = false
         bubbleTailView.translatesAutoresizingMaskIntoConstraints = false
+        
         bubbleView.backgroundColor = .blue
         NSLayoutConstraint.activate([
             bubbleView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            bubbleView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            bubbleView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
             bubbleView.heightAnchor.constraint(equalTo: paddingLabel.heightAnchor),
-            bubbleView.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, constant: -30),
+            bubbleView.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, multiplier: 0.7),
             bubbleView.widthAnchor.constraint(greaterThanOrEqualTo: paddingLabel.widthAnchor),
-            bubbleTailView.widthAnchor.constraint(equalToConstant: 10),
-            bubbleTailView.heightAnchor.constraint(equalToConstant: 10),
+            paddingLabel.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor),
+            paddingLabel.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor),
+            paddingLabel.topAnchor.constraint(equalTo: bubbleView.topAnchor),
+            bubbleTailView.widthAnchor.constraint(equalToConstant: 12),
+            bubbleTailView.heightAnchor.constraint(equalToConstant: 12),
             bubbleTailView.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor),
+            
         ])
-        if role == Role.user {
+        
+        
+        if role == .user {
             NSLayoutConstraint.activate([
-                bubbleView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30),
+                bubbleView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -28),
                 bubbleTailView.leadingAnchor.constraint(equalTo: bubbleView.trailingAnchor),
             ])
             
         } else {
             NSLayoutConstraint.activate([
-                bubbleView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 30),
-                bubbleTailView.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: -10),
+                bubbleView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 28),
+                bubbleTailView.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: -12),
             ])
             bubbleTailView.transform = CGAffineTransform.init(scaleX: -1, y: 1)
         }
