@@ -18,7 +18,7 @@ final class ChatViewModel {
         case fetchChatDidSucceed(result: Decodable)
     }
     
-    private var messages: [Message]
+    private(set) var messages: [Message]
     private var cancellables = Set<AnyCancellable>()
     private let output: PassthroughSubject<Output, Never> = .init()
     
@@ -39,7 +39,7 @@ final class ChatViewModel {
         return output.eraseToAnyPublisher()
     }
     
-    func handleRequest() {
+    private func handleRequest() {
         let builder = PostChatBotNetworkBuilder(message: messages)
         guard let request = try? APIService.shared.makeRequest(builder) else { return }
         Task(priority: .background) {
@@ -56,5 +56,10 @@ final class ChatViewModel {
             
             output.send(.fetchChatDidSucceed(result: content))
         }
+    }
+    
+    // MARK: - Public
+    func getMessage(at index: Int) -> Message {
+        messages[index]
     }
 }
