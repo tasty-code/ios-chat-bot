@@ -8,5 +8,6 @@
 import Foundation
 
 protocol ChatCollectionViewDelegate: AnyObject {
-    func addChatRecord(text: String) async
+    func addChatRecord(text: String)
+    func updateCollectionViewFromResponse() async
 }

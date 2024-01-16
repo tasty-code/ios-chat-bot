@@ -52,10 +52,12 @@ final class ChatCollectionView: UICollectionView {
 
 extension ChatCollectionView: ChatCollectionViewDelegate {
     
-    func addChatRecord(text: String) async {
+    func addChatRecord(text: String) {
         chatRecord.append(Message(role: .user, content: text))
         saveSnapshot()
-        
+    }
+    
+    func updateCollectionViewFromResponse() async {
         let injectedDelegate = chatServiceDelegate?.injectChatServiceDelegate()
         do {
             guard let chatAnswer: ResponseModel = try await injectedDelegate?.getRequestData(inputData: RequestModel(messages: chatRecord)) else { return }

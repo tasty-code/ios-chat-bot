@@ -13,7 +13,7 @@ final class ChatBallon: UIView {
         let label = UILabel()
         
         label.font = .preferredFont(forTextStyle: .body)
-        label.numberOfLines = 0
+        label.numberOfLines = .max
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label

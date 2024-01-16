@@ -66,8 +66,10 @@ final class ChatTextInputView: UIStackView {
 extension ChatTextInputView {
     
     @objc func tappedButton() {
+        delegate?.addChatRecord(text: textView.text)
+        textView.text = .none
         Task {
-           await delegate?.addChatRecord(text: textView.text)
+            await delegate?.updateCollectionViewFromResponse()
         }
     }
 }
