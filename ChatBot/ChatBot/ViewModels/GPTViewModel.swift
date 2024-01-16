@@ -23,25 +23,29 @@ final class GPTViewModel {
     }
     
     func fetch(userInput: String) {
-        let messageDTO = UserMessage(content: userInput).convertGPTMessageDTO()
-        messages.append(messageDTO)
+        let userMessageDTO = UserMessage(content: userInput).convertGPTMessageDTO()
+        messages.append(userMessageDTO)
         let requestDTO = GPTRequestDTO(stream: false, messages: messages)
         
-        let assistantMessage = AssistantMessage(content: nil).convertGPTMessageDTO()
-        messages.append(assistantMessage)
-       
-        let lastIndex = messages.count - 1
+        let assistantMessageDTO = AssistantMessage(content: nil).convertGPTMessageDTO()
+        messages.append(assistantMessageDTO)
+        
         Task {
             do {
                 let responseDTO: GPTResponseDTO = try await serviceProvider.excute(for: requestDTO)
-                Task { @MainActor in
-                    if let messageDTO = responseDTO.choices.first?.message {
-                        messages[lastIndex] = messageDTO
-                    }
+                if let messageDTO = responseDTO.choices.first?.message {
+                    addResponseMessage(messageDTO)
                 }
             } catch {
-                // TODO:  에러 처리
+                let assistantMessageDTO = AssistantMessage(content: error.localizedDescription).convertGPTMessageDTO()
+                addResponseMessage(assistantMessageDTO)
             }
+        }
+    }
+    
+    private func addResponseMessage(_ messageDTO: GPTMessageDTO) {
+        Task { @MainActor in
+            messages[messages.count - 1] = messageDTO
         }
     }
 }
