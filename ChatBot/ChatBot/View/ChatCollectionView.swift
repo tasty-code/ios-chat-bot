@@ -27,10 +27,15 @@ final class ChatCollectionView: UICollectionView {
     }
     
     private func configureDataSource() {
-        let cellRegistration = UICollectionView.CellRegistration<ChatBallonCell, Message> { (cell, indexPath, itemIdentifier) in
+        let cellRegistration = UICollectionView.CellRegistration<ChatBalloonCell, Message> { (cell, indexPath, itemIdentifier) in
+            
+            if itemIdentifier.role == .user {
+                cell.setDirection(direction: .right)
+            } else {
+                cell.setDirection(direction: .left)
+            }
             
             guard let text = itemIdentifier.content else { return }
-            
             cell.setLabelText(text: text)
             cell.setNeedsUpdateConfiguration()
         }
