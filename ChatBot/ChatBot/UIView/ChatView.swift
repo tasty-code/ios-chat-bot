@@ -88,7 +88,7 @@ final class ChatView: UIView {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: itemSize, subitem: item, count: 1)
-
+        
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = spacing
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 20, trailing: 20)
@@ -123,7 +123,7 @@ final class ChatView: UIView {
         return dataSource
     }
     
-
+    
     private func updateSnapshot(_ item: Message) {
         var snapShot = dataSource.snapshot()
         snapShot.appendItems([item])
@@ -149,6 +149,7 @@ final class ChatView: UIView {
     
     @objc private func submitUserAnswer() {
         resetTextViewHeight()
+        scrollToBottom()
         contentTextView.isScrollEnabled = false
         guard let userMessage = contentTextView.text else {
             return
@@ -191,6 +192,16 @@ final class ChatView: UIView {
         let endpoint: Endpointable = ChatBotEndpoint(url: url, httpMethod: .post, httpHeader: header, httpBody: body)
         
         return endpoint
+    }
+    
+    private func scrollToBottom() {
+        let lastItemIndex = chatCollectionView.numberOfItems(inSection: 0) - 1
+        if lastItemIndex < 0 {
+            return
+        }
+        
+        let indexPath = IndexPath(item: lastItemIndex, section: 0)
+        chatCollectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
     }
     
     // MARK: - Public Method
