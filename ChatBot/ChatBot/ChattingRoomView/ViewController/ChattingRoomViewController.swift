@@ -34,6 +34,7 @@ final class ChattingRoomViewController: UIViewController {
         let chattingRoomView = UICollectionView(frame: view.bounds, collectionViewLayout: configureLayout())
         chattingRoomView.translatesAutoresizingMaskIntoConstraints = false
         chattingRoomView.allowsSelection = false
+        chattingRoomView.keyboardDismissMode = .onDrag
         return chattingRoomView
     }()
     
