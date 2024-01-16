@@ -15,6 +15,7 @@ final class GPTChatRoomViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
         collectionView.allowsSelection = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.keyboardDismissMode = .onDrag
         return collectionView
     }()
     
@@ -176,12 +177,14 @@ final class GPTChatRoomViewController: UIViewController {
         else {
             return
         }
+        
         viewModel.fetch(userInput: userMessageText)
         
+        userInputTextView.resignFirstResponder()
         userInputTextView.text = nil
         userInputTextView.insertText("")
         
-        sendButton.isEnabled = false
+        sender.isEnabled = false
     }
     
     private func updateUI() {
