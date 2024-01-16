@@ -76,7 +76,7 @@ final class GPTChatRoomViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        setViews()
+        configureUI()
         bind()
         configureDataSource()
     }
@@ -103,7 +103,7 @@ final class GPTChatRoomViewController: UIViewController {
 
 // MARK: - set Views
 extension GPTChatRoomViewController {
-    private func setViews() {
+    private func configureUI() {
         view.addSubview(chatCollectionView)
         view.addSubview(horizontalStackView)
         
