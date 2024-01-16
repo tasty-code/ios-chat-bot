@@ -6,9 +6,8 @@ final class APIService {
     
     private init() {}
     
-    func execute<Response:Decodable>(request: URLRequest) async throws -> Response {
-        
-        let (data, httpResponse) = try await URLSession.shared.data(for: request)
+    func execute<Response: Decodable>(request: URLRequest, session: URLSession = URLSession.shared) async throws -> Result<Response, Error> {
+        let (data, httpResponse) = try await session.data(for: request)
         
         guard let response = httpResponse as? HTTPURLResponse, response.statusCode == 200 else {
             throw APIError.invalidResponse(code: (httpResponse as? HTTPURLResponse)?.statusCode)
@@ -18,9 +17,9 @@ final class APIService {
             let decoder = JSONDecoder()
             let result = try decoder.decode(Response.self, from: data)
             
-            return result
-        } catch {
-            throw APIError.failToDecodeData
+            return .success(result)
+        } catch let error {
+            return .failure(error)
         }
     }
     
