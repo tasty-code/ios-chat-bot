@@ -8,6 +8,7 @@
 import UIKit
 
 final class ChatView: UIView {
+    
     // MARK: - enum
     
     enum Section {
@@ -16,6 +17,8 @@ final class ChatView: UIView {
     
     // MARK: - properties
     
+    private lazy var textViewMaxHeightConstraint: NSLayoutConstraint = contentTextView.heightAnchor.constraint(equalToConstant: self.frame.height / 9)
+    
     private lazy var dataSource: UICollectionViewDiffableDataSource<Section, Message> = makeDataSource()
     private lazy var snapShot: NSDiffableDataSourceSnapshot<Section, Message> = configureSnapshot()
     
@@ -23,38 +26,40 @@ final class ChatView: UIView {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: makeCollectionViewLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .white
+        collectionView.keyboardDismissMode = .onDrag
         collectionView.register(ChatCollectionViewCell.self, forCellWithReuseIdentifier: ChatCollectionViewCell.reuseIdentifier)
         addSubview(collectionView)
+        
         return collectionView
     }()
     
-    private lazy var contentTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "대화를 입력해주세요"
+    private let contentTextView: UITextView = {
+        let textView = UITextView()
+        textView.isScrollEnabled = false
+        textView.layer.cornerRadius = 12
+        textView.layer.borderColor = UIColor.systemCyan.cgColor
+        textView.layer.borderWidth = 1.0
+        textView.backgroundColor = .white
+        textView.textContainerInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        textView.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        textView.translatesAutoresizingMaskIntoConstraints = false
         
-        
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 13, height: textField.frame.height))
-        textField.leftView = paddingView
-        textField.leftViewMode = .always
-        textField.borderStyle = .none
-        textField.layer.cornerRadius = 12
-        textField.layer.borderColor = UIColor.systemCyan.cgColor
-        textField.layer.borderWidth = 2.0
-        textField.backgroundColor = .white
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
+        return textView
     }()
     
-    private lazy var contentSendButton: UIButton = {
+    private let contentSendButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("전송", for: .normal)
+        button.setImage(UIImage(systemName: "arrow.up.message"), for: .normal)
+        button.tintColor = UIColor.systemCyan
+        button.setContentCompressionResistancePriority(.required, for: .horizontal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        
         return button
     }()
     
     private lazy var contentStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [
-            contentTextField,contentSendButton
+            contentTextView,contentSendButton
         ])
         stackView.axis = .horizontal
         stackView.distribution = .fill
@@ -95,6 +100,7 @@ final class ChatView: UIView {
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
         
         let layout = UICollectionViewCompositionalLayout(section: section)
+        
         return layout
     }
     
@@ -114,6 +120,7 @@ final class ChatView: UIView {
             (collectionView: UICollectionView, indexPath: IndexPath, identifier: Message) -> UICollectionViewCell? in
             collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: identifier)
         }
+        
         return dataSource
     }
     
@@ -122,6 +129,7 @@ final class ChatView: UIView {
         snapShot = NSDiffableDataSourceSnapshot<Section, Message>()
         snapShot.appendSections([.main])
         dataSource.apply(snapShot, animatingDifferences: false)
+        
         return snapShot
     }
     
@@ -134,25 +142,28 @@ final class ChatView: UIView {
     
     private func configureLayout() {
         self.backgroundColor = .white
+        
         NSLayoutConstraint.activate([
+            contentTextView.widthAnchor.constraint(equalTo: contentSendButton.widthAnchor, multiplier: 6),
             
             chatCollectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             chatCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             chatCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
             
-            contentStackView.topAnchor.constraint(equalTo: chatCollectionView.bottomAnchor, constant: 3),
-            contentStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            contentStackView.topAnchor.constraint(equalTo: chatCollectionView.bottomAnchor, constant: 30),
+            contentStackView.bottomAnchor.constraint(equalTo: keyboardLayoutGuide.topAnchor, constant: -10),
             contentStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 30),
             contentStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -30)
         ])
     }
     
     @objc private func submitUserAnswer() {
-        
-        guard let userMessage = contentTextField.text else {
+        resetTextViewHeight()
+        contentTextView.isScrollEnabled = false
+        guard let userMessage = contentTextView.text else {
             return
         }
-        contentTextField.text = nil
+        contentTextView.text = nil
         
         updateSnapshot(Message(role: "user", content: userMessage))
         
@@ -183,13 +194,24 @@ final class ChatView: UIView {
         let newMessage = [Message(role: UserContentConstant.UserRole, content: userMessage),
                           Message(role: UserContentConstant.UserRole, content: userMessage)]
         let body = UserContentModel(messages: newMessage)
-        
-        
         let header: [String: String] = [HeaderFieldName.contentType.description : ContentType.json.description,
                                         HeaderFieldName.authorization.description : "Bearer \(apiKey)"]
-        
         let endpoint: Endpointable = ChatBotEndpoint(url: url, httpMethod: .post, httpHeader: header, httpBody: body)
         
         return endpoint
+    }
+    
+    // MARK: - Public Method
+    
+    func setTextViewDelegate(_ delegate: UITextViewDelegate) {
+        contentTextView.delegate = delegate
+    }
+    
+    func limitTextViewHeight() {
+        textViewMaxHeightConstraint.isActive = true
+    }
+    
+    func resetTextViewHeight() {
+        textViewMaxHeightConstraint.isActive = false
     }
 }
