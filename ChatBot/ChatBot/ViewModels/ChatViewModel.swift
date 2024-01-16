@@ -31,7 +31,7 @@ final class ChatViewModel {
         input.sink { [weak self] event in
             switch event {
             case .sendButtonDidTap(let prompt):
-                self?.messages.append(Message(role: "user", content: prompt))
+                self?.messages.append(Message(role: .user, content: prompt))
                 self?.handleRequest()
             }
         }.store(in: &cancellables)
@@ -50,7 +50,7 @@ final class ChatViewModel {
             }
             
             let content = response.choices[0].message.content
-            messages.append(Message(role: "assistant", content: content))
+            messages.append(Message(role: .assistant, content: content))
             
             print("🔔", content)
             

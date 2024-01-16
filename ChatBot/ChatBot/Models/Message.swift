@@ -8,6 +8,6 @@
 import Foundation
 
 struct Message: Codable {
-    let role: String
+    let role: ChatType
     let content: String
 }
