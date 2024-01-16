@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E7B00302B5652ED005C883C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7B002F2B5652ED005C883C /* String.swift */; };
+		0E7B00322B565301005C883C /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7B00312B565301005C883C /* UIView.swift */; };
+		0E7B00342B565342005C883C /* ChatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7B00332B565342005C883C /* ChatCollectionViewCell.swift */; };
+		0E7B003A2B5668F7005C883C /* ChatType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7B00392B5668F7005C883C /* ChatType.swift */; };
 		0ED22E1B2B4796A200E9596B /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED22E1A2B4796A200E9596B /* APIError.swift */; };
 		0ED22E1D2B4796CC00E9596B /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED22E1C2B4796CC00E9596B /* APIService.swift */; };
 		0ED22E202B479A6C00E9596B /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED22E1F2B479A6C00E9596B /* Environment.swift */; };
@@ -28,6 +32,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E7B002F2B5652ED005C883C /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		0E7B00312B565301005C883C /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		0E7B00332B565342005C883C /* ChatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCollectionViewCell.swift; sourceTree = "<group>"; };
+		0E7B00392B5668F7005C883C /* ChatType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatType.swift; sourceTree = "<group>"; };
 		0ED22E1A2B4796A200E9596B /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		0ED22E1C2B4796CC00E9596B /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		0ED22E1F2B479A6C00E9596B /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
@@ -62,6 +70,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E7B002D2B5652BE005C883C /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				0E7B002E2B5652D5005C883C /* Extension */,
+			);
+			path = Module;
+			sourceTree = "<group>";
+		};
+		0E7B002E2B5652D5005C883C /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				0E7B002F2B5652ED005C883C /* String.swift */,
+				0E7B00312B565301005C883C /* UIView.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		0ED22E192B47969100E9596B /* Errors */ = {
 			isa = PBXGroup;
 			children = (
@@ -105,7 +130,9 @@
 				0ED22E192B47969100E9596B /* Errors */,
 				E15CF20D2B464A3B00DFBD44 /* Models */,
 				E17C39C62B46432A00C49CD8 /* Controllers */,
+				0E7B002D2B5652BE005C883C /* Module */,
 				E17C39C52B46431E00C49CD8 /* Resources */,
+				0E7B00332B565342005C883C /* ChatCollectionViewCell.swift */,
 				B4B3E2CA2B42D1BC00818B3C /* Info.plist */,
 				E15CF2262B47D54500DFBD44 /* Environment.xcconfig */,
 			);
@@ -145,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				E15CF2242B47C22100DFBD44 /* Constants.swift */,
+				0E7B00392B5668F7005C883C /* ChatType.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -260,9 +288,13 @@
 				E15CF2152B479E3A00DFBD44 /* Endpoint.swift in Sources */,
 				0ED22E202B479A6C00E9596B /* Environment.swift in Sources */,
 				E15CF2112B464B7200DFBD44 /* APIRequest.swift in Sources */,
+				0E7B003A2B5668F7005C883C /* ChatType.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
 				0ED22E1D2B4796CC00E9596B /* APIService.swift in Sources */,
+				0E7B00322B565301005C883C /* UIView.swift in Sources */,
 				E1B1FB972B564F6700A1B96D /* ChatViewModel.swift in Sources */,
+				0E7B00302B5652ED005C883C /* String.swift in Sources */,
+				0E7B00342B565342005C883C /* ChatCollectionViewCell.swift in Sources */,
 				0ED22E1B2B4796A200E9596B /* APIError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
