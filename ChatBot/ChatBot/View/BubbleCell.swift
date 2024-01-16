@@ -9,32 +9,75 @@ import UIKit
 
 class BubbleCell: UICollectionViewCell {
     static let identifier = "BubbleCell"
-    
+    var role: Role?
     private let bubbleView: UIView = UIView()
     
     private let paddingLabel: UILabel = {
-        let label = UILabel.init(frame: .zero, padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
-        label.text = "11111"
+        let label = PaddingLabel(inset: .init(top: 10, left: 10, bottom: 10, right: 10))
+        label.text = "1111dfopkopgkopergkoperkgoperkgoperkopgerkopgerkopgkeropgdkl;vbmdfklvbmeropvermpvmdfkgvmedfp1"
+        label.numberOfLines = 0
         return label
     }()
+    
+    private lazy var bubbleTailView: BubbleTailView = {
+        let color: UIColor = role == .user ? .systemYellow : .systemMint
+        let bubbleTailView = BubbleTailView(color: color)
+        return bubbleTailView
+    }()
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        bubbleView.translatesAutoresizingMaskIntoConstraints = false
-        paddingLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        bubbleView.addSubview(paddingLabel)
-        bubbleView.backgroundColor = .orange
-
-        paddingLabel.backgroundColor = .blue
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configuration() {
-            print(111)
+    func setBubbleCell(message: Message) {
+        role = Role(rawValue: message.role)
+        paddingLabel.text = message.content
+        paddingLabel.backgroundColor = role == Role.user ? .systemYellow : .systemMint
+        paddingLabel.textAlignment = role == Role.user ? .left : .right
+        
+        bubbleView.addSubview(paddingLabel)
+        bubbleView.addSubview(bubbleTailView)
+        contentView.addSubview(bubbleView)
+
+        
+        configuration()
+
+    }
+    
+    private func configuration() {
+        bubbleView.translatesAutoresizingMaskIntoConstraints = false
+        paddingLabel.translatesAutoresizingMaskIntoConstraints = false
+        bubbleTailView.translatesAutoresizingMaskIntoConstraints = false
+        bubbleView.backgroundColor = .blue
+        NSLayoutConstraint.activate([
+            bubbleView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            bubbleView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            bubbleView.heightAnchor.constraint(equalTo: paddingLabel.heightAnchor),
+            bubbleView.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, constant: -30),
+            bubbleView.widthAnchor.constraint(greaterThanOrEqualTo: paddingLabel.widthAnchor),
+            bubbleTailView.widthAnchor.constraint(equalToConstant: 10),
+            bubbleTailView.heightAnchor.constraint(equalToConstant: 10),
+            bubbleTailView.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor),
+        ])
+        if role == Role.user {
+            NSLayoutConstraint.activate([
+                bubbleView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30),
+                bubbleTailView.leadingAnchor.constraint(equalTo: bubbleView.trailingAnchor),
+            ])
+            
+        } else {
+            NSLayoutConstraint.activate([
+                bubbleView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 30),
+                bubbleTailView.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: -10),
+            ])
+            bubbleTailView.transform = CGAffineTransform.init(scaleX: -1, y: 1)
+        }
     }
 }

@@ -30,6 +30,8 @@
 		E386CBD02B480BC900B84994 /* APIKEY.plist in Resources */ = {isa = PBXBuildFile; fileRef = E386CBCF2B480BC900B84994 /* APIKEY.plist */; };
 		E38F86102B4E284F003AB81E /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38F860F2B4E284F003AB81E /* URLSessionProtocol.swift */; };
 		E38F86132B4F7E2C003AB81E /* URLSession+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38F86122B4F7E2C003AB81E /* URLSession+Extension.swift */; };
+		E38F864A2B552863003AB81E /* BubbleTailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38F86492B552863003AB81E /* BubbleTailView.swift */; };
+		E38F864C2B560E35003AB81E /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38F864B2B560E35003AB81E /* Role.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +60,8 @@
 		E386CBCF2B480BC900B84994 /* APIKEY.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APIKEY.plist; sourceTree = "<group>"; };
 		E38F860F2B4E284F003AB81E /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
 		E38F86122B4F7E2C003AB81E /* URLSession+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extension.swift"; sourceTree = "<group>"; };
+		E38F86492B552863003AB81E /* BubbleTailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleTailView.swift; sourceTree = "<group>"; };
+		E38F864B2B560E35003AB81E /* Role.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Role.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +96,7 @@
 			children = (
 				B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */,
 				B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */,
-				B4B3E2C02B42D1BB00818B3C /* ChatRoomViewController.swift */,
+				E38F86482B552316003AB81E /* Controller */,
 				D04416C42B5518C800110C2B /* View */,
 				E386CBC22B47B85000B84994 /* NetworkManager */,
 				E3388FBA2B44E46800175C2C /* Model */,
@@ -127,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				D04416C52B55192C00110C2B /* BubbleCell.swift */,
+				E38F86492B552863003AB81E /* BubbleTailView.swift */,
 				D04416C72B5519F900110C2B /* PaddingLabel.swift */,
 			);
 			path = View;
@@ -171,6 +176,7 @@
 			children = (
 				D00C334D2B44ECC700E57445 /* DTO */,
 				D04416C22B5515E300110C2B /* ChatBubble.swift */,
+				E38F864B2B560E35003AB81E /* Role.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -204,6 +210,14 @@
 				E38F86122B4F7E2C003AB81E /* URLSession+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		E38F86482B552316003AB81E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B4B3E2C02B42D1BB00818B3C /* ChatRoomViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,6 +292,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E38F864A2B552863003AB81E /* BubbleTailView.swift in Sources */,
 				E38F86102B4E284F003AB81E /* URLSessionProtocol.swift in Sources */,
 				D0F7BFDD2B47E74500329F11 /* NetworkBuilderProtocol.swift in Sources */,
 				D04416C32B5515E300110C2B /* ChatBubble.swift in Sources */,
@@ -285,6 +300,7 @@
 				E386CBCD2B47CBBD00B84994 /* Bundle+Extension.swift in Sources */,
 				E38F86132B4F7E2C003AB81E /* URLSession+Extension.swift in Sources */,
 				E3388FBC2B44F1AF00175C2C /* RequestData.swift in Sources */,
+				E38F864C2B560E35003AB81E /* Role.swift in Sources */,
 				D04416C82B5519F900110C2B /* PaddingLabel.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
 				D0F7BFDA2B47E6E800329F11 /* ChatSendMessageBuilder.swift in Sources */,

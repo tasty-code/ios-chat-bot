@@ -18,12 +18,42 @@ final class ChatRoomViewController : UIViewController {
     private var dataSource: DataSource?
     
     var chats: [ChatBubble] = [
-        ChatBubble(message: Message(role: "user", content: "ddd"))
+        ChatBubble(message: Message(role: "assistant", content: "ddd")),
+        ChatBubble(message: Message(role: "user", content: "ddd")),
+        ChatBubble(message: Message(role: "user", content: "ddddfdfgdfgdfgdfgdfgwert342523r523")),
+        ChatBubble(message: Message(role: "user", content: "ddd")),
+        ChatBubble(message: Message(role: "user", content: "ddwet2341235wefwedf3d")),
+        ChatBubble(message: Message(role: "assistant", content: "ddd")),
+        ChatBubble(message: Message(role: "assistant", content: "d23r5fgwedrftg234r5t234dd")),
+        ChatBubble(message: Message(role: "assistant", content: "ddd")),
+        ChatBubble(message: Message(role: "assistant", content: "d하워드바보cdd")),
+        ChatBubble(message: Message(role: "user", content: "dd2342345wefg245t235t6235235623624623634634523d")),
+        ChatBubble(message: Message(role: "assistant", content: "ddd")),
+        ChatBubble(message: Message(role: "user", content: "ddd")),
+        ChatBubble(message: Message(role: "user", content: "ddddfdfgdfgdfgdfgdfgwert342523r523")),
+        ChatBubble(message: Message(role: "user", content: "ddd")),
+        ChatBubble(message: Message(role: "user", content: "ddwet2341235wefwedf3d")),
+        ChatBubble(message: Message(role: "assistant", content: "ddd")),
+        ChatBubble(message: Message(role: "assistant", content: "d23r5fgwedrftg234r5t234dd")),
+        ChatBubble(message: Message(role: "assistant", content: "ddd")),
+        ChatBubble(message: Message(role: "assistant", content: "d하워드바보cdd")),
+        ChatBubble(message: Message(role: "user", content: "dd2342345wefg245t235t6235235623624623634634523d")),
+        ChatBubble(message: Message(role: "assistant", content: "ddd")),
+        ChatBubble(message: Message(role: "user", content: "ddd")),
+        ChatBubble(message: Message(role: "user", content: "ddddfdfgdfgdfgdfgdfgwert342523r523")),
+        ChatBubble(message: Message(role: "user", content: "ddd")),
+        ChatBubble(message: Message(role: "user", content: "ddwet2341235wefwedf3d")),
+        ChatBubble(message: Message(role: "assistant", content: "ddd")),
+        ChatBubble(message: Message(role: "assistant", content: "d23r5fgwedrftg234r5t234dd")),
+        ChatBubble(message: Message(role: "assistant", content: "ddd")),
+        ChatBubble(message: Message(role: "assistant", content: "d하워드바보cdd")),
+        ChatBubble(message: Message(role: "user", content: "dd2342345wefg245t235t6235235623624623634634523d")),
+        
+        
     ]
     
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createLayout())
-        collectionView.backgroundColor = .red
         return collectionView
     }()
 
@@ -40,6 +70,7 @@ final class ChatRoomViewController : UIViewController {
 //        }
         
         configurationUI()
+        configurationCell()
         setUpSnapshot()
     }
     
@@ -66,7 +97,7 @@ final class ChatRoomViewController : UIViewController {
     
     private func configurationCell() {
         let cellRegistration = UICollectionView.CellRegistration<BubbleCell, ChatBubble> { cell, indexPath, itemIdentifier in
-            cell.configuration()
+            cell.setBubbleCell(message: itemIdentifier.message)
         }
         
         dataSource = DataSource(collectionView: collectionView) { (collectionView, indexPath, identifier) -> UICollectionViewCell in
