@@ -45,10 +45,6 @@ final class ChattingRoomViewController: UIViewController {
         stackView.spacing = padding
         stackView.distribution = .fill
         stackView.alignment = .fill
-        stackView.layoutMargins = UIEdgeInsets(top: padding,
-                                               left: padding,
-                                               bottom: padding,
-                                               right: padding)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()

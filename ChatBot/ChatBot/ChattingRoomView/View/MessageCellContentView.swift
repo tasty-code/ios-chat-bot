@@ -1,6 +1,11 @@
 import UIKit
 
 final class MessageCellContentView: UIView, UIContentView {
+    private enum Constants {
+        static let labelWidthRatio: CGFloat = 2/3
+        static let defaultMargin: CGFloat = 10
+    }
+    
     private lazy var label: UILabel = UILabel()
     
     private var appliedConfiguration: MessageCellContentConfiguration!
@@ -40,25 +45,28 @@ final class MessageCellContentView: UIView, UIContentView {
     }
     
     private func setUpConstraintsByRole() {
+        let margin = Constants.defaultMargin
+        let labelWidthRatio = Constants.labelWidthRatio
+        
         NSLayoutConstraint.deactivate(label.constraints)
         
         if appliedConfiguration.role == .user {
             label.semanticContentAttribute = .forceRightToLeft
             
             NSLayoutConstraint.activate([
-                label.topAnchor.constraint(equalTo: self.topAnchor),
-                label.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-                label.widthAnchor.constraint(lessThanOrEqualTo: self.widthAnchor, multiplier: 2/3),
-                label.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+                label.topAnchor.constraint(equalTo: self.topAnchor, constant: margin),
+                label.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -margin),
+                label.widthAnchor.constraint(lessThanOrEqualTo: self.widthAnchor, multiplier: labelWidthRatio),
+                label.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -margin)
             ])
         } else {
             label.semanticContentAttribute = .forceLeftToRight
             
             NSLayoutConstraint.activate([
-                label.topAnchor.constraint(equalTo: self.topAnchor),
-                label.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-                label.widthAnchor.constraint(lessThanOrEqualTo: self.widthAnchor, multiplier: 2/3),
-                label.leadingAnchor.constraint(equalTo: self.leadingAnchor)
+                label.topAnchor.constraint(equalTo: self.topAnchor, constant: margin),
+                label.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -margin),
+                label.widthAnchor.constraint(lessThanOrEqualTo: self.widthAnchor, multiplier: labelWidthRatio),
+                label.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin)
             ])
         }
     }
