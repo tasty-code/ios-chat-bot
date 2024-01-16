@@ -13,9 +13,9 @@ final class ChatBubbleView: UIView {
         case left
     }
     
-    let bubbleLayer = CAShapeLayer()
+    private let bubbleLayer = CAShapeLayer()
     
-    let chatLabel: UILabel = {
+    private let chatLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.font = .preferredFont(forTextStyle: .body)
@@ -25,9 +25,25 @@ final class ChatBubbleView: UIView {
         return label
     }()
     
-    var direction: Direction = .right
+    var contentSize: Double {
+        return chatLabel.font.pointSize
+    }
+    
+    var direction: Direction {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+    
+    var text: String? {
+        didSet {
+            chatLabel.text = text
+            setNeedsDisplay()
+        }
+    }
     
     override init(frame: CGRect) {
+        direction = .right
         super.init(frame: frame)
         setupUI()
     }
@@ -49,9 +65,7 @@ final class ChatBubbleView: UIView {
         
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
+    override func draw(_ rect: CGRect) {
         switch direction {
         case .right:
             drawBubbleToRight()
@@ -60,7 +74,7 @@ final class ChatBubbleView: UIView {
         }
     }
     
-    func drawBubbleToRight() {
+    private func drawBubbleToRight() {
         let width = bounds.size.width
         let height = bounds.size.height
         
@@ -85,7 +99,7 @@ final class ChatBubbleView: UIView {
         chatLabel.textAlignment = .right
     }
     
-    func drawBubbleToLeft() {
+    private func drawBubbleToLeft() {
         let width = bounds.size.width
         let height = bounds.size.height
         
