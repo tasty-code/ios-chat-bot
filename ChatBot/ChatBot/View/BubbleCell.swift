@@ -72,16 +72,15 @@ class BubbleCell: UICollectionViewCell {
             
         ])
         
-        
         if role == .user {
             NSLayoutConstraint.activate([
-                bubbleView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -28),
+                bubbleView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
                 bubbleTailView.leadingAnchor.constraint(equalTo: bubbleView.trailingAnchor),
             ])
             
         } else {
             NSLayoutConstraint.activate([
-                bubbleView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 28),
+                bubbleView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
                 bubbleTailView.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: -12),
             ])
             bubbleTailView.transform = CGAffineTransform.init(scaleX: -1, y: 1)

@@ -52,22 +52,53 @@ final class ChatRoomViewController : UIViewController {
         
     ]
     
+    lazy var mainStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        return stackView
+    }()
+    
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createLayout())
         return collectionView
     }()
-
+    
+    lazy var userInputStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 12
+        return stackView
+    }()
+    
+    lazy var textInputView: UITextView = {
+        let textView = UITextView()
+        textView.layer.borderWidth = 1
+        textView.layer.borderColor = UIColor.systemGray.cgColor
+        textView.isScrollEnabled = false
+        textView.layer.cornerRadius = 12
+        return textView
+    }()
+    
+    lazy var sendButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "paperplane"), for: .normal)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        try? chatService.sendMessage(text: "안녕") { result in
-//            switch result {
-//            case .success(let success):
-//                print("GPT: \(success.choices[0].message.content)")
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
+        //        try? chatService.sendMessage(text: "안녕") { result in
+        //            switch result {
+        //            case .success(let success):
+        //                print("GPT: \(success.choices[0].message.content)")
+        //            case .failure(let error):
+        //                print(error)
+        //            }
+        //        }
         
         configurationUI()
         configurationCell()
@@ -81,17 +112,32 @@ final class ChatRoomViewController : UIViewController {
     }
     
     private func configurationUI() {
-        view.addSubview(collectionView)
+        view.addSubview(mainStackView)
+    
+        mainStackView.addArrangedSubview(collectionView)
+        mainStackView.addArrangedSubview(userInputStackView)
         
+        userInputStackView.addArrangedSubview(textInputView)
+        userInputStackView.addArrangedSubview(sendButton)
+        
+        mainStackView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        userInputStackView.translatesAutoresizingMaskIntoConstraints = false
+        textInputView.translatesAutoresizingMaskIntoConstraints = false
+        sendButton.translatesAutoresizingMaskIntoConstraints = false
         
         let safeLayoutGuide = view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: safeLayoutGuide.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: safeLayoutGuide.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: safeLayoutGuide.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: safeLayoutGuide.trailingAnchor),
+            mainStackView.topAnchor.constraint(equalTo: safeLayoutGuide.topAnchor),
+            mainStackView.bottomAnchor.constraint(equalTo: safeLayoutGuide.bottomAnchor),
+            mainStackView.leadingAnchor.constraint(equalTo: safeLayoutGuide.leadingAnchor, constant: 12),
+            mainStackView.trailingAnchor.constraint(equalTo: safeLayoutGuide.trailingAnchor, constant: -12),
+                        
+            textInputView.widthAnchor.constraint(equalTo: userInputStackView.widthAnchor, multiplier: 0.8),
+            
+            sendButton.widthAnchor.constraint(equalTo: userInputStackView.widthAnchor, multiplier: 0.1),
+
         ])
     }
     
@@ -102,7 +148,7 @@ final class ChatRoomViewController : UIViewController {
         let assistantChatBubbleRegistration = UICollectionView.CellRegistration<BubbleCell, ChatBubble> { cell, indexPath, itemIdentifier in
             cell.setBubbleCell(message: itemIdentifier.message)
         }
-
+        
         dataSource = DataSource(collectionView: collectionView) { (collectionView, indexPath, identifier) -> UICollectionViewCell in
             
             switch identifier.message.role {
