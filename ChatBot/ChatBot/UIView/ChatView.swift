@@ -102,16 +102,11 @@ final class ChatView: UIView {
         let cellRegistration = UICollectionView.CellRegistration<ChatCollectionViewCell, Message> { (cell, indexPath, identifier) in
             
             cell.configureBubbles(identifier: identifier)
-            
         }
         
         dataSource =  UICollectionViewDiffableDataSource<Section, Message>(collectionView: chatCollectionView) {
             (collectionView: UICollectionView, indexPath: IndexPath, identifier: Message) -> UICollectionViewCell? in
             let cell = collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: identifier)
-            
-            if identifier.role == UserContentConstant.UserRole {
-                
-            }
             
             return cell
         }

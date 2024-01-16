@@ -9,7 +9,7 @@ import UIKit
 
 @IBDesignable final class ChatBubbleTail: UIView {
     
-    var color: UIColor = .systemYellow {
+    var color: UIColor = .clear {
         didSet {
             setNeedsDisplay()
         }

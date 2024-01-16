@@ -7,8 +7,11 @@
 
 import UIKit
 
-class ChatCollectionViewCell: UICollectionViewCell {
+class ChatCollectionViewCell: UICollectionViewListCell {
     static let reuseIdentifier = "text-cell-reuse-identifier"
+    
+    private var chatBotBubbleConstarint: [NSLayoutConstraint] = []
+    private var userBubbleConstraint: [NSLayoutConstraint] = []
     
     private lazy var containerView: UIView = {
         var view = UIView()
@@ -78,31 +81,47 @@ class ChatCollectionViewCell: UICollectionViewCell {
         switch role {
         case UserContentConstant.UserRole :
             configureUserBubble()
-            
         case UserContentConstant.AIRole :
             configureChatbotBubble()
         default:
             break
         }
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        NSLayoutConstraint.deactivate(chatBotBubbleConstarint + userBubbleConstraint)
+        layoutIfNeeded()
+    }
 }
 
 //MARK: - chatBubbleConfigure
 extension ChatCollectionViewCell {
-    private func configureChatbotBubble() {
-        containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        bubbleTail.trailingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 3).isActive = true
+    func configureChatbotBubble() {
+        chatBotBubbleConstarint = [
+            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            bubbleTail.trailingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 3)
+        ]
         containerView.backgroundColor = .darkGray
         chatLabel.textColor = .white
         bubbleTail.transform = CGAffineTransform(scaleX: -1, y: 1)
         bubbleTail.color = .darkGray
+                
+        NSLayoutConstraint.activate(chatBotBubbleConstarint)
     }
     
-    private func configureUserBubble() {
-        containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        bubbleTail.leadingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -3).isActive = true
+    func configureUserBubble() {
+        userBubbleConstraint = [
+            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            bubbleTail.leadingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -3)
+        ]
         containerView.backgroundColor = .systemYellow
         chatLabel.textColor = .black
+        bubbleTail.transform = CGAffineTransform(scaleX: 1, y: 1)
+        bubbleTail.color = .systemYellow
+        
+        NSLayoutConstraint.activate(userBubbleConstraint)
         
     }
 }
