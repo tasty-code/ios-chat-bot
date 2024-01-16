@@ -34,7 +34,8 @@ class ChatCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        promptTextView.text = ""
+        promptTextView.text = nil
+        
     }
     
     func setupView() {
@@ -46,6 +47,9 @@ class ChatCollectionViewCell: UICollectionViewCell {
     
     func configure(model: ChatViewModel, index: Int) {
         let message = model.getMessage(at: index)
+        
+        guard message.role != .system, message.role != .tool else { return }
+        
         promptTextView.text = message.content
         guard let font = promptTextView.font else { return }
         let estimateFrame = message.content.getEstimatedFrame(with: font)

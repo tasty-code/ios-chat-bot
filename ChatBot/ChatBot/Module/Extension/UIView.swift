@@ -9,9 +9,7 @@ import UIKit
 
 extension UIView {
     func addTipViewToLeftBottom(with color: UIColor?) {
-        
         layoutIfNeeded()
-        
         let height = frame.height
      
         let path = CGMutablePath()
@@ -26,7 +24,6 @@ extension UIView {
     }
     
     func addTipViewToRightBottom(with color: UIColor?) {
-        
         layoutIfNeeded()
         
         let height = frame.height

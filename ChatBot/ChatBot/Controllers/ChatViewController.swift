@@ -48,6 +48,7 @@ final class ChatViewController: UIViewController {
         textView.font = UIFont.preferredFont(forTextStyle: .headline)
         textView.delegate = self
         textView.isScrollEnabled = false
+        textView.isEditable = true
         
         return textView
     }()
@@ -62,6 +63,7 @@ final class ChatViewController: UIViewController {
         super.viewDidLoad()
         
         configureUI()
+        bind()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -71,10 +73,8 @@ final class ChatViewController: UIViewController {
     
     @objc func didTapSubmit() {
         inputTextView.resignFirstResponder()
-//        fetchMessageForPrompt(prompt: inputTextView.text)
-//        guard let sdf = inputTextView.text else { return }
-//        messages.append(storeQuestion(prompt: sdf))
-//        collectionView.reloadData()
+        input.send(.sendButtonDidTap(prompt: inputTextView.text))
+        self.collectionView.reloadData()
     }
     
     private func configureUI() {
