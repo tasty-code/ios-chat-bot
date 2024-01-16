@@ -18,5 +18,3 @@ struct MessageContentConfiguration: UIContentConfiguration {
         return self
     }
 }
-
-
