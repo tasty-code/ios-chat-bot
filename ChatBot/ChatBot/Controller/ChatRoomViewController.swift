@@ -17,40 +17,7 @@ final class ChatRoomViewController : UIViewController {
     private let chatService = ChatService()
     private var dataSource: DataSource?
     
-    var chats: [ChatBubble] = [
-        ChatBubble(message: Message(role: "assistant", content: "ddd")),
-        ChatBubble(message: Message(role: "user", content: "ddd")),
-        ChatBubble(message: Message(role: "user", content: "ddddfdfgdfgdfgdfgdfgwert342523r523")),
-        ChatBubble(message: Message(role: "user", content: "ddd")),
-        ChatBubble(message: Message(role: "user", content: "ddwet2341235wefwedf3d")),
-        ChatBubble(message: Message(role: "assistant", content: "ddd")),
-        ChatBubble(message: Message(role: "assistant", content: "d23r5fgwedrftg234r5t234dd")),
-        ChatBubble(message: Message(role: "assistant", content: "ddd")),
-        ChatBubble(message: Message(role: "assistant", content: "d하워드바보cdd")),
-        ChatBubble(message: Message(role: "user", content: "dd2342345wefg245t235t6235235623624623634634523d")),
-        ChatBubble(message: Message(role: "assistant", content: "ddd")),
-        ChatBubble(message: Message(role: "user", content: "ddd")),
-        ChatBubble(message: Message(role: "user", content: "ddddfdfgdfgdfgdfgdfgwert342523r523")),
-        ChatBubble(message: Message(role: "user", content: "ddd")),
-        ChatBubble(message: Message(role: "user", content: "ddwet2341235wefwedf3d")),
-        ChatBubble(message: Message(role: "assistant", content: "ddd")),
-        ChatBubble(message: Message(role: "assistant", content: "d23r5fgwedrftg234r5t234dd")),
-        ChatBubble(message: Message(role: "assistant", content: "ddd")),
-        ChatBubble(message: Message(role: "assistant", content: "d하워드바보cdd")),
-        ChatBubble(message: Message(role: "user", content: "dd2342345wefg245t235t6235235623624623634634523d")),
-        ChatBubble(message: Message(role: "assistant", content: "ddd")),
-        ChatBubble(message: Message(role: "user", content: "ddd")),
-        ChatBubble(message: Message(role: "user", content: "ddddfdfgdfgdfgdfgdfgwert342523r523")),
-        ChatBubble(message: Message(role: "user", content: "ddd")),
-        ChatBubble(message: Message(role: "user", content: "ddwet2341235wefwedf3d")),
-        ChatBubble(message: Message(role: "assistant", content: "ddd")),
-        ChatBubble(message: Message(role: "assistant", content: "d23r5fgwedrftg234r5t234dd")),
-        ChatBubble(message: Message(role: "assistant", content: "ddd")),
-        ChatBubble(message: Message(role: "assistant", content: "d하워드바보cdd")),
-        ChatBubble(message: Message(role: "user", content: "dd2342345wefg245t235t6rthrthyrtrtyrtyrtyrtyryrtyrty450y9i59034jkgh90ertik90ghik9034i90tk9340ktg9034tk9034kt903490i5t9034t9045io90yi4590yk9045y9045y9045ik9o0ti3490-i-9034i0-34ik-235235623624623634634523d")),
-        
-        
-    ]
+    var chats: [ChatBubble] = []
     
     lazy var mainStackView: UIStackView = {
         let stackView = UIStackView()
@@ -85,6 +52,7 @@ final class ChatRoomViewController : UIViewController {
     lazy var sendButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "paperplane"), for: .normal)
+        button.addTarget(self, action: #selector(tappedSendButton), for: .touchUpInside)
         return button
     }()
     
@@ -113,7 +81,7 @@ final class ChatRoomViewController : UIViewController {
     
     private func configurationUI() {
         view.addSubview(mainStackView)
-    
+        
         mainStackView.addArrangedSubview(collectionView)
         mainStackView.addArrangedSubview(userInputStackView)
         
@@ -133,11 +101,11 @@ final class ChatRoomViewController : UIViewController {
             mainStackView.bottomAnchor.constraint(equalTo: safeLayoutGuide.bottomAnchor),
             mainStackView.leadingAnchor.constraint(equalTo: safeLayoutGuide.leadingAnchor, constant: 12),
             mainStackView.trailingAnchor.constraint(equalTo: safeLayoutGuide.trailingAnchor, constant: -12),
-                        
+            
             textInputView.widthAnchor.constraint(equalTo: userInputStackView.widthAnchor, multiplier: 0.8),
             
             sendButton.widthAnchor.constraint(equalTo: userInputStackView.widthAnchor, multiplier: 0.1),
-
+            
         ])
     }
     
@@ -168,5 +136,28 @@ final class ChatRoomViewController : UIViewController {
         snapshot.appendSections([.main])
         snapshot.appendItems(chats)
         dataSource?.apply(snapshot, animatingDifferences: true)
+    }
+    
+    @objc func tappedSendButton() {
+        chats.append(ChatBubble(message: Message(role: "user", content: textInputView.text)))
+        setUpSnapshot()
+        guard let question = textInputView.text else { return }
+        
+        DispatchQueue.global().async { [self] in
+            try? self.chatService.sendMessage(text: question) { result in
+                switch result {
+                case .success(let success):
+                    let answer = success.choices[0].message.content
+                    print(answer)
+                    self.chats.append(ChatBubble(message: Message(role: "assistant", content: answer)))
+                    DispatchQueue.main.async {
+                        self.setUpSnapshot()
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+                
+            }
+        }
     }
 }

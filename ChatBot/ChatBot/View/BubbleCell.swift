@@ -12,9 +12,8 @@ class BubbleCell: UICollectionViewCell {
     var role: Role?
     private let bubbleView: UIView = UIView()
     
-    private let paddingLabel: UILabel = {
-        let label = PaddingLabel(inset: .init(top: 10, left: 10, bottom: 10, right: 10))
-        label.text = "1111dfopkopgkopergkoperkgoperkgoperkopgerkopgerkopgkeropgdkl;vbmdfklvbmeropvermpvmdfkgvmedfp1"
+    private let textLabel: UILabel = {
+        let label = UILabel()
         label.numberOfLines = 0
         return label
     }()
@@ -38,11 +37,11 @@ class BubbleCell: UICollectionViewCell {
     
     func setBubbleCell(message: Message) {
         role = Role(rawValue: message.role)
-        paddingLabel.text = message.content
-        paddingLabel.backgroundColor = role == Role.user ? .systemYellow : .systemMint
-        paddingLabel.textAlignment = role == Role.user ? .left : .right
+        textLabel.text = message.content
+        bubbleView.backgroundColor = role == Role.user ? .systemYellow : .systemMint
+        textLabel.textAlignment = role == Role.user ? .right : .left
         
-        bubbleView.addSubview(paddingLabel)
+        bubbleView.addSubview(textLabel)
         bubbleView.addSubview(bubbleTailView)
         contentView.addSubview(bubbleView)
 
@@ -53,23 +52,21 @@ class BubbleCell: UICollectionViewCell {
     
     private func configuration() {
         bubbleView.translatesAutoresizingMaskIntoConstraints = false
-        paddingLabel.translatesAutoresizingMaskIntoConstraints = false
+        textLabel.translatesAutoresizingMaskIntoConstraints = false
         bubbleTailView.translatesAutoresizingMaskIntoConstraints = false
-        
-        bubbleView.backgroundColor = .blue
+
         NSLayoutConstraint.activate([
             bubbleView.topAnchor.constraint(equalTo: contentView.topAnchor),
             bubbleView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
-            bubbleView.heightAnchor.constraint(equalTo: paddingLabel.heightAnchor),
+            bubbleView.heightAnchor.constraint(equalTo: textLabel.heightAnchor, constant: 20),
             bubbleView.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, multiplier: 0.7),
-            bubbleView.widthAnchor.constraint(greaterThanOrEqualTo: paddingLabel.widthAnchor),
-            paddingLabel.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor),
-            paddingLabel.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor),
-            paddingLabel.topAnchor.constraint(equalTo: bubbleView.topAnchor),
+            bubbleView.widthAnchor.constraint(greaterThanOrEqualTo: textLabel.widthAnchor, constant: 20),
+            textLabel.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 10),
+            textLabel.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: -10),
+            textLabel.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 10),
             bubbleTailView.widthAnchor.constraint(equalToConstant: 12),
             bubbleTailView.heightAnchor.constraint(equalToConstant: 12),
             bubbleTailView.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor),
-            
         ])
         
         if role == .user {
