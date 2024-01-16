@@ -34,20 +34,15 @@ final class GPTChatRoomCell: UICollectionViewCell {
         ])
     }
     
-    override func updateConstraints() {
-        super.updateConstraints()
+    func configureCell(to message: GPTMessagable) {
+        let direction: UIChatBubbleView.StartDirection = message.role == .user ? .right : .left
+        chatBubble.setText(message.content, direction: direction)
         directionConstraint.isActive = false
-        if chatBubble.startDirection == .left {
+        if direction == .left {
             directionConstraint = chatBubble.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 12.0)
         } else {
             directionConstraint = chatBubble.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -12.0)
         }
         directionConstraint.isActive = true
-    }
-    
-    func configureCell(to message: GPTMessagable) {
-        chatBubble.text = message.content
-        chatBubble.startDirection = message.role == .user ? .right : .left
-        setNeedsUpdateConstraints()
     }
 }

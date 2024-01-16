@@ -19,18 +19,7 @@ final class UIChatBubbleView: UIView {
         return textLabel
     }()
     
-    var text: String? {
-        didSet {
-            contentLabel.text = text
-            setNeedsDisplay()
-        }
-    }
-    
-    var startDirection: StartDirection {
-        didSet {
-            setNeedsDisplay()
-        }
-    }
+    private var startDirection: StartDirection
     
     override init(frame: CGRect) {
         self.emptyWidth = 0
@@ -54,6 +43,11 @@ final class UIChatBubbleView: UIView {
         setConstraint()
     }
     
+    func setText(_ text: String?, direction: StartDirection) {
+        self.contentLabel.text = text
+        self.startDirection = direction
+    }
+    
     private func setConstraint() {
         layer.addSublayer(bubbleLayer)
         addSubview(contentLabel)
@@ -66,8 +60,8 @@ final class UIChatBubbleView: UIView {
         ])
     }
     
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
+    override func layoutSubviews() {
+        super.layoutSubviews()
         let width = contentLabel.text == nil ? emptyWidth : bounds.size.width
         let height = contentLabel.text == nil ? emptyHeight : bounds.size.height
         
@@ -81,7 +75,7 @@ final class UIChatBubbleView: UIView {
             bubbleLayer.fillColor = UIColor.systemBlue.cgColor
         }
         
-        if text == nil {
+        if contentLabel.text == nil {
             drawWaitingDots(to: bezierPath)
         }
         
