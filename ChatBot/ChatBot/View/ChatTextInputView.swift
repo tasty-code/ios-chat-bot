@@ -68,6 +68,11 @@ extension ChatTextInputView {
     @objc func tappedButton() {
         delegate?.addChatRecord(text: textView.text)
         textView.text = .none
+        textView.constraints.forEach { constraint in
+            if constraint.firstAttribute == .height {
+                constraint.constant = textView.estimatedSizeHeight
+            }
+        }
         Task {
             await delegate?.updateCollectionViewFromResponse()
         }

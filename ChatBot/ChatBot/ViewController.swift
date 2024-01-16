@@ -38,7 +38,6 @@ final class ViewController: UIViewController {
     }
     
     private func collectionViewConfigure() {
-        let safeArea = view.safeAreaLayoutGuide
         let chatTextInputView = ChatTextInputView()
         chatTextInputView.delegate = collectionView
         
@@ -49,7 +48,7 @@ final class ViewController: UIViewController {
         NSLayoutConstraint.activate([
             collectionView.widthAnchor.constraint(equalTo: chatStackView.widthAnchor, multiplier: 1.0),
             chatStackView.topAnchor.constraint(equalTo: view.topAnchor),
-            chatStackView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
+            chatStackView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor, constant: -8),
             chatStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             chatStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             chatTextInputView.leadingAnchor.constraint(equalTo: chatStackView.leadingAnchor, constant: 8),

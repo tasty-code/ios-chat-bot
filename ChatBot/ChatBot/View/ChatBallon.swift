@@ -53,7 +53,7 @@ extension ChatBallon {
     private func makeBubble(color: UIColor) {
         
         let radius: CGFloat = 8
-        let width = layer.frame.width - 16 - radius
+        let width = layer.frame.width - 16
         let height = layer.frame.height - radius * 3
         
         let startPointX: CGFloat = radius * 2
