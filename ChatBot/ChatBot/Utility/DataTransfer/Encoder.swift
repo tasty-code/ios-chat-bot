@@ -11,7 +11,6 @@ struct Encoder {
     private let encoder = JSONEncoder()
     
     func transformData(_ content: Encodable) -> Data? {
-        print(content)
         guard let encodedData = try? encoder.encode(content) else {
             return nil
         }

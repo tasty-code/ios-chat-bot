@@ -8,47 +8,102 @@
 import UIKit
 
 class ChatCollectionViewCell: UICollectionViewCell {
-    
-    // MARK: - static property
-
     static let reuseIdentifier = "text-cell-reuse-identifier"
     
-    // MARK: - property
-
+    private lazy var containerView: UIView = {
+        var view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.clipsToBounds = false
+        view.layer.cornerRadius = 4
+        view.addSubview(chatLabel)
+        view.addSubview(bubbleTail)
+        
+        return view
+    }()
+    
+    private lazy var bubbleTail: ChatBubbleTail = {
+        var tail = ChatBubbleTail(frame: CGRect(x: 0, y: 0, width: 15, height: 10))
+        tail.translatesAutoresizingMaskIntoConstraints = false
+        tail.backgroundColor = .clear
+        
+        return tail
+        
+    }()
+    
     private lazy var chatLabel: UILabel = {
-        let label = UILabel()
+        var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.adjustsFontForContentSizeCategory = true
-        label.font = UIFont.preferredFont(forTextStyle: .caption1)
-        label.backgroundColor = .orange
+        label.font = .systemFont(ofSize: 16)
         label.numberOfLines = 0
-        label.preferredMaxLayoutWidth = contentView.bounds.width * 0.7
-        contentView.addSubview(label)
+        
         return label
     }()
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configure()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - methods
-
-    func setConstraintUserBubble() {
-        chatLabel.backgroundColor = .blue
+    private func configure() {
+        contentView.addSubview(containerView)
         
         NSLayoutConstraint.activate([
-            chatLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            chatLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-            chatLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            containerView.topAnchor.constraint(equalTo: contentView.topAnchor ),
+            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            containerView.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, multiplier: 0.8),
+            
+            chatLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
+            chatLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10),
+            chatLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
+            chatLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
+            
+            bubbleTail.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+            bubbleTail.widthAnchor.constraint(equalToConstant: 15),
+            bubbleTail.heightAnchor.constraint(equalToConstant: 10)
         ])
     }
     
-    func setConstraintAIBubble() {
-        chatLabel.backgroundColor = .gray
-        NSLayoutConstraint.activate([
-            chatLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            chatLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-            chatLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-        ])
-    }
-    
-    func setChatLabelText(to text: String) {
-        chatLabel.text = text
+    func configureBubbles(identifier: Message) {
+        let role = identifier.role
+        let content = identifier.content
+        
+        chatLabel.text = content
+        
+        switch role {
+        case UserContentConstant.UserRole :
+            configureUserBubble()
+            
+        case UserContentConstant.AIRole :
+            configureChatbotBubble()
+        default:
+            break
+        }
     }
 }
+
+//MARK: - chatBubbleConfigure
+extension ChatCollectionViewCell {
+    private func configureChatbotBubble() {
+        containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        bubbleTail.trailingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 3).isActive = true
+        containerView.backgroundColor = .darkGray
+        chatLabel.textColor = .white
+        bubbleTail.transform = CGAffineTransform(scaleX: -1, y: 1)
+        bubbleTail.color = .darkGray
+    }
+    
+    private func configureUserBubble() {
+        containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        bubbleTail.leadingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -3).isActive = true
+        containerView.backgroundColor = .systemYellow
+        chatLabel.textColor = .black
+        
+    }
+}
+

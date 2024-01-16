@@ -9,18 +9,14 @@ import UIKit
 
 final class ChatView: UIView {
     
-    // MARK: - enum
-    
+    // MARK: - CollectionView Section
     enum Section {
         case main
     }
     
     // MARK: - properties
-    
     private lazy var textViewMaxHeightConstraint: NSLayoutConstraint = contentTextView.heightAnchor.constraint(equalToConstant: self.frame.height / 9)
-    
     private lazy var dataSource: UICollectionViewDiffableDataSource<Section, Message> = makeDataSource()
-    private lazy var snapShot: NSDiffableDataSourceSnapshot<Section, Message> = configureSnapshot()
     
     private lazy var chatCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: makeCollectionViewLayout())
@@ -74,8 +70,8 @@ final class ChatView: UIView {
     // MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureLayout()
         contentSendButton.addTarget(self, action: #selector(submitUserAnswer), for: .touchUpInside)
+        configureLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -83,21 +79,19 @@ final class ChatView: UIView {
     }
     
     // MARK: - private methods
-    
     private func makeCollectionViewLayout() -> UICollectionViewLayout {
+        let spacing: CGFloat = 10
+        let estimatedHeight: CGFloat = 50
+        
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                              heightDimension: .fractionalHeight(1.0))
+                                              heightDimension: .estimated(estimatedHeight))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                               heightDimension: .estimated(50))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
-        let spacing = CGFloat(10)
-        group.interItemSpacing = .fixed(spacing)
-        
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: itemSize, subitem: item, count: 1)
+
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = spacing
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 20, trailing: 20)
         
         let layout = UICollectionViewCompositionalLayout(section: section)
         
@@ -105,39 +99,35 @@ final class ChatView: UIView {
     }
     
     private func makeDataSource() -> UICollectionViewDiffableDataSource<Section, Message> {
-        
         let cellRegistration = UICollectionView.CellRegistration<ChatCollectionViewCell, Message> { (cell, indexPath, identifier) in
-            if identifier.role == "assistant" {
-                cell.setConstraintAIBubble()
-                cell.setChatLabelText(to: identifier.content)
-            } else {
-                cell.setConstraintUserBubble()
-                cell.setChatLabelText(to: identifier.content)
-            }
+            
+            cell.configureBubbles(identifier: identifier)
+            
         }
         
         dataSource =  UICollectionViewDiffableDataSource<Section, Message>(collectionView: chatCollectionView) {
             (collectionView: UICollectionView, indexPath: IndexPath, identifier: Message) -> UICollectionViewCell? in
-            collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: identifier)
+            let cell = collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: identifier)
+            
+            if identifier.role == UserContentConstant.UserRole {
+                
+            }
+            
+            return cell
         }
+        
+        var snapShot = NSDiffableDataSourceSnapshot<Section, Message>()
+        snapShot.appendSections([.main])
+        dataSource.apply(snapShot, animatingDifferences: false)
         
         return dataSource
     }
     
-    private func configureSnapshot()-> NSDiffableDataSourceSnapshot<Section, Message> {
-        
-        snapShot = NSDiffableDataSourceSnapshot<Section, Message>()
-        snapShot.appendSections([.main])
-        dataSource.apply(snapShot, animatingDifferences: false)
-        
-        return snapShot
-    }
-    
+
     private func updateSnapshot(_ item: Message) {
-        DispatchQueue.main.async {
-            self.snapShot.appendItems([item])
-            self.dataSource.apply(self.snapShot, animatingDifferences: false)
-        }
+        var snapShot = dataSource.snapshot()
+        snapShot.appendItems([item])
+        dataSource.apply(snapShot, animatingDifferences: false)
     }
     
     private func configureLayout() {
@@ -175,9 +165,11 @@ final class ChatView: UIView {
                                               to: AIContentModel.self) { result in
             switch result {
             case .success(let data):
-                self.updateSnapshot(data.choices[0].message)
+                DispatchQueue.main.async {
+                    self.updateSnapshot(data.choices[0].message)
+                }
             case .failure(let error):
-                print("\(error)가 발생했습니다 얼럿얼럿띄움~~")
+                print(error)
             }
         }
     }
