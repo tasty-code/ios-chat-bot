@@ -2,8 +2,14 @@ import Foundation
 
 final class NetworkRequestBuilder: NetworkRequestBuilderProtocol {
     // MARK: Namespace
-    enum NetworkBuilderError: Error {
+    enum NetworkBuilderError: Error, CustomDebugStringConvertible {
         case buildRequestFailed
+        
+        var debugDescription: String {
+            switch self {
+            case .buildRequestFailed: "빌드 요청 실패"
+            }
+        }
     }
     
     // MARK: Dependencies

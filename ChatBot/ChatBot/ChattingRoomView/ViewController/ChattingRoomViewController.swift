@@ -12,23 +12,6 @@ final class ChattingRoomViewController: UIViewController {
         static let messageBubbleWidthRatio: CGFloat = 2/3
     }
     
-    enum Section: CaseIterable {
-        case main
-    }
-    
-    private struct Item: Hashable {
-        let id: String = UUID().uuidString
-        let message: Message
-        
-        func hash(into hasher: inout Hasher) {
-            hasher.combine(id)
-        }
-        
-        static func == (lhs: ChattingRoomViewController.Item, rhs: ChattingRoomViewController.Item) -> Bool {
-            return lhs.id == rhs.id
-        }
-    }
-    
     // MARK: View Components
     private lazy var chattingRoomView: UICollectionView! = {
         let chattingRoomView = UICollectionView(frame: view.bounds, collectionViewLayout: configureLayout())
@@ -101,13 +84,14 @@ extension ChattingRoomViewController {
               let text = messageTextView.text
         else { return }
         
-        submitMessage(text: text)
-        sendMessage()
+        submitMessage(role: .user, text: text)
+        submitMessage(role: .assistant, text: "...")
+        sendMessageToGPT()
         messageTextView.text = String()
     }
     
-    private func submitMessage(text: String) {
-        let message = Message(role: .user, content: text)
+    private func submitMessage(role: Role, text: String) {
+        let message = Message(role: role, content: text)
         updateDataSource(with: message)
     }
     
@@ -121,18 +105,19 @@ extension ChattingRoomViewController {
         return builder
     }
     
-    private func sendMessage() {
-        let messages = snapshot.itemIdentifiers.map({ $0.message })
+    private func sendMessageToGPT() {
+        let messages = snapshot.itemIdentifiers[0..<snapshot.numberOfItems - 1].map({ $0.message })
         let builder = prepareToSend(messages, to: .gpt_3_5_turbo)
         do {
             let request = try builder.build()
             Task {
                 let responseModel = try await networkManager?.request(urlRequest: request)
                 guard let newMessage = responseModel?.choices.first?.message else { return }
-                updateDataSource(with: newMessage)
+                reloadCurrentDataSource(with: newMessage)
             }
         } catch {
-            print(error)
+            let errorMessage = Message(role: .assistant, content: error.localizedDescription)
+            reloadCurrentDataSource(with: errorMessage)
         }
     }
 }
@@ -167,11 +152,33 @@ extension ChattingRoomViewController {
 
 // MARK: DataSource Controls
 extension ChattingRoomViewController {
+    enum Section: CaseIterable {
+        case main
+    }
+    
+    private struct Item: Hashable {
+        let id: String
+        let message: Message
+        
+        init(id: String = UUID().uuidString, message: Message) {
+            self.id = id
+            self.message = message
+        }
+        
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(id)
+        }
+        
+        static func == (lhs: ChattingRoomViewController.Item, rhs: ChattingRoomViewController.Item) -> Bool {
+            return lhs.id == rhs.id
+        }
+    }
+    
     private func updateDataSource(with messages: [Message?]) {
-        let items: [Item] = messages.compactMap({ message in
+        let items: [Item] = messages.compactMap { message in
             guard let message = message else { return nil }
             return Item(message: message)
-        })
+        }
         
         snapshot.appendItems(items)
         dataSource.apply(snapshot, animatingDifferences: true)
@@ -186,6 +193,14 @@ extension ChattingRoomViewController {
         dataSource.apply(snapshot, animatingDifferences: true)
         
         scrollToBottom(itemsCount: snapshot.numberOfItems, sectionsCount: snapshot.numberOfSections)
+    }
+    
+    private func reloadCurrentDataSource(with message: Message) {
+        guard let lastItem = snapshot.itemIdentifiers.last else { return }
+        let newItem = Item(message: message)
+        snapshot.deleteItems([lastItem])
+        snapshot.appendItems([newItem])
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
     
     private func scrollToBottom(itemsCount: Int, sectionsCount: Int, at position: UICollectionView.ScrollPosition = .bottom) {
@@ -210,7 +225,6 @@ extension ChattingRoomViewController {
         ])
         
         NSLayoutConstraint.activate([
-            bottomStackView.topAnchor.constraint(equalTo: chattingRoomView.bottomAnchor),
             bottomStackView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor),
             bottomStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: layoutMargin),
             bottomStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -layoutMargin),
