@@ -2,6 +2,8 @@ import UIKit
 
 final class BubbleView: UIView {
     private var bubbleLayer: CAShapeLayer
+    private var dotLayer: CAReplicatorLayer
+    
     private let bubbleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = .zero
@@ -21,10 +23,15 @@ final class BubbleView: UIView {
     }
     
     init() {
-        self.bubbleLayer = CAShapeLayer()
+        bubbleLayer = CAShapeLayer()
+        dotLayer = CAReplicatorLayer()
         super.init(frame: .zero)
-        self.layer.addSublayer(bubbleLayer)
-        self.addSubview(bubbleLabel)
+        
+        layer.addSublayer(bubbleLayer)
+        layer.addSublayer(dotLayer)
+        
+        addSubview(bubbleLabel)
+        
         setConstraint()
     }
     
@@ -42,13 +49,40 @@ final class BubbleView: UIView {
     }
     
     override func draw(_ rect: CGRect) {
+        
         if role == .user {
+            dotLayer.isHidden = true
             drawBubbleToRight()
-        } else {
+        } else if role == .assistant {
             drawBubbleToLeft()
+            
+            if text == "      " {
+                showAnimatingDotsInImageView(dotXOffset: 6.0, dotSize: 4.0, dotSpacing: 8.0)
+            }
         }
         
         super.draw(rect)
+    }
+    
+    private func showAnimatingDotsInImageView(dotXOffset: CGFloat, dotSize: CGFloat, dotSpacing: CGFloat) {
+        let lay = CAReplicatorLayer()
+        let bar = CALayer()
+        
+        dotLayer.addSublayer(lay)
+        bar.frame = CGRect(x: bounds.width / 2 - dotXOffset, y: bounds.height / 2, width: dotSize, height: dotSize)
+        
+        bar.cornerRadius = bar.frame.width / 2  
+        bar.backgroundColor = UIColor.black.cgColor
+        lay.addSublayer(bar)
+        lay.instanceCount = 3
+        lay.instanceTransform = CATransform3DMakeTranslation(dotSpacing, 0, 0)
+        let anim = CABasicAnimation(keyPath: #keyPath(CALayer.opacity))
+        anim.fromValue = 1.0
+        anim.toValue = 0.2
+        anim.duration = 1
+        anim.repeatCount = .infinity
+        bar.add(anim, forKey: nil)
+        lay.instanceDelay = anim.duration / Double(lay.instanceCount)
     }
     
     private func drawBubbleToRight() {
