@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0D3260012B576362000C352E /* ChatRoomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3260002B576362000C352E /* ChatRoomError.swift */; };
 		0D3260042B576BC9000C352E /* BezierPath+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3260032B576BC9000C352E /* BezierPath+extension.swift */; };
+		0D3260062B57724B000C352E /* AppEnviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3260052B57724B000C352E /* AppEnviroment.swift */; };
 		0D843AD82B4B986D00F4EAD2 /* URLSession+HTTPPublishable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843AD72B4B986D00F4EAD2 /* URLSession+HTTPPublishable.swift */; };
 		0D843ADB2B4B98C900F4EAD2 /* GPTHTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843ADA2B4B98C900F4EAD2 /* GPTHTTPService.swift */; };
 		0D843ADD2B4B992500F4EAD2 /* DataDecoderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843ADC2B4B992500F4EAD2 /* DataDecoderable.swift */; };
@@ -62,6 +63,7 @@
 /* Begin PBXFileReference section */
 		0D3260002B576362000C352E /* ChatRoomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomError.swift; sourceTree = "<group>"; };
 		0D3260032B576BC9000C352E /* BezierPath+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BezierPath+extension.swift"; sourceTree = "<group>"; };
+		0D3260052B57724B000C352E /* AppEnviroment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnviroment.swift; sourceTree = "<group>"; };
 		0D843AD72B4B986D00F4EAD2 /* URLSession+HTTPPublishable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+HTTPPublishable.swift"; sourceTree = "<group>"; };
 		0D843ADA2B4B98C900F4EAD2 /* GPTHTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTHTTPService.swift; sourceTree = "<group>"; };
 		0D843ADC2B4B992500F4EAD2 /* DataDecoderable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDecoderable.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 			children = (
 				B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */,
 				B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */,
+				0D3260052B57724B000C352E /* AppEnviroment.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -646,6 +649,7 @@
 				0D843B2B2B4FB5C700F4EAD2 /* GPTChatRoomViewModel.swift in Sources */,
 				0D843AE92B4BA6D300F4EAD2 /* JSONEecoder+DataEecoderable.swift in Sources */,
 				0DF997B52B479C0A0055C836 /* HTTPError.swift in Sources */,
+				0D3260062B57724B000C352E /* AppEnviroment.swift in Sources */,
 				0DF997AF2B479BA80055C836 /* GPTError.swift in Sources */,
 				0DF997772B43FFA10055C836 /* GPTCommentDTO.swift in Sources */,
 				0D843AE22B4B99C000F4EAD2 /* JSONDecoder+DataDecoderable.swift in Sources */,
