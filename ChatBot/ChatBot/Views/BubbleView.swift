@@ -6,24 +6,22 @@
 //
 import UIKit
 
-enum role {
-    case assistant
-    case user
-}
-
 final class BubbleView: UIView {
     var color = UIColor()
+    var sender: Sender?
     
     override func draw(_ rect: CGRect) {
-        
-        
-//        role.assistant ? GPTBubbleMake(color: color) : userBubbleMake(color: color)
-        userBubbleMake(color: color)
-//        GPTBubbleMake(color: color)
-       
+        switch sender {
+        case .assistant:
+            makeAssistantBubble(color: color)
+        case .user:
+            makeUserBubble(color: color)
+        case .none:
+            return
+        }
     }
     
-    func userBubbleMake(color: UIColor) {
+    func makeUserBubble(color: UIColor) {
         let bubbleRect = CGRect(x: 0, y: 0, width: layer.frame.width - 10, height: layer.frame.height)
         let path = UIBezierPath(roundedRect: bubbleRect, byRoundingCorners: [.topLeft, .topRight, .bottomLeft], cornerRadii: CGSize(width: 5, height: 5))
         let plus = CGFloat(10)
@@ -35,8 +33,7 @@ final class BubbleView: UIView {
         path.close()
     }
     
-    
-    func GPTBubbleMake(color: UIColor) {
+    func makeAssistantBubble(color: UIColor) {
         let bubbleRect = CGRect(x: 10, y: 0, width: layer.frame.width - 10, height: layer.frame.height)
         let path = UIBezierPath(roundedRect: bubbleRect, byRoundingCorners: [.topLeft, .topRight, .bottomRight], cornerRadii: CGSize(width: 5, height: 5))
         let plus = CGFloat(10)

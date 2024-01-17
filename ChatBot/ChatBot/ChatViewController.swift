@@ -8,14 +8,14 @@
 import UIKit
 
 struct ChatMessage: Hashable {
-    let sender: String
+    let sender: Sender
     let message: String
     let messageID = UUID()
 }
 
 final class ChatViewController: UIViewController {
     private lazy var horizontalStackView: UIStackView = {
-       let stackView = UIStackView()
+        let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.alignment = .fill
         stackView.distribution = .fill
@@ -26,7 +26,7 @@ final class ChatViewController: UIViewController {
     }()
     
     private lazy var sendButtonStackView: UIStackView = {
-       let stackView = UIStackView()
+        let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.addSubview(sendButton)
         return stackView
@@ -57,15 +57,13 @@ final class ChatViewController: UIViewController {
     
     typealias ChatDataSource = UICollectionViewDiffableDataSource<Int, ChatMessage>
     typealias CellRegistration = UICollectionView.CellRegistration<ChatCollectionViewCell, ChatMessage>
-
+    
     private var collectionView: UICollectionView!
     private var dataSource: ChatDataSource!
     private var cellRegistration: CellRegistration!
     
-    // TODO: 이걸 CoreData로 저장 예정
     private var messageStorage = [ChatMessage]()
-    private var receiveStorage = [ChatMessage]()
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -90,7 +88,7 @@ extension ChatViewController {
         config.showsSeparators = false
         return UICollectionViewCompositionalLayout.list(using: config)
     }
-
+    
     private func setUpLayouts() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -99,7 +97,6 @@ extension ChatViewController {
         view.backgroundColor = .white
         view.addSubview(collectionView)
         
-//        sendButtonStackView.addSubview(sendButton)
         view.addSubview(horizontalStackView)
         horizontalStackView.addArrangedSubviews([textView, sendButtonStackView])
         
@@ -133,34 +130,32 @@ extension ChatViewController {
     @objc
     private func sendButtonTapped() {
         if let message = textView.text, !message.isEmpty {
-            let chatMessage = ChatMessage(sender: "user", message: message)
-            
+            let chatMessage = ChatMessage(sender: Sender.user, message: message)
             messageStorage.append(chatMessage)
             
             var snapshot = dataSource.snapshot()
-//            var snapshot2 = NSDiffableDataSourceSnapshot<Int, ChatMessage>()
             snapshot.deleteAllItems()
             snapshot.appendSections([0])
             snapshot.appendItems(messageStorage)
             dataSource.apply(snapshot, animatingDifferences: true)
-            textView.text = nil // Clear the text field after sending
+            
+            textView.text = nil
             textView.endEditing(true)
             textViewDidChange(textView)
             
-//            receiveMessage()
+            receiveMessage()
         }
     }
     
     private func receiveMessage() {
         let message = "test"
-        let chatResponse = ChatMessage(sender: "assistant", message: message)
-        receiveStorage.append(chatResponse)
+        let chatResponse = ChatMessage(sender: Sender.assistant, message: message)
+        messageStorage.append(chatResponse)
         
         var shot = NSDiffableDataSourceSnapshot<Int, ChatMessage>()
-        shot.appendSections([1])
-        shot.appendItems(receiveStorage)
+        shot.appendSections([0])
+        shot.appendItems(messageStorage)
         dataSource.apply(shot, animatingDifferences: true)
-        
     }
     
     private func configureDataSource() {
@@ -177,10 +172,10 @@ extension ChatViewController {
     }
     
     private func textFieldShouldReturn(_ textView: UITextView) -> Bool {
-         if textView == self.textView {
-             sendButtonTapped()
-             textView.resignFirstResponder()
-         }
+        if textView == self.textView {
+            sendButtonTapped()
+            textView.resignFirstResponder()
+        }
         return true
     }
 }

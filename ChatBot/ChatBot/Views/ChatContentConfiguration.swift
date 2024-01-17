@@ -8,6 +8,7 @@
 import UIKit
 
 struct ChatContentConfiguration: UIContentConfiguration {
+    var sender: Sender?
     var content: String?
     
     func makeContentView() -> UIView & UIContentView {

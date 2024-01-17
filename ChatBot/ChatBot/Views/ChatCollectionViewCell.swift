@@ -13,6 +13,7 @@ final class ChatCollectionViewCell: UICollectionViewListCell {
     override func updateConfiguration(using state: UICellConfigurationState) {
         var config = ChatContentConfiguration().updated(for: state)
         config.content = item.message
+        config.sender = item.sender
         contentConfiguration = config
     }
 }
