@@ -15,10 +15,16 @@ final class ChatBalloon: UIView {
         label.textColor = .white
         label.font = .preferredFont(forTextStyle: .body)
         label.numberOfLines = .max
-        
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    var text: String? {
+        didSet {
+            label.text = text
+            setNeedsDisplay()
+        }
+    }
     
     var direction: Direction = .right
     
@@ -38,20 +44,12 @@ final class ChatBalloon: UIView {
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: topAnchor, constant: 12.0),
             label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12.0),
-            
         ])
-//        if direction == .right {
-//        } else {
-//            print("dhdhdhdhdhdh\(direction)")
-//            NSLayoutConstraint.activate([
-//                label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
-//                label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12.0),
-//            ])
-//        }
     }
     
     func leftOrRight(direction: Direction) {
         let constraint: [NSLayoutConstraint] = [label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12.0), label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0)]
+        
         if direction == .right {
             constraint.forEach { constraint in
                 constraint.isActive = true
@@ -98,7 +96,7 @@ final class ChatBalloon: UIView {
         
         balloonLayer.fillColor = UIColor.systemBlue.cgColor
         balloonLayer.path = bezierPath.cgPath
-        label.textAlignment = .right
+        label.textAlignment = .left
     }
     
     func drawBalloonToLeft() {

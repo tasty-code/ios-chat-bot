@@ -56,10 +56,10 @@ final class ChatCollectionView: UICollectionView {
 }
 
 extension ChatCollectionView: ChatCollectionViewDelegate {
-    
     func addChatRecord(text: String) {
         chatRecord.append(Message(role: .user, content: text))
         saveSnapshot()
+        self.scrollToItem(at: IndexPath(row: self.numberOfItems(inSection: 0) - 1, section: 0), at: .bottom, animated: true)
     }
     
     func updateCollectionViewFromResponse() async {
@@ -68,6 +68,7 @@ extension ChatCollectionView: ChatCollectionViewDelegate {
             guard let chatAnswer: ResponseModel = try await injectedDelegate?.getRequestData(inputData: RequestModel(messages: chatRecord)) else { return }
             chatRecord.append(chatAnswer.choices[0].message)
             saveSnapshot()
+            self.scrollToItem(at: IndexPath(row: self.numberOfItems(inSection: 0) - 1, section: 0), at: .bottom, animated: true)
         }
         catch {
             print(error)

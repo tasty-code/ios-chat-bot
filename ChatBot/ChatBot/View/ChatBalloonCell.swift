@@ -37,7 +37,7 @@ final class ChatBalloonCell: UICollectionViewListCell {
     }
     
     func setLabelText(text: String) {
-        chatBalloonView.label.text = text
+        chatBalloonView.text = text
     }
     
     func setDirection(direction: Direction) {
