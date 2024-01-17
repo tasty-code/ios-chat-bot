@@ -68,64 +68,29 @@ final class UIChatBubbleView: UIView {
         let bezierPath = UIBezierPath()
         switch startDirection {
         case .left:
-            drawLeftChatBubble(to: bezierPath, width: width, height: height)
+            bezierPath.drawLeftChatBubble(width: width, height: height)
             bubbleLayer.fillColor = UIColor.lightGray.cgColor
         case .right:
-            drawRightChatBubble(to: bezierPath, width: width, height: height)
+            bezierPath.drawRightChatBubble(width: width, height: height)
             bubbleLayer.fillColor = UIColor.systemBlue.cgColor
         }
+        bezierPath.close()
         
         if contentLabel.text == nil {
-            drawWaitingDots(to: bezierPath)
+            bezierPath.drawDots(
+                size: 5,
+                points:
+                    CGPoint(x: emptyWidth / 2, y: emptyHeight / 2),
+                    CGPoint(x: emptyWidth / 2 - dotsSpacing, y: emptyHeight / 2),
+                    CGPoint(x: emptyWidth / 2 + dotsSpacing, y: emptyHeight / 2)
+            )
+            executeAnimation()
         }
         
         bubbleLayer.path = bezierPath.cgPath
     }
     
-    private func drawLeftChatBubble(to bezierPath: UIBezierPath, width: Double, height: Double) {
-        bezierPath.move(to: CGPoint(x: 22, y: height))
-        bezierPath.addLine(to: CGPoint(x: width - 17, y: height))
-        bezierPath.addCurve(to: CGPoint(x: width, y: height - 17), controlPoint1: CGPoint(x: width - 7.61, y: height), controlPoint2: CGPoint(x: width, y: height - 7.61))
-        bezierPath.addLine(to: CGPoint(x: width, y: 17))
-        bezierPath.addCurve(to: CGPoint(x: width - 17, y: 0), controlPoint1: CGPoint(x: width, y: 7.61), controlPoint2: CGPoint(x: width - 7.61, y: 0))
-        bezierPath.addLine(to: CGPoint(x: 21, y: 0))
-        bezierPath.addCurve(to: CGPoint(x: 4, y: 17), controlPoint1: CGPoint(x: 11.61, y: 0), controlPoint2: CGPoint(x: 4, y: 7.61))
-        bezierPath.addLine(to: CGPoint(x: 4, y: height - 11))
-        bezierPath.addCurve(to: CGPoint(x: 0, y: height), controlPoint1: CGPoint(x: 4, y: height - 1), controlPoint2: CGPoint(x: 0, y: height))
-        bezierPath.addLine(to: CGPoint(x: -0.05, y: height - 0.01))
-        bezierPath.addCurve(to: CGPoint(x: 11.04, y: height - 4.04), controlPoint1: CGPoint(x: 4.07, y: height + 0.43), controlPoint2: CGPoint(x: 8.16, y: height - 1.06))
-        bezierPath.addCurve(to: CGPoint(x: 22, y: height), controlPoint1: CGPoint(x: 16, y: height), controlPoint2: CGPoint(x: 19, y: height))
-        bezierPath.close()
-    }
-    
-    private func drawRightChatBubble(to bezierPath: UIBezierPath, width: Double, height: Double) {
-        bezierPath.move(to: CGPoint(x: width - 22, y: height))
-        bezierPath.addLine(to: CGPoint(x: 17, y: height))
-        bezierPath.addCurve(to: CGPoint(x: 0, y: height - 17), controlPoint1: CGPoint(x: 7.61, y: height), controlPoint2: CGPoint(x: 0, y: height - 7.61))
-        bezierPath.addLine(to: CGPoint(x: 0, y: 17))
-        bezierPath.addCurve(to: CGPoint(x: 17, y: 0), controlPoint1: CGPoint(x: 0, y: 7.61), controlPoint2: CGPoint(x: 7.61, y: 0))
-        bezierPath.addLine(to: CGPoint(x: width - 21, y: 0))
-        bezierPath.addCurve(to: CGPoint(x: width - 4, y: 17), controlPoint1: CGPoint(x: width - 11.61, y: 0), controlPoint2: CGPoint(x: width - 4, y: 7.61))
-        bezierPath.addLine(to: CGPoint(x: width - 4, y: height - 11))
-        bezierPath.addCurve(to: CGPoint(x: width, y: height), controlPoint1: CGPoint(x: width - 4, y: height - 1), controlPoint2: CGPoint(x: width, y: height))
-        bezierPath.addLine(to: CGPoint(x: width + 0.05, y: height - 0.01))
-        bezierPath.addCurve(to: CGPoint(x: width - 11.04, y: height - 4.04), controlPoint1: CGPoint(x: width - 4.07, y: height + 0.43), controlPoint2: CGPoint(x: width - 8.16, y: height - 1.06))
-        bezierPath.addCurve(to: CGPoint(x: width - 22, y: height), controlPoint1: CGPoint(x: width - 16, y: height), controlPoint2: CGPoint(x: width - 19, y: height))
-        bezierPath.close()
-    }
-    
-    private func drawWaitingDots(to bezierPath: UIBezierPath) {
-        let centerPoint = CGPoint(x: emptyWidth / 2, y: emptyHeight / 2)
-        let startPoint = CGPoint(x: emptyWidth / 2 - dotsSpacing, y: emptyHeight / 2)
-        let endPoint = CGPoint(x: emptyWidth / 2 + dotsSpacing, y: emptyHeight / 2)
-        
-        bezierPath.move(to: CGPoint(x: centerPoint.x + 5, y: centerPoint.y))
-        bezierPath.addArc(withCenter: centerPoint, radius: 5, startAngle: 0, endAngle: 2 * .pi, clockwise: true)
-        bezierPath.move(to: CGPoint(x: startPoint.x + 5, y: startPoint.y))
-        bezierPath.addArc(withCenter: startPoint, radius: 5, startAngle: 0, endAngle: 2 * .pi, clockwise: true)
-        bezierPath.move(to: CGPoint(x: endPoint.x + 5, y: endPoint.y))
-        bezierPath.addArc(withCenter: endPoint, radius: 5, startAngle: 0, endAngle: 2 * .pi, clockwise: true)
-        
+    private func executeAnimation() {
         let animation = CABasicAnimation(keyPath: "opacity")
         animation.fromValue = 0
         animation.toValue = 1

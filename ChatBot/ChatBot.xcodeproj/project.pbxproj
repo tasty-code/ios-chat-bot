@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0D3260012B576362000C352E /* ChatRoomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3260002B576362000C352E /* ChatRoomError.swift */; };
+		0D3260042B576BC9000C352E /* BezierPath+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3260032B576BC9000C352E /* BezierPath+extension.swift */; };
 		0D843AD82B4B986D00F4EAD2 /* URLSession+HTTPPublishable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843AD72B4B986D00F4EAD2 /* URLSession+HTTPPublishable.swift */; };
 		0D843ADB2B4B98C900F4EAD2 /* GPTHTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843ADA2B4B98C900F4EAD2 /* GPTHTTPService.swift */; };
 		0D843ADD2B4B992500F4EAD2 /* DataDecoderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843ADC2B4B992500F4EAD2 /* DataDecoderable.swift */; };
@@ -60,6 +61,7 @@
 
 /* Begin PBXFileReference section */
 		0D3260002B576362000C352E /* ChatRoomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomError.swift; sourceTree = "<group>"; };
+		0D3260032B576BC9000C352E /* BezierPath+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BezierPath+extension.swift"; sourceTree = "<group>"; };
 		0D843AD72B4B986D00F4EAD2 /* URLSession+HTTPPublishable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+HTTPPublishable.swift"; sourceTree = "<group>"; };
 		0D843ADA2B4B98C900F4EAD2 /* GPTHTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTHTTPService.swift; sourceTree = "<group>"; };
 		0D843ADC2B4B992500F4EAD2 /* DataDecoderable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDecoderable.swift; sourceTree = "<group>"; };
@@ -122,6 +124,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D3260022B576B86000C352E /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				0D3260032B576BC9000C352E /* BezierPath+extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		0D843AD92B4B98B200F4EAD2 /* HTTPService */ = {
 			isa = PBXGroup;
 			children = (
@@ -331,6 +341,7 @@
 		0D843B372B511ED100F4EAD2 /* ChatBubble */ = {
 			isa = PBXGroup;
 			children = (
+				0D3260022B576B86000C352E /* Extension */,
 				0D843B382B511F0A00F4EAD2 /* UIChatBubbleView.swift */,
 			);
 			path = ChatBubble;
@@ -649,6 +660,7 @@
 				0DF997A72B4680BB0055C836 /* Network.swift in Sources */,
 				0DF997722B43BC590055C836 /* ToolMessage.swift in Sources */,
 				0D3260012B576362000C352E /* ChatRoomError.swift in Sources */,
+				0D3260042B576BC9000C352E /* BezierPath+extension.swift in Sources */,
 				0D843B392B511F0A00F4EAD2 /* UIChatBubbleView.swift in Sources */,
 				0D843B342B50CFAD00F4EAD2 /* WaitingMessage.swift in Sources */,
 				0D843AD82B4B986D00F4EAD2 /* URLSession+HTTPPublishable.swift in Sources */,
