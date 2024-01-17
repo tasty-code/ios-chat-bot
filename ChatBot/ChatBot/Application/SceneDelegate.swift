@@ -11,7 +11,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.windowScene = windowScene
+        
+        let apiKey = Bundle.main.object(forInfoDictionaryKey: "CHAT_BOT_API_KEY") as! String
+        window?.rootViewController = GPTChatRoomViewController(
+            viewModel: GPTChatRoomViewModel.init(httpRequest: Network.GPTRequest.chatBot(apiKey: apiKey))
+        )
+        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) { }

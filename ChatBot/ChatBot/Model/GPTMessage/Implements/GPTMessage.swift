@@ -5,8 +5,11 @@
 //  Created by 김준성 on 1/2/24.
 //
 
+import Foundation
+
 extension Model {
-    struct GPTMessage: Codable, GPTMessagable {
+    struct GPTMessage: GPTMessagable, Identifiable {
+        let id: UUID = UUID()
         let role: GPTMessageRole
         let content: String?
         let name: String?
@@ -33,13 +36,23 @@ extension Model {
     }
 }
 
-extension Model.GPTMessage {
+extension Model.GPTMessage: Codable {
     enum CodingKeys: String, CodingKey {
         case role
         case content
         case name
         case toolCalls = "tool_calls"
         case toolCallID = "tool_call_id"
+    }
+}
+
+extension Model.GPTMessage: Hashable {
+    static func == (lhs: Model.GPTMessage, rhs: Model.GPTMessage) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }
 

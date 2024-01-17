@@ -20,5 +20,6 @@ extension Model {
         case user = "user"
         case assistant = "assistant"
         case tool = "tool"
+        case waiting
     }
 }
