@@ -108,6 +108,14 @@ final class GPTChatRoomViewController: UIViewController {
                 chatCollectionView.scrollToItem(at: indexPath, at: .top, animated: true)
             }
             .store(in: &cancellables)
+        
+        viewModel.errorMessageSubject
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] error in
+                guard let self else { return }
+                present(configureErrorAlert(error), animated: true)
+            }
+            .store(in: &cancellables)
     }
 }
 
@@ -161,5 +169,14 @@ extension GPTChatRoomViewController {
     private func tapSendButton(_ sender: Any) {
         viewModel.sendComment(commentTextView.text)
         commentTextView.text = nil
+    }
+}
+
+// MARK: - configure AlertController
+extension GPTChatRoomViewController {
+    private func configureErrorAlert(_ error: Error) -> UIAlertController {
+        let alert = UIAlertController(title: "\(type(of: error))", message: error.localizedDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        return alert
     }
 }

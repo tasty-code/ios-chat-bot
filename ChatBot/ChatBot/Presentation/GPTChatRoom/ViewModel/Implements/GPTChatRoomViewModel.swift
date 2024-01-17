@@ -17,6 +17,7 @@ final class GPTChatRoomViewModel: GPTChatRoomVMProtocol {
     var chattingsPublisher: Published<[Model.GPTMessage]>.Publisher { $chattings }
     
     let lastestUpdateIndexSubject = PassthroughSubject<Int, Never>()
+    let errorMessageSubject = PassthroughSubject<Error, Never>()
     
     init(httpService: HTTPServicable, httpRequest: HTTPRequestable, chattings: [Model.GPTMessage]) {
         self.httpService = httpService
@@ -25,7 +26,12 @@ final class GPTChatRoomViewModel: GPTChatRoomVMProtocol {
     }
     
     func sendComment(_ text: String?) {
-        guard let indexToUpdate = appendComments(text) else { return }
+        guard let text = text, !text.isEmpty else {
+            errorMessageSubject.send(GPTError.ChatRoomError.emptyContent)
+            return
+        }
+        
+        let indexToUpdate = appendComments(text)
         
         httpService.request(
             request: httpRequest,
@@ -37,6 +43,7 @@ final class GPTChatRoomViewModel: GPTChatRoomVMProtocol {
         .sink { [weak self] completion in
             if case .failure(let error) = completion {
                 self?.chattings[indexToUpdate] = Model.AssistantMessage(content: "\(error)", name: nil, toolCalls: nil).asRequestMessage()
+                self?.errorMessageSubject.send(error)
             }
             self?.lastestUpdateIndexSubject.send(indexToUpdate)
         } receiveValue: { [weak self] reply in
@@ -45,11 +52,9 @@ final class GPTChatRoomViewModel: GPTChatRoomVMProtocol {
         .store(in: &cancellables)
     }
     
-    private func appendComments(_ text: String?) -> Int? {
-        guard let text = text else {
-            return nil
-        }
-        
+    
+    
+    private func appendComments(_ text: String) -> Int {
         let comment = Model.UserMessage(content: text)
         chattings.append(comment.asRequestMessage())
         

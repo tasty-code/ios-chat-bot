@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D3260012B576362000C352E /* ChatRoomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3260002B576362000C352E /* ChatRoomError.swift */; };
 		0D843AD82B4B986D00F4EAD2 /* URLSession+HTTPPublishable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843AD72B4B986D00F4EAD2 /* URLSession+HTTPPublishable.swift */; };
 		0D843ADB2B4B98C900F4EAD2 /* GPTHTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843ADA2B4B98C900F4EAD2 /* GPTHTTPService.swift */; };
 		0D843ADD2B4B992500F4EAD2 /* DataDecoderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843ADC2B4B992500F4EAD2 /* DataDecoderable.swift */; };
@@ -58,6 +59,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0D3260002B576362000C352E /* ChatRoomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomError.swift; sourceTree = "<group>"; };
 		0D843AD72B4B986D00F4EAD2 /* URLSession+HTTPPublishable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+HTTPPublishable.swift"; sourceTree = "<group>"; };
 		0D843ADA2B4B98C900F4EAD2 /* GPTHTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTHTTPService.swift; sourceTree = "<group>"; };
 		0D843ADC2B4B992500F4EAD2 /* DataDecoderable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDecoderable.swift; sourceTree = "<group>"; };
@@ -465,6 +467,7 @@
 			isa = PBXGroup;
 			children = (
 				0DF997B42B479C0A0055C836 /* HTTPError.swift */,
+				0D3260002B576362000C352E /* ChatRoomError.swift */,
 			);
 			path = Implements;
 			sourceTree = "<group>";
@@ -645,6 +648,7 @@
 				0DF997832B463C610055C836 /* Model.swift in Sources */,
 				0DF997A72B4680BB0055C836 /* Network.swift in Sources */,
 				0DF997722B43BC590055C836 /* ToolMessage.swift in Sources */,
+				0D3260012B576362000C352E /* ChatRoomError.swift in Sources */,
 				0D843B392B511F0A00F4EAD2 /* UIChatBubbleView.swift in Sources */,
 				0D843B342B50CFAD00F4EAD2 /* WaitingMessage.swift in Sources */,
 				0D843AD82B4B986D00F4EAD2 /* URLSession+HTTPPublishable.swift in Sources */,

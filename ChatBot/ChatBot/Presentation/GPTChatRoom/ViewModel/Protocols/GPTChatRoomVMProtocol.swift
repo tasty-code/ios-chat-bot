@@ -12,6 +12,7 @@ protocol GPTChatRoomVMProtocol {
     var chattingsPublisher: Published<[Model.GPTMessage]>.Publisher { get }
     
     var lastestUpdateIndexSubject: PassthroughSubject<Int, Never> { get }
+    var errorMessageSubject: PassthroughSubject<Error, Never> { get }
     
     func sendComment(_ text: String?)
 }
