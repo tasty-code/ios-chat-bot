@@ -10,6 +10,7 @@ import UIKit
 struct ChatMessage: Hashable {
     let sender: String
     let message: String
+    let messageID = UUID()
 }
 
 final class ChatViewController: UIViewController {
@@ -63,6 +64,7 @@ final class ChatViewController: UIViewController {
     
     // TODO: 이걸 CoreData로 저장 예정
     private var messageStorage = [ChatMessage]()
+    private var receiveStorage = [ChatMessage]()
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -131,18 +133,34 @@ extension ChatViewController {
     @objc
     private func sendButtonTapped() {
         if let message = textView.text, !message.isEmpty {
-            let chatMessage = ChatMessage(sender: "ai", message: message)
+            let chatMessage = ChatMessage(sender: "user", message: message)
             
             messageStorage.append(chatMessage)
             
-            var snapshot = NSDiffableDataSourceSnapshot<Int, ChatMessage>()
+            var snapshot = dataSource.snapshot()
+//            var snapshot2 = NSDiffableDataSourceSnapshot<Int, ChatMessage>()
+            snapshot.deleteAllItems()
             snapshot.appendSections([0])
             snapshot.appendItems(messageStorage)
-            dataSource.apply(snapshot, animatingDifferences: false)
-            textView.text = "" // Clear the text field after sending
+            dataSource.apply(snapshot, animatingDifferences: true)
+            textView.text = nil // Clear the text field after sending
             textView.endEditing(true)
             textViewDidChange(textView)
+            
+//            receiveMessage()
         }
+    }
+    
+    private func receiveMessage() {
+        let message = "test"
+        let chatResponse = ChatMessage(sender: "assistant", message: message)
+        receiveStorage.append(chatResponse)
+        
+        var shot = NSDiffableDataSourceSnapshot<Int, ChatMessage>()
+        shot.appendSections([1])
+        shot.appendItems(receiveStorage)
+        dataSource.apply(shot, animatingDifferences: true)
+        
     }
     
     private func configureDataSource() {

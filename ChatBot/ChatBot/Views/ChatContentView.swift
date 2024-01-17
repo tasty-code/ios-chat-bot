@@ -40,6 +40,7 @@ class ChatContentView: UIView, UIContentView {
             super.init(frame: .zero)
             apply(configuration)
             setup()
+//            gptSetup()
         }
         
         required init?(coder: NSCoder) {
@@ -59,6 +60,21 @@ class ChatContentView: UIView, UIContentView {
                 textLabel.trailingAnchor.constraint(equalTo: bubble.trailingAnchor, constant: -20),
             ])
         }
+    
+    private func gptSetup() {
+        NSLayoutConstraint.activate([
+            bubble.leadingAnchor.constraint(equalTo: leadingAnchor),
+//            bubble.trailingAnchor.constraint(equalTo: trailingAnchor),
+            bubble.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            bubble.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            bubble.widthAnchor.constraint(lessThanOrEqualToConstant: 200),
+            
+            textLabel.topAnchor.constraint(equalTo: bubble.topAnchor, constant: 5),
+            textLabel.bottomAnchor.constraint(equalTo: bubble.bottomAnchor, constant: -5),
+            textLabel.leadingAnchor.constraint(equalTo: bubble.leadingAnchor, constant: 15),
+            textLabel.trailingAnchor.constraint(equalTo: bubble.trailingAnchor, constant: -20),
+        ])
+    }
         
         private func apply(_ configuration: ChatContentConfiguration) {
             textLabel.text = configuration.content
