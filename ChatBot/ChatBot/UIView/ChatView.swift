@@ -17,7 +17,9 @@ final class ChatView: UIView {
     // MARK: - properties
     
     private var userContentStorage = [Message]()
+    
     private lazy var textViewMaxHeightConstraint: NSLayoutConstraint = contentTextView.heightAnchor.constraint(equalToConstant: self.frame.height / 9)
+    
     private lazy var dataSource: UICollectionViewDiffableDataSource<Section, Message> = makeDataSource()
     
     private lazy var chatCollectionView: UICollectionView = {
@@ -189,9 +191,9 @@ final class ChatView: UIView {
             return nil
         }
         
-        if let newMessage = [Message(role: UserContentConstant.UserRole, content: userMessage)].last {
-            userContentStorage.append(newMessage)
-        }
+        let newMessage = Message(role: UserContentConstant.userRole, content: userMessage)
+        
+        userContentStorage.append(newMessage)
 
         let body = UserContentModel(messages: userContentStorage)
         let header: [String: String] = [HeaderFieldName.contentType.description : ContentType.json.description,
