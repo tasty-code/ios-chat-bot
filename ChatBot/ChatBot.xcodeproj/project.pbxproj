@@ -10,6 +10,7 @@
 		377F559C2B565D0B008066C6 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377F559B2B565D0B008066C6 /* UIStackView+Extension.swift */; };
 		378300362B4BD3E700BE0943 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378300352B4BD3E700BE0943 /* Bundle+Extension.swift */; };
 		37847FCD2B45121F00BE5E93 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37847FCC2B45121F00BE5E93 /* Message.swift */; };
+		37A12E9E2B568D9D00414D94 /* UITextView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A12E9D2B568D9D00414D94 /* UITextView+Extensions.swift */; };
 		37AF86D92B47E87A007BB30A /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AF86D82B47E87A007BB30A /* Errors.swift */; };
 		37B6CE872B43B1170075535E /* ChatRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B6CE862B43B1170075535E /* ChatRequestModel.swift */; };
 		37C6CCD42B560D5A008F96A6 /* ChatContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6CCD32B560D5A008F96A6 /* ChatContentView.swift */; };
@@ -33,6 +34,7 @@
 		377F559B2B565D0B008066C6 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
 		378300352B4BD3E700BE0943 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		37847FCC2B45121F00BE5E93 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		37A12E9D2B568D9D00414D94 /* UITextView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extensions.swift"; sourceTree = "<group>"; };
 		37AF86D82B47E87A007BB30A /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		37B6CE862B43B1170075535E /* ChatRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRequestModel.swift; sourceTree = "<group>"; };
 		37C6CCD32B560D5A008F96A6 /* ChatContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatContentView.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 			children = (
 				378300352B4BD3E700BE0943 /* Bundle+Extension.swift */,
 				377F559B2B565D0B008066C6 /* UIStackView+Extension.swift */,
+				37A12E9D2B568D9D00414D94 /* UITextView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -221,6 +224,7 @@
 				6666181B2B4CDFC900F96009 /* ChatViewController.swift in Sources */,
 				664D4A592B4BD732003765A9 /* NetworkManager.swift in Sources */,
 				66E5FF792B44FD1A0038398C /* ChatResponseModel.swift in Sources */,
+				37A12E9E2B568D9D00414D94 /* UITextView+Extensions.swift in Sources */,
 				B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */,
 				37C6CCD42B560D5A008F96A6 /* ChatContentView.swift in Sources */,
 				664D4A552B4BD625003765A9 /* ChatAPI.swift in Sources */,
