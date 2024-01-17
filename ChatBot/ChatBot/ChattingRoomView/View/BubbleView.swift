@@ -56,33 +56,39 @@ final class BubbleView: UIView {
         } else if role == .assistant {
             drawBubbleToLeft()
             
-            if text == "      " {
-                showAnimatingDotsInImageView(dotXOffset: 6.0, dotSize: 4.0, dotSpacing: 8.0)
+            if text == "" {
+                drawAnimatingDots(dotXOffset: 6.0, dotSize: 4.0, dotSpacing: 8.0)
             }
         }
         
         super.draw(rect)
     }
     
-    private func showAnimatingDotsInImageView(dotXOffset: CGFloat, dotSize: CGFloat, dotSpacing: CGFloat) {
-        let lay = CAReplicatorLayer()
-        let bar = CALayer()
+    private func drawAnimatingDots(dotXOffset: CGFloat, dotSize: CGFloat, dotSpacing: CGFloat) {
+        let layer = CAReplicatorLayer()
+        let backgroundLayer = CALayer()
         
-        dotLayer.addSublayer(lay)
-        bar.frame = CGRect(x: bounds.width / 2 - dotXOffset, y: bounds.height / 2, width: dotSize, height: dotSize)
+        dotLayer.addSublayer(layer)
+        backgroundLayer.frame = CGRect(x: bounds.width / 2 - dotXOffset,
+                           y: bounds.height / 2,
+                           width: dotSize,
+                           height: dotSize)
         
-        bar.cornerRadius = bar.frame.width / 2  
-        bar.backgroundColor = UIColor.black.cgColor
-        lay.addSublayer(bar)
-        lay.instanceCount = 3
-        lay.instanceTransform = CATransform3DMakeTranslation(dotSpacing, 0, 0)
-        let anim = CABasicAnimation(keyPath: #keyPath(CALayer.opacity))
-        anim.fromValue = 1.0
-        anim.toValue = 0.2
-        anim.duration = 1
-        anim.repeatCount = .infinity
-        bar.add(anim, forKey: nil)
-        lay.instanceDelay = anim.duration / Double(lay.instanceCount)
+        backgroundLayer.cornerRadius = backgroundLayer.frame.width / 2
+        backgroundLayer.backgroundColor = UIColor.black.cgColor
+        
+        layer.addSublayer(backgroundLayer)
+        layer.instanceCount = 3
+        layer.instanceTransform = CATransform3DMakeTranslation(dotSpacing, 0, 0)
+        
+        let animation = CABasicAnimation(keyPath: #keyPath(CALayer.opacity))
+        animation.fromValue = 1.0
+        animation.toValue = 0.2
+        animation.duration = 1
+        animation.repeatCount = .infinity
+        
+        backgroundLayer.add(animation, forKey: nil)
+        layer.instanceDelay = animation.duration / Double(layer.instanceCount)
     }
     
     private func drawBubbleToRight() {

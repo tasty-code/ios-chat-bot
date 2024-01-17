@@ -85,7 +85,7 @@ extension ChattingRoomViewController {
         else { return }
         
         submitMessage(role: .user, text: text)
-        submitMessage(role: .assistant, text: "      ")
+        submitMessage(role: .assistant, text: "")
         sendMessageToGPT()
         messageTextView.text = String()
     }
