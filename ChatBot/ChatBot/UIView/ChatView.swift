@@ -15,6 +15,8 @@ final class ChatView: UIView {
     }
     
     // MARK: - properties
+    
+    private var userContentStorage = [Message]()
     private lazy var textViewMaxHeightConstraint: NSLayoutConstraint = contentTextView.heightAnchor.constraint(equalToConstant: self.frame.height / 9)
     private lazy var dataSource: UICollectionViewDiffableDataSource<Section, Message> = makeDataSource()
     
@@ -179,9 +181,11 @@ final class ChatView: UIView {
             return nil
         }
         
-        let newMessage = [Message(role: UserContentConstant.UserRole, content: userMessage),
-                          Message(role: UserContentConstant.UserRole, content: userMessage)]
-        let body = UserContentModel(messages: newMessage)
+        if let newMessage = [Message(role: UserContentConstant.UserRole, content: userMessage)].last {
+            userContentStorage.append(newMessage)
+        }
+
+        let body = UserContentModel(messages: userContentStorage)
         let header: [String: String] = [HeaderFieldName.contentType.description : ContentType.json.description,
                                         HeaderFieldName.authorization.description : "Bearer \(apiKey)"]
         let endpoint: Endpointable = ChatBotEndpoint(url: url, httpMethod: .post, httpHeader: header, httpBody: body)
