@@ -31,15 +31,15 @@ final class GPTChatRoomViewController: UIViewController {
      }()
     
     private lazy var commentTextView: UITextView = {
-        let textField = UITextView()
-        textField.font = UIFont.preferredFont(forTextStyle: .body)
-        textField.layer.cornerRadius = ((textField.font?.pointSize ?? 24) / 2)
-        textField.backgroundColor = .white
-        textField.textColor = .black
-        textField.isScrollEnabled = false
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        return textField
+        let textView = UITextView()
+        textView.font = UIFont.preferredFont(forTextStyle: .body)
+        textView.layer.cornerRadius = ((textView.font?.pointSize ?? 24) / 2)
+        textView.backgroundColor = .white
+        textView.textColor = .black
+        textView.isScrollEnabled = false
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        return textView
     }()
     
     private lazy var sendButton: UIButton = {
@@ -98,6 +98,16 @@ final class GPTChatRoomViewController: UIViewController {
                 }
             }
             .store(in: &cancellables)
+        
+        viewModel.lastestUpdateIndexSubject
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] index in
+                guard let self else { return }
+                
+                let indexPath = IndexPath(item: index, section: 0)
+                chatCollectionView.scrollToItem(at: indexPath, at: .top, animated: true)
+            }
+            .store(in: &cancellables)
     }
 }
 
@@ -149,9 +159,7 @@ extension GPTChatRoomViewController {
 extension GPTChatRoomViewController {
     @objc
     private func tapSendButton(_ sender: Any) {
-        if let content = commentTextView.text, !content.isEmpty {
-            viewModel.sendComment(Model.UserMessage(content: content))
-        }
+        viewModel.sendComment(commentTextView.text)
         commentTextView.text = nil
     }
 }

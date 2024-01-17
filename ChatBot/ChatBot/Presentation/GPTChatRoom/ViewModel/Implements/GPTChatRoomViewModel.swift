@@ -16,16 +16,16 @@ final class GPTChatRoomViewModel: GPTChatRoomVMProtocol {
     @Published private(set) var chattings: [Model.GPTMessage]
     var chattingsPublisher: Published<[Model.GPTMessage]>.Publisher { $chattings }
     
+    let lastestUpdateIndexSubject = PassthroughSubject<Int, Never>()
+    
     init(httpService: HTTPServicable, httpRequest: HTTPRequestable, chattings: [Model.GPTMessage]) {
         self.httpService = httpService
         self.httpRequest = httpRequest
         self.chattings = chattings
     }
     
-    func sendComment(_ comment: GPTMessagable) {
-        chattings.append(comment.asRequestMessage())
-        let index = chattings.count
-        chattings.append(Model.WaitingMessage().asRequestMessage())
+    func sendComment(_ text: String?) {
+        guard let indexToUpdate = appendComments(text) else { return }
         
         httpService.request(
             request: httpRequest,
@@ -36,11 +36,27 @@ final class GPTChatRoomViewModel: GPTChatRoomVMProtocol {
         .replaceNil(with: Model.AssistantMessage(content: "내용이 없습니다...", name: nil, toolCalls: nil).asRequestMessage())
         .sink { [weak self] completion in
             if case .failure(let error) = completion {
-                self?.chattings[index] = Model.AssistantMessage(content: "\(error)", name: nil, toolCalls: nil).asRequestMessage()
+                self?.chattings[indexToUpdate] = Model.AssistantMessage(content: "\(error)", name: nil, toolCalls: nil).asRequestMessage()
             }
+            self?.lastestUpdateIndexSubject.send(indexToUpdate)
         } receiveValue: { [weak self] reply in
-            self?.chattings[index] = Model.AssistantMessage(content: reply.content, name: nil, toolCalls: nil).asRequestMessage()
+            self?.chattings[indexToUpdate] = Model.AssistantMessage(content: reply.content, name: nil, toolCalls: nil).asRequestMessage()
         }
         .store(in: &cancellables)
+    }
+    
+    private func appendComments(_ text: String?) -> Int? {
+        guard let text = text else {
+            return nil
+        }
+        
+        let comment = Model.UserMessage(content: text)
+        chattings.append(comment.asRequestMessage())
+        
+        let index = chattings.count
+        chattings.append(Model.WaitingMessage().asRequestMessage())
+        lastestUpdateIndexSubject.send(index)
+        
+        return index
     }
 }
