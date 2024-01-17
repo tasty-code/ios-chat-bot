@@ -161,6 +161,7 @@ extension ChatViewController {
     private func configureDataSource() {
         dataSource = ChatDataSource(collectionView: collectionView) { (collectionView, indexPath, identifier) -> ChatCollectionViewCell? in
             collectionView.allowsSelection = false
+            collectionView.isScrollEnabled = true
             return collectionView.dequeueConfiguredReusableCell(using: self.cellRegistration, for: indexPath, item: identifier)
         }
     }
@@ -183,8 +184,11 @@ extension ChatViewController {
 extension ChatViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         textView.constraints.forEach { constraint in
-            if constraint.firstAttribute == .height {
-                constraint.constant = textView.estimatedSizeHeight
+            guard textView.estimatedSizeHeight >= 150 else {
+                if constraint.firstAttribute == .height {
+                    constraint.constant = textView.estimatedSizeHeight
+                }
+                return
             }
         }
     }
