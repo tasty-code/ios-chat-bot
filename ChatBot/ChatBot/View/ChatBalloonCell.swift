@@ -8,6 +8,7 @@
 import UIKit
 
 final class ChatBalloonCell: UICollectionViewListCell {
+    private var balloonConstraint = NSLayoutConstraint()
     
     private lazy var chatBalloonView: ChatBalloon = {
         let view = ChatBalloon()
@@ -42,16 +43,14 @@ final class ChatBalloonCell: UICollectionViewListCell {
     
     func setDirection(direction: Direction) {
         chatBalloonView.direction = direction
+        balloonConstraint.isActive = false
         if direction == .right {
-            NSLayoutConstraint.activate([
-                chatBalloonView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-            ])
+            balloonConstraint = chatBalloonView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8)
             chatBalloonView.leftOrRight(direction: .right)
         } else {
-            NSLayoutConstraint.activate([
-                chatBalloonView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            ])
+            balloonConstraint = chatBalloonView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8)
             chatBalloonView.leftOrRight(direction: .left)
         }
+        balloonConstraint.isActive = true
     }
 }
