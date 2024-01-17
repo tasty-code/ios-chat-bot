@@ -14,6 +14,7 @@ struct ChatMessage: Hashable {
 }
 
 final class ChatViewController: UIViewController {
+    
     private lazy var horizontalStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -61,8 +62,10 @@ final class ChatViewController: UIViewController {
     private var collectionView: UICollectionView!
     private var dataSource: ChatDataSource!
     private var cellRegistration: CellRegistration!
-    
     private var messageStorage = [ChatMessage]()
+    
+    private let networkManager = NetworkManager()
+    private let api = ChatAPI()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,6 +74,21 @@ final class ChatViewController: UIViewController {
         setConstraints()
         configureDataSource()
         configureCellRegistration()
+    }
+    
+    private func makeRequestModel(message: String) -> ChatRequestModel {
+        let messages = [
+            Message(
+                role: "user",
+                content: message,
+                toolCalls: nil)]
+        
+        let model = ChatRequestModel(model: "gpt-3.5-turbo-1106",
+                                    messages: messages,
+                                    stream: false,
+                                    logprobs: false)
+        
+        return model
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -143,12 +161,24 @@ extension ChatViewController {
             textView.endEditing(true)
             textViewDidChange(textView)
             
-            receiveMessage()
+            let requestModel = makeRequestModel(message: message)
+            Task {
+                do {
+                    let body = try JSONEncoder().encode(requestModel)
+                    let request = try api.makeRequest(body: body)
+                    let responseModel = try await networkManager.loadData(request: request)
+                    guard let msg = responseModel.choices.first?.message.content else {return}
+                    
+                    receiveMessage(message: msg)
+                    
+                } catch {
+                    print(error)
+                }
+            }
         }
     }
     
-    private func receiveMessage() {
-        let message = "test"
+    private func receiveMessage(message: String) {
         let chatResponse = ChatMessage(sender: Sender.assistant, message: message)
         messageStorage.append(chatResponse)
         
