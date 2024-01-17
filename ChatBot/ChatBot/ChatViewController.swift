@@ -39,7 +39,7 @@ final class ChatViewController: UIViewController {
         textView.layer.cornerRadius = 16
         textView.layer.borderWidth = 1.5
         textView.layer.borderColor = UIColor.red.cgColor
-        textView.isScrollEnabled = false
+        textView.isScrollEnabled = true
         textView.delegate = self
         return textView
     }()

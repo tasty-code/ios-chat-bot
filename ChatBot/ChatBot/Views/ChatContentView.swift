@@ -47,7 +47,7 @@ class ChatContentView: UIView, UIContentView {
             bubble.trailingAnchor.constraint(equalTo: trailingAnchor),
             bubble.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             bubble.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            bubble.widthAnchor.constraint(lessThanOrEqualToConstant: 200),
+            bubble.widthAnchor.constraint(lessThanOrEqualToConstant: 300),
             
             textLabel.topAnchor.constraint(equalTo: bubble.topAnchor, constant: 5),
             textLabel.bottomAnchor.constraint(equalTo: bubble.bottomAnchor, constant: -5),
@@ -61,7 +61,7 @@ class ChatContentView: UIView, UIContentView {
             bubble.leadingAnchor.constraint(equalTo: leadingAnchor),
             bubble.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             bubble.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            bubble.widthAnchor.constraint(lessThanOrEqualToConstant: 200),
+            bubble.widthAnchor.constraint(lessThanOrEqualToConstant: 300),
             
             textLabel.topAnchor.constraint(equalTo: bubble.topAnchor, constant: 5),
             textLabel.bottomAnchor.constraint(equalTo: bubble.bottomAnchor, constant: -5),
