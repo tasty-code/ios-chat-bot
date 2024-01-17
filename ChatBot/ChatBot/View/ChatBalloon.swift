@@ -8,9 +8,9 @@ import UIKit
 
 final class ChatBalloon: UIView {
     
-    let balloonLayer = CAShapeLayer()
+    private let balloonLayer = CAShapeLayer()
     
-    let label: UILabel = {
+    private let label: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.font = .preferredFont(forTextStyle: .body)
@@ -27,6 +27,8 @@ final class ChatBalloon: UIView {
     }
     
     var direction: Direction = .right
+    private var rightLabelConstraint = [NSLayoutConstraint]()
+    private var leftLabelConstraint = [NSLayoutConstraint]()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -41,6 +43,10 @@ final class ChatBalloon: UIView {
         layer.addSublayer(balloonLayer)
         
         addSubview(label)
+        
+        rightLabelConstraint = [label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12.0), label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0)]
+        leftLabelConstraint = [label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0), label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12.0)]
+
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: topAnchor, constant: 12.0),
             label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12.0),
@@ -48,18 +54,12 @@ final class ChatBalloon: UIView {
     }
     
     func leftOrRight(direction: Direction) {
-        let constraint: [NSLayoutConstraint] = [label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12.0), label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0)]
-        
         if direction == .right {
-            constraint.forEach { constraint in
-                constraint.isActive = true
-            }
+            NSLayoutConstraint.deactivate(leftLabelConstraint)
+            NSLayoutConstraint.activate(rightLabelConstraint)
         } else {
-            constraint.forEach { constraint in
-                constraint.isActive = false
-            }
-            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0).isActive = true
-            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12.0).isActive = true
+            NSLayoutConstraint.deactivate(rightLabelConstraint)
+            NSLayoutConstraint.activate(leftLabelConstraint)
         }
     }
     
@@ -74,7 +74,7 @@ final class ChatBalloon: UIView {
         }
     }
     
-    func drawBalloonToRight() {
+    private func drawBalloonToRight() {
         let width = bounds.size.width
         let height = bounds.size.height
         
@@ -99,7 +99,7 @@ final class ChatBalloon: UIView {
         label.textAlignment = .left
     }
     
-    func drawBalloonToLeft() {
+    private func drawBalloonToLeft() {
         let width = bounds.size.width
         let height = bounds.size.height
         
