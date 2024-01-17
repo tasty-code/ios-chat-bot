@@ -156,6 +156,7 @@ extension ChatViewController {
             snapshot.appendSections([0])
             snapshot.appendItems(messageStorage)
             dataSource.apply(snapshot, animatingDifferences: true)
+            moveToLastChat()
             
             textView.text = nil
             textView.endEditing(true)
@@ -186,12 +187,17 @@ extension ChatViewController {
         shot.appendSections([0])
         shot.appendItems(messageStorage)
         dataSource.apply(shot, animatingDifferences: true)
+        moveToLastChat()
+    }
+    
+    private func moveToLastChat() {
+        let lastIndex = IndexPath(item: self.messageStorage.count - 1, section: 0)
+        collectionView.scrollToItem(at: lastIndex, at: .bottom, animated: true)
     }
     
     private func configureDataSource() {
         dataSource = ChatDataSource(collectionView: collectionView) { (collectionView, indexPath, identifier) -> ChatCollectionViewCell? in
             collectionView.allowsSelection = false
-            collectionView.isScrollEnabled = true
             return collectionView.dequeueConfiguredReusableCell(using: self.cellRegistration, for: indexPath, item: identifier)
         }
     }
