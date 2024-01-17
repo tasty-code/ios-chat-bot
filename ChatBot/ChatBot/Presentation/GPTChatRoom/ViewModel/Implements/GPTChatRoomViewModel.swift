@@ -19,7 +19,7 @@ final class GPTChatRoomViewModel: GPTChatRoomVMProtocol {
     let lastestUpdateIndexSubject = PassthroughSubject<Int, Never>()
     let errorMessageSubject = PassthroughSubject<Error, Never>()
     
-    init(httpService: HTTPServicable, httpRequest: HTTPRequestable, chattings: [Model.GPTMessage]) {
+    init(httpService: HTTPServicable = AppEnviroment.defaultHTTPSecvice, httpRequest: HTTPRequestable, chattings: [Model.GPTMessage] = []) {
         self.httpService = httpService
         self.httpRequest = httpRequest
         self.chattings = chattings

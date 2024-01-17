@@ -15,12 +15,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = windowScene
         
-        let viewModel = GPTChatRoomViewModel.init(
-            httpService: Network.GPTHTTPService(encoder: JSONEncoder(), decoder: JSONDecoder()),
-            httpRequest: Network.GPTRequest.chatBot(apiKey: Bundle.main.object(forInfoDictionaryKey: "CHAT_BOT_API_KEY") as! String),
-            chattings: []
+        let apiKey = Bundle.main.object(forInfoDictionaryKey: "CHAT_BOT_API_KEY") as! String
+        window?.rootViewController = GPTChatRoomViewController(
+            viewModel: GPTChatRoomViewModel.init(httpRequest: Network.GPTRequest.chatBot(apiKey: apiKey))
         )
-        window?.rootViewController = GPTChatRoomViewController(viewModel: viewModel)
         window?.makeKeyAndVisible()
     }
 
