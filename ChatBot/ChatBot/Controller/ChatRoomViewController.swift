@@ -59,15 +59,6 @@ final class ChatRoomViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //        try? chatService.sendMessage(text: "안녕") { result in
-        //            switch result {
-        //            case .success(let success):
-        //                print("GPT: \(success.choices[0].message.content)")
-        //            case .failure(let error):
-        //                print(error)
-        //            }
-        //        }
-        
         configurationUI()
         configurationCell()
         setUpSnapshot()
@@ -138,26 +129,32 @@ final class ChatRoomViewController : UIViewController {
         dataSource?.apply(snapshot, animatingDifferences: true)
     }
     
+    private func moveScroll() {
+        collectionView.scrollToItem(at: IndexPath(row: chats.endIndex - 1, section: .zero), at: .bottom, animated: true)
+    }
+    
     @objc func tappedSendButton() {
-        chats.append(ChatBubble(message: Message(role: "user", content: textInputView.text)))
-        setUpSnapshot()
         guard let question = textInputView.text else { return }
+        chats.append(ChatBubble(message: Message(role: "user", content: question)))
+        setUpSnapshot()
+        moveScroll()
         
         DispatchQueue.global().async { [self] in
             try? self.chatService.sendMessage(text: question) { result in
                 switch result {
                 case .success(let success):
                     let answer = success.choices[0].message.content
-                    print(answer)
                     self.chats.append(ChatBubble(message: Message(role: "assistant", content: answer)))
                     DispatchQueue.main.async {
                         self.setUpSnapshot()
+                        self.moveScroll()
                     }
                 case .failure(let error):
                     print(error)
                 }
-                
             }
         }
+        
+        textInputView.text = nil
     }
 }
