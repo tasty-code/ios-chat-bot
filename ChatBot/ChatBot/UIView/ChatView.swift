@@ -64,8 +64,8 @@ final class ChatView: UIView {
         ])
         stackView.axis = .horizontal
         stackView.distribution = .fill
-        stackView.backgroundColor = .white
-        stackView.spacing = 15
+        stackView.backgroundColor = .clear
+        stackView.spacing = 5
         stackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stackView)
         
@@ -138,7 +138,6 @@ final class ChatView: UIView {
     
     private func configureLayout() {
         self.backgroundColor = .white
-        
         NSLayoutConstraint.activate([
             contentTextView.widthAnchor.constraint(equalTo: contentSendButton.widthAnchor, multiplier: 6),
             
@@ -146,10 +145,10 @@ final class ChatView: UIView {
             chatCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             chatCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
             
-            contentStackView.topAnchor.constraint(equalTo: chatCollectionView.bottomAnchor, constant: 30),
-            contentStackView.bottomAnchor.constraint(equalTo: keyboardLayoutGuide.topAnchor, constant: -10),
-            contentStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 30),
-            contentStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -30)
+            contentStackView.topAnchor.constraint(equalTo: chatCollectionView.bottomAnchor, constant: 3),
+            contentStackView.bottomAnchor.constraint(equalTo: keyboardLayoutGuide.topAnchor, constant: -5),
+            contentStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 50),
+            contentStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20)
         ])
     }
     
