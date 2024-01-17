@@ -10,5 +10,6 @@ import Foundation
 enum UserContentConstant {
     static let AIRole = "assistant"
     static let AIContent = "You are a helpful assistant."
-    static let UserRole = "user"
+    static let userRole = "user"
+    static let indicator = "indicator"
 }

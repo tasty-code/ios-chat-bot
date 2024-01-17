@@ -31,7 +31,7 @@ final class ChatView: UIView {
         return collectionView
     }()
     
-    private let contentTextView: UITextView = {
+    private lazy var contentTextView: UITextView = {
         let textView = UITextView()
         textView.isScrollEnabled = false
         textView.layer.cornerRadius = 12
@@ -45,12 +45,13 @@ final class ChatView: UIView {
         return textView
     }()
     
-    private let contentSendButton: UIButton = {
+    private lazy var contentSendButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "arrow.up.message"), for: .normal)
         button.tintColor = UIColor.systemCyan
         button.setContentCompressionResistancePriority(.required, for: .horizontal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(submitUserAnswer), for: .touchUpInside)
         
         return button
     }()
@@ -72,7 +73,6 @@ final class ChatView: UIView {
     // MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentSendButton.addTarget(self, action: #selector(submitUserAnswer), for: .touchUpInside)
         configureLayout()
     }
     
@@ -120,11 +120,18 @@ final class ChatView: UIView {
         return dataSource
     }
     
+    private let chatUIItem = Message(role: "indicator", content: "메세지 수신중..(임시)")
     
-    private func updateSnapshot(_ item: Message) {
+    private func updateSnapshot(item: [Message], isFetched: Bool) {
         var snapShot = dataSource.snapshot()
-        snapShot.appendItems([item])
-        dataSource.apply(snapShot, animatingDifferences: false)
+        
+        if isFetched {
+            snapShot.deleteItems([chatUIItem])
+            dataSource.apply(snapShot, animatingDifferences: true)
+        }
+        
+        snapShot.appendItems(item)
+        dataSource.apply(snapShot, animatingDifferences: true)
     }
     
     private func configureLayout() {
@@ -145,16 +152,15 @@ final class ChatView: UIView {
     }
     
     @objc private func submitUserAnswer() {
-        resetTextViewHeight()
-        scrollToBottom()
-        contentTextView.isScrollEnabled = false
         guard let userMessage = contentTextView.text else {
             return
         }
-        contentTextView.text = nil
+        configureTextView()
+        contentSendButton.isEnabled.toggle()
+        let snapShotItems = [Message(role: "user", content: userMessage), chatUIItem]
         
-        updateSnapshot(Message(role: "user", content: userMessage))
-        
+        updateSnapshot(item: snapShotItems, isFetched: false)
+        scrollToBottom()
         guard let endpoint = buildEndpoint(userMessage) else {
             return
         }
@@ -164,7 +170,9 @@ final class ChatView: UIView {
             switch result {
             case .success(let data):
                 DispatchQueue.main.async {
-                    self.updateSnapshot(data.choices[0].message)
+                    self.updateSnapshot(item: [data.choices[0].message], isFetched: true)
+                    self.contentSendButton.isEnabled.toggle()
+                    self.scrollToBottom()
                 }
             case .failure(let error):
                 print(error)
@@ -201,6 +209,12 @@ final class ChatView: UIView {
         
         let indexPath = IndexPath(item: lastItemIndex, section: 0)
         chatCollectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
+    }
+    
+    private func configureTextView() {
+        resetTextViewHeight()
+        contentTextView.isScrollEnabled = false
+        contentTextView.text = nil
     }
     
     // MARK: - Public Method

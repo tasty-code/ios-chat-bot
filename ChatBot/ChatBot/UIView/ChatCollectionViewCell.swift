@@ -75,14 +75,15 @@ class ChatCollectionViewCell: UICollectionViewListCell {
     func configureBubbles(identifier: Message) {
         let role = identifier.role
         let content = identifier.content
-        
         chatLabel.text = content
         
         switch role {
-        case UserContentConstant.UserRole :
+        case UserContentConstant.indicator :
+            configureChatbotBubble(isFetching: true)
+        case UserContentConstant.userRole :
             configureUserBubble()
         case UserContentConstant.AIRole :
-            configureChatbotBubble()
+            configureChatbotBubble(isFetching: false)
         default:
             break
         }
@@ -98,15 +99,21 @@ class ChatCollectionViewCell: UICollectionViewListCell {
 
 //MARK: - chatBubbleConfigure
 extension ChatCollectionViewCell {
-    func configureChatbotBubble() {
+    func configureChatbotBubble(isFetching: Bool) {
         chatBotBubbleConstarint = [
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             bubbleTail.trailingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 3)
         ]
         containerView.backgroundColor = .darkGray
-        chatLabel.textColor = .white
-        bubbleTail.transform = CGAffineTransform(scaleX: -1, y: 1)
         bubbleTail.color = .darkGray
+        bubbleTail.transform = CGAffineTransform(scaleX: -1, y: 1)
+        chatLabel.textColor = .white
+        
+        if isFetching {
+            
+        } else {
+            
+        }
                 
         NSLayoutConstraint.activate(chatBotBubbleConstarint)
     }
@@ -126,3 +133,10 @@ extension ChatCollectionViewCell {
     }
 }
 
+
+
+
+
+
+
+    
