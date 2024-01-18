@@ -25,9 +25,3 @@ extension GPTChatRoomViewController: UITextViewDelegate {
         }
     }
 }
-
-extension GPTChatRoomViewController {
-    enum Section {
-        case main
-    }
-}

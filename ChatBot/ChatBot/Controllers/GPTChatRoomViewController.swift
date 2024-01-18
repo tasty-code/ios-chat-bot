@@ -9,6 +9,12 @@ import UIKit
 
 final class GPTChatRoomViewController: UIViewController {
     
+    // MARK: NestedType
+    
+    private enum Section {
+        case main
+    }
+    
     // MARK: - UI Components
     
     private lazy var chatCollectionView: UICollectionView = {
@@ -102,6 +108,8 @@ final class GPTChatRoomViewController: UIViewController {
     
     private func setupUI() {
         view.backgroundColor = .white
+        view.addSubview(chatCollectionView)
+        view.addSubview(userInteractionStackView)
         
         setConstraintsCollectionView()
         setConstraintsStackView()
@@ -111,7 +119,6 @@ final class GPTChatRoomViewController: UIViewController {
     private func setConstraintsCollectionView() {
         let safeArea = view.safeAreaLayoutGuide
         
-        view.addSubview(chatCollectionView)
         NSLayoutConstraint.activate([
             chatCollectionView.topAnchor.constraint(equalTo: safeArea.topAnchor),
             chatCollectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 10),
@@ -120,7 +127,6 @@ final class GPTChatRoomViewController: UIViewController {
     }
     
     private func setConstraintsStackView() {
-        view.addSubview(userInteractionStackView)
         NSLayoutConstraint.activate([
             userInteractionStackView.topAnchor.constraint(equalTo: chatCollectionView.bottomAnchor, constant: 10),
             userInteractionStackView.leadingAnchor.constraint(equalTo: chatCollectionView.leadingAnchor),
@@ -161,8 +167,7 @@ final class GPTChatRoomViewController: UIViewController {
     }
     
     private func configureSnapshot(with messages: [GPTMessageDTO]) {
-        var snapshot = dataSource.snapshot()
-        snapshot.deleteAllItems()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, GPTMessageDTO>()
         snapshot.appendSections([.main])
         snapshot.appendItems(messages)
         dataSource.apply(snapshot, animatingDifferences: true)

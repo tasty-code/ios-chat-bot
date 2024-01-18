@@ -96,6 +96,9 @@ final class MessageContentView: UIView, UIContentView {
         widthConstraint = chatBubble.widthAnchor.constraint(equalToConstant: totalWidth + 24)
         heightConstraint = chatBubble.heightAnchor.constraint(equalToConstant: defaultContentSize + 24)
         
+        widthConstraint?.priority = .defaultLow
+        heightConstraint?.priority = .defaultLow
+        
         for i in 0..<dotsCount {
             let dotLayer = CALayer()
             dotLayer.frame = CGRect(
