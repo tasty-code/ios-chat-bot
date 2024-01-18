@@ -57,7 +57,7 @@ final class ChatViewController: UIViewController {
         textView.layer.cornerRadius = 22
         textView.layer.borderWidth = 1
         textView.layer.borderColor = UIColor.lightGray.cgColor
-        textView.backgroundColor = .clear
+        
         
         textView.font = UIFont.preferredFont(forTextStyle: .headline)
         
