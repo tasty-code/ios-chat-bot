@@ -14,7 +14,7 @@ final class ChatViewModel {
     }
     
     enum Output {
-        case fetchChatDidStart
+        case fetchChatDidStart(isNetworking: Bool)
         case fetchChatDidSucceed
     }
     
@@ -48,7 +48,7 @@ final class ChatViewModel {
     
     private func handleRequest() {
         isNetworking = true
-        output.send(.fetchChatDidStart)
+        output.send(.fetchChatDidStart(isNetworking: true))
         
         let builder = PostChatBotNetworkBuilder(message: messages)
         guard let request = try? APIService.shared.makeRequest(builder) else { return }

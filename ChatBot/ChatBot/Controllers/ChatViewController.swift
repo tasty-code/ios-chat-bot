@@ -82,7 +82,7 @@ final class ChatViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        input.send(.sendButtonDidTap(prompt: "Hello, My name is Janine. Please remember my name"))
+//        input.send(.sendButtonDidTap(prompt: "Hello, My name is Janine. Please remember my name"))
     }
     
     // MARK: - Setup
@@ -93,8 +93,10 @@ final class ChatViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] event in
                 switch event {
-                case .fetchChatDidStart:
-                    self?.collectionView.reloadData()
+                case .fetchChatDidStart(let isNetworking):
+                    if isNetworking {
+                        self?.collectionView.reloadData()
+                    }
                 case .fetchChatDidSucceed:
                     self?.collectionView.reloadData()
                 }
@@ -108,7 +110,7 @@ final class ChatViewController: UIViewController {
         
         inputTextView.delegate = self
         
-        sendButton.addTarget(self, action: #selector(didTapSubmit), for: .touchUpInside)
+        sendButton.addTarget(self, action: #selector(didTapSubmitButton), for: .touchUpInside)
     }
     
     private func setupRegistration() {
@@ -156,10 +158,11 @@ final class ChatViewController: UIViewController {
     
     // MARK: - Event handler
     
-    @objc func didTapSubmit() {
+    @objc func didTapSubmitButton() {
         inputTextView.resignFirstResponder()
+        
         input.send(.sendButtonDidTap(prompt: inputTextView.text))
-        self.collectionView.reloadData()
+        inputTextView.text = nil
     }
 }
 

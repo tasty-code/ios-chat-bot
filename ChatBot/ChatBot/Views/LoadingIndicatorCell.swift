@@ -11,14 +11,6 @@ final class LoadingIndicatorCell: UICollectionViewCell {
     
     static let identifier = "loading-indicator-cell"
     
-    private let newView: UIView = {
-        let view = UIView()
-        
-        view.backgroundColor = .magenta
-        
-        return view
-    }()
-    
     private let loadingBubble = LoadingBubble()
     
     // MARK: - Life cycle
@@ -31,6 +23,10 @@ final class LoadingIndicatorCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupSubviews()
+    }
+    
+    deinit {
+        print("deinitialized")
     }
     
     override func layoutSubviews() {
@@ -48,6 +44,7 @@ final class LoadingIndicatorCell: UICollectionViewCell {
         }
     }
     
+    
     private func startAnimation() {
         loadingBubble.startAnimating()
     }
@@ -55,8 +52,14 @@ final class LoadingIndicatorCell: UICollectionViewCell {
     // MARK: - Private
     
     private func setupSubviews() {
-        addSubview(newView)
-//        addSubview(loadingBubble)
-        
+        addSubview(loadingBubble)
+    }
+    
+    private func setupConstraint() {
+        NSLayoutConstraint.activate([
+            loadingBubble.heightAnchor.constraint(equalToConstant: 10),
+            loadingBubble.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+            
+        ])
     }
 }
