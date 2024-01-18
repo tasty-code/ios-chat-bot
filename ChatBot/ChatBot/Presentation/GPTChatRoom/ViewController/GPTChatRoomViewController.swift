@@ -94,7 +94,7 @@ final class GPTChatRoomViewController: UIViewController {
                 
                 if !messages.isEmpty {
                     let indexPath = IndexPath(item: messages.count - 1, section: 0)
-                    chatCollectionView.scrollToItem(at: indexPath, at: .top, animated: true)
+                    self.chatCollectionView.scrollToItem(at: indexPath, at: .top, animated: true)
                 }
             }
             .store(in: &cancellables)
@@ -105,7 +105,7 @@ final class GPTChatRoomViewController: UIViewController {
                 guard let self else { return }
                 
                 let indexPath = IndexPath(item: index, section: 0)
-                chatCollectionView.scrollToItem(at: indexPath, at: .top, animated: true)
+                self.chatCollectionView.scrollToItem(at: indexPath, at: .top, animated: true)
             }
             .store(in: &cancellables)
         
@@ -113,7 +113,7 @@ final class GPTChatRoomViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] error in
                 guard let self else { return }
-                present(configureErrorAlert(error), animated: true)
+                self.present(configureErrorAlert(error), animated: true)
             }
             .store(in: &cancellables)
     }
