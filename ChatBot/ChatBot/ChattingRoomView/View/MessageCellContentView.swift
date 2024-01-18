@@ -59,7 +59,7 @@ final class MessageCellContentView: UIView, UIContentView {
         
         NSLayoutConstraint.activate([
             bubbleView.topAnchor.constraint(equalTo: self.topAnchor, constant: margin),
-            bubbleView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -margin),
+            bubbleView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             bubbleView.widthAnchor.constraint(lessThanOrEqualTo: self.widthAnchor, multiplier: labelWidthRatio)
         ])
         

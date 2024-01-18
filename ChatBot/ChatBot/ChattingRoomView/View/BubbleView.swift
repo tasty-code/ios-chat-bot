@@ -1,6 +1,10 @@
 import UIKit
 
 final class BubbleView: UIView {
+    private enum Constants {
+        static let defaultMargin: CGFloat = 10
+    }
+    
     private var bubbleLayer: CAShapeLayer
     private var dotLayer: CAReplicatorLayer
     
@@ -41,15 +45,14 @@ final class BubbleView: UIView {
     
     private func setConstraint() {
         NSLayoutConstraint.activate([
-            bubbleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            bubbleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            bubbleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            bubbleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
+            bubbleLabel.topAnchor.constraint(equalTo: topAnchor, constant: Constants.defaultMargin),
+            bubbleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.defaultMargin),
+            bubbleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.defaultMargin),
+            bubbleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.defaultMargin)
         ])
     }
     
     override func draw(_ rect: CGRect) {
-        
         if role == .user {
             dotLayer.isHidden = true
             drawBubbleToRight()
