@@ -44,13 +44,15 @@ final class ChatRoomViewController : UIViewController {
         let textView = UITextView()
         textView.layer.borderWidth = 1
         textView.layer.borderColor = UIColor.systemGray.cgColor
-        textView.isScrollEnabled = false
+//        textView.isScrollEnabled = false
         textView.layer.cornerRadius = 12
         return textView
     }()
     
     lazy var sendButton: UIButton = {
         let button = UIButton()
+        button.layer.cornerRadius = 8
+        button.backgroundColor = #colorLiteral(red: 0.7890922427, green: 0.9981873631, blue: 0.9562725425, alpha: 1)
         button.setImage(UIImage(systemName: "paperplane"), for: .normal)
         button.addTarget(self, action: #selector(tappedSendButton), for: .touchUpInside)
         return button
@@ -58,10 +60,10 @@ final class ChatRoomViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configurationUI()
         configurationCell()
         setUpSnapshot()
+        self.textInputView.delegate = self
     }
     
     private func createLayout() -> UICollectionViewLayout {
@@ -83,20 +85,19 @@ final class ChatRoomViewController : UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         userInputStackView.translatesAutoresizingMaskIntoConstraints = false
         textInputView.translatesAutoresizingMaskIntoConstraints = false
-        sendButton.translatesAutoresizingMaskIntoConstraints = false
+//        sendButton.translatesAutoresizingMaskIntoConstraints = false
         
         let safeLayoutGuide = view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
             mainStackView.topAnchor.constraint(equalTo: safeLayoutGuide.topAnchor),
-            mainStackView.bottomAnchor.constraint(equalTo: safeLayoutGuide.bottomAnchor),
+            mainStackView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor),
             mainStackView.leadingAnchor.constraint(equalTo: safeLayoutGuide.leadingAnchor, constant: 12),
             mainStackView.trailingAnchor.constraint(equalTo: safeLayoutGuide.trailingAnchor, constant: -12),
-            
             textInputView.widthAnchor.constraint(equalTo: userInputStackView.widthAnchor, multiplier: 0.8),
-            
+            textInputView.heightAnchor.constraint(equalToConstant: textInputView.estimatedHeight),
             sendButton.widthAnchor.constraint(equalTo: userInputStackView.widthAnchor, multiplier: 0.1),
-            
+
         ])
     }
     
@@ -134,7 +135,9 @@ final class ChatRoomViewController : UIViewController {
     }
     
     @objc func tappedSendButton() {
+        textInputView.resignFirstResponder()
         guard let question = textInputView.text else { return }
+        
         chats.append(ChatBubble(message: Message(role: "user", content: question)))
         setUpSnapshot()
         moveScroll()
@@ -156,5 +159,33 @@ final class ChatRoomViewController : UIViewController {
         }
         
         textInputView.text = nil
+        textInputView.insertText("")
+    }
+}
+
+extension ChatRoomViewController: UITextViewDelegate {
+    
+    func textViewDidChange(_ textView: UITextView) {
+        guard textView.contentSize.height <= view.frame.height * 0.1 else {
+            textView.isScrollEnabled = true
+            return
+        }
+        
+        textView.isScrollEnabled = false
+        
+        textView.constraints.forEach { (constraint) in
+            guard constraint.firstAttribute != .height else {
+                constraint.constant = textView.estimatedHeight
+                return
+            }
+        }
+    }
+}
+
+extension UITextView {
+    var estimatedHeight: CGFloat {
+        let size = CGSize(width: self.frame.width, height: .infinity)
+        let estimatedSize = self.sizeThatFits(size)
+        return estimatedSize.height
     }
 }
