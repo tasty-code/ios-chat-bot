@@ -1,94 +1,62 @@
 import UIKit
 
-final class BubbleView: UIView {
-    private var bubbleLayer: CAShapeLayer
-    private var dotLayer: CAReplicatorLayer
-    
-    private let bubbleLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = .zero
-        label.lineBreakMode = .byWordWrapping
-        label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        return label
+final class MessageView: UIView {
+    private lazy var contentView: MessageContentView = {
+        let contentView = MessageContentView()
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(contentView)
+        return contentView
     }()
     
-    var text: String? {
-        didSet { bubbleLabel.text = text }
-    }
+    private var bubbleLayer: CAShapeLayer
     
-    var role: Role? {
+    private var role: Role? {
         didSet { setNeedsDisplay() }
     }
     
-    init() {
+    init(configuration: MessageViewContentConfiguration) {
         bubbleLayer = CAShapeLayer()
-        dotLayer = CAReplicatorLayer()
         super.init(frame: .zero)
-        
         layer.addSublayer(bubbleLayer)
-        layer.addSublayer(dotLayer)
-        
-        addSubview(bubbleLabel)
-        
-        setConstraint()
+        contentView.configuration = configuration
+        setUpConstraints()
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) 없음")
+        fatalError("init(coder:) 구현 안됨")
     }
-    
-    private func setConstraint() {
+}
+
+// MARK: Configure MessageView Method
+extension MessageView {
+    func updateConfiguration(configuration: MessageViewContentConfiguration) {
+        role = configuration.role
+        contentView.configuration = configuration
+    }
+}
+
+// MARK: Autolayout Methods
+extension MessageView {
+    private func setUpConstraints() {
         NSLayoutConstraint.activate([
-            bubbleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            bubbleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            bubbleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            bubbleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
+            contentView.topAnchor.constraint(equalTo: self.layoutMarginsGuide.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: self.layoutMarginsGuide.bottomAnchor),
+            contentView.leadingAnchor.constraint(equalTo: self.layoutMarginsGuide.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: self.layoutMarginsGuide.trailingAnchor)
         ])
     }
-    
+}
+
+// MARK: Draw Methods
+extension MessageView {
     override func draw(_ rect: CGRect) {
-        
         if role == .user {
-            dotLayer.isHidden = true
             drawBubbleToRight()
         } else if role == .assistant {
             drawBubbleToLeft()
-            
-            if text == "" {
-                drawAnimatingDots(dotXOffset: 6.0, dotSize: 4.0, dotSpacing: 8.0)
-            }
         }
         
         super.draw(rect)
-    }
-    
-    private func drawAnimatingDots(dotXOffset: CGFloat, dotSize: CGFloat, dotSpacing: CGFloat) {
-        let layer = CAReplicatorLayer()
-        let backgroundLayer = CALayer()
-        
-        dotLayer.addSublayer(layer)
-        backgroundLayer.frame = CGRect(x: bounds.width / 2 - dotXOffset,
-                           y: bounds.height / 2,
-                           width: dotSize,
-                           height: dotSize)
-        
-        backgroundLayer.cornerRadius = backgroundLayer.frame.width / 2
-        backgroundLayer.backgroundColor = UIColor.black.cgColor
-        
-        layer.addSublayer(backgroundLayer)
-        layer.instanceCount = 3
-        layer.instanceTransform = CATransform3DMakeTranslation(dotSpacing, 0, 0)
-        
-        let animation = CABasicAnimation(keyPath: #keyPath(CALayer.opacity))
-        animation.fromValue = 1.0
-        animation.toValue = 0.2
-        animation.duration = 1
-        animation.repeatCount = .infinity
-        
-        backgroundLayer.add(animation, forKey: nil)
-        layer.instanceDelay = animation.duration / Double(layer.instanceCount)
     }
     
     private func drawBubbleToRight() {

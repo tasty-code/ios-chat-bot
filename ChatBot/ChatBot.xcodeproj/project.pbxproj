@@ -28,8 +28,10 @@
 		045DE5FF2B515B7D002B426C /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045DE5FE2B515B7D002B426C /* MessageCell.swift */; };
 		04A9300A2B5523ED002E4819 /* MessageCellConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A930092B5523ED002E4819 /* MessageCellConfiguration.swift */; };
 		04A9300C2B55240B002E4819 /* MessageCellContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A9300B2B55240B002E4819 /* MessageCellContentView.swift */; };
+		04A9303F2B590F4E002E4819 /* MessageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A9303E2B590F4E002E4819 /* MessageContentView.swift */; };
+		04A930412B59119A002E4819 /* MessageViewContentConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A930402B59119A002E4819 /* MessageViewContentConfiguration.swift */; };
 		A60A086C2B4BFE410027A6F7 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60A086B2B4BFE410027A6F7 /* Bundle+Extension.swift */; };
-		A6AC5F5B2B5688E900AB7CAF /* BubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6AC5F5A2B5688E900AB7CAF /* BubbleView.swift */; };
+		A6AC5F5B2B5688E900AB7CAF /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6AC5F5A2B5688E900AB7CAF /* MessageView.swift */; };
 		B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */; };
 		B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */; };
 		B4B3E2C12B42D1BB00818B3C /* ChattingRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2C02B42D1BB00818B3C /* ChattingRoomViewController.swift */; };
@@ -59,10 +61,11 @@
 		045DE5FE2B515B7D002B426C /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		04A930092B5523ED002E4819 /* MessageCellConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellConfiguration.swift; sourceTree = "<group>"; };
 		04A9300B2B55240B002E4819 /* MessageCellContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellContentView.swift; sourceTree = "<group>"; };
-		04A930312B56AFF8002E4819 /* ChatBot copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ChatBot copy-Info.plist"; path = "/Users/swain/Desktop/Project/ios-chat-bot/ChatBot/ChatBot copy-Info.plist"; sourceTree = "<absolute>"; };
+		04A9303E2B590F4E002E4819 /* MessageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContentView.swift; sourceTree = "<group>"; };
+		04A930402B59119A002E4819 /* MessageViewContentConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewContentConfiguration.swift; sourceTree = "<group>"; };
 		A60A086B2B4BFE410027A6F7 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
-		A6AC5F5A2B5688E900AB7CAF /* BubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleView.swift; sourceTree = "<group>"; };
-		B4B3E2B92B42D1BB00818B3C /* ChatBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A6AC5F5A2B5688E900AB7CAF /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		B4B3E2B92B42D1BB00818B3C /* ChatBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = ChatBot.app; path = "/Users/swain/Desktop/Project/ios-chat-bot/ChatBot/build/Debug-iphoneos/ChatBot.app"; sourceTree = "<absolute>"; };
 		B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B4B3E2C02B42D1BB00818B3C /* ChattingRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingRoomViewController.swift; sourceTree = "<group>"; };
@@ -197,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				04A930092B5523ED002E4819 /* MessageCellConfiguration.swift */,
+				04A930402B59119A002E4819 /* MessageViewContentConfiguration.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -206,7 +210,8 @@
 			children = (
 				045DE5FE2B515B7D002B426C /* MessageCell.swift */,
 				04A9300B2B55240B002E4819 /* MessageCellContentView.swift */,
-				A6AC5F5A2B5688E900AB7CAF /* BubbleView.swift */,
+				A6AC5F5A2B5688E900AB7CAF /* MessageView.swift */,
+				04A9303E2B590F4E002E4819 /* MessageContentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -240,17 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				B4B3E2BB2B42D1BB00818B3C /* ChatBot */,
-				B4B3E2BA2B42D1BB00818B3C /* Products */,
-				04A930312B56AFF8002E4819 /* ChatBot copy-Info.plist */,
 			);
-			sourceTree = "<group>";
-		};
-		B4B3E2BA2B42D1BB00818B3C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				B4B3E2B92B42D1BB00818B3C /* ChatBot.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		B4B3E2BB2B42D1BB00818B3C /* ChatBot */ = {
@@ -315,7 +310,7 @@
 				Base,
 			);
 			mainGroup = B4B3E2B02B42D1BB00818B3C;
-			productRefGroup = B4B3E2BA2B42D1BB00818B3C /* Products */;
+			productRefGroup = B4B3E2B02B42D1BB00818B3C;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -360,9 +355,11 @@
 				045DE5F72B5108E6002B426C /* Extension+UIStackView.swift in Sources */,
 				045295542B4BFCED000A5FD1 /* JSONDecodeManager.swift in Sources */,
 				0452954D2B4BFCED000A5FD1 /* NetworkRequestBuilderProtocol.swift in Sources */,
+				04A930412B59119A002E4819 /* MessageViewContentConfiguration.swift in Sources */,
 				04A9300C2B55240B002E4819 /* MessageCellContentView.swift in Sources */,
 				0452954E2B4BFCED000A5FD1 /* NetworkRequestBuilder.swift in Sources */,
-				A6AC5F5B2B5688E900AB7CAF /* BubbleView.swift in Sources */,
+				04A9303F2B590F4E002E4819 /* MessageContentView.swift in Sources */,
+				A6AC5F5B2B5688E900AB7CAF /* MessageView.swift in Sources */,
 				045295502B4BFCED000A5FD1 /* JSONEncodable.swift in Sources */,
 				04A9300A2B5523ED002E4819 /* MessageCellConfiguration.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,

@@ -3,15 +3,18 @@ import UIKit
 final class MessageCellContentView: UIView, UIContentView {
     private enum Constants {
         static let labelWidthRatio: CGFloat = 2/3
-        static let defaultMargin: CGFloat = 20
+        static let defaultMargin: CGFloat = 30
     }
     
-    private let bubbleView: BubbleView = BubbleView()
+    private lazy var messageView: MessageView! = {
+        let messageView = MessageView(configuration: MessageViewContentConfiguration())
+        addSubview(messageView)
+        messageView.backgroundColor = .clear
+        messageView.translatesAutoresizingMaskIntoConstraints = false
+        return messageView
+    }()
 
     private var appliedConfiguration: MessageCellContentConfiguration!
-    
-    private var leading: NSLayoutConstraint? = nil
-    private var trailing: NSLayoutConstraint? = nil
     
     var configuration: UIContentConfiguration {
         get { appliedConfiguration }
@@ -21,13 +24,14 @@ final class MessageCellContentView: UIView, UIContentView {
         }
     }
     
+    private var leading: NSLayoutConstraint? = nil
+    private var trailing: NSLayoutConstraint? = nil
+    
     init(configuration: MessageCellContentConfiguration) {
         super.init(frame: .zero)
-
-        setUpHierarchy()
         
-        leading = bubbleView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Constants.defaultMargin)
-        trailing = bubbleView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Constants.defaultMargin)
+        leading = messageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Constants.defaultMargin)
+        trailing = messageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Constants.defaultMargin)
         
         apply(configuration: configuration)
     }
@@ -35,32 +39,36 @@ final class MessageCellContentView: UIView, UIContentView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) 없음")
     }
-    
-    private func setUpHierarchy() {
-        addSubview(bubbleView)
-        
-        bubbleView.backgroundColor = .clear
-        bubbleView.translatesAutoresizingMaskIntoConstraints = false
-    }
-    
+}
+
+// MARK: Configuration
+extension MessageCellContentView {
     private func apply(configuration: MessageCellContentConfiguration) {
         guard appliedConfiguration != configuration else { return }
         appliedConfiguration = configuration
         
-        bubbleView.role = configuration.role
-        bubbleView.text = configuration.text
-        
         setUpConstraintsByRole()
+        updateMessageViewConfiguration(configuration: configuration)
     }
     
+    private func updateMessageViewConfiguration(configuration: MessageCellContentConfiguration) {
+        var messageViewConfiguration = MessageViewContentConfiguration()
+        messageViewConfiguration.text = configuration.text
+        messageViewConfiguration.role = configuration.role
+        messageView.updateConfiguration(configuration: messageViewConfiguration)
+    }
+}
+
+// MARK: Autolayout Methods
+extension MessageCellContentView {
     private func setUpConstraintsByRole() {
         let margin = Constants.defaultMargin
         let labelWidthRatio = Constants.labelWidthRatio
         
         NSLayoutConstraint.activate([
-            bubbleView.topAnchor.constraint(equalTo: self.topAnchor, constant: margin),
-            bubbleView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -margin),
-            bubbleView.widthAnchor.constraint(lessThanOrEqualTo: self.widthAnchor, multiplier: labelWidthRatio)
+            messageView.topAnchor.constraint(equalTo: self.topAnchor, constant: margin),
+            messageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -margin),
+            messageView.widthAnchor.constraint(lessThanOrEqualTo: self.widthAnchor, multiplier: labelWidthRatio)
         ])
         
         if appliedConfiguration.role == .user {
