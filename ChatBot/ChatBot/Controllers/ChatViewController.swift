@@ -9,32 +9,46 @@ import UIKit
 import Combine
 
 final class ChatViewController: UIViewController {
-
-    lazy var collectionView: UICollectionView = {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.minimumLineSpacing = 16.0
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        collectionView.register(ChatCollectionViewCell.self, forCellWithReuseIdentifier: ChatCollectionViewCell.identifier)
-        collectionView.delegate = self
-        collectionView.dataSource = self
+    
+    // MARK: - Properties
+    
+    private let chatViewModel = ChatViewModel()
+    
+    private let input: PassthroughSubject<ChatViewModel.InputEvent, Never> = .init()
+    private var cancellables = Set<AnyCancellable>()
+    
+    // MARK: - Layout
+    
+    private var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 16.0
+        
+        let collectionView = UICollectionView(
+            frame: .zero,
+            collectionViewLayout: layout
+        )
+        
         collectionView.backgroundColor = .white
         
         return collectionView
     }()
     
-    lazy var containerView: UIView = {
+    private var containerView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.clear
+        
         return view
     }()
     
-    lazy var sendButton: UIButton = {
+    private var sendButton: UIButton = {
         let button = UIButton()
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .light)
+        
         button.setImage(UIImage(systemName: "arrow.up.circle.fill", withConfiguration: imageConfig), for: .normal)
+        
         button.imageView?.contentMode = .scaleAspectFill
         button.imageView?.clipsToBounds = true
-        button.addTarget(self, action: #selector(didTapSubmit), for: .touchUpInside)
+        
         return button
     }()
     
@@ -46,24 +60,24 @@ final class ChatViewController: UIViewController {
         textView.backgroundColor = .clear
         
         textView.font = UIFont.preferredFont(forTextStyle: .headline)
-        textView.delegate = self
+        
         textView.isScrollEnabled = false
         textView.isEditable = true
         
         return textView
     }()
     
-    private let vm = ChatViewModel()
-    private let input: PassthroughSubject<ChatViewModel.InputEvent, Never> = .init()
-    private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureUI()
         bind()
+        setupDelegates()
+        setupRegistration()
+        setupSubviews()
+        setupConstraint()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -71,25 +85,52 @@ final class ChatViewController: UIViewController {
         input.send(.sendButtonDidTap(prompt: "Hello, My name is Janine. Please remember my name"))
     }
     
-    @objc func didTapSubmit() {
-        inputTextView.resignFirstResponder()
-        input.send(.sendButtonDidTap(prompt: inputTextView.text))
-        self.collectionView.reloadData()
+    // MARK: - Setup
+    
+    private func bind() {
+        let output = chatViewModel.transform(input: input.eraseToAnyPublisher())
+        output
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] event in
+                switch event {
+                case .fetchChatDidStart:
+                    self?.collectionView.reloadData()
+                case .fetchChatDidSucceed:
+                    self?.collectionView.reloadData()
+                }
+            }.store(in: &cancellables)
     }
     
-    private func configureUI() {
+    
+    private func setupDelegates() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        inputTextView.delegate = self
+        
+        sendButton.addTarget(self, action: #selector(didTapSubmit), for: .touchUpInside)
+    }
+    
+    private func setupRegistration() {
+        collectionView.register(ChatCollectionViewCell.self, forCellWithReuseIdentifier: ChatCollectionViewCell.identifier)
+        
+        collectionView.register(LoadingIndicatorCell.self, forCellWithReuseIdentifier: LoadingIndicatorCell.identifier)
+    }
+    
+    private func setupSubviews() {
+        view.addSubview(collectionView)
+        view.addSubview(containerView)
+        
         containerView.addSubview(sendButton)
-        
         containerView.addSubview(inputTextView)
-        
+    }
+    
+    private func setupConstraint() {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         containerView.translatesAutoresizingMaskIntoConstraints = false
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         inputTextView.translatesAutoresizingMaskIntoConstraints = false
         
-        view.addSubview(collectionView)
-        view.addSubview(containerView)
-
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             containerView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor),
@@ -112,56 +153,52 @@ final class ChatViewController: UIViewController {
         ])
     }
     
-    func bind() {
-        let output = vm.transform(input: input.eraseToAnyPublisher())
-        output
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] event in
-                switch event {
-                case .fetchChatDidFail:
-                    return
-                case .fetchChatDidSucceed:
-                    self?.collectionView.reloadData()
-                }
-            }.store(in: &cancellables)
-    }
     
-    @objc func buttonTapped() {
-        input.send(.sendButtonDidTap(prompt: "what was my name? please call my name and say hello to me with smily face!"))
+    // MARK: - Event handler
+    
+    @objc func didTapSubmit() {
+        inputTextView.resignFirstResponder()
+        input.send(.sendButtonDidTap(prompt: inputTextView.text))
+        self.collectionView.reloadData()
     }
 }
-
 
 extension ChatViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return vm.messages.count
+        return chatViewModel.getCountOfMessage()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatCollectionViewCell.identifier, for: indexPath) as! ChatCollectionViewCell
         
-        cell.configure(model: vm, index: indexPath.row)
-        return cell
+        if chatViewModel.isNetworking && indexPath.row == chatViewModel.messages.count {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LoadingIndicatorCell.identifier, for: indexPath) as! LoadingIndicatorCell
+            
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatCollectionViewCell.identifier, for: indexPath) as! ChatCollectionViewCell
+            
+            cell.configure(model: chatViewModel, index: indexPath.row)
+            return cell
+        }
     }
-}
-
-extension ChatViewController: UICollectionViewDelegate {
-    
 }
 
 extension ChatViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let message = vm.getMessage(at: indexPath.row).content
-        let estimatedFrame = message.getEstimatedFrame(with: .systemFont(ofSize: 18))
+        
+        guard let message = chatViewModel.getMessage(at: indexPath.row) else {
+            return CGSize(width: view.bounds.width, height: view.bounds.height)
+        }
+        
+        let content = message.content
+        let estimatedFrame = content.getEstimatedFrame(with: .systemFont(ofSize: 18))
         return CGSize(width: view.bounds.width, height: estimatedFrame.height + 20)
     }
 }
 
 extension ChatViewController: UITextViewDelegate {
-    
     func textViewDidChange(_ textView: UITextView) {
-        print(textView.text)
         let size = CGSize(width: view.frame.width - 30, height: .infinity)
         let estimateSize = textView.sizeThatFits(size)
         
@@ -173,3 +210,4 @@ extension ChatViewController: UITextViewDelegate {
     }
 }
 
+extension ChatViewController: UICollectionViewDelegate {}

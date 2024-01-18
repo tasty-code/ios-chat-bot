@@ -9,7 +9,7 @@ import UIKit
 
 class ChatCollectionViewCell: UICollectionViewCell {
     
-    static let identifier = "ChatTableViewCell"
+    static let identifier = "chat-cell"
     
     let promptTextView: UITextView = {
         let view = UITextView()
@@ -46,11 +46,12 @@ class ChatCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(model: ChatViewModel, index: Int) {
-        let message = model.getMessage(at: index)
-        
-        guard message.role != .system, message.role != .tool else { return }
+        guard let message = model.getMessage(at: index),
+              message.role != .system,
+              message.role != .tool else { return }
         
         promptTextView.text = message.content
+        
         guard let font = promptTextView.font else { return }
         let estimateFrame = message.content.getEstimatedFrame(with: font)
         promptTextView.widthAnchor.constraint(equalToConstant: estimateFrame.width + 16).isActive = true
