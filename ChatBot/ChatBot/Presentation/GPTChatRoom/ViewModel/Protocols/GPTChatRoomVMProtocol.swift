@@ -7,12 +7,14 @@
 
 import Combine
 
-protocol GPTChatRoomVMProtocol {
-    var chattings: [Model.GPTMessage] { get }
-    var chattingsPublisher: Published<[Model.GPTMessage]>.Publisher { get }
-    
-    var lastestUpdateIndexSubject: PassthroughSubject<Int, Never> { get }
-    var errorMessageSubject: PassthroughSubject<Error, Never> { get }
-    
-    func sendComment(_ text: String?)
+protocol GPTChatRoomVMProtocol: ViewModelable
+where Input == GPTChatRoomInput, Output == GPTChatRoomOutput { }
+
+struct GPTChatRoomInput {
+    let sendingComment: AnyPublisher<String?, Never>
+}
+
+enum GPTChatRoomOutput {
+    case success(messages: [Model.GPTMessage], indexToUpdate: Int)
+    case failure(Error)
 }

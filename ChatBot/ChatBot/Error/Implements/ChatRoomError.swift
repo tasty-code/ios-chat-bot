@@ -9,15 +9,18 @@ import Foundation
 
 extension GPTError {
     enum ChatRoomError: Error {
-        case emptyContent
+        case emptyUserComment
+        case emptyGPTReply
     }
 }
 
 extension GPTError.ChatRoomError: LocalizedError {
     var errorDescription: String? {
         switch self {
-        case .emptyContent:
+        case .emptyUserComment:
             return "내용을 입력해주세요."
+        case .emptyGPTReply:
+            return "챗봇에 응답이 없습니다."
         }
     }
 }

@@ -11,57 +11,62 @@ final class GPTChatRoomViewModel: GPTChatRoomVMProtocol {
     private let httpService: HTTPServicable
     private let httpRequest: HTTPRequestable
     
+    private let output = PassthroughSubject<Output, Never>()
     private var cancellables = Set<AnyCancellable>()
     
-    @Published private(set) var chattings: [Model.GPTMessage]
-    var chattingsPublisher: Published<[Model.GPTMessage]>.Publisher { $chattings }
+    private var messages = [Model.GPTMessage]()
     
-    let lastestUpdateIndexSubject = PassthroughSubject<Int, Never>()
-    let errorMessageSubject = PassthroughSubject<Error, Never>()
-    
-    init(httpService: HTTPServicable = AppEnviroment.defaultHTTPSecvice, httpRequest: HTTPRequestable, chattings: [Model.GPTMessage] = []) {
+    init(httpService: HTTPServicable = AppEnviroment.defaultHTTPSecvice, httpRequest: HTTPRequestable) {
         self.httpService = httpService
         self.httpRequest = httpRequest
-        self.chattings = chattings
     }
     
-    func sendComment(_ text: String?) {
-        guard let text = text, !text.isEmpty else {
-            errorMessageSubject.send(GPTError.ChatRoomError.emptyContent)
-            return
-        }
-        
-        let indexToUpdate = appendComments(text)
-        
-        httpService.request(
-            request: httpRequest,
-            object: Model.GPTCommentDTO(messages: chattings.filter { $0.role != .waiting }),
-            type: Model.GPTReplyDTO.self
-        )
-        .map { $0.choices.first?.message }
-        .replaceNil(with: Model.AssistantMessage(content: "내용이 없습니다...", name: nil, toolCalls: nil).asRequestMessage())
-        .sink { [weak self] completion in
-            if case .failure(let error) = completion {
-                self?.chattings[indexToUpdate] = Model.AssistantMessage(content: "\(error)", name: nil, toolCalls: nil).asRequestMessage()
-                self?.errorMessageSubject.send(error)
+    func transform(from input: GPTChatRoomInput) -> AnyPublisher<GPTChatRoomOutput, Never> {
+        input.sendingComment
+            .sink { [weak self] comment in
+                guard let self else { return }
+                guard let comment = comment, !comment.isEmpty else {
+                    output.send(Output.failure(GPTError.ChatRoomError.emptyUserComment))
+                    return
+                }
+                messages.append(Model.UserMessage(content: comment).asRequestMessage())
+                messages.append(Model.WaitingMessage().asRequestMessage())
+                output.send(Output.success(messages: messages, indexToUpdate: messages.count - 1))
+                getReplyFromServer(messages.count - 1)
             }
-            self?.lastestUpdateIndexSubject.send(indexToUpdate)
-        } receiveValue: { [weak self] reply in
-            self?.chattings[indexToUpdate] = Model.AssistantMessage(content: reply.content, name: nil, toolCalls: nil).asRequestMessage()
-        }
-        .store(in: &cancellables)
+            .store(in: &cancellables)
+        
+        return output.eraseToAnyPublisher()
     }
     
-    
-    
-    private func appendComments(_ text: String) -> Int {
-        let comment = Model.UserMessage(content: text)
-        chattings.append(comment.asRequestMessage())
+    private func getReplyFromServer(_ indexToUpdate: Int) {
+        let networkPublisher = httpService.request(
+            request: httpRequest,
+            object: Model.GPTCommentDTO(messages: messages.filter { $0.role != .waiting }),
+            type: Model.GPTReplyDTO.self
+        ).tryMap { replyDTO in
+            guard let reply = replyDTO.choices.first?.message else {
+                throw GPTError.ChatRoomError.emptyGPTReply
+            }
+            return reply
+        }
         
-        let index = chattings.count
-        chattings.append(Model.WaitingMessage().asRequestMessage())
-        lastestUpdateIndexSubject.send(index)
-        
-        return index
+        var cancellable: AnyCancellable! = nil
+        cancellable = networkPublisher
+            .sink { [weak self] completion in
+                guard let self else { return }
+                switch completion {
+                case .failure(let error):
+                    messages[indexToUpdate] = Model.AssistantMessage(content: error.localizedDescription, name: nil, toolCalls: nil).asRequestMessage()
+                    output.send(Output.failure(error))
+                case .finished:
+                    output.send(Output.success(messages: messages, indexToUpdate: indexToUpdate))
+                }
+                cancellables.remove(cancellable)?.cancel()
+            } receiveValue: { [weak self] message in
+                guard let self else { return }
+                messages[indexToUpdate] = message
+            }
+        cancellable?.store(in: &cancellables)
     }
 }

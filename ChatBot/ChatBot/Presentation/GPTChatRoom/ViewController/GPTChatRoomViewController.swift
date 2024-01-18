@@ -56,7 +56,8 @@ final class GPTChatRoomViewController: UIViewController {
         return button
     }()
     
-    private let viewModel: GPTChatRoomVMProtocol
+    private let userComment = PassthroughSubject<String?, Never>()
+    private let viewModel: any GPTChatRoomVMProtocol
     private let cellResistration = UICollectionView.CellRegistration<GPTChatRoomCell, Model.GPTMessage> { cell, indexPath, itemIdentifier in
         cell.configureCell(to: itemIdentifier)
     }
@@ -64,7 +65,7 @@ final class GPTChatRoomViewController: UIViewController {
     private var chattingDataSource: UICollectionViewDiffableDataSource<Section, Model.GPTMessage>!
     private var cancellables = Set<AnyCancellable>()
     
-    init(viewModel: GPTChatRoomVMProtocol) {
+    init(viewModel: any GPTChatRoomVMProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -77,45 +78,27 @@ final class GPTChatRoomViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         configureUI()
-        bind()
+        bind(to: viewModel)
         configureDataSource()
     }
     
-    private func bind() {
-        viewModel.chattingsPublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] messages in
-                guard let self else { return }
-                
-                var snapshot = NSDiffableDataSourceSnapshot<Section, Model.GPTMessage>()
-                snapshot.appendSections([.main])
-                snapshot.appendItems(messages)
-                self.chattingDataSource.apply(snapshot)
-                
-                if !messages.isEmpty {
-                    let indexPath = IndexPath(item: messages.count - 1, section: 0)
-                    self.chatCollectionView.scrollToItem(at: indexPath, at: .top, animated: true)
-                }
-            }
-            .store(in: &cancellables)
+    private func bind(to viewModel: any GPTChatRoomVMProtocol) {
+        let input = GPTChatRoomInput(sendingComment: userComment.eraseToAnyPublisher())
+        let output = viewModel.transform(from: input)
         
-        viewModel.lastestUpdateIndexSubject
+        output
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] index in
-                guard let self else { return }
+            .sink { [weak self] output in
+            guard let self = self else { return }
                 
-                let indexPath = IndexPath(item: index, section: 0)
-                self.chatCollectionView.scrollToItem(at: indexPath, at: .top, animated: true)
+            switch output {
+            case .success(let replies, let indexToUpdate):
+                self.updateCollectionView(replies, indexToUpdate: indexToUpdate)
+            case .failure(let error):
+                self.present(self.configureErrorAlert(error), animated: true)
             }
-            .store(in: &cancellables)
-        
-        viewModel.errorMessageSubject
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] error in
-                guard let self else { return }
-                self.present(configureErrorAlert(error), animated: true)
-            }
-            .store(in: &cancellables)
+        }
+        .store(in: &cancellables)
     }
 }
 
@@ -149,6 +132,15 @@ extension GPTChatRoomViewController {
         let section = NSCollectionLayoutSection(group: group)
         return UICollectionViewCompositionalLayout(section: section)
     }
+    
+    private func updateCollectionView(_ updatedMessages: [Model.GPTMessage], indexToUpdate: Int) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Model.GPTMessage>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(updatedMessages)
+        chattingDataSource.apply(snapshot)
+        
+        chatCollectionView.scrollToItem(at: IndexPath(row: indexToUpdate, section: 0), at: .top, animated: true)
+    }
 }
 
 // MARK: - configure Diffable Data Source
@@ -167,7 +159,7 @@ extension GPTChatRoomViewController {
 extension GPTChatRoomViewController {
     @objc
     private func tapSendButton(_ sender: Any) {
-        viewModel.sendComment(commentTextView.text)
+        userComment.send(commentTextView.text)
         commentTextView.text = nil
     }
 }
