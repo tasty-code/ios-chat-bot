@@ -118,7 +118,7 @@ extension ChattingRoomViewController {
     private func prepareToSend(_ messages: [Message], to gptModel: GPTModel) -> NetworkRequestBuilderProtocol {
         let requestModel = RequestModel(model: gptModel, messages: messages, stream: false)
         let endpoint = EndpointType.chatCompletion(apiKey: Bundle.main.APIKey)
-        let builder: NetworkRequestBuilderProtocol = NetworkRequestBuilder(jsonEncodeManager: JSONEncodeManager(), endpoint: endpoint)
+        var builder: NetworkRequestBuilderProtocol = NetworkRequestBuilder(jsonEncodeManager: JSONEncodeManager(), endpoint: endpoint)
         builder.setHttpHeaderFields(httpHeaderFields: endpoint.header)
         builder.setHttpMethod(httpMethod: .post)
         builder.setRequestModel(requestModel: requestModel)

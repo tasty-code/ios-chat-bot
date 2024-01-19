@@ -6,9 +6,9 @@ protocol NetworkRequestBuilderProtocol {
     var requestModel: Encodable? { get set }
     var httpHeaderFields: [String: String] { get set }
     
-    func setHttpMethod(httpMethod: HTTPMethodType)
-    func setHttpHeaderFields(httpHeaderFields: [String: String])
-    func setRequestModel(requestModel: RequestModel)
+    mutating func setHttpMethod(httpMethod: HTTPMethodType)
+    mutating func setHttpHeaderFields(httpHeaderFields: [String: String])
+    mutating func setRequestModel(requestModel: RequestModel)
     func build() throws -> URLRequest
 }
 

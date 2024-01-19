@@ -1,6 +1,6 @@
 import Foundation
 
-final class NetworkRequestBuilder: NetworkRequestBuilderProtocol {
+struct NetworkRequestBuilder: NetworkRequestBuilderProtocol {
     // MARK: Namespace
     enum NetworkBuilderError: Error, CustomDebugStringConvertible {
         case buildRequestFailed
@@ -26,19 +26,6 @@ final class NetworkRequestBuilder: NetworkRequestBuilderProtocol {
         self.jsonEncodeManager = jsonEncodeManager
         self.httpHeaderFields = endpoint.header
         self.baseURLString = endpoint.baseURLString
-    }
-    
-    // MARK: Public Methods
-    func setHttpMethod(httpMethod: HTTPMethodType) {
-        self.httpMethod = httpMethod
-    }
-    
-    func setHttpHeaderFields(httpHeaderFields: [String: String]) {
-        self.httpHeaderFields = httpHeaderFields
-    }
-    
-    func setRequestModel(requestModel: RequestModel) {
-        self.requestModel = requestModel
     }
     
     func build() throws -> URLRequest {
