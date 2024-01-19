@@ -8,7 +8,7 @@
 import Foundation
 
 struct PostChatBotNetworkBuilder: NetworkRequestBuildable {
-    typealias RequestBody = APIRequest
+    typealias RequestBody = ChatRequest
     
     var httpMethod: HttpMethod = .post
     let authKey: String? = Environment.apiKey
@@ -16,15 +16,12 @@ struct PostChatBotNetworkBuilder: NetworkRequestBuildable {
     
     var path: String
     
-    init(prompt: String) {
+    init(message: [ChatMessage]) {
         self.path = "v1/chat/\(Endpoint.completions.rawValue)"
-        self.body = APIRequest(
+        self.body = ChatRequest(
             model: ConstantsForNetworkRequest.model,
             stream: false,
-            messages: [
-                ConstantsForNetworkRequest.defaultMessage,
-                Message(role: "user", content: prompt)
-            ]
+            messages: message
         )
     }
 }

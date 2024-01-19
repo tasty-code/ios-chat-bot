@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct APIRequest: Encodable {
+struct ChatRequest: Encodable {
     let model: String
     let stream: Bool
-    let messages: [Message]
+    let messages: [ChatMessage]
 }
