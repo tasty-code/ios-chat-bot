@@ -51,15 +51,15 @@ extension MessageView {
 extension MessageView {
     override func draw(_ rect: CGRect) {
         if role == .user {
-            drawBubbleToRight()
+            drawRightBubble()
         } else if role == .assistant {
-            drawBubbleToLeft()
+            drawLeftBubble()
         }
         
         super.draw(rect)
     }
     
-    private func drawBubbleToRight() {
+    private func drawRightBubble() {
         let width = bounds.size.width
         let height = bounds.size.height
         
@@ -83,9 +83,9 @@ extension MessageView {
         bubbleLayer.path = bezierPath.cgPath
     }
     
-    private func drawBubbleToLeft() {
-        let width = bounds.size.width
-        let height = bounds.size.height
+    private func drawLeftBubble() {
+        let width: CGFloat = max(80, bounds.size.width)
+        let height: CGFloat = max(50, bounds.size.height)
         
         let bezierPath = UIBezierPath()
         

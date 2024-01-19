@@ -3,7 +3,7 @@ import UIKit
 final class MessageCellContentView: UIView, UIContentView {
     private enum Constants {
         static let labelWidthRatio: CGFloat = 2/3
-        static let defaultMargin: CGFloat = 30
+        static let defaultMargin: CGFloat = 10
     }
     
     private lazy var messageView: MessageView! = {

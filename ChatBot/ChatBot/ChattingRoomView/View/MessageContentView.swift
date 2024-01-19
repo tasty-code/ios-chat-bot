@@ -1,6 +1,12 @@
 import UIKit
 
 final class MessageContentView: UIView, UIContentView {
+    private enum Constants {
+        static let defaultOffset: CGFloat = 10
+        static let defaultDotSize: CGFloat = 10
+        static let defaultDotSpacing: CGFloat = 20
+    }
+    
     private let bubbleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = .zero
@@ -13,7 +19,9 @@ final class MessageContentView: UIView, UIContentView {
     }()
     
     private lazy var dotLayer: CAReplicatorLayer = {
-        let dotLayer = drawAnimatingDots(dotXOffset: 6.0, dotSize: 4.0, dotSpacing: 8.0)
+        let dotLayer = drawAnimatingDots(dotOffset: Constants.defaultOffset,
+                                         dotSize: Constants.defaultDotSize,
+                                         dotSpacing: Constants.defaultDotSpacing)
         layer.addSublayer(dotLayer)
         return dotLayer
     }()
@@ -66,12 +74,12 @@ extension MessageContentView {
 
 // MARK: Draw Methods
 extension MessageContentView {
-    private func drawAnimatingDots(dotXOffset: CGFloat, dotSize: CGFloat, dotSpacing: CGFloat) -> CAReplicatorLayer {
+    private func drawAnimatingDots(dotOffset: CGFloat, dotSize: CGFloat, dotSpacing: CGFloat) -> CAReplicatorLayer {
         let layer = CAReplicatorLayer()
         let backgroundLayer = CALayer()
         
-        backgroundLayer.frame = CGRect(x: bounds.width / 2 - dotXOffset,
-                           y: bounds.height / 2,
+        backgroundLayer.frame = CGRect(x: bounds.width / 2 + dotOffset,
+                           y: bounds.height / 2 + dotOffset,
                            width: dotSize,
                            height: dotSize)
         
