@@ -105,17 +105,27 @@ final class ChatViewController: UIViewController {
             .sink { [weak self] event in
                 switch event {
                 case .fetchRequestDidCreate:
+//                    guard let count = self?.chatViewModel.getChatMessageCount() else { return }
                     self?.collectionView.reloadData()
+//                    let indexPath = IndexPath(item: count - 1, section: 0)
+//                    self?.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
+                    self?.scrollToBottom()
                 case .fetchChatDidStart(let isNetworking):
                     if isNetworking {
                         self?.collectionView.reloadData()
                     }
                 case .fetchChatDidSucceed:
                     self?.collectionView.reloadData()
+                    self?.scrollToBottom()
                 }
             }.store(in: &cancellables)
     }
     
+    private func scrollToBottom() {
+        let count = chatViewModel.getChatMessageCount()
+        let indexPath = IndexPath(item: count - 1, section: 0)
+        collectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
+    }
     
     private func setupDelegates() {
         collectionView.delegate = self
