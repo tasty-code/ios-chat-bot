@@ -8,75 +8,85 @@
 import UIKit
 import Combine
 
+
 final class ChatViewController: UIViewController {
     
     // MARK: - Properties
-    
     private let chatViewModel = ChatViewModel()
-    
+
     private let input: PassthroughSubject<ChatViewModel.InputEvent, Never> = .init()
     private var cancellables = Set<AnyCancellable>()
     
+    private lazy var textViewMaxHeightConstraint: NSLayoutConstraint =
+    inputTextView.heightAnchor.constraint(equalToConstant: view.frame.height / 9)
+    
     // MARK: - Layout
     
-    private var collectionView: UICollectionView = {
+    private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 16.0
+        
+        layout.minimumLineSpacing = 16.0 // 위아래 줄 간격
         
         let collectionView = UICollectionView(
             frame: .zero,
             collectionViewLayout: layout
         )
-        
         collectionView.backgroundColor = .white
+        collectionView.keyboardDismissMode = .onDrag
+        view.addSubview(collectionView)
         
         return collectionView
     }()
     
-    private var containerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.clear
+    private lazy var contentStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [
+            inputTextView, sendButton
+        ])
+        stackView.axis = .horizontal
+        stackView.distribution = .fill
+        stackView.backgroundColor = .white
+        stackView.spacing = 15
+        view.addSubview(stackView)
         
-        return view
+        return stackView
     }()
     
-    private var sendButton: UIButton = {
-        let button = UIButton()
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .light)
-        
-        button.setImage(UIImage(systemName: "arrow.up.circle.fill", withConfiguration: imageConfig), for: .normal)
-        
-        button.imageView?.contentMode = .scaleAspectFill
-        button.imageView?.clipsToBounds = true
-        
-        return button
-    }()
-    
-    lazy var inputTextView: UITextView = {
+    private lazy var inputTextView: UITextView = {
         let textView = UITextView()
-        textView.layer.cornerRadius = 22
-        textView.layer.borderWidth = 1
-        textView.layer.borderColor = UIColor.lightGray.cgColor
-        
-        
-        textView.font = UIFont.preferredFont(forTextStyle: .headline)
-        
         textView.isScrollEnabled = false
-        textView.isEditable = true
+        textView.layer.cornerRadius = 12
+        textView.layer.borderColor = UIColor.systemMint.cgColor
+        textView.layer.borderWidth = 1
+        textView.backgroundColor = .white
+        textView.textContainerInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        textView.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        textView.layer.borderColor = UIColor.lightGray.cgColor
+        textView.font = UIFont.preferredFont(forTextStyle: .headline)
         
         return textView
     }()
-    
-    
+
+    private lazy var sendButton: UIButton = {
+        let button = UIButton()
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .light)
+        button.setImage(UIImage(systemName: "arrow.up.circle.fill", withConfiguration: imageConfig), for: .normal)
+        button.tintColor = UIColor.systemMint
+        button.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(didTapSubmitButton), for: .touchUpInside)
+        
+        return button
+    }()
+
     // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         bind()
+        
         setupDelegates()
         setupRegistration()
-        setupSubviews()
+        
         setupConstraint()
     }
     
@@ -84,6 +94,7 @@ final class ChatViewController: UIViewController {
         super.viewDidAppear(animated)
 //        input.send(.sendButtonDidTap(prompt: "Hello, My name is Janine. Please remember my name"))
     }
+    
     
     // MARK: - Setup
     
@@ -107,60 +118,38 @@ final class ChatViewController: UIViewController {
     private func setupDelegates() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        
         inputTextView.delegate = self
-        
-        sendButton.addTarget(self, action: #selector(didTapSubmitButton), for: .touchUpInside)
     }
     
     private func setupRegistration() {
         collectionView.register(ChatCollectionViewCell.self, forCellWithReuseIdentifier: ChatCollectionViewCell.identifier)
-        
-        collectionView.register(LoadingIndicatorCell.self, forCellWithReuseIdentifier: LoadingIndicatorCell.identifier)
-    }
     
-    private func setupSubviews() {
-        view.addSubview(collectionView)
-        view.addSubview(containerView)
-        
-        containerView.addSubview(sendButton)
-        containerView.addSubview(inputTextView)
+        collectionView.register(LoadingIndicatorCell.self, forCellWithReuseIdentifier: LoadingIndicatorCell.identifier)
     }
     
     private func setupConstraint() {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.translatesAutoresizingMaskIntoConstraints = false
+        contentStackView.translatesAutoresizingMaskIntoConstraints = false
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         inputTextView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            containerView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor),
-            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            containerView.heightAnchor.constraint(equalTo: inputTextView.heightAnchor),
-            
-            sendButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            sendButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
-            sendButton.leadingAnchor.constraint(equalTo: inputTextView.trailingAnchor, constant: 10),
-            sendButton.topAnchor.constraint(equalTo: containerView.topAnchor),
-            
-            inputTextView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            inputTextView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
-            inputTextView.heightAnchor.constraint(equalToConstant: 40),
+            inputTextView.widthAnchor.constraint(equalTo: sendButton.widthAnchor, multiplier: 6),
             
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: containerView.topAnchor, constant: -10)
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            contentStackView.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
+            contentStackView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor),
+            contentStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            contentStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
     }
-    
-    
     // MARK: - Event handler
     
     @objc func didTapSubmitButton() {
         inputTextView.resignFirstResponder()
-        
         input.send(.sendButtonDidTap(prompt: inputTextView.text))
         inputTextView.text = nil
     }
@@ -191,12 +180,13 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         guard let message = chatViewModel.getMessage(at: indexPath.row) else {
-            return CGSize(width: view.bounds.width, height: view.bounds.height)
+            return CGSize(width: view.bounds.width - 50, height: view.bounds.height)
         }
         
         let content = message.content
         let estimatedFrame = content.getEstimatedFrame(with: .systemFont(ofSize: 18))
-        return CGSize(width: view.bounds.width, height: estimatedFrame.height + 20)
+       
+        return CGSize(width: view.bounds.width - 50, height: estimatedFrame.height + 20)
     }
 }
 
@@ -213,4 +203,4 @@ extension ChatViewController: UITextViewDelegate {
     }
 }
 
-extension ChatViewController: UICollectionViewDelegate {}
+extension ChatViewController: UICollectionViewDelegate { }
