@@ -26,7 +26,7 @@ final class ChatViewController: UIViewController {
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         
-        layout.minimumLineSpacing = 16.0 // 위아래 줄 간격
+        layout.minimumLineSpacing = 16.0
         
         let collectionView = UICollectionView(
             frame: .zero,
@@ -34,47 +34,51 @@ final class ChatViewController: UIViewController {
         )
         collectionView.backgroundColor = .white
         collectionView.keyboardDismissMode = .onDrag
-        view.addSubview(collectionView)
+        
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         return collectionView
     }()
     
-    private lazy var contentStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [
-            inputTextView, sendButton
-        ])
+    private var contentStackView: UIStackView = {
+        let stackView = UIStackView()
+        
         stackView.axis = .horizontal
         stackView.distribution = .fill
         stackView.backgroundColor = .white
         stackView.spacing = 15
-        view.addSubview(stackView)
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         
         return stackView
     }()
     
-    private lazy var inputTextView: UITextView = {
+    private var inputTextView: UITextView = {
         let textView = UITextView()
+        
         textView.isScrollEnabled = false
-        textView.layer.cornerRadius = 12
-        textView.layer.borderColor = UIColor.systemMint.cgColor
-        textView.layer.borderWidth = 1
-        textView.backgroundColor = .white
-        textView.textContainerInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        
         textView.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        textView.layer.borderColor = UIColor.lightGray.cgColor
+        textView.textContainerInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        
+        textView.backgroundColor = .systemBackground
         textView.font = UIFont.preferredFont(forTextStyle: .headline)
+        
+        textView.layer.cornerRadius = 12
+        textView.layer.borderWidth = 1
+        textView.layer.borderColor = UIColor.lightGray.cgColor
         
         return textView
     }()
     
-    private lazy var sendButton: UIButton = {
+    private var sendButton: UIButton = {
         let button = UIButton()
+        
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .light)
         button.setImage(UIImage(systemName: "arrow.up.circle.fill", withConfiguration: imageConfig), for: .normal)
         button.tintColor = UIColor.systemMint
+        
         button.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(didTapSubmitButton), for: .touchUpInside)
         
         return button
     }()
@@ -83,17 +87,16 @@ final class ChatViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
         
+        setupBinding()
         setupDelegates()
         setupRegistration()
-        
-        setupConstraint()
+        setupConfiguration()
     }
-
+    
     // MARK: - Setup
     
-    private func bind() {
+    private func setupBinding() {
         let output = chatViewModel.transform(input: input.eraseToAnyPublisher())
         output
             .receive(on: DispatchQueue.main)
@@ -101,40 +104,35 @@ final class ChatViewController: UIViewController {
                 switch event {
                 case .fetchRequestDidCreate:
                     self?.collectionView.reloadData()
-                    self?.scrollToBottom()
+                    
                 case .fetchChatDidStart(let isNetworking):
                     if isNetworking {
                         self?.collectionView.reloadData()
                     }
+                    
                 case .fetchChatDidSucceed:
                     self?.collectionView.reloadData()
-                    self?.scrollToBottom()
                 }
             }.store(in: &cancellables)
-    }
-    
-    private func scrollToBottom() {
-        let count = chatViewModel.getChatMessageCount()
-        let indexPath = IndexPath(item: count - 1, section: 0)
-        collectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
     }
     
     private func setupDelegates() {
         collectionView.delegate = self
         collectionView.dataSource = self
         inputTextView.delegate = self
+        
+        sendButton.addTarget(self, action: #selector(didTapSubmitButton), for: .touchUpInside)
     }
     
     private func setupRegistration() {
-        collectionView.register(ChatCollectionViewCell.self, forCellWithReuseIdentifier: ChatCollectionViewCell.identifier)
+        collectionView.register(ChatMessageCell.self, forCellWithReuseIdentifier: ChatMessageCell.identifier)
         collectionView.register(ChatLoadingBubbleCell.self, forCellWithReuseIdentifier: ChatLoadingBubbleCell.identifier)
     }
     
-    private func setupConstraint() {
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        contentStackView.translatesAutoresizingMaskIntoConstraints = false
-        sendButton.translatesAutoresizingMaskIntoConstraints = false
-        inputTextView.translatesAutoresizingMaskIntoConstraints = false
+    private func setupConfiguration() {
+        view.backgroundColor = .systemBackground
+        view.addSubviews(collectionView, contentStackView)
+        contentStackView.addArrangedSubviews(inputTextView, sendButton)
         
         NSLayoutConstraint.activate([
             inputTextView.widthAnchor.constraint(equalTo: sendButton.widthAnchor, multiplier: 6),
@@ -143,13 +141,19 @@ final class ChatViewController: UIViewController {
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            contentStackView.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
+            contentStackView.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 10),
             contentStackView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor),
             contentStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             contentStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
     }
-
+    
+    private func scrollToBottom() {
+        let count = chatViewModel.getChatMessageCount()
+        let indexPath = IndexPath(item: count - 1, section: 0)
+        collectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
+    }
+    
     // MARK: - Event handler
     
     @objc func didTapSubmitButton() {
@@ -170,13 +174,16 @@ extension ChatViewController: UICollectionViewDataSource {
         if chatViewModel.isNetworking, chatViewModel.messages[safeIndex: indexPath.row] == nil {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatLoadingBubbleCell.identifier, for: indexPath) as! ChatLoadingBubbleCell
             
-        cell.loadingBubble.startAnimating()
+            cell.loadingBubble.startAnimating()
             
             return cell
+            
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatCollectionViewCell.identifier, for: indexPath) as! ChatCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatMessageCell.identifier, for: indexPath) as! ChatMessageCell
             
             cell.configure(model: chatViewModel, index: indexPath.row)
+            
+            scrollToBottom()
             return cell
         }
     }
@@ -209,4 +216,4 @@ extension ChatViewController: UITextViewDelegate {
     }
 }
 
-extension ChatViewController: UICollectionViewDelegate { }
+extension ChatViewController: UICollectionViewDelegate {}
