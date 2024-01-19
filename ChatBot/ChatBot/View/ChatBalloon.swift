@@ -18,7 +18,7 @@ final class ChatBalloon: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+        
     var text: String? {
         didSet {
             label.text = text
@@ -29,6 +29,7 @@ final class ChatBalloon: UIView {
     var direction: Direction = .right
     private var rightLabelConstraint = [NSLayoutConstraint]()
     private var leftLabelConstraint = [NSLayoutConstraint]()
+    var commonLabelConstraint = [NSLayoutConstraint]()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -41,16 +42,15 @@ final class ChatBalloon: UIView {
     
     private func setupUI() {
         layer.addSublayer(balloonLayer)
-        
         addSubview(label)
         
         rightLabelConstraint = [label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12.0), label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0)]
-        leftLabelConstraint = [label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0), label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12.0)]
 
-        NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: topAnchor, constant: 12.0),
-            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12.0),
-        ])
+        leftLabelConstraint = [label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0), label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12.0)]
+        
+        commonLabelConstraint = [label.topAnchor.constraint(equalTo: topAnchor, constant: 12.0),
+            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12.0)]
+        NSLayoutConstraint.activate(commonLabelConstraint)
     }
     
     func leftOrRight(direction: Direction) {
@@ -74,6 +74,20 @@ final class ChatBalloon: UIView {
         }
     }
     
+    func ssss() {
+        rightLabelConstraint.forEach { i in
+            i.isActive = false
+        }
+        
+        leftLabelConstraint.forEach { i in
+            i.isActive = false
+        }
+        
+        commonLabelConstraint.forEach { i in
+            i.isActive = false
+        }
+    }
+
     private func drawBalloonToRight() {
         let width = bounds.size.width
         let height = bounds.size.height
