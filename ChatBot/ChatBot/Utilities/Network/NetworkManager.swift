@@ -25,7 +25,6 @@ final class NetworkManager {
         else {
             throw APIError.responseError(status: statusCode)
         }
-        
         return data
     }
 }

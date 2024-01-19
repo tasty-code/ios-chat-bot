@@ -124,5 +124,3 @@ final class ChatBubbleView: UIView {
         chatLabel.textAlignment = .left
     }
 }
-
-
