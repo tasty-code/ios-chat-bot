@@ -59,13 +59,13 @@
 		045DE5F62B5108E6002B426C /* Extension+UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIStackView.swift"; sourceTree = "<group>"; };
 		045DE5F82B510DDA002B426C /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
 		045DE5FE2B515B7D002B426C /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		046C25102B5A17C000B5696D /* ChatBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = ChatBot.app; path = "/Users/swain/Desktop/Project/ios-chat-bot/ChatBot/build/Debug-iphoneos/ChatBot.app"; sourceTree = "<absolute>"; };
 		04A930092B5523ED002E4819 /* MessageCellConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellConfiguration.swift; sourceTree = "<group>"; };
 		04A9300B2B55240B002E4819 /* MessageCellContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellContentView.swift; sourceTree = "<group>"; };
 		04A9303E2B590F4E002E4819 /* MessageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContentView.swift; sourceTree = "<group>"; };
 		04A930402B59119A002E4819 /* MessageViewContentConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewContentConfiguration.swift; sourceTree = "<group>"; };
 		A60A086B2B4BFE410027A6F7 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		A6AC5F5A2B5688E900AB7CAF /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
-		B4B3E2B92B42D1BB00818B3C /* ChatBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = ChatBot.app; path = "/Users/swain/Desktop/Project/ios-chat-bot/ChatBot/build/Debug-iphoneos/ChatBot.app"; sourceTree = "<absolute>"; };
 		B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B4B3E2C02B42D1BB00818B3C /* ChattingRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingRoomViewController.swift; sourceTree = "<group>"; };
@@ -283,7 +283,7 @@
 			);
 			name = ChatBot;
 			productName = ChatBot;
-			productReference = B4B3E2B92B42D1BB00818B3C /* ChatBot.app */;
+			productReference = 046C25102B5A17C000B5696D /* ChatBot.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
