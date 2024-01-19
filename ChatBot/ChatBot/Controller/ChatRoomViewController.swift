@@ -44,7 +44,6 @@ final class ChatRoomViewController : UIViewController {
         let textView = UITextView()
         textView.layer.borderWidth = 1
         textView.layer.borderColor = UIColor.systemGray.cgColor
-//        textView.isScrollEnabled = false
         textView.layer.cornerRadius = 12
         return textView
     }()
@@ -85,7 +84,7 @@ final class ChatRoomViewController : UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         userInputStackView.translatesAutoresizingMaskIntoConstraints = false
         textInputView.translatesAutoresizingMaskIntoConstraints = false
-//        sendButton.translatesAutoresizingMaskIntoConstraints = false
+        sendButton.translatesAutoresizingMaskIntoConstraints = false
         
         let safeLayoutGuide = view.safeAreaLayoutGuide
         
@@ -96,8 +95,7 @@ final class ChatRoomViewController : UIViewController {
             mainStackView.trailingAnchor.constraint(equalTo: safeLayoutGuide.trailingAnchor, constant: -12),
             textInputView.widthAnchor.constraint(equalTo: userInputStackView.widthAnchor, multiplier: 0.8),
             textInputView.heightAnchor.constraint(equalToConstant: textInputView.estimatedHeight),
-            sendButton.widthAnchor.constraint(equalTo: userInputStackView.widthAnchor, multiplier: 0.1),
-
+            sendButton.widthAnchor.constraint(equalTo: userInputStackView.widthAnchor, multiplier: 0.15),
         ])
     }
     
@@ -110,11 +108,10 @@ final class ChatRoomViewController : UIViewController {
         }
         
         dataSource = DataSource(collectionView: collectionView) { (collectionView, indexPath, identifier) -> UICollectionViewCell in
-            
             switch identifier.message.role {
             case "user":
                 return collectionView.dequeueConfiguredReusableCell(using: userChatBubbleRegistration, for: indexPath, item: identifier)
-            case "assistant" :
+            case "assistant":
                 return collectionView.dequeueConfiguredReusableCell(using: assistantChatBubbleRegistration, for: indexPath, item: identifier)
             default :
                 return collectionView.dequeueConfiguredReusableCell(using: assistantChatBubbleRegistration, for: indexPath, item: identifier)
@@ -135,10 +132,12 @@ final class ChatRoomViewController : UIViewController {
     }
     
     @objc func tappedSendButton() {
+        sendButton.isEnabled = false
         textInputView.resignFirstResponder()
         guard let question = textInputView.text else { return }
         
         chats.append(ChatBubble(message: Message(role: "user", content: question)))
+        chats.append(ChatBubble(message: Message(role: "assistant", content: "")))
         setUpSnapshot()
         moveScroll()
         
@@ -147,10 +146,12 @@ final class ChatRoomViewController : UIViewController {
                 switch result {
                 case .success(let success):
                     let answer = success.choices[0].message.content
-                    self.chats.append(ChatBubble(message: Message(role: "assistant", content: answer)))
+                    self.chats[self.chats.count - 1] = ChatBubble(message: Message(role: "assistant", content: answer))
+                    
                     DispatchQueue.main.async {
                         self.setUpSnapshot()
                         self.moveScroll()
+                        self.sendButton.isEnabled = true
                     }
                 case .failure(let error):
                     print(error)
