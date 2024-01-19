@@ -7,10 +7,16 @@ final class MessageContentView: UIView, UIContentView {
         label.lineBreakMode = .byWordWrapping
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .preferredFont(forTextStyle: .body)
+        label.adjustsFontForContentSizeCategory = true
         return label
     }()
     
-    private var dotLayer: CAReplicatorLayer
+    private lazy var dotLayer: CAReplicatorLayer = {
+        let dotLayer = drawAnimatingDots(dotXOffset: 6.0, dotSize: 4.0, dotSpacing: 8.0)
+        layer.addSublayer(dotLayer)
+        return dotLayer
+    }()
     
     private var appliedConfiguration: MessageViewContentConfiguration!
     
@@ -23,10 +29,7 @@ final class MessageContentView: UIView, UIContentView {
     }
     
     init() {
-        dotLayer = CAReplicatorLayer()
         super.init(frame: .zero)
-        
-        layer.addSublayer(dotLayer)
         
         addSubview(bubbleLabel)
         
@@ -56,22 +59,17 @@ extension MessageContentView {
         guard appliedConfiguration != configuration else { return }
         appliedConfiguration = configuration
         bubbleLabel.text = configuration.text
+        
+        dotLayer.isHidden = configuration.role == .user || (configuration.text?.isEmpty == false)
     }
 }
 
 // MARK: Draw Methods
 extension MessageContentView {
-    override func draw(_ rect: CGRect) {
-        if bubbleLabel.text!.isEmpty && appliedConfiguration.role != .user {
-            drawAnimatingDots(dotXOffset: 6.0, dotSize: 4.0, dotSpacing: 8.0)
-        }
-    }
-    
-    private func drawAnimatingDots(dotXOffset: CGFloat, dotSize: CGFloat, dotSpacing: CGFloat) {
+    private func drawAnimatingDots(dotXOffset: CGFloat, dotSize: CGFloat, dotSpacing: CGFloat) -> CAReplicatorLayer {
         let layer = CAReplicatorLayer()
         let backgroundLayer = CALayer()
         
-        dotLayer.addSublayer(layer)
         backgroundLayer.frame = CGRect(x: bounds.width / 2 - dotXOffset,
                            y: bounds.height / 2,
                            width: dotSize,
@@ -92,5 +90,6 @@ extension MessageContentView {
         
         backgroundLayer.add(animation, forKey: nil)
         layer.instanceDelay = animation.duration / Double(layer.instanceCount)
+        return layer
     }
 }
