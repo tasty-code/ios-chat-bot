@@ -142,7 +142,7 @@ final class ChatRoomViewController : UIViewController {
         moveScroll()
         
         DispatchQueue.global().async { [self] in
-            try? self.chatService.sendMessage(text: question) { result in
+            try? self.chatService.sendChats(chats: chats) { result in
                 switch result {
                 case .success(let success):
                     let answer = success.choices[0].message.content
@@ -190,3 +190,4 @@ extension UITextView {
         return estimatedSize.height
     }
 }
+

@@ -9,9 +9,15 @@ import Foundation
 
 final class ChatService: ChatServiceProtocol {
     
-    func sendMessage(text: String, completion: @escaping (Result<ResponseData, Error>) -> Void) throws {
+    func sendChats(chats: [ChatBubble], completion: @escaping (Result<ResponseData, Error>) -> Void) throws {
+        var messages: [Message] = []
+        for chat in chats {
+            messages.append(chat.message)
+        }
+        print(messages.last?.content)
+        messages.removeLast()
         
-        let requestData = RequestData(model: Gpt.model, messages: [Message(role: "user", content: text)])
+        let requestData = RequestData(model: Gpt.model, messages: messages)
         
         guard let encodedData = try? JSONEncoder().encode(requestData) else {
             throw NetworkError.failedEncoding
