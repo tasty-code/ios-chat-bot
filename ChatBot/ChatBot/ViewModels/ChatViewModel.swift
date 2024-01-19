@@ -19,14 +19,14 @@ final class ChatViewModel {
         case fetchChatDidSucceed
     }
     
-    private(set) var messages: [Message]
+    private(set) var messages: [ChatMessage]
     private var cancellables = Set<AnyCancellable>()
     private let output: PassthroughSubject<Output, Never> = .init()
     
     private(set) var isNetworking = false
     
     // MARK: - Life cycle
-    init(messages: [Message] = []) {
+    init(messages: [ChatMessage] = []) {
         self.messages = messages
     }
     
@@ -42,11 +42,11 @@ final class ChatViewModel {
     }
     
     private func handleMessage(prompt: String, from role: ChatType) {
-        messages.append(Message(role: role, content: prompt))
+        messages.append(ChatMessage(role: role, content: prompt))
     }
     
     private func handleRequest(with prompt: String) {
-        messages.append(Message(role: .user, content: prompt))
+        messages.append(ChatMessage(role: .user, content: prompt))
         
         let builder = PostChatBotNetworkBuilder(message: messages.compactMap({ $0 }))
         guard let request = try? APIService.shared.makeRequest(builder) else { return }
@@ -57,7 +57,7 @@ final class ChatViewModel {
             isNetworking = true
             output.send(.fetchChatDidStart(isNetworking: isNetworking))
             
-            let data: Result<APIResponse, Error> = try await APIService.shared.execute(request: request)
+            let data: Result<ChatResponse, Error> = try await APIService.shared.execute(request: request)
             
             isNetworking = false
             guard case .success(let response) = data else {
@@ -65,14 +65,14 @@ final class ChatViewModel {
             }
             
             let content = response.choices[0].message.content
-            messages.append(Message(role: .assistant, content: content))
+            messages.append(ChatMessage(role: .assistant, content: content))
             
             output.send(.fetchChatDidSucceed)
         }
     }
     
     // MARK: - Public
-    func getMessage(at index: Int) -> Message? {
+    func getMessage(at index: Int) -> ChatMessage? {
         messages[safeIndex: index]
     }
     

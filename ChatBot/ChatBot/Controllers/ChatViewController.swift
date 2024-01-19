@@ -12,6 +12,7 @@ import Combine
 final class ChatViewController: UIViewController {
     
     // MARK: - Properties
+    
     private let chatViewModel = ChatViewModel()
     
     private let input: PassthroughSubject<ChatViewModel.InputEvent, Never> = .init()
@@ -89,13 +90,7 @@ final class ChatViewController: UIViewController {
         
         setupConstraint()
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        //        input.send(.sendButtonDidTap(prompt: "Hello, My name is Janine. Please remember my name"))
-    }
-    
-    
+
     // MARK: - Setup
     
     private func bind() {
@@ -105,10 +100,7 @@ final class ChatViewController: UIViewController {
             .sink { [weak self] event in
                 switch event {
                 case .fetchRequestDidCreate:
-//                    guard let count = self?.chatViewModel.getChatMessageCount() else { return }
                     self?.collectionView.reloadData()
-//                    let indexPath = IndexPath(item: count - 1, section: 0)
-//                    self?.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
                     self?.scrollToBottom()
                 case .fetchChatDidStart(let isNetworking):
                     if isNetworking {
@@ -135,7 +127,6 @@ final class ChatViewController: UIViewController {
     
     private func setupRegistration() {
         collectionView.register(ChatCollectionViewCell.self, forCellWithReuseIdentifier: ChatCollectionViewCell.identifier)
-        
         collectionView.register(ChatLoadingBubbleCell.self, forCellWithReuseIdentifier: ChatLoadingBubbleCell.identifier)
     }
     
@@ -165,7 +156,6 @@ final class ChatViewController: UIViewController {
         inputTextView.resignFirstResponder()
         input.send(.sendButtonDidTap(prompt: inputTextView.text))
         inputTextView.text = nil
-        
     }
 }
 

@@ -119,10 +119,9 @@ final class LoadingBubble: UIView {
         right: contentBubbleFrameCornerRadius / 1.25)
       loadingIndicator.frame = contentBubble.bounds.inset(by: insets)
     }
-
-    
     
     // MARK: - Animation
+    
     func startAnimating() {
         defer { isAnimating = true }
         

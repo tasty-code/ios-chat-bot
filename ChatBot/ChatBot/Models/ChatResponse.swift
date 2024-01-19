@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct APIResponse: Decodable {
+struct ChatResponse: Decodable {
     let id: String
     let object: String
     let created: Date
@@ -24,7 +24,7 @@ struct APIResponse: Decodable {
 
 struct Choice: Decodable {
     let index: Int
-    let message: Message
+    let message: ChatMessage
     let logprobs: LogProbs?
     let finishReason: FinishReason
     

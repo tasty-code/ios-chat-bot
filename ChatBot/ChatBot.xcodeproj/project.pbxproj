@@ -25,9 +25,9 @@
 		E14E95E92B57B74600E80C1A /* BubbleCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14E95E82B57B74600E80C1A /* BubbleCircle.swift */; };
 		E14E95EB2B57B99200E80C1A /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14E95EA2B57B99200E80C1A /* LoadingIndicator.swift */; };
 		E14E95ED2B57BCC600E80C1A /* ChatLoadingBubbleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14E95EC2B57BCC600E80C1A /* ChatLoadingBubbleCell.swift */; };
-		E15CF20F2B464A3B00DFBD44 /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15CF20E2B464A3B00DFBD44 /* APIResponse.swift */; };
-		E15CF2112B464B7200DFBD44 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15CF2102B464B7200DFBD44 /* APIRequest.swift */; };
-		E15CF2132B464BDE00DFBD44 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15CF2122B464BDE00DFBD44 /* Message.swift */; };
+		E15CF20F2B464A3B00DFBD44 /* ChatResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15CF20E2B464A3B00DFBD44 /* ChatResponse.swift */; };
+		E15CF2112B464B7200DFBD44 /* ChatRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15CF2102B464B7200DFBD44 /* ChatRequest.swift */; };
+		E15CF2132B464BDE00DFBD44 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15CF2122B464BDE00DFBD44 /* ChatMessage.swift */; };
 		E15CF2152B479E3A00DFBD44 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15CF2142B479E3A00DFBD44 /* Endpoint.swift */; };
 		E15CF21A2B47A2DF00DFBD44 /* NetworkRequestBuildable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15CF2192B47A2DF00DFBD44 /* NetworkRequestBuildable.swift */; };
 		E15CF21C2B47A32E00DFBD44 /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15CF21B2B47A32E00DFBD44 /* HttpMethod.swift */; };
@@ -58,9 +58,9 @@
 		E14E95E82B57B74600E80C1A /* BubbleCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleCircle.swift; sourceTree = "<group>"; };
 		E14E95EA2B57B99200E80C1A /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		E14E95EC2B57BCC600E80C1A /* ChatLoadingBubbleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLoadingBubbleCell.swift; sourceTree = "<group>"; };
-		E15CF20E2B464A3B00DFBD44 /* APIResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
-		E15CF2102B464B7200DFBD44 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
-		E15CF2122B464BDE00DFBD44 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		E15CF20E2B464A3B00DFBD44 /* ChatResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatResponse.swift; sourceTree = "<group>"; };
+		E15CF2102B464B7200DFBD44 /* ChatRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRequest.swift; sourceTree = "<group>"; };
+		E15CF2122B464BDE00DFBD44 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		E15CF2142B479E3A00DFBD44 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		E15CF2192B47A2DF00DFBD44 /* NetworkRequestBuildable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestBuildable.swift; sourceTree = "<group>"; };
 		E15CF21B2B47A32E00DFBD44 /* HttpMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
@@ -165,9 +165,9 @@
 		E15CF20D2B464A3B00DFBD44 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E15CF20E2B464A3B00DFBD44 /* APIResponse.swift */,
-				E15CF2102B464B7200DFBD44 /* APIRequest.swift */,
-				E15CF2122B464BDE00DFBD44 /* Message.swift */,
+				E15CF20E2B464A3B00DFBD44 /* ChatResponse.swift */,
+				E15CF2102B464B7200DFBD44 /* ChatRequest.swift */,
+				E15CF2122B464BDE00DFBD44 /* ChatMessage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -301,7 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E15CF21A2B47A2DF00DFBD44 /* NetworkRequestBuildable.swift in Sources */,
-				E15CF20F2B464A3B00DFBD44 /* APIResponse.swift in Sources */,
+				E15CF20F2B464A3B00DFBD44 /* ChatResponse.swift in Sources */,
 				E14E95ED2B57BCC600E80C1A /* ChatLoadingBubbleCell.swift in Sources */,
 				E15CF21C2B47A32E00DFBD44 /* HttpMethod.swift in Sources */,
 				B4B3E2C12B42D1BB00818B3C /* ChatViewController.swift in Sources */,
@@ -309,10 +309,10 @@
 				0EDA93B52B5A0F68002B8067 /* ChatBubbleTail.swift in Sources */,
 				E15CF2252B47C22100DFBD44 /* Constants.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
-				E15CF2132B464BDE00DFBD44 /* Message.swift in Sources */,
+				E15CF2132B464BDE00DFBD44 /* ChatMessage.swift in Sources */,
 				E15CF2152B479E3A00DFBD44 /* Endpoint.swift in Sources */,
 				0ED22E202B479A6C00E9596B /* Environment.swift in Sources */,
-				E15CF2112B464B7200DFBD44 /* APIRequest.swift in Sources */,
+				E15CF2112B464B7200DFBD44 /* ChatRequest.swift in Sources */,
 				0E7B003A2B5668F7005C883C /* ChatType.swift in Sources */,
 				E14E95E92B57B74600E80C1A /* BubbleCircle.swift in Sources */,
 				E14E95E72B57B44F00E80C1A /* LoadingBubble.swift in Sources */,
