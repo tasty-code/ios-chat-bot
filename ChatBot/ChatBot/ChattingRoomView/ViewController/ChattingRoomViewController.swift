@@ -137,12 +137,12 @@ extension ChattingRoomViewController {
                     reloadCurrentDataSource(with: newMessage)
                 } catch {
                     guard let error = error as? NetworkManager.NetworkError else { return }
-                    submitMessage(role: .assistant, text: error.debugDescription)
+                    reloadCurrentDataSource(with: Message(role: .assistant, content: error.debugDescription))
                 }
             }
         } catch {
             guard let error = error as? NetworkRequestBuilder.NetworkBuilderError else { return }
-            submitMessage(role: .assistant, text: error.debugDescription)
+            reloadCurrentDataSource(with: Message(role: .assistant, content: error.debugDescription))
         }
     }
     
