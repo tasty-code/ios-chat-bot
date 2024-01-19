@@ -14,11 +14,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = windowScene
-        
-        let apiKey = Bundle.main.object(forInfoDictionaryKey: "CHAT_BOT_API_KEY") as! String
-        window?.rootViewController = GPTChattingViewController(
-            viewModel: GPTChatRoomViewModel.init(httpRequest: Network.GPTRequest.chatBot(apiKey: apiKey))
-        )
+        window?.rootViewController = UINavigationController(rootViewController: GPTChatRoomsViewController(viewModel: GPTChatRoomsViewModel()))
         window?.makeKeyAndVisible()
     }
 

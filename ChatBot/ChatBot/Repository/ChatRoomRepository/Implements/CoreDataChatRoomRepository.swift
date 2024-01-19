@@ -28,7 +28,7 @@ extension Repository.CoreDataChatRoomRepository: ChatRoomRepositable {
         let chatRoomList = try coreDataRepository.context.fetch(request)
         
         return chatRoomList.map { chatRoom in
-            return Model.GPTChatRoomDTO(id: chatRoom.id!, title: chatRoom.title!)
+            return Model.GPTChatRoomDTO(id: chatRoom.id!, title: chatRoom.title!, recentChatDate: chatRoom.recentChatDate!)
         }
     }
     
@@ -39,7 +39,7 @@ extension Repository.CoreDataChatRoomRepository: ChatRoomRepositable {
         
         chatRoomCD.id = chatRoom.id
         chatRoomCD.title = chatRoom.title
-        chatRoomCD.chatList = NSSet()
+        chatRoomCD.recentChatDate = chatRoom.recentChatDate
         
         try coreDataRepository.saveContext()
     }

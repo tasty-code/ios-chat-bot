@@ -19,7 +19,6 @@ extension Chatting {
     @NSManaged public var id: UUID?
     @NSManaged public var role: String?
     @NSManaged public var content: String?
-    @NSManaged public var chatRoom: ChatRoom?
 
 }
 
