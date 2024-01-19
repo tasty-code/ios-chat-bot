@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         
         let apiKey = Bundle.main.object(forInfoDictionaryKey: "CHAT_BOT_API_KEY") as! String
-        window?.rootViewController = GPTChatRoomViewController(
+        window?.rootViewController = GPTChattingViewController(
             viewModel: GPTChatRoomViewModel.init(httpRequest: Network.GPTRequest.chatBot(apiKey: apiKey))
         )
         window?.makeKeyAndVisible()

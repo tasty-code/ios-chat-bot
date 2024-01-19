@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-final class GPTChatRoomViewController: UIViewController {
+final class GPTChattingViewController: UIViewController {
     enum Section {
         case main
     }
@@ -16,7 +16,7 @@ final class GPTChatRoomViewController: UIViewController {
     private lazy var chatCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(GPTChatRoomCell.self, forCellWithReuseIdentifier: "\(type(of: GPTChatRoomCell.self))")
+        collectionView.register(GPTChattingCell.self, forCellWithReuseIdentifier: "\(type(of: GPTChattingCell.self))")
         return collectionView
     }()
     
@@ -58,7 +58,7 @@ final class GPTChatRoomViewController: UIViewController {
     
     private let userComment = PassthroughSubject<String?, Never>()
     private let viewModel: any GPTChatRoomVMProtocol
-    private let cellResistration = UICollectionView.CellRegistration<GPTChatRoomCell, Model.GPTMessage> { cell, indexPath, itemIdentifier in
+    private let cellResistration = UICollectionView.CellRegistration<GPTChattingCell, Model.GPTMessage> { cell, indexPath, itemIdentifier in
         cell.configureCell(to: itemIdentifier)
     }
     
@@ -103,7 +103,7 @@ final class GPTChatRoomViewController: UIViewController {
 }
 
 // MARK: - set Views
-extension GPTChatRoomViewController {
+extension GPTChattingViewController {
     private func configureUI() {
         view.addSubview(chatCollectionView)
         view.addSubview(horizontalStackView)
@@ -121,7 +121,7 @@ extension GPTChatRoomViewController {
 }
 
 // MARK: - configure Collection View
-extension GPTChatRoomViewController {
+extension GPTChattingViewController {
     private func configureCollectionViewLayout() -> UICollectionViewCompositionalLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(100))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -144,7 +144,7 @@ extension GPTChatRoomViewController {
 }
 
 // MARK: - configure Diffable Data Source
-extension GPTChatRoomViewController {
+extension GPTChattingViewController {
     private func configureDataSource() {
         chattingDataSource = UICollectionViewDiffableDataSource<Section, Model.GPTMessage>(
             collectionView: chatCollectionView,
@@ -156,7 +156,7 @@ extension GPTChatRoomViewController {
 }
 
  // MARK: - set UIRespond
-extension GPTChatRoomViewController {
+extension GPTChattingViewController {
     @objc
     private func tapSendButton(_ sender: Any) {
         userComment.send(commentTextView.text)
@@ -165,7 +165,7 @@ extension GPTChatRoomViewController {
 }
 
 // MARK: - configure AlertController
-extension GPTChatRoomViewController {
+extension GPTChattingViewController {
     private func configureErrorAlert(_ error: Error) -> UIAlertController {
         let alert = UIAlertController(title: "\(type(of: error))", message: error.localizedDescription, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default))

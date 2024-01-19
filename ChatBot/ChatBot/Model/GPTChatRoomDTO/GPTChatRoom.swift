@@ -18,15 +18,3 @@ extension Model {
         }
     }
 }
-
-extension Model.GPTChatRoomDTO: Encodable {
-    enum CodingKeys: CodingKey {
-        case id
-        case title
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        let container = encoder.container(keyedBy: CodingKeys.self)
-        container.
-    }
-}
