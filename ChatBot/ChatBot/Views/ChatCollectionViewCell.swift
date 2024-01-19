@@ -104,7 +104,7 @@ class ChatCollectionViewCell: UICollectionViewCell {
     private func configureUserBubble() {
         userBubbleConstraint = [
             containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            bubbleTail.leadingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 3)
+            bubbleTail.leadingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -3)
         ]
         containerView.backgroundColor = .systemRed
         bubbleTail.color = .systemRed
