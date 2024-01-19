@@ -25,10 +25,13 @@ extension Repository {
         }
         
         func saveContext() throws {
-            let context = persistentContainer.viewContext
             if context.hasChanges {
                 try context.save()
             }
+        }
+        
+        func resetContext() throws {
+            context.reset()
         }
     }
 }
