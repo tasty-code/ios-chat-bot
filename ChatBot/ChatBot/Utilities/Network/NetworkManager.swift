@@ -18,12 +18,12 @@ final class NetworkManager {
         let (data, response) = try await session.data(for: urlRequest, delegate: nil)
         guard let statusCode = (response as? HTTPURLResponse)?.statusCode
         else {
-            throw NetworkError.failedResponseCasting
+            throw APIError.failedResponseCasting
         }
         
         guard (200..<300).contains(statusCode)
         else {
-            throw NetworkError.responseError(status: statusCode)
+            throw APIError.responseError(status: statusCode)
         }
         
         return data

@@ -32,12 +32,12 @@ final class GPTViewModel {
         
         Task {
             do {
-                let responseDTO: GPTResponseDTO = try await serviceProvider.excute(for: requestDTO)
+                let responseDTO: GPTResponseDTO = try await serviceProvider.excute(for: GPTEndPoint.chatbot(body: requestDTO))
                 if let messageDTO = responseDTO.choices.first?.message {
                     addResponseMessage(messageDTO)
                 }
             } catch {
-                let assistantMessageDTO = AssistantMessage(content: error.localizedDescription).convertGPTMessageDTO()
+                let assistantMessageDTO = AssistantMessage(content: "\(error)").convertGPTMessageDTO()
                 addResponseMessage(assistantMessageDTO)
             }
         }
