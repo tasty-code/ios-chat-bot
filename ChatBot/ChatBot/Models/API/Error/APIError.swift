@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum NetworkError: Error, LocalizedError {
+enum APIError: Error, CustomStringConvertible {
     case notFoundAPIKey
     case badURL
     case failedEncoding
@@ -15,7 +15,7 @@ enum NetworkError: Error, LocalizedError {
     case failedResponseCasting
     case responseError(status: Int)
     
-    var errorDescription: String {
+    var description: String {
         switch self {
         case .notFoundAPIKey:
             return "API KEY가 없습니다. 확인해 주세요."
