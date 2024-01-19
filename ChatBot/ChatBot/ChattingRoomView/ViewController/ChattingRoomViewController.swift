@@ -98,6 +98,7 @@ extension ChattingRoomViewController {
     @objc private func touchUpMessageSendButton() {
         messageTextView.isScrollEnabled = false
         messageSendButton.isEnabled = false
+        messageTextView.isEditable = false
         
         guard messageTextView.hasText == true,
               let text = messageTextView.text
@@ -230,6 +231,7 @@ extension ChattingRoomViewController {
         snapshot.deleteItems([lastItem])
         snapshot.appendItems([newItem])
         dataSource.apply(snapshot, animatingDifferences: true)
+        messageTextView.isEditable = true
     }
     
     private func scrollToBottom(itemsCount: Int, sectionsCount: Int, at position: UICollectionView.ScrollPosition = .bottom) {
