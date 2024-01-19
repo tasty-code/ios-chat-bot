@@ -137,6 +137,7 @@ final class ChatViewController: UIViewController {
         inputTextView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
+            sendButton.leadingAnchor.constraint(equalTo: inputTextView.trailingAnchor),
             inputTextView.widthAnchor.constraint(equalTo: sendButton.widthAnchor, multiplier: 6),
             
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -145,7 +146,7 @@ final class ChatViewController: UIViewController {
             
             contentStackView.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
             contentStackView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor),
-            contentStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            contentStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
             contentStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
     }
@@ -156,6 +157,7 @@ final class ChatViewController: UIViewController {
         inputTextView.resignFirstResponder()
         input.send(.sendButtonDidTap(prompt: inputTextView.text))
         inputTextView.text = nil
+
     }
 }
 
