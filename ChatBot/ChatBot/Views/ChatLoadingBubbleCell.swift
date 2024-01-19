@@ -11,8 +11,8 @@ final class ChatLoadingBubbleCell: UICollectionViewCell {
     
     static let identifier = "chat-loading-cell"
     
-    private var insets = UIEdgeInsets(top: 15, left: 0, bottom: 0, right: 0)
-    private let loadingBubble = LoadingBubble()
+    let loadingBubble = LoadingBubble()
+    
     
     // MARK: - Lifecycle
     override init(frame: CGRect) {
@@ -26,6 +26,16 @@ final class ChatLoadingBubbleCell: UICollectionViewCell {
     
     func setupSubviews() {
         addSubview(loadingBubble)
+        
+        loadingBubble.frame = bounds
+        loadingBubble.translatesAutoresizingMaskIntoConstraints = false
+        
+//        NSLayoutConstraint.activate([
+//            loadingBubble.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5),
+//            loadingBubble.heightAnchor.constraint(equalToConstant: 20),
+//            loadingBubble.leadingAnchor.constraint(equalTo: leadingAnchor),
+//            loadingBubble.centerYAnchor.constraint(equalTo: centerYAnchor)
+//        ])
     }
     
     override func prepareForReuse() {
@@ -37,6 +47,5 @@ final class ChatLoadingBubbleCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        loadingBubble.frame = bounds.inset(by: insets)
     }
 }

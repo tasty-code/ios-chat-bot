@@ -167,18 +167,18 @@ extension ChatViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-//        if chatViewModel.isNetworking, chatViewModel.messages[safeIndex: indexPath.row] == nil {
+        if chatViewModel.isNetworking, chatViewModel.messages[safeIndex: indexPath.row] == nil {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatLoadingBubbleCell.identifier, for: indexPath) as! ChatLoadingBubbleCell
             
-//        cell.loadingBubble.startAnimating()
+        cell.loadingBubble.startAnimating()
             
             return cell
-//        } else {
-//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatCollectionViewCell.identifier, for: indexPath) as! ChatCollectionViewCell
-//            
-//            cell.configure(model: chatViewModel, index: indexPath.row)
-//            return cell
-//        }
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatCollectionViewCell.identifier, for: indexPath) as! ChatCollectionViewCell
+            
+            cell.configure(model: chatViewModel, index: indexPath.row)
+            return cell
+        }
     }
 }
 
