@@ -8,8 +8,9 @@ final class ChattingRoomViewController: UIViewController {
     enum Constants {
         static let buttonImageName: String = "paperplane.fill"
         static let defaultMargin: CGFloat = 6
+        static let messageTextViewWidthRatio: CGFloat = 8
         static let messageTextViewHeightRatio: CGFloat = 1/6
-        static let messageBubbleWidthRatio: CGFloat = 2/3
+        static let messageTextViewHeight: CGFloat = 120
     }
     
     // MARK: View Components
@@ -21,24 +22,15 @@ final class ChattingRoomViewController: UIViewController {
         return chattingRoomView
     }()
     
-    private lazy var bottomStackView: UIStackView! = {
-        let padding = Constants.defaultMargin
-        let stackView = UIStackView(frame: view.bounds)
-        stackView.addArrangedSubviews(messageTextView, messageSendButton)
-        stackView.axis = .horizontal
-        stackView.spacing = padding
-        stackView.distribution = .fill
-        stackView.alignment = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
     private lazy var messageTextView: UITextView! = {
         let textView = UITextView(frame: view.bounds)
+        textView.isScrollEnabled = false
         textView.autocapitalizationType = .none
         textView.autocorrectionType = .no
         textView.backgroundColor = .secondarySystemBackground
+        textView.layer.cornerRadius = 10
         textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         return textView
     }()
     
@@ -49,6 +41,7 @@ final class ChattingRoomViewController: UIViewController {
         let button = UIButton(configuration: configuration)
         button.addTarget(self, action: #selector(touchUpMessageSendButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         return button
     }()
     
@@ -74,12 +67,33 @@ final class ChattingRoomViewController: UIViewController {
         configureHierarchy()
         configureConstraints()
         configureDataSource()
+        configureDelegate()
+    }
+}
+
+// MARK: TextView Delegate Methods
+extension ChattingRoomViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        let maxHeight = Constants.messageTextViewHeight
+        let size = CGSize(width: textView.frame.width, height: .infinity)
+        let estimatedSize = textView.sizeThatFits(size)
+        let _ = textView.layoutManager.usedRect(for: textView.textContainer)
+        
+        scrollToBottom(itemsCount: snapshot.numberOfItems, sectionsCount: snapshot.numberOfSections)
+
+        textView.constraints.forEach { (constraint) in
+            if constraint.firstAttribute == .height {
+                constraint.constant = min(estimatedSize.height, maxHeight)
+            }
+        }
+        textView.isScrollEnabled = estimatedSize.height > maxHeight
     }
 }
 
 // MARK: Private Methods
 extension ChattingRoomViewController {
     @objc private func touchUpMessageSendButton() {
+        messageTextView.isScrollEnabled = false
         guard messageTextView.hasText == true,
               let text = messageTextView.text
         else { return }
@@ -106,7 +120,7 @@ extension ChattingRoomViewController {
     }
     
     private func sendMessageToGPT() {
-        let messages = snapshot.itemIdentifiers[0..<snapshot.numberOfItems - 1].map({ $0.message })
+        let messages = snapshot.itemIdentifiers[0..<snapshot.numberOfItems - 1].map{ $0.message }
         let builder = prepareToSend(messages, to: .gpt_3_5_turbo)
         do {
             let request = try builder.build()
@@ -125,7 +139,7 @@ extension ChattingRoomViewController {
 // MARK: ChattingRoomView Configuration Methods
 extension ChattingRoomViewController {
     private func configureHierarchy() {
-        view.addSubviews(chattingRoomView, bottomStackView)
+        view.addSubviews(chattingRoomView, messageTextView, messageSendButton)
     }
     
     private func configureLayout() -> UICollectionViewLayout {
@@ -147,6 +161,10 @@ extension ChattingRoomViewController {
         
         snapshot.appendSections(Section.allCases)
         dataSource.apply(snapshot, animatingDifferences: true)
+    }
+    
+    private func configureDelegate() {
+        messageTextView.delegate = self
     }
 }
 
@@ -216,24 +234,26 @@ extension ChattingRoomViewController {
     private func configureConstraints() {
         let layoutMargin = Constants.defaultMargin
         let messageTextViewHeightRatio = Constants.messageTextViewHeightRatio
+        let messageTextViewWidthRatio = Constants.messageTextViewWidthRatio
         
         NSLayoutConstraint.activate([
             chattingRoomView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            chattingRoomView.bottomAnchor.constraint(equalTo: bottomStackView.topAnchor),
+            chattingRoomView.bottomAnchor.constraint(equalTo: messageTextView.topAnchor),
             chattingRoomView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: layoutMargin),
             chattingRoomView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -layoutMargin)
         ])
         
         NSLayoutConstraint.activate([
-            bottomStackView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor),
-            bottomStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: layoutMargin),
-            bottomStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -layoutMargin),
-            bottomStackView.heightAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: messageTextViewHeightRatio)
+            messageTextView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor),
+            messageTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: layoutMargin),
+            messageTextView.trailingAnchor.constraint(equalTo: messageSendButton.leadingAnchor),
+            messageTextView.heightAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: messageTextViewHeightRatio),
+            messageTextView.widthAnchor.constraint(equalTo: messageSendButton.widthAnchor, multiplier: messageTextViewWidthRatio)
         ])
         
         NSLayoutConstraint.activate([
-            messageSendButton.heightAnchor.constraint(equalTo: bottomStackView.heightAnchor),
-            messageSendButton.widthAnchor.constraint(equalTo: messageSendButton.heightAnchor)
+            messageSendButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -layoutMargin),
+            messageSendButton.centerYAnchor.constraint(equalTo: messageTextView.centerYAnchor)
         ])
     }
 }
