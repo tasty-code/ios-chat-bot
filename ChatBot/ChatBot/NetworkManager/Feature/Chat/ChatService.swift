@@ -14,7 +14,6 @@ final class ChatService: ChatServiceProtocol {
         for chat in chats {
             messages.append(chat.message)
         }
-        print(messages.last?.content)
         messages.removeLast()
         
         let requestData = RequestData(model: Gpt.model, messages: messages)
