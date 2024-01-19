@@ -59,7 +59,6 @@ final class LoadingIndicatorCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             loadingBubble.heightAnchor.constraint(equalToConstant: 10),
             loadingBubble.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-            
         ])
     }
 }
