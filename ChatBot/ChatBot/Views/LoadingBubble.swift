@@ -9,11 +9,17 @@ import UIKit
 
 final class LoadingBubble: UIView {
     
+    // MARK: - Namespace
+    
+    private enum AnimationKeys {
+        static let pulse = "typingBubble.pulse"
+    }
+    
     // MARK: - Properties
     
     private(set) var isAnimating = false
     
-    var isPulseEnabled: Bool = true
+    private var isPulseEnabled: Bool = true
     
     override var backgroundColor: UIColor? {
         set {
@@ -25,14 +31,14 @@ final class LoadingBubble: UIView {
     
     // MARK: - Subviews
     
-    let loadingIndicator = LoadingIndicator()
-    let contentBubble = UIView()
-    let cornerBubble = BubbleCircle()
-    let tinyBubble = BubbleCircle()
+    private let loadingIndicator = LoadingIndicator()
+    private let contentBubble = UIView()
+    private let cornerBubble = BubbleCircle()
+    private let tinyBubble = BubbleCircle()
     
     //MARK: - Animation Layers
     
-    var contentPulseAnimationLayer: CABasicAnimation {
+    private var contentPulseAnimationLayer: CABasicAnimation {
         let animation = CABasicAnimation(keyPath: "transform.scale")
         
         animation.fromValue = 1
@@ -44,7 +50,7 @@ final class LoadingBubble: UIView {
         return animation
     }
     
-    var circlePulseAnimationLayer: CABasicAnimation {
+    private var circlePulseAnimationLayer: CABasicAnimation {
         let animation = CABasicAnimation(keyPath: "transform.scale")
         
         animation.fromValue = 1
@@ -63,65 +69,66 @@ final class LoadingBubble: UIView {
         setupSubviews()
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
         setupSubviews()
     }
     
-    func setupSubviews() {
-      addSubview(tinyBubble)
-      addSubview(cornerBubble)
-      addSubview(contentBubble)
-      contentBubble.addSubview(loadingIndicator)
-      backgroundColor = .systemGray5
-    }
-    
     override func layoutSubviews() {
-      super.layoutSubviews()
-
-      guard
-        bounds.width > 0,
-        bounds.height > 0
-      else { return }
-
-      let ratio = bounds.width / bounds.height
-      let extraRightInset = bounds.width - (1.65 / ratio) * bounds.width
-
-      let tinyBubbleRadius: CGFloat = bounds.height / 6
-      tinyBubble.frame = CGRect(
-        x: 0,
-        y: bounds.height - tinyBubbleRadius,
-        width: tinyBubbleRadius,
-        height: tinyBubbleRadius)
-
-      let cornerBubbleRadius = tinyBubbleRadius * 2
-      let offset: CGFloat = tinyBubbleRadius / 6
-      cornerBubble.frame = CGRect(
-        x: tinyBubbleRadius - offset,
-        y: bounds.height - (1.5 * cornerBubbleRadius) + offset,
-        width: cornerBubbleRadius,
-        height: cornerBubbleRadius)
-
-      let contentBubbleFrame = CGRect(
-        x: tinyBubbleRadius + offset,
-        y: 0,
-        width: bounds.width - (tinyBubbleRadius + offset) - extraRightInset,
-        height: bounds.height - (tinyBubbleRadius + offset))
-      let contentBubbleFrameCornerRadius = contentBubbleFrame.height / 2
-
-      contentBubble.frame = contentBubbleFrame
-      contentBubble.layer.cornerRadius = contentBubbleFrameCornerRadius
-
-      let insets = UIEdgeInsets(
-        top: offset,
-        left: contentBubbleFrameCornerRadius / 1.25,
-        bottom: offset,
-        right: contentBubbleFrameCornerRadius / 1.25)
-      loadingIndicator.frame = contentBubble.bounds.inset(by: insets)
+        super.layoutSubviews()
+        
+        guard bounds.width > 0, bounds.height > 0 else { return }
+        
+        let ratio = bounds.width / bounds.height
+        let extraRightInset = bounds.width - (1.65 / ratio) * bounds.width
+        
+        let tinyBubbleRadius: CGFloat = bounds.height / 6
+        tinyBubble.frame = CGRect(
+            x: 0,
+            y: bounds.height - tinyBubbleRadius,
+            width: tinyBubbleRadius,
+            height: tinyBubbleRadius)
+        
+        let cornerBubbleRadius = tinyBubbleRadius * 2
+        let offset: CGFloat = tinyBubbleRadius / 6
+        
+        cornerBubble.frame = CGRect(
+            x: tinyBubbleRadius - offset,
+            y: bounds.height - (1.5 * cornerBubbleRadius) + offset,
+            width: cornerBubbleRadius,
+            height: cornerBubbleRadius)
+        
+        let contentBubbleFrame = CGRect(
+            x: tinyBubbleRadius + offset,
+            y: 0,
+            width: bounds.width - (tinyBubbleRadius + offset) - extraRightInset,
+            height: bounds.height - (tinyBubbleRadius + offset))
+        
+        let contentBubbleFrameCornerRadius = contentBubbleFrame.height / 2
+        
+        contentBubble.frame = contentBubbleFrame
+        contentBubble.layer.cornerRadius = contentBubbleFrameCornerRadius
+        
+        let insets = UIEdgeInsets(
+            top: offset,
+            left: contentBubbleFrameCornerRadius / 1.25,
+            bottom: offset,
+            right: contentBubbleFrameCornerRadius / 1.25)
+        loadingIndicator.frame = contentBubble.bounds.inset(by: insets)
     }
     
-    // MARK: - Animation
+    // MARK: - Private
     
+    private func setupSubviews() {
+        addSubviews(tinyBubble, cornerBubble, contentBubble)
+        contentBubble.addSubview(loadingIndicator)
+        backgroundColor = .systemGray5
+    }
+}
+
+// MARK: - Animation
+
+extension LoadingBubble {
     func startAnimating() {
         defer { isAnimating = true }
         
@@ -134,10 +141,11 @@ final class LoadingBubble: UIView {
                 forKey: AnimationKeys.pulse
             )
             
-            [cornerBubble, tinyBubble].forEach { $0.layer.add(
-                circlePulseAnimationLayer,
-                forKey: AnimationKeys.pulse
-            )}
+            [cornerBubble, tinyBubble].forEach {
+                $0.layer.add(
+                    circlePulseAnimationLayer,
+                    forKey: AnimationKeys.pulse)
+            }
         }
     }
     
@@ -147,13 +155,8 @@ final class LoadingBubble: UIView {
         guard isAnimating else { return }
         loadingIndicator.stopAnimating()
         
-        [contentBubble, cornerBubble, tinyBubble].forEach { $0.layer.removeAnimation(forKey: AnimationKeys.pulse)
+        [contentBubble, cornerBubble, tinyBubble].forEach {
+            $0.layer.removeAnimation(forKey: AnimationKeys.pulse)
         }
-    }
-    
-    // MARK: - Private
-    
-    private enum AnimationKeys {
-        static let pulse = "typingBubble.pulse"
     }
 }

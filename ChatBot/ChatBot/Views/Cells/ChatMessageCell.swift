@@ -1,5 +1,5 @@
 //
-//  ChatCollectionViewCell.swift
+//  ChatMessageCell.swift
 //  ChatBot
 //
 //  Created by 동준 on 1/16/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChatCollectionViewCell: UICollectionViewCell {
+final class ChatMessageCell: UICollectionViewCell {
     
     static let identifier = "chat-cell"
     
