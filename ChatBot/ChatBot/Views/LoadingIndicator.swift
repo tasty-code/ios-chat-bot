@@ -7,24 +7,24 @@
 
 import UIKit
 
-class LoadingIndicator: UIView {
-    
+final class LoadingIndicator: UIView {
+
     // MARK: - Properties
-    
+
     private(set) var isAnimating = false
-    
+
     var bounceOffset: CGFloat = 2.5
     var isBounceEnabled = false
     var isFadeEnabled = true
-    
+
     // MARK: - Subviews
-    
+
     let stackView = UIStackView()
-    
+
     let dots: [BubbleCircle] = {
         [BubbleCircle(), BubbleCircle(), BubbleCircle()]
     }()
-    
+
     var dotColor = UIColor.lightGray {
         didSet {
           dots.forEach { $0.backgroundColor = dotColor }
@@ -36,7 +36,7 @@ class LoadingIndicator: UIView {
         animation.byValue = -bounceOffset
         animation.duration = 0.5
         animation.isRemovedOnCompletion = true
-          
+
         return animation
       }
 
@@ -47,42 +47,42 @@ class LoadingIndicator: UIView {
         animation.duration = 0.5
         animation.repeatCount = .infinity
         animation.autoreverses = true
-          
+
         return animation
       }
 
       /// The `CABasicAnimation` applied when `isFadeEnabled` is TRUE
-      open var opacityAnimationLayer: CABasicAnimation {
+      var opacityAnimationLayer: CABasicAnimation {
         let animation = CABasicAnimation(keyPath: "opacity")
         animation.fromValue = 1
         animation.toValue = 0.5
         animation.duration = 0.5
         animation.repeatCount = .infinity
         animation.autoreverses = true
-          
+
         return animation
       }
-    
+
     // MARK: - Lifecycle
-    
+
     public override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
     }
-    
+
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupView()
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         stackView.frame = bounds
         stackView.spacing = bounds.width > 0 ? 5 : 0
     }
-    
+
     // MARK: - Animation
-    
+
     func startAnimating() {
         defer { isAnimating = true }
         guard !isAnimating else { return }
@@ -113,10 +113,8 @@ class LoadingIndicator: UIView {
         }
       }
 
-    
-    
     // MARK: - Private
-    
+
     private func setupView() {
         dots.forEach {
             $0.backgroundColor = dotColor
@@ -128,7 +126,7 @@ class LoadingIndicator: UIView {
         stackView.distribution = .fillEqually
         addSubview(stackView)
     }
-    
+
     private enum AnimationKeys {
         static let offset = "typingIndicator.offset"
         static let bounce = "typingIndicator.bounce"

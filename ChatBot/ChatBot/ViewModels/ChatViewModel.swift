@@ -14,6 +14,7 @@ final class ChatViewModel {
     }
     
     enum Output {
+        case fetchRequestDidCreate
         case fetchChatDidStart(isNetworking: Bool)
         case fetchChatDidSucceed
     }
@@ -22,7 +23,7 @@ final class ChatViewModel {
     private var cancellables = Set<AnyCancellable>()
     private let output: PassthroughSubject<Output, Never> = .init()
     
-    private(set) var isNetworking: Bool = false
+    private(set) var isNetworking = false
     
     // MARK: - Life cycle
     init(messages: [Message] = []) {
@@ -33,9 +34,7 @@ final class ChatViewModel {
         input.sink { [weak self] event in
             switch event {
             case .sendButtonDidTap(let prompt):
-                self?.messages.append(Message(role: .user, content: prompt))
-                
-                self?.handleRequest()
+                self?.handleRequest(with: prompt)
             }
         }.store(in: &cancellables)
         
@@ -46,16 +45,21 @@ final class ChatViewModel {
         messages.append(Message(role: role, content: prompt))
     }
     
-    private func handleRequest() {
-        isNetworking = true
-        output.send(.fetchChatDidStart(isNetworking: true))
+    private func handleRequest(with prompt: String) {
+        messages.append(Message(role: .user, content: prompt))
         
-        let builder = PostChatBotNetworkBuilder(message: messages)
+        let builder = PostChatBotNetworkBuilder(message: messages.compactMap({ $0 }))
         guard let request = try? APIService.shared.makeRequest(builder) else { return }
         
+        output.send(.fetchRequestDidCreate)
+        
         Task(priority: .background) {
+            isNetworking = true
+            output.send(.fetchChatDidStart(isNetworking: isNetworking))
+            
             let data: Result<APIResponse, Error> = try await APIService.shared.execute(request: request)
             
+            isNetworking = false
             guard case .success(let response) = data else {
                 return
             }
@@ -72,7 +76,7 @@ final class ChatViewModel {
         messages[safeIndex: index]
     }
     
-    func getCountOfMessage() -> Int {
+    func getChatMessageCount() -> Int {
         isNetworking ? messages.count + 1 : messages.count
     }
 }

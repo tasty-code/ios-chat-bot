@@ -13,7 +13,7 @@ final class ChatViewController: UIViewController {
     
     // MARK: - Properties
     private let chatViewModel = ChatViewModel()
-
+    
     private let input: PassthroughSubject<ChatViewModel.InputEvent, Never> = .init()
     private var cancellables = Set<AnyCancellable>()
     
@@ -65,7 +65,7 @@ final class ChatViewController: UIViewController {
         
         return textView
     }()
-
+    
     private lazy var sendButton: UIButton = {
         let button = UIButton()
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .light)
@@ -77,7 +77,7 @@ final class ChatViewController: UIViewController {
         
         return button
     }()
-
+    
     // MARK: - Life cycle
     
     override func viewDidLoad() {
@@ -92,7 +92,7 @@ final class ChatViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        input.send(.sendButtonDidTap(prompt: "Hello, My name is Janine. Please remember my name"))
+        //        input.send(.sendButtonDidTap(prompt: "Hello, My name is Janine. Please remember my name"))
     }
     
     
@@ -104,6 +104,8 @@ final class ChatViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] event in
                 switch event {
+                case .fetchRequestDidCreate:
+                    self?.collectionView.reloadData()
                 case .fetchChatDidStart(let isNetworking):
                     if isNetworking {
                         self?.collectionView.reloadData()
@@ -123,8 +125,8 @@ final class ChatViewController: UIViewController {
     
     private func setupRegistration() {
         collectionView.register(ChatCollectionViewCell.self, forCellWithReuseIdentifier: ChatCollectionViewCell.identifier)
-    
-        collectionView.register(LoadingIndicatorCell.self, forCellWithReuseIdentifier: LoadingIndicatorCell.identifier)
+        
+        collectionView.register(ChatLoadingBubbleCell.self, forCellWithReuseIdentifier: ChatLoadingBubbleCell.identifier)
     }
     
     private func setupConstraint() {
@@ -146,33 +148,37 @@ final class ChatViewController: UIViewController {
             contentStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
     }
+
     // MARK: - Event handler
     
     @objc func didTapSubmitButton() {
         inputTextView.resignFirstResponder()
         input.send(.sendButtonDidTap(prompt: inputTextView.text))
         inputTextView.text = nil
+        
     }
 }
 
 extension ChatViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return chatViewModel.getCountOfMessage()
+        chatViewModel.getChatMessageCount()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if chatViewModel.isNetworking && indexPath.row == chatViewModel.messages.count {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LoadingIndicatorCell.identifier, for: indexPath) as! LoadingIndicatorCell
+//        if chatViewModel.isNetworking, chatViewModel.messages[safeIndex: indexPath.row] == nil {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatLoadingBubbleCell.identifier, for: indexPath) as! ChatLoadingBubbleCell
+            
+//        cell.loadingBubble.startAnimating()
             
             return cell
-        } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatCollectionViewCell.identifier, for: indexPath) as! ChatCollectionViewCell
-            
-            cell.configure(model: chatViewModel, index: indexPath.row)
-            return cell
-        }
+//        } else {
+//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatCollectionViewCell.identifier, for: indexPath) as! ChatCollectionViewCell
+//            
+//            cell.configure(model: chatViewModel, index: indexPath.row)
+//            return cell
+//        }
     }
 }
 
@@ -180,12 +186,12 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         guard let message = chatViewModel.getMessage(at: indexPath.row) else {
-            return CGSize(width: view.bounds.width - 50, height: view.bounds.height)
+            return CGSize(width: view.bounds.width - 50, height: CGFloat(40))
         }
         
         let content = message.content
         let estimatedFrame = content.getEstimatedFrame(with: .systemFont(ofSize: 18))
-       
+        
         return CGSize(width: view.bounds.width - 50, height: estimatedFrame.height + 20)
     }
 }
