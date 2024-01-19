@@ -42,6 +42,7 @@ final class ChattingRoomViewController: UIViewController {
         button.addTarget(self, action: #selector(touchUpMessageSendButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        button.isEnabled = false
         return button
     }()
     
@@ -87,6 +88,8 @@ extension ChattingRoomViewController: UITextViewDelegate {
             }
         }
         textView.isScrollEnabled = estimatedSize.height > maxHeight
+        
+        hasWhitespacesAndNewlines(textView.text)
     }
 }
 
@@ -94,6 +97,8 @@ extension ChattingRoomViewController: UITextViewDelegate {
 extension ChattingRoomViewController {
     @objc private func touchUpMessageSendButton() {
         messageTextView.isScrollEnabled = false
+        messageSendButton.isEnabled = false
+        
         guard messageTextView.hasText == true,
               let text = messageTextView.text
         else { return }
@@ -133,6 +138,12 @@ extension ChattingRoomViewController {
             let errorMessage = Message(role: .assistant, content: error.localizedDescription)
             reloadCurrentDataSource(with: errorMessage)
         }
+    }
+    
+    private func hasWhitespacesAndNewlines(_ content: String) {
+        let trimmedContent = content.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        messageSendButton.isEnabled = trimmedContent.isEmpty ? false : true
     }
 }
 
