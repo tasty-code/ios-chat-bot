@@ -5,7 +5,7 @@ final class ChattingRoomViewController: UIViewController {
     private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Item>
     
     // MARK: Namespace
-    enum Constants {
+    private enum Constants {
         static let buttonImageName: String = "paperplane.fill"
         static let defaultMargin: CGFloat = 6
         static let messageTextViewWidthRatio: CGFloat = 8
@@ -131,13 +131,18 @@ extension ChattingRoomViewController {
         do {
             let request = try builder.build()
             Task {
-                let responseModel = try await networkManager?.request(urlRequest: request)
-                guard let newMessage = responseModel?.choices.first?.message else { return }
-                reloadCurrentDataSource(with: newMessage)
+                do {
+                    let responseModel = try await networkManager?.request(urlRequest: request)
+                    guard let newMessage = responseModel?.choices.first?.message else { return }
+                    reloadCurrentDataSource(with: newMessage)
+                } catch {
+                    guard let error = error as? NetworkManager.NetworkError else { return }
+                    submitMessage(role: .assistant, text: error.debugDescription)
+                }
             }
         } catch {
-            let errorMessage = Message(role: .assistant, content: error.localizedDescription)
-            reloadCurrentDataSource(with: errorMessage)
+            guard let error = error as? NetworkRequestBuilder.NetworkBuilderError else { return }
+            submitMessage(role: .assistant, text: error.debugDescription)
         }
     }
     
@@ -182,7 +187,7 @@ extension ChattingRoomViewController {
 
 // MARK: DataSource Controls
 extension ChattingRoomViewController {
-    enum Section: CaseIterable {
+    private enum Section: CaseIterable {
         case main
     }
     
