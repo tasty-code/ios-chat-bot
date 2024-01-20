@@ -13,7 +13,7 @@ final class ChatCollectionView: UICollectionView {
         case main
     }
     
-    private var diffableDataSource: UICollectionViewDiffableDataSource<Section, Message>?
+    private var diffableDataSource: UICollectionViewDiffableDataSource<Section, UUID>?
    
     private var chatRecord: [Message] = []
 
@@ -29,28 +29,32 @@ final class ChatCollectionView: UICollectionView {
     }
     
     private func configureDataSource() {
-        let cellRegistration = UICollectionView.CellRegistration<ChatBalloonCell, Message> { (cell, indexPath, itemIdentifier) in
+        let cellRegistration = UICollectionView.CellRegistration<ChatBalloonCell, UUID> { (cell, indexPath, itemIdentifier) in
             
-            guard let text = itemIdentifier.content else { return }
-            cell.setLabelText(text: text)
+            var message = [UUID: Message]()
+            let tupleArray = self.chatRecord.map { ($0.id, $0) }
+            message = Dictionary(uniqueKeysWithValues: tupleArray)
+            
+            guard let message = message[itemIdentifier],
+                  let content = message.content
+            else { return }
+            cell.setLabelText(text: message.content!)
        
-            if itemIdentifier.role == .user {
+            if message.role == .user {
                 cell.setDirection(direction: .right)
             } else {
                 cell.setDirection(direction: .left)
             }
-        
         }
         
-        diffableDataSource = UICollectionViewDiffableDataSource<Section, Message>(collectionView: self, cellProvider: { collectionView, indexPath, itemIdentifier in
-            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
+        diffableDataSource = UICollectionViewDiffableDataSource<Section, UUID>(collectionView: self, cellProvider: { collectionView, indexPath, uuid in
+            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: uuid)
         })
         
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Message>()
+        
+        var snapshot = NSDiffableDataSourceSnapshot<Section, UUID>()
         snapshot.appendSections([.main])
-        
         self.diffableDataSource?.apply(snapshot)
-        
 
     }
     
@@ -58,18 +62,17 @@ final class ChatCollectionView: UICollectionView {
         guard var snapshot = diffableDataSource?.snapshot(), !chatRecord.isEmpty else { return }
         guard let data = chatRecord.last else { return }
         
-        snapshot.appendItems([data], toSection: .main)
-        diffableDataSource?.apply(snapshot, animatingDifferences: true)
+        snapshot.appendItems([data.id], toSection: .main)
+        diffableDataSource?.apply(snapshot, animatingDifferences: false)
     }
     
-    func removeSnapshot(replaceData: Message) {
+    func removeSnapshot() {
+        
         guard var snapshot = diffableDataSource?.snapshot(), !chatRecord.isEmpty else { return }
         guard let data = chatRecord.last else { return }
-
-        snapshot.deleteItems([data])
-
-        snapshot.appendItems([replaceData],toSection: .main)
-        diffableDataSource?.apply(snapshot, animatingDifferences: true)
+        
+        snapshot.reconfigureItems([data.id])
+        diffableDataSource?.apply(snapshot, animatingDifferences: false)
     }
 }
 
@@ -89,7 +92,8 @@ extension ChatCollectionView: ChatCollectionViewDelegate {
         let injectedDelegate = chatServiceDelegate?.injectChatServiceDelegate()
         do {
             guard let chatAnswer: ResponseModel = try await injectedDelegate?.getRequestData(inputData: RequestModel(messages: chatRecord)) else { return }
-            removeSnapshot(replaceData: chatAnswer.choices[0].message)
+            chatRecord[chatRecord.count-1].content = chatAnswer.choices[0].message.content
+            removeSnapshot()
             
             self.scrollToItem(at: IndexPath(row: self.numberOfItems(inSection: 0) - 1, section: 0),
                               at: .bottom,

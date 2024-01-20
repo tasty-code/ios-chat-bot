@@ -67,6 +67,7 @@ extension ChatTextInputView {
     
     @objc func tappedButton() {
         delegate?.addChatRecord(text: textView.text)
+        button.isEnabled = false
         textView.text = .none
         textView.constraints.forEach { constraint in
             if constraint.firstAttribute == .height {
@@ -75,6 +76,7 @@ extension ChatTextInputView {
         }
         Task {
             await delegate?.updateCollectionViewFromResponse()
+            button.isEnabled = true
         }
     }
 }

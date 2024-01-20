@@ -56,20 +56,14 @@ final class ChatBalloon: UIView {
                                  label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12.0)]
         
         emptyLabelWidthConstraint = label.widthAnchor.constraint(equalToConstant: 50)
-        emptyLabelHeightConstraint = label.heightAnchor.constraint(equalToConstant: 100)
-//        NSLayoutConstraint.activate(commonLabelConstraint)
     }
     
     func leftOrRight(direction: Direction) {
  
         if direction == .right {
-//            NSLayoutConstraint.deactivate(leftLabelConstraint)
-//            NSLayoutConstraint.activate(rightLabelConstraint)
             leftLabelConstraintIsActive(bool: false)
             rightLabelConstraintIsActive(bool: true)
         } else {
-            //            NSLayoutConstraint.deactivate(rightLabelConstraint)
-            //            NSLayoutConstraint.activate(leftLabelConstraint)
             leftLabelConstraintIsActive(bool: true)
             rightLabelConstraintIsActive(bool: false)
         }
@@ -89,7 +83,6 @@ final class ChatBalloon: UIView {
     
     func emptyLabelConstraintIsActive(bool: Bool) {
         emptyLabelWidthConstraint.isActive = bool
-        emptyLabelHeightConstraint.isActive = bool
     }
     
     func commonLabelConstraintIsActive(bool: Bool)
@@ -104,10 +97,8 @@ final class ChatBalloon: UIView {
         
         if bool {
             NSLayoutConstraint.activate(leftLabelConstraint)
-//            NSLayoutConstraint.activate(commonLabelConstraint)
         } else {
             NSLayoutConstraint.deactivate(leftLabelConstraint)
-//            NSLayoutConstraint.deactivate(commonLabelConstraint)
         }
     }
     
@@ -115,10 +106,8 @@ final class ChatBalloon: UIView {
         
         if bool {
             NSLayoutConstraint.activate(rightLabelConstraint)
-//            NSLayoutConstraint.activate(commonLabelConstraint)
         } else {
             NSLayoutConstraint.deactivate(rightLabelConstraint)
-//            NSLayoutConstraint.deactivate(commonLabelConstraint)
         }
     }
     
