@@ -33,7 +33,7 @@ final class ChatCollectionView: UICollectionView {
             
             guard let text = itemIdentifier.content else { return }
             cell.setLabelText(text: text)
-            
+       
             if itemIdentifier.role == .user {
                 cell.setDirection(direction: .right)
             } else {
@@ -59,7 +59,7 @@ final class ChatCollectionView: UICollectionView {
         guard let data = chatRecord.last else { return }
         
         snapshot.appendItems([data], toSection: .main)
-        diffableDataSource?.apply(snapshot, animatingDifferences: false)
+        diffableDataSource?.apply(snapshot, animatingDifferences: true)
     }
     
     func removeSnapshot(replaceData: Message) {
@@ -69,8 +69,7 @@ final class ChatCollectionView: UICollectionView {
         snapshot.deleteItems([data])
 
         snapshot.appendItems([replaceData],toSection: .main)
-
-        diffableDataSource?.apply(snapshot, animatingDifferences: false)
+        diffableDataSource?.apply(snapshot, animatingDifferences: true)
     }
 }
 
@@ -81,7 +80,6 @@ extension ChatCollectionView: ChatCollectionViewDelegate {
         
         chatRecord.append(Message(role: .assistant, content: ""))
         saveSnapshot()
-        
         self.scrollToItem(at: IndexPath(row: self.numberOfItems(inSection: 0) - 1, section: 0),
                           at: .bottom,
                           animated: true)
@@ -92,7 +90,7 @@ extension ChatCollectionView: ChatCollectionViewDelegate {
         do {
             guard let chatAnswer: ResponseModel = try await injectedDelegate?.getRequestData(inputData: RequestModel(messages: chatRecord)) else { return }
             removeSnapshot(replaceData: chatAnswer.choices[0].message)
-
+            
             self.scrollToItem(at: IndexPath(row: self.numberOfItems(inSection: 0) - 1, section: 0),
                               at: .bottom,
                               animated: true)

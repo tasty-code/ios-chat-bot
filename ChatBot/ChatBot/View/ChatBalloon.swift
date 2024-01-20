@@ -57,27 +57,33 @@ final class ChatBalloon: UIView {
         
         emptyLabelWidthConstraint = label.widthAnchor.constraint(equalToConstant: 50)
         emptyLabelHeightConstraint = label.heightAnchor.constraint(equalToConstant: 100)
-        NSLayoutConstraint.activate(commonLabelConstraint)
+//        NSLayoutConstraint.activate(commonLabelConstraint)
     }
     
     func leftOrRight(direction: Direction) {
+ 
         if direction == .right {
-            NSLayoutConstraint.deactivate(leftLabelConstraint)
-            NSLayoutConstraint.activate(rightLabelConstraint)
+//            NSLayoutConstraint.deactivate(leftLabelConstraint)
+//            NSLayoutConstraint.activate(rightLabelConstraint)
+            leftLabelConstraintIsActive(bool: false)
+            rightLabelConstraintIsActive(bool: true)
         } else {
-            NSLayoutConstraint.deactivate(rightLabelConstraint)
-            NSLayoutConstraint.activate(leftLabelConstraint)
+            //            NSLayoutConstraint.deactivate(rightLabelConstraint)
+            //            NSLayoutConstraint.activate(leftLabelConstraint)
+            leftLabelConstraintIsActive(bool: true)
+            rightLabelConstraintIsActive(bool: false)
         }
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         switch direction {
         case .right:
             drawBalloonToRight()
+            self.balloonLayer.fillColor = UIColor.blue.cgColor
         case .left:
             drawBalloonToLeft()
+            self.balloonLayer.fillColor = UIColor.brown.cgColor
         }
     }
     
@@ -86,14 +92,22 @@ final class ChatBalloon: UIView {
         emptyLabelHeightConstraint.isActive = bool
     }
     
+    func commonLabelConstraintIsActive(bool: Bool)
+    {
+        if bool {
+            NSLayoutConstraint.activate(commonLabelConstraint)
+        } else {
+            NSLayoutConstraint.deactivate(commonLabelConstraint)
+        }
+    }
     func leftLabelConstraintIsActive(bool: Bool) {
         
         if bool {
             NSLayoutConstraint.activate(leftLabelConstraint)
-            NSLayoutConstraint.activate(commonLabelConstraint)
+//            NSLayoutConstraint.activate(commonLabelConstraint)
         } else {
             NSLayoutConstraint.deactivate(leftLabelConstraint)
-            NSLayoutConstraint.deactivate(commonLabelConstraint)
+//            NSLayoutConstraint.deactivate(commonLabelConstraint)
         }
     }
     
@@ -101,10 +115,10 @@ final class ChatBalloon: UIView {
         
         if bool {
             NSLayoutConstraint.activate(rightLabelConstraint)
-            NSLayoutConstraint.activate(commonLabelConstraint)
+//            NSLayoutConstraint.activate(commonLabelConstraint)
         } else {
             NSLayoutConstraint.deactivate(rightLabelConstraint)
-            NSLayoutConstraint.deactivate(commonLabelConstraint)
+//            NSLayoutConstraint.deactivate(commonLabelConstraint)
         }
     }
     

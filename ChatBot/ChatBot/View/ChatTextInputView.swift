@@ -92,8 +92,10 @@ extension ChatTextInputView: UITextViewDelegate {
         textView.constraints.forEach { constraint in
             if constraint.firstAttribute == .height {
                 constraint.constant = textView.estimatedSizeHeight
+                self.layoutIfNeeded()
             }
         }
+        
     }
 }
 
