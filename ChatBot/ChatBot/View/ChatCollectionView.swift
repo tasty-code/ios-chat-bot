@@ -39,7 +39,7 @@ final class ChatCollectionView: UICollectionView {
             } else {
                 cell.setDirection(direction: .left)
             }
-            
+        
         }
         
         diffableDataSource = UICollectionViewDiffableDataSource<Section, Message>(collectionView: self, cellProvider: { collectionView, indexPath, itemIdentifier in
@@ -51,12 +51,25 @@ final class ChatCollectionView: UICollectionView {
         
         self.diffableDataSource?.apply(snapshot)
         
-        saveSnapshot()
+
     }
     
     func saveSnapshot() {
         guard var snapshot = diffableDataSource?.snapshot(), !chatRecord.isEmpty else { return }
-        snapshot.appendItems([chatRecord.last!], toSection: .main)
+        guard let data = chatRecord.last else { return }
+        
+        snapshot.appendItems([data], toSection: .main)
+        diffableDataSource?.apply(snapshot, animatingDifferences: false)
+    }
+    
+    func removeSnapshot(replaceData: Message) {
+        guard var snapshot = diffableDataSource?.snapshot(), !chatRecord.isEmpty else { return }
+        guard let data = chatRecord.last else { return }
+
+        snapshot.deleteItems([data])
+
+        snapshot.appendItems([replaceData],toSection: .main)
+
         diffableDataSource?.apply(snapshot, animatingDifferences: false)
     }
 }
@@ -69,18 +82,20 @@ extension ChatCollectionView: ChatCollectionViewDelegate {
         chatRecord.append(Message(role: .assistant, content: ""))
         saveSnapshot()
         
-        self.scrollToItem(at: IndexPath(row: self.numberOfItems(inSection: 0) - 1, section: 0), at: .bottom, animated: true)
+        self.scrollToItem(at: IndexPath(row: self.numberOfItems(inSection: 0) - 1, section: 0),
+                          at: .bottom,
+                          animated: true)
     }
     
     func updateCollectionViewFromResponse() async {
         let injectedDelegate = chatServiceDelegate?.injectChatServiceDelegate()
         do {
             guard let chatAnswer: ResponseModel = try await injectedDelegate?.getRequestData(inputData: RequestModel(messages: chatRecord)) else { return }
-            
-            chatRecord[chatRecord.count - 1] = chatAnswer.choices[0].message
-            saveSnapshot()
-            
-            self.scrollToItem(at: IndexPath(row: self.numberOfItems(inSection: 0) - 1, section: 0), at: .bottom, animated: true)
+            removeSnapshot(replaceData: chatAnswer.choices[0].message)
+
+            self.scrollToItem(at: IndexPath(row: self.numberOfItems(inSection: 0) - 1, section: 0),
+                              at: .bottom,
+                              animated: true)
         }
         catch {
             print(error)

@@ -8,6 +8,14 @@ import UIKit
 
 final class ChatBalloon: UIView {
     
+    var direction: Direction = .right
+    
+    private var rightLabelConstraint = [NSLayoutConstraint]()
+    private var leftLabelConstraint = [NSLayoutConstraint]()
+    private var commonLabelConstraint = [NSLayoutConstraint]()
+    private var emptyLabelWidthConstraint = NSLayoutConstraint()
+    private var emptyLabelHeightConstraint = NSLayoutConstraint()
+    
     private let balloonLayer = CAShapeLayer()
     
     private let label: UILabel = {
@@ -18,7 +26,7 @@ final class ChatBalloon: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-        
+    
     var text: String? {
         didSet {
             label.text = text
@@ -26,13 +34,9 @@ final class ChatBalloon: UIView {
         }
     }
     
-    var direction: Direction = .right
-    private var rightLabelConstraint = [NSLayoutConstraint]()
-    private var leftLabelConstraint = [NSLayoutConstraint]()
-    var commonLabelConstraint = [NSLayoutConstraint]()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.translatesAutoresizingMaskIntoConstraints = false
         setupUI()
     }
     
@@ -45,11 +49,14 @@ final class ChatBalloon: UIView {
         addSubview(label)
         
         rightLabelConstraint = [label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12.0), label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0)]
-
+        
         leftLabelConstraint = [label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0), label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12.0)]
         
         commonLabelConstraint = [label.topAnchor.constraint(equalTo: topAnchor, constant: 12.0),
-            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12.0)]
+                                 label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12.0)]
+        
+        emptyLabelWidthConstraint = label.widthAnchor.constraint(equalToConstant: 50)
+        emptyLabelHeightConstraint = label.heightAnchor.constraint(equalToConstant: 100)
         NSLayoutConstraint.activate(commonLabelConstraint)
     }
     
@@ -74,20 +81,37 @@ final class ChatBalloon: UIView {
         }
     }
     
-    func ssss() {
-        rightLabelConstraint.forEach { i in
-            i.isActive = false
-        }
+    func emptyLabelConstraintIsActive(bool: Bool) {
+        emptyLabelWidthConstraint.isActive = bool
+        emptyLabelHeightConstraint.isActive = bool
+    }
+    
+    func leftLabelConstraintIsActive(bool: Bool) {
         
-        leftLabelConstraint.forEach { i in
-            i.isActive = false
-        }
-        
-        commonLabelConstraint.forEach { i in
-            i.isActive = false
+        if bool {
+            NSLayoutConstraint.activate(leftLabelConstraint)
+            NSLayoutConstraint.activate(commonLabelConstraint)
+        } else {
+            NSLayoutConstraint.deactivate(leftLabelConstraint)
+            NSLayoutConstraint.deactivate(commonLabelConstraint)
         }
     }
-
+    
+    func rightLabelConstraintIsActive(bool: Bool) {
+        
+        if bool {
+            NSLayoutConstraint.activate(rightLabelConstraint)
+            NSLayoutConstraint.activate(commonLabelConstraint)
+        } else {
+            NSLayoutConstraint.deactivate(rightLabelConstraint)
+            NSLayoutConstraint.deactivate(commonLabelConstraint)
+        }
+    }
+    
+    func fillLayerColor(color: UIColor) {
+        balloonLayer.fillColor = color.cgColor
+    }
+    
     private func drawBalloonToRight() {
         let width = bounds.size.width
         let height = bounds.size.height
@@ -108,7 +132,6 @@ final class ChatBalloon: UIView {
         bezierPath.addCurve(to: CGPoint(x: width - 22, y: height), controlPoint1: CGPoint(x: width - 16, y: height), controlPoint2: CGPoint(x: width - 19, y: height))
         bezierPath.close()
         
-        balloonLayer.fillColor = UIColor.systemBlue.cgColor
         balloonLayer.path = bezierPath.cgPath
         label.textAlignment = .left
     }
@@ -132,8 +155,7 @@ final class ChatBalloon: UIView {
         bezierPath.addCurve(to: CGPoint(x: 11.04, y: height - 4.04), controlPoint1: CGPoint(x: 4.07, y: height + 0.43), controlPoint2: CGPoint(x: 8.16, y: height - 1.06))
         bezierPath.addCurve(to: CGPoint(x: 22, y: height), controlPoint1: CGPoint(x: 16, y: height), controlPoint2: CGPoint(x: 19, y: height))
         bezierPath.close()
-        
-        balloonLayer.fillColor = UIColor.systemOrange.cgColor
+
         balloonLayer.path = bezierPath.cgPath
         label.textAlignment = .left
     }

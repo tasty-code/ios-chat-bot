@@ -43,15 +43,15 @@ final class LoadingView: UIView {
         animation.duration = 1
         animation.repeatCount = Float.infinity
         
-        animation.values = [firstCircle.position.y, bounds.height * -0.05, firstCircle.position.y]
+        animation.values = [firstCircle.position.y, firstCircle.position.y - 8, firstCircle.position.y]
         animation.keyTimes = [0.1, 0.4, 0.7]
         firstCircle.add(animation, forKey: nil)
         
-        animation.values = [secondCircle.position.y, bounds.height * -0.05, secondCircle.position.y]
+        animation.values = [secondCircle.position.y, secondCircle.position.y - 8, secondCircle.position.y]
         animation.keyTimes = [0.2, 0.5, 0.8]
         secondCircle.add(animation, forKey: nil)
         
-        animation.values = [thirdCircle.position.y, bounds.height * -0.05, thirdCircle.position.y]
+        animation.values = [thirdCircle.position.y, thirdCircle.position.y - 8, thirdCircle.position.y]
         animation.keyTimes = [0.3, 0.6, 0.9]
         thirdCircle.add(animation, forKey: nil)
     }
