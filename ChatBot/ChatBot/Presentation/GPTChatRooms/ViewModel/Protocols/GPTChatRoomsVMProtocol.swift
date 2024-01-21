@@ -14,12 +14,13 @@ where Input == GPTChatRoomsInput, Output == GPTChatRoomsOutput { }
 struct GPTChatRoomsInput {
     let fetchRooms: AnyPublisher<Void, Never>
     let createRoom: AnyPublisher<String, Never>
-    let modifyRoom: AnyPublisher<(Model.GPTChatRoomDTO, IndexPath), Never>
-    let deleteRoom: AnyPublisher<(Model.GPTChatRoomDTO, IndexPath), Never>
-    let selectRoom: AnyPublisher<(Model.GPTChatRoomDTO, IndexPath), Never>
+    let modifyRoom: AnyPublisher<(IndexPath, String), Never>
+    let deleteRoom: AnyPublisher<IndexPath, Never>
+    let selectRoom: AnyPublisher<IndexPath, Never>
 }
 
 enum GPTChatRoomsOutput {
     case success(rooms: [Model.GPTChatRoomDTO])
     case failure(error: Error)
+    case moveToChatRoom(chatRoomViewModel: any GPTChatRoomVMProtocol)
 }

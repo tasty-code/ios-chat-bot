@@ -46,11 +46,40 @@ final class GPTChatRoomsViewModel: GPTChatRoomsVMProtocol {
             .store(in: &cancellables)
         
         input.deleteRoom
-            .sink { [weak self] (chatRoom, indexPath) in
+            .sink { [weak self] indexPath in
                 guard let self else { return }
                 do {
+                    let chatRoom = chatRoomList[indexPath.item]
                     try chatRoomRepository.removeChatRoom(chatRoom)
                     chatRoomList.remove(at: indexPath.item)
+                    output.send(Output.success(rooms: chatRoomList))
+                } catch {
+                    output.send(Output.failure(error: error))
+                }
+            }
+            .store(in: &cancellables)
+        
+        input.selectRoom
+            .sink { [weak self] indexPath in
+                guard let self else { return }
+                guard let apiKey = Bundle.main.object(forInfoDictionaryKey: "CHAT_BOT_API_KEY") as? String else {
+                    output.send(Output.failure(error: GPTError.RepositoryError.dataNotFound))
+                    return
+                }
+                
+                output.send(Output.moveToChatRoom(
+                    chatRoomViewModel: GPTChatRoomViewModel(httpRequest: Network.GPTRequest.chatBot(apiKey: apiKey)))
+                )
+            }
+            .store(in: &cancellables)
+        
+        input.modifyRoom
+            .sink { [weak self] (indexPath, title) in
+                guard let self else { return }
+                let chatRoomDTO = Model.GPTChatRoomDTO(id: chatRoomList[indexPath.item].id, title: title, recentChatDate: chatRoomList[indexPath.item].recentChatDate)
+                do {
+                    try chatRoomRepository.modifyChatRoom(chatRoomDTO)
+                    chatRoomList[indexPath.item] = chatRoomDTO
                     output.send(Output.success(rooms: chatRoomList))
                 } catch {
                     output.send(Output.failure(error: error))

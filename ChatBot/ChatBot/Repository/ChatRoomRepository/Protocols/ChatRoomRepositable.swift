@@ -12,6 +12,6 @@ protocol ChatRoomRepositable {
     func fetchChatRoomList() throws -> [Model.GPTChatRoomDTO]
     
     func storeChatRoom(_ chatRoom: Model.GPTChatRoomDTO) throws
-    
+    func modifyChatRoom(_ chatRoom: Model.GPTChatRoomDTO) throws
     func removeChatRoom(_ chatRoom: Model.GPTChatRoomDTO) throws
 }

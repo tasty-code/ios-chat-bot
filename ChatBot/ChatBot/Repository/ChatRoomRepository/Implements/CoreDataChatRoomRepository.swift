@@ -44,6 +44,19 @@ extension Repository.CoreDataChatRoomRepository: ChatRoomRepositable {
         try coreDataRepository.saveContext()
     }
     
+    func modifyChatRoom(_ chatRoom: Model.GPTChatRoomDTO) throws {
+        let request = ChatRoom.fetchRequest()
+        let predicate = NSPredicate(format: "id == %@", chatRoom.id.uuidString)
+        request.predicate = predicate
+        
+        guard let result = try? coreDataRepository.context.fetch(request).first else {
+            throw GPTError.RepositoryError.dataNotFound
+        }
+        
+        result.title = chatRoom.title
+        try coreDataRepository.saveContext()
+    }
+    
     func removeChatRoom(_ chatRoom: Model.GPTChatRoomDTO) throws {
         let request = ChatRoom.fetchRequest()
         let predicate = NSPredicate(format: "id == %@", chatRoom.id.uuidString)
