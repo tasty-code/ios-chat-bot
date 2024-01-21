@@ -63,10 +63,10 @@
 		045DE5FE2B515B7D002B426C /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		046C25172B5A485200B5696D /* MessageContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageContentView.swift; sourceTree = "<group>"; };
 		046C25192B5A485F00B5696D /* MessageViewContentConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewContentConfiguration.swift; sourceTree = "<group>"; };
+		04A4863B2B5CFC0F009E6943 /* ChatBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = ChatBot.app; path = "/Users/swain/Desktop/Project/ios-chat-bot/ChatBot/build/Debug-iphoneos/ChatBot.app"; sourceTree = "<absolute>"; };
 		04A930092B5523ED002E4819 /* MessageCellConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellConfiguration.swift; sourceTree = "<group>"; };
 		04A9300B2B55240B002E4819 /* MessageCellContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellContentView.swift; sourceTree = "<group>"; };
 		A60A086B2B4BFE410027A6F7 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
-		A631B2B42B5A587E00054D53 /* ChatBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6AC5F5A2B5688E900AB7CAF /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -193,7 +193,9 @@
 		045DE5DD2B4FBC44002B426C /* ChattingRoomListView */ = {
 			isa = PBXGroup;
 			children = (
-				0452955E2B4E2E01000A5FD1 /* ChattingRoomListViewController.swift */,
+				04A4863E2B5CFC1E009E6943 /* ViewController */,
+				04A4863D2B5CFC1B009E6943 /* View */,
+				04A4863C2B5CFC16009E6943 /* Model */,
 			);
 			path = ChattingRoomListView;
 			sourceTree = "<group>";
@@ -235,6 +237,59 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		04A486362B5CFAAE009E6943 /* PromptSettingView */ = {
+			isa = PBXGroup;
+			children = (
+				04A486392B5CFAC1009E6943 /* ViewController */,
+				04A486382B5CFABD009E6943 /* View */,
+				04A486372B5CFAB9009E6943 /* Model */,
+			);
+			path = PromptSettingView;
+			sourceTree = "<group>";
+		};
+		04A486372B5CFAB9009E6943 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		04A486382B5CFABD009E6943 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		04A486392B5CFAC1009E6943 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		04A4863C2B5CFC16009E6943 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		04A4863D2B5CFC1B009E6943 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		04A4863E2B5CFC1E009E6943 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0452955E2B4E2E01000A5FD1 /* ChattingRoomListViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		A60A086A2B4BFE340027A6F7 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,7 +302,6 @@
 			isa = PBXGroup;
 			children = (
 				B4B3E2BB2B42D1BB00818B3C /* ChatBot */,
-				A631B2B42B5A587E00054D53 /* ChatBot.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -256,6 +310,7 @@
 			children = (
 				B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */,
 				B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */,
+				04A486362B5CFAAE009E6943 /* PromptSettingView */,
 				045DE5DD2B4FBC44002B426C /* ChattingRoomListView */,
 				045DE5DC2B4FBC2F002B426C /* ChattingRoomView */,
 				045DE5F52B5108C3002B426C /* Extensions */,
@@ -286,7 +341,7 @@
 			);
 			name = ChatBot;
 			productName = ChatBot;
-			productReference = A631B2B42B5A587E00054D53 /* ChatBot.app */;
+			productReference = 04A4863B2B5CFC0F009E6943 /* ChatBot.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
