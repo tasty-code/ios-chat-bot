@@ -2,7 +2,7 @@
 //  ChatRoom+CoreDataProperties.swift
 //  ChatBot
 //
-//  Created by 김준성 on 1/19/24.
+//  Created by 김준성 on 1/21/24.
 //
 //
 
@@ -17,8 +17,26 @@ extension ChatRoom {
     }
 
     @NSManaged public var id: UUID?
-    @NSManaged public var title: String?
     @NSManaged public var recentChatDate: Date?
+    @NSManaged public var title: String?
+    @NSManaged public var chattings: NSSet?
+
+}
+
+// MARK: Generated accessors for chattings
+extension ChatRoom {
+
+    @objc(addChattingsObject:)
+    @NSManaged public func addToChattings(_ value: Chatting)
+
+    @objc(removeChattingsObject:)
+    @NSManaged public func removeFromChattings(_ value: Chatting)
+
+    @objc(addChattings:)
+    @NSManaged public func addToChattings(_ values: NSSet)
+
+    @objc(removeChattings:)
+    @NSManaged public func removeFromChattings(_ values: NSSet)
 
 }
 

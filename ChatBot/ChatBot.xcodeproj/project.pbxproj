@@ -27,6 +27,8 @@
 		0D3260432B5A4C83000C352E /* GPTChatRoomsVMProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3260422B5A4C83000C352E /* GPTChatRoomsVMProtocol.swift */; };
 		0D3260472B5A4CB5000C352E /* GPTChatRoomsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3260462B5A4CB5000C352E /* GPTChatRoomsViewModel.swift */; };
 		0D32604A2B5A4CFD000C352E /* GPTChatRoomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3260492B5A4CFD000C352E /* GPTChatRoomsViewController.swift */; };
+		0D3260512B5D44FC000C352E /* ChattingRepositable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3260502B5D44FC000C352E /* ChattingRepositable.swift */; };
+		0D3260532B5D45C0000C352E /* CoreDataChattingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3260522B5D45C0000C352E /* CoreDataChattingRepository.swift */; };
 		0D843AD82B4B986D00F4EAD2 /* URLSession+HTTPPublishable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843AD72B4B986D00F4EAD2 /* URLSession+HTTPPublishable.swift */; };
 		0D843ADB2B4B98C900F4EAD2 /* GPTHTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843ADA2B4B98C900F4EAD2 /* GPTHTTPService.swift */; };
 		0D843ADD2B4B992500F4EAD2 /* DataDecoderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843ADC2B4B992500F4EAD2 /* DataDecoderable.swift */; };
@@ -98,6 +100,8 @@
 		0D3260422B5A4C83000C352E /* GPTChatRoomsVMProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTChatRoomsVMProtocol.swift; sourceTree = "<group>"; };
 		0D3260462B5A4CB5000C352E /* GPTChatRoomsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTChatRoomsViewModel.swift; sourceTree = "<group>"; };
 		0D3260492B5A4CFD000C352E /* GPTChatRoomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTChatRoomsViewController.swift; sourceTree = "<group>"; };
+		0D3260502B5D44FC000C352E /* ChattingRepositable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingRepositable.swift; sourceTree = "<group>"; };
+		0D3260522B5D45C0000C352E /* CoreDataChattingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataChattingRepository.swift; sourceTree = "<group>"; };
 		0D843AD72B4B986D00F4EAD2 /* URLSession+HTTPPublishable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+HTTPPublishable.swift"; sourceTree = "<group>"; };
 		0D843ADA2B4B98C900F4EAD2 /* GPTHTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTHTTPService.swift; sourceTree = "<group>"; };
 		0D843ADC2B4B992500F4EAD2 /* DataDecoderable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDecoderable.swift; sourceTree = "<group>"; };
@@ -171,6 +175,7 @@
 		0D32600D2B5A085D000C352E /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				0D32604D2B5D44BD000C352E /* ChattingRepository */,
 				0D3260202B5A18D0000C352E /* ChatRoomRepository */,
 				0D3260182B5A0E4B000C352E /* CoreDataRepository */,
 				0D32601B2B5A1523000C352E /* Repository.swift */,
@@ -268,6 +273,31 @@
 				0D3260492B5A4CFD000C352E /* GPTChatRoomsViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0D32604D2B5D44BD000C352E /* ChattingRepository */ = {
+			isa = PBXGroup;
+			children = (
+				0D32604F2B5D44D5000C352E /* Implements */,
+				0D32604E2B5D44CC000C352E /* Protocols */,
+			);
+			path = ChattingRepository;
+			sourceTree = "<group>";
+		};
+		0D32604E2B5D44CC000C352E /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				0D3260502B5D44FC000C352E /* ChattingRepositable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		0D32604F2B5D44D5000C352E /* Implements */ = {
+			isa = PBXGroup;
+			children = (
+				0D3260522B5D45C0000C352E /* CoreDataChattingRepository.swift */,
+			);
+			path = Implements;
 			sourceTree = "<group>";
 		};
 		0D843AD92B4B98B200F4EAD2 /* HTTPService */ = {
@@ -834,10 +864,12 @@
 				0D32601A2B5A0E6C000C352E /* CoreDataRepository.swift in Sources */,
 				0DF9976D2B43B15F0055C836 /* GPTMessagable.swift in Sources */,
 				0DF997812B450E8E0055C836 /* Date+Extention.swift in Sources */,
+				0D3260532B5D45C0000C352E /* CoreDataChattingRepository.swift in Sources */,
 				0D3260232B5A195C000C352E /* CoreDataChatRoomRepository.swift in Sources */,
 				0D843B292B4FB16200F4EAD2 /* GPTChatRoomVMProtocol.swift in Sources */,
 				0D3260472B5A4CB5000C352E /* GPTChatRoomsViewModel.swift in Sources */,
 				0D843ADD2B4B992500F4EAD2 /* DataDecoderable.swift in Sources */,
+				0D3260512B5D44FC000C352E /* ChattingRepositable.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
