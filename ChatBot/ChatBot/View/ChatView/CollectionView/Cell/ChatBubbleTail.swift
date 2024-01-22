@@ -36,7 +36,5 @@ import UIKit
         context.setFillColor(color.cgColor)
         
         context.fillPath()
-        
-        
     }
 }

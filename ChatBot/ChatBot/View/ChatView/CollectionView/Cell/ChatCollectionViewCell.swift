@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChatCollectionViewCell: UICollectionViewListCell {
+final class ChatCollectionViewCell: UICollectionViewListCell {
     static let reuseIdentifier = "text-cell-reuse-identifier"
     
     private var chatBotBubbleConstarint: [NSLayoutConstraint] = []
@@ -30,7 +30,6 @@ class ChatCollectionViewCell: UICollectionViewListCell {
         tail.backgroundColor = .clear
         
         return tail
-        
     }()
     
     private lazy var chatLabel: UILabel = {
@@ -98,6 +97,7 @@ class ChatCollectionViewCell: UICollectionViewListCell {
 }
 
 //MARK: - chatBubbleConfigure
+
 extension ChatCollectionViewCell {
     func configureChatbotBubble(isFetching: Bool) {
         chatBotBubbleConstarint = [
@@ -114,7 +114,6 @@ extension ChatCollectionViewCell {
         } else {
             
         }
-                
         NSLayoutConstraint.activate(chatBotBubbleConstarint)
     }
     
@@ -129,7 +128,6 @@ extension ChatCollectionViewCell {
         bubbleTail.color = .systemYellow
         
         NSLayoutConstraint.activate(userBubbleConstraint)
-        
     }
 }
 
