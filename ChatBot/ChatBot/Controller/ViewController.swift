@@ -10,8 +10,8 @@ import UIKit
 final class ViewController: UIViewController {
     
     private let chatView = ChatView()
-    private let endPoint = EndPointMaker()
-    static let chatUIItem = Message(role: "indicator", content: "메세지 수신중..(임시)")
+    private var endPoint: Endpointable = ChatBotEndpoint()
+    private var historyMessages = [Message]()
     
     override func loadView() {
         self.view = chatView
@@ -53,16 +53,18 @@ extension ViewController: UITextViewDelegate {
 }
 
 extension ViewController: ChatViewDelegate {
-    func submitUserMessage(chatView: ChatView, userMessage: String) {
-        let snapShotItems = [Message(role: "user", content: userMessage), ViewController.chatUIItem]
+    func submitUserMessage(chatView: ChatView, animationData: Message, userMessage: String) {
+        let newMessage = Message(role: UserContentConstant.userRole, content: userMessage)
+        historyMessages.append(newMessage)
+        
+        endPoint.httpBodyContent.messages = historyMessages
+        
+        let snapShotItems = [newMessage, animationData]
         
         chatView.updateSnapshot(items: snapShotItems, isFetched: false)
         chatView.scrollToBottom()
-        guard let endpoint = endPoint.buildEndpoint(userMessage) else {
-            return
-        }
         
-        NetworkingManager.shared.downloadData(request: endpoint.generateRequest(),
+        NetworkingManager.shared.downloadData(endpoint: endPoint,
                                               to: AIContentModel.self) { result in
             switch result {
             case .success(let data):

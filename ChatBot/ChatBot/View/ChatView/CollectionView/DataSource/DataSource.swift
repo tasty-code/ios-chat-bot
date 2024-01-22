@@ -12,6 +12,8 @@ enum Section {
 
 final class ChatCollectionViewDataSource: UICollectionViewDiffableDataSource<Section, Message> {
     
+    let animationData = Message(role: "indicator", content: "메세지 수신중..(임시)")
+    
     init(collectionView: UICollectionView) {
         let cellRegistration = UICollectionView.CellRegistration<ChatCollectionViewCell, Message> { (cell, indexPath, item) in
             cell.configureBubbles(identifier: item)
@@ -33,7 +35,7 @@ final class ChatCollectionViewDataSource: UICollectionViewDiffableDataSource<Sec
         var snapShot = self.snapshot()
         
         if isFetched {
-            snapShot.deleteItems([ViewController.chatUIItem])
+            snapShot.deleteItems([animationData])
             self.apply(snapShot, animatingDifferences: true)
         }
         

@@ -10,7 +10,7 @@ import UIKit
 // MARK: - Delegate Protocol
 
 protocol ChatViewDelegate: AnyObject {
-    func submitUserMessage(chatView: ChatView, userMessage: String)
+    func submitUserMessage(chatView: ChatView, animationData: Message, userMessage: String)
 }
 
 final class ChatView: UIView {
@@ -90,8 +90,7 @@ final class ChatView: UIView {
         configureTextView()
         contentSendButton.isEnabled.toggle()
         
-        delegate?.submitUserMessage(chatView: self, userMessage: userMessage)
-        contentTextView.text = nil
+        delegate?.submitUserMessage(chatView: self, animationData: dataSource.animationData, userMessage: userMessage)
     }
     
     private func configureLayout() {

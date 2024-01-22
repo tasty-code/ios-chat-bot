@@ -19,7 +19,6 @@
 		C3CFDE4A2B4CD097003CF9CC /* NetworkingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CFDE492B4CD097003CF9CC /* NetworkingError.swift */; };
 		C3CFDE912B4E39AB003CF9CC /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CFDE902B4E39AB003CF9CC /* HTTPMethod.swift */; };
 		C3CFDE942B4E39E5003CF9CC /* BaseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CFDE932B4E39E5003CF9CC /* BaseURL.swift */; };
-		C3CFDE962B4E3A06003CF9CC /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CFDE952B4E3A06003CF9CC /* ContentType.swift */; };
 		C3CFDE982B4E3ADF003CF9CC /* ChatBotEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CFDE972B4E3ADF003CF9CC /* ChatBotEndpoint.swift */; };
 		C3CFDE9C2B4E78D0003CF9CC /* Endpointable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CFDE9B2B4E78D0003CF9CC /* Endpointable.swift */; };
 		C3F2DA6E2B57F7B60035BD91 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F2DA6D2B57F7B60035BD91 /* DataSource.swift */; };
@@ -27,7 +26,6 @@
 		CB01BBCB2B51100E00565462 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB01BBCA2B51100E00565462 /* Message.swift */; };
 		CB1DA6BB2B4E849300D8BAF6 /* APIName.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1DA6BA2B4E849300D8BAF6 /* APIName.swift */; };
 		CB1DA6BE2B4EC6BA00D8BAF6 /* UserContentConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1DA6BD2B4EC6BA00D8BAF6 /* UserContentConstant.swift */; };
-		CB1DA6C02B4ECC0700D8BAF6 /* HeaderFieldName.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1DA6BF2B4ECC0700D8BAF6 /* HeaderFieldName.swift */; };
 		CB24DB9E2B5565A5007EEE38 /* ChatBubbleTail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB24DB9D2B5565A5007EEE38 /* ChatBubbleTail.swift */; };
 		CB3263042B44F55F00B9518D /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB3263032B44F55F00B9518D /* ApiKeys.plist */; };
 		CB32630A2B44FBE400B9518D /* AIContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3263092B44FBE400B9518D /* AIContentModel.swift */; };
@@ -50,7 +48,6 @@
 		C3CFDE492B4CD097003CF9CC /* NetworkingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingError.swift; sourceTree = "<group>"; };
 		C3CFDE902B4E39AB003CF9CC /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		C3CFDE932B4E39E5003CF9CC /* BaseURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseURL.swift; sourceTree = "<group>"; };
-		C3CFDE952B4E3A06003CF9CC /* ContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentType.swift; sourceTree = "<group>"; };
 		C3CFDE972B4E3ADF003CF9CC /* ChatBotEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotEndpoint.swift; sourceTree = "<group>"; };
 		C3CFDE9B2B4E78D0003CF9CC /* Endpointable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpointable.swift; sourceTree = "<group>"; };
 		C3F2DA6D2B57F7B60035BD91 /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
@@ -58,7 +55,6 @@
 		CB01BBCA2B51100E00565462 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		CB1DA6BA2B4E849300D8BAF6 /* APIName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIName.swift; sourceTree = "<group>"; };
 		CB1DA6BD2B4EC6BA00D8BAF6 /* UserContentConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserContentConstant.swift; sourceTree = "<group>"; };
-		CB1DA6BF2B4ECC0700D8BAF6 /* HeaderFieldName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderFieldName.swift; sourceTree = "<group>"; };
 		CB24DB9D2B5565A5007EEE38 /* ChatBubbleTail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubbleTail.swift; sourceTree = "<group>"; };
 		CB3263032B44F55F00B9518D /* ApiKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiKeys.plist; sourceTree = "<group>"; };
 		CB3263092B44FBE400B9518D /* AIContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIContentModel.swift; sourceTree = "<group>"; };
@@ -115,7 +111,8 @@
 			isa = PBXGroup;
 			children = (
 				C3CFDE472B4CD034003CF9CC /* Network */,
-				CBD979032B4CD171001F2AE8 /* DataTransfer */,
+				C3CFDE9A2B4E78B5003CF9CC /* Endpoint */,
+				CBD979032B4CD171001F2AE8 /* JSONCoder */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -149,11 +146,9 @@
 		C3CFDE922B4E39B2003CF9CC /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				C3CFDE952B4E3A06003CF9CC /* ContentType.swift */,
 				C3CFDE902B4E39AB003CF9CC /* HTTPMethod.swift */,
 				C3CFDE932B4E39E5003CF9CC /* BaseURL.swift */,
 				CB1DA6BA2B4E849300D8BAF6 /* APIName.swift */,
-				CB1DA6BF2B4ECC0700D8BAF6 /* HeaderFieldName.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -171,18 +166,18 @@
 		C3CFDE9A2B4E78B5003CF9CC /* Endpoint */ = {
 			isa = PBXGroup;
 			children = (
-				C3CFDE972B4E3ADF003CF9CC /* ChatBotEndpoint.swift */,
-				C3CFDE9D2B4E78F4003CF9CC /* Protocol */,
+				CBC26DEB2B5DF74B00DD57FD /* Implementation */,
+				C3CFDE9D2B4E78F4003CF9CC /* Interface */,
 			);
 			path = Endpoint;
 			sourceTree = "<group>";
 		};
-		C3CFDE9D2B4E78F4003CF9CC /* Protocol */ = {
+		C3CFDE9D2B4E78F4003CF9CC /* Interface */ = {
 			isa = PBXGroup;
 			children = (
 				C3CFDE9B2B4E78D0003CF9CC /* Endpointable.swift */,
 			);
-			path = Protocol;
+			path = Interface;
 			sourceTree = "<group>";
 		};
 		C3F2DA682B57F7390035BD91 /* ChatView */ = {
@@ -266,17 +261,24 @@
 			isa = PBXGroup;
 			children = (
 				C3CFDE992B4E78A6003CF9CC /* DTO */,
-				C3CFDE9A2B4E78B5003CF9CC /* Endpoint */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		CBD979032B4CD171001F2AE8 /* DataTransfer */ = {
+		CBC26DEB2B5DF74B00DD57FD /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				C3CFDE972B4E3ADF003CF9CC /* ChatBotEndpoint.swift */,
+			);
+			path = Implementation;
+			sourceTree = "<group>";
+		};
+		CBD979032B4CD171001F2AE8 /* JSONCoder */ = {
 			isa = PBXGroup;
 			children = (
 				CBD979042B4CD197001F2AE8 /* Encoder.swift */,
 			);
-			path = DataTransfer;
+			path = JSONCoder;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -357,7 +359,6 @@
 				C3CFDE912B4E39AB003CF9CC /* HTTPMethod.swift in Sources */,
 				C3B9B93A2B44F48200B85140 /* ChatBot++Bundle.swift in Sources */,
 				CB1DA6BB2B4E849300D8BAF6 /* APIName.swift in Sources */,
-				CB1DA6C02B4ECC0700D8BAF6 /* HeaderFieldName.swift in Sources */,
 				C3CFDE4A2B4CD097003CF9CC /* NetworkingError.swift in Sources */,
 				CB01BBCB2B51100E00565462 /* Message.swift in Sources */,
 				CB32630C2B44FC1200B9518D /* UserContentModel.swift in Sources */,
@@ -370,7 +371,6 @@
 				C3CFDE942B4E39E5003CF9CC /* BaseURL.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
 				CBD979052B4CD197001F2AE8 /* Encoder.swift in Sources */,
-				C3CFDE962B4E3A06003CF9CC /* ContentType.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
 				C3CFDE452B4CD010003CF9CC /* NetworkingManager.swift in Sources */,
 			);
