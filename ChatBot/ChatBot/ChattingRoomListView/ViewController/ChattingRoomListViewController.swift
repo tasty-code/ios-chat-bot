@@ -4,6 +4,11 @@ final class ChattingRoomListViewController: UIViewController {
     private typealias DataSource = UICollectionViewDiffableDataSource<Section, Item>
     private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Item>
     
+    // MARK: Namespace
+    private enum Constants {
+        static let buttonImageName: String = "square.and.pencil"
+    }
+    
     // MARK: View Components
     private lazy var chattingRoomListView: UICollectionView! = {
         let chattingRoomListView = UICollectionView(frame: view.bounds, collectionViewLayout: configureLayout())
@@ -15,11 +20,32 @@ final class ChattingRoomListViewController: UIViewController {
     private var dataSource: DataSource! = nil
     private var snapshot: Snapshot! = Snapshot()
     
+    // MARK: Dependencies
+    private let networkManager: NetworkRequestable!
+    
+    init(networkManager: NetworkRequestable) {
+        self.networkManager = networkManager
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) 구현되지 않음.")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureNavigationBar()
         configureHierarchy()
         configureConstraints()
         configureDataSource()
+    }
+}
+
+// MARK: Private Methods
+extension ChattingRoomListViewController {
+    @objc private func pushToNewChattingRoomViewController() {
+        let newChattingRoomViewController = ChattingRoomViewController(networkManager: networkManager)
+        self.navigationController?.pushViewController(newChattingRoomViewController, animated: true)
     }
 }
 
@@ -36,22 +62,26 @@ extension ChattingRoomListViewController {
 
 // MARK: ChattingRoomListView Configuration Methods
 extension ChattingRoomListViewController {
+    private func configureNavigationBar() {
+        let navigationTitle = "MyChatBot"
+        let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: Constants.buttonImageName), style: .plain, target: self, action: #selector(pushToNewChattingRoomViewController))
+        self.navigationItem.title = navigationTitle
+        self.navigationItem.setRightBarButton(rightBarButtonItem, animated: true)
+    }
+    
     private func configureHierarchy() {
         view.addSubview(chattingRoomListView)
     }
     
     private func configureLayout() -> UICollectionViewLayout {
         var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
-        configuration.headerMode = .supplementary
         let layout = UICollectionViewCompositionalLayout.list(using: configuration)
         return layout
     }
     
     private func configureDataSource() {
-//        let headerRegistration = UICollectionView.SupplementaryRegistration(elementKind: , handler: <#T##UICollectionView.SupplementaryRegistration<Supplementary>.Handler##UICollectionView.SupplementaryRegistration<Supplementary>.Handler##(_ supplementaryView: Supplementary, _ elementKind: String, _ indexPath: IndexPath) -> Void#>)
-        
-        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewCell, Item> { cell, indexPath, itemIdentifier in
-            <#code#>
+        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Item> { cell, indexPath, itemIdentifier in
+            
         }
     }
 }

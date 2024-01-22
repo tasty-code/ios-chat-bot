@@ -42,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0445ACDC2B5DFBEF0001D0E2 /* ChatBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = ChatBot.app; path = "/Users/swain/Desktop/Project/ios-chat-bot/ChatBot/build/Debug-iphoneos/ChatBot.app"; sourceTree = "<absolute>"; };
 		0452948E2B44F058000A5FD1 /* ResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseModel.swift; sourceTree = "<group>"; };
 		045294902B4519E7000A5FD1 /* RequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
 		045295392B4BFCED000A5FD1 /* HTTPMethodType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethodType.swift; sourceTree = "<group>"; };
@@ -63,7 +64,6 @@
 		045DE5FE2B515B7D002B426C /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		046C25172B5A485200B5696D /* MessageContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageContentView.swift; sourceTree = "<group>"; };
 		046C25192B5A485F00B5696D /* MessageViewContentConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewContentConfiguration.swift; sourceTree = "<group>"; };
-		04A4863B2B5CFC0F009E6943 /* ChatBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = ChatBot.app; path = "/Users/swain/Desktop/Project/ios-chat-bot/ChatBot/build/Debug-iphoneos/ChatBot.app"; sourceTree = "<absolute>"; };
 		04A930092B5523ED002E4819 /* MessageCellConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellConfiguration.swift; sourceTree = "<group>"; };
 		04A9300B2B55240B002E4819 /* MessageCellContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellContentView.swift; sourceTree = "<group>"; };
 		A60A086B2B4BFE410027A6F7 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
@@ -341,7 +341,7 @@
 			);
 			name = ChatBot;
 			productName = ChatBot;
-			productReference = 04A4863B2B5CFC0F009E6943 /* ChatBot.app */;
+			productReference = 0445ACDC2B5DFBEF0001D0E2 /* ChatBot.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -567,7 +567,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TTKL6566T6;
+				DEVELOPMENT_TEAM = P85DW78LYM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChatBot/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -600,7 +600,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = GWV26BWTUR;
+				DEVELOPMENT_TEAM = P85DW78LYM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChatBot/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
