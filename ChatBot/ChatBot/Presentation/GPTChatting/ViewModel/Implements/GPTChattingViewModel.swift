@@ -32,45 +32,9 @@ final class GPTChattingViewModel: GPTChattingVMProtocol {
     }
     
     func transform(from input: GPTChatRoomInput) -> AnyPublisher<GPTChatRoomOutput, Never> {
-        input.fetchChattings?
-            .sink { [weak self] in
-                guard let self else { return }
-                do {
-                    messages = try chattingRepository.fetchChattings(for: chatRoomDTO)
-                    if messages.count - 1 < 0 {
-                        return
-                    }
-                    output.send(Output.success(messages: messages, indexToUpdate: messages.count - 1))
-                } catch {
-                    output.send(Output.failure(error))
-                }
-            }
-            .store(in: &cancellables)
-        
-        input.sendComment?
-            .sink { [weak self] comment in
-                guard let self else { return }
-                guard let comment = comment, !comment.isEmpty else {
-                    output.send(Output.failure(GPTError.ChatRoomError.emptyUserComment))
-                    return
-                }
-                messages.append(Model.UserMessage(content: comment).asRequestMessage())
-                messages.append(Model.WaitingMessage().asRequestMessage())
-                output.send(Output.success(messages: messages, indexToUpdate: messages.count - 1))
-                getReplyFromServer(messages.count - 1)
-            }
-            .store(in: &cancellables)
-        
-        input.storeChattings?
-            .sink { [weak self] in
-                guard let self else { return }
-                do {
-                    try chattingRepository.storeChattings(messages, for: chatRoomDTO)
-                } catch {
-                    output.send(Output.failure(error))
-                }
-            }
-            .store(in: &cancellables)
+        bindFetchChattings(from: input.fetchChattings)
+        bindSendCommnet(from: input.sendComment)
+        bindStoreChattings(from: input.storeChattings)
         
         return output.eraseToAnyPublisher()
     }
@@ -104,5 +68,53 @@ final class GPTChattingViewModel: GPTChattingVMProtocol {
                 messages[indexToUpdate] = message
             }
         cancellable?.store(in: &cancellables)
+    }
+}
+
+extension GPTChattingViewModel {
+    private func bindFetchChattings(from publisher: AnyPublisher<Void, Never>?) {
+        publisher?
+            .sink { [weak self] in
+                guard let self else { return }
+                do {
+                    messages = try chattingRepository.fetchChattings(for: chatRoomDTO)
+                    if messages.count - 1 < 0 {
+                        return
+                    }
+                    output.send(Output.success(messages: messages, indexToUpdate: messages.count - 1))
+                } catch {
+                    output.send(Output.failure(error))
+                }
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func bindSendCommnet(from publisher: AnyPublisher<String?, Never>?) {
+        publisher?
+            .sink { [weak self] comment in
+                guard let self else { return }
+                guard let comment = comment, !comment.isEmpty else {
+                    output.send(Output.failure(GPTError.ChatRoomError.emptyUserComment))
+                    return
+                }
+                messages.append(Model.UserMessage(content: comment).asRequestMessage())
+                messages.append(Model.WaitingMessage().asRequestMessage())
+                output.send(Output.success(messages: messages, indexToUpdate: messages.count - 1))
+                getReplyFromServer(messages.count - 1)
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func bindStoreChattings(from publisher: AnyPublisher<Void, Never>?) {
+        publisher?
+            .sink { [weak self] in
+                guard let self else { return }
+                do {
+                    try chattingRepository.storeChattings(messages, for: chatRoomDTO)
+                } catch {
+                    output.send(Output.failure(error))
+                }
+            }
+            .store(in: &cancellables)
     }
 }

@@ -20,7 +20,19 @@ final class GPTChatRoomsViewModel: GPTChatRoomsVMProtocol {
     }
     
     func transform(from input: GPTChatRoomsInput) -> AnyPublisher<GPTChatRoomsOutput, Never> {
-        input.fetchRooms?
+        bindFetchRoom(from: input.fetchRooms)
+        bindCreateRoom(from: input.createRoom)
+        bindDeleteRoom(from: input.deleteRoom)
+        bindSelectRoom(from: input.selectRoom)
+        bindModifyRoom(from: input.modifyRoom)
+        
+        return output.eraseToAnyPublisher()
+    }
+}
+
+extension GPTChatRoomsViewModel {
+    private func bindFetchRoom(from publisher: AnyPublisher<Void, Never>?) {
+        publisher?
             .sink { [weak self] _ in
                 guard let chatRoomList = try? self?.chatRoomRepository.fetchChatRoomList() else {
                     self?.output.send(Output.failure(error: GPTError.RepositoryError.dataNotFound))
@@ -30,8 +42,10 @@ final class GPTChatRoomsViewModel: GPTChatRoomsVMProtocol {
                 self?.output.send(Output.success(rooms: chatRoomList))
             }
             .store(in: &cancellables)
-        
-        input.createRoom?
+    }
+    
+    private func bindCreateRoom(from publisher: AnyPublisher<String?, Never>?) {
+        publisher?
             .sink { [weak self] title in
                 guard let self else { return }
                 guard let title = title, title.count > 0 else {
@@ -49,8 +63,10 @@ final class GPTChatRoomsViewModel: GPTChatRoomsVMProtocol {
                 }
             }
             .store(in: &cancellables)
-        
-        input.deleteRoom?
+    }
+    
+    private func bindDeleteRoom(from publisher: AnyPublisher<IndexPath, Never>?) {
+        publisher?
             .sink { [weak self] indexPath in
                 guard let self else { return }
                 do {
@@ -63,8 +79,10 @@ final class GPTChatRoomsViewModel: GPTChatRoomsVMProtocol {
                 }
             }
             .store(in: &cancellables)
-        
-        input.selectRoom?
+    }
+    
+    private func bindSelectRoom(from publisher: AnyPublisher<IndexPath, Never>?) {
+        publisher?
             .sink { [weak self] indexPath in
                 guard let self else { return }
                 guard let apiKey = Bundle.main.object(forInfoDictionaryKey: "CHAT_BOT_API_KEY") as? String else {
@@ -78,8 +96,10 @@ final class GPTChatRoomsViewModel: GPTChatRoomsVMProtocol {
                 ))
             }
             .store(in: &cancellables)
-        
-        input.modifyRoom?
+    }
+    
+    private func bindModifyRoom(from publisher: AnyPublisher<(IndexPath, String?), Never>?) {
+        publisher?
             .sink { [weak self] (indexPath, title) in
                 guard let self else { return }
                 guard let title = title, title.count > 0 else {
@@ -97,7 +117,5 @@ final class GPTChatRoomsViewModel: GPTChatRoomsVMProtocol {
                 }
             }
             .store(in: &cancellables)
-        
-        return output.eraseToAnyPublisher()
     }
 }
