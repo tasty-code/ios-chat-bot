@@ -77,7 +77,14 @@ final class GPTChatRoomViewController: UIViewController {
         }
     }()
     
-    private lazy var dataSource = configureDataSource()
+    private lazy var dataSource: UICollectionViewDiffableDataSource<Section, GPTMessageDTO> = {
+        return UICollectionViewDiffableDataSource<Section, GPTMessageDTO>(collectionView: chatCollectionView) {
+            (collectionView: UICollectionView, indexPath: IndexPath, item: GPTMessageDTO) -> MessageCell? in
+            let cell = collectionView
+                .dequeueConfiguredReusableCell(using: self.cellRegistration, for: indexPath, item: item)
+            return cell
+        }
+    }()
     
     // MARK: - Initializer
     
@@ -154,16 +161,6 @@ final class GPTChatRoomViewController: UIViewController {
         
         let compositionalLayout = UICollectionViewCompositionalLayout.list(using: listConfiguration)
         return compositionalLayout
-    }
-    
-    private func configureDataSource() -> UICollectionViewDiffableDataSource<Section, GPTMessageDTO> {
-        let dataSource = UICollectionViewDiffableDataSource<Section, GPTMessageDTO>(collectionView: chatCollectionView) {
-            (collectionView: UICollectionView, indexPath: IndexPath, item: GPTMessageDTO) -> MessageCell? in
-            let cell = collectionView
-                .dequeueConfiguredReusableCell(using: self.cellRegistration, for: indexPath, item: item)
-            return cell
-        }
-        return dataSource
     }
     
     private func configureSnapshot(with messages: [GPTMessageDTO]) {

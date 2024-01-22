@@ -8,7 +8,7 @@
 import Foundation
 
 extension JSONEncoder: DataEncodable {
-    func encode<T>(from value: T) throws -> Data where T : Encodable {
+    func encode<T: Encodable>(from value: T) throws -> Data {
         guard let data = try? self.encode(value)
         else {
             throw APIError.failedEncoding

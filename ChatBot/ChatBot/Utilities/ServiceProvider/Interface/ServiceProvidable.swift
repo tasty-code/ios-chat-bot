@@ -8,5 +8,5 @@
 import Foundation
 
 protocol ServiceProvidable {
-    func excute<E: APIEndPoint, D: ResponseDTODecodable>(for requestDTO: E) async throws -> D
+    func excute<E: APIEndPoint, D: ResponseDTODecodable>(for endPoint: E) async throws -> D
 }
