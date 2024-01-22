@@ -15,8 +15,8 @@ final class GPTChatRoomsViewController: UIViewController {
     
     private let viewModel: any GPTChatRoomsVMProtocol
     private let fetchRoomsSubject = PassthroughSubject<Void, Never>()
-    private let createRoomSubject = PassthroughSubject<String, Never>()
-    private let modifyRoomSubject = PassthroughSubject<(IndexPath, String), Never>()
+    private let createRoomSubject = PassthroughSubject<String?, Never>()
+    private let modifyRoomSubject = PassthroughSubject<(IndexPath, String?), Never>()
     private let deleteRoomSubject = PassthroughSubject<IndexPath, Never>()
     private let selectRoomSubject = PassthroughSubject<IndexPath, Never>()
     private var cancellables = Set<AnyCancellable>()
@@ -40,9 +40,9 @@ final class GPTChatRoomsViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //    override func loadView() {
-    //        view = tableView
-    //    }
+    override func loadView() {
+        view = tableView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +71,7 @@ final class GPTChatRoomsViewController: UIViewController {
                 case .success(let rooms):
                     self?.applySnapshot(rooms: rooms)
                 case .failure(let error):
-                    print(error)
+                    self?.present(UIAlertController(error: error), animated: true)
                 case .moveToChatRoom(let chatRoomViewModel):
                     let viewController = GPTChattingViewController(viewModel: chatRoomViewModel)
                     self?.navigationController?.pushViewController(viewController, animated: true)
@@ -84,14 +84,6 @@ final class GPTChatRoomsViewController: UIViewController {
 // MARK: - Configure UI
 extension GPTChatRoomsViewController {
     private func configureUI() {
-        view.addSubview(tableView)
-        NSLayoutConstraint.activate([
-            view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: tableView.leadingAnchor),
-            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: tableView.trailingAnchor),
-            view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: tableView.topAnchor),
-            view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: tableView.bottomAnchor)
-        ])
-        
         navigationItem.title = "MyChatBot 🤖"
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "pencil"), style: .plain, target: self, action: #selector(createChatRoomButtonTapped(_:)))
     }
@@ -127,41 +119,15 @@ extension GPTChatRoomsViewController {
 
 extension GPTChatRoomsViewController {
     private func configureCreateRoomAlert() -> UIAlertController {
-        let alertController = UIAlertController(title: "채팅방 생성", message: "방 제목을 입력해주세요.", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "생성", style: .default) { [unowned self] _ in
-            guard let roomName = alertController.textFields?.first?.text else {
-                return
-            }
+        UIAlertController(title: "방 생성", message: "생성할 방 제목을 입력해주세요.") { [unowned self] roomName in
             createRoomSubject.send(roomName)
         }
-        let cancelAction = UIAlertAction(title: "취소", style: .destructive)
-        
-        alertController.addTextField { textField in
-            textField.placeholder = "제목 입력"
-            textField.translatesAutoresizingMaskIntoConstraints = false
-        }
-        alertController.addAction(okAction)
-        alertController.addAction(cancelAction)
-        return alertController
     }
     
     private func configureModifyRoomAlert(for indexPath: IndexPath) -> UIAlertController {
-        let alertController = UIAlertController(title: "방 제목 수정", message: "방 제목을 입력해주세요.", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "수정", style: .default) { [unowned self] _ in
-            guard let roomName = alertController.textFields?.first?.text else {
-                return
-            }
+        UIAlertController(title: "방 수정", message: "수정할 방 제목을 입력해주세요.") { [unowned self] roomName in
             modifyRoomSubject.send((indexPath, roomName))
         }
-        let cancelAction = UIAlertAction(title: "취소", style: .destructive)
-        
-        alertController.addTextField { textField in
-            textField.placeholder = "제목 입력"
-            textField.translatesAutoresizingMaskIntoConstraints = false
-        }
-        alertController.addAction(okAction)
-        alertController.addAction(cancelAction)
-        return alertController
     }
 }
 

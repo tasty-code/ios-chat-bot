@@ -13,8 +13,8 @@ where Input == GPTChatRoomsInput, Output == GPTChatRoomsOutput { }
 
 struct GPTChatRoomsInput {
     let fetchRooms: AnyPublisher<Void, Never>?
-    let createRoom: AnyPublisher<String, Never>?
-    let modifyRoom: AnyPublisher<(IndexPath, String), Never>?
+    let createRoom: AnyPublisher<String?, Never>?
+    let modifyRoom: AnyPublisher<(IndexPath, String?), Never>?
     let deleteRoom: AnyPublisher<IndexPath, Never>?
     let selectRoom: AnyPublisher<IndexPath, Never>?
 }

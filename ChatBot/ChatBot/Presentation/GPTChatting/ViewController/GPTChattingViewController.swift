@@ -112,7 +112,7 @@ final class GPTChattingViewController: UIViewController {
             case .success(let replies, let indexToUpdate):
                 self.updateCollectionView(replies, indexToUpdate: indexToUpdate)
             case .failure(let error):
-                self.present(self.configureErrorAlert(error), animated: true)
+                self.present(UIAlertController(error: error), animated: true)
             }
         }
         .store(in: &cancellables)
@@ -178,14 +178,5 @@ extension GPTChattingViewController {
     private func tapSendButton(_ sender: Any) {
         sendCommentSubject.send(commentTextView.text)
         commentTextView.text = nil
-    }
-}
-
-// MARK: - configure AlertController
-extension GPTChattingViewController {
-    private func configureErrorAlert(_ error: Error) -> UIAlertController {
-        let alert = UIAlertController(title: "\(type(of: error))", message: error.localizedDescription, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "확인", style: .default))
-        return alert
     }
 }

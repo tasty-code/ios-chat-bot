@@ -11,6 +11,7 @@ extension GPTError {
     enum ChatRoomError: Error {
         case emptyUserComment
         case emptyGPTReply
+        case noRoomName
     }
 }
 
@@ -21,6 +22,8 @@ extension GPTError.ChatRoomError: LocalizedError {
             return "내용을 입력해주세요."
         case .emptyGPTReply:
             return "챗봇에 응답이 없습니다."
+        case .noRoomName:
+            return "방 제목을 입력해주세요."
         }
     }
 }

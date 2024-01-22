@@ -34,6 +34,11 @@ final class GPTChatRoomsViewModel: GPTChatRoomsVMProtocol {
         input.createRoom?
             .sink { [weak self] title in
                 guard let self else { return }
+                guard let title = title, title.count > 0 else {
+                    output.send(Output.failure(error: GPTError.ChatRoomError.noRoomName))
+                    return
+                }
+                
                 let chatRoomDTO = Model.GPTChatRoomDTO(title: title, recentChatDate: Date())
                 do {
                     try chatRoomRepository.storeChatRoom(chatRoomDTO)
@@ -77,6 +82,11 @@ final class GPTChatRoomsViewModel: GPTChatRoomsVMProtocol {
         input.modifyRoom?
             .sink { [weak self] (indexPath, title) in
                 guard let self else { return }
+                guard let title = title, title.count > 0 else {
+                    output.send(Output.failure(error: GPTError.ChatRoomError.noRoomName))
+                    return
+                }
+                
                 let chatRoomDTO = Model.GPTChatRoomDTO(id: chatRoomList[indexPath.item].id, title: title, recentChatDate: chatRoomList[indexPath.item].recentChatDate)
                 do {
                     try chatRoomRepository.modifyChatRoom(chatRoomDTO)
