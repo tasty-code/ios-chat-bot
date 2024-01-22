@@ -20,7 +20,7 @@ final class GPTChatRoomsViewModel: GPTChatRoomsVMProtocol {
     }
     
     func transform(from input: GPTChatRoomsInput) -> AnyPublisher<GPTChatRoomsOutput, Never> {
-        input.fetchRooms
+        input.fetchRooms?
             .sink { [weak self] _ in
                 guard let chatRoomList = try? self?.chatRoomRepository.fetchChatRoomList() else {
                     self?.output.send(Output.failure(error: GPTError.RepositoryError.dataNotFound))
@@ -31,7 +31,7 @@ final class GPTChatRoomsViewModel: GPTChatRoomsVMProtocol {
             }
             .store(in: &cancellables)
         
-        input.createRoom
+        input.createRoom?
             .sink { [weak self] title in
                 guard let self else { return }
                 let chatRoomDTO = Model.GPTChatRoomDTO(title: title, recentChatDate: Date())
@@ -45,7 +45,7 @@ final class GPTChatRoomsViewModel: GPTChatRoomsVMProtocol {
             }
             .store(in: &cancellables)
         
-        input.deleteRoom
+        input.deleteRoom?
             .sink { [weak self] indexPath in
                 guard let self else { return }
                 do {
@@ -59,7 +59,7 @@ final class GPTChatRoomsViewModel: GPTChatRoomsVMProtocol {
             }
             .store(in: &cancellables)
         
-        input.selectRoom
+        input.selectRoom?
             .sink { [weak self] indexPath in
                 guard let self else { return }
                 guard let apiKey = Bundle.main.object(forInfoDictionaryKey: "CHAT_BOT_API_KEY") as? String else {
@@ -74,7 +74,7 @@ final class GPTChatRoomsViewModel: GPTChatRoomsVMProtocol {
             }
             .store(in: &cancellables)
         
-        input.modifyRoom
+        input.modifyRoom?
             .sink { [weak self] (indexPath, title) in
                 guard let self else { return }
                 let chatRoomDTO = Model.GPTChatRoomDTO(id: chatRoomList[indexPath.item].id, title: title, recentChatDate: chatRoomList[indexPath.item].recentChatDate)

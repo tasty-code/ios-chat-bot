@@ -32,7 +32,7 @@ final class GPTChatRoomViewModel: GPTChatRoomVMProtocol {
     }
     
     func transform(from input: GPTChatRoomInput) -> AnyPublisher<GPTChatRoomOutput, Never> {
-        input.fetchChattings
+        input.fetchChattings?
             .sink { [weak self] in
                 guard let self else { return }
                 do {
@@ -47,7 +47,7 @@ final class GPTChatRoomViewModel: GPTChatRoomVMProtocol {
             }
             .store(in: &cancellables)
         
-        input.sendComment
+        input.sendComment?
             .sink { [weak self] comment in
                 guard let self else { return }
                 guard let comment = comment, !comment.isEmpty else {
@@ -61,7 +61,7 @@ final class GPTChatRoomViewModel: GPTChatRoomVMProtocol {
             }
             .store(in: &cancellables)
         
-        input.storeChattings
+        input.storeChattings?
             .sink { [weak self] in
                 guard let self else { return }
                 do {
