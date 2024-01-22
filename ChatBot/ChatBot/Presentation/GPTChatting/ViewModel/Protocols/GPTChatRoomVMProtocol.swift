@@ -11,7 +11,9 @@ protocol GPTChatRoomVMProtocol: ViewModelable
 where Input == GPTChatRoomInput, Output == GPTChatRoomOutput { }
 
 struct GPTChatRoomInput {
-    let sendingComment: AnyPublisher<String?, Never>
+    let fetchChattings: AnyPublisher<Void, Never>
+    let sendComment: AnyPublisher<String?, Never>
+    let storeChattings: AnyPublisher<Void, Never>
 }
 
 enum GPTChatRoomOutput {

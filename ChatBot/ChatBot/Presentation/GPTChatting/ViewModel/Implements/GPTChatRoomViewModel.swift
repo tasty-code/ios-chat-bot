@@ -8,6 +8,9 @@
 import Combine
 
 final class GPTChatRoomViewModel: GPTChatRoomVMProtocol {
+    private let chatRoomDTO: Model.GPTChatRoomDTO
+    private let chattingRepository: ChattingRepositable
+    
     private let httpService: HTTPServicable
     private let httpRequest: HTTPRequestable
     
@@ -16,13 +19,35 @@ final class GPTChatRoomViewModel: GPTChatRoomVMProtocol {
     
     private var messages = [Model.GPTMessage]()
     
-    init(httpService: HTTPServicable = AppEnviroment.defaultHTTPSecvice, httpRequest: HTTPRequestable) {
+    init(
+        chatRoomDTO: Model.GPTChatRoomDTO,
+        chattingRepository: ChattingRepositable = Repository.CoreDataChattingRepository(),
+        httpService: HTTPServicable = AppEnviroment.defaultHTTPSecvice,
+        httpRequest: HTTPRequestable
+    ) {
+        self.chatRoomDTO = chatRoomDTO
+        self.chattingRepository = chattingRepository
         self.httpService = httpService
         self.httpRequest = httpRequest
     }
     
     func transform(from input: GPTChatRoomInput) -> AnyPublisher<GPTChatRoomOutput, Never> {
-        input.sendingComment
+        input.fetchChattings
+            .sink { [weak self] in
+                guard let self else { return }
+                do {
+                    messages = try chattingRepository.fetchChattings(for: chatRoomDTO)
+                    if messages.count - 1 < 0 {
+                        return
+                    }
+                    output.send(Output.success(messages: messages, indexToUpdate: messages.count - 1))
+                } catch {
+                    output.send(Output.failure(error))
+                }
+            }
+            .store(in: &cancellables)
+        
+        input.sendComment
             .sink { [weak self] comment in
                 guard let self else { return }
                 guard let comment = comment, !comment.isEmpty else {
@@ -33,6 +58,17 @@ final class GPTChatRoomViewModel: GPTChatRoomVMProtocol {
                 messages.append(Model.WaitingMessage().asRequestMessage())
                 output.send(Output.success(messages: messages, indexToUpdate: messages.count - 1))
                 getReplyFromServer(messages.count - 1)
+            }
+            .store(in: &cancellables)
+        
+        input.storeChattings
+            .sink { [weak self] in
+                guard let self else { return }
+                do {
+                    try chattingRepository.storeChattings(messages, for: chatRoomDTO)
+                } catch {
+                    output.send(Output.failure(error))
+                }
             }
             .store(in: &cancellables)
         

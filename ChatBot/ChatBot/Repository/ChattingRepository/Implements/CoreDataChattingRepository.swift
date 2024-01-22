@@ -42,8 +42,15 @@ extension Repository.CoreDataChattingRepository: ChattingRepositable {
     
     func storeChattings(_ chattings: [Model.GPTMessage], for chatRoomDTO: Model.GPTChatRoomDTO) throws {
         let chatRoom = try fetchChatRoom(chatRoomDTO)
+        guard let previousCount = chatRoom.chattings?.count else {
+            return
+        }
         
-        for chatting in chattings {
+        let storeStartIndex = previousCount - 1 < 0 ? 0 : previousCount - 1
+        if storeStartIndex >= chattings.count {
+            return
+        }
+        for chatting in chattings[storeStartIndex..<chattings.count] {
             guard let chattingCD = NSManagedObject(entity: Chatting.entity(), insertInto: coreDataRepository.context) as? Chatting else {
                 continue
             }

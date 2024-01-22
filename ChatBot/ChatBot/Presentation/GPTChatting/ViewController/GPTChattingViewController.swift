@@ -56,7 +56,10 @@ final class GPTChattingViewController: UIViewController {
         return button
     }()
     
-    private let userComment = PassthroughSubject<String?, Never>()
+    private let fetchChattingsSubject = PassthroughSubject<Void, Never>()
+    private let sendCommentSubject = PassthroughSubject<String?, Never>()
+    private let storeChattingsSubject = PassthroughSubject<Void, Never>()
+    
     private let viewModel: any GPTChatRoomVMProtocol
     private let cellResistration = UICollectionView.CellRegistration<GPTChattingCell, Model.GPTMessage> { cell, indexPath, itemIdentifier in
         cell.configureCell(to: itemIdentifier)
@@ -82,8 +85,22 @@ final class GPTChattingViewController: UIViewController {
         configureDataSource()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchChattingsSubject.send()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        storeChattingsSubject.send()
+    }
+    
     private func bind(to viewModel: any GPTChatRoomVMProtocol) {
-        let input = GPTChatRoomInput(sendingComment: userComment.eraseToAnyPublisher())
+        let input = GPTChatRoomInput(
+            fetchChattings: fetchChattingsSubject.eraseToAnyPublisher(),
+            sendComment: sendCommentSubject.eraseToAnyPublisher(),
+            storeChattings: storeChattingsSubject.eraseToAnyPublisher()
+        )
         let output = viewModel.transform(from: input)
         
         output
@@ -159,7 +176,7 @@ extension GPTChattingViewController {
 extension GPTChattingViewController {
     @objc
     private func tapSendButton(_ sender: Any) {
-        userComment.send(commentTextView.text)
+        sendCommentSubject.send(commentTextView.text)
         commentTextView.text = nil
     }
 }

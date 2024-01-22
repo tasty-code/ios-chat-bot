@@ -68,8 +68,9 @@ final class GPTChatRoomsViewModel: GPTChatRoomsVMProtocol {
                 }
                 
                 output.send(Output.moveToChatRoom(
-                    chatRoomViewModel: GPTChatRoomViewModel(httpRequest: Network.GPTRequest.chatBot(apiKey: apiKey)))
-                )
+                    chatRoomViewModel: GPTChatRoomViewModel(chatRoomDTO: chatRoomList[indexPath.item],
+                        httpRequest: Network.GPTRequest.chatBot(apiKey: apiKey))
+                ))
             }
             .store(in: &cancellables)
         
