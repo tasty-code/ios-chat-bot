@@ -25,16 +25,16 @@ final class LoadingView: UIView {
     func configure() {
         self.translatesAutoresizingMaskIntoConstraints = false
         
-        makeCircle(circleLayer: firstCircle, position: CGPoint(x: bounds.width / 4 * 1 , y: bounds.height / 2))
-        makeCircle(circleLayer: secondCircle, position: CGPoint(x: bounds.width / 4 * 2 , y: bounds.height / 2))
-        makeCircle(circleLayer: thirdCircle, position: CGPoint(x: bounds.width / 4 * 3 , y: bounds.height / 2))
+        makeCircle(circleLayer: firstCircle, position: CGPoint(x: bounds.width * 0.3 , y: bounds.height * 0.6))
+        makeCircle(circleLayer: secondCircle, position: CGPoint(x: bounds.width * 0.5 , y: bounds.height * 0.6))
+        makeCircle(circleLayer: thirdCircle, position: CGPoint(x: bounds.width * 0.7 , y: bounds.height * 0.6))
     }
     
     func makeCircle(circleLayer: CALayer, position: CGPoint) {
         circleLayer.bounds = CGRect(x: 0, y: 0, width: frame.height * 0.2, height: frame.height * 0.2)
         circleLayer.position = position
         circleLayer.cornerRadius = circleLayer.bounds.width / 2
-        circleLayer.backgroundColor = UIColor.red.cgColor
+        circleLayer.backgroundColor = #colorLiteral(red: 0.303986609, green: 0.4493992925, blue: 1, alpha: 1)
         layer.addSublayer(circleLayer)
     }
 

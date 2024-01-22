@@ -14,9 +14,8 @@ final class ChatCollectionView: UICollectionView {
     }
     
     private var diffableDataSource: UICollectionViewDiffableDataSource<Section, UUID>?
-   
     private var chatRecord: [Message] = []
-
+    
     weak var chatServiceDelegate: ChatServiceDelegate?
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
@@ -38,8 +37,8 @@ final class ChatCollectionView: UICollectionView {
             guard let message = message[itemIdentifier],
                   let content = message.content
             else { return }
-            cell.setLabelText(text: message.content!)
-       
+            cell.setLabelText(text: content)
+            
             if message.role == .user {
                 cell.setDirection(direction: .right)
             } else {
@@ -55,10 +54,9 @@ final class ChatCollectionView: UICollectionView {
         var snapshot = NSDiffableDataSourceSnapshot<Section, UUID>()
         snapshot.appendSections([.main])
         self.diffableDataSource?.apply(snapshot)
-
     }
     
-    func saveSnapshot() {
+    private func saveSnapshot() {
         guard var snapshot = diffableDataSource?.snapshot(), !chatRecord.isEmpty else { return }
         guard let data = chatRecord.last else { return }
         
@@ -66,8 +64,7 @@ final class ChatCollectionView: UICollectionView {
         diffableDataSource?.apply(snapshot, animatingDifferences: false)
     }
     
-    func removeSnapshot() {
-        
+    private func removeSnapshot() {
         guard var snapshot = diffableDataSource?.snapshot(), !chatRecord.isEmpty else { return }
         guard let data = chatRecord.last else { return }
         

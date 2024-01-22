@@ -20,7 +20,7 @@ final class ChatBalloon: UIView {
     
     private let label: UILabel = {
         let label = UILabel()
-        label.textColor = .white
+        label.textColor = .black
         label.font = .preferredFont(forTextStyle: .body)
         label.numberOfLines = .max
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -58,7 +58,7 @@ final class ChatBalloon: UIView {
         emptyLabelWidthConstraint = label.widthAnchor.constraint(equalToConstant: 50)
     }
     
-    func leftOrRight(direction: Direction) {
+    private func leftOrRight(direction: Direction) {
  
         if direction == .right {
             leftLabelConstraintIsActive(bool: false)
@@ -74,10 +74,8 @@ final class ChatBalloon: UIView {
         switch direction {
         case .right:
             drawBalloonToRight()
-            self.balloonLayer.fillColor = UIColor.blue.cgColor
         case .left:
             drawBalloonToLeft()
-            self.balloonLayer.fillColor = UIColor.brown.cgColor
         }
     }
     

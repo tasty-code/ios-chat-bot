@@ -57,7 +57,7 @@ final class ChatTextInputView: UIStackView {
         
         NSLayoutConstraint.activate([
             textView.heightAnchor.constraint(equalToConstant: textView.estimatedSizeHeight),
-            button.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.1),
+            button.heightAnchor.constraint(equalToConstant: 40),
             button.widthAnchor.constraint(equalTo: button.heightAnchor, multiplier: 1.0)
         ])
     }
@@ -65,15 +65,19 @@ final class ChatTextInputView: UIStackView {
 
 extension ChatTextInputView {
     
-    @objc func tappedButton() {
+    @objc private func tappedButton() {
+        if textView.text == "" { return }
+        
         delegate?.addChatRecord(text: textView.text)
         button.isEnabled = false
         textView.text = .none
+
         textView.constraints.forEach { constraint in
             if constraint.firstAttribute == .height {
                 constraint.constant = textView.estimatedSizeHeight
             }
         }
+        
         Task {
             await delegate?.updateCollectionViewFromResponse()
             button.isEnabled = true
