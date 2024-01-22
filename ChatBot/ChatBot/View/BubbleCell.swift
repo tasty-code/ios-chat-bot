@@ -8,9 +8,9 @@
 import UIKit
 
 class BubbleCell: UICollectionViewCell {
-    static let identifier = "BubbleCell"
     
     var role: Role?
+    
     private let bubbleView: UIView = UIView()
     
     private let textLabel: UILabel = {
