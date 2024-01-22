@@ -300,6 +300,13 @@
 			path = Implements;
 			sourceTree = "<group>";
 		};
+		0D3260542B5E0C9C000C352E /* ChatErrorAlert */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ChatErrorAlert;
+			sourceTree = "<group>";
+		};
 		0D843AD92B4B98B200F4EAD2 /* HTTPService */ = {
 			isa = PBXGroup;
 			children = (
@@ -505,6 +512,7 @@
 		0D843B362B511ECA00F4EAD2 /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
+				0D3260542B5E0C9C000C352E /* ChatErrorAlert */,
 				0D843B372B511ED100F4EAD2 /* ChatBubble */,
 			);
 			path = CustomUI;

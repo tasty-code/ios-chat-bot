@@ -8,16 +8,16 @@
 import Foundation
 
 extension Model {
-    struct GPTMessage: GPTMessagable, Identifiable {
-        let id: UUID
+    struct GPTMessage: GPTMessagable {
+        let localInformation: LocalInformation
         let role: GPTMessageRole
         let content: String?
         let name: String?
         let toolCalls: [GPTToolCall]?
         let toolCallID: String?
         
-        init(id: UUID = UUID(), role: GPTMessageRole, content: String?, name: String?, toolCalls: [GPTToolCall]?, toolCallID: String?) {
-            self.id = id
+        init(localInformation: LocalInformation = LocalInformation(id: UUID(), date: Date()), role: GPTMessageRole, content: String?, name: String?, toolCalls: [GPTToolCall]?, toolCallID: String?) {
+            self.localInformation = localInformation
             self.role = role
             self.content = content
             self.name = name
@@ -26,7 +26,7 @@ extension Model {
         }
         
         init(requestMessage: Model.GPTMessage) {
-            self.id = requestMessage.id
+            self.localInformation = requestMessage.localInformation
             self.role = requestMessage.role
             self.content = requestMessage.content
             self.name = requestMessage.name
@@ -40,7 +40,6 @@ extension Model {
 
 extension Model.GPTMessage: Codable {
     enum CodingKeys: String, CodingKey {
-        case id
         case role
         case content
         case name
@@ -50,7 +49,7 @@ extension Model.GPTMessage: Codable {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = UUID()
+        self.localInformation = LocalInformation(id: UUID(), date: Date())
         self.role = try container.decode(Model.GPTMessageRole.self, forKey: .role)
         self.content = try container.decodeIfPresent(String.self, forKey: .content)
         self.name = try container.decodeIfPresent(String.self, forKey: .name)
@@ -68,13 +67,20 @@ extension Model.GPTMessage: Codable {
     }
 }
 
+extension Model.GPTMessage {
+    struct LocalInformation: Identifiable {
+        let id: UUID
+        let date: Date
+    }
+}
+
 extension Model.GPTMessage: Hashable {
     static func == (lhs: Model.GPTMessage, rhs: Model.GPTMessage) -> Bool {
-        lhs.id == rhs.id
+        lhs.localInformation.id == rhs.localInformation.id
     }
     
     func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
+        hasher.combine(localInformation.id)
     }
 }
 

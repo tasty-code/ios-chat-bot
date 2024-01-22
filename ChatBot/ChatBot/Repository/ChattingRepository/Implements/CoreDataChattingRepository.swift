@@ -35,28 +35,34 @@ extension Repository.CoreDataChattingRepository: ChattingRepositable {
         
         let chattingsRequest = Chatting.fetchRequest()
         chattingsRequest.predicate = NSPredicate(format: "chatRoom = %@", chatRoom)
+        chattingsRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
         
         let chattings = try coreDataRepository.context.fetch(chattingsRequest)
-        return chattings.map { Model.GPTMessage(role: Model.GPTMessageRole(rawValue: $0.role!)!, content: $0.content, name: nil, toolCalls: nil, toolCallID: nil) }
+        return chattings.map {
+            Model.GPTMessage(
+                localInformation: Model.GPTMessage.LocalInformation(id: $0.id!, date: $0.date!),
+                role: Model.GPTMessageRole(rawValue: $0.role!)!,
+                content: $0.content, name: nil, toolCalls: nil, toolCallID: nil
+            )
+        }
     }
     
     func storeChattings(_ chattings: [Model.GPTMessage], for chatRoomDTO: Model.GPTChatRoomDTO) throws {
         let chatRoom = try fetchChatRoom(chatRoomDTO)
-        guard let previousCount = chatRoom.chattings?.count else {
+        guard let previousCount = chatRoom.chattings?.count, previousCount < chattings.count else {
             return
         }
         
-        let storeStartIndex = previousCount - 1 < 0 ? 0 : previousCount - 1
-        if storeStartIndex >= chattings.count {
-            return
-        }
-        for chatting in chattings[storeStartIndex..<chattings.count] {
+        for chatting in chattings[previousCount..<chattings.count] {
+            if chatting.role == .waiting { continue }
+            
             guard let chattingCD = NSManagedObject(entity: Chatting.entity(), insertInto: coreDataRepository.context) as? Chatting else {
                 continue
             }
-            chattingCD.id = chatting.id
+            chattingCD.id = chatting.localInformation.id
             chattingCD.role = chatting.role.rawValue
             chattingCD.content = chatting.content
+            chattingCD.date = chatting.localInformation.date
             
             chatRoom.addToChattings(chattingCD)
         }

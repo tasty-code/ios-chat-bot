@@ -2,7 +2,7 @@
 //  Chatting+CoreDataProperties.swift
 //  ChatBot
 //
-//  Created by 김준성 on 1/21/24.
+//  Created by 김준성 on 1/22/24.
 //
 //
 
@@ -19,6 +19,7 @@ extension Chatting {
     @NSManaged public var content: String?
     @NSManaged public var id: UUID?
     @NSManaged public var role: String?
+    @NSManaged public var date: Date?
     @NSManaged public var chatRoom: ChatRoom?
 
 }
