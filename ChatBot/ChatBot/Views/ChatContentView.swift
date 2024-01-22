@@ -48,9 +48,9 @@ class ChatContentView: UIView, UIContentView {
             textLabel.trailingAnchor.constraint(equalTo: bubble.trailingAnchor, constant: -20),
         ]
         assistantConstraints = [
-            bubble.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            bubble.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: -3),
             textLabel.leadingAnchor.constraint(equalTo: bubble.leadingAnchor, constant: 20),
-            textLabel.trailingAnchor.constraint(equalTo: bubble.trailingAnchor, constant: -10),
+            textLabel.trailingAnchor.constraint(equalTo: bubble.trailingAnchor, constant: -20),
         ]
         
         apply(configuration)
@@ -84,13 +84,11 @@ class ChatContentView: UIView, UIContentView {
             NSLayoutConstraint.activate(self.assistantConstraints)
             NSLayoutConstraint.deactivate(self.userConstraints)
             textLabel.textColor = .black
-            bubble.color = .systemGray3
             break
         case .user:
             NSLayoutConstraint.activate(self.userConstraints)
             NSLayoutConstraint.deactivate(self.assistantConstraints)
             textLabel.textColor = .white
-            bubble.color = .systemBlue
             break
         }
     }

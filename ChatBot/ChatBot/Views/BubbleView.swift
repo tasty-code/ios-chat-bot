@@ -32,7 +32,7 @@ final class BubbleView: UIView {
         path.move(to: CGPoint(x: bubbleRect.maxX, y: bubbleRect.maxY))
         path.addLine(to: CGPoint(x: bubbleRect.maxX + plus, y: bubbleRect.maxY))
         path.addLine(to: CGPoint(x: bubbleRect.maxX, y: bubbleRect.maxY - plus))
-        color.setFill()
+        UIColor.systemBlue.setFill()
         path.fill()
         path.close()
     }
@@ -44,7 +44,7 @@ final class BubbleView: UIView {
         path.move(to: CGPoint(x: bubbleRect.maxX, y: bubbleRect.maxY))
         path.addLine(to: CGPoint(x: bubbleRect.minX - plus, y: bubbleRect.maxY))
         path.addLine(to: CGPoint(x: bubbleRect.minX + plus, y: bubbleRect.maxY - plus))
-        color.setFill()
+        UIColor.systemGray3.setFill()
         path.fill()
         path.close()
     }
