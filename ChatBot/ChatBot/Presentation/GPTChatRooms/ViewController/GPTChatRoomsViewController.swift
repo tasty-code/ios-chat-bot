@@ -96,7 +96,7 @@ extension GPTChatRoomsViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "GPTChatRoomCell", for: indexPath)
             var config = cell.defaultContentConfiguration()
             config.text = itemIdentifier.title
-            config.secondaryText = itemIdentifier.recentChatDate.description
+            config.secondaryText = itemIdentifier.recentChatDate.toLocaleString(.koKR)
             cell.contentConfiguration = config
             return cell
         }

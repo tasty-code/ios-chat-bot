@@ -67,6 +67,8 @@ extension Repository.CoreDataChattingRepository: ChattingRepositable {
             chatRoom.addToChattings(chattingCD)
         }
         
+        chatRoom.recentChatDate = chattings.last!.localInformation.date
+        
         try coreDataRepository.saveContext()
     }
 }
