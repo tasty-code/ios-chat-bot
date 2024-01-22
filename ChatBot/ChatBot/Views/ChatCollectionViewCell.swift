@@ -8,7 +8,7 @@
 import UIKit
 
 final class ChatCollectionViewCell: UICollectionViewListCell {
-    var item: ChatMessage!
+    var item: Chat!
     
     override func updateConfiguration(using state: UICellConfigurationState) {
         var config = ChatContentConfiguration().updated(for: state)

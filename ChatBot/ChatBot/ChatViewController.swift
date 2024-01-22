@@ -7,12 +7,6 @@
 
 import UIKit
 
-struct ChatMessage: Hashable {
-    let sender: Sender
-    let message: String
-    let messageID = UUID()
-}
-
 final class ChatViewController: UIViewController {
     
     private lazy var horizontalStackView: UIStackView = {
@@ -56,13 +50,12 @@ final class ChatViewController: UIViewController {
         return button
     }()
     
-    typealias ChatDataSource = UICollectionViewDiffableDataSource<Int, ChatMessage>
-    typealias CellRegistration = UICollectionView.CellRegistration<ChatCollectionViewCell, ChatMessage>
+    typealias ChatDataSource = UICollectionViewDiffableDataSource<Int, Chat>
+    typealias CellRegistration = UICollectionView.CellRegistration<ChatCollectionViewCell, Chat>
     
     private var collectionView: UICollectionView!
     private var dataSource: ChatDataSource!
     private var cellRegistration: CellRegistration!
-    private var messageStorage = [ChatMessage]()
     
     private let networkManager = NetworkManager()
     private let api = ChatAPI()
@@ -74,27 +67,6 @@ final class ChatViewController: UIViewController {
         setConstraints()
         configureDataSource()
         configureCellRegistration()
-    }
-    
-    private func makeRequestModel(message: String) -> ChatRequestModel {
-        let messages = [
-            Message(
-                role: "user",
-                content: message,
-                toolCalls: nil)]
-        
-        let model = ChatRequestModel(model: "gpt-3.5-turbo-1106",
-                                    messages: messages,
-                                    stream: false,
-                                    logprobs: false)
-        
-        return model
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
-        collectionView.endEditing(true)
-        ChatCollectionViewCell().endEditing(true)
     }
 }
 
@@ -144,17 +116,39 @@ extension ChatViewController {
     }
 }
 
+// MARK: - Configure Data
+
 extension ChatViewController {
+    
+    private func configureDataSource() {
+        dataSource = ChatDataSource(collectionView: collectionView) { (collectionView, indexPath, identifier) -> ChatCollectionViewCell? in
+            collectionView.allowsSelection = false
+            return collectionView.dequeueConfiguredReusableCell(using: self.cellRegistration, for: indexPath, item: identifier)
+        }
+        
+        var snapshot = dataSource.snapshot()
+        snapshot.appendSections([0])
+        dataSource.apply(snapshot)
+    }
+    
+    private func configureCellRegistration() {
+        cellRegistration = UICollectionView.CellRegistration<ChatCollectionViewCell, Chat> { (cell, indexPath, item) in
+            cell.item = item
+        }
+    }
+}
+
+// MARK: - Send & Receive Chat
+
+extension ChatViewController {
+    
     @objc
     private func sendButtonTapped() {
         if let message = textView.text, !message.isEmpty {
-            let chatMessage = ChatMessage(sender: Sender.user, message: message)
-            messageStorage.append(chatMessage)
+            let chat = Chat(sender: Sender.user, message: message)
             
             var snapshot = dataSource.snapshot()
-            snapshot.deleteAllItems()
-            snapshot.appendSections([0])
-            snapshot.appendItems(messageStorage)
+            snapshot.appendItems([chat], toSection: 0)
             dataSource.apply(snapshot, animatingDifferences: true)
             moveToLastChat()
             
@@ -162,7 +156,7 @@ extension ChatViewController {
             textView.endEditing(true)
             textViewDidChange(textView)
             
-            let requestModel = makeRequestModel(message: message)
+            let requestModel = makeRequestModel()
             Task {
                 do {
                     let body = try JSONEncoder().encode(requestModel)
@@ -179,34 +173,39 @@ extension ChatViewController {
         }
     }
     
-    private func receiveMessage(message: String) {
-        let chatResponse = ChatMessage(sender: Sender.assistant, message: message)
-        messageStorage.append(chatResponse)
+    private func makeRequestModel() -> ChatRequestModel {
         
-        var shot = NSDiffableDataSourceSnapshot<Int, ChatMessage>()
-        shot.appendSections([0])
-        shot.appendItems(messageStorage)
-        dataSource.apply(shot, animatingDifferences: true)
+        let snapshot = dataSource.snapshot()
+        let chatMessage = snapshot.itemIdentifiers(inSection: 0)
+        var messages = [Message]()
+        chatMessage.forEach { chat in
+            let message = Message(
+                role: chat.sender.description,
+                content: chat.message,
+                toolCalls: nil)
+            messages.append(message)
+        }
+        
+        let model = ChatRequestModel(model: "gpt-3.5-turbo-1106",
+                                    messages: messages,
+                                    stream: false,
+                                    logprobs: false)
+        
+        return model
+    }
+    
+    private func receiveMessage(message: String) {
+        let chat = Chat(sender: Sender.assistant, message: message)
+        var snapshot = dataSource.snapshot()
+        snapshot.appendItems([chat], toSection: 0)
+        dataSource.apply(snapshot, animatingDifferences: true)
         moveToLastChat()
     }
-    
-    private func moveToLastChat() {
-        let lastIndex = IndexPath(item: self.messageStorage.count - 1, section: 0)
-        collectionView.scrollToItem(at: lastIndex, at: .bottom, animated: true)
-    }
-    
-    private func configureDataSource() {
-        dataSource = ChatDataSource(collectionView: collectionView) { (collectionView, indexPath, identifier) -> ChatCollectionViewCell? in
-            collectionView.allowsSelection = false
-            return collectionView.dequeueConfiguredReusableCell(using: self.cellRegistration, for: indexPath, item: identifier)
-        }
-    }
-    
-    private func configureCellRegistration() {
-        cellRegistration = UICollectionView.CellRegistration<ChatCollectionViewCell, ChatMessage> { (cell, indexPath, item) in
-            cell.item = item
-        }
-    }
+}
+
+// MARK: - View 처리
+
+extension ChatViewController {
     
     private func textFieldShouldReturn(_ textView: UITextView) -> Bool {
         if textView == self.textView {
@@ -215,9 +214,25 @@ extension ChatViewController {
         }
         return true
     }
+    
+    private func moveToLastChat() {
+        let lastIndex = IndexPath(item: dataSource.snapshot().numberOfItems - 1, section: 0)
+        collectionView.scrollToItem(at: lastIndex, at: .bottom, animated: true)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+        collectionView.endEditing(true)
+        ChatCollectionViewCell().endEditing(true)
+    }
+    
 }
 
+
+// MARK: - UITextViewDelegate
+
 extension ChatViewController: UITextViewDelegate {
+    
     func textViewDidChange(_ textView: UITextView) {
         textView.constraints.forEach { constraint in
             guard textView.estimatedSizeHeight >= 150 else {
