@@ -22,5 +22,5 @@ struct GPTChatRoomsInput {
 enum GPTChatRoomsOutput {
     case success(rooms: [Model.GPTChatRoomDTO])
     case failure(error: Error)
-    case moveToChatRoom(chatRoomViewModel: any GPTChatRoomVMProtocol)
+    case moveToChatRoom(chatRoomViewModel: any GPTChattingVMProtocol)
 }

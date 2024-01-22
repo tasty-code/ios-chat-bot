@@ -1,5 +1,5 @@
 //
-//  GPTChatRoomVMProtocol.swift
+//  GPTChattingVMProtocol.swift
 //  ChatBot
 //
 //  Created by 김준성 on 1/11/24.
@@ -7,7 +7,7 @@
 
 import Combine
 
-protocol GPTChatRoomVMProtocol: ViewModelable
+protocol GPTChattingVMProtocol: ViewModelable
 where Input == GPTChatRoomInput, Output == GPTChatRoomOutput { }
 
 struct GPTChatRoomInput {

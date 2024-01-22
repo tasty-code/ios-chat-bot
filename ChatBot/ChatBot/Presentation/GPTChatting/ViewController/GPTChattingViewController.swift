@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  GPTChattingViewController.swift
 //  ChatBot
 //
 //  Created by Tacocat on 1/1/24.
@@ -60,7 +60,7 @@ final class GPTChattingViewController: UIViewController {
     private let sendCommentSubject = PassthroughSubject<String?, Never>()
     private let storeChattingsSubject = PassthroughSubject<Void, Never>()
     
-    private let viewModel: any GPTChatRoomVMProtocol
+    private let viewModel: any GPTChattingVMProtocol
     private let cellResistration = UICollectionView.CellRegistration<GPTChattingCell, Model.GPTMessage> { cell, indexPath, itemIdentifier in
         cell.configureCell(to: itemIdentifier)
     }
@@ -68,7 +68,7 @@ final class GPTChattingViewController: UIViewController {
     private var chattingDataSource: UICollectionViewDiffableDataSource<Section, Model.GPTMessage>!
     private var cancellables = Set<AnyCancellable>()
     
-    init(viewModel: any GPTChatRoomVMProtocol) {
+    init(viewModel: any GPTChattingVMProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -95,7 +95,7 @@ final class GPTChattingViewController: UIViewController {
         storeChattingsSubject.send()
     }
     
-    private func bind(to viewModel: any GPTChatRoomVMProtocol) {
+    private func bind(to viewModel: any GPTChattingVMProtocol) {
         let input = GPTChatRoomInput(
             fetchChattings: fetchChattingsSubject.eraseToAnyPublisher(),
             sendComment: sendCommentSubject.eraseToAnyPublisher(),

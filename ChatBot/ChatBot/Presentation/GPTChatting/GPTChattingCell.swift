@@ -1,5 +1,5 @@
 //
-//  GPTChatRoomCell.swift
+//  GPTChattingCell.swift
 //  ChatBot
 //
 //  Created by 김준성 on 1/11/24.

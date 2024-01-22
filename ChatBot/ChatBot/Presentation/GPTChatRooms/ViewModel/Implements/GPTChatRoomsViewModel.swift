@@ -68,7 +68,7 @@ final class GPTChatRoomsViewModel: GPTChatRoomsVMProtocol {
                 }
                 
                 output.send(Output.moveToChatRoom(
-                    chatRoomViewModel: GPTChatRoomViewModel(chatRoomDTO: chatRoomList[indexPath.item],
+                    chatRoomViewModel: GPTChattingViewModel(chatRoomDTO: chatRoomList[indexPath.item],
                         httpRequest: Network.GPTRequest.chatBot(apiKey: apiKey))
                 ))
             }

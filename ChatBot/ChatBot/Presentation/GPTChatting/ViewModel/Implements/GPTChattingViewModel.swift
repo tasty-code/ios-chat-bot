@@ -1,5 +1,5 @@
 //
-//  GPTChatRoomViewModel.swift
+//  GPTChattingViewModel.swift
 //  ChatBot
 //
 //  Created by 김준성 on 1/11/24.
@@ -7,7 +7,7 @@
 
 import Combine
 
-final class GPTChatRoomViewModel: GPTChatRoomVMProtocol {
+final class GPTChattingViewModel: GPTChattingVMProtocol {
     private let chatRoomDTO: Model.GPTChatRoomDTO
     private let chattingRepository: ChattingRepositable
     
