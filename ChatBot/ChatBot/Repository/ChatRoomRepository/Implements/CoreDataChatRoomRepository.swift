@@ -19,10 +19,6 @@ extension Repository {
 }
 
 extension Repository.CoreDataChatRoomRepository: ChatRoomRepositable {
-    func fetchChatRoom() throws {
-        
-    }
-    
     func fetchChatRoomList() throws -> [Model.GPTChatRoomDTO] {
         let request = ChatRoom.fetchRequest()
         let chatRoomList = try coreDataRepository.context.fetch(request)
