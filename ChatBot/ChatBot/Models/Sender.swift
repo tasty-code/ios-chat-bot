@@ -7,7 +7,16 @@
 
 import Foundation
 
-enum Sender {
+enum Sender: String, CustomStringConvertible {
     case assistant
     case user
+    
+    var description: String {
+        switch self {
+        case .assistant:
+            return "assistant"
+        case .user:
+            return "user"
+        }
+    }
 }

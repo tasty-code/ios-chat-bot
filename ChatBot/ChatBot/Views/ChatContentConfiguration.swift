@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct ChatContentConfiguration: UIContentConfiguration {
+struct ChatContentConfiguration: UIContentConfiguration, Hashable {
     var sender: Sender?
     var content: String?
     

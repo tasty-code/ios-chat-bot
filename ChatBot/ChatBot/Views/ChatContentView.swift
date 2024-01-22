@@ -8,12 +8,18 @@
 import UIKit
 
 class ChatContentView: UIView, UIContentView {
+    private var appliedConfiguration: ChatContentConfiguration!
+    
     var configuration: UIContentConfiguration {
-        didSet {
-            guard let configuration = configuration as? ChatContentConfiguration else { return }
-            apply(configuration)
+        get { appliedConfiguration }
+        set {
+            guard let newConfig = newValue as? ChatContentConfiguration else { return }
+            apply(newConfig)
         }
     }
+    
+    private var userConstraints: [NSLayoutConstraint]!
+    private var assistantConstraints: [NSLayoutConstraint]!
     
     private lazy var textLabel: UILabel = {
         let label = UILabel()
@@ -33,8 +39,20 @@ class ChatContentView: UIView, UIContentView {
     }()
     
     init(configuration: ChatContentConfiguration) {
-        self.configuration = configuration
         super.init(frame: .zero)
+        setConstraints()
+
+        userConstraints = [
+            bubble.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            textLabel.leadingAnchor.constraint(equalTo: bubble.leadingAnchor, constant: 10),
+            textLabel.trailingAnchor.constraint(equalTo: bubble.trailingAnchor, constant: -20),
+        ]
+        assistantConstraints = [
+            bubble.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            textLabel.leadingAnchor.constraint(equalTo: bubble.leadingAnchor, constant: 20),
+            textLabel.trailingAnchor.constraint(equalTo: bubble.trailingAnchor, constant: -10),
+        ]
+        
         apply(configuration)
     }
     
@@ -42,49 +60,38 @@ class ChatContentView: UIView, UIContentView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func userSetConstraints() {
+    private func setConstraints() {
         NSLayoutConstraint.activate([
-            bubble.trailingAnchor.constraint(equalTo: trailingAnchor),
             bubble.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             bubble.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             bubble.widthAnchor.constraint(lessThanOrEqualToConstant: 300),
             
             textLabel.topAnchor.constraint(equalTo: bubble.topAnchor, constant: 5),
             textLabel.bottomAnchor.constraint(equalTo: bubble.bottomAnchor, constant: -5),
-            textLabel.leadingAnchor.constraint(equalTo: bubble.leadingAnchor, constant: 10),
-            textLabel.trailingAnchor.constraint(equalTo: bubble.trailingAnchor, constant: -20),
-        ])
-    }
-    
-    private func assistantSetConstraints() {
-        NSLayoutConstraint.activate([
-            bubble.leadingAnchor.constraint(equalTo: leadingAnchor),
-            bubble.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            bubble.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            bubble.widthAnchor.constraint(lessThanOrEqualToConstant: 300),
-            
-            textLabel.topAnchor.constraint(equalTo: bubble.topAnchor, constant: 5),
-            textLabel.bottomAnchor.constraint(equalTo: bubble.bottomAnchor, constant: -5),
-            textLabel.leadingAnchor.constraint(equalTo: bubble.leadingAnchor, constant: 20),
-            textLabel.trailingAnchor.constraint(equalTo: bubble.trailingAnchor, constant: -10),
         ])
     }
     
     private func apply(_ configuration: ChatContentConfiguration) {
+        guard appliedConfiguration != configuration else { return }
+        appliedConfiguration = configuration
         textLabel.text = configuration.content
-        switch configuration.sender {
+        
+        guard let sender = configuration.sender else { return }
+        bubble.sender = sender
+        
+        switch sender {
         case .assistant:
-            assistantSetConstraints()
+            NSLayoutConstraint.activate(self.assistantConstraints)
+            NSLayoutConstraint.deactivate(self.userConstraints)
             textLabel.textColor = .black
             bubble.color = .systemGray3
-            bubble.sender = configuration.sender
+            break
         case .user:
-            userSetConstraints()
+            NSLayoutConstraint.activate(self.userConstraints)
+            NSLayoutConstraint.deactivate(self.assistantConstraints)
             textLabel.textColor = .white
             bubble.color = .systemBlue
-            bubble.sender = configuration.sender
-        case .none:
-            return
+            break
         }
     }
 }

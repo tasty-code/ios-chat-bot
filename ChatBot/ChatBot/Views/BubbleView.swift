@@ -8,20 +8,24 @@ import UIKit
 
 final class BubbleView: UIView {
     var color = UIColor()
-    var sender: Sender?
+    var sender: Sender? {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
     
     override func draw(_ rect: CGRect) {
         switch sender {
         case .assistant:
-            makeAssistantBubble(color: color)
+            makeAssistantBubble()
         case .user:
-            makeUserBubble(color: color)
+            makeUserBubble()
         case .none:
             return
         }
     }
     
-    func makeUserBubble(color: UIColor) {
+    func makeUserBubble() {
         let bubbleRect = CGRect(x: 0, y: 0, width: layer.frame.width - 10, height: layer.frame.height)
         let path = UIBezierPath(roundedRect: bubbleRect, byRoundingCorners: [.topLeft, .topRight, .bottomLeft], cornerRadii: CGSize(width: 5, height: 5))
         let plus = CGFloat(10)
@@ -33,7 +37,7 @@ final class BubbleView: UIView {
         path.close()
     }
     
-    func makeAssistantBubble(color: UIColor) {
+    func makeAssistantBubble() {
         let bubbleRect = CGRect(x: 10, y: 0, width: layer.frame.width - 10, height: layer.frame.height)
         let path = UIBezierPath(roundedRect: bubbleRect, byRoundingCorners: [.topLeft, .topRight, .bottomRight], cornerRadii: CGSize(width: 5, height: 5))
         let plus = CGFloat(10)
