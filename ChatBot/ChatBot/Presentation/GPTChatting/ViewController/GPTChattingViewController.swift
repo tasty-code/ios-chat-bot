@@ -60,10 +60,6 @@ final class GPTChattingViewController: UIViewController {
         return button
     }()
     
-    private let fetchChattingsSubject = PassthroughSubject<Void, Never>()
-    private let sendCommentSubject = PassthroughSubject<String?, Never>()
-    private let storeChattingsSubject = PassthroughSubject<Void, Never>()
-    
     private let viewModel: any GPTChattingVMProtocol
     private let cellResistration = UICollectionView.CellRegistration<GPTChattingCell, Row> { cell, indexPath, itemIdentifier in
         switch itemIdentifier {
@@ -90,39 +86,40 @@ final class GPTChattingViewController: UIViewController {
         configureUI()
         bind(to: viewModel)
         configureDataSource()
+        viewModel.onViewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchChattingsSubject.send()
+        viewModel.onViewWillAppear()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        storeChattingsSubject.send()
+        viewModel.onViewWillDisappear()
     }
     
     private func bind(to viewModel: any GPTChattingVMProtocol) {
-        let input = GPTChatRoomInput(
-            fetchChattings: fetchChattingsSubject.eraseToAnyPublisher(),
-            sendComment: sendCommentSubject.eraseToAnyPublisher(),
-            storeChattings: storeChattingsSubject.eraseToAnyPublisher()
-        )
-        let output = viewModel.transform(from: input)
-        
-        output
+        viewModel.output
             .receive(on: DispatchQueue.main)
             .sink { [weak self] output in
-            guard let self = self else { return }
-                
-            switch output {
-            case .success(let replies, let indexToUpdate):
-                self.updateCollectionView(replies.map { Row.forMain(message: $0) }, indexToUpdate: indexToUpdate)
-            case .failure(let error):
-                self.present(UIAlertController(error: error), animated: true)
+                switch output {
+                case .fetchChattings(let result):
+                    self?.handleChattings(result)
+                case .networkChatting(let result):
+                    self?.handleChattings(result)
+                }
             }
+            .store(in: &cancellables)
+    }
+    
+    private func handleChattings(_ result: Result<(messages: [Model.GPTMessage], indexToUpdate: Int), Error>) {
+        switch result {
+        case .success((let messages, let indexToUpdate)):
+            updateCollectionView(messages.map { Row.forMain(message: $0) }, indexToUpdate: indexToUpdate)
+        case .failure(let error):
+            present(UIAlertController(error: error), animated: true)
         }
-        .store(in: &cancellables)
     }
 }
 
@@ -163,7 +160,7 @@ extension GPTChattingViewController {
         snapshot.appendItems(updatedMessages)
         chattingDataSource.apply(snapshot)
         
-        chatCollectionView.scrollToItem(at: IndexPath(row: indexToUpdate, section: 0), at: .top, animated: true)
+        chatCollectionView.scrollToItem(at: IndexPath(row: indexToUpdate, section: 0), at: .bottom, animated: true)
     }
 }
 
@@ -183,7 +180,7 @@ extension GPTChattingViewController {
 extension GPTChattingViewController {
     @objc
     private func tapSendButton(_ sender: Any) {
-        sendCommentSubject.send(commentTextView.text)
+        viewModel.sendChat(commentTextView.text)
         commentTextView.text = nil
     }
 }

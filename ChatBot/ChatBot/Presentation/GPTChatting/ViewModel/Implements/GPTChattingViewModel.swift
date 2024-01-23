@@ -7,14 +7,17 @@
 
 import Combine
 
-final class GPTChattingViewModel: GPTChattingVMProtocol {
+final class GPTChattingViewModel: GPTChattingOutputProtocol {
+    typealias Output = GPTChattingOutput
+    
     private let chatRoomDTO: Model.GPTChatRoomDTO
     private let chattingRepository: ChattingRepositable
     
     private let httpService: HTTPServicable
     private let httpRequest: HTTPRequestable
     
-    private let output = PassthroughSubject<Output, Never>()
+    private let outputSubject = PassthroughSubject<Output, Never>()
+    var output: AnyPublisher<GPTChattingOutput, Never> { outputSubject.eraseToAnyPublisher() }
     private var cancellables = Set<AnyCancellable>()
     
     private var messages = [Model.GPTMessage]()
@@ -29,14 +32,6 @@ final class GPTChattingViewModel: GPTChattingVMProtocol {
         self.chattingRepository = chattingRepository
         self.httpService = httpService
         self.httpRequest = httpRequest
-    }
-    
-    func transform(from input: GPTChatRoomInput) -> AnyPublisher<GPTChatRoomOutput, Never> {
-        bindFetchChattings(from: input.fetchChattings)
-        bindSendCommnet(from: input.sendComment)
-        bindStoreChattings(from: input.storeChattings)
-        
-        return output.eraseToAnyPublisher()
     }
     
     private func getReplyFromServer(_ indexToUpdate: Int) {
@@ -58,9 +53,9 @@ final class GPTChattingViewModel: GPTChattingVMProtocol {
                 switch completion {
                 case .failure(let error):
                     messages[indexToUpdate] = Model.AssistantMessage(content: error.localizedDescription, name: nil, toolCalls: nil).asRequestMessage()
-                    output.send(Output.failure(error))
+                    outputSubject.send(Output.networkChatting(.failure(error)))
                 case .finished:
-                    output.send(Output.success(messages: messages, indexToUpdate: indexToUpdate))
+                    outputSubject.send(Output.networkChatting(.success((messages, indexToUpdate))))
                 }
                 cancellables.remove(cancellable)?.cancel()
             } receiveValue: { [weak self] message in
@@ -71,50 +66,32 @@ final class GPTChattingViewModel: GPTChattingVMProtocol {
     }
 }
 
-extension GPTChattingViewModel {
-    private func bindFetchChattings(from publisher: AnyPublisher<Void, Never>?) {
-        publisher?
-            .sink { [weak self] in
-                guard let self else { return }
-                do {
-                    messages = try chattingRepository.fetchChattings(for: chatRoomDTO)
-                    if messages.count - 1 < 0 {
-                        return
-                    }
-                    output.send(Output.success(messages: messages, indexToUpdate: messages.count - 1))
-                } catch {
-                    output.send(Output.failure(error))
-                }
-            }
-            .store(in: &cancellables)
+extension GPTChattingViewModel: GPTChattingsInputProtocol {
+    func onViewDidLoad() { }
+    
+    func onViewWillAppear() {
+        do {
+            messages = try chattingRepository.fetchChattings(for: chatRoomDTO)
+            if messages.isEmpty { return }
+            outputSubject.send(Output.networkChatting(.success((messages, messages.count - 1))))
+        } catch {
+            outputSubject.send(.fetchChattings(.failure(error)))
+        }
     }
     
-    private func bindSendCommnet(from publisher: AnyPublisher<String?, Never>?) {
-        publisher?
-            .sink { [weak self] comment in
-                guard let self else { return }
-                guard let comment = comment, !comment.isEmpty else {
-                    output.send(Output.failure(GPTError.ChatRoomError.emptyUserComment))
-                    return
-                }
-                messages.append(Model.UserMessage(content: comment).asRequestMessage())
-                messages.append(Model.WaitingMessage().asRequestMessage())
-                output.send(Output.success(messages: messages, indexToUpdate: messages.count - 1))
-                getReplyFromServer(messages.count - 1)
-            }
-            .store(in: &cancellables)
+    func onViewWillDisappear() {
+        try? chattingRepository.storeChattings(messages, for: chatRoomDTO)
     }
     
-    private func bindStoreChattings(from publisher: AnyPublisher<Void, Never>?) {
-        publisher?
-            .sink { [weak self] in
-                guard let self else { return }
-                do {
-                    try chattingRepository.storeChattings(messages, for: chatRoomDTO)
-                } catch {
-                    output.send(Output.failure(error))
-                }
-            }
-            .store(in: &cancellables)
+    func sendChat(_ content: String?) {
+        guard let content = content, !content.isEmpty else {
+            outputSubject.send(.networkChatting(.failure(GPTError.ChatRoomError.emptyUserComment)))
+            return
+        }
+        messages.append(Model.UserMessage(content: content).asRequestMessage())
+        messages.append(Model.WaitingMessage().asRequestMessage())
+        outputSubject.send(.networkChatting(.success((messages: messages, indexToUpdate: messages.count - 1))))
+        
+        getReplyFromServer(messages.count - 1)
     }
 }

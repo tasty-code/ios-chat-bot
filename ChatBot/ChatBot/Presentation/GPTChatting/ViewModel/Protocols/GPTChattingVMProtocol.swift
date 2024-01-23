@@ -7,16 +7,20 @@
 
 import Combine
 
-protocol GPTChattingVMProtocol: ViewModelable
-where Input == GPTChatRoomInput, Output == GPTChatRoomOutput { }
+typealias GPTChattingVMProtocol = GPTChattingsInputProtocol & GPTChattingOutputProtocol
 
-struct GPTChatRoomInput {
-    let fetchChattings: AnyPublisher<Void, Never>?
-    let sendComment: AnyPublisher<String?, Never>?
-    let storeChattings: AnyPublisher<Void, Never>?
+protocol GPTChattingsInputProtocol {
+    func onViewDidLoad()
+    func onViewWillAppear()
+    func onViewWillDisappear()
+    func sendChat(_ content: String?)
 }
 
-enum GPTChatRoomOutput {
-    case success(messages: [Model.GPTMessage], indexToUpdate: Int)
-    case failure(Error)
+protocol GPTChattingOutputProtocol {
+    var output: AnyPublisher<GPTChattingOutput, Never> { get }
+}
+
+enum GPTChattingOutput {
+    case networkChatting(Result<(messages: [Model.GPTMessage], indexToUpdate: Int), Error>)
+    case fetchChattings(Result<(messages: [Model.GPTMessage], indexToUpdate: Int), Error>)
 }
