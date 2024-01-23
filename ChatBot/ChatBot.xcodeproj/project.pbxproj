@@ -10,7 +10,6 @@
 		0D3260012B576362000C352E /* ChatRoomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3260002B576362000C352E /* ChatRoomError.swift */; };
 		0D3260042B576BC9000C352E /* BezierPath+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3260032B576BC9000C352E /* BezierPath+extension.swift */; };
 		0D3260062B57724B000C352E /* AppEnviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3260052B57724B000C352E /* AppEnviroment.swift */; };
-		0D32600C2B58B859000C352E /* ViewModelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D32600B2B58B859000C352E /* ViewModelable.swift */; };
 		0D3260142B5A08DD000C352E /* ChatBotCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0D3260122B5A08DD000C352E /* ChatBotCoreData.xcdatamodeld */; };
 		0D3260162B5A0A56000C352E /* ChatRoomRepositable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3260152B5A0A56000C352E /* ChatRoomRepositable.swift */; };
 		0D32601A2B5A0E6C000C352E /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3260192B5A0E6C000C352E /* CoreDataRepository.swift */; };
@@ -82,7 +81,6 @@
 		0D3260002B576362000C352E /* ChatRoomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomError.swift; sourceTree = "<group>"; };
 		0D3260032B576BC9000C352E /* BezierPath+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BezierPath+extension.swift"; sourceTree = "<group>"; };
 		0D3260052B57724B000C352E /* AppEnviroment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnviroment.swift; sourceTree = "<group>"; };
-		0D32600B2B58B859000C352E /* ViewModelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelable.swift; sourceTree = "<group>"; };
 		0D3260132B5A08DD000C352E /* ChatBotCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ChatBotCoreData.xcdatamodel; sourceTree = "<group>"; };
 		0D3260152B5A0A56000C352E /* ChatRoomRepositable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomRepositable.swift; sourceTree = "<group>"; };
 		0D3260192B5A0E6C000C352E /* CoreDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRepository.swift; sourceTree = "<group>"; };
@@ -720,7 +718,6 @@
 			isa = PBXGroup;
 			children = (
 				B4B3E2CA2B42D1BC00818B3C /* Info.plist */,
-				0D32600B2B58B859000C352E /* ViewModelable.swift */,
 				0D843B1E2B4FAD8500F4EAD2 /* Application */,
 				0D843B232B4FAF9900F4EAD2 /* Data */,
 				0D843B352B511EC100F4EAD2 /* Design */,
@@ -879,7 +876,6 @@
 				0DF997832B463C610055C836 /* Model.swift in Sources */,
 				0DF997A72B4680BB0055C836 /* Network.swift in Sources */,
 				0DF997722B43BC590055C836 /* ToolMessage.swift in Sources */,
-				0D32600C2B58B859000C352E /* ViewModelable.swift in Sources */,
 				0D3260012B576362000C352E /* ChatRoomError.swift in Sources */,
 				0D3260042B576BC9000C352E /* BezierPath+extension.swift in Sources */,
 				0D843B392B511F0A00F4EAD2 /* UIChatBubbleView.swift in Sources */,
