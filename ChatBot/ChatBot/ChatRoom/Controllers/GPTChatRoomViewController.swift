@@ -9,7 +9,7 @@ import UIKit
 
 final class GPTChatRoomViewController: UIViewController {
     
-    // MARK: NestedType
+    // MARK: - NestedType
     
     private enum Section {
         case main
@@ -79,10 +79,8 @@ final class GPTChatRoomViewController: UIViewController {
     
     private lazy var dataSource: UICollectionViewDiffableDataSource<Section, GPTMessageDTO> = {
         return UICollectionViewDiffableDataSource<Section, GPTMessageDTO>(collectionView: chatCollectionView) {
-            (collectionView: UICollectionView, indexPath: IndexPath, item: GPTMessageDTO) -> MessageCell? in
-            let cell = collectionView
-                .dequeueConfiguredReusableCell(using: self.cellRegistration, for: indexPath, item: item)
-            return cell
+            collectionView, indexPath, itemIdentifier in
+            collectionView.dequeueConfiguredReusableCell(using: self.cellRegistration, for: indexPath, item: itemIdentifier)
         }
     }()
     
@@ -108,12 +106,12 @@ final class GPTChatRoomViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         userInputTextView.delegate = self
-        setupUI()
+        configureUI()
     }
     
     // MARK: - Auto Layout
     
-    private func setupUI() {
+    private func configureUI() {
         view.backgroundColor = .white
         view.addSubview(chatCollectionView)
         view.addSubview(userInteractionStackView)

@@ -9,15 +9,11 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
-
-    private let networkManager = NetworkManager()
-    private lazy var serviceProvider: ServiceProvidable = ServiceProvider(networkManager: networkManager)
-    private lazy var gptViewModel = GPTViewModel(serviceProvider: serviceProvider)
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = GPTChatRoomViewController(viewModel: gptViewModel) 
+        window?.rootViewController = UINavigationController(rootViewController: GPTChatListViewController())
         window?.makeKeyAndVisible()
     }
 
