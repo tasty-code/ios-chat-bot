@@ -9,10 +9,14 @@ import UIKit
 
 final class ViewController: UIViewController {
     
+    // MARK: - properties
+
     private let chatView = ChatView()
     private var endPoint: Endpointable = ChatBotEndpoint()
     private var historyMessages = [Message]()
     
+    // MARK: - view life cycle
+
     override func loadView() {
         self.view = chatView
     }
@@ -24,13 +28,18 @@ final class ViewController: UIViewController {
         chatView.setTextViewDelegate(self)
         chatView.delegate = self
     }
+}
+
+// MARK: - private methods
+
+extension ViewController {
     
     @objc private func hideKeyboard() {
         view.endEditing(true)
     }
 }
 
-// MARK: - Delegate
+// MARK: - Delegate methods
 extension ViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
@@ -77,3 +86,4 @@ extension ViewController: ChatViewDelegate {
         }
     }
 }
+

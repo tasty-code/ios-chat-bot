@@ -13,6 +13,8 @@ final class LoadingAnimationView: UIView {
         static let circleSize: CGFloat = 16
     }
     
+    // MARK: - properties
+    
     private let animationContainer: UIStackView = {
         var stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -48,6 +50,8 @@ final class LoadingAnimationView: UIView {
         return view
     }()
     
+    // MARK: - init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureLoadingView()
@@ -56,6 +60,11 @@ final class LoadingAnimationView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+// MARK: - private methods
+
+extension LoadingAnimationView {
     
     private func configureLoadingView() {
         addSubview(animationContainer)
@@ -79,6 +88,11 @@ final class LoadingAnimationView: UIView {
             lastCircle.heightAnchor.constraint(equalToConstant: Constant.circleSize),
         ])
     }
+}
+
+// MARK: - public methods
+
+extension LoadingAnimationView {
     
     func runSpinner() {
         UIView.animateKeyframes(withDuration: 1.0, delay: 0, options: [.repeat]) {

@@ -9,6 +9,8 @@ import UIKit
 
 final class ChatCollectionViewCell: UICollectionViewCell {
     
+    // MARK: - properties
+
     static let reuseIdentifier = "text-cell-reuse-identifier"
     
     private var chatBotBubbleConstarint: [NSLayoutConstraint] = []
@@ -51,6 +53,9 @@ final class ChatCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    // MARK: - init
+
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -61,7 +66,7 @@ final class ChatCollectionViewCell: UICollectionViewCell {
     }
 }
 
-//MARK: Public Method
+//MARK: public Method
 
 extension ChatCollectionViewCell {
     func configureBubbles(identifier: Message) {
@@ -82,7 +87,7 @@ extension ChatCollectionViewCell {
     }
 }
 
-//MARK: - private method
+//MARK: - private methods
 
 extension ChatCollectionViewCell {
     private func configure() {

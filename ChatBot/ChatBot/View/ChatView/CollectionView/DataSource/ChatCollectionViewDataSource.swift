@@ -1,5 +1,5 @@
 //
-//  DataSource.swift
+//  ChatCollectionViewDataSource.swift
 //  ChatBot
 //
 //  Created by 김경록 on 1/17/24.
@@ -12,7 +12,11 @@ enum Section {
 
 final class ChatCollectionViewDataSource: UICollectionViewDiffableDataSource<Section, Message> {
     
+    // MARK: - properties
+
     let animationData = Message(role: "indicator", content: "")
+    
+    // MARK: - init
     
     init(collectionView: UICollectionView) {
         let cellRegistration = UICollectionView.CellRegistration<ChatCollectionViewCell, Message> { (cell, indexPath, item) in
@@ -28,7 +32,11 @@ final class ChatCollectionViewDataSource: UICollectionViewDiffableDataSource<Sec
         snapShot.appendSections([.main])
         self.apply(snapShot, animatingDifferences: false)
     }
-    
+}
+
+// MARK: - public methods
+
+extension ChatCollectionViewDataSource {
     func updateSnapshot(items: [Message], isFetched: Bool) {
         var snapShot = self.snapshot()
         

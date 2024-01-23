@@ -7,7 +7,7 @@
 
 import UIKit
 
-// MARK: - Delegate Protocol
+// MARK: - delegate Protocol
 
 protocol ChatViewDelegate: AnyObject {
     func submitUserMessage(chatView: ChatView, animationData: Message, userMessage: String)
@@ -80,6 +80,9 @@ final class ChatView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+extension ChatView {
     
     // MARK: - private methods
     
@@ -136,8 +139,11 @@ final class ChatView: UIView {
         resetTextViewHeight()
         contentTextView.isScrollEnabled = false
     }
+}
+
+extension ChatView {
     
-    // MARK: - Public Method
+    // MARK: - public Methods
     
     func updateSnapshot(items: [Message], isFetched: Bool) {
         dataSource.updateSnapshot(items: items, isFetched: isFetched)
