@@ -11,9 +11,9 @@ import Foundation
 @testable import ChatBot
 
 final class MockHTTPPublisher: HTTPPublishable {
-    func publish(urlRequest: URLRequest) -> AnyPublisher<Data, ChatBot.GPTError.HTTPError> {
+    func responsePublisher(urlRequest: URLRequest) -> AnyPublisher<Data, ChatBot.GPTError.HTTPError> {
         guard let data = try? JSONFetcher.fileData(of: urlRequest.url!.absoluteURL) else {
-            return Fail(error: .unknownError(description: "Data를 찾을 수 없음."))
+            return Fail(error: .unknownError(error: URLError(.badURL)))
                 .eraseToAnyPublisher()
         }
         

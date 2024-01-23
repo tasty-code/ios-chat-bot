@@ -9,7 +9,7 @@ import XCTest
 
 @testable import ChatBot
 
-final class ChatBotTests: XCTestCase {
+final class ChatBotNetWorkTests: XCTestCase {
     var httpService: HTTPServicable!
     
     override func setUpWithError() throws {

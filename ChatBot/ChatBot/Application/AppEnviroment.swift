@@ -9,4 +9,5 @@ import Foundation
 
 struct AppEnviroment {
     static let defaultHTTPSecvice = Network.GPTHTTPService(encoder: JSONEncoder(), decoder: JSONDecoder())
+    static let defaultCDRepository = Repository.CoreDataRepository(containerName: "ChatBotCoreData")
 }

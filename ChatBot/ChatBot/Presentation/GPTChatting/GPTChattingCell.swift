@@ -1,5 +1,5 @@
 //
-//  GPTChatRoomCell.swift
+//  GPTChattingCell.swift
 //  ChatBot
 //
 //  Created by 김준성 on 1/11/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class GPTChatRoomCell: UICollectionViewCell {
+final class GPTChattingCell: UICollectionViewCell {
     private let chatBubble: UIChatBubbleView = {
         let bubbleView = UIChatBubbleView(emptyWidth: 100, emptyHeight: 50, dotsSpacing: 15, frame: .zero)
         bubbleView.translatesAutoresizingMaskIntoConstraints = false
