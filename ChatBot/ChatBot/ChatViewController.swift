@@ -67,8 +67,19 @@ final class ChatViewController: UIViewController {
         setConstraints()
         configureDataSource()
         configureCellRegistration()
+        collectionView.keyboardDismissMode = .onDrag
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleCellTap(_:)))
+        collectionView.addGestureRecognizer(tapGesture)
     }
-}
+    
+    @objc
+    func handleCellTap(_ gesture: UITapGestureRecognizer) {
+            view.endEditing(true)
+       }
+    }
+
+
 
 // MARK: - Configure Layout
 
@@ -128,6 +139,7 @@ extension ChatViewController {
         
         var snapshot = dataSource.snapshot()
         snapshot.appendSections([0])
+        snapshot.appendSections([1])
         dataSource.apply(snapshot)
     }
     
@@ -146,15 +158,18 @@ extension ChatViewController {
     private func sendButtonTapped() {
         if let message = textView.text, !message.isEmpty {
             let chat = Chat(sender: Sender.user, message: message)
-            
             var snapshot = dataSource.snapshot()
             snapshot.appendItems([chat], toSection: 0)
             dataSource.apply(snapshot, animatingDifferences: true)
             moveToLastChat()
-            
             textView.text = nil
             textView.endEditing(true)
             textViewDidChange(textView)
+            
+
+            let loadingChat = Chat(sender: .loading, message: "\n")
+            snapshot.appendItems([loadingChat], toSection: 1)
+            dataSource.apply(snapshot, animatingDifferences: true)
             
             let requestModel = makeRequestModel()
             Task {
@@ -162,12 +177,14 @@ extension ChatViewController {
                     let body = try JSONEncoder().encode(requestModel)
                     let request = try api.makeRequest(body: body)
                     let responseModel = try await networkManager.loadData(request: request)
-                    guard let msg = responseModel.choices.first?.message.content else {return}
+                    guard let content = responseModel.choices.first?.message.content else {return}
                     
-                    receiveMessage(message: msg)
+                    snapshot.deleteItems([loadingChat])
+                    await dataSource.apply(snapshot, animatingDifferences: true)
+                    receiveMessage(message: content)
                     
                 } catch {
-                    print(error)
+                    print("메시지 전송 실패: ", error)
                 }
             }
         }
@@ -222,13 +239,23 @@ extension ChatViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
-        collectionView.endEditing(true)
-        ChatCollectionViewCell().endEditing(true)
+//        self.collectionView.endEditing(true)
+                
+        
+//        ChatCollectionViewCell.endEditing(true)
+        
     }
     
 }
 
 
+
+extension ChatViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.cellForItem(at: indexPath)?.endEditing(true)
+        
+    }
+}
 // MARK: - UITextViewDelegate
 
 extension ChatViewController: UITextViewDelegate {

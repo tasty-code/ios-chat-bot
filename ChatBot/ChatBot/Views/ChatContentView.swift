@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChatContentView: UIView, UIContentView {
+final class ChatContentView: UIView, UIContentView {
     private var appliedConfiguration: ChatContentConfiguration!
     
     var configuration: UIContentConfiguration {
@@ -20,6 +20,13 @@ class ChatContentView: UIView, UIContentView {
     
     private var userConstraints: [NSLayoutConstraint]!
     private var assistantConstraints: [NSLayoutConstraint]!
+    private var loadingConstraints: [NSLayoutConstraint]!
+    
+    private lazy var dotsView : DotsView = {
+        let dots = DotsView()
+        dots.translatesAutoresizingMaskIntoConstraints = false
+        return dots
+    }()
     
     private lazy var textLabel: UILabel = {
         let label = UILabel()
@@ -47,10 +54,18 @@ class ChatContentView: UIView, UIContentView {
             textLabel.leadingAnchor.constraint(equalTo: bubble.leadingAnchor, constant: 10),
             textLabel.trailingAnchor.constraint(equalTo: bubble.trailingAnchor, constant: -20),
         ]
+        
         assistantConstraints = [
             bubble.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: -3),
             textLabel.leadingAnchor.constraint(equalTo: bubble.leadingAnchor, constant: 20),
             textLabel.trailingAnchor.constraint(equalTo: bubble.trailingAnchor, constant: -20),
+        ]
+        
+        loadingConstraints = [
+            bubble.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: -3),
+            dotsView.topAnchor.constraint(equalTo: bubble.topAnchor, constant: 34),
+            dotsView.leadingAnchor.constraint(equalTo: bubble.leadingAnchor, constant: 20),
+            dotsView.trailingAnchor.constraint(equalTo: bubble.trailingAnchor, constant: -20),
         ]
         
         apply(configuration)
@@ -83,12 +98,24 @@ class ChatContentView: UIView, UIContentView {
         case .assistant:
             NSLayoutConstraint.activate(self.assistantConstraints)
             NSLayoutConstraint.deactivate(self.userConstraints)
+            NSLayoutConstraint.deactivate(self.loadingConstraints)
             textLabel.textColor = .black
+            dotsView.stopAnimating()
+            dotsView.isHidden = true
             break
         case .user:
             NSLayoutConstraint.activate(self.userConstraints)
             NSLayoutConstraint.deactivate(self.assistantConstraints)
+            NSLayoutConstraint.deactivate(self.loadingConstraints)
             textLabel.textColor = .white
+            break
+        case .loading:
+            bubble.addSubview(dotsView)
+            NSLayoutConstraint.activate(self.loadingConstraints)
+            NSLayoutConstraint.deactivate(self.userConstraints)
+            NSLayoutConstraint.deactivate(self.assistantConstraints)
+            dotsView.beginAnimating()
+            dotsView.isHidden = false
             break
         }
     }

@@ -10,6 +10,7 @@ import Foundation
 enum Sender: String, CustomStringConvertible {
     case assistant
     case user
+    case loading
     
     var description: String {
         switch self {
@@ -17,6 +18,8 @@ enum Sender: String, CustomStringConvertible {
             return "assistant"
         case .user:
             return "user"
+        case .loading:
+            return "loading"
         }
     }
 }
