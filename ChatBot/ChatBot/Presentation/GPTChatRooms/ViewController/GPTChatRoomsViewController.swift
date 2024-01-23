@@ -87,7 +87,13 @@ final class GPTChatRoomsViewController: UIViewController {
         case .success(let chatRooms):
             applySnapshot(sectionRows: chatRooms.map { Row.forMain(title: $0.title, localeDateString: $0.recentChatDate.toLocaleString(.koKR)) })
         case .failure(let error):
-            present(UIAlertController(error: error), animated: true)
+            UIAlertController.presentErrorPublisher(on: self, with: error)
+                .receive(on: DispatchQueue.main)
+                .sink { _ in
+                    print(self.cancellables.count)
+                }
+                .store(in: &cancellables)
+
         }
     }
 }

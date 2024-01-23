@@ -5,9 +5,25 @@
 //  Created by 김준성 on 1/22/24.
 //
 
+import Combine
 import UIKit
 
 extension UIAlertController {
+    static func presentErrorPublisher(on viewController: UIViewController, with error: Error) -> AnyPublisher<Void, Never> {
+        Future<Void, Never> { promise in
+            let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+
+            let okayAction = UIAlertAction(title: "Okay", style: .default) { _ in
+                promise(.success(()))
+            }
+            
+            alertController.addAction(okayAction)
+
+            viewController.present(alertController, animated: true, completion: nil)
+        }
+        .eraseToAnyPublisher()
+    }
+    
     /// 에러를 보여주기 위해 사용합니다.
     convenience init(error: Error) {
         self.init(title: "\(type(of: error))", message: error.localizedDescription, preferredStyle: .alert)
