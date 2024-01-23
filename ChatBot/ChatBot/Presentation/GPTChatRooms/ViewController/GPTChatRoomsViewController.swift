@@ -130,14 +130,14 @@ extension GPTChatRoomsViewController {
 
 extension GPTChatRoomsViewController {
     private func configureCreateRoomAlert() -> UIAlertController {
-        UIAlertController(title: "방 생성", message: "생성할 방 제목을 입력해주세요.") { [unowned self] roomName in
-            createRoomSubject.send(roomName)
+        UIAlertController(title: "방 생성", message: "생성할 방 제목을 입력해주세요.") { [weak self] roomName in
+            self?.createRoomSubject.send(roomName)
         }
     }
     
     private func configureModifyRoomAlert(for indexPath: IndexPath) -> UIAlertController {
-        UIAlertController(title: "방 수정", message: "수정할 방 제목을 입력해주세요.") { [unowned self] roomName in
-            modifyRoomSubject.send((indexPath, roomName))
+        UIAlertController(title: "방 수정", message: "수정할 방 제목을 입력해주세요.") { [weak self] roomName in
+            self?.modifyRoomSubject.send((indexPath, roomName))
         }
     }
 }
@@ -148,13 +148,15 @@ extension GPTChatRoomsViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let modifyAction = UIContextualAction(style: .normal, title: "수정", handler: { [unowned self] (action, view, completionHandler) in
+        let modifyAction = UIContextualAction(style: .normal, title: "수정", handler: { [weak self] (action, view, completionHandler) in
+            guard let self = self else { return }
             present(configureModifyRoomAlert(for: indexPath), animated: true)
             completionHandler(true)
         })
         modifyAction.backgroundColor = .systemOrange
         
-        let deleteAction = UIContextualAction(style: .destructive, title: "삭제", handler: { [unowned self] (action, view, completionHandler) in
+        let deleteAction = UIContextualAction(style: .destructive, title: "삭제", handler: { [weak self] (action, view, completionHandler) in
+            guard let self = self else { return }
             deleteRoomSubject.send(indexPath)
             completionHandler(true)
         })
