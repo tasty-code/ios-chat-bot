@@ -67,8 +67,8 @@ final class ChatViewController: UIViewController {
         setConstraints()
         configureDataSource()
         configureCellRegistration()
-        collectionView.keyboardDismissMode = .onDrag
         
+        collectionView.keyboardDismissMode = .onDrag
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleCellTap(_:)))
         collectionView.addGestureRecognizer(tapGesture)
     }
@@ -78,8 +78,6 @@ final class ChatViewController: UIViewController {
             view.endEditing(true)
        }
     }
-
-
 
 // MARK: - Configure Layout
 
@@ -165,7 +163,6 @@ extension ChatViewController {
             textView.text = nil
             textView.endEditing(true)
             textViewDidChange(textView)
-            
 
             let loadingChat = Chat(sender: .loading, message: "\n")
             snapshot.appendItems([loadingChat], toSection: 1)
@@ -191,7 +188,6 @@ extension ChatViewController {
     }
     
     private func makeRequestModel() -> ChatRequestModel {
-        
         let snapshot = dataSource.snapshot()
         let chatMessage = snapshot.itemIdentifiers(inSection: 0)
         var messages = [Message]()
@@ -239,23 +235,9 @@ extension ChatViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
-//        self.collectionView.endEditing(true)
-                
-        
-//        ChatCollectionViewCell.endEditing(true)
-        
-    }
-    
-}
-
-
-
-extension ChatViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.cellForItem(at: indexPath)?.endEditing(true)
-        
     }
 }
+
 // MARK: - UITextViewDelegate
 
 extension ChatViewController: UITextViewDelegate {

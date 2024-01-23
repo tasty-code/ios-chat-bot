@@ -27,7 +27,7 @@ final class BubbleView: UIView {
         }		
     }
     
-    func makeUserBubble() {
+    private func makeUserBubble() {
         let bubbleRect = CGRect(x: 0, y: 0, width: layer.frame.width - 10, height: layer.frame.height)
         let path = UIBezierPath(roundedRect: bubbleRect, byRoundingCorners: [.topLeft, .topRight, .bottomLeft], cornerRadii: CGSize(width: 5, height: 5))
         let plus = CGFloat(10)
@@ -39,7 +39,7 @@ final class BubbleView: UIView {
         path.close()
     }
     
-    func makeAssistantBubble() {
+    private func makeAssistantBubble() {
         let bubbleRect = CGRect(x: 10, y: 0, width: layer.frame.width - 10, height: layer.frame.height)
         let path = UIBezierPath(roundedRect: bubbleRect, byRoundingCorners: [.topLeft, .topRight, .bottomRight], cornerRadii: CGSize(width: 5, height: 5))
         let plus = CGFloat(10)
@@ -51,7 +51,7 @@ final class BubbleView: UIView {
         path.close()
     }
     
-    func makeLoadingBubble() {
+    private func makeLoadingBubble() {
         let bubbleRect = CGRect(x: 10, y: 0, width: 90, height: 50)
         let path = UIBezierPath(roundedRect: bubbleRect, byRoundingCorners: [.topLeft, .topRight, .bottomRight], cornerRadii: CGSize(width: 5, height: 5))
         let plus = CGFloat(10)

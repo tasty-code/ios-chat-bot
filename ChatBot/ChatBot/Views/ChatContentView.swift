@@ -18,10 +18,6 @@ final class ChatContentView: UIView, UIContentView {
         }
     }
     
-    private var userConstraints: [NSLayoutConstraint]!
-    private var assistantConstraints: [NSLayoutConstraint]!
-    private var loadingConstraints: [NSLayoutConstraint]!
-    
     private lazy var dotsView : DotsView = {
         let dots = DotsView()
         dots.translatesAutoresizingMaskIntoConstraints = false
@@ -44,6 +40,10 @@ final class ChatContentView: UIView, UIContentView {
         bubble.translatesAutoresizingMaskIntoConstraints = false
         return bubble
     }()
+    
+    private var userConstraints: [NSLayoutConstraint]!
+    private var assistantConstraints: [NSLayoutConstraint]!
+    private var loadingConstraints: [NSLayoutConstraint]!
     
     init(configuration: ChatContentConfiguration) {
         super.init(frame: .zero)
