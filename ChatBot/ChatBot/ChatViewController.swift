@@ -69,12 +69,12 @@ final class ChatViewController: UIViewController {
         configureCellRegistration()
         
         collectionView.keyboardDismissMode = .onDrag
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleCellTap(_:)))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleCellTap))
         collectionView.addGestureRecognizer(tapGesture)
     }
     
     @objc
-    func handleCellTap(_ gesture: UITapGestureRecognizer) {
+    func handleCellTap() {
             view.endEditing(true)
        }
     }
