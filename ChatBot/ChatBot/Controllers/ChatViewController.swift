@@ -18,9 +18,6 @@ final class ChatViewController: UIViewController {
     private let input: PassthroughSubject<ChatViewModel.InputEvent, Never> = .init()
     private var cancellables = Set<AnyCancellable>()
     
-    private lazy var textViewMaxHeightConstraint: NSLayoutConstraint =
-    inputTextView.heightAnchor.constraint(equalToConstant: view.frame.height / 9)
-    
     // MARK: - Layout
     
     private lazy var collectionView: UICollectionView = {
@@ -46,7 +43,6 @@ final class ChatViewController: UIViewController {
         stackView.axis = .horizontal
         stackView.distribution = .fill
         stackView.backgroundColor = .white
-        stackView.spacing = 15
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -161,7 +157,6 @@ final class ChatViewController: UIViewController {
         inputTextView.resignFirstResponder()
         input.send(.sendButtonDidTap(prompt: inputTextView.text))
         inputTextView.text = nil
-
     }
 }
 
