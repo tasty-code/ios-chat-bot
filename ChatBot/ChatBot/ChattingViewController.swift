@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ChattingViewController.swift
 //  ChatBot
 //
 //  Created by Tacocat on 1/1/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class ChattingViewController: UIViewController {
     
     private let chatService = ChatService(url: OpenAIURL(path: .chat), httpMethod: .post, contentType: .json)
     private lazy var chatStackView: UIStackView = {
@@ -34,10 +34,12 @@ final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         collectionViewConfigure()
     }
     
     private func collectionViewConfigure() {
+        let safeArea = view.safeAreaLayoutGuide
         let chatTextInputView = ChatTextInputView()
         chatTextInputView.delegate = collectionView
         
@@ -47,7 +49,7 @@ final class ViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             collectionView.widthAnchor.constraint(equalTo: chatStackView.widthAnchor, multiplier: 1.0),
-            chatStackView.topAnchor.constraint(equalTo: view.topAnchor),
+            chatStackView.topAnchor.constraint(equalTo: safeArea.topAnchor),
             chatStackView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor, constant: -8),
             chatStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             chatStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -57,7 +59,7 @@ final class ViewController: UIViewController {
     }
 }
 
-extension ViewController: ChatServiceDelegate  {
+extension ChattingViewController: ChatServiceDelegate  {
     func injectChatServiceDelegate() -> ChatService {
         return chatService
     }

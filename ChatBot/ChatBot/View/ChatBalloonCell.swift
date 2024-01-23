@@ -12,10 +12,10 @@ final class ChatBalloonCell: UICollectionViewListCell {
     private lazy var chatBalloonView: ChatBalloon = ChatBalloon()
     private lazy var loadingView = LoadingView(frame: CGRect(origin: .zero, size: CGSize(width: 100, height: 50)))
     
-    private var balloonConstraint = NSLayoutConstraint()
+    private var balloonDirectionConstraint = NSLayoutConstraint()
     private var loadingViewConstraint = [NSLayoutConstraint]()
     private var chatBallonViewConstraint = [NSLayoutConstraint]()
-    private var defaultHeight = NSLayoutConstraint()
+    private var contentVeiwHeightConstraint = NSLayoutConstraint()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,13 +28,14 @@ final class ChatBalloonCell: UICollectionViewListCell {
     
     private func configure() {
         self.contentView.addSubview(chatBalloonView)
+        self.contentView.addSubview(loadingView)
         
-        defaultHeight = contentView.heightAnchor.constraint(equalToConstant: 60)
-        defaultHeight.priority = .defaultHigh
-        
+        contentVeiwHeightConstraint = contentView.heightAnchor.constraint(equalToConstant: 60)
+        contentVeiwHeightConstraint.priority = .defaultHigh
         loadingViewConstraint = [
-            loadingView.topAnchor.constraint(equalTo: self.topAnchor),
-            loadingView.leadingAnchor.constraint(equalTo: self.leadingAnchor)
+            contentVeiwHeightConstraint,
+            loadingView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            loadingView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor)
         ]
         
         chatBallonViewConstraint = [
@@ -50,51 +51,44 @@ final class ChatBalloonCell: UICollectionViewListCell {
         chatBalloonView.text = text
     }
  
-    
-    
     func setDirection(direction: Direction) {
-        let rightColor = #colorLiteral(red: 1, green: 0.7630318403, blue: 0.8500509858, alpha: 1)
-        let leftColor = #colorLiteral(red: 0.5870948434, green: 0.7980247736, blue: 0.985825479, alpha: 1)
-        chatBalloonView.direction = direction
-        balloonConstraint.isActive = false
-        defaultHeight.isActive = false
+        
+        chatBalloonView.setDirection(direction: direction)
+        balloonDirectionConstraint.isActive = false
+        chatBalloonView.leftOrRight(direction: direction)
         
         if direction == .right {
+            loadingView.isHidden = true
+            NSLayoutConstraint.deactivate(loadingViewConstraint)
+            
             chatBalloonView.emptyLabelConstraintIsActive(bool: false)
-            chatBalloonView.rightLabelConstraintIsActive(bool: true)
             chatBalloonView.commonLabelConstraintIsActive(bool: true)
-            balloonConstraint = chatBalloonView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8)
-            chatBalloonView.fillLayerColor(color: rightColor)
-          
+            balloonDirectionConstraint = chatBalloonView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8)
         } else {
-            addSubview(loadingView)
-            chatBalloonView.leftLabelConstraintIsActive(bool: true)
-            balloonConstraint = chatBalloonView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8)
-            chatBalloonView.fillLayerColor(color: leftColor)
+            balloonDirectionConstraint = chatBalloonView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8)
             
             if chatBalloonView.text != "" {
-                self.loadingView.isHidden = true
+                loadingView.isHidden = true
+                NSLayoutConstraint.deactivate(loadingViewConstraint)
+                
                 chatBalloonView.emptyLabelConstraintIsActive(bool: false)
                 chatBalloonView.commonLabelConstraintIsActive(bool: true)
-                
             } else {
-                self.loadingView.isHidden = false
-                chatBalloonView.emptyLabelConstraintIsActive(bool: true)
-                chatBalloonView.emptyLabelConstraintIsActive(bool: true)
-                defaultHeight.isActive = true
+                loadingView.isHidden = false
+                NSLayoutConstraint.activate(loadingViewConstraint)
                 
+                chatBalloonView.emptyLabelConstraintIsActive(bool: true)
+
+                loadingView.moveCircle()
             }
         }
-        balloonConstraint.isActive = true
-
+        balloonDirectionConstraint.isActive = true
     }
     
     override func prepareForReuse() {
-        chatBalloonView.direction = .right
+        super.prepareForReuse()
+        
         chatBalloonView.emptyLabelConstraintIsActive(bool: false)
-        chatBalloonView.leftLabelConstraintIsActive(bool: false)
-        chatBalloonView.rightLabelConstraintIsActive(bool: false)
         chatBalloonView.commonLabelConstraintIsActive(bool: false)
-        self.loadingView.isHidden = true
     }
 }

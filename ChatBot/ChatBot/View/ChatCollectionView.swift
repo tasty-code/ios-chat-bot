@@ -30,15 +30,14 @@ final class ChatCollectionView: UICollectionView {
     private func configureDataSource() {
         let cellRegistration = UICollectionView.CellRegistration<ChatBalloonCell, UUID> { (cell, indexPath, itemIdentifier) in
             
-            var message = [UUID: Message]()
             let tupleArray = self.chatRecord.map { ($0.id, $0) }
-            message = Dictionary(uniqueKeysWithValues: tupleArray)
+            let chatRecordDictionary: [UUID: Message] = Dictionary(uniqueKeysWithValues: tupleArray)
             
-            guard let message = message[itemIdentifier],
-                  let content = message.content
-            else { return }
+            guard let message = chatRecordDictionary[itemIdentifier],
+                  let content = message.content else { return }
+            
             cell.setLabelText(text: content)
-            
+
             if message.role == .user {
                 cell.setDirection(direction: .right)
             } else {
@@ -49,7 +48,6 @@ final class ChatCollectionView: UICollectionView {
         diffableDataSource = UICollectionViewDiffableDataSource<Section, UUID>(collectionView: self, cellProvider: { collectionView, indexPath, uuid in
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: uuid)
         })
-        
         
         var snapshot = NSDiffableDataSourceSnapshot<Section, UUID>()
         snapshot.appendSections([.main])
@@ -63,8 +61,8 @@ final class ChatCollectionView: UICollectionView {
         snapshot.appendItems([data.id], toSection: .main)
         diffableDataSource?.apply(snapshot, animatingDifferences: false)
     }
-    
-    private func removeSnapshot() {
+
+    private func replaceSnapShot() {
         guard var snapshot = diffableDataSource?.snapshot(), !chatRecord.isEmpty else { return }
         guard let data = chatRecord.last else { return }
         
@@ -80,23 +78,24 @@ extension ChatCollectionView: ChatCollectionViewDelegate {
         
         chatRecord.append(Message(role: .assistant, content: ""))
         saveSnapshot()
+        
         self.scrollToItem(at: IndexPath(row: self.numberOfItems(inSection: 0) - 1, section: 0),
                           at: .bottom,
-                          animated: true)
+                          animated: false)
     }
     
     func updateCollectionViewFromResponse() async {
         let injectedDelegate = chatServiceDelegate?.injectChatServiceDelegate()
         do {
             guard let chatAnswer: ResponseModel = try await injectedDelegate?.getRequestData(inputData: RequestModel(messages: chatRecord)) else { return }
+            
             chatRecord[chatRecord.count-1].content = chatAnswer.choices[0].message.content
-            removeSnapshot()
+            replaceSnapShot()
             
             self.scrollToItem(at: IndexPath(row: self.numberOfItems(inSection: 0) - 1, section: 0),
                               at: .bottom,
-                              animated: true)
-        }
-        catch {
+                              animated: false)
+        } catch {
             print(error)
         }
     }

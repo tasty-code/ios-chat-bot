@@ -8,13 +8,12 @@ import UIKit
 
 final class ChatBalloon: UIView {
     
-    var direction: Direction = .right
+    private var direction: Direction = .right
     
     private var rightLabelConstraint = [NSLayoutConstraint]()
     private var leftLabelConstraint = [NSLayoutConstraint]()
     private var commonLabelConstraint = [NSLayoutConstraint]()
     private var emptyLabelWidthConstraint = NSLayoutConstraint()
-    private var emptyLabelHeightConstraint = NSLayoutConstraint()
     
     private let balloonLayer = CAShapeLayer()
     
@@ -37,45 +36,50 @@ final class ChatBalloon: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
-        setupUI()
+        configure()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupUI() {
+    func setDirection(direction: Direction) {
+        self.direction = direction
+    }
+    
+    private func configure() {
         layer.addSublayer(balloonLayer)
         addSubview(label)
         
-        rightLabelConstraint = [label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12.0), label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0)]
+        rightLabelConstraint = [label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12.0),
+                                label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0)]
         
-        leftLabelConstraint = [label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0), label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12.0)]
+        leftLabelConstraint = [label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
+                               label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12.0)]
         
         commonLabelConstraint = [label.topAnchor.constraint(equalTo: topAnchor, constant: 12.0),
                                  label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12.0)]
         
         emptyLabelWidthConstraint = label.widthAnchor.constraint(equalToConstant: 50)
     }
-    
-    private func leftOrRight(direction: Direction) {
- 
+}
+
+
+// MARK: - Constraint
+
+extension ChatBalloon {
+    func leftOrRight(direction: Direction) {
+        let rightColor = #colorLiteral(red: 1, green: 0.7630318403, blue: 0.8500509858, alpha: 1)
+        let leftColor = #colorLiteral(red: 0.5870948434, green: 0.7980247736, blue: 0.985825479, alpha: 1)
+        
         if direction == .right {
             leftLabelConstraintIsActive(bool: false)
             rightLabelConstraintIsActive(bool: true)
+            fillLayerColor(color: rightColor)
         } else {
             leftLabelConstraintIsActive(bool: true)
             rightLabelConstraintIsActive(bool: false)
-        }
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        switch direction {
-        case .right:
-            drawBalloonToRight()
-        case .left:
-            drawBalloonToLeft()
+            fillLayerColor(color: leftColor)
         }
     }
     
@@ -83,16 +87,15 @@ final class ChatBalloon: UIView {
         emptyLabelWidthConstraint.isActive = bool
     }
     
-    func commonLabelConstraintIsActive(bool: Bool)
-    {
+    func commonLabelConstraintIsActive(bool: Bool) {
         if bool {
             NSLayoutConstraint.activate(commonLabelConstraint)
         } else {
             NSLayoutConstraint.deactivate(commonLabelConstraint)
         }
     }
-    func leftLabelConstraintIsActive(bool: Bool) {
-        
+    
+    private func leftLabelConstraintIsActive(bool: Bool) {
         if bool {
             NSLayoutConstraint.activate(leftLabelConstraint)
         } else {
@@ -100,12 +103,27 @@ final class ChatBalloon: UIView {
         }
     }
     
-    func rightLabelConstraintIsActive(bool: Bool) {
-        
+    private func rightLabelConstraintIsActive(bool: Bool) {
         if bool {
             NSLayoutConstraint.activate(rightLabelConstraint)
         } else {
             NSLayoutConstraint.deactivate(rightLabelConstraint)
+        }
+    }
+}
+
+
+// MARK: - Drawing Animation
+
+extension ChatBalloon {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        switch direction {
+        case .right:
+            drawBalloonToRight()
+        case .left:
+            drawBalloonToLeft()
         }
     }
     

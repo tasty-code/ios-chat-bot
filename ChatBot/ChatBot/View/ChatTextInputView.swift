@@ -18,7 +18,6 @@ final class ChatTextInputView: UIStackView {
         textView.layer.cornerRadius = 8
         textView.font = .preferredFont(forTextStyle: .body)
         textView.delegate = self
-        textView.translatesAutoresizingMaskIntoConstraints = false
         
         return textView
     }()
@@ -27,7 +26,6 @@ final class ChatTextInputView: UIStackView {
         let button = UIButton()
         
         button.setImage(UIImage(systemName: "paperplane"), for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
         DispatchQueue.main.async {
             button.layer.cornerRadius = button.frame.size.width / 2
         }
@@ -47,7 +45,6 @@ final class ChatTextInputView: UIStackView {
     }
     
     private func configure() {
-
         self.addArrangedSubview(textView)
         self.addArrangedSubview(button)
         
@@ -63,8 +60,10 @@ final class ChatTextInputView: UIStackView {
     }
 }
 
+
+// MARK: - User Interaction 
+
 extension ChatTextInputView {
-    
     @objc private func tappedButton() {
         if textView.text == "" { return }
         
@@ -85,11 +84,13 @@ extension ChatTextInputView {
     }
 }
 
+
+// MARK: - TextViewDelegate
+
 extension ChatTextInputView: UITextViewDelegate {
-    
     func textViewDidChange(_ textView: UITextView) {
         
-        guard textView.contentSize.height < self.frame.width * 0.3 else {
+        guard textView.contentSize.height < self.frame.width * 0.2 else {
             textView.isScrollEnabled = true
             return
         }
@@ -101,7 +102,6 @@ extension ChatTextInputView: UITextViewDelegate {
                 self.layoutIfNeeded()
             }
         }
-        
     }
 }
 
