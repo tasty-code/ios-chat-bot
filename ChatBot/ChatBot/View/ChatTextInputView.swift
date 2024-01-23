@@ -51,6 +51,7 @@ final class ChatTextInputView: UIStackView {
         self.axis = .horizontal
         self.alignment = .center
         self.spacing = 8
+        self.backgroundColor = .white
         
         NSLayoutConstraint.activate([
             textView.heightAnchor.constraint(equalToConstant: textView.estimatedSizeHeight),

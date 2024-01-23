@@ -16,6 +16,7 @@ final class ChattingViewController: UIViewController {
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.spacing = 8
         
         return stackView
     }()
@@ -36,6 +37,7 @@ final class ChattingViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         collectionViewConfigure()
+        self.collectionView.allowsSelection = false
     }
     
     private func collectionViewConfigure() {
