@@ -7,7 +7,6 @@
 import UIKit
 
 final class BubbleView: UIView {
-    var color = UIColor()
     var sender: Sender? {
         didSet {
             setNeedsDisplay()
