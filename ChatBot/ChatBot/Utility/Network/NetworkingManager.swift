@@ -8,10 +8,10 @@
 import Foundation
 
 final class NetworkingManager {
-    static let shared = NetworkingManager()
     private let decoder = JSONDecoder()
     private let encoder = Encoder()
     
+    static let shared = NetworkingManager()
     private init() {}
     
     private func request(_ endpoint: Endpointable) throws -> URLRequest {

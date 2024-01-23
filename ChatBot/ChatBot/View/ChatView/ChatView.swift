@@ -89,13 +89,13 @@ final class ChatView: UIView {
         }
         configureTextView()
         contentSendButton.isEnabled.toggle()
-        
         delegate?.submitUserMessage(chatView: self, animationData: dataSource.animationData, userMessage: userMessage)
     }
     
     private func configureLayout() {
         self.backgroundColor = .white
         addSubview(chatCollectionView)
+        
         NSLayoutConstraint.activate([
             contentTextView.widthAnchor.constraint(equalTo: contentSendButton.widthAnchor, multiplier: 6),
             contentTextView.heightAnchor.constraint(equalToConstant: contentTextView.estimatedSizeHeight),
@@ -122,6 +122,7 @@ final class ChatView: UIView {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: itemSize, subitem: item, count: 1)
         
         let section = NSCollectionLayoutSection(group: group)
+        
         section.interGroupSpacing = spacing
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 20, trailing: 20)
         
@@ -148,6 +149,7 @@ final class ChatView: UIView {
     
     func scrollToBottom() {
         let lastItemIndex = chatCollectionView.numberOfItems(inSection: 0) - 1
+        
         if lastItemIndex < 0 {
             return
         }

@@ -7,11 +7,13 @@
 
 import UIKit
 
-final class ChatCollectionViewCell: UICollectionViewListCell {
+final class ChatCollectionViewCell: UICollectionViewCell {
+    
     static let reuseIdentifier = "text-cell-reuse-identifier"
     
     private var chatBotBubbleConstarint: [NSLayoutConstraint] = []
     private var userBubbleConstraint: [NSLayoutConstraint] = []
+    private var animationConstraint: [NSLayoutConstraint] = []
     
     private lazy var containerView: UIView = {
         var view = UIView()
@@ -20,6 +22,13 @@ final class ChatCollectionViewCell: UICollectionViewListCell {
         view.layer.cornerRadius = 4
         view.addSubview(chatLabel)
         view.addSubview(bubbleTail)
+        
+        return view
+    }()
+    
+    private lazy var loadingView: LoadingAnimationView = {
+        var view = LoadingAnimationView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
     }()
@@ -50,27 +59,11 @@ final class ChatCollectionViewCell: UICollectionViewListCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // MARK: - methods
-    private func configure() {
-        contentView.addSubview(containerView)
-        
-        NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: contentView.topAnchor ),
-            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            containerView.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, multiplier: 0.8),
-            
-            chatLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
-            chatLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10),
-            chatLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
-            chatLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
-            
-            bubbleTail.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
-            bubbleTail.widthAnchor.constraint(equalToConstant: 15),
-            bubbleTail.heightAnchor.constraint(equalToConstant: 10)
-        ])
-    }
-    
+}
+
+//MARK: Public Method
+
+extension ChatCollectionViewCell {
     func configureBubbles(identifier: Message) {
         let role = identifier.role
         let content = identifier.content
@@ -87,11 +80,45 @@ final class ChatCollectionViewCell: UICollectionViewListCell {
             break
         }
     }
+}
+
+//MARK: - private method
+
+extension ChatCollectionViewCell {
+    private func configure() {
+        contentView.addSubview(containerView)
+        
+        NSLayoutConstraint.activate([
+            containerView.topAnchor.constraint(equalTo: contentView.topAnchor ),
+            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            containerView.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, multiplier: 0.8),
+            
+            chatLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
+            chatLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10),
+            chatLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
+            chatLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
+            
+            bubbleTail.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+            bubbleTail.widthAnchor.constraint(equalToConstant: 15),
+            bubbleTail.heightAnchor.constraint(equalToConstant: 10),
+            
+            loadingView.widthAnchor.constraint(equalToConstant: 60)
+        ])
+    }
+}
+
+//MARK: override Methods
+
+extension ChatCollectionViewCell {
+    
+    override func layoutSubviews() {
+        loadingView.runSpinner()
+    }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        NSLayoutConstraint.deactivate(chatBotBubbleConstarint + userBubbleConstraint)
+        NSLayoutConstraint.deactivate(chatBotBubbleConstarint + userBubbleConstraint + animationConstraint)
         layoutIfNeeded()
     }
 }
@@ -99,7 +126,7 @@ final class ChatCollectionViewCell: UICollectionViewListCell {
 //MARK: - chatBubbleConfigure
 
 extension ChatCollectionViewCell {
-    func configureChatbotBubble(isFetching: Bool) {
+    private func configureChatbotBubble(isFetching: Bool) {
         chatBotBubbleConstarint = [
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             bubbleTail.trailingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 3)
@@ -110,14 +137,15 @@ extension ChatCollectionViewCell {
         chatLabel.textColor = .white
         
         if isFetching {
-            
+            showAnimationView()
         } else {
-            
+            loadingView.removeFromSuperview()
         }
+        
         NSLayoutConstraint.activate(chatBotBubbleConstarint)
     }
     
-    func configureUserBubble() {
+    private func configureUserBubble() {
         userBubbleConstraint = [
             containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             bubbleTail.leadingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -3)
@@ -126,15 +154,24 @@ extension ChatCollectionViewCell {
         chatLabel.textColor = .black
         bubbleTail.transform = CGAffineTransform(scaleX: 1, y: 1)
         bubbleTail.color = .systemYellow
+        loadingView.removeFromSuperview()
         
         NSLayoutConstraint.activate(userBubbleConstraint)
+    }
+    
+    private func showAnimationView() {
+        containerView.addSubview(loadingView)
+        animationConstraint = [
+            loadingView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
+            loadingView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10),
+            loadingView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
+            loadingView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
+        ]
+        
+        NSLayoutConstraint.activate(animationConstraint)
     }
 }
 
 
 
 
-
-
-
-    

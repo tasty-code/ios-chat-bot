@@ -31,7 +31,6 @@ final class ViewController: UIViewController {
 }
 
 // MARK: - Delegate
-
 extension ViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
@@ -60,7 +59,6 @@ extension ViewController: ChatViewDelegate {
         endPoint.httpBodyContent.messages = historyMessages
         
         let snapShotItems = [newMessage, animationData]
-        
         chatView.updateSnapshot(items: snapShotItems, isFetched: false)
         chatView.scrollToBottom()
         

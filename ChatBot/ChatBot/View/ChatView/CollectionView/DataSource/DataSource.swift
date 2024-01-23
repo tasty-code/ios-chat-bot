@@ -12,7 +12,7 @@ enum Section {
 
 final class ChatCollectionViewDataSource: UICollectionViewDiffableDataSource<Section, Message> {
     
-    let animationData = Message(role: "indicator", content: "메세지 수신중..(임시)")
+    let animationData = Message(role: "indicator", content: "")
     
     init(collectionView: UICollectionView) {
         let cellRegistration = UICollectionView.CellRegistration<ChatCollectionViewCell, Message> { (cell, indexPath, item) in
@@ -29,8 +29,6 @@ final class ChatCollectionViewDataSource: UICollectionViewDiffableDataSource<Sec
         self.apply(snapShot, animatingDifferences: false)
     }
     
-    // MARK: - todo: chatUIItem 적절히 처리하기
-
     func updateSnapshot(items: [Message], isFetched: Bool) {
         var snapShot = self.snapshot()
         
