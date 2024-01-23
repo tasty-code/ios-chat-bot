@@ -13,6 +13,10 @@ final class GPTChattingViewController: UIViewController {
         case main
     }
     
+    enum Row: Hashable {
+        case forMain(message: Model.GPTMessage)
+    }
+    
     private lazy var chatCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -61,11 +65,14 @@ final class GPTChattingViewController: UIViewController {
     private let storeChattingsSubject = PassthroughSubject<Void, Never>()
     
     private let viewModel: any GPTChattingVMProtocol
-    private let cellResistration = UICollectionView.CellRegistration<GPTChattingCell, Model.GPTMessage> { cell, indexPath, itemIdentifier in
-        cell.configureCell(to: itemIdentifier)
+    private let cellResistration = UICollectionView.CellRegistration<GPTChattingCell, Row> { cell, indexPath, itemIdentifier in
+        switch itemIdentifier {
+        case .forMain(let message):
+            cell.configureCell(to: message)
+        }
     }
     
-    private var chattingDataSource: UICollectionViewDiffableDataSource<Section, Model.GPTMessage>!
+    private var chattingDataSource: UICollectionViewDiffableDataSource<Section, Row>!
     private var cancellables = Set<AnyCancellable>()
     
     init(viewModel: any GPTChattingVMProtocol) {
@@ -110,7 +117,7 @@ final class GPTChattingViewController: UIViewController {
                 
             switch output {
             case .success(let replies, let indexToUpdate):
-                self.updateCollectionView(replies, indexToUpdate: indexToUpdate)
+                self.updateCollectionView(replies.map { Row.forMain(message: $0) }, indexToUpdate: indexToUpdate)
             case .failure(let error):
                 self.present(UIAlertController(error: error), animated: true)
             }
@@ -150,8 +157,8 @@ extension GPTChattingViewController {
         return UICollectionViewCompositionalLayout(section: section)
     }
     
-    private func updateCollectionView(_ updatedMessages: [Model.GPTMessage], indexToUpdate: Int) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Model.GPTMessage>()
+    private func updateCollectionView(_ updatedMessages: [Row], indexToUpdate: Int) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Row>()
         snapshot.appendSections([.main])
         snapshot.appendItems(updatedMessages)
         chattingDataSource.apply(snapshot)
@@ -163,7 +170,7 @@ extension GPTChattingViewController {
 // MARK: - configure Diffable Data Source
 extension GPTChattingViewController {
     private func configureDataSource() {
-        chattingDataSource = UICollectionViewDiffableDataSource<Section, Model.GPTMessage>(
+        chattingDataSource = UICollectionViewDiffableDataSource<Section, Row>(
             collectionView: chatCollectionView,
             cellProvider: { collectionView, indexPath, itemIdentifier in
                 collectionView.dequeueConfiguredReusableCell(using: self.cellResistration, for: indexPath, item: itemIdentifier)

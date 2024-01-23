@@ -13,6 +13,10 @@ final class GPTChatRoomsViewController: UIViewController {
         case main
     }
     
+    enum Row: Hashable {
+        case forMain(title: String, localeDateString: String)
+    }
+    
     private let viewModel: any GPTChatRoomsVMProtocol
     private let fetchRoomsSubject = PassthroughSubject<Void, Never>()
     private let createRoomSubject = PassthroughSubject<String?, Never>()
@@ -29,7 +33,7 @@ final class GPTChatRoomsViewController: UIViewController {
         return tableView
     }()
     
-    private var chatRoomsDataSource: UITableViewDiffableDataSource<Section, Model.GPTChatRoomDTO>!
+    private var chatRoomsDataSource: UITableViewDiffableDataSource<Section, Row>!
     
     init(viewModel: any GPTChatRoomsVMProtocol) {
         self.viewModel = viewModel
@@ -69,7 +73,7 @@ final class GPTChatRoomsViewController: UIViewController {
             .sink { [weak self] output in
                 switch output {
                 case .success(let rooms):
-                    self?.applySnapshot(rooms: rooms)
+                    self?.applySnapshot(sectionRows: rooms.map { Row.forMain(title: $0.title, localeDateString: $0.recentChatDate.toLocaleString(.koKR)) })
                 case .failure(let error):
                     self?.present(UIAlertController(error: error), animated: true)
                 case .moveToChatRoom(let chatRoomViewModel):
@@ -92,21 +96,28 @@ extension GPTChatRoomsViewController {
 // MARK: - Confiure TableView
 extension GPTChatRoomsViewController {
     private func configureDataSource() {
-        self.chatRoomsDataSource = UITableViewDiffableDataSource(tableView: tableView) { tableView, indexPath, itemIdentifier in
-            let cell = tableView.dequeueReusableCell(withIdentifier: "GPTChatRoomCell", for: indexPath)
-            var config = cell.defaultContentConfiguration()
-            config.text = itemIdentifier.title
-            config.secondaryText = itemIdentifier.recentChatDate.toLocaleString(.koKR)
-            cell.contentConfiguration = config
-            return cell
+        self.chatRoomsDataSource = UITableViewDiffableDataSource(tableView: tableView) { [weak self] tableView, indexPath, itemIdentifier in
+            switch itemIdentifier {
+            case.forMain(let title, let localeDateString):
+                self?.configureMainCell(for: indexPath, title: title, localeDateString: localeDateString)
+            }
         }
     }
     
-    private func applySnapshot(rooms: [Model.GPTChatRoomDTO]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Model.GPTChatRoomDTO>()
+    private func applySnapshot(sectionRows: [Row]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Row>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(rooms)
-        chatRoomsDataSource.apply(snapshot)
+        snapshot.appendItems(sectionRows)
+        chatRoomsDataSource.apply(snapshot, animatingDifferences: false)
+    }
+    
+    private func configureMainCell(for indexPath: IndexPath, title: String, localeDateString: String) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GPTChatRoomCell", for: indexPath)
+        var config = cell.defaultContentConfiguration()
+        config.text = title
+        config.secondaryText = localeDateString
+        cell.contentConfiguration = config
+        return cell
     }
 }
 
