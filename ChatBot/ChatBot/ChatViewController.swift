@@ -156,17 +156,14 @@ extension ChatViewController {
     private func sendButtonTapped() {
         if let message = textView.text, !message.isEmpty {
             let chat = Chat(sender: Sender.user, message: message)
+            let loadingChat = Chat(sender: .loading, message: "\n")
             var snapshot = dataSource.snapshot()
-            snapshot.appendItems([chat], toSection: 0)
+            snapshot.appendItems([chat, loadingChat], toSection: 0)
             dataSource.apply(snapshot, animatingDifferences: true)
             moveToLastChat()
             textView.text = nil
             textView.endEditing(true)
             textViewDidChange(textView)
-
-            let loadingChat = Chat(sender: .loading, message: "\n")
-            snapshot.appendItems([loadingChat], toSection: 1)
-            dataSource.apply(snapshot, animatingDifferences: true)
             
             let requestModel = makeRequestModel()
             Task {
@@ -189,8 +186,9 @@ extension ChatViewController {
     
     private func makeRequestModel() -> ChatRequestModel {
         let snapshot = dataSource.snapshot()
-        let chatMessage = snapshot.itemIdentifiers(inSection: 0)
+        let chatMessage = snapshot.itemIdentifiers(inSection: 0).dropLast()
         var messages = [Message]()
+        
         chatMessage.forEach { chat in
             let message = Message(
                 role: chat.sender.description,
