@@ -8,6 +8,15 @@
 import UIKit
 
 final class ChatViewController: UIViewController {
+    private lazy var collectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
+        collectionView.backgroundColor = .systemBackground
+        collectionView.keyboardDismissMode = .onDrag
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return collectionView
+    }()
+    
     private lazy var horizontalStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -52,7 +61,6 @@ final class ChatViewController: UIViewController {
     typealias ChatDataSource = UICollectionViewDiffableDataSource<Int, Chat>
     typealias CellRegistration = UICollectionView.CellRegistration<ChatCollectionViewCell, Chat>
     
-    private var collectionView: UICollectionView!
     private var dataSource: ChatDataSource!
     private var cellRegistration: CellRegistration!
     
@@ -67,14 +75,8 @@ final class ChatViewController: UIViewController {
         configureDataSource()
         configureCellRegistration()
         
-        collectionView.keyboardDismissMode = .onDrag
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleCellTap))
         collectionView.addGestureRecognizer(tapGesture)
-    }
-    
-    @objc
-    func handleCellTap() {
-        view.endEditing(true)
     }
 }
 
@@ -88,10 +90,6 @@ extension ChatViewController {
     }
     
     private func setUpLayouts() {
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
-        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = .systemBackground
         view.backgroundColor = .white
         view.addSubview(collectionView)
         
@@ -136,7 +134,6 @@ extension ChatViewController {
         
         var snapshot = dataSource.snapshot()
         snapshot.appendSections([0])
-        snapshot.appendSections([1])
         dataSource.apply(snapshot)
     }
     
@@ -153,35 +150,48 @@ extension ChatViewController {
     
     @objc
     private func sendButtonTapped() {
-        if let message = textView.text, !message.isEmpty {
-            let chat = Chat(sender: Sender.user, message: message)
+        if let message = textView.text,
+            message.isEmpty == false 
+        {
+            let userChat = Chat(sender: Sender.user, message: message)
             let loadingChat = Chat(sender: .loading, message: "\n")
-            var snapshot = dataSource.snapshot()
-            snapshot.appendItems([chat, loadingChat], toSection: 0)
-            dataSource.apply(snapshot, animatingDifferences: true)
-            moveToLastChat()
-            textView.text = nil
-            textView.endEditing(true)
-            textViewDidChange(textView)
             
-            let requestModel = makeRequestModel()
-            Task {
-                do {
-                    let body = try JSONEncoder().encode(requestModel)
-                    let request = try api.makeRequest(body: body)
-                    let responseModel = try await networkManager.loadData(request: request)
-                    guard let content = responseModel.choices.first?.message.content else {return}
-                    
-                    snapshot.deleteItems([loadingChat])
-                    await dataSource.apply(snapshot, animatingDifferences: true)
-                    receiveMessage(message: content)
-                    
-                } catch {
-                    showAlert("메시지 전송에 실패하였습니다. \n 오류코드: \(error)")
-                    print("메시지 전송 실패: ", error)
-                }
+            updateChats(withNew: [userChat, loadingChat])
+            initTextView()
+            sendMessage()
+        }
+    }
+    
+    private func sendMessage() {
+        Task {
+            do {
+                let body = try JSONEncoder().encode(makeRequestModel())
+                let request = try api.makeRequest(body: body)
+                let response = try await networkManager.loadData(request: request)
+                receiveMessage(with: response)
+            } catch {
+                showAlert("메시지 전송에 실패하였습니다. \n 오류코드: \(error)")
             }
         }
+    }
+    
+    private func receiveMessage(with responseModel: ChatResponseModel) {
+        guard let content = responseModel.choices.first?.message.content else { return }
+        let assistantChat = Chat(sender: Sender.assistant, message: content)
+        updateChats(withNew: [assistantChat])
+    }
+    
+    private func updateChats(withNew chats: [Chat]) {
+        var snapshot = dataSource.snapshot()
+        
+        if let lastChat = snapshot.itemIdentifiers(inSection: 0).last {
+            if lastChat.sender == .loading {
+                snapshot.deleteItems([lastChat])
+            }
+        }
+        snapshot.appendItems(chats, toSection: 0)
+        dataSource.apply(snapshot, animatingDifferences: true)
+        moveToLastChat()
     }
     
     private func makeRequestModel() -> ChatRequestModel {
@@ -197,20 +207,13 @@ extension ChatViewController {
             messages.append(message)
         }
         
-        let model = ChatRequestModel(model: "gpt-3.5-turbo-1106",
-                                     messages: messages,
-                                     stream: false,
-                                     logprobs: false)
+        let model = ChatRequestModel(
+            model: "gpt-3.5-turbo-1106",
+            messages: messages,
+            stream: false,
+            logprobs: false)
         
         return model
-    }
-    
-    private func receiveMessage(message: String) {
-        let chat = Chat(sender: Sender.assistant, message: message)
-        var snapshot = dataSource.snapshot()
-        snapshot.appendItems([chat], toSection: 0)
-        dataSource.apply(snapshot, animatingDifferences: true)
-        moveToLastChat()
     }
     
     private func showAlert(_ message: String) {
@@ -218,6 +221,12 @@ extension ChatViewController {
         let okAction = UIAlertAction(title: "확인", style: .default)
         alertController.addAction(okAction)
         self.present(alertController, animated: true)
+    }
+    
+    private func initTextView() {
+        textView.text = nil
+        textView.endEditing(true)
+        textViewDidChange(textView)
     }
 }
 
@@ -239,6 +248,11 @@ extension ChatViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    @objc
+    func handleCellTap() {
         view.endEditing(true)
     }
 }

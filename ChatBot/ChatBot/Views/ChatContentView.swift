@@ -37,12 +37,13 @@ final class ChatContentView: UIView, UIContentView {
         bubble.backgroundColor = .systemBackground
         addSubview(bubble)
         bubble.addSubview(textLabel)
+        bubble.addSubview(dotsView)
         bubble.translatesAutoresizingMaskIntoConstraints = false
         return bubble
     }()
     
-    private var userConstraints: [NSLayoutConstraint]!
     private var assistantConstraints: [NSLayoutConstraint]!
+    private var userConstraints: [NSLayoutConstraint]!
     private var loadingConstraints: [NSLayoutConstraint]!
     
     init(configuration: ChatContentConfiguration) {
@@ -87,37 +88,44 @@ final class ChatContentView: UIView, UIContentView {
     }
     
     private func apply(_ configuration: ChatContentConfiguration) {
+        guard let sender = configuration.sender else { return }
         guard appliedConfiguration != configuration else { return }
         appliedConfiguration = configuration
         textLabel.text = configuration.content
-        
-        guard let sender = configuration.sender else { return }
         bubble.sender = sender
         
         switch sender {
         case .assistant:
-            NSLayoutConstraint.activate(self.assistantConstraints)
-            NSLayoutConstraint.deactivate(self.userConstraints)
-            NSLayoutConstraint.deactivate(self.loadingConstraints)
-            textLabel.textColor = .black
-            dotsView.stopAnimating()
-            dotsView.isHidden = true
-            break
+            configureAssistantView()
         case .user:
-            NSLayoutConstraint.activate(self.userConstraints)
-            NSLayoutConstraint.deactivate(self.assistantConstraints)
-            NSLayoutConstraint.deactivate(self.loadingConstraints)
-            textLabel.textColor = .white
-            dotsView.isHidden = true
-            break
+            configureUserView()
         case .loading:
-            bubble.addSubview(dotsView)
-            NSLayoutConstraint.activate(self.loadingConstraints)
-            NSLayoutConstraint.deactivate(self.userConstraints)
-            NSLayoutConstraint.deactivate(self.assistantConstraints)
-            dotsView.beginAnimating()
-            dotsView.isHidden = false
-            break
+            configureLoadingView()
         }
+    }
+    
+    private func configureAssistantView() {
+        NSLayoutConstraint.activate(self.assistantConstraints)
+        NSLayoutConstraint.deactivate(self.userConstraints)
+        NSLayoutConstraint.deactivate(self.loadingConstraints)
+        textLabel.textColor = .black
+        dotsView.stopAnimating()
+        dotsView.isHidden = true
+    }
+    
+    private func configureUserView() {
+        NSLayoutConstraint.activate(self.userConstraints)
+        NSLayoutConstraint.deactivate(self.assistantConstraints)
+        NSLayoutConstraint.deactivate(self.loadingConstraints)
+        textLabel.textColor = .white
+        dotsView.isHidden = true
+    }
+    
+    private func configureLoadingView() {
+        NSLayoutConstraint.activate(self.loadingConstraints)
+        NSLayoutConstraint.deactivate(self.userConstraints)
+        NSLayoutConstraint.deactivate(self.assistantConstraints)
+        dotsView.startAnimating()
+        dotsView.isHidden = false
     }
 }
