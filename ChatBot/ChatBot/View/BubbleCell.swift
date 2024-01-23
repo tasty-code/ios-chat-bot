@@ -19,7 +19,7 @@ final class BubbleCell: UICollectionViewCell {
         return label
     }()
     
-    private let loadingView: UIView = LoadingView()
+    private lazy var loadingView: LoadingView = LoadingView()
     
     private lazy var bubbleTailView: BubbleTailView = {
         let color: UIColor = role == .user ? .systemYellow : .systemMint
@@ -38,18 +38,23 @@ final class BubbleCell: UICollectionViewCell {
     func setBubbleCell(message: Message) {
         role = Role(rawValue: message.role)
         textLabel.text = message.content
-        bubbleView.backgroundColor = role == Role.user ? .systemYellow : .systemMint
-        textLabel.textAlignment = role == Role.user ? .right : .left
         
-        if role == .assistant {
+        let isUserChat = role == Role.user
+        
+        bubbleView.backgroundColor = isUserChat ? .systemYellow : .systemMint
+        textLabel.textAlignment = isUserChat ? .right : .left
+        
+        if !isUserChat && message.content.isEmpty {
             bubbleView.addSubview(loadingView)
-            loadingView.isHidden = message.content == "" ? false : true
+            loadingView.isHidden = false
+        } else if !isUserChat {
+            loadingView.isHidden = true
         }
         
         bubbleView.addSubview(textLabel)
         bubbleView.addSubview(bubbleTailView)
         contentView.addSubview(bubbleView)
-
+        
         configuration()
     }
     
@@ -58,47 +63,56 @@ final class BubbleCell: UICollectionViewCell {
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         bubbleTailView.translatesAutoresizingMaskIntoConstraints = false
         loadingView.translatesAutoresizingMaskIntoConstraints = false
-
+        
         NSLayoutConstraint.activate([
             bubbleView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            bubbleView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             bubbleView.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, multiplier: 0.7),
-            textLabel.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 10),
-            textLabel.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: -10),
-            textLabel.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 10),
             
             bubbleTailView.widthAnchor.constraint(equalToConstant: 12),
             bubbleTailView.heightAnchor.constraint(equalToConstant: 12),
             bubbleTailView.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor),
         ])
         
-        let loadingBubbleSize = [bubbleView.widthAnchor.constraint(equalToConstant: 80),
-                                 bubbleView.heightAnchor.constraint(equalToConstant: 40)]
-        
-        let commonBubbleSize = [bubbleView.widthAnchor.constraint(greaterThanOrEqualTo: textLabel.widthAnchor, constant: 20),
-                                bubbleView.heightAnchor.constraint(equalTo: textLabel.heightAnchor, constant: 20),
-                                bubbleView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12)]
-        
         if role == .user {
-            NSLayoutConstraint.activate(commonBubbleSize)
             NSLayoutConstraint.activate([
                 bubbleView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
+                
                 bubbleTailView.leadingAnchor.constraint(equalTo: bubbleView.trailingAnchor),
             ])
         } else {
-            NSLayoutConstraint.activate([
-                bubbleView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
-                bubbleTailView.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: -12),
-                
-                loadingView.topAnchor.constraint(equalTo: bubbleView.topAnchor),
-                loadingView.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor),
-                loadingView.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 10),
-                loadingView.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor),
-            ])
-            
             bubbleTailView.transform = CGAffineTransform.init(scaleX: -1, y: 1)
             
-            NSLayoutConstraint.deactivate(textLabel.text == "" ? commonBubbleSize : loadingBubbleSize)
-            NSLayoutConstraint.activate(textLabel.text == "" ? loadingBubbleSize : commonBubbleSize)
+            NSLayoutConstraint.activate([
+                bubbleView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
+                
+                bubbleTailView.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: -12),
+            ])
         }
+        
+        let textLabelConstranint = [textLabel.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 10),
+                                    textLabel.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 10),
+                                    textLabel.widthAnchor.constraint(equalTo: bubbleView.widthAnchor, constant: -20),
+                                    textLabel.heightAnchor.constraint(lessThanOrEqualTo: bubbleView.heightAnchor, constant: -20)]
+        
+        let loadingConstraint = [loadingView.topAnchor.constraint(equalTo: bubbleView.topAnchor),
+                                 loadingView.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 10),
+                                 loadingView.widthAnchor.constraint(greaterThanOrEqualToConstant: 100),
+                                 loadingView.heightAnchor.constraint(greaterThanOrEqualToConstant: 30),
+                                 loadingView.widthAnchor.constraint(equalTo: bubbleView.widthAnchor),
+                                 loadingView.heightAnchor.constraint(equalTo: bubbleView.heightAnchor)]
+        
+        if textLabel.text == "" {
+            NSLayoutConstraint.activate(loadingConstraint)
+            NSLayoutConstraint.deactivate(textLabelConstranint)
+        } else {
+            NSLayoutConstraint.activate(textLabelConstranint)
+            NSLayoutConstraint.deactivate(loadingConstraint)
+        }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        loadingView.isHidden = true
     }
 }
