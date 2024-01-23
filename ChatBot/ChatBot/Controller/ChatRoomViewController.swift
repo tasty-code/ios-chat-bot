@@ -27,6 +27,7 @@ final class ChatRoomViewController : UIViewController {
     
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createLayout())
+        collectionView.keyboardDismissMode = .onDrag
         return collectionView
     }()
     
@@ -49,6 +50,7 @@ final class ChatRoomViewController : UIViewController {
     
     private lazy var sendButton: UIButton = {
         let button = UIButton()
+        button.isEnabled = false
         button.layer.cornerRadius = 8
         button.backgroundColor = #colorLiteral(red: 0.7890922427, green: 0.9981873631, blue: 0.9562725425, alpha: 1)
         button.setImage(UIImage(systemName: "paperplane"), for: .normal)
@@ -113,7 +115,16 @@ final class ChatRoomViewController : UIViewController {
                         self.sendButton.isEnabled = true
                     }
                 case .failure(let error):
-                    print(error)
+                    DispatchQueue.main.async {
+                        let alert = UIAlertController(title: "전송 실패", message: "통신 실패 네트워크 상태를 확인해주세요.", preferredStyle: .alert)
+                        
+                        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
+                            self.chats.removeLast()
+                            self.setUpSnapshot()
+                        }))
+                        self.present(alert, animated: true)
+                    }
+                    
                 }
             }
         }
@@ -137,6 +148,7 @@ final class ChatRoomViewController : UIViewController {
 extension ChatRoomViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
+        sendButton.isEnabled = !textView.text.isEmpty
         guard textView.contentSize.height <= view.frame.height * 0.1 else {
             textView.isScrollEnabled = true
             return
