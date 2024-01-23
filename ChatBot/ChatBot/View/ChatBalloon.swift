@@ -73,12 +73,10 @@ extension ChatBalloon {
         let leftColor = #colorLiteral(red: 0.5870948434, green: 0.7980247736, blue: 0.985825479, alpha: 1)
         
         if direction == .right {
-            leftLabelConstraintIsActive(bool: false)
             rightLabelConstraintIsActive(bool: true)
             fillLayerColor(color: rightColor)
         } else {
             leftLabelConstraintIsActive(bool: true)
-            rightLabelConstraintIsActive(bool: false)
             fillLayerColor(color: leftColor)
         }
     }
@@ -95,7 +93,7 @@ extension ChatBalloon {
         }
     }
     
-    private func leftLabelConstraintIsActive(bool: Bool) {
+     func leftLabelConstraintIsActive(bool: Bool) {
         if bool {
             NSLayoutConstraint.activate(leftLabelConstraint)
         } else {
@@ -103,7 +101,7 @@ extension ChatBalloon {
         }
     }
     
-    private func rightLabelConstraintIsActive(bool: Bool) {
+     func rightLabelConstraintIsActive(bool: Bool) {
         if bool {
             NSLayoutConstraint.activate(rightLabelConstraint)
         } else {
