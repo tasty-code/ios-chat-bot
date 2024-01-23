@@ -7,11 +7,11 @@
 
 import UIKit
 
-class DotsView: UIView {
-    public var baseline: CGFloat = 0
-    public var dotXOffset: CGFloat = 4.0
-    public var dotSize: CGFloat = 15
-    public var dotSpacing: CGFloat = 25
+final class DotsView: UIView {
+    lazy var baseline: CGFloat = 0
+    lazy var dotXOffset: CGFloat = 4.0
+    lazy var dotSize: CGFloat = 15
+    lazy var dotSpacing: CGFloat = 25
     private let copyLayer = CAReplicatorLayer()
     private let dot = CALayer()
     
@@ -25,28 +25,27 @@ class DotsView: UIView {
         commonInit()
     }
     
-    func commonInit() {
+    private func commonInit() {
         copyLayer.addSublayer(dot)
         layer.addSublayer(copyLayer)
     }
     
-    public func beginAnimating() {
+    func startAnimating() {
         dot.frame = CGRect(x: dotXOffset, y: baseline - dotSize, width: dotSize, height: dotSize)
         dot.cornerRadius = dot.frame.width / 2.0
         dot.backgroundColor = UIColor.systemCyan.cgColor
         copyLayer.instanceCount = 3
         copyLayer.instanceTransform = CATransform3DMakeTranslation(dotSpacing, 0, 0)
-        let anim = CABasicAnimation(keyPath: #keyPath(CALayer.opacity))
-        anim.fromValue = 1.0
-        anim.toValue = 0.2
-        anim.duration = 1
-        anim.repeatCount = .infinity
-        dot.add(anim, forKey: nil)
-        copyLayer.instanceDelay = anim.duration / Double(copyLayer.instanceCount)
+        let animation = CABasicAnimation(keyPath: #keyPath(CALayer.opacity))
+        animation.fromValue = 1.0
+        animation.toValue = 0.2
+        animation.duration = 1
+        animation.repeatCount = .infinity
+        dot.add(animation, forKey: nil)
+        copyLayer.instanceDelay = animation.duration / Double(copyLayer.instanceCount)
     }
     
-    public func stopAnimating() {
+    func stopAnimating() {
         layer.removeAllAnimations()
     }
-    
 }
