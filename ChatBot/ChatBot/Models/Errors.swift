@@ -74,3 +74,14 @@ enum DecoderError: Error, CustomStringConvertible {
         }
     }
 }
+
+enum MessageSendError: Error, CustomStringConvertible {
+    case sendError
+    
+    var description: String {
+        switch self {
+        case .sendError:
+            "메시지 전송에 실패하였습니다.\n오류내용: "
+        }
+    }
+}

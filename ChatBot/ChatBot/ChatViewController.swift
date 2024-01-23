@@ -170,7 +170,7 @@ extension ChatViewController {
                 let response = try await networkManager.loadData(request: request)
                 receiveMessage(with: response)
             } catch {
-                showAlert("메시지 전송에 실패하였습니다. \n 오류코드: \(error)")
+                showAlert(title: "오류", message: "\(MessageSendError.sendError.description) \(error)")
             }
         }
     }
@@ -216,8 +216,8 @@ extension ChatViewController {
         return model
     }
     
-    private func showAlert(_ message: String) {
-        let alertController = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
+    private func showAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "확인", style: .default)
         alertController.addAction(okAction)
         self.present(alertController, animated: true)
