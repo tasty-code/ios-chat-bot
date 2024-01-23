@@ -72,7 +72,7 @@ final class ChatContentView: UIView, UIContentView {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
     }
     
     private func setConstraints() {
@@ -108,6 +108,7 @@ final class ChatContentView: UIView, UIContentView {
             NSLayoutConstraint.deactivate(self.assistantConstraints)
             NSLayoutConstraint.deactivate(self.loadingConstraints)
             textLabel.textColor = .white
+            dotsView.isHidden = true
             break
         case .loading:
             bubble.addSubview(dotsView)

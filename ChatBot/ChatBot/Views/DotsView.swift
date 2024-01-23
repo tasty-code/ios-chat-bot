@@ -8,12 +8,10 @@
 import UIKit
 
 class DotsView: UIView {
-    
     public var baseline: CGFloat = 0
     public var dotXOffset: CGFloat = 4.0
     public var dotSize: CGFloat = 15
     public var dotSpacing: CGFloat = 25
-    
     private let copyLayer = CAReplicatorLayer()
     private let dot = CALayer()
     
@@ -31,6 +29,7 @@ class DotsView: UIView {
         copyLayer.addSublayer(dot)
         layer.addSublayer(copyLayer)
     }
+    
     public func beginAnimating() {
         dot.frame = CGRect(x: dotXOffset, y: baseline - dotSize, width: dotSize, height: dotSize)
         dot.cornerRadius = dot.frame.width / 2.0
@@ -45,6 +44,7 @@ class DotsView: UIView {
         dot.add(anim, forKey: nil)
         copyLayer.instanceDelay = anim.duration / Double(copyLayer.instanceCount)
     }
+    
     public func stopAnimating() {
         layer.removeAllAnimations()
     }

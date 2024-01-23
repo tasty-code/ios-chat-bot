@@ -8,7 +8,6 @@
 import UIKit
 
 final class ChatViewController: UIViewController {
-    
     private lazy var horizontalStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -75,9 +74,9 @@ final class ChatViewController: UIViewController {
     
     @objc
     func handleCellTap() {
-            view.endEditing(true)
-       }
+        view.endEditing(true)
     }
+}
 
 // MARK: - Configure Layout
 
@@ -178,6 +177,7 @@ extension ChatViewController {
                     receiveMessage(message: content)
                     
                 } catch {
+                    showAlert("메시지 전송에 실패하였습니다. \n 오류코드: \(error)")
                     print("메시지 전송 실패: ", error)
                 }
             }
@@ -198,9 +198,9 @@ extension ChatViewController {
         }
         
         let model = ChatRequestModel(model: "gpt-3.5-turbo-1106",
-                                    messages: messages,
-                                    stream: false,
-                                    logprobs: false)
+                                     messages: messages,
+                                     stream: false,
+                                     logprobs: false)
         
         return model
     }
@@ -211,6 +211,13 @@ extension ChatViewController {
         snapshot.appendItems([chat], toSection: 0)
         dataSource.apply(snapshot, animatingDifferences: true)
         moveToLastChat()
+    }
+    
+    private func showAlert(_ message: String) {
+        let alertController = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true)
     }
 }
 
