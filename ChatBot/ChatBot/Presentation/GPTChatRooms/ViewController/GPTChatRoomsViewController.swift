@@ -18,11 +18,6 @@ final class GPTChatRoomsViewController: UIViewController {
     }
     
     private let viewModel: any GPTChatRoomsVMProtocol
-    private let fetchRoomsSubject = PassthroughSubject<Void, Never>()
-    private let createRoomSubject = PassthroughSubject<String?, Never>()
-    private let modifyRoomSubject = PassthroughSubject<(IndexPath, String?), Never>()
-    private let deleteRoomSubject = PassthroughSubject<IndexPath, Never>()
-    private let selectRoomSubject = PassthroughSubject<IndexPath, Never>()
     private var cancellables = Set<AnyCancellable>()
     
     private lazy var tableView = {
@@ -53,35 +48,47 @@ final class GPTChatRoomsViewController: UIViewController {
         configureUI()
         configureDataSource()
         bind(to: viewModel)
+        viewModel.onViewDidLoad()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        fetchRoomsSubject.send()
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.onViewWillAppear()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        viewModel.onViewDidDisappear()
     }
     
     private func bind(to viewModel: any GPTChatRoomsVMProtocol) {
-        let input = GPTChatRoomsInput(
-            fetchRooms: fetchRoomsSubject.eraseToAnyPublisher(),
-            createRoom: createRoomSubject.eraseToAnyPublisher(),
-            modifyRoom: modifyRoomSubject.eraseToAnyPublisher(),
-            deleteRoom: deleteRoomSubject.eraseToAnyPublisher(),
-            selectRoom: selectRoomSubject.eraseToAnyPublisher()
-        )
-        
-        viewModel.transform(from: input)
+        viewModel.output
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] output in
                 switch output {
-                case .success(let rooms):
-                    self?.applySnapshot(sectionRows: rooms.map { Row.forMain(title: $0.title, localeDateString: $0.recentChatDate.toLocaleString(.koKR)) })
-                case .failure(let error):
-                    self?.present(UIAlertController(error: error), animated: true)
-                case .moveToChatRoom(let chatRoomViewModel):
-                    let viewController = GPTChattingViewController(viewModel: chatRoomViewModel)
-                    self?.navigationController?.pushViewController(viewController, animated: true)
+                case .moveToChatRoom(let result):
+                    self?.handleMoveChatRoom(result)
+                case .updateChatRooms(let result):
+                    self?.handleUpdateChatRooms(result)
                 }
             }
             .store(in: &cancellables)
+    }
+    
+    private func handleMoveChatRoom(_ result: Result<any GPTChattingVMProtocol, Error>) {
+        switch result {
+        case .success(let viewModel):
+            navigationController?.pushViewController(GPTChattingViewController(viewModel: viewModel), animated: true)
+        case .failure(let error):
+            present(UIAlertController(error: error), animated: true)
+        }
+    }
+    
+    private func handleUpdateChatRooms(_ result: Result<[Model.GPTChatRoomDTO], Error>) {
+        switch result {
+        case .success(let chatRooms):
+            applySnapshot(sectionRows: chatRooms.map { Row.forMain(title: $0.title, localeDateString: $0.recentChatDate.toLocaleString(.koKR)) })
+        case .failure(let error):
+            present(UIAlertController(error: error), animated: true)
+        }
     }
 }
 
@@ -131,20 +138,20 @@ extension GPTChatRoomsViewController {
 extension GPTChatRoomsViewController {
     private func configureCreateRoomAlert() -> UIAlertController {
         UIAlertController(title: "방 생성", message: "생성할 방 제목을 입력해주세요.") { [weak self] roomName in
-            self?.createRoomSubject.send(roomName)
+            self?.viewModel.createRoom(roomName)
         }
     }
     
     private func configureModifyRoomAlert(for indexPath: IndexPath) -> UIAlertController {
         UIAlertController(title: "방 수정", message: "수정할 방 제목을 입력해주세요.") { [weak self] roomName in
-            self?.modifyRoomSubject.send((indexPath, roomName))
+            self?.viewModel.modifyRoom(roomName, for: indexPath)
         }
     }
 }
 
 extension GPTChatRoomsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectRoomSubject.send(indexPath)
+        viewModel.selectRoom(for: indexPath)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -157,7 +164,7 @@ extension GPTChatRoomsViewController: UITableViewDelegate {
         
         let deleteAction = UIContextualAction(style: .destructive, title: "삭제", handler: { [weak self] (action, view, completionHandler) in
             guard let self = self else { return }
-            deleteRoomSubject.send(indexPath)
+            viewModel.deleteRoom(for: indexPath)
             completionHandler(true)
         })
         deleteAction.backgroundColor = .systemRed

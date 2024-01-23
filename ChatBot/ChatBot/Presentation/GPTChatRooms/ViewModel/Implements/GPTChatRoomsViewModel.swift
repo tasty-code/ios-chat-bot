@@ -8,9 +8,13 @@
 import Combine
 import Foundation
 
-final class GPTChatRoomsViewModel: GPTChatRoomsVMProtocol {
+final class GPTChatRoomsViewModel: GPTChatRoomsOutputProtocol {
+    typealias Output = GPTChatRoomsOutput
+    
+    var output: AnyPublisher<Output, Never> { outputSubject.eraseToAnyPublisher() }
+    
     private let chatRoomRepository: ChatRoomRepositable
-    private let output = PassthroughSubject<Output, Never>()
+    private let outputSubject = PassthroughSubject<Output, Never>()
     
     private var cancellables = Set<AnyCancellable>()
     private var chatRoomList = [Model.GPTChatRoomDTO]()
@@ -18,104 +22,81 @@ final class GPTChatRoomsViewModel: GPTChatRoomsVMProtocol {
     init(chatRoomRepository: ChatRoomRepositable = Repository.CoreDataChatRoomRepository()) {
         self.chatRoomRepository = chatRoomRepository
     }
+}
+
+extension GPTChatRoomsViewModel: GPTChatRoomsInputProtocol {
+    func onViewDidLoad() { }
     
-    func transform(from input: GPTChatRoomsInput) -> AnyPublisher<GPTChatRoomsOutput, Never> {
-        bindFetchRoom(from: input.fetchRooms)
-        bindCreateRoom(from: input.createRoom)
-        bindDeleteRoom(from: input.deleteRoom)
-        bindSelectRoom(from: input.selectRoom)
-        bindModifyRoom(from: input.modifyRoom)
+    func onViewWillAppear() {
+        outputSubject.send(fetchChatRooms())
+    }
+    
+    func onViewDidDisappear() { }
+    
+    func createRoom(_ roomName: String?) {
+        guard let roomName = roomName, !roomName.isEmpty else {
+            outputSubject.send(Output.updateChatRooms(.failure(GPTError.ChatRoomError.noRoomName)))
+            return
+        }
         
-        return output.eraseToAnyPublisher()
+        let chatRoom = Model.GPTChatRoomDTO(title: roomName, recentChatDate: Date())
+        let output = handleRooms {
+            try chatRoomRepository.storeChatRoom(chatRoom)
+            chatRoomList.append(chatRoom)
+        }
+        outputSubject.send(output)
+    }
+    
+    func modifyRoom(_ roomName: String?, for indexPath: IndexPath) {
+        guard let roomName = roomName, !roomName.isEmpty else {
+            outputSubject.send(Output.updateChatRooms(.failure(GPTError.ChatRoomError.noRoomName)))
+            return
+        }
+        
+        let previousChatRoom = chatRoomList[indexPath.item]
+        let newChatRoom = Model.GPTChatRoomDTO(id: previousChatRoom.id, title: roomName, recentChatDate: previousChatRoom.recentChatDate)
+        let output = handleRooms {
+            try chatRoomRepository.modifyChatRoom(newChatRoom)
+            chatRoomList[indexPath.item] = newChatRoom
+        }
+        outputSubject.send(output)
+    }
+    
+    func deleteRoom(for indexPath: IndexPath) {
+        let chatRoom = chatRoomList[indexPath.item]
+        let output = handleRooms {
+            try chatRoomRepository.removeChatRoom(chatRoom)
+            chatRoomList.remove(at: indexPath.item)
+        }
+        outputSubject.send(output)
+    }
+    
+    func selectRoom(for indexPath: IndexPath) {
+        let chatRoom = chatRoomList[indexPath.item]
+        guard let apiKey = Bundle.main.object(forInfoDictionaryKey: "CHAT_BOT_API_KEY") as? String else {
+            let output = Output.moveToChatRoom(.failure(GPTError.RepositoryError.dataNotFound))
+            outputSubject.send(output)
+            return
+        }
+        let viewModel = GPTChattingViewModel(chatRoomDTO: chatRoom, httpRequest: Network.GPTRequest.chatBot(apiKey: apiKey))
+        outputSubject.send(Output.moveToChatRoom(.success(viewModel)))
     }
 }
 
 extension GPTChatRoomsViewModel {
-    private func bindFetchRoom(from publisher: AnyPublisher<Void, Never>?) {
-        publisher?
-            .sink { [weak self] _ in
-                guard let chatRoomList = try? self?.chatRoomRepository.fetchChatRoomList() else {
-                    self?.output.send(Output.failure(error: GPTError.RepositoryError.dataNotFound))
-                    return
-                }
-                self?.chatRoomList = chatRoomList
-                self?.output.send(Output.success(rooms: chatRoomList))
-            }
-            .store(in: &cancellables)
+    private func handleRooms(_ handler: () throws -> Void) -> Output {
+        do {
+            try handler()
+            return Output.updateChatRooms(.success(chatRoomList))
+        } catch {
+            return Output.updateChatRooms(.failure(error))
+        }
     }
     
-    private func bindCreateRoom(from publisher: AnyPublisher<String?, Never>?) {
-        publisher?
-            .sink { [weak self] title in
-                guard let self else { return }
-                guard let title = title, title.count > 0 else {
-                    output.send(Output.failure(error: GPTError.ChatRoomError.noRoomName))
-                    return
-                }
-                
-                let chatRoomDTO = Model.GPTChatRoomDTO(title: title, recentChatDate: Date())
-                do {
-                    try chatRoomRepository.storeChatRoom(chatRoomDTO)
-                    chatRoomList.append(chatRoomDTO)
-                    output.send(Output.success(rooms: chatRoomList))
-                } catch {
-                    output.send(Output.failure(error: error))
-                }
-            }
-            .store(in: &cancellables)
-    }
-    
-    private func bindDeleteRoom(from publisher: AnyPublisher<IndexPath, Never>?) {
-        publisher?
-            .sink { [weak self] indexPath in
-                guard let self else { return }
-                do {
-                    let chatRoom = chatRoomList[indexPath.item]
-                    try chatRoomRepository.removeChatRoom(chatRoom)
-                    chatRoomList.remove(at: indexPath.item)
-                    output.send(Output.success(rooms: chatRoomList))
-                } catch {
-                    output.send(Output.failure(error: error))
-                }
-            }
-            .store(in: &cancellables)
-    }
-    
-    private func bindSelectRoom(from publisher: AnyPublisher<IndexPath, Never>?) {
-        publisher?
-            .sink { [weak self] indexPath in
-                guard let self else { return }
-                guard let apiKey = Bundle.main.object(forInfoDictionaryKey: "CHAT_BOT_API_KEY") as? String else {
-                    output.send(Output.failure(error: GPTError.RepositoryError.dataNotFound))
-                    return
-                }
-                
-                output.send(Output.moveToChatRoom(
-                    chatRoomViewModel: GPTChattingViewModel(chatRoomDTO: chatRoomList[indexPath.item],
-                        httpRequest: Network.GPTRequest.chatBot(apiKey: apiKey))
-                ))
-            }
-            .store(in: &cancellables)
-    }
-    
-    private func bindModifyRoom(from publisher: AnyPublisher<(IndexPath, String?), Never>?) {
-        publisher?
-            .sink { [weak self] (indexPath, title) in
-                guard let self else { return }
-                guard let title = title, title.count > 0 else {
-                    output.send(Output.failure(error: GPTError.ChatRoomError.noRoomName))
-                    return
-                }
-                
-                let chatRoomDTO = Model.GPTChatRoomDTO(id: chatRoomList[indexPath.item].id, title: title, recentChatDate: chatRoomList[indexPath.item].recentChatDate)
-                do {
-                    try chatRoomRepository.modifyChatRoom(chatRoomDTO)
-                    chatRoomList[indexPath.item] = chatRoomDTO
-                    output.send(Output.success(rooms: chatRoomList))
-                } catch {
-                    output.send(Output.failure(error: error))
-                }
-            }
-            .store(in: &cancellables)
+    private func fetchChatRooms() -> Output {
+        let output = handleRooms {
+            chatRoomList = try chatRoomRepository.fetchChatRoomList()
+        }
+        return output
     }
 }

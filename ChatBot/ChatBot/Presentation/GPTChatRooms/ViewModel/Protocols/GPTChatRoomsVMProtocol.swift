@@ -8,19 +8,23 @@
 import Combine
 import Foundation
 
-protocol GPTChatRoomsVMProtocol: ViewModelable
-where Input == GPTChatRoomsInput, Output == GPTChatRoomsOutput { }
+typealias GPTChatRoomsVMProtocol = GPTChatRoomsInputProtocol & GPTChatRoomsOutputProtocol
 
-struct GPTChatRoomsInput {
-    let fetchRooms: AnyPublisher<Void, Never>?
-    let createRoom: AnyPublisher<String?, Never>?
-    let modifyRoom: AnyPublisher<(IndexPath, String?), Never>?
-    let deleteRoom: AnyPublisher<IndexPath, Never>?
-    let selectRoom: AnyPublisher<IndexPath, Never>?
+protocol GPTChatRoomsInputProtocol {
+    func onViewDidLoad()
+    func onViewWillAppear()
+    func onViewDidDisappear()
+    func createRoom(_ roomName: String?)
+    func modifyRoom(_ roomName: String?, for indexPath: IndexPath)
+    func deleteRoom(for indexPath: IndexPath)
+    func selectRoom(for indexPath: IndexPath)
+}
+
+protocol GPTChatRoomsOutputProtocol {
+    var output: AnyPublisher<GPTChatRoomsOutput, Never> { get }
 }
 
 enum GPTChatRoomsOutput {
-    case success(rooms: [Model.GPTChatRoomDTO])
-    case failure(error: Error)
-    case moveToChatRoom(chatRoomViewModel: any GPTChattingVMProtocol)
+    case updateChatRooms(Result<[Model.GPTChatRoomDTO], Error>)
+    case moveToChatRoom(Result<any GPTChattingVMProtocol, Error>)
 }
