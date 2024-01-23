@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoadingView: UIView {
+final class LoadingView: UIView {
     
     let circleLayer1 = CALayer()
     let circleLayer2 = CALayer()

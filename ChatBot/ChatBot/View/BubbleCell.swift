@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BubbleCell: UICollectionViewCell {
+final class BubbleCell: UICollectionViewCell {
     
     var role: Role?
     
