@@ -14,9 +14,9 @@ final class ChatRoomViewController : UIViewController {
         case main
     }
     
-    private var chatManager = ChatManager()
-    private let chatService = ChatService()
+    private let chatUseCase = ChatUseCase()
     private var dataSource: DataSource?
+    
     
     private var mainStackView: UIStackView = {
         let stackView = UIStackView()
@@ -99,38 +99,30 @@ final class ChatRoomViewController : UIViewController {
         textInputView.resignFirstResponder()
         
         guard let question = textInputView.text, question != "" else { return }
-        chatManager.appendChat(question: question)
-        sendButton.isEnabled = false
-        
-        let chats = chatManager.getChats()
-        
-        DispatchQueue.global().async { [weak self] in
-            guard let self = self else { return }
+        //        chatManager.appendChat(question: question)
+        chatUseCase.appendQuestion(question: question) {
+            sendButton.isEnabled = false
             
-            try? self.chatService.sendChats(chats: chats) { result in
-                switch result {
-                case .success(let success):
-                    let answer = success.choices[0].message.content
-                    self.chatManager.responseChat(answer: answer)
-                    
-                    DispatchQueue.main.async { [weak self] in
-                        guard let self = self else { return }
-                        self.sendButton.isEnabled = true
-                    }
-                case .failure:
-                    DispatchQueue.main.async { [weak self] in
-                        guard let self = self else { return }
-                        let alert = UIAlertController(title: "전송 실패", message: "통신 실패 네트워크 상태를 확인해주세요.", preferredStyle: .alert)
-                            
-                        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
-                            self.chatManager.removeLastChat()
-                            self.setUpSnapshot()
-                        }))
-                        self.present(alert, animated: true)
-                    }
-                }
+        }
+        
+        chatUseCase.sendQuestion {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.sendButton.isEnabled = true
+            }
+        } failureCompletion: {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                let alert = UIAlertController(title: "전송 실패", message: "통신 실패 네트워크 상태를 확인해주세요.", preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
+                    self.chatUseCase.removeLastChat()
+                    self.setUpSnapshot()
+                }))
+                self.present(alert, animated: true)
             }
         }
+        
         
         textInputView.text = nil
         textInputView.insertText("")
@@ -184,7 +176,7 @@ extension ChatRoomViewController {
     }
     
     private func setUpSnapshot() {
-        let chats = chatManager.getChats()
+        let chats = chatUseCase.getChats()
         var snapshot = NSDiffableDataSourceSnapshot<Section, ChatBubble>()
         snapshot.appendSections([.main])
         snapshot.appendItems(chats)
@@ -192,7 +184,7 @@ extension ChatRoomViewController {
     }
     
     private func moveScroll() {
-        collectionView.scrollToItem(at: IndexPath(row: chatManager.getChats().endIndex - 1, section: .zero), at: .bottom, animated: true)
+        collectionView.scrollToItem(at: IndexPath(row: chatUseCase.getChats().count - 1, section: .zero), at: .bottom, animated: true)
     }
     
 }
