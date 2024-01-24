@@ -32,6 +32,7 @@
 		E38F86132B4F7E2C003AB81E /* URLSession+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38F86122B4F7E2C003AB81E /* URLSession+Extension.swift */; };
 		E38F864A2B552863003AB81E /* BubbleTailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38F86492B552863003AB81E /* BubbleTailView.swift */; };
 		E38F864C2B560E35003AB81E /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38F864B2B560E35003AB81E /* Role.swift */; };
+		E3B6A2DD2B609DA500C9B555 /* ChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B6A2DC2B609DA500C9B555 /* ChatManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		E38F86122B4F7E2C003AB81E /* URLSession+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extension.swift"; sourceTree = "<group>"; };
 		E38F86492B552863003AB81E /* BubbleTailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleTailView.swift; sourceTree = "<group>"; };
 		E38F864B2B560E35003AB81E /* Role.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Role.swift; sourceTree = "<group>"; };
+		E3B6A2DC2B609DA500C9B555 /* ChatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 		E3388FBA2B44E46800175C2C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E3B6A2DB2B609D8E00C9B555 /* ChatManager */,
 				D00C334D2B44ECC700E57445 /* DTO */,
 				D04416C22B5515E300110C2B /* ChatBubble.swift */,
 				E38F864B2B560E35003AB81E /* Role.swift */,
@@ -226,6 +229,14 @@
 				B4B3E2C02B42D1BB00818B3C /* ChatRoomViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		E3B6A2DB2B609D8E00C9B555 /* ChatManager */ = {
+			isa = PBXGroup;
+			children = (
+				E3B6A2DC2B609DA500C9B555 /* ChatManager.swift */,
+			);
+			path = ChatManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -315,6 +326,7 @@
 				E31C08CE2B5DFD4A0062FFA0 /* UITextView+Extension.swift in Sources */,
 				E3388FBE2B44F30400175C2C /* Message.swift in Sources */,
 				D00C334F2B44ECCE00E57445 /* ResponseData.swift in Sources */,
+				E3B6A2DD2B609DA500C9B555 /* ChatManager.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
 				D04416C62B55192C00110C2B /* BubbleCell.swift in Sources */,
 				E386CBC92B47B95700B84994 /* Constant.swift in Sources */,

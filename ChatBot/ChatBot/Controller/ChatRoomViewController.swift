@@ -14,7 +14,7 @@ final class ChatRoomViewController : UIViewController {
         case main
     }
     
-    private var chats: [ChatBubble] = []
+    private var chatManager = ChatManager()
     private let chatService = ChatService()
     private var dataSource: DataSource?
     
@@ -100,15 +100,16 @@ final class ChatRoomViewController : UIViewController {
         textInputView.resignFirstResponder()
         guard let question = textInputView.text else { return }
         
-        appendChat(content: question)
+        chatManager.appendChat(question: question)
         updateCollectionView()
+        let chats = chatManager.getChats()
         
         DispatchQueue.global().async { [self] in
             try? self.chatService.sendChats(chats: chats) { result in
                 switch result {
                 case .success(let success):
                     let answer = success.choices[0].message.content
-                    self.chats[self.chats.count - 1] = ChatBubble(message: Message(role: "assistant", content: answer))
+                    self.chatManager.responseChat(answer: answer)
                     
                     DispatchQueue.main.async {
                         self.updateCollectionView()
@@ -119,7 +120,7 @@ final class ChatRoomViewController : UIViewController {
                         let alert = UIAlertController(title: "전송 실패", message: "통신 실패 네트워크 상태를 확인해주세요.", preferredStyle: .alert)
                         
                         alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
-                            self.chats.removeLast()
+                            self.chatManager.removeLastChat()
                             self.setUpSnapshot()
                         }))
                         self.present(alert, animated: true)
@@ -133,10 +134,7 @@ final class ChatRoomViewController : UIViewController {
         textInputView.insertText("")
     }
     
-    private func appendChat(content: String) {
-        chats.append(ChatBubble(message: Message(role: "user", content: content)))
-        chats.append(ChatBubble(message: Message(role: "assistant", content: "")))
-    }
+    
     
     private func updateCollectionView() {
         setUpSnapshot()
@@ -194,7 +192,7 @@ extension ChatRoomViewController {
     }
     
     private func setUpSnapshot() {
-        let chats = self.chats
+        let chats = chatManager.getChats()
         var snapshot = NSDiffableDataSourceSnapshot<Section, ChatBubble>()
         snapshot.appendSections([.main])
         snapshot.appendItems(chats)
@@ -202,7 +200,7 @@ extension ChatRoomViewController {
     }
     
     private func moveScroll() {
-        collectionView.scrollToItem(at: IndexPath(row: chats.endIndex - 1, section: .zero), at: .bottom, animated: true)
+        collectionView.scrollToItem(at: IndexPath(row: chatManager.getChats().endIndex - 1, section: .zero), at: .bottom, animated: true)
     }
     
 }

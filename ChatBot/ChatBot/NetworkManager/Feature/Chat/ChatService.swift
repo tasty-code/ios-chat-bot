@@ -11,6 +11,7 @@ final class ChatService: ChatServiceProtocol {
     
     func sendChats(chats: [ChatBubble], completion: @escaping (Result<ResponseData, Error>) -> Void) throws {
         var messages: [Message] = []
+    
         for chat in chats {
             messages.append(chat.message)
         }
