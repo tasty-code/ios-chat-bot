@@ -18,7 +18,7 @@ final class ChatRoomViewController : UIViewController {
     private let chatService = ChatService()
     private var dataSource: DataSource?
     
-    private lazy var mainStackView: UIStackView = {
+    private var mainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .fill
@@ -31,7 +31,7 @@ final class ChatRoomViewController : UIViewController {
         return collectionView
     }()
     
-    private lazy var userInputStackView: UIStackView = {
+    private var userInputStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.alignment = .fill
@@ -40,7 +40,7 @@ final class ChatRoomViewController : UIViewController {
         return stackView
     }()
     
-    private lazy var textInputView: UITextView = {
+    private var textInputView: UITextView = {
         let textView = UITextView()
         textView.layer.borderWidth = 1
         textView.layer.borderColor = UIColor.systemGray.cgColor

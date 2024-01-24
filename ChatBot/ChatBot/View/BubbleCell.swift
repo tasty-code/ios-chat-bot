@@ -19,7 +19,7 @@ final class BubbleCell: UICollectionViewCell {
         return label
     }()
     
-    private lazy var loadingView: LoadingView = LoadingView()
+    private var loadingView: LoadingView = LoadingView()
     
     private lazy var bubbleTailView: BubbleTailView = {
         let color: UIColor = role == .user ? .systemYellow : .systemMint
