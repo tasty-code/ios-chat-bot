@@ -89,12 +89,12 @@
 		0E7B002D2B5652BE005C883C /* Module */ = {
 			isa = PBXGroup;
 			children = (
-				0E7B002E2B5652D5005C883C /* Extension */,
+				0E7B002E2B5652D5005C883C /* Extensions */,
 			);
 			path = Module;
 			sourceTree = "<group>";
 		};
-		0E7B002E2B5652D5005C883C /* Extension */ = {
+		0E7B002E2B5652D5005C883C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				0E7B002F2B5652ED005C883C /* String.swift */,
@@ -103,7 +103,7 @@
 				E136DB892B5A8177009E8026 /* UIStackView.swift */,
 				E15D64042B60C79F0014A9B1 /* URLSession.swift */,
 			);
-			path = Extension;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		0ED22E192B47969100E9596B /* Errors */ = {
