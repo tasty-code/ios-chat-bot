@@ -12,6 +12,7 @@ final class GPTChattingViewModel: GPTChattingOutputProtocol {
     
     private let chatRoomDTO: Model.GPTChatRoomDTO
     private let chattingRepository: ChattingRepositable
+    private let promptSettingRepository: PromptSettingRepositable
     
     private let httpService: HTTPServicable
     private let httpRequest: HTTPRequestable
@@ -19,12 +20,14 @@ final class GPTChattingViewModel: GPTChattingOutputProtocol {
     private let outputSubject = PassthroughSubject<Output, Never>()
     var output: AnyPublisher<GPTChattingOutput, Never> { outputSubject.eraseToAnyPublisher() }
     private var cancellables = Set<AnyCancellable>()
+    private var systemMessage: Model.GPTMessage?
     
     private var messages = [Model.GPTMessage]()
     
     init(
         chatRoomDTO: Model.GPTChatRoomDTO,
         chattingRepository: ChattingRepositable = Repository.CoreDataChattingRepository(),
+        promptSettingRepository: PromptSettingRepositable = Repository.CoreDataPromptSettingRepository(),
         httpService: HTTPServicable = AppEnviroment.defaultHTTPSecvice,
         httpRequest: HTTPRequestable
     ) {
@@ -32,12 +35,19 @@ final class GPTChattingViewModel: GPTChattingOutputProtocol {
         self.chattingRepository = chattingRepository
         self.httpService = httpService
         self.httpRequest = httpRequest
+        self.promptSettingRepository = promptSettingRepository
     }
     
     private func getReplyFromServer(_ indexToUpdate: Int) {
+        var sendMessage = messages.filter { $0.role != .waiting }
+        if let systemMessage = systemMessage {
+            sendMessage = [systemMessage] + sendMessage
+        }
+        print(sendMessage)
+        
         let networkPublisher = httpService.request(
             request: httpRequest,
-            object: Model.GPTCommentDTO(messages: messages.filter { $0.role != .waiting }),
+            object: Model.GPTCommentDTO(messages: sendMessage),
             type: Model.GPTReplyDTO.self
         ).tryMap { replyDTO in
             guard let reply = replyDTO.choices.first?.message else {
@@ -71,6 +81,7 @@ extension GPTChattingViewModel: GPTChattingsInputProtocol {
     
     func onViewWillAppear() {
         do {
+            systemMessage = try promptSettingRepository.fetchPromptSetting(for: chatRoomDTO)?.asRequestMessage()
             messages = try chattingRepository.fetchChattings(for: chatRoomDTO)
             if messages.isEmpty { return }
             outputSubject.send(Output.networkChatting(.success((messages, messages.count - 1))))

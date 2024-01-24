@@ -60,13 +60,50 @@ final class GPTChatRoomsViewController: UIViewController {
     }
     
     private func bind(to viewModel: any GPTChatRoomsVMProtocol) {
+        let chattingPublisher = viewModel.output
+            .flatMap {
+                if case let .moveToChatRoom(result) = $0,
+                   case let .success(viewModel) = result {
+                    return Just(viewModel).eraseToAnyPublisher()
+                }
+                return Empty().eraseToAnyPublisher()
+            }
+            .eraseToAnyPublisher()
+        
+        let promptSettingPublisher = viewModel.output
+            .flatMap {
+                if case let .moveToPromptSetting(result) = $0,
+                   case let .success(viewModel) = result {
+                    return Just(viewModel).eraseToAnyPublisher()
+                }
+                return Empty().eraseToAnyPublisher()
+            }
+            .eraseToAnyPublisher()
+        
+        Publishers.Zip(chattingPublisher, promptSettingPublisher)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] (chattingViewModel, promptSettingViewModel) in
+                let chattingVC = GPTChattingViewController(viewModel: chattingViewModel)
+                let promptSettingVC = GPTPromptSettingViewController(viewModel: promptSettingViewModel)
+                let tabBarController = UITabBarController()
+                tabBarController.setViewControllers([chattingVC, promptSettingVC], animated: true)
+                if let items = tabBarController.tabBar.items {
+                    items[0].selectedImage = UIImage(systemName: "folder.fill")
+                    items[0].image = UIImage(systemName: "folder")
+                    items[0].title = "채팅"
+                    
+                    items[1].selectedImage = UIImage(systemName: "folder.fill")
+                    items[1].image = UIImage(systemName: "folder")
+                    items[1].title = "프롬프트"
+                }
+                self?.navigationController?.pushViewController(tabBarController, animated: true)
+            }
+            .store(in: &cancellables)
+        
         viewModel.output
             .receive(on: DispatchQueue.main)
             .sink { [weak self] output in
-                switch output {
-                case .moveToChatRoom(let result):
-                    self?.handleMoveChatRoom(result)
-                case .updateChatRooms(let result):
+                if case let .updateChatRooms(result) = output {
                     self?.handleUpdateChatRooms(result)
                 }
             }

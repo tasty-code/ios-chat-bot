@@ -27,4 +27,5 @@ protocol GPTChatRoomsOutputProtocol {
 enum GPTChatRoomsOutput {
     case updateChatRooms(Result<[Model.GPTChatRoomDTO], Error>)
     case moveToChatRoom(Result<any GPTChattingVMProtocol, Error>)
+    case moveToPromptSetting(Result<any GPTPromptSettingVMProtocol, Error>)
 }

@@ -78,8 +78,12 @@ extension GPTChatRoomsViewModel: GPTChatRoomsInputProtocol {
             outputSubject.send(output)
             return
         }
-        let viewModel = GPTChattingViewModel(chatRoomDTO: chatRoom, httpRequest: Network.GPTRequest.chatBot(apiKey: apiKey))
-        outputSubject.send(Output.moveToChatRoom(.success(viewModel)))
+        
+        let chatRoomViewModel = GPTChattingViewModel(chatRoomDTO: chatRoom, httpRequest: Network.GPTRequest.chatBot(apiKey: apiKey))
+        let promptSettingViewModel = GPTPromptSettingViewModel(chatRoom: chatRoom)
+        
+        outputSubject.send(Output.moveToChatRoom(.success(chatRoomViewModel)))
+        outputSubject.send(Output.moveToPromptSetting(.success(promptSettingViewModel)))
     }
 }
 

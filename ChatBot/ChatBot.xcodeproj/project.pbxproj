@@ -185,11 +185,11 @@
 		0D32600D2B5A085D000C352E /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				0D66D0D12B60AD2000F518CE /* PromptSettingRepository */,
-				0D32604D2B5D44BD000C352E /* ChattingRepository */,
-				0D3260202B5A18D0000C352E /* ChatRoomRepository */,
-				0D3260182B5A0E4B000C352E /* CoreDataRepository */,
 				0D32601B2B5A1523000C352E /* Repository.swift */,
+				0D3260202B5A18D0000C352E /* ChatRoomRepository */,
+				0D32604D2B5D44BD000C352E /* ChattingRepository */,
+				0D3260182B5A0E4B000C352E /* CoreDataRepository */,
+				0D66D0D12B60AD2000F518CE /* PromptSettingRepository */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
