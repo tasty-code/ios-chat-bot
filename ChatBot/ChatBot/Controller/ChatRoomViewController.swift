@@ -64,6 +64,7 @@ final class ChatRoomViewController : UIViewController {
         configurationCell()
         setUpSnapshot()
         self.textInputView.delegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(updateCollectionView), name: Notification.Name("ChatsUpdatedNotification"), object: nil)
     }
     
     private func configurationUI() {
@@ -101,7 +102,7 @@ final class ChatRoomViewController : UIViewController {
         guard let question = textInputView.text else { return }
         
         chatManager.appendChat(question: question)
-        updateCollectionView()
+
         let chats = chatManager.getChats()
         
         DispatchQueue.global().async { [weak self] in
@@ -115,7 +116,6 @@ final class ChatRoomViewController : UIViewController {
                     
                     DispatchQueue.main.async { [weak self] in
                         guard let self = self else { return }
-                        self.updateCollectionView()
                         self.sendButton.isEnabled = true
                     }
                 case .failure:
@@ -139,9 +139,12 @@ final class ChatRoomViewController : UIViewController {
     
     
     
-    private func updateCollectionView() {
-        setUpSnapshot()
-        moveScroll()
+   @objc private func updateCollectionView() {
+       DispatchQueue.main.async { [weak self] in
+           guard let self = self else { return }
+           self.setUpSnapshot()
+           self.moveScroll()
+       }
     }
 }
 

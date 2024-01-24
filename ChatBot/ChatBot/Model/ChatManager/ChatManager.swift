@@ -9,8 +9,11 @@ import Foundation
 
 final class ChatManager {
     
-    private var chats: [ChatBubble] = []
-    
+    private var chats: [ChatBubble] = [] {
+        didSet {
+            NotificationCenter.default.post(name: Notification.Name("ChatsUpdatedNotification"), object: nil)
+        }
+    }
     func appendChat(question: String) {
         chats.append(ChatBubble(message: Message(role: "user", content: question)))
         chats.append(ChatBubble(message: Message(role: "assistant", content: "")))
