@@ -11,6 +11,7 @@ import UIKit
 
 protocol ChatViewDelegate: AnyObject {
     func submitUserMessage(chatView: ChatView, animationData: Message, userMessage: String)
+    func blankCheckTextView(of chatView: ChatView)
 }
 
 final class ChatView: UIView {
@@ -32,7 +33,7 @@ final class ChatView: UIView {
         return collectionView
     }()
     
-    private lazy var contentTextView: UITextView = {
+    private lazy var userInputChatTextView: UITextView = {
         let textView = UITextView()
         textView.isScrollEnabled = false
         textView.layer.cornerRadius = 12
@@ -46,7 +47,7 @@ final class ChatView: UIView {
         return textView
     }()
     
-    private lazy var contentSendButton: UIButton = {
+    private lazy var sendButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "arrow.up.message"), for: .normal)
         button.tintColor = UIColor.systemCyan
@@ -59,7 +60,7 @@ final class ChatView: UIView {
     
     private lazy var contentStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [
-            contentTextView,contentSendButton
+            userInputChatTextView, sendButton
         ])
         stackView.axis = .horizontal
         stackView.distribution = .fill
@@ -87,21 +88,23 @@ extension ChatView {
     // MARK: - private methods
     
     @objc private func submitUserAnswer() {
-        guard let userMessage = contentTextView.text else {
+        guard !userInputChatTextView.text.isEmpty else { delegate?.blankCheckTextView(of: self)
             return
         }
-        configureTextView()
-        contentSendButton.isEnabled.toggle()
+        guard let userMessage = userInputChatTextView.text else {
+            return
+        }
+        resetTextView()
+        sendButton.isEnabled.toggle()
         delegate?.submitUserMessage(chatView: self, animationData: dataSource.animationData, userMessage: userMessage)
     }
     
     private func configureLayout() {
         self.backgroundColor = .white
-        addSubview(chatCollectionView)
         
         NSLayoutConstraint.activate([
-            contentTextView.widthAnchor.constraint(equalTo: contentSendButton.widthAnchor, multiplier: 6),
-            contentTextView.heightAnchor.constraint(equalToConstant: contentTextView.estimatedSizeHeight),
+            userInputChatTextView.widthAnchor.constraint(equalTo: sendButton.widthAnchor, multiplier: 6),
+            userInputChatTextView.heightAnchor.constraint(equalToConstant: userInputChatTextView.estimatedSizeHeight),
             
             chatCollectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             chatCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -134,41 +137,39 @@ extension ChatView {
         return layout
     }
     
-    private func configureTextView() {
-        contentTextView.text = nil
+    private func resetTextView() {
+        userInputChatTextView.text = nil
         resetTextViewHeight()
-        contentTextView.isScrollEnabled = false
+        userInputChatTextView.isScrollEnabled = false
     }
 }
 
 extension ChatView {
     
-    // MARK: - public Methods
+    // MARK: - internal Methods
     
     func updateSnapshot(items: [Message], isFetched: Bool) {
         dataSource.updateSnapshot(items: items, isFetched: isFetched)
     }
     
     func toggleSendButton() {
-        contentSendButton.isEnabled.toggle()
+        sendButton.isEnabled.toggle()
     }
     
     func scrollToBottom() {
         let lastItemIndex = chatCollectionView.numberOfItems(inSection: 0) - 1
-        
-        if lastItemIndex < 0 {
-            return
-        }
+    
+        guard lastItemIndex >= 0 else { return }
         
         let indexPath = IndexPath(item: lastItemIndex, section: 0)
         chatCollectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
     }
     
     func setTextViewDelegate(_ delegate: UITextViewDelegate) {
-        contentTextView.delegate = delegate
+        userInputChatTextView.delegate = delegate
     }
-
+    
     func resetTextViewHeight() {
-        contentTextView.heightAnchor.constraint(equalToConstant: contentTextView.estimatedSizeHeight).isActive = true
+        userInputChatTextView.heightAnchor.constraint(equalToConstant: userInputChatTextView.estimatedSizeHeight).isActive = true
     }
 }

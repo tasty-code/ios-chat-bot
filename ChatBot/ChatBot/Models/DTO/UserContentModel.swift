@@ -13,6 +13,3 @@ struct UserContentModel: Encodable  {
     let stream: Bool = false
     var messages: [Message]
 }
-
-
-

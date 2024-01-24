@@ -10,23 +10,21 @@ import UIKit
 final class ChatRoomViewController: UIViewController {
     
     // MARK: - properties
-
+    
     private let chatView = ChatView()
     private var endPoint: Endpointable = ChatBotEndpoint()
     private var historyMessages: [Message] = [Message]()
     
     // MARK: - view life cycle
-
+    
     override func loadView() {
         self.view = chatView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        view.addGestureRecognizer(tapGesture)
-        chatView.setTextViewDelegate(self)
-        chatView.delegate = self
+        addTapGestureToHideKeyboard()
+        configureDelegate()
     }
 }
 
@@ -34,12 +32,30 @@ final class ChatRoomViewController: UIViewController {
 
 extension ChatRoomViewController {
     
+    private func addTapGestureToHideKeyboard() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    private func configureDelegate() {
+        chatView.setTextViewDelegate(self)
+        chatView.delegate = self
+    }
+    
     @objc private func hideKeyboard() {
         view.endEditing(true)
+    }
+    
+    private func showAlert(title: String, message: String, completionHandler: ((UIAlertAction) -> Void)? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "확인", style: .default, handler: completionHandler)
+        alert.addAction(action)
+        self.present(alert, animated: true)
     }
 }
 
 // MARK: - Delegate methods
+
 extension ChatRoomViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
@@ -51,18 +67,20 @@ extension ChatRoomViewController: UITextViewDelegate {
         
         textView.isScrollEnabled = false
         textView.constraints.forEach { constraint in
-            guard constraint.firstAttribute != .height
-            else {
-                constraint.constant = textView.estimatedSizeHeight
-                return
+            if constraint.firstAttribute == .height { constraint.constant = textView.estimatedSizeHeight
             }
         }
     }
 }
 
 extension ChatRoomViewController: ChatViewDelegate {
+    
+    func blankCheckTextView(of chatView: ChatView) {
+        showAlert(title: "메세지를 입력해주세요", message: "")
+    }
+    
     func submitUserMessage(chatView: ChatView, animationData: Message, userMessage: String) {
-        let newMessage = Message(role: UserContentConstant.userRole, content: userMessage)
+        let newMessage = Message(role: RequestBodyConstant.userRole, content: userMessage)
         historyMessages.append(newMessage)
         
         endPoint.httpBodyContent.messages = historyMessages
@@ -75,15 +93,18 @@ extension ChatRoomViewController: ChatViewDelegate {
                                               to: AIContentModel.self) { result in
             switch result {
             case .success(let data):
-                DispatchQueue.main.async { [weak self] in
-                    self?.chatView.updateSnapshot(items: [data.choices[0].message], isFetched: true)
+                DispatchQueue.main.async {
+                    chatView.updateSnapshot(items: [data.choices[0].message], isFetched: true)
                     chatView.toggleSendButton()
                     chatView.scrollToBottom()
                 }
             case .failure(let error):
-                print(error)
+                DispatchQueue.main.async {
+                    self.showAlert(title: "에러가 발생하였습니다", message: "\(error) 앱을 종료합니다") {_ in
+                        exit(0)
+                    }
+                }
             }
         }
     }
 }
-

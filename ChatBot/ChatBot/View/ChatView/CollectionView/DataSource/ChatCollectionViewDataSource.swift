@@ -34,7 +34,7 @@ final class ChatCollectionViewDataSource: UICollectionViewDiffableDataSource<Sec
     }
 }
 
-// MARK: - public methods
+// MARK: - internal methods
 
 extension ChatCollectionViewDataSource {
     func updateSnapshot(items: [Message], isFetched: Bool) {

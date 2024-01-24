@@ -54,7 +54,6 @@ final class ChatCollectionViewCell: UICollectionViewCell {
     }()
     
     // MARK: - init
-
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -66,7 +65,7 @@ final class ChatCollectionViewCell: UICollectionViewCell {
     }
 }
 
-//MARK: public Method
+//MARK: internal methods
 
 extension ChatCollectionViewCell {
     func configureBubbles(identifier: Message) {
@@ -75,11 +74,11 @@ extension ChatCollectionViewCell {
         chatLabel.text = content
         
         switch role {
-        case UserContentConstant.indicator :
+        case RequestBodyConstant.indicator :
             configureChatbotBubble(isFetching: true)
-        case UserContentConstant.userRole :
+        case RequestBodyConstant.userRole :
             configureUserBubble()
-        case UserContentConstant.AIRole :
+        case RequestBodyConstant.AIRole :
             configureChatbotBubble(isFetching: false)
         default:
             break
@@ -176,7 +175,3 @@ extension ChatCollectionViewCell {
         NSLayoutConstraint.activate(animationConstraint)
     }
 }
-
-
-
-

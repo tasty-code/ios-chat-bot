@@ -10,9 +10,9 @@ import Foundation
 struct Encoder {
     private let encoder = JSONEncoder()
     
-    func transformData(_ content: Encodable) throws -> Data? {
+    func transformData(_ content: Encodable) -> Data? {
         guard let encodedData = try? encoder.encode(content) else {
-            throw NetworkingError.codableError(whichTranform: "\(content) 인코딩")
+            return nil
         }
         
         return encodedData

@@ -90,7 +90,7 @@ extension LoadingAnimationView {
     }
 }
 
-// MARK: - public methods
+// MARK: - internal methods
 
 extension LoadingAnimationView {
     

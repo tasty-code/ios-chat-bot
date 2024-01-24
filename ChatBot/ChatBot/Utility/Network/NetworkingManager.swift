@@ -33,7 +33,11 @@ final class NetworkingManager {
             request.setValue("Bearer \(accessKey)", forHTTPHeaderField: "Authorization")
         }
         
-        request.httpBody = try encoder.transformData(endpoint.httpBodyContent)
+        guard let encodedData = encoder.transformData(endpoint.httpBodyContent) else {
+            throw NetworkingError.codableError(whichTranform: "인코딩")
+        }
+        
+        request.httpBody = encodedData
         
         return request
     }
