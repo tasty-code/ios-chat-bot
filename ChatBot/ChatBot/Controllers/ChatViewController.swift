@@ -14,8 +14,6 @@ final class ChatViewController: UIViewController {
     // MARK: - Properties
     
     private let chatViewModel = ChatViewModel()
-    
-    private let input: PassthroughSubject<ChatViewModel.InputEvent, Never> = .init()
     private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Layout
@@ -93,19 +91,15 @@ final class ChatViewController: UIViewController {
     // MARK: - Setup
     
     private func setupBinding() {
-        let output = chatViewModel.transform(input: input.eraseToAnyPublisher())
+        let output = chatViewModel.subscribeAnswer()
         output
             .receive(on: DispatchQueue.main)
             .sink { [weak self] event in
                 switch event {
-                case .fetchRequestDidCreate:
-                    self?.collectionView.reloadData()
-                    
                 case .fetchChatDidStart(let isNetworking):
                     if isNetworking {
                         self?.collectionView.reloadData()
                     }
-                    
                 case .fetchChatDidSucceed:
                     self?.collectionView.reloadData()
                 }
@@ -155,8 +149,10 @@ final class ChatViewController: UIViewController {
     
     @objc func didTapSubmitButton() {
         inputTextView.resignFirstResponder()
-        input.send(.sendButtonDidTap(prompt: inputTextView.text))
+        chatViewModel.userInputMessage.send(inputTextView.text)
         inputTextView.text = nil
+        
+        collectionView.reloadData()
     }
 }
 

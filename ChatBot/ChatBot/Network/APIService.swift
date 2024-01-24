@@ -1,4 +1,5 @@
 import UIKit
+import Combine
 
 final class APIService {
     
@@ -6,21 +7,18 @@ final class APIService {
     
     private init() {}
     
-    func execute<Response: Decodable>(request: URLRequest, session: URLSession = URLSession.shared) async throws -> Result<Response, Error> {
-        let (data, httpResponse) = try await session.data(for: request)
-        
-        guard let response = httpResponse as? HTTPURLResponse, response.statusCode == 200 else {
-            throw APIError.invalidResponse(code: (httpResponse as? HTTPURLResponse)?.statusCode)
-        }
-        
-        do {
-            let decoder = JSONDecoder()
-            let result = try decoder.decode(Response.self, from: data)
-            
-            return .success(result)
-        } catch let error {
-            return .failure(error)
-        }
+    func execute<Response: Decodable>(request: URLRequest) -> AnyPublisher<Response, Error> {
+        URLSession.shared.dataTaskPublisher(with: request)
+            .tryMap { data, response in
+                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                    throw APIError.invalidResponse(
+                        code: (response as? HTTPURLResponse)?.statusCode)
+                }
+                
+                return data
+            }
+            .decode(type: Response.self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
     }
     
     func makeRequest<Builder: NetworkRequestBuildable>(_ builder: Builder) throws -> URLRequest {
