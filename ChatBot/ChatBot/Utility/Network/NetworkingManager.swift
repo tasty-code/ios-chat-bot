@@ -14,7 +14,7 @@ final class NetworkingManager {
     static let shared = NetworkingManager()
     private init() {}
     
-    private func request(_ endpoint: Endpointable) throws -> URLRequest {
+    private func request(of endpoint: Endpointable) throws -> URLRequest {
         guard let url = endpoint.url else {
             throw NetworkingError.unknownURL
         }
@@ -41,7 +41,7 @@ final class NetworkingManager {
     func downloadData<T: Decodable>(endpoint: Endpointable, to type: T.Type, completion: @escaping (Result<T, Error>) -> Void) {
         
         do {
-            let request = try request(endpoint)
+            let request = try request(of: endpoint)
             URLSession.shared.dataTask(with: request) { data, response, error in
                 if let error = error {
                     print(error.localizedDescription)

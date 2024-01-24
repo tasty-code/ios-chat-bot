@@ -7,13 +7,13 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class ChatRoomViewController: UIViewController {
     
     // MARK: - properties
 
     private let chatView = ChatView()
     private var endPoint: Endpointable = ChatBotEndpoint()
-    private var historyMessages = [Message]()
+    private var historyMessages: [Message] = [Message]()
     
     // MARK: - view life cycle
 
@@ -32,7 +32,7 @@ final class ViewController: UIViewController {
 
 // MARK: - private methods
 
-extension ViewController {
+extension ChatRoomViewController {
     
     @objc private func hideKeyboard() {
         view.endEditing(true)
@@ -40,7 +40,7 @@ extension ViewController {
 }
 
 // MARK: - Delegate methods
-extension ViewController: UITextViewDelegate {
+extension ChatRoomViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         guard textView.contentSize.height < view.frame.height * 0.1
@@ -60,7 +60,7 @@ extension ViewController: UITextViewDelegate {
     }
 }
 
-extension ViewController: ChatViewDelegate {
+extension ChatRoomViewController: ChatViewDelegate {
     func submitUserMessage(chatView: ChatView, animationData: Message, userMessage: String) {
         let newMessage = Message(role: UserContentConstant.userRole, content: userMessage)
         historyMessages.append(newMessage)
