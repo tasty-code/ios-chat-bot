@@ -56,7 +56,7 @@ extension Repository.CoreDataPromptSettingRepository: PromptSettingRepositable {
         let chatRoomCD = try fetchChatRoom(chatRoom)
         
         guard let promptSetting = chatRoomCD.promptSetting else {
-            throw GPTError.RepositoryError.dataNotFound
+            return
         }
         
         coreDataRepository.context.delete(promptSetting)
