@@ -14,7 +14,7 @@ final class ChatRoomViewController : UIViewController {
         case main
     }
     
-    private let chatUseCase = ChatUseCase()
+    private let chatManager = ChatManager()
     private var dataSource: DataSource?
     
     
@@ -100,12 +100,12 @@ final class ChatRoomViewController : UIViewController {
         
         guard let question = textInputView.text, question != "" else { return }
         //        chatManager.appendChat(question: question)
-        chatUseCase.appendQuestion(question: question) {
+        chatManager.appendQuestion(question: question) {
             sendButton.isEnabled = false
             
         }
         
-        chatUseCase.sendQuestion {
+        chatManager.sendQuestion {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.sendButton.isEnabled = true
@@ -115,8 +115,9 @@ final class ChatRoomViewController : UIViewController {
                 guard let self = self else { return }
                 let alert = UIAlertController(title: "전송 실패", message: "통신 실패 네트워크 상태를 확인해주세요.", preferredStyle: .alert)
                 
-                alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
-                    self.chatUseCase.removeLastChat()
+                alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { [weak self] _ in
+                    guard let self = self else { return }
+                    self.chatManager.removeLastChat()
                     self.setUpSnapshot()
                 }))
                 self.present(alert, animated: true)
@@ -176,7 +177,7 @@ extension ChatRoomViewController {
     }
     
     private func setUpSnapshot() {
-        let chats = chatUseCase.getChats()
+        let chats = chatManager.getChats()
         var snapshot = NSDiffableDataSourceSnapshot<Section, ChatBubble>()
         snapshot.appendSections([.main])
         snapshot.appendItems(chats)
@@ -184,7 +185,7 @@ extension ChatRoomViewController {
     }
     
     private func moveScroll() {
-        collectionView.scrollToItem(at: IndexPath(row: chatUseCase.getChats().count - 1, section: .zero), at: .bottom, animated: true)
+        collectionView.scrollToItem(at: IndexPath(row: chatManager.getChats().count - 1, section: .zero), at: .bottom, animated: true)
     }
     
 }
