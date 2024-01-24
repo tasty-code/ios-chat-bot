@@ -87,7 +87,7 @@ extension GPTChatRoomsViewModel {
     private func handleRooms(_ handler: () throws -> Void) -> Output {
         do {
             try handler()
-            return Output.updateChatRooms(.success(chatRoomList))
+            return Output.updateChatRooms(.success(chatRoomList.reversed()))
         } catch {
             return Output.updateChatRooms(.failure(error))
         }
