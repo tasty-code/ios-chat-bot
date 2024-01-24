@@ -11,8 +11,8 @@ extension Model {
         let content: String?
         let name: String?
         
-        init(role: GPTMessageRole, content: String? , name: String?) {
-            self.role = role
+        init(content: String? , name: String?) {
+            self.role = .system
             self.content = content
             self.name = name
         }
