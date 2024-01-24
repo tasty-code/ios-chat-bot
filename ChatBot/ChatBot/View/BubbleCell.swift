@@ -21,11 +21,7 @@ final class BubbleCell: UICollectionViewCell {
     
     private var loadingView: LoadingView = LoadingView()
     
-    private lazy var bubbleTailView: BubbleTailView = {
-        let color: UIColor = role == .user ? .systemYellow : .systemMint
-        let bubbleTailView = BubbleTailView(color: color)
-        return bubbleTailView
-    }()
+    private lazy var bubbleTailView: BubbleTailView = BubbleTailView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,7 +38,11 @@ final class BubbleCell: UICollectionViewCell {
         let isUserChat = role == Role.user
         
         bubbleView.backgroundColor = isUserChat ? .systemYellow : .systemMint
+        bubbleTailView.backgroundColor = isUserChat ? .systemYellow : .systemMint
         textLabel.textAlignment = isUserChat ? .right : .left
+        
+        loadingView.isHidden = true
+        bubbleTailView.transform = .identity
         
         if !isUserChat && message.content.isEmpty {
             bubbleView.addSubview(loadingView)
@@ -54,15 +54,25 @@ final class BubbleCell: UICollectionViewCell {
         bubbleView.addSubview(textLabel)
         bubbleView.addSubview(bubbleTailView)
         contentView.addSubview(bubbleView)
-        
+
         configuration()
     }
+    
+    private var userBubbleConstraints: [NSLayoutConstraint]?
+    private var assistantConstraints: [NSLayoutConstraint]?
+    private var textLabelConstraints: [NSLayoutConstraint]?
+    private var loadingConstraints: [NSLayoutConstraint]?
     
     private func configuration() {
         bubbleView.translatesAutoresizingMaskIntoConstraints = false
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         bubbleTailView.translatesAutoresizingMaskIntoConstraints = false
         loadingView.translatesAutoresizingMaskIntoConstraints = false
+        
+        userBubbleConstraints?.forEach { $0.isActive = false }
+        assistantConstraints?.forEach { $0.isActive = false }
+        textLabelConstraints?.forEach { $0.isActive = false }
+        loadingConstraints?.forEach { $0.isActive = false }        
         
         NSLayoutConstraint.activate([
             bubbleView.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -74,45 +84,39 @@ final class BubbleCell: UICollectionViewCell {
             bubbleTailView.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor),
         ])
         
+        userBubbleConstraints = [bubbleView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
+                                 bubbleTailView.leadingAnchor.constraint(equalTo: bubbleView.trailingAnchor)]
+        
+        assistantConstraints = [bubbleView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
+                                bubbleTailView.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: -12)]
+        
+        textLabelConstraints = [textLabel.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 10),
+                                textLabel.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 10),
+                                textLabel.widthAnchor.constraint(equalTo: bubbleView.widthAnchor, constant: -20),
+                                textLabel.heightAnchor.constraint(lessThanOrEqualTo: bubbleView.heightAnchor, constant: -20)]
+        
+        loadingConstraints = [loadingView.topAnchor.constraint(equalTo: bubbleView.topAnchor),
+                              loadingView.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 10),
+                              loadingView.widthAnchor.constraint(greaterThanOrEqualToConstant: 100),
+                              loadingView.heightAnchor.constraint(greaterThanOrEqualToConstant: 30),
+                              loadingView.widthAnchor.constraint(equalTo: bubbleView.widthAnchor),
+                              loadingView.heightAnchor.constraint(equalTo: bubbleView.heightAnchor)]
+        
         if role == .user {
-            NSLayoutConstraint.activate([
-                bubbleView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
-                
-                bubbleTailView.leadingAnchor.constraint(equalTo: bubbleView.trailingAnchor),
-            ])
-        } else {
             bubbleTailView.transform = CGAffineTransform.init(scaleX: -1, y: 1)
-            
-            NSLayoutConstraint.activate([
-                bubbleView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
-                
-                bubbleTailView.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: -12),
-            ])
+            assistantConstraints?.forEach { $0.isActive = false }
+            userBubbleConstraints?.forEach { $0.isActive = true }
+        } else {
+            userBubbleConstraints?.forEach { $0.isActive = false }
+            assistantConstraints?.forEach { $0.isActive = true }
         }
-        
-        let textLabelConstranint = [textLabel.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 10),
-                                    textLabel.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 10),
-                                    textLabel.widthAnchor.constraint(equalTo: bubbleView.widthAnchor, constant: -20),
-                                    textLabel.heightAnchor.constraint(lessThanOrEqualTo: bubbleView.heightAnchor, constant: -20)]
-        
-        let loadingConstraint = [loadingView.topAnchor.constraint(equalTo: bubbleView.topAnchor),
-                                 loadingView.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 10),
-                                 loadingView.widthAnchor.constraint(greaterThanOrEqualToConstant: 100),
-                                 loadingView.heightAnchor.constraint(greaterThanOrEqualToConstant: 30),
-                                 loadingView.widthAnchor.constraint(equalTo: bubbleView.widthAnchor),
-                                 loadingView.heightAnchor.constraint(equalTo: bubbleView.heightAnchor)]
         
         if textLabel.text == "" {
-            NSLayoutConstraint.activate(loadingConstraint)
-            NSLayoutConstraint.deactivate(textLabelConstranint)
+            textLabelConstraints?.forEach { $0.isActive = false }
+            loadingConstraints?.forEach { $0.isActive = true }
         } else {
-            NSLayoutConstraint.activate(textLabelConstranint)
-            NSLayoutConstraint.deactivate(loadingConstraint)
+            loadingConstraints?.forEach { $0.isActive = false }
+            textLabelConstraints?.forEach { $0.isActive = true }
         }
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        loadingView.isHidden = true
     }
 }

@@ -50,7 +50,6 @@ final class ChatRoomViewController : UIViewController {
     
     private lazy var sendButton: UIButton = {
         let button = UIButton()
-        button.isEnabled = false
         button.layer.cornerRadius = 8
         button.backgroundColor = #colorLiteral(red: 0.7890922427, green: 0.9981873631, blue: 0.9562725425, alpha: 1)
         button.setImage(UIImage(systemName: "paperplane"), for: .normal)
@@ -97,12 +96,12 @@ final class ChatRoomViewController : UIViewController {
     }
     
     @objc func tappedSendButton() {
-        sendButton.isEnabled = false
         textInputView.resignFirstResponder()
-        guard let question = textInputView.text else { return }
         
+        guard let question = textInputView.text, question != "" else { return }
         chatManager.appendChat(question: question)
-
+        sendButton.isEnabled = false
+        
         let chats = chatManager.getChats()
         
         DispatchQueue.global().async { [weak self] in
@@ -122,7 +121,7 @@ final class ChatRoomViewController : UIViewController {
                     DispatchQueue.main.async { [weak self] in
                         guard let self = self else { return }
                         let alert = UIAlertController(title: "전송 실패", message: "통신 실패 네트워크 상태를 확인해주세요.", preferredStyle: .alert)
-                        
+                            
                         alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
                             self.chatManager.removeLastChat()
                             self.setUpSnapshot()
@@ -137,14 +136,12 @@ final class ChatRoomViewController : UIViewController {
         textInputView.insertText("")
     }
     
-    
-    
-   @objc private func updateCollectionView() {
-       DispatchQueue.main.async { [weak self] in
-           guard let self = self else { return }
-           self.setUpSnapshot()
-           self.moveScroll()
-       }
+    @objc private func updateCollectionView() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.setUpSnapshot()
+            self.moveScroll()
+        }
     }
 }
 
@@ -152,7 +149,6 @@ final class ChatRoomViewController : UIViewController {
 extension ChatRoomViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
-        sendButton.isEnabled = !textView.text.isEmpty
         guard textView.contentSize.height <= view.frame.height * 0.1 else {
             textView.isScrollEnabled = true
             return
@@ -178,22 +174,12 @@ extension ChatRoomViewController {
     }
     
     private func configurationCell() {
-        let userChatBubbleRegistration = UICollectionView.CellRegistration<BubbleCell, ChatBubble> { cell, indexPath, itemIdentifier in
-            cell.setBubbleCell(message: itemIdentifier.message)
-        }
-        let assistantChatBubbleRegistration = UICollectionView.CellRegistration<BubbleCell, ChatBubble> { cell, indexPath, itemIdentifier in
+        let chatBubbleRegistration = UICollectionView.CellRegistration<BubbleCell, ChatBubble> { cell, indexPath, itemIdentifier in
             cell.setBubbleCell(message: itemIdentifier.message)
         }
         
         dataSource = DataSource(collectionView: collectionView) { (collectionView, indexPath, identifier) -> UICollectionViewCell in
-            switch identifier.message.role {
-            case "user":
-                return collectionView.dequeueConfiguredReusableCell(using: userChatBubbleRegistration, for: indexPath, item: identifier)
-            case "assistant":
-                return collectionView.dequeueConfiguredReusableCell(using: assistantChatBubbleRegistration, for: indexPath, item: identifier)
-            default :
-                return collectionView.dequeueConfiguredReusableCell(using: assistantChatBubbleRegistration, for: indexPath, item: identifier)
-            }
+            return collectionView.dequeueConfiguredReusableCell(using: chatBubbleRegistration, for: indexPath, item: identifier)
         }
     }
     

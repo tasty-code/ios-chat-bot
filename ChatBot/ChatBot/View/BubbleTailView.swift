@@ -7,8 +7,7 @@
 import UIKit
 
 final class BubbleTailView: UIView {
-    var color: UIColor = UIColor.blue
-
+    
     override func draw(_ rect: CGRect) {
         let minX: CGFloat = bounds.minX
         let minY: CGFloat = bounds.minY
@@ -16,12 +15,12 @@ final class BubbleTailView: UIView {
         let maxY: CGFloat = bounds.maxY
 
         let tailPath = UIBezierPath()
-        tailPath.move(to: CGPoint(x: minX, y: minY))
-        tailPath.addLine(to: CGPoint(x: maxX, y: maxY))
-        tailPath.addLine(to: CGPoint(x: minX, y: maxY))
+        tailPath.move(to: CGPoint(x: minX, y: maxY))
+        tailPath.addLine(to: CGPoint(x: maxX, y: minY))
+        tailPath.addLine(to: CGPoint(x: minX, y: minY))
         tailPath.close()
 
-        color.set()
+        UIColor.white.set()
         tailPath.fill()
     }
 
@@ -29,12 +28,7 @@ final class BubbleTailView: UIView {
         super.init(frame: frame)
         self.backgroundColor = .white
     }
-
-    convenience init(color: UIColor) {
-        self.init()
-        self.color = color
-    }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
