@@ -43,7 +43,6 @@ final class GPTChattingViewModel: GPTChattingOutputProtocol {
         if let systemMessage = systemMessage {
             sendMessage = [systemMessage] + sendMessage
         }
-        print(sendMessage)
         
         let networkPublisher = httpService.request(
             request: httpRequest,

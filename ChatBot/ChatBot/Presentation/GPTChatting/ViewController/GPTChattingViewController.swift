@@ -61,12 +61,6 @@ final class GPTChattingViewController: UIViewController {
     }()
     
     private let viewModel: any GPTChattingVMProtocol
-    private let cellResistration = UICollectionView.CellRegistration<GPTChattingCell, Row> { cell, indexPath, itemIdentifier in
-        switch itemIdentifier {
-        case .forMain(let message):
-            cell.configureCell(to: message)
-        }
-    }
     
     private var chattingDataSource: UICollectionViewDiffableDataSource<Section, Row>!
     private var cancellables = Set<AnyCancellable>()
@@ -74,6 +68,12 @@ final class GPTChattingViewController: UIViewController {
     init(viewModel: any GPTChattingVMProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+    }
+    
+    deinit {
+        for cancellable in cancellables {
+            cancellable.cancel()
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -167,10 +167,17 @@ extension GPTChattingViewController {
 // MARK: - configure Diffable Data Source
 extension GPTChattingViewController {
     private func configureDataSource() {
+        let cellResistration = UICollectionView.CellRegistration<GPTChattingCell, Row> { cell, indexPath, itemIdentifier in
+            switch itemIdentifier {
+            case .forMain(let message):
+                cell.configureCell(to: message)
+            }
+        }
+        
         chattingDataSource = UICollectionViewDiffableDataSource<Section, Row>(
             collectionView: chatCollectionView,
             cellProvider: { collectionView, indexPath, itemIdentifier in
-                collectionView.dequeueConfiguredReusableCell(using: self.cellResistration, for: indexPath, item: itemIdentifier)
+                collectionView.dequeueConfiguredReusableCell(using: cellResistration, for: indexPath, item: itemIdentifier)
             }
         )
     }
