@@ -104,19 +104,23 @@ final class ChatRoomViewController : UIViewController {
         updateCollectionView()
         let chats = chatManager.getChats()
         
-        DispatchQueue.global().async { [self] in
+        DispatchQueue.global().async { [weak self] in
+            guard let self = self else { return }
+            
             try? self.chatService.sendChats(chats: chats) { result in
                 switch result {
                 case .success(let success):
                     let answer = success.choices[0].message.content
                     self.chatManager.responseChat(answer: answer)
                     
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self = self else { return }
                         self.updateCollectionView()
                         self.sendButton.isEnabled = true
                     }
-                case .failure(let error):
-                    DispatchQueue.main.async {
+                case .failure:
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self = self else { return }
                         let alert = UIAlertController(title: "전송 실패", message: "통신 실패 네트워크 상태를 확인해주세요.", preferredStyle: .alert)
                         
                         alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
@@ -125,7 +129,6 @@ final class ChatRoomViewController : UIViewController {
                         }))
                         self.present(alert, animated: true)
                     }
-                    
                 }
             }
         }

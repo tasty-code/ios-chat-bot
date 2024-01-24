@@ -11,7 +11,6 @@ final class ChatManager {
     
     private var chats: [ChatBubble] = []
     
-    
     func appendChat(question: String) {
         chats.append(ChatBubble(message: Message(role: "user", content: question)))
         chats.append(ChatBubble(message: Message(role: "assistant", content: "")))

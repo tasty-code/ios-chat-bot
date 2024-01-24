@@ -21,13 +21,13 @@
 		D0F7BFDA2B47E6E800329F11 /* ChatSendMessageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F7BFD92B47E6E800329F11 /* ChatSendMessageBuilder.swift */; };
 		D0F7BFDD2B47E74500329F11 /* NetworkBuilderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F7BFDC2B47E74500329F11 /* NetworkBuilderProtocol.swift */; };
 		D0FBDB642B5A35F10064E394 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FBDB632B5A35F10064E394 /* LoadingView.swift */; };
+		D0FBDB8D2B60AACC0064E394 /* APIKEY.plist in Resources */ = {isa = PBXBuildFile; fileRef = D0FBDB8C2B60AACC0064E394 /* APIKEY.plist */; };
 		E31C08CE2B5DFD4A0062FFA0 /* UITextView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31C08CD2B5DFD4A0062FFA0 /* UITextView+Extension.swift */; };
 		E3388FBC2B44F1AF00175C2C /* RequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3388FBB2B44F1AF00175C2C /* RequestData.swift */; };
 		E3388FBE2B44F30400175C2C /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3388FBD2B44F30400175C2C /* Message.swift */; };
 		E386CBC62B47B89200B84994 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E386CBC52B47B89200B84994 /* NetworkManager.swift */; };
 		E386CBC92B47B95700B84994 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E386CBC82B47B95700B84994 /* Constant.swift */; };
 		E386CBCD2B47CBBD00B84994 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E386CBCC2B47CBBD00B84994 /* Bundle+Extension.swift */; };
-		E386CBD02B480BC900B84994 /* APIKEY.plist in Resources */ = {isa = PBXBuildFile; fileRef = E386CBCF2B480BC900B84994 /* APIKEY.plist */; };
 		E38F86102B4E284F003AB81E /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38F860F2B4E284F003AB81E /* URLSessionProtocol.swift */; };
 		E38F86132B4F7E2C003AB81E /* URLSession+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38F86122B4F7E2C003AB81E /* URLSession+Extension.swift */; };
 		E38F864A2B552863003AB81E /* BubbleTailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38F86492B552863003AB81E /* BubbleTailView.swift */; };
@@ -52,13 +52,13 @@
 		D0F7BFD92B47E6E800329F11 /* ChatSendMessageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSendMessageBuilder.swift; sourceTree = "<group>"; };
 		D0F7BFDC2B47E74500329F11 /* NetworkBuilderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkBuilderProtocol.swift; sourceTree = "<group>"; };
 		D0FBDB632B5A35F10064E394 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		D0FBDB8C2B60AACC0064E394 /* APIKEY.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APIKEY.plist; sourceTree = "<group>"; };
 		E31C08CD2B5DFD4A0062FFA0 /* UITextView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extension.swift"; sourceTree = "<group>"; };
 		E3388FBB2B44F1AF00175C2C /* RequestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestData.swift; sourceTree = "<group>"; };
 		E3388FBD2B44F30400175C2C /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		E386CBC52B47B89200B84994 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		E386CBC82B47B95700B84994 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		E386CBCC2B47CBBD00B84994 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
-		E386CBCF2B480BC900B84994 /* APIKEY.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APIKEY.plist; sourceTree = "<group>"; };
 		E38F860F2B4E284F003AB81E /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
 		E38F86122B4F7E2C003AB81E /* URLSession+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extension.swift"; sourceTree = "<group>"; };
 		E38F86492B552863003AB81E /* BubbleTailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleTailView.swift; sourceTree = "<group>"; };
@@ -105,7 +105,7 @@
 				B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */,
 				B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */,
 				B4B3E2CA2B42D1BC00818B3C /* Info.plist */,
-				E386CBCF2B480BC900B84994 /* APIKEY.plist */,
+				D0FBDB8C2B60AACC0064E394 /* APIKEY.plist */,
 			);
 			path = ChatBot;
 			sourceTree = "<group>";
@@ -298,8 +298,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4B3E2C92B42D1BC00818B3C /* LaunchScreen.storyboard in Resources */,
-				E386CBD02B480BC900B84994 /* APIKEY.plist in Resources */,
 				B4B3E2C62B42D1BC00818B3C /* Assets.xcassets in Resources */,
+				D0FBDB8D2B60AACC0064E394 /* APIKEY.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
