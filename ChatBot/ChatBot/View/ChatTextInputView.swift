@@ -45,6 +45,7 @@ final class ChatTextInputView: UIStackView {
     }
     
     private func configure() {
+        self.translatesAutoresizingMaskIntoConstraints = false
         self.addArrangedSubview(textView)
         self.addArrangedSubview(button)
         
@@ -90,7 +91,6 @@ extension ChatTextInputView {
 
 extension ChatTextInputView: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
-        
         guard textView.contentSize.height < self.frame.width * 0.2 else {
             textView.isScrollEnabled = true
             return

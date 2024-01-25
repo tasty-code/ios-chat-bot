@@ -10,17 +10,7 @@ import UIKit
 final class ChattingViewController: UIViewController {
     
     private let chatService = ChatService(url: OpenAIURL(path: .chat), httpMethod: .post, contentType: .json)
-    private lazy var chatStackView: UIStackView = {
-        let stackView = UIStackView()
-        
-        stackView.axis = .vertical
-        stackView.alignment = .center
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.spacing = 8
-        
-        return stackView
-    }()
-    
+
     private lazy var collectionView: ChatCollectionView = {
         var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
         configuration.showsSeparators = false
@@ -45,18 +35,18 @@ final class ChattingViewController: UIViewController {
         let chatTextInputView = ChatTextInputView()
         chatTextInputView.delegate = collectionView
         
-        view.addSubview(chatStackView)
-        chatStackView.addArrangedSubview(collectionView)
-        chatStackView.addArrangedSubview(chatTextInputView)
+        view.addSubview(collectionView)
+        view.addSubview(chatTextInputView)
         
         NSLayoutConstraint.activate([
-            collectionView.widthAnchor.constraint(equalTo: chatStackView.widthAnchor, multiplier: 1.0),
-            chatStackView.topAnchor.constraint(equalTo: safeArea.topAnchor),
-            chatStackView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor, constant: -8),
-            chatStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            chatStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            chatTextInputView.leadingAnchor.constraint(equalTo: chatStackView.leadingAnchor, constant: 8),
-            chatTextInputView.trailingAnchor.constraint(equalTo: chatStackView.trailingAnchor, constant: -8)
+            collectionView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: chatTextInputView.topAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            chatTextInputView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
+            chatTextInputView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
+            chatTextInputView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor, constant: -8),
         ])
     }
 }

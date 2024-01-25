@@ -87,6 +87,8 @@ final class ChatBalloonCell: UICollectionViewListCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        chatBalloonView.text = ""
+        chatBalloonView.fillLayerColor(color: .clear)
         chatBalloonView.leftLabelConstraintIsActive(bool: false)
         chatBalloonView.rightLabelConstraintIsActive(bool: false)
         chatBalloonView.emptyLabelConstraintIsActive(bool: false)
