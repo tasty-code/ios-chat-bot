@@ -21,11 +21,8 @@ protocol GPTChatRoomsInputProtocol {
 }
 
 protocol GPTChatRoomsOutputProtocol {
-    var output: AnyPublisher<GPTChatRoomsOutput, Never> { get }
-}
-
-enum GPTChatRoomsOutput {
-    case updateChatRooms(Result<[Model.GPTChatRoomDTO], Error>)
-    case moveToChatRoom(Result<any GPTChattingVMProtocol, Error>)
-    case moveToPromptSetting(Result<any GPTPromptSettingVMProtocol, Error>)
+    var updateChatRooms: AnyPublisher<[Model.GPTChatRoomDTO], Never> { get }
+    var moveToChatting: AnyPublisher<any GPTChattingVMProtocol, Never> { get }
+    var moveToPromptSetting: AnyPublisher<any GPTPromptSettingVMProtocol, Never> { get }
+    var error: AnyPublisher<Error, Never> { get }
 }

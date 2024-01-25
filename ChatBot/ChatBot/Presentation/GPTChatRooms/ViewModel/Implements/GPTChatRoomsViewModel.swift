@@ -9,15 +9,20 @@ import Combine
 import Foundation
 
 final class GPTChatRoomsViewModel: GPTChatRoomsOutputProtocol {
-    typealias Output = GPTChatRoomsOutput
-    
-    var output: AnyPublisher<Output, Never> { outputSubject.eraseToAnyPublisher() }
-    
     private let chatRoomRepository: ChatRoomRepositable
-    private let outputSubject = PassthroughSubject<Output, Never>()
+    
+    private let updateChatRoomsSubject = PassthroughSubject<[Model.GPTChatRoomDTO], Never>()
+    private let moveToChattingSubject = PassthroughSubject<GPTChattingVMProtocol, Never>()
+    private let moveToPromptSettingSubject = PassthroughSubject<GPTPromptSettingVMProtocol, Never>()
+    private let errorSubject = PassthroughSubject<Error, Never>()
     
     private var cancellables = Set<AnyCancellable>()
     private var chatRoomList = [Model.GPTChatRoomDTO]()
+    
+    var updateChatRooms: AnyPublisher<[Model.GPTChatRoomDTO], Never> { updateChatRoomsSubject.eraseToAnyPublisher() }
+    var moveToChatting: AnyPublisher<GPTChattingVMProtocol, Never> { moveToChattingSubject.eraseToAnyPublisher() }
+    var moveToPromptSetting: AnyPublisher<GPTPromptSettingVMProtocol, Never> { moveToPromptSettingSubject.eraseToAnyPublisher() }
+    var error: AnyPublisher<Error, Never> { errorSubject.eraseToAnyPublisher() }
     
     init(chatRoomRepository: ChatRoomRepositable = Repository.CoreDataChatRoomRepository()) {
         self.chatRoomRepository = chatRoomRepository
@@ -28,79 +33,77 @@ extension GPTChatRoomsViewModel: GPTChatRoomsInputProtocol {
     func onViewDidLoad() { }
     
     func onViewWillAppear() {
-        outputSubject.send(fetchChatRooms())
+        fetchChatRooms()
     }
     
     func onViewDidDisappear() { }
     
     func createRoom(_ roomName: String?) {
         guard let roomName = roomName, !roomName.isEmpty else {
-            outputSubject.send(Output.updateChatRooms(.failure(GPTError.ChatRoomError.noRoomName)))
+            errorSubject.send(GPTError.ChatRoomError.noRoomName)
             return
         }
         
         let chatRoom = Model.GPTChatRoomDTO(title: roomName, recentChatDate: Date())
-        let output = handleRooms {
+        handleRooms {
             try chatRoomRepository.storeChatRoom(chatRoom)
             chatRoomList.append(chatRoom)
         }
-        outputSubject.send(output)
     }
     
     func modifyRoom(_ roomName: String?, for indexPath: IndexPath) {
         guard let roomName = roomName, !roomName.isEmpty else {
-            outputSubject.send(Output.updateChatRooms(.failure(GPTError.ChatRoomError.noRoomName)))
+            errorSubject.send(GPTError.ChatRoomError.noRoomName)
             return
         }
         
         let previousChatRoom = chatRoomList[indexPath.item]
         let newChatRoom = Model.GPTChatRoomDTO(id: previousChatRoom.id, title: roomName, recentChatDate: previousChatRoom.recentChatDate)
-        let output = handleRooms {
+        handleRooms {
             try chatRoomRepository.modifyChatRoom(newChatRoom)
             chatRoomList[indexPath.item] = newChatRoom
         }
-        outputSubject.send(output)
     }
     
     func deleteRoom(for indexPath: IndexPath) {
         let chatRoom = chatRoomList[indexPath.item]
-        let output = handleRooms {
+        handleRooms {
             try chatRoomRepository.removeChatRoom(chatRoom)
             chatRoomList.remove(at: indexPath.item)
         }
-        outputSubject.send(output)
     }
     
     func selectRoom(for indexPath: IndexPath) {
         let chatRoom = chatRoomList[indexPath.item]
         guard let apiKey = Bundle.main.object(forInfoDictionaryKey: "CHAT_BOT_API_KEY") as? String else {
-            let output = Output.moveToChatRoom(.failure(GPTError.RepositoryError.dataNotFound))
-            outputSubject.send(output)
+            errorSubject.send(GPTError.RepositoryError.dataNotFound)
             return
         }
         
-        let chatRoomViewModel = GPTChattingViewModel(chatRoomDTO: chatRoom, httpRequest: Network.GPTRequest.chatBot(apiKey: apiKey))
+        let chattingViewModel = GPTChattingViewModel(chatRoomDTO: chatRoom, httpRequest: Network.GPTRequest.chatBot(apiKey: apiKey))
         let promptSettingViewModel = GPTPromptSettingViewModel(chatRoom: chatRoom)
         
-        outputSubject.send(Output.moveToChatRoom(.success(chatRoomViewModel)))
-        outputSubject.send(Output.moveToPromptSetting(.success(promptSettingViewModel)))
+        moveToChattingSubject.send(chattingViewModel)
+        moveToPromptSettingSubject.send(promptSettingViewModel)
     }
 }
 
 extension GPTChatRoomsViewModel {
-    private func handleRooms(_ handler: () throws -> Void) -> Output {
+    private func handleRooms(_ handler: () throws -> Void) {
         do {
             try handler()
-            return Output.updateChatRooms(.success(chatRoomList.reversed()))
+            updateChatRoomsSubject.send(chatRoomList.reversed())
         } catch {
-            return Output.updateChatRooms(.failure(error))
+            errorSubject.send(error)
         }
     }
     
-    private func fetchChatRooms() -> Output {
-        let output = handleRooms {
+    private func fetchChatRooms() {
+        do {
             chatRoomList = try chatRoomRepository.fetchChatRoomList()
+            updateChatRoomsSubject.send(chatRoomList.reversed())
+        } catch {
+            errorSubject.send(error)
         }
-        return output
     }
 }

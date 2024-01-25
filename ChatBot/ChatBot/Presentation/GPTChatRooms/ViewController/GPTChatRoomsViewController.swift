@@ -60,72 +60,32 @@ final class GPTChatRoomsViewController: UIViewController {
     }
     
     private func bind(to viewModel: any GPTChatRoomsVMProtocol) {
-        let chattingPublisher = viewModel.output
-            .flatMap {
-                if case let .moveToChatRoom(result) = $0,
-                   case let .success(viewModel) = result {
-                    return Just(viewModel).eraseToAnyPublisher()
-                }
-                return Empty().eraseToAnyPublisher()
-            }
-            .eraseToAnyPublisher()
-        
-        let promptSettingPublisher = viewModel.output
-            .flatMap {
-                if case let .moveToPromptSetting(result) = $0,
-                   case let .success(viewModel) = result {
-                    return Just(viewModel).eraseToAnyPublisher()
-                }
-                return Empty().eraseToAnyPublisher()
-            }
-            .eraseToAnyPublisher()
-        
-        Publishers.Zip(chattingPublisher, promptSettingPublisher)
+        Publishers.Zip(viewModel.moveToChatting, viewModel.moveToPromptSetting)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] (chattingViewModel, promptSettingViewModel) in
                 let chattingVC = GPTChattingViewController(viewModel: chattingViewModel)
                 let promptSettingVC = GPTPromptSettingViewController(viewModel: promptSettingViewModel)
-                let tabBarController = UITabBarController()
-                tabBarController.setViewControllers([chattingVC, promptSettingVC], animated: true)
-                if let items = tabBarController.tabBar.items {
-                    items[0].selectedImage = UIImage(systemName: "folder.fill")
-                    items[0].image = UIImage(systemName: "folder")
-                    items[0].title = "채팅"
-                    
-                    items[1].selectedImage = UIImage(systemName: "folder.fill")
-                    items[1].image = UIImage(systemName: "folder")
-                    items[1].title = "프롬프트"
-                }
-                self?.navigationController?.pushViewController(tabBarController, animated: true)
+                guard let tabbarVC = self?.configureTabbarController(chattingVC, promptSettingVC) else { return }
+                
+                self?.navigationController?.pushViewController(tabbarVC, animated: true)
             }
             .store(in: &cancellables)
         
-        viewModel.output
+        viewModel.updateChatRooms
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] output in
-                if case let .updateChatRooms(result) = output {
-                    self?.handleUpdateChatRooms(result)
-                }
-            }
+            .sink(receiveValue: { [weak self] chatRooms in
+                self?.handleUpdateChatRooms(chatRooms)
+            })
+            .store(in: &cancellables)
+        
+        viewModel.error
+            .flatMap { UIAlertController.presentErrorPublisher(on: self, with: $0) }
+            .sink { _ in }
             .store(in: &cancellables)
     }
     
-    private func handleMoveChatRoom(_ result: Result<any GPTChattingVMProtocol, Error>) {
-        switch result {
-        case .success(let viewModel):
-            navigationController?.pushViewController(GPTChattingViewController(viewModel: viewModel), animated: true)
-        case .failure(let error):
-            present(UIAlertController(error: error), animated: true)
-        }
-    }
-    
-    private func handleUpdateChatRooms(_ result: Result<[Model.GPTChatRoomDTO], Error>) {
-        switch result {
-        case .success(let chatRooms):
-            applySnapshot(sectionRows: chatRooms.map { Row.forMain(title: $0.title, localeDateString: $0.recentChatDate.toLocaleString(.koKR)) })
-        case .failure(let error):
-            present(UIAlertController(error: error), animated: true)
-        }
+    private func handleUpdateChatRooms(_ chatRooms: [Model.GPTChatRoomDTO]) {
+        applySnapshot(sectionRows: chatRooms.map { Row.forMain(title: $0.title, localeDateString: $0.recentChatDate.toLocaleString(.koKR)) })
     }
 }
 
@@ -134,6 +94,33 @@ extension GPTChatRoomsViewController {
     private func configureUI() {
         navigationItem.title = "MyChatBot 🤖"
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "pencil"), style: .plain, target: self, action: #selector(createChatRoomButtonTapped(_:)))
+    }
+    
+    private func configureCreateRoomAlert() -> UIAlertController {
+        UIAlertController(title: "방 생성", message: "생성할 방 제목을 입력해주세요.") { [weak self] roomName in
+            self?.viewModel.createRoom(roomName)
+        }
+    }
+    
+    private func configureModifyRoomAlert(for indexPath: IndexPath) -> UIAlertController {
+        UIAlertController(title: "방 수정", message: "수정할 방 제목을 입력해주세요.") { [weak self] roomName in
+            self?.viewModel.modifyRoom(roomName, for: indexPath)
+        }
+    }
+    
+    private func configureTabbarController(_ chattingVC: GPTChattingViewController, _ promptSettingVC: GPTPromptSettingViewController) -> UITabBarController {
+        let tabbarController = UITabBarController()
+        tabbarController.setViewControllers([chattingVC, promptSettingVC], animated: true)
+        if let items = tabbarController.tabBar.items {
+            items[0].selectedImage = UIImage(systemName: "folder.fill")
+            items[0].image = UIImage(systemName: "folder")
+            items[0].title = "채팅"
+            
+            items[1].selectedImage = UIImage(systemName: "folder.fill")
+            items[1].image = UIImage(systemName: "folder")
+            items[1].title = "프롬프트"
+        }
+        return tabbarController
     }
 }
 
@@ -165,6 +152,7 @@ extension GPTChatRoomsViewController {
     }
 }
 
+// MARK: - set UIRespond
 extension GPTChatRoomsViewController {
     @objc
     private func createChatRoomButtonTapped(_ Sender: Any) {
@@ -172,20 +160,7 @@ extension GPTChatRoomsViewController {
     }
 }
 
-extension GPTChatRoomsViewController {
-    private func configureCreateRoomAlert() -> UIAlertController {
-        UIAlertController(title: "방 생성", message: "생성할 방 제목을 입력해주세요.") { [weak self] roomName in
-            self?.viewModel.createRoom(roomName)
-        }
-    }
-    
-    private func configureModifyRoomAlert(for indexPath: IndexPath) -> UIAlertController {
-        UIAlertController(title: "방 수정", message: "수정할 방 제목을 입력해주세요.") { [weak self] roomName in
-            self?.viewModel.modifyRoom(roomName, for: indexPath)
-        }
-    }
-}
-
+// MARK: - UITableViewDelegate
 extension GPTChatRoomsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.selectRoom(for: indexPath)
