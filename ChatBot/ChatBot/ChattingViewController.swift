@@ -12,11 +12,7 @@ final class ChattingViewController: UIViewController {
     private let chatService = ChatService(url: OpenAIURL(path: .chat), httpMethod: .post, contentType: .json)
 
     private lazy var collectionView: ChatCollectionView = {
-        var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
-        configuration.showsSeparators = false
-        let layout = UICollectionViewCompositionalLayout.list(using: configuration)
-        
-        let collectionView = ChatCollectionView(frame: .zero, collectionViewLayout: layout)
+        let collectionView = ChatCollectionView(frame: .zero)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.chatServiceDelegate = self
         

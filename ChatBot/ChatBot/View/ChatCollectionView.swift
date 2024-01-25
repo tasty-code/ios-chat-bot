@@ -18,11 +18,16 @@ final class ChatCollectionView: UICollectionView {
     
     weak var chatServiceDelegate: ChatServiceDelegate?
     
-    override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
+    init(frame: CGRect) {
+        var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
+        configuration.showsSeparators = false
+        let layout = UICollectionViewCompositionalLayout.list(using: configuration)
+        
         super.init(frame: frame, collectionViewLayout: layout)
+        
         configureDataSource()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("ChatCollectionView error")
     }
