@@ -68,9 +68,9 @@ final class ChatCollectionViewCell: UICollectionViewCell {
 //MARK: internal methods
 
 extension ChatCollectionViewCell {
-    func configureBubbles(identifier: Message) {
-        let role = identifier.role
-        let content = identifier.content
+    func configureBubbles(with material: Message) {
+        let role = material.role
+        let content = material.content
         chatLabel.text = content
         
         switch role {

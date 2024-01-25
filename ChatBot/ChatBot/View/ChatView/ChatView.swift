@@ -11,7 +11,7 @@ import UIKit
 
 protocol ChatViewDelegate: AnyObject {
     func submitUserMessage(chatView: ChatView, animationData: Message, userMessage: String)
-    func blankCheckTextView(of chatView: ChatView)
+    func blankCheckTextView(chatView: ChatView)
 }
 
 final class ChatView: UIView {
@@ -89,7 +89,7 @@ extension ChatView {
     
     @objc private func submitUserAnswer() {
         guard !userInputChatTextView.text.isEmpty else { 
-            delegate?.blankCheckTextView(of: self)
+            delegate?.blankCheckTextView(chatView: self)
             return
         }
         guard let userMessage = userInputChatTextView.text else {

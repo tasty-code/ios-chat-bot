@@ -85,7 +85,7 @@ extension ChatRoomViewController: UITextViewDelegate {
 
 extension ChatRoomViewController: ChatViewDelegate {
     
-    func blankCheckTextView(of chatView: ChatView) {
+    func blankCheckTextView(chatView: ChatView) {
         showAlert(title: "메세지를 입력해주세요", message: "", needErrorHandle: false)
     }
     

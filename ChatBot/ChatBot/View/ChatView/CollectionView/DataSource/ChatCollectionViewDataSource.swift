@@ -20,7 +20,7 @@ final class ChatCollectionViewDataSource: UICollectionViewDiffableDataSource<Sec
     
     init(collectionView: UICollectionView) {
         let cellRegistration = UICollectionView.CellRegistration<ChatCollectionViewCell, Message> { (cell, indexPath, item) in
-            cell.configureBubbles(identifier: item)
+            cell.configureBubbles(with: item)
         }
         
         super.init(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
