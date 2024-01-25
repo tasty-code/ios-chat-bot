@@ -8,10 +8,10 @@
 import UIKit
 
 final class DotsView: UIView {
-    lazy var baseline: CGFloat = 0
-    lazy var dotXOffset: CGFloat = 4.0
-    lazy var dotSize: CGFloat = 15
-    lazy var dotSpacing: CGFloat = 25
+    private lazy var baseline: CGFloat = 0
+    private lazy var dotXOffset: CGFloat = 4.0
+    private lazy var dotSize: CGFloat = 15
+    private lazy var dotSpacing: CGFloat = 25
     private let copyLayer = CAReplicatorLayer()
     private let dot = CALayer()
     
