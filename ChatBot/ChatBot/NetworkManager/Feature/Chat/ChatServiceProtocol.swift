@@ -8,5 +8,5 @@
 import Foundation
 
 protocol ChatServiceProtocol {
-    func sendMessage(text: String, completion: @escaping (Result<ResponseData, Error>) -> Void) throws 
+    func sendChats(chats: [ChatBubble], completion: @escaping (Result<ResponseData, Error>) -> Void) throws
 }

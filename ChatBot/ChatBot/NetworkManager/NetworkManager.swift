@@ -8,10 +8,10 @@
 import Foundation
  
 final class NetworkManager {
-    let urlSession: URLSession
+    let urlSession: URLSessionProtocol
     
-    init(urlSessionManager: URLSessionProtocol) {
-        self.urlSession = urlSessionManager.urlSession
+    init(urlSession: URLSessionProtocol = URLSession.shared) {
+        self.urlSession = urlSession
     }
     
     func fetch(builder: NetworkBuilderProtocol, completion: @escaping (Result<ResponseData, NetworkError>) -> Void) {
@@ -19,7 +19,7 @@ final class NetworkManager {
         guard let request = builder.makeRequest(builder: builder) else {
             return completion(.failure(.invalidHeader))
         }
-
+        
         urlSession.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
                 return completion(.failure(.invalidResponse))
