@@ -68,14 +68,14 @@ final class GPTChatViewController: UIViewController {
     
     private let viewModel: GPTChatViewModel
     
-    private lazy var dataSource: UICollectionViewDiffableDataSource<Section, GPTMessageDTO> = {
-        let cellRegistration = UICollectionView.CellRegistration<MessageCell, GPTMessageDTO> {
+    private lazy var dataSource: UICollectionViewDiffableDataSource<Section, ChatMessage> = {
+        let cellRegistration = UICollectionView.CellRegistration<MessageCell, ChatMessage> {
             cell, indexPath, item in
             var configuration = MessageContentConfiguration()
             configuration.message = item
             cell.contentConfiguration = configuration
         }
-        return UICollectionViewDiffableDataSource<Section, GPTMessageDTO>(collectionView: chatCollectionView) {
+        return UICollectionViewDiffableDataSource<Section, ChatMessage>(collectionView: chatCollectionView) {
             collectionView, indexPath, itemIdentifier in
             collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
         }
@@ -158,8 +158,8 @@ final class GPTChatViewController: UIViewController {
         return compositionalLayout
     }
     
-    private func configureSnapshot(with messages: [GPTMessageDTO]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, GPTMessageDTO>()
+    private func configureSnapshot(with messages: [ChatMessage]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, ChatMessage>()
         snapshot.appendSections([.main])
         snapshot.appendItems(messages)
         dataSource.apply(snapshot, animatingDifferences: true)

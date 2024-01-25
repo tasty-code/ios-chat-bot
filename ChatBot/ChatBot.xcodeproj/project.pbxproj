@@ -17,8 +17,6 @@
 		7F2F345D2B61F58F000CBC6E /* DataManagable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2F345C2B61F58F000CBC6E /* DataManagable.swift */; };
 		7F2F345F2B61F604000CBC6E /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2F345E2B61F604000CBC6E /* CoreDataManager.swift */; };
 		7F2F34632B61F943000CBC6E /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7F2F34612B61F943000CBC6E /* DataModel.xcdatamodeld */; };
-		7F2F34682B61FA67000CBC6E /* MessageEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2F34642B61FA67000CBC6E /* MessageEntity+CoreDataClass.swift */; };
-		7F2F34692B61FA67000CBC6E /* MessageEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2F34652B61FA67000CBC6E /* MessageEntity+CoreDataProperties.swift */; };
 		7F2F346A2B61FA67000CBC6E /* RoomEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2F34662B61FA67000CBC6E /* RoomEntity+CoreDataClass.swift */; };
 		7F2F346B2B61FA67000CBC6E /* RoomEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2F34672B61FA67000CBC6E /* RoomEntity+CoreDataProperties.swift */; };
 		7F2F346E2B61FAC9000CBC6E /* GPTRoomListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2F346D2B61FAC9000CBC6E /* GPTRoomListViewModel.swift */; };
@@ -32,6 +30,10 @@
 		7F6F93172B6215D800A2ED13 /* ChatRoomDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6F93162B6215D800A2ED13 /* ChatRoomDataHandler.swift */; };
 		7F6F931A2B62179200A2ED13 /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6F93192B62179200A2ED13 /* ChatRoom.swift */; };
 		7F6F931C2B621DCB00A2ED13 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6F931B2B621DCB00A2ED13 /* Date+Extension.swift */; };
+		7F6F931E2B62296E00A2ED13 /* MessageDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6F931D2B62296E00A2ED13 /* MessageDataHandler.swift */; };
+		7F6F93202B62331500A2ED13 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6F931F2B62331500A2ED13 /* ChatMessage.swift */; };
+		7F6F93232B6233B900A2ED13 /* MessageEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6F93212B6233B900A2ED13 /* MessageEntity+CoreDataClass.swift */; };
+		7F6F93242B6233B900A2ED13 /* MessageEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6F93222B6233B900A2ED13 /* MessageEntity+CoreDataProperties.swift */; };
 		7F7A55702B4D043000368247 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A556F2B4D043000368247 /* NetworkManager.swift */; };
 		7F7A55742B4D072B00368247 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A55732B4D072B00368247 /* URLSessionProtocol.swift */; };
 		7F7A55762B4D076A00368247 /* URLSession+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A55752B4D076A00368247 /* URLSession+Extension.swift */; };
@@ -47,7 +49,6 @@
 		DE4EC8DB2B4F9D840077E405 /* RequestEncodable+RequestDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4EC8DA2B4F9D840077E405 /* RequestEncodable+RequestDecodable.swift */; };
 		DE584B302B44EE8C00B04403 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE584B2F2B44EE8C00B04403 /* Bundle+Extension.swift */; };
 		DE652B6A2B52546800407705 /* GPTChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE652B692B52546800407705 /* GPTChatViewModel.swift */; };
-		DE652B6C2B525BC000407705 /* GPTMessageDTO+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE652B6B2B525BC000407705 /* GPTMessageDTO+Extension.swift */; };
 		DE7DA4C02B4FFDFC0073D201 /* UITextView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7DA4BF2B4FFDFC0073D201 /* UITextView+Extension.swift */; };
 		DE7DA4C22B4FFFE50073D201 /* GPTChatRoomViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7DA4C12B4FFFE40073D201 /* GPTChatRoomViewController+Extension.swift */; };
 		DEA638532B47BE81006E474C /* GPTEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA638522B47BE81006E474C /* GPTEndPoint.swift */; };
@@ -68,8 +69,6 @@
 		7F2F345C2B61F58F000CBC6E /* DataManagable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagable.swift; sourceTree = "<group>"; };
 		7F2F345E2B61F604000CBC6E /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		7F2F34622B61F943000CBC6E /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
-		7F2F34642B61FA67000CBC6E /* MessageEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
-		7F2F34652B61FA67000CBC6E /* MessageEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7F2F34662B61FA67000CBC6E /* RoomEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RoomEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7F2F34672B61FA67000CBC6E /* RoomEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RoomEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7F2F346D2B61FAC9000CBC6E /* GPTRoomListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTRoomListViewModel.swift; sourceTree = "<group>"; };
@@ -83,6 +82,10 @@
 		7F6F93162B6215D800A2ED13 /* ChatRoomDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomDataHandler.swift; sourceTree = "<group>"; };
 		7F6F93192B62179200A2ED13 /* ChatRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
 		7F6F931B2B621DCB00A2ED13 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		7F6F931D2B62296E00A2ED13 /* MessageDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDataHandler.swift; sourceTree = "<group>"; };
+		7F6F931F2B62331500A2ED13 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		7F6F93212B6233B900A2ED13 /* MessageEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7F6F93222B6233B900A2ED13 /* MessageEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7F7A556F2B4D043000368247 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		7F7A55732B4D072B00368247 /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
 		7F7A55752B4D076A00368247 /* URLSession+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extension.swift"; sourceTree = "<group>"; };
@@ -100,7 +103,6 @@
 		DE4EC8DA2B4F9D840077E405 /* RequestEncodable+RequestDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RequestEncodable+RequestDecodable.swift"; sourceTree = "<group>"; };
 		DE584B2F2B44EE8C00B04403 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		DE652B692B52546800407705 /* GPTChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTChatViewModel.swift; sourceTree = "<group>"; };
-		DE652B6B2B525BC000407705 /* GPTMessageDTO+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GPTMessageDTO+Extension.swift"; sourceTree = "<group>"; };
 		DE7DA4BF2B4FFDFC0073D201 /* UITextView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extension.swift"; sourceTree = "<group>"; };
 		DE7DA4C12B4FFFE40073D201 /* GPTChatRoomViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GPTChatRoomViewController+Extension.swift"; sourceTree = "<group>"; };
 		DEA638522B47BE81006E474C /* GPTEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTEndPoint.swift; sourceTree = "<group>"; };
@@ -193,8 +195,8 @@
 		7F2F34602B61F92A000CBC6E /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				7F2F34642B61FA67000CBC6E /* MessageEntity+CoreDataClass.swift */,
-				7F2F34652B61FA67000CBC6E /* MessageEntity+CoreDataProperties.swift */,
+				7F6F93212B6233B900A2ED13 /* MessageEntity+CoreDataClass.swift */,
+				7F6F93222B6233B900A2ED13 /* MessageEntity+CoreDataProperties.swift */,
 				7F2F34662B61FA67000CBC6E /* RoomEntity+CoreDataClass.swift */,
 				7F2F34672B61FA67000CBC6E /* RoomEntity+CoreDataProperties.swift */,
 				7F2F34612B61F943000CBC6E /* DataModel.xcdatamodeld */,
@@ -278,6 +280,7 @@
 			children = (
 				7F6F93182B62178700A2ED13 /* Model */,
 				7F6F93162B6215D800A2ED13 /* ChatRoomDataHandler.swift */,
+				7F6F931D2B62296E00A2ED13 /* MessageDataHandler.swift */,
 			);
 			path = DataHandler;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 			isa = PBXGroup;
 			children = (
 				7F6F93192B62179200A2ED13 /* ChatRoom.swift */,
+				7F6F931F2B62331500A2ED13 /* ChatMessage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -434,7 +438,6 @@
 				DE584B2F2B44EE8C00B04403 /* Bundle+Extension.swift */,
 				7F7A55752B4D076A00368247 /* URLSession+Extension.swift */,
 				DE7DA4BF2B4FFDFC0073D201 /* UITextView+Extension.swift */,
-				DE652B6B2B525BC000407705 /* GPTMessageDTO+Extension.swift */,
 				DE7DA4C12B4FFFE40073D201 /* GPTChatRoomViewController+Extension.swift */,
 				7F158D0B2B5A49BD0082EE29 /* JSONEncoder+Extension.swift */,
 				7F158D0F2B5A4A2A0082EE29 /* JSONDecoder+Extension.swift */,
@@ -554,6 +557,9 @@
 			files = (
 				7F7A55742B4D072B00368247 /* URLSessionProtocol.swift in Sources */,
 				7F7A55702B4D043000368247 /* NetworkManager.swift in Sources */,
+				7F6F93232B6233B900A2ED13 /* MessageEntity+CoreDataClass.swift in Sources */,
+				7F6F93202B62331500A2ED13 /* ChatMessage.swift in Sources */,
+				7F6F931E2B62296E00A2ED13 /* MessageDataHandler.swift in Sources */,
 				7F7A55762B4D076A00368247 /* URLSession+Extension.swift in Sources */,
 				7F7A557C2B4D0CD800368247 /* ServiceProvidable.swift in Sources */,
 				DEF3D1DE2B51332000FAC500 /* MessageContentConfiguration.swift in Sources */,
@@ -563,7 +569,6 @@
 				7F195BA12B47BB5D00C99766 /* APIEndPoint.swift in Sources */,
 				7F4C9D792B4522C1006CD685 /* SystemMessage.swift in Sources */,
 				7F6F931A2B62179200A2ED13 /* ChatRoom.swift in Sources */,
-				DE652B6C2B525BC000407705 /* GPTMessageDTO+Extension.swift in Sources */,
 				7F2F346B2B61FA67000CBC6E /* RoomEntity+CoreDataProperties.swift in Sources */,
 				7F195BA32B47BC0600C99766 /* HTTPMethod.swift in Sources */,
 				7F5A080A2B5F5AED00617992 /* GPTRoomListViewController.swift in Sources */,
@@ -571,7 +576,6 @@
 				7F4C9D772B4522B5006CD685 /* UserMessage.swift in Sources */,
 				B4B3E2C12B42D1BB00818B3C /* GPTChatViewController.swift in Sources */,
 				7F4C9D712B452165006CD685 /* GPTMessageDTO.swift in Sources */,
-				7F2F34692B61FA67000CBC6E /* MessageEntity+CoreDataProperties.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
 				7F7F43A82B44F247000CB9CC /* GPTResponseDTO.swift in Sources */,
 				7F4C9D7E2B45262B006CD685 /* AssistantMessage.swift in Sources */,
@@ -579,8 +583,8 @@
 				DE652B6A2B52546800407705 /* GPTChatViewModel.swift in Sources */,
 				DEF3D1E22B51348200FAC500 /* ChatBubbleView.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
+				7F6F93242B6233B900A2ED13 /* MessageEntity+CoreDataProperties.swift in Sources */,
 				DEF3D1DC2B5132CC00FAC500 /* MessageCell.swift in Sources */,
-				7F2F34682B61FA67000CBC6E /* MessageEntity+CoreDataClass.swift in Sources */,
 				DE4EC8DB2B4F9D840077E405 /* RequestEncodable+RequestDecodable.swift in Sources */,
 				7F2F346E2B61FAC9000CBC6E /* GPTRoomListViewModel.swift in Sources */,
 				7F4C9D802B452A89006CD685 /* GPTRequestDTO.swift in Sources */,

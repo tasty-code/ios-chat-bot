@@ -16,9 +16,10 @@ extension MessageEntity {
         return NSFetchRequest<MessageEntity>(entityName: "MessageEntity")
     }
 
-    @NSManaged public var uuid: UUID?
-    @NSManaged public var role: String?
     @NSManaged public var content: String?
+    @NSManaged public var role: String?
+    @NSManaged public var uuid: UUID?
+    @NSManaged public var date: Date?
     @NSManaged public var roomRelationship: RoomEntity?
 
 }
