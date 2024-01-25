@@ -16,28 +16,13 @@ final class ChatManager {
         }
     }
     
-    
-    func appendChat(question: String) {
-        
-        chats.append(ChatBubble(message: Message(role: "user", content: question)))
-        chats.append(ChatBubble(message: Message(role: "assistant", content: "")))
-    }
-    
     func getChats() -> [ChatBubble] {
         return self.chats
     }
     
-    func responseChat(answer: String) {
-        chats[chats.count - 1] = ChatBubble(message: Message(role: "assistant", content: answer))
-    }
-    
-    func removeLastChat() {
-        chats.removeLast()
-    }
-    
-    func appendQuestion(question: String, completionHandler: () -> ()) {
-        appendChat(question: question)
-        completionHandler()
+    func appendChat(question: String) {
+        chats.append(ChatBubble(message: Message(role: "user", content: question)))
+        chats.append(ChatBubble(message: Message(role: "assistant", content: "")))
     }
     
     func sendQuestion(successCompletion: @escaping () -> (), failureCompletion: @escaping () -> ()) {
@@ -48,5 +33,13 @@ final class ChatManager {
         } failureCompletion: {
             failureCompletion()
         }
+    }
+    
+    func responseChat(answer: String) {
+        chats[chats.count - 1] = ChatBubble(message: Message(role: "assistant", content: answer))
+    }
+    
+    func removeLastChat() {
+        chats.removeLast()
     }
 }

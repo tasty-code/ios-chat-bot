@@ -99,11 +99,10 @@ final class ChatRoomViewController : UIViewController {
         textInputView.resignFirstResponder()
         
         guard let question = textInputView.text, question != "" else { return }
-        //        chatManager.appendChat(question: question)
-        chatManager.appendQuestion(question: question) {
-            sendButton.isEnabled = false
-            
-        }
+        
+        chatManager.appendChat(question: question)
+        
+        sendButton.isEnabled = false
         
         chatManager.sendQuestion {
             DispatchQueue.main.async { [weak self] in
@@ -123,7 +122,6 @@ final class ChatRoomViewController : UIViewController {
                 self.present(alert, animated: true)
             }
         }
-        
         
         textInputView.text = nil
         textInputView.insertText("")
