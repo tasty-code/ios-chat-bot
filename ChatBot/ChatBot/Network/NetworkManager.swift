@@ -37,4 +37,19 @@ extension NetworkManager: NetworkManagerProtocol {
         
         return data
     }
+
+    func requestData<E: Encodable, D: Decodable>(inputData: E) async throws -> D {
+        
+        guard let encodedData = JSONConverter.encode(data: inputData) else {
+            throw JSONConvertError.wrongEncodig
+        }
+        
+        let responseData = try await getData(body: encodedData)
+        
+        guard let decodedData = JSONConverter.decode(type: D.self, data: responseData) else {
+            throw JSONConvertError.wrongDecoding
+        }
+        
+        return decodedData
+    }
 }
