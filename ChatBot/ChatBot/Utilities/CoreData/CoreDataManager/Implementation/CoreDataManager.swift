@@ -28,8 +28,6 @@ final class CoreDataManager {
 extension CoreDataManager: DataManagable {
     var context: NSManagedObjectContext { container.viewContext }
     
-    // TODO: context save. do catch
-    
     func saveContext() throws {
         guard context.hasChanges else { return }
         try context.save()

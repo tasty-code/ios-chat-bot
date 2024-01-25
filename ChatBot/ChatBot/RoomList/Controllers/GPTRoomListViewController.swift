@@ -17,8 +17,9 @@ final class GPTRoomListViewController: UIViewController {
 
     // MARK: - UI Components
     
-    private lazy var chatListCollectionView: UICollectionView = {
-        let configuration = UICollectionLayoutListConfiguration(appearance: .plain)
+    private lazy var roomListCollectionView: UICollectionView = {
+        var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
+        configuration.trailingSwipeActionsConfigurationProvider = configureSwipeActions(for:)
         let layout = UICollectionViewCompositionalLayout.list(using: configuration)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -31,9 +32,10 @@ final class GPTRoomListViewController: UIViewController {
             configuration.text = itemIdentifier.title
             configuration.secondaryText = itemIdentifier.date.toString
             configuration.secondaryTextProperties.color = .systemGray
+            
             cell.contentConfiguration = configuration
         }
-        return UICollectionViewDiffableDataSource<Section, ChatRoom>(collectionView: chatListCollectionView) {
+        return UICollectionViewDiffableDataSource<Section, ChatRoom>(collectionView: roomListCollectionView) {
             collectionView, indexPath, itemIdentifier in
             collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
         }
@@ -46,7 +48,6 @@ final class GPTRoomListViewController: UIViewController {
         label.textColor = .systemCyan
         return label
     }()
-    
     
     // MARK: - Private Property
     
@@ -84,9 +85,9 @@ final class GPTRoomListViewController: UIViewController {
 
     private func configureUI() {
         view.backgroundColor = .white
-        view.addSubview(chatListCollectionView)
+        view.addSubview(roomListCollectionView)
         
-        chatListCollectionView.delegate = self
+        roomListCollectionView.delegate = self
         
         setConstraintsCollectionView()
         configureNavigationBarItem()
@@ -96,10 +97,10 @@ final class GPTRoomListViewController: UIViewController {
         let safeArea = view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
-            chatListCollectionView.topAnchor.constraint(equalTo: safeArea.topAnchor),
-            chatListCollectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
-            chatListCollectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-            chatListCollectionView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
+            roomListCollectionView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            roomListCollectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+            roomListCollectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+            roomListCollectionView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
         ])
     }
     
@@ -123,11 +124,24 @@ final class GPTRoomListViewController: UIViewController {
         dataSource.apply(snapshot, animatingDifferences: true)
     }
     
-    // MARK: - ActionHandler
+    // MARK: - Action Handler
 
     @objc
     private func newChatButtonTapped(_ sender: UIButton) {
         enterRoom()
+    }
+    
+    private func configureSwipeActions(for indexPath: IndexPath?) -> UISwipeActionsConfiguration? {
+        guard let indexPath = indexPath
+        else {
+            return nil
+        }
+        let deleteAction = UIContextualAction(style: .destructive, title: "삭제") {
+            [weak self] _, _, completion in
+            self?.viewModel.deleteChatRoom(at: indexPath.row)
+            completion(true)
+        }
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
     
     private func enterRoom(with chatRoom: ChatRoom? = nil) {

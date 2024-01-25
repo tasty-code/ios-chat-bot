@@ -18,10 +18,7 @@ final class MessageDataHandler {
         let request = RoomEntity.fetchRequest()
         request.predicate = NSPredicate(format: "uuid == %@", currentRoom.uuid.uuidString)
         
-        guard let entities = try? dataManager.context.fetch(request)
-        else {
-            throw APIError.failedResponseCasting
-        }
+        let entities = try dataManager.context.fetch(request)
         guard let entity = entities.first
         else {
             let newEntity = RoomEntity(context: dataManager.context)
@@ -30,7 +27,6 @@ final class MessageDataHandler {
             newEntity.title = currentRoom.title
             return  newEntity
         }
-        
         return entity
     }
     
@@ -53,6 +49,7 @@ final class MessageDataHandler {
             
             roomEntity.addToMessageRelationship(entity)
         }
+        roomEntity.date = Date()
         try dataManager.saveContext()
     }
     

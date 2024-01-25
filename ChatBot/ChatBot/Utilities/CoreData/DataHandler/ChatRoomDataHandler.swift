@@ -20,7 +20,7 @@ final class ChatRoomDataHandler {
         else {
             return []
         }
-        return entities.compactMap {
+        let rooms: [ChatRoom] = entities.compactMap {
             guard let uuid = $0.uuid,
                   let title = $0.title,
                   let date = $0.date
@@ -28,6 +28,24 @@ final class ChatRoomDataHandler {
                 return nil
             }
             return ChatRoom(uuid: uuid, title: title, date: date)
+        }
+        return rooms.sorted { $0.date > $1.date }
+    }
+    
+    func deleteChatRoomData(with chatRoom: ChatRoom) {
+        let request = RoomEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "uuid == %@", chatRoom.uuid.uuidString)
+        
+        guard let entity = try? dataManager.context.fetch(request).first
+        else {
+             return
+        }
+        
+        dataManager.context.delete(entity)
+        do {
+            try dataManager.saveContext()
+        } catch {
+            print(error.localizedDescription)
         }
     }
 }

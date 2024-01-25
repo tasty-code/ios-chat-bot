@@ -11,7 +11,7 @@ extension Date {
     static let dateFormatter = DateFormatter()
     
     var toString: String {
-        Date.dateFormatter.dateFormat = "yyyy-MM-dd(E) hh:MM"
+        Date.dateFormatter.dateFormat = "yyyy-MM-dd(E) HH:mm"
         Date.dateFormatter.locale = Locale(identifier: "ko-KR")
         return Date.dateFormatter.string(from: self)
     }
