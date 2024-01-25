@@ -43,19 +43,20 @@ final class ChatContentView: UIView, UIContentView {
     }()
     
     private lazy var userConstraints: [NSLayoutConstraint] = [
-        bubbleView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+        bubbleView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
         textLabel.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 10),
         textLabel.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: -20),
     ]
     
     private lazy var assistantConstraints: [NSLayoutConstraint] = [
-        bubbleView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: -3),
+        bubbleView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: -3),
         textLabel.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 20),
         textLabel.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: -20),
     ]
     
     private lazy var loadingConstraints: [NSLayoutConstraint] = [
-        bubbleView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: -3),
+        bubbleView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: -3),
+        bubbleView.widthAnchor.constraint(greaterThanOrEqualToConstant: 100),
         dotsView.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 34),
         dotsView.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 20),
         dotsView.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: -20),
@@ -72,11 +73,21 @@ final class ChatContentView: UIView, UIContentView {
     }
     
     private func setConstraints() {
+        userConstraints.forEach { constraint in
+            constraint.priority = .defaultLow
+        }
+        assistantConstraints.forEach { constraint in
+            constraint.priority = .defaultLow
+        }
+        loadingConstraints.forEach { constraint in
+            constraint.priority = .defaultLow
+        }
+        
         NSLayoutConstraint.activate([
             bubbleView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             bubbleView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            bubbleView.widthAnchor.constraint(lessThanOrEqualToConstant: 300),
             
+            textLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 300),
             textLabel.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 5),
             textLabel.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor, constant: -5),
         ])
