@@ -47,26 +47,17 @@ final class GPTPromptSettingViewController: UIViewController {
     }
     
     private func bind(to viewModel: GPTPromptSettingVMProtocol) {
-        viewModel.output
+        viewModel.fetchPromptSetting
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] output in
-                switch output {
-                case .fetch(let result):
-                    self?.handleFetchString(result)
-                case .store:
-                    break
-                }
+            .sink { [weak self] content in
+                self?.textView.text = content
             }
             .store(in: &cancellables)
-    }
-    
-    private func handleFetchString(_ result: Result<String?, Error>) {
-        switch result {
-        case .success(let content):
-            textView.text = content
-        case .failure(let error):
-            present(UIAlertController(error: error), animated: true)
-        }
+        
+        viewModel.error
+            .flatMap { UIAlertController.presentErrorPublisher(on: self, with: $0) }
+            .sink { _ in }
+            .store(in: &cancellables)
     }
 }
 
@@ -75,7 +66,7 @@ extension GPTPromptSettingViewController {
     private func configureUI() {
         NSLayoutConstraint.activate([
             textView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            textView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            textView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor),
             textView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
             textView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8)
         ])
