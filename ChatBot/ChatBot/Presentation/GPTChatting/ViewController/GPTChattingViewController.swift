@@ -21,6 +21,7 @@ final class GPTChattingViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(GPTChattingCell.self, forCellWithReuseIdentifier: "\(type(of: GPTChattingCell.self))")
+        collectionView.keyboardDismissMode = .onDrag
         return collectionView
     }()
     

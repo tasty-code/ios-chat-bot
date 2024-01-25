@@ -19,6 +19,8 @@ final class GPTPromptSettingViewController: UIViewController {
         textView.layer.borderWidth = 3
         textView.textColor = .black
         textView.layer.borderColor = UIColor.lightGray.cgColor
+        textView.delegate = self
+        textView.addDoneButton(title: "저장", target: self, selctor: #selector(tapDoneButton))
         view.addSubview(textView)
         return textView
     }()
@@ -42,11 +44,6 @@ final class GPTPromptSettingViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.onViewWillAppear()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        viewModel.storeUpdatePromptSetting(content: textView.text)
     }
     
     private func bind(to viewModel: GPTPromptSettingVMProtocol) {
@@ -82,5 +79,16 @@ extension GPTPromptSettingViewController {
             textView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
             textView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8)
         ])
+    }
+    
+    @objc
+    private func tapDoneButton() {
+        view.endEditing(true)
+    }
+}
+
+extension GPTPromptSettingViewController: UITextViewDelegate {
+    func textViewDidEndEditing(_ textView: UITextView) {
+        viewModel.storeUpdatePromptSetting(content: textView.text)
     }
 }

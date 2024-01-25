@@ -34,6 +34,7 @@
 		0D66D0EB2B60C98C00F518CE /* GPTPromptSettingVMProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66D0EA2B60C98C00F518CE /* GPTPromptSettingVMProtocol.swift */; };
 		0D66D0EE2B60CAB500F518CE /* GPTPromptSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66D0ED2B60CAB500F518CE /* GPTPromptSettingViewModel.swift */; };
 		0D66D0F12B60D4F100F518CE /* GPTPromptSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66D0F02B60D4F100F518CE /* GPTPromptSettingViewController.swift */; };
+		0D66D0F52B62144000F518CE /* UITextView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66D0F42B62144000F518CE /* UITextView+Extension.swift */; };
 		0D843AD82B4B986D00F4EAD2 /* URLSession+HTTPPublishable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843AD72B4B986D00F4EAD2 /* URLSession+HTTPPublishable.swift */; };
 		0D843ADB2B4B98C900F4EAD2 /* GPTHTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843ADA2B4B98C900F4EAD2 /* GPTHTTPService.swift */; };
 		0D843ADD2B4B992500F4EAD2 /* DataDecoderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843ADC2B4B992500F4EAD2 /* DataDecoderable.swift */; };
@@ -112,6 +113,7 @@
 		0D66D0EA2B60C98C00F518CE /* GPTPromptSettingVMProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GPTPromptSettingVMProtocol.swift; path = ../../../../../../../../../.Trash/GPTPromptSetting/ViewModel/Protocols/GPTPromptSettingVMProtocol.swift; sourceTree = "<group>"; };
 		0D66D0ED2B60CAB500F518CE /* GPTPromptSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTPromptSettingViewModel.swift; sourceTree = "<group>"; };
 		0D66D0F02B60D4F100F518CE /* GPTPromptSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTPromptSettingViewController.swift; sourceTree = "<group>"; };
+		0D66D0F42B62144000F518CE /* UITextView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extension.swift"; sourceTree = "<group>"; };
 		0D843AD72B4B986D00F4EAD2 /* URLSession+HTTPPublishable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+HTTPPublishable.swift"; sourceTree = "<group>"; };
 		0D843ADA2B4B98C900F4EAD2 /* GPTHTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTHTTPService.swift; sourceTree = "<group>"; };
 		0D843ADC2B4B992500F4EAD2 /* DataDecoderable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDecoderable.swift; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 			isa = PBXGroup;
 			children = (
 				0D3260582B5E21A9000C352E /* UIAlertController+Extension.swift */,
+				0D66D0F42B62144000F518CE /* UITextView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -939,6 +942,7 @@
 			files = (
 				0D3260142B5A08DD000C352E /* ChatBotCoreData.xcdatamodeld in Sources */,
 				0DF997742B43BCC50055C836 /* AssistantMessage.swift in Sources */,
+				0D66D0F52B62144000F518CE /* UITextView+Extension.swift in Sources */,
 				0D843B1A2B4E88AC00F4EAD2 /* GPTRequest.swift in Sources */,
 				0DF9977E2B45022A0055C836 /* UserMessage.swift in Sources */,
 				0D32604A2B5A4CFD000C352E /* GPTChatRoomsViewController.swift in Sources */,
