@@ -9,7 +9,7 @@ import UIKit
 
 final class ChattingViewController: UIViewController {
     
-    private let chatService = ChatService(url: OpenAIURL(path: .chat), httpMethod: .post, contentType: .json)
+    private let chatService: OpenAIServiceProtocol = ChatService(url: OpenAIURL(path: .chat), httpMethod: .post, contentType: .json)
 
     private lazy var collectionView: ChatCollectionView = {
         let collectionView = ChatCollectionView(frame: .zero)
@@ -47,8 +47,8 @@ final class ChattingViewController: UIViewController {
     }
 }
 
-extension ChattingViewController: ChatServiceDelegate  {
-    func injectChatServiceDelegate() -> ChatService {
+extension ChattingViewController: OpenAIServiceDelegate  {
+    func injectServiceDelegate() -> OpenAIServiceProtocol {
         return chatService
     }
 }

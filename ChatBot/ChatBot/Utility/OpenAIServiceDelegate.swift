@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol ChatServiceDelegate: AnyObject {
-    func injectChatServiceDelegate() -> ChatService
+protocol OpenAIServiceDelegate: AnyObject {
+    func injectServiceDelegate() -> OpenAIServiceProtocol
 }

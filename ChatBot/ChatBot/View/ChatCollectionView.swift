@@ -16,7 +16,7 @@ final class ChatCollectionView: UICollectionView {
     private var diffableDataSource: UICollectionViewDiffableDataSource<Section, UUID>?
     private var chatRecord: [Message] = []
     
-    weak var chatServiceDelegate: ChatServiceDelegate?
+    weak var chatServiceDelegate: OpenAIServiceDelegate?
     
     init(frame: CGRect) {
         var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
@@ -90,9 +90,9 @@ extension ChatCollectionView: ChatCollectionViewDelegate {
     }
     
     func updateCollectionViewFromResponse() async {
-        let injectedDelegate = chatServiceDelegate?.injectChatServiceDelegate()
+        let injectedDelegate = chatServiceDelegate?.injectServiceDelegate()
         do {
-            guard let chatAnswer: ResponseModel = try await injectedDelegate?.getRequestData(inputData: RequestModel(messages: chatRecord)) else { return }
+            guard let chatAnswer: ResponseModel = try await injectedDelegate?.sendRequestDTO(inputData: RequestModel(messages: chatRecord)) else { return }
             
             chatRecord[chatRecord.count-1].content = chatAnswer.choices[0].message.content
             replaceSnapShot()

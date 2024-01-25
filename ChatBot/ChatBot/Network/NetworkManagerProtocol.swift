@@ -9,4 +9,5 @@ import Foundation
 
 protocol NetworkManagerProtocol {
     func getData(body: Data?) async throws -> Data
+    func requestData<E: Encodable, D: Decodable>(inputData: E) async throws -> D
 }

@@ -17,15 +17,8 @@ struct ChatService {
     }
 }
 
-extension ChatService {
-    func getRequestData<E: Encodable, D: Decodable>(inputData: E) async throws -> D {
-        
-        let encodedData = JSONConverter.encode(data: inputData)
-        let responseData = try await networkManager.getData(body: encodedData)
-        guard let decodedData = JSONConverter.decode(type: D.self, data: responseData) else {
-            throw JSONConvertError.wrongDecoding
-        }
-        
-        return decodedData
+extension ChatService: OpenAIServiceProtocol {
+    func sendRequestDTO<E: Encodable, D: Decodable>(inputData: E) async throws -> D {
+        return try await networkManager.requestData(inputData:  inputData)
     }
 }
