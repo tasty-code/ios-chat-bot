@@ -8,6 +8,7 @@
 import Foundation
 
 // MARK: - Message
+
 struct Message: Codable, Hashable, Identifiable {
     let id: UUID = UUID()
     let role: String

@@ -8,6 +8,7 @@
 import Foundation
 
 // MARK: - UserContentModel
+
 struct UserContentModel: Encodable  {
     let model: String = "gpt-3.5-turbo"
     let stream: Bool = false

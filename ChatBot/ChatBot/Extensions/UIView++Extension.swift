@@ -8,6 +8,9 @@
 import UIKit
 
 extension UIView {
+    
+    // MARK: - for cricle uiView
+
     convenience init(backgroundColor: UIColor, cornerRadius: CGFloat) {
         self.init()
         self.translatesAutoresizingMaskIntoConstraints = false
