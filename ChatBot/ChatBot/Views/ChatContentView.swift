@@ -32,7 +32,7 @@ final class ChatContentView: UIView, UIContentView {
         return label
     }()
     
-    private lazy var bubble: BubbleView = {
+    private lazy var bubbleView: BubbleView = {
         let bubble = BubbleView()
         bubble.backgroundColor = .systemBackground
         addSubview(bubble)
@@ -51,22 +51,22 @@ final class ChatContentView: UIView, UIContentView {
         setConstraints()
 
         userConstraints = [
-            bubble.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            textLabel.leadingAnchor.constraint(equalTo: bubble.leadingAnchor, constant: 10),
-            textLabel.trailingAnchor.constraint(equalTo: bubble.trailingAnchor, constant: -20),
+            bubbleView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            textLabel.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 10),
+            textLabel.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: -20),
         ]
         
         assistantConstraints = [
-            bubble.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: -3),
-            textLabel.leadingAnchor.constraint(equalTo: bubble.leadingAnchor, constant: 20),
-            textLabel.trailingAnchor.constraint(equalTo: bubble.trailingAnchor, constant: -20),
+            bubbleView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: -3),
+            textLabel.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 20),
+            textLabel.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: -20),
         ]
         
         loadingConstraints = [
-            bubble.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: -3),
-            dotsView.topAnchor.constraint(equalTo: bubble.topAnchor, constant: 34),
-            dotsView.leadingAnchor.constraint(equalTo: bubble.leadingAnchor, constant: 20),
-            dotsView.trailingAnchor.constraint(equalTo: bubble.trailingAnchor, constant: -20),
+            bubbleView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: -3),
+            dotsView.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 34),
+            dotsView.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 20),
+            dotsView.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: -20),
         ]
         
         apply(configuration)
@@ -78,12 +78,12 @@ final class ChatContentView: UIView, UIContentView {
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            bubble.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            bubble.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            bubble.widthAnchor.constraint(lessThanOrEqualToConstant: 300),
+            bubbleView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            bubbleView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            bubbleView.widthAnchor.constraint(lessThanOrEqualToConstant: 300),
             
-            textLabel.topAnchor.constraint(equalTo: bubble.topAnchor, constant: 5),
-            textLabel.bottomAnchor.constraint(equalTo: bubble.bottomAnchor, constant: -5),
+            textLabel.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 5),
+            textLabel.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor, constant: -5),
         ])
     }
     
@@ -92,7 +92,7 @@ final class ChatContentView: UIView, UIContentView {
         guard appliedConfiguration != configuration else { return }
         appliedConfiguration = configuration
         textLabel.text = configuration.content
-        bubble.sender = sender
+        bubbleView.sender = sender
         
         switch sender {
         case .assistant:
