@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-final class GPTChatRoomsViewModel: GPTChatRoomsOutputProtocol {
+final class GPTChatRoomsViewModel: GPTChatRoomsOutput {
     private let chatRoomRepository: ChatRoomRepositable
     
     private let updateChatRoomsSubject = PassthroughSubject<[Model.GPTChatRoomDTO], Never>()
@@ -29,7 +29,7 @@ final class GPTChatRoomsViewModel: GPTChatRoomsOutputProtocol {
     }
 }
 
-extension GPTChatRoomsViewModel: GPTChatRoomsInputProtocol {
+extension GPTChatRoomsViewModel: GPTChatRoomsInput {
     func onViewDidLoad() { }
     
     func onViewWillAppear() {

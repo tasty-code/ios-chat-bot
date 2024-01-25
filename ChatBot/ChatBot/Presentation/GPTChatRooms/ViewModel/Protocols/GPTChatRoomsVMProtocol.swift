@@ -8,9 +8,9 @@
 import Combine
 import Foundation
 
-typealias GPTChatRoomsVMProtocol = GPTChatRoomsInputProtocol & GPTChatRoomsOutputProtocol
+typealias GPTChatRoomsVMProtocol = GPTChatRoomsInput & GPTChatRoomsOutput
 
-protocol GPTChatRoomsInputProtocol {
+protocol GPTChatRoomsInput {
     func onViewDidLoad()
     func onViewWillAppear()
     func onViewDidDisappear()
@@ -20,7 +20,7 @@ protocol GPTChatRoomsInputProtocol {
     func selectRoom(for indexPath: IndexPath)
 }
 
-protocol GPTChatRoomsOutputProtocol {
+protocol GPTChatRoomsOutput {
     var updateChatRooms: AnyPublisher<[Model.GPTChatRoomDTO], Never> { get }
     var moveToChatting: AnyPublisher<any GPTChattingVMProtocol, Never> { get }
     var moveToPromptSetting: AnyPublisher<any GPTPromptSettingVMProtocol, Never> { get }

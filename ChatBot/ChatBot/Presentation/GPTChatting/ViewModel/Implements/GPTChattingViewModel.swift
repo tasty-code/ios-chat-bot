@@ -73,12 +73,12 @@ final class GPTChattingViewModel {
     }
 }
 
-extension GPTChattingViewModel: GPTChattingOutputProtocol {
+extension GPTChattingViewModel: GPTChattingOutput {
     var updateChattings: AnyPublisher<(messages: [Model.GPTMessage], indexToUpdate: Int), Never> { updateChattingsSubject.eraseToAnyPublisher() }
     var error: AnyPublisher<Error, Never> { errorSubject.eraseToAnyPublisher() }
 }
 
-extension GPTChattingViewModel: GPTChattingsInputProtocol {
+extension GPTChattingViewModel: GPTChattingsInput {
     func onViewDidLoad() { }
     
     func onViewWillAppear() {

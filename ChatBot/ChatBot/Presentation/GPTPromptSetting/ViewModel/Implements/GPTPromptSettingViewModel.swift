@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-final class GPTPromptSettingViewModel: GPTPromptSettingOutputProtocol {
+final class GPTPromptSettingViewModel: GPTPromptSettingOutput {
     private let chatRoom: Model.GPTChatRoomDTO
     private let fetchPromptSettingSubject = PassthroughSubject<String?, Never>()
     private let errorSubject = PassthroughSubject<Error, Never>()
@@ -35,7 +35,7 @@ final class GPTPromptSettingViewModel: GPTPromptSettingOutputProtocol {
     }
 }
 
-extension GPTPromptSettingViewModel: GPTPromptSettingInputProtocol {
+extension GPTPromptSettingViewModel: GPTPromptSettingInput {
     func onViewDidLoad() { }
     
     func onViewWillAppear() {

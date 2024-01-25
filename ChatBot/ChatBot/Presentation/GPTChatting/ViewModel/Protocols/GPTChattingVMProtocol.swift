@@ -7,16 +7,16 @@
 
 import Combine
 
-typealias GPTChattingVMProtocol = GPTChattingsInputProtocol & GPTChattingOutputProtocol
+typealias GPTChattingVMProtocol = GPTChattingsInput & GPTChattingOutput
 
-protocol GPTChattingsInputProtocol {
+protocol GPTChattingsInput {
     func onViewDidLoad()
     func onViewWillAppear()
     func onViewWillDisappear()
     func sendChat(_ content: String?)
 }
 
-protocol GPTChattingOutputProtocol {
+protocol GPTChattingOutput {
     var updateChattings: AnyPublisher<(messages: [Model.GPTMessage], indexToUpdate: Int), Never> { get }
     var error: AnyPublisher<Error, Never> { get }
 }
