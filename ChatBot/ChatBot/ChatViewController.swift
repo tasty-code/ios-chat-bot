@@ -13,7 +13,6 @@ final class ChatViewController: UIViewController {
         collectionView.backgroundColor = .systemBackground
         collectionView.keyboardDismissMode = .onDrag
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        
         return collectionView
     }()
     
