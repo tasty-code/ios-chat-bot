@@ -7,9 +7,7 @@
 
 import Combine
 
-final class GPTChattingViewModel: GPTChattingOutputProtocol {
-    typealias Output = GPTChattingOutput
-    
+final class GPTChattingViewModel {
     private let chatRoomDTO: Model.GPTChatRoomDTO
     private let chattingRepository: ChattingRepositable
     private let promptSettingRepository: PromptSettingRepositable
@@ -17,11 +15,11 @@ final class GPTChattingViewModel: GPTChattingOutputProtocol {
     private let httpService: HTTPServicable
     private let httpRequest: HTTPRequestable
     
-    private let outputSubject = PassthroughSubject<Output, Never>()
-    var output: AnyPublisher<GPTChattingOutput, Never> { outputSubject.eraseToAnyPublisher() }
+    private let updateChattingsSubject = PassthroughSubject<(messages: [Model.GPTMessage], indexToUpdate: Int), Never>()
+    private let errorSubject = PassthroughSubject<Error, Never>()
+    
     private var cancellables = Set<AnyCancellable>()
     private var systemMessage: Model.GPTMessage?
-    
     private var messages = [Model.GPTMessage]()
     
     init(
@@ -62,9 +60,9 @@ final class GPTChattingViewModel: GPTChattingOutputProtocol {
                 switch completion {
                 case .failure(let error):
                     messages[indexToUpdate] = Model.AssistantMessage(content: error.localizedDescription, name: nil, toolCalls: nil).asRequestMessage()
-                    outputSubject.send(Output.networkChatting(.failure(error)))
+                    errorSubject.send(error)
                 case .finished:
-                    outputSubject.send(Output.networkChatting(.success((messages, indexToUpdate))))
+                    updateChattingsSubject.send((messages, indexToUpdate))
                 }
                 cancellables.remove(cancellable)?.cancel()
             } receiveValue: { [weak self] message in
@@ -75,6 +73,11 @@ final class GPTChattingViewModel: GPTChattingOutputProtocol {
     }
 }
 
+extension GPTChattingViewModel: GPTChattingOutputProtocol {
+    var updateChattings: AnyPublisher<(messages: [Model.GPTMessage], indexToUpdate: Int), Never> { updateChattingsSubject.eraseToAnyPublisher() }
+    var error: AnyPublisher<Error, Never> { errorSubject.eraseToAnyPublisher() }
+}
+
 extension GPTChattingViewModel: GPTChattingsInputProtocol {
     func onViewDidLoad() { }
     
@@ -83,9 +86,9 @@ extension GPTChattingViewModel: GPTChattingsInputProtocol {
             systemMessage = try promptSettingRepository.fetchPromptSetting(for: chatRoomDTO)?.asRequestMessage()
             messages = try chattingRepository.fetchChattings(for: chatRoomDTO)
             if messages.isEmpty { return }
-            outputSubject.send(Output.networkChatting(.success((messages, messages.count - 1))))
+            updateChattingsSubject.send((messages, messages.count - 1))
         } catch {
-            outputSubject.send(.fetchChattings(.failure(error)))
+            errorSubject.send(error)
         }
     }
     
@@ -95,12 +98,12 @@ extension GPTChattingViewModel: GPTChattingsInputProtocol {
     
     func sendChat(_ content: String?) {
         guard let content = content, !content.isEmpty else {
-            outputSubject.send(.networkChatting(.failure(GPTError.ChatRoomError.emptyUserComment)))
+            errorSubject.send(GPTError.ChatRoomError.emptyUserComment)
             return
         }
         messages.append(Model.UserMessage(content: content).asRequestMessage())
         messages.append(Model.WaitingMessage().asRequestMessage())
-        outputSubject.send(.networkChatting(.success((messages: messages, indexToUpdate: messages.count - 1))))
+        updateChattingsSubject.send((messages: messages, indexToUpdate: messages.count - 1))
         
         getReplyFromServer(messages.count - 1)
     }

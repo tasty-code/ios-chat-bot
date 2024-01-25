@@ -17,10 +17,6 @@ protocol GPTChattingsInputProtocol {
 }
 
 protocol GPTChattingOutputProtocol {
-    var output: AnyPublisher<GPTChattingOutput, Never> { get }
-}
-
-enum GPTChattingOutput {
-    case networkChatting(Result<(messages: [Model.GPTMessage], indexToUpdate: Int), Error>)
-    case fetchChattings(Result<(messages: [Model.GPTMessage], indexToUpdate: Int), Error>)
+    var updateChattings: AnyPublisher<(messages: [Model.GPTMessage], indexToUpdate: Int), Never> { get }
+    var error: AnyPublisher<Error, Never> { get }
 }

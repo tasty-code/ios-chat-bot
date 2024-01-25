@@ -101,26 +101,17 @@ final class GPTChattingViewController: UIViewController {
     }
     
     private func bind(to viewModel: any GPTChattingVMProtocol) {
-        viewModel.output
+        viewModel.updateChattings
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] output in
-                switch output {
-                case .fetchChattings(let result):
-                    self?.handleChattings(result)
-                case .networkChatting(let result):
-                    self?.handleChattings(result)
-                }
+            .sink { [weak self] (messages, indexToUpdate) in
+                self?.updateCollectionView(messages.map { Row.forMain(message: $0) }, indexToUpdate: indexToUpdate)
             }
             .store(in: &cancellables)
-    }
-    
-    private func handleChattings(_ result: Result<(messages: [Model.GPTMessage], indexToUpdate: Int), Error>) {
-        switch result {
-        case .success((let messages, let indexToUpdate)):
-            updateCollectionView(messages.map { Row.forMain(message: $0) }, indexToUpdate: indexToUpdate)
-        case .failure(let error):
-            present(UIAlertController(error: error), animated: true)
-        }
+        
+        viewModel.error
+            .flatMap { UIAlertController.presentErrorPublisher(on: self, with: $0) }
+            .sink { _ in }
+            .store(in: &cancellables)
     }
 }
 
