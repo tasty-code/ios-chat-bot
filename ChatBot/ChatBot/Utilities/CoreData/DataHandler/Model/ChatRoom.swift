@@ -25,6 +25,6 @@ extension ChatRoom: Hashable {
     }
     
     static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs.uuid == rhs.uuid
+        return lhs.uuid == rhs.uuid && lhs.date == rhs.date
     }
 }

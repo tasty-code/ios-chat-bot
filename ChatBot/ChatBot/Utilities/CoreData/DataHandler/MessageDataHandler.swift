@@ -49,7 +49,7 @@ final class MessageDataHandler {
             
             roomEntity.addToMessageRelationship(entity)
         }
-        roomEntity.date = Date()
+        roomEntity.date = messages.last?.date
         try dataManager.saveContext()
     }
     
