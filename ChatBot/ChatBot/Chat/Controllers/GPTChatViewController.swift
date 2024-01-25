@@ -1,5 +1,5 @@
 //
-//  GPTChatRoomViewController.swift
+//  GPTChatViewController.swift
 //  ChatBot
 //
 //  Created by Tacocat on 1/1/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class GPTChatRoomViewController: UIViewController {
+final class GPTChatViewController: UIViewController {
     
     // MARK: - NestedType
     
@@ -66,27 +66,24 @@ final class GPTChatRoomViewController: UIViewController {
     
     // MARK: - Private Property
     
-    private let viewModel: GPTViewModel
+    private let viewModel: GPTChatViewModel
     
-    private let cellRegistration: UICollectionView.CellRegistration<MessageCell, GPTMessageDTO> = {
-        return UICollectionView.CellRegistration<MessageCell, GPTMessageDTO> {
+    private lazy var dataSource: UICollectionViewDiffableDataSource<Section, GPTMessageDTO> = {
+        let cellRegistration = UICollectionView.CellRegistration<MessageCell, GPTMessageDTO> {
             cell, indexPath, item in
             var configuration = MessageContentConfiguration()
             configuration.message = item
             cell.contentConfiguration = configuration
         }
-    }()
-    
-    private lazy var dataSource: UICollectionViewDiffableDataSource<Section, GPTMessageDTO> = {
         return UICollectionViewDiffableDataSource<Section, GPTMessageDTO>(collectionView: chatCollectionView) {
             collectionView, indexPath, itemIdentifier in
-            collectionView.dequeueConfiguredReusableCell(using: self.cellRegistration, for: indexPath, item: itemIdentifier)
+            collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
         }
     }()
     
     // MARK: - Initializer
     
-    init(viewModel: GPTViewModel) {
+    init(viewModel: GPTChatViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         

@@ -1,5 +1,5 @@
 //
-//  GPTViewModel.swift
+//  GPTChatViewModel.swift
 //  ChatBot
 //
 //  Created by 김진웅 on 1/13/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class GPTViewModel {
+final class GPTChatViewModel {
     private let serviceProvider: ServiceProvidable
     
     private var messages: [GPTMessageDTO] = [] {

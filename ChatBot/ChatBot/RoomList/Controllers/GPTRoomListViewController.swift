@@ -1,5 +1,5 @@
 //
-//  GPTChatListViewController.swift
+//  GPTRoomListViewController.swift
 //  ChatBot
 //
 //  Created by BOMBSGIE on 1/23/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class GPTChatListViewController: UIViewController {
+final class GPTRoomListViewController: UIViewController {
     
     // MARK: - Nested Type
     
@@ -29,20 +29,17 @@ final class GPTChatListViewController: UIViewController {
         return collectionView
     }()
     
-    private let cellRegistration: UICollectionView.CellRegistration<UICollectionViewListCell, Mock> = {
-        return UICollectionView.CellRegistration<UICollectionViewListCell, Mock> { cell, indexPath, itemIdentifier in
+    private lazy var dataSource: UICollectionViewDiffableDataSource<Section, Mock> = {
+        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Mock> { cell, indexPath, itemIdentifier in
             var configuration = cell.defaultContentConfiguration()
             configuration.text = itemIdentifier.content
             configuration.secondaryText = "날짜"
             configuration.secondaryTextProperties.color = .systemGray5
             cell.contentConfiguration = configuration
         }
-    }()
-    
-    private lazy var dataSource: UICollectionViewDiffableDataSource<Section, Mock> = {
-        return UICollectionViewDiffableDataSource<Section, Mock>(collectionView: chatListCollectionView) { 
+        return UICollectionViewDiffableDataSource<Section, Mock>(collectionView: chatListCollectionView) {
             collectionView, indexPath, itemIdentifier in
-            collectionView.dequeueConfiguredReusableCell(using: self.cellRegistration, for: indexPath, item: itemIdentifier)
+            collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
         }
     }()
     
