@@ -43,19 +43,19 @@ final class ChatContentView: UIView, UIContentView {
     }()
     
     private lazy var userConstraints: [NSLayoutConstraint] = [
-        bubbleView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+        bubbleView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
         textLabel.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 10),
         textLabel.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: -20),
     ]
     
     private lazy var assistantConstraints: [NSLayoutConstraint] = [
-        bubbleView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: -3),
+        bubbleView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
         textLabel.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 20),
         textLabel.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: -20),
     ]
     
     private lazy var loadingConstraints: [NSLayoutConstraint] = [
-        bubbleView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: -3),
+        bubbleView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
         bubbleView.widthAnchor.constraint(greaterThanOrEqualToConstant: 100),
         dotsView.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 34),
         dotsView.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 20),
