@@ -26,29 +26,9 @@ final class LoadingAnimationView: UIView {
         return stackView
     }()
     
-    private let firstCircle: UIView = {
-        var view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
-        view.layer.cornerRadius = Constant.circleSize / 2
-        return view
-    }()
-    
-    private let secondCircle: UIView = {
-        var view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
-        view.layer.cornerRadius = Constant.circleSize / 2
-        return view
-    }()
-    
-    private let lastCircle: UIView = {
-        var view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
-        view.layer.cornerRadius = Constant.circleSize / 2
-        return view
-    }()
+    private let firstCircle: UIView = UIView(backgroundColor: .white, cornerRadius: Constant.circleSize)
+    private let secondCircle: UIView = UIView(backgroundColor: .white, cornerRadius: Constant.circleSize)
+    private let lastCircle: UIView = UIView(backgroundColor: .white, cornerRadius: Constant.circleSize)
     
     // MARK: - init
     

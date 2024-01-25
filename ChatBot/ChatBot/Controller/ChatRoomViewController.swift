@@ -46,10 +46,20 @@ extension ChatRoomViewController {
         view.endEditing(true)
     }
     
-    private func showAlert(title: String, message: String, completionHandler: ((UIAlertAction) -> Void)? = nil) {
+    private func showAlert(title: String, message: String, needErrorHandle: Bool) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "확인", style: .default, handler: completionHandler)
-        alert.addAction(action)
+        var okAction: UIAlertAction
+        
+        if needErrorHandle {
+            okAction = UIAlertAction(title: "확인", style: .default, handler: { _ in
+                self.chatView.toggleSendButton()
+                self.chatView.updateSnapshot(items: nil, isFetched: true)
+            })
+        } else {
+            okAction = UIAlertAction(title: "확인", style: .default)
+        }
+        
+        alert.addAction(okAction)
         self.present(alert, animated: true)
     }
 }
@@ -76,7 +86,7 @@ extension ChatRoomViewController: UITextViewDelegate {
 extension ChatRoomViewController: ChatViewDelegate {
     
     func blankCheckTextView(of chatView: ChatView) {
-        showAlert(title: "메세지를 입력해주세요", message: "")
+        showAlert(title: "메세지를 입력해주세요", message: "", needErrorHandle: false)
     }
     
     func submitUserMessage(chatView: ChatView, animationData: Message, userMessage: String) {
@@ -94,15 +104,18 @@ extension ChatRoomViewController: ChatViewDelegate {
             switch result {
             case .success(let data):
                 DispatchQueue.main.async {
-                    chatView.updateSnapshot(items: [data.choices[0].message], isFetched: true)
+                    guard let message = data.choices.first?.message else {
+                        self.showAlert(title: "에러가 발생하였습니다", message: "잠시 후 다시 시도해주세요.", needErrorHandle: true)
+                        return
+                    }
+                    
+                    chatView.updateSnapshot(items: [message], isFetched: true)
                     chatView.toggleSendButton()
                     chatView.scrollToBottom()
                 }
             case .failure(let error):
                 DispatchQueue.main.async {
-                    self.showAlert(title: "에러가 발생하였습니다", message: "\(error) 앱을 종료합니다") {_ in
-                        exit(0)
-                    }
+                    self.showAlert(title: "에러가 발생하였습니다", message: "\(error)", needErrorHandle: true)
                 }
             }
         }

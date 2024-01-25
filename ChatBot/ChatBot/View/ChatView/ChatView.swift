@@ -88,7 +88,8 @@ extension ChatView {
     // MARK: - private methods
     
     @objc private func submitUserAnswer() {
-        guard !userInputChatTextView.text.isEmpty else { delegate?.blankCheckTextView(of: self)
+        guard !userInputChatTextView.text.isEmpty else { 
+            delegate?.blankCheckTextView(of: self)
             return
         }
         guard let userMessage = userInputChatTextView.text else {
@@ -148,7 +149,7 @@ extension ChatView {
     
     // MARK: - internal Methods
     
-    func updateSnapshot(items: [Message], isFetched: Bool) {
+    func updateSnapshot(items: [Message]?, isFetched: Bool) {
         dataSource.updateSnapshot(items: items, isFetched: isFetched)
     }
     

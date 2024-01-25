@@ -37,12 +37,16 @@ final class ChatCollectionViewDataSource: UICollectionViewDiffableDataSource<Sec
 // MARK: - internal methods
 
 extension ChatCollectionViewDataSource {
-    func updateSnapshot(items: [Message], isFetched: Bool) {
+    func updateSnapshot(items: [Message]?, isFetched: Bool) {
         var snapShot = self.snapshot()
         
         if isFetched {
             snapShot.deleteItems([animationData])
             self.apply(snapShot, animatingDifferences: true)
+        }
+        
+        guard let items = items else {
+            return
         }
         
         snapShot.appendItems(items)

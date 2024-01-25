@@ -9,9 +9,9 @@ import Foundation
 
 // MARK: - Message
 struct Message: Codable, Hashable, Identifiable {
-    var id: UUID = UUID()
+    let id: UUID = UUID()
     let role: String
-    var content: String
+    let content: String
     
     enum CodingKeys: CodingKey {
         case role
