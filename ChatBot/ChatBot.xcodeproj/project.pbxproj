@@ -23,7 +23,17 @@
 		0452955B2B4C2120000A5FD1 /* APIKeyList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0452955A2B4C2120000A5FD1 /* APIKeyList.plist */; };
 		0452955D2B4E291F000A5FD1 /* GPTModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452955C2B4E291F000A5FD1 /* GPTModel.swift */; };
 		0452955F2B4E2E01000A5FD1 /* ChattingRoomListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452955E2B4E2E01000A5FD1 /* ChattingRoomListViewController.swift */; };
+		045DE5F72B5108E6002B426C /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045DE5F62B5108E6002B426C /* UIStackView+Extension.swift */; };
+		045DE5F92B510DDA002B426C /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045DE5F82B510DDA002B426C /* UIView+Extension.swift */; };
+		045DE5FF2B515B7D002B426C /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045DE5FE2B515B7D002B426C /* MessageCell.swift */; };
+		046C25182B5A485200B5696D /* MessageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046C25172B5A485200B5696D /* MessageContentView.swift */; };
+		046C251A2B5A485F00B5696D /* MessageViewContentConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046C25192B5A485F00B5696D /* MessageViewContentConfiguration.swift */; };
+		04A9300A2B5523ED002E4819 /* MessageCellConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A930092B5523ED002E4819 /* MessageCellConfiguration.swift */; };
+		04A9300C2B55240B002E4819 /* MessageCellContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A9300B2B55240B002E4819 /* MessageCellContentView.swift */; };
+		04A9303F2B590F4E002E4819 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		04A930412B59119A002E4819 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		A60A086C2B4BFE410027A6F7 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60A086B2B4BFE410027A6F7 /* Bundle+Extension.swift */; };
+		A6AC5F5B2B5688E900AB7CAF /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6AC5F5A2B5688E900AB7CAF /* MessageView.swift */; };
 		B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */; };
 		B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */; };
 		B4B3E2C12B42D1BB00818B3C /* ChattingRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2C02B42D1BB00818B3C /* ChattingRoomViewController.swift */; };
@@ -32,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0445ACDC2B5DFBEF0001D0E2 /* ChatBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = ChatBot.app; path = "/Users/swain/Desktop/Project/ios-chat-bot/ChatBot/build/Debug-iphoneos/ChatBot.app"; sourceTree = "<absolute>"; };
 		0452948E2B44F058000A5FD1 /* ResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseModel.swift; sourceTree = "<group>"; };
 		045294902B4519E7000A5FD1 /* RequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
 		045295392B4BFCED000A5FD1 /* HTTPMethodType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethodType.swift; sourceTree = "<group>"; };
@@ -48,8 +59,15 @@
 		0452955A2B4C2120000A5FD1 /* APIKeyList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = APIKeyList.plist; sourceTree = "<group>"; };
 		0452955C2B4E291F000A5FD1 /* GPTModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTModel.swift; sourceTree = "<group>"; };
 		0452955E2B4E2E01000A5FD1 /* ChattingRoomListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingRoomListViewController.swift; sourceTree = "<group>"; };
+		045DE5F62B5108E6002B426C /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
+		045DE5F82B510DDA002B426C /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		045DE5FE2B515B7D002B426C /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		046C25172B5A485200B5696D /* MessageContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageContentView.swift; sourceTree = "<group>"; };
+		046C25192B5A485F00B5696D /* MessageViewContentConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewContentConfiguration.swift; sourceTree = "<group>"; };
+		04A930092B5523ED002E4819 /* MessageCellConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellConfiguration.swift; sourceTree = "<group>"; };
+		04A9300B2B55240B002E4819 /* MessageCellContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellContentView.swift; sourceTree = "<group>"; };
 		A60A086B2B4BFE410027A6F7 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
-		B4B3E2B92B42D1BB00818B3C /* ChatBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A6AC5F5A2B5688E900AB7CAF /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B4B3E2C02B42D1BB00818B3C /* ChattingRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingRoomViewController.swift; sourceTree = "<group>"; };
@@ -162,6 +180,116 @@
 			path = Implementation;
 			sourceTree = "<group>";
 		};
+		045DE5DC2B4FBC2F002B426C /* ChattingRoomView */ = {
+			isa = PBXGroup;
+			children = (
+				045DE5E02B4FBC97002B426C /* ViewController */,
+				045DE5DF2B4FBC92002B426C /* View */,
+				045DE5DE2B4FBC8D002B426C /* Model */,
+			);
+			path = ChattingRoomView;
+			sourceTree = "<group>";
+		};
+		045DE5DD2B4FBC44002B426C /* ChattingRoomListView */ = {
+			isa = PBXGroup;
+			children = (
+				04A4863E2B5CFC1E009E6943 /* ViewController */,
+				04A4863D2B5CFC1B009E6943 /* View */,
+				04A4863C2B5CFC16009E6943 /* Model */,
+			);
+			path = ChattingRoomListView;
+			sourceTree = "<group>";
+		};
+		045DE5DE2B4FBC8D002B426C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				04A930092B5523ED002E4819 /* MessageCellConfiguration.swift */,
+				046C25192B5A485F00B5696D /* MessageViewContentConfiguration.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		045DE5DF2B4FBC92002B426C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				045DE5FE2B515B7D002B426C /* MessageCell.swift */,
+				04A9300B2B55240B002E4819 /* MessageCellContentView.swift */,
+				A6AC5F5A2B5688E900AB7CAF /* MessageView.swift */,
+				046C25172B5A485200B5696D /* MessageContentView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		045DE5E02B4FBC97002B426C /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B4B3E2C02B42D1BB00818B3C /* ChattingRoomViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		045DE5F52B5108C3002B426C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				045DE5F62B5108E6002B426C /* UIStackView+Extension.swift */,
+				045DE5F82B510DDA002B426C /* UIView+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		04A486362B5CFAAE009E6943 /* PromptSettingView */ = {
+			isa = PBXGroup;
+			children = (
+				04A486392B5CFAC1009E6943 /* ViewController */,
+				04A486382B5CFABD009E6943 /* View */,
+				04A486372B5CFAB9009E6943 /* Model */,
+			);
+			path = PromptSettingView;
+			sourceTree = "<group>";
+		};
+		04A486372B5CFAB9009E6943 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		04A486382B5CFABD009E6943 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		04A486392B5CFAC1009E6943 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		04A4863C2B5CFC16009E6943 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		04A4863D2B5CFC1B009E6943 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		04A4863E2B5CFC1E009E6943 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0452955E2B4E2E01000A5FD1 /* ChattingRoomListViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		A60A086A2B4BFE340027A6F7 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -174,16 +302,7 @@
 			isa = PBXGroup;
 			children = (
 				B4B3E2BB2B42D1BB00818B3C /* ChatBot */,
-				B4B3E2BA2B42D1BB00818B3C /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		B4B3E2BA2B42D1BB00818B3C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				B4B3E2B92B42D1BB00818B3C /* ChatBot.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		B4B3E2BB2B42D1BB00818B3C /* ChatBot */ = {
@@ -191,8 +310,10 @@
 			children = (
 				B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */,
 				B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */,
-				B4B3E2C02B42D1BB00818B3C /* ChattingRoomViewController.swift */,
-				0452955E2B4E2E01000A5FD1 /* ChattingRoomListViewController.swift */,
+				04A486362B5CFAAE009E6943 /* PromptSettingView */,
+				045DE5DD2B4FBC44002B426C /* ChattingRoomListView */,
+				045DE5DC2B4FBC2F002B426C /* ChattingRoomView */,
+				045DE5F52B5108C3002B426C /* Extensions */,
 				045295362B4BFCED000A5FD1 /* Utilities */,
 				0402A7C42B43AD5E005AE613 /* OpenAIAPI */,
 				B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */,
@@ -220,7 +341,7 @@
 			);
 			name = ChatBot;
 			productName = ChatBot;
-			productReference = B4B3E2B92B42D1BB00818B3C /* ChatBot.app */;
+			productReference = 0445ACDC2B5DFBEF0001D0E2 /* ChatBot.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -247,7 +368,7 @@
 				Base,
 			);
 			mainGroup = B4B3E2B02B42D1BB00818B3C;
-			productRefGroup = B4B3E2BA2B42D1BB00818B3C /* Products */;
+			productRefGroup = B4B3E2B02B42D1BB00818B3C;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -277,6 +398,7 @@
 				0452955F2B4E2E01000A5FD1 /* ChattingRoomListViewController.swift in Sources */,
 				045294912B4519E7000A5FD1 /* RequestModel.swift in Sources */,
 				A60A086C2B4BFE410027A6F7 /* Bundle+Extension.swift in Sources */,
+				045DE5F92B510DDA002B426C /* UIView+Extension.swift in Sources */,
 				0452954C2B4BFCED000A5FD1 /* EndpointType.swift in Sources */,
 				045295522B4BFCED000A5FD1 /* JSONDecoder+Extension.swift in Sources */,
 				0452954F2B4BFCED000A5FD1 /* JSONDecodable.swift in Sources */,
@@ -284,13 +406,22 @@
 				045295532B4BFCED000A5FD1 /* JSONEncodeManager.swift in Sources */,
 				0452954B2B4BFCED000A5FD1 /* HTTPMethodType.swift in Sources */,
 				0452948F2B44F058000A5FD1 /* ResponseModel.swift in Sources */,
+				045DE5FF2B515B7D002B426C /* MessageCell.swift in Sources */,
 				B4B3E2C12B42D1BB00818B3C /* ChattingRoomViewController.swift in Sources */,
 				045295512B4BFCED000A5FD1 /* JSONEncoder+Extension.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
+				045DE5F72B5108E6002B426C /* UIStackView+Extension.swift in Sources */,
 				045295542B4BFCED000A5FD1 /* JSONDecodeManager.swift in Sources */,
+				046C251A2B5A485F00B5696D /* MessageViewContentConfiguration.swift in Sources */,
 				0452954D2B4BFCED000A5FD1 /* NetworkRequestBuilderProtocol.swift in Sources */,
+				04A930412B59119A002E4819 /* (null) in Sources */,
+				04A9300C2B55240B002E4819 /* MessageCellContentView.swift in Sources */,
 				0452954E2B4BFCED000A5FD1 /* NetworkRequestBuilder.swift in Sources */,
+				04A9303F2B590F4E002E4819 /* (null) in Sources */,
+				046C25182B5A485200B5696D /* MessageContentView.swift in Sources */,
+				A6AC5F5B2B5688E900AB7CAF /* MessageView.swift in Sources */,
 				045295502B4BFCED000A5FD1 /* JSONEncodable.swift in Sources */,
+				04A9300A2B5523ED002E4819 /* MessageCellConfiguration.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
 				0452955D2B4E291F000A5FD1 /* GPTModel.swift in Sources */,
 			);
@@ -436,7 +567,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TTKL6566T6;
+				DEVELOPMENT_TEAM = P85DW78LYM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChatBot/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -451,6 +582,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tacocat.ChatBot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -462,9 +597,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TTKL6566T6;
+				DEVELOPMENT_TEAM = P85DW78LYM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChatBot/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -479,6 +615,11 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tacocat.ChatBot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
