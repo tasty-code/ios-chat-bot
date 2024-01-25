@@ -10,6 +10,7 @@ import Foundation
 final class GPTChatViewModel {
     private let serviceProvider: ServiceProvidable
     
+    private var currentRoom: ChatRoom?
     private var messages: [GPTMessageDTO] = [] {
         didSet {
             didMessagesAppend?(messages)
@@ -18,8 +19,9 @@ final class GPTChatViewModel {
     
     var didMessagesAppend: (([GPTMessageDTO]) -> Void)?
     
-    init(serviceProvider: ServiceProvidable) {
+    init(serviceProvider: ServiceProvidable, currentRoom: ChatRoom? = nil) {
         self.serviceProvider = serviceProvider
+        self.currentRoom = currentRoom
     }
     
     func fetch(userInput: String) {

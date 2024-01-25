@@ -10,10 +10,15 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     
+    private let dataHandler = ChatRoomDataHandler()
+    
+    private lazy var roomListViewModel = GPTRoomListViewModel(dataHandler: dataHandler)
+    private lazy var gptRoomListViewController = GPTRoomListViewController(viewModel: roomListViewModel)
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = UINavigationController(rootViewController: GPTRoomListViewController())
+        window?.rootViewController = UINavigationController(rootViewController: gptRoomListViewController)
         window?.makeKeyAndVisible()
     }
 

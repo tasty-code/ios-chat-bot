@@ -14,11 +14,7 @@ final class GPTRoomListViewController: UIViewController {
     private enum Section {
         case main
     }
-    
-    struct Mock: Hashable {
-        var content: String
-    }
-    
+
     // MARK: - UI Components
     
     private lazy var chatListCollectionView: UICollectionView = {
@@ -29,15 +25,15 @@ final class GPTRoomListViewController: UIViewController {
         return collectionView
     }()
     
-    private lazy var dataSource: UICollectionViewDiffableDataSource<Section, Mock> = {
-        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Mock> { cell, indexPath, itemIdentifier in
+    private lazy var dataSource: UICollectionViewDiffableDataSource<Section, ChatRoom> = {
+        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, ChatRoom> { cell, indexPath, itemIdentifier in
             var configuration = cell.defaultContentConfiguration()
-            configuration.text = itemIdentifier.content
-            configuration.secondaryText = "날짜"
+            configuration.text = itemIdentifier.title
+            configuration.secondaryText = itemIdentifier.date.toString
             configuration.secondaryTextProperties.color = .systemGray5
             cell.contentConfiguration = configuration
         }
-        return UICollectionViewDiffableDataSource<Section, Mock>(collectionView: chatListCollectionView) {
+        return UICollectionViewDiffableDataSource<Section, ChatRoom>(collectionView: chatListCollectionView) {
             collectionView, indexPath, itemIdentifier in
             collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
         }
@@ -51,13 +47,26 @@ final class GPTRoomListViewController: UIViewController {
         return label
     }()
     
-    private lazy var newChatBarButton: UIButton = {
-        let button = UIButton()
-        let image = UIImage(systemName: "square.and.pencil")
-        button.setImage(image, for: .normal)
-        button.tintColor = .systemCyan
-        return button
-    }()
+    
+    // MARK: - Private Property
+    
+    private let viewModel: GPTRoomListViewModel
+    
+    // MARK: - Initializer
+    
+    init(viewModel: GPTRoomListViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+        
+        viewModel.didRoomAppend = { [weak self] roomList in
+            guard let self else { return }
+            configureSnapshot(with: roomList)
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Life Cycle
     
@@ -66,11 +75,18 @@ final class GPTRoomListViewController: UIViewController {
         configureUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.fetchRoomList()
+    }
+    
     // MARK: - Auto Layout
 
     private func configureUI() {
         view.backgroundColor = .white
         view.addSubview(chatListCollectionView)
+        
+        chatListCollectionView.delegate = self
         
         setConstraintsCollectionView()
         configureNavigationBarItem()
@@ -91,6 +107,41 @@ final class GPTRoomListViewController: UIViewController {
     
     private func configureNavigationBarItem() {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: navigationTitleLabel)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: newChatBarButton)
+        
+        let image = UIImage(systemName: "square.and.pencil")
+        let newChatButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(newChatButtonTapped(_:)))
+        newChatButton.tintColor = .systemCyan
+        self.navigationItem.rightBarButtonItem = newChatButton
+    }
+    
+    // MARK: - Private Method
+    
+    private func configureSnapshot(with roomList: [ChatRoom]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, ChatRoom>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(roomList)
+        dataSource.apply(snapshot, animatingDifferences: true)
+    }
+    
+    // MARK: - ActionHandler
+
+    @objc
+    private func newChatButtonTapped(_ sender: UIButton) {
+        enterRoom()
+    }
+    
+    private func enterRoom(with chatRoom: ChatRoom? = nil) {
+        let networkManager = NetworkManager()
+        let serviceProvider = ServiceProvider(networkManager: networkManager)
+        let gptChatViewModel = GPTChatViewModel(serviceProvider: serviceProvider, currentRoom: chatRoom)
+        let gptChatViewController = GPTChatViewController(viewModel: gptChatViewModel)
+        navigationController?.pushViewController(gptChatViewController, animated: true)
+    }
+}
+
+extension GPTRoomListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let chatRoom = viewModel.getChatRoom(at: indexPath.row)
+        enterRoom(with: chatRoom)
     }
 }
