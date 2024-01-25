@@ -30,7 +30,7 @@ final class GPTRoomListViewController: UIViewController {
             var configuration = cell.defaultContentConfiguration()
             configuration.text = itemIdentifier.title
             configuration.secondaryText = itemIdentifier.date.toString
-            configuration.secondaryTextProperties.color = .systemGray5
+            configuration.secondaryTextProperties.color = .systemGray
             cell.contentConfiguration = configuration
         }
         return UICollectionViewDiffableDataSource<Section, ChatRoom>(collectionView: chatListCollectionView) {
@@ -133,7 +133,11 @@ final class GPTRoomListViewController: UIViewController {
     private func enterRoom(with chatRoom: ChatRoom? = nil) {
         let networkManager = NetworkManager()
         let serviceProvider = ServiceProvider(networkManager: networkManager)
-        let gptChatViewModel = GPTChatViewModel(serviceProvider: serviceProvider, currentRoom: chatRoom)
+        let dataHandler = MessageDataHandler()
+        let gptChatViewModel = GPTChatViewModel(
+            serviceProvider: serviceProvider,
+            dataHandler: dataHandler,
+            currentRoom: chatRoom)
         let gptChatViewController = GPTChatViewController(viewModel: gptChatViewModel)
         navigationController?.pushViewController(gptChatViewController, animated: true)
     }

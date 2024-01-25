@@ -261,8 +261,8 @@
 		7F5A08062B5F5A9100617992 /* RoomList */ = {
 			isa = PBXGroup;
 			children = (
-				7F2F346C2B61FA8B000CBC6E /* ViewModel */,
 				7F5A08072B5F5ABE00617992 /* Controllers */,
+				7F2F346C2B61FA8B000CBC6E /* ViewModel */,
 			);
 			path = RoomList;
 			sourceTree = "<group>";

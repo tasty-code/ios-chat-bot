@@ -12,7 +12,7 @@ struct ChatRoom {
     var title: String
     var date: Date
     
-    init(uuid: UUID = UUID(), title: String, date: Date) {
+    init(uuid: UUID = UUID(), title: String, date: Date = Date()) {
         self.uuid = uuid
         self.title = title
         self.date = date

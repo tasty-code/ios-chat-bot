@@ -102,16 +102,26 @@ final class GPTChatViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        userInputTextView.delegate = self
         configureUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.fetchMessages()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        viewModel.saveMessages()
+    }
     // MARK: - Auto Layout
     
     private func configureUI() {
         view.backgroundColor = .white
         view.addSubview(chatCollectionView)
         view.addSubview(userInteractionStackView)
+        
+        userInputTextView.delegate = self
         
         setConstraintsCollectionView()
         setConstraintsStackView()

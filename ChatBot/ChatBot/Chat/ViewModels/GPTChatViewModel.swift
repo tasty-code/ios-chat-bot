@@ -9,6 +9,7 @@ import Foundation
 
 final class GPTChatViewModel {
     private let serviceProvider: ServiceProvidable
+    private let dataHandler: MessageDataHandler
     
     private var currentRoom: ChatRoom?
     private var messages: [ChatMessage] = [] {
@@ -19,8 +20,9 @@ final class GPTChatViewModel {
     
     var didMessagesAppend: (([ChatMessage]) -> Void)?
     
-    init(serviceProvider: ServiceProvidable, currentRoom: ChatRoom? = nil) {
+    init(serviceProvider: ServiceProvidable, dataHandler: MessageDataHandler, currentRoom: ChatRoom? = nil) {
         self.serviceProvider = serviceProvider
+        self.dataHandler = dataHandler
         self.currentRoom = currentRoom
     }
     
@@ -48,6 +50,25 @@ final class GPTChatViewModel {
     private func addResponseMessage(_ chatMessage: ChatMessage) {
         Task { @MainActor in
             messages[messages.count - 1] = chatMessage
+        }
+    }
+    
+    func fetchMessages() {
+        guard let currentRoom = currentRoom else { return }
+        messages = dataHandler.fetchChats(at: currentRoom)
+    }
+    
+    func saveMessages() {
+        guard messages.isEmpty == false else { return }
+        guard let title = messages.first?.content else { return }
+        if currentRoom == nil {
+            currentRoom = ChatRoom(title: title)
+        }
+        guard let currentRoom = currentRoom else { return }
+        do {
+            try dataHandler.saveChat(at: currentRoom, with: messages)
+        } catch {
+            print("\(error.localizedDescription)")
         }
     }
 }

@@ -24,7 +24,7 @@ final class GPTRoomListViewModel {
     
     
     func fetchRoomList() {
-        roomList = dataHandler.fetchChatRoomData().sorted { $0.date > $1.date }
+        roomList = dataHandler.fetchChatRoomData().sorted { $0.date < $1.date }
     }
     
     func getChatRoom(at index: Int) -> ChatRoom {
