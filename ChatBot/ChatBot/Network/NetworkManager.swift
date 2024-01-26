@@ -18,7 +18,7 @@ final class NetworkManager {
 }
 
 // MARK: - protocol method
-extension NetworkManager: NetworkManagerProtocol {
+extension NetworkManager: NetworkManagerProtocol {    
     func getData(body: Data?) async throws -> Data {
         guard var urlRequest = urlRequest else {
             throw NetworkError.invalidURL
@@ -38,7 +38,7 @@ extension NetworkManager: NetworkManagerProtocol {
         return data
     }
 
-    func requestData<E: Encodable, D: Decodable>(inputData: E) async throws -> D {
+    func requestData<E: Encodable, D: Decodable>(inputData: E, type: D.Type) async throws -> D {
         
         guard let encodedData = JSONConverter.encode(data: inputData) else {
             throw JSONConvertError.wrongEncodig

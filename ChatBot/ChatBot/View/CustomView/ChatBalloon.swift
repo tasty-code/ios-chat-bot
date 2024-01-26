@@ -68,17 +68,19 @@ final class ChatBalloon: UIView {
 // MARK: - Constraint
 
 extension ChatBalloon {
-    func leftOrRight(direction: Direction) {
-        let rightColor = #colorLiteral(red: 1, green: 0.7630318403, blue: 0.8500509858, alpha: 1)
+    func leftBalloon() {
         let leftColor = #colorLiteral(red: 0.5870948434, green: 0.7980247736, blue: 0.985825479, alpha: 1)
+        NSLayoutConstraint.activate(leftLabelConstraint)
+        NSLayoutConstraint.activate(commonLabelConstraint)
+        fillLayerColor(color: leftColor)
+    }
+    
+    func rightBalloon() {
+        let rightColor = #colorLiteral(red: 1, green: 0.7630318403, blue: 0.8500509858, alpha: 1)
+        NSLayoutConstraint.activate(rightLabelConstraint)
+        NSLayoutConstraint.activate(commonLabelConstraint)
         
-        if direction == .right {
-            rightLabelConstraintIsActive(bool: true)
-            fillLayerColor(color: rightColor)
-        } else {
-            leftLabelConstraintIsActive(bool: true)
-            fillLayerColor(color: leftColor)
-        }
+        fillLayerColor(color: rightColor)
     }
     
     func emptyLabelConstraintIsActive(bool: Bool) {
@@ -90,22 +92,6 @@ extension ChatBalloon {
             NSLayoutConstraint.activate(commonLabelConstraint)
         } else {
             NSLayoutConstraint.deactivate(commonLabelConstraint)
-        }
-    }
-    
-     func leftLabelConstraintIsActive(bool: Bool) {
-        if bool {
-            NSLayoutConstraint.activate(leftLabelConstraint)
-        } else {
-            NSLayoutConstraint.deactivate(leftLabelConstraint)
-        }
-    }
-    
-     func rightLabelConstraintIsActive(bool: Bool) {
-        if bool {
-            NSLayoutConstraint.activate(rightLabelConstraint)
-        } else {
-            NSLayoutConstraint.deactivate(rightLabelConstraint)
         }
     }
 }

@@ -9,7 +9,7 @@ import UIKit
 
 final class ChatTextInputView: UIStackView {
     
-    weak var delegate: ChatCollectionViewDelegate?
+    weak var delegate: ChatTextInputViewButtonDelegate?
     
     private lazy var textView: UITextView = {
         let textView = UITextView()
@@ -35,11 +35,12 @@ final class ChatTextInputView: UIStackView {
         return button
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(delegate: ChatTextInputViewButtonDelegate) {
+        super.init(frame: .zero)
         configure()
+        self.delegate = delegate
     }
-
+    
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -68,8 +69,8 @@ final class ChatTextInputView: UIStackView {
 extension ChatTextInputView {
     @objc private func tappedButton() {
         if textView.text == "" { return }
+        delegate?.sendMessage(textView.text)
         
-        delegate?.addChatRecord(text: textView.text)
         button.isEnabled = false
         textView.text = .none
 
@@ -78,11 +79,8 @@ extension ChatTextInputView {
                 constraint.constant = textView.estimatedSizeHeight
             }
         }
-        
-        Task {
-            await delegate?.updateCollectionViewFromResponse()
-            button.isEnabled = true
-        }
+
+        button.isEnabled = true
     }
 }
 
@@ -105,4 +103,3 @@ extension ChatTextInputView: UITextViewDelegate {
         }
     }
 }
-
