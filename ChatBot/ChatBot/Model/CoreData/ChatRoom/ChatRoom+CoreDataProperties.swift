@@ -2,7 +2,7 @@
 //  ChatRoom+CoreDataProperties.swift
 //  ChatBot
 //
-//  Created by 김준성 on 1/21/24.
+//  Created by 김준성 on 1/24/24.
 //
 //
 
@@ -20,6 +20,7 @@ extension ChatRoom {
     @NSManaged public var recentChatDate: Date?
     @NSManaged public var title: String?
     @NSManaged public var chattings: NSSet?
+    @NSManaged public var promptSetting: PromptSetting?
 
 }
 

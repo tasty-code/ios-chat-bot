@@ -21,6 +21,7 @@ final class GPTChattingViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(GPTChattingCell.self, forCellWithReuseIdentifier: "\(type(of: GPTChattingCell.self))")
+        collectionView.keyboardDismissMode = .onDrag
         return collectionView
     }()
     
@@ -61,12 +62,6 @@ final class GPTChattingViewController: UIViewController {
     }()
     
     private let viewModel: any GPTChattingVMProtocol
-    private let cellResistration = UICollectionView.CellRegistration<GPTChattingCell, Row> { cell, indexPath, itemIdentifier in
-        switch itemIdentifier {
-        case .forMain(let message):
-            cell.configureCell(to: message)
-        }
-    }
     
     private var chattingDataSource: UICollectionViewDiffableDataSource<Section, Row>!
     private var cancellables = Set<AnyCancellable>()
@@ -74,6 +69,12 @@ final class GPTChattingViewController: UIViewController {
     init(viewModel: any GPTChattingVMProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+    }
+    
+    deinit {
+        for cancellable in cancellables {
+            cancellable.cancel()
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -100,26 +101,20 @@ final class GPTChattingViewController: UIViewController {
     }
     
     private func bind(to viewModel: any GPTChattingVMProtocol) {
-        viewModel.output
+        viewModel.updateChattings
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] output in
-                switch output {
-                case .fetchChattings(let result):
-                    self?.handleChattings(result)
-                case .networkChatting(let result):
-                    self?.handleChattings(result)
-                }
+            .sink { [weak self] (messages, indexToUpdate) in
+                self?.updateCollectionView(messages.map { Row.forMain(message: $0) }, indexToUpdate: indexToUpdate)
             }
             .store(in: &cancellables)
-    }
-    
-    private func handleChattings(_ result: Result<(messages: [Model.GPTMessage], indexToUpdate: Int), Error>) {
-        switch result {
-        case .success((let messages, let indexToUpdate)):
-            updateCollectionView(messages.map { Row.forMain(message: $0) }, indexToUpdate: indexToUpdate)
-        case .failure(let error):
-            present(UIAlertController(error: error), animated: true)
-        }
+        
+        viewModel.error
+            .flatMap { [weak self] error in
+                guard let self = self else { return Empty<Void, Never>().eraseToAnyPublisher() }
+                return UIAlertController.presentErrorPublisher(on: self, with: error)
+            }
+            .sink { _ in }
+            .store(in: &cancellables)
     }
 }
 
@@ -167,10 +162,17 @@ extension GPTChattingViewController {
 // MARK: - configure Diffable Data Source
 extension GPTChattingViewController {
     private func configureDataSource() {
+        let cellResistration = UICollectionView.CellRegistration<GPTChattingCell, Row> { cell, indexPath, itemIdentifier in
+            switch itemIdentifier {
+            case .forMain(let message):
+                cell.configureCell(to: message)
+            }
+        }
+        
         chattingDataSource = UICollectionViewDiffableDataSource<Section, Row>(
             collectionView: chatCollectionView,
             cellProvider: { collectionView, indexPath, itemIdentifier in
-                collectionView.dequeueConfiguredReusableCell(using: self.cellResistration, for: indexPath, item: itemIdentifier)
+                collectionView.dequeueConfiguredReusableCell(using: cellResistration, for: indexPath, item: itemIdentifier)
             }
         )
     }
