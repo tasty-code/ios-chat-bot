@@ -28,7 +28,7 @@ final class ChatCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    private lazy var loadingView: LoadingAnimationView = {
+    lazy var loadingView: LoadingAnimationView = {
         var view = LoadingAnimationView()
         view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -114,10 +114,6 @@ extension ChatCollectionViewCell {
 //MARK: override Methods
 
 extension ChatCollectionViewCell {
-    
-    override func layoutSubviews() {
-        loadingView.runSpinner()
-    }
     
     override func prepareForReuse() {
         super.prepareForReuse()

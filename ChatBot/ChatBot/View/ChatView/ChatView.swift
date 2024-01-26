@@ -75,6 +75,7 @@ final class ChatView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        chatCollectionView.delegate = self
         configureLayout()
     }
     
@@ -180,5 +181,18 @@ extension ChatView {
     
     func resetTextViewHeight() {
         userInputChatTextView.heightAnchor.constraint(equalToConstant: userInputChatTextView.estimatedSizeHeight).isActive = true
+    }
+}
+
+extension ChatView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let chatCell = cell as? ChatCollectionViewCell else {
+            print("콜렉션뷰 셀 타입캐스팅 실패")
+            return
+        }
+     
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+            chatCell.loadingView.runSpinner()
+        }
     }
 }
