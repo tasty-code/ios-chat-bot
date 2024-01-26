@@ -53,7 +53,7 @@ final class GPTChattingViewModel {
             return reply
         }
         
-        var cancellable: AnyCancellable! = nil
+        var cancellable: AnyCancellable = AnyCancellable{ }
         cancellable = networkPublisher
             .sink { [weak self] completion in
                 guard let self else { return }
@@ -69,7 +69,7 @@ final class GPTChattingViewModel {
                 guard let self else { return }
                 messages[indexToUpdate] = message
             }
-        cancellable?.store(in: &cancellables)
+        cancellable.store(in: &cancellables)
     }
 }
 

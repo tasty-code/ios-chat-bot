@@ -31,10 +31,12 @@
 		0D66D0DF2B60C2C100F518CE /* PromptSetting+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66D0DC2B60C2C100F518CE /* PromptSetting+CoreDataClass.swift */; };
 		0D66D0E12B60C2C100F518CE /* ChatRoom+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66D0DE2B60C2C100F518CE /* ChatRoom+CoreDataProperties.swift */; };
 		0D66D0E52B60C42300F518CE /* PromptSetting+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66D0E32B60C42300F518CE /* PromptSetting+CoreDataProperties.swift */; };
-		0D66D0EB2B60C98C00F518CE /* GPTPromptSettingVMProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66D0EA2B60C98C00F518CE /* GPTPromptSettingVMProtocol.swift */; };
 		0D66D0EE2B60CAB500F518CE /* GPTPromptSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66D0ED2B60CAB500F518CE /* GPTPromptSettingViewModel.swift */; };
 		0D66D0F12B60D4F100F518CE /* GPTPromptSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66D0F02B60D4F100F518CE /* GPTPromptSettingViewController.swift */; };
 		0D66D0F52B62144000F518CE /* UITextView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66D0F42B62144000F518CE /* UITextView+Extension.swift */; };
+		0D66D0FE2B63528500F518CE /* StubHTTPPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66D0FD2B63528500F518CE /* StubHTTPPublisher.swift */; };
+		0D66D1002B6354EF00F518CE /* GPTPromptSettingVMProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66D0FF2B6354EF00F518CE /* GPTPromptSettingVMProtocol.swift */; };
+		0D66D1022B6363A500F518CE /* GPTChattingVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66D1012B6363A500F518CE /* GPTChattingVMTests.swift */; };
 		0D843AD82B4B986D00F4EAD2 /* URLSession+HTTPPublishable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843AD72B4B986D00F4EAD2 /* URLSession+HTTPPublishable.swift */; };
 		0D843ADB2B4B98C900F4EAD2 /* GPTHTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843ADA2B4B98C900F4EAD2 /* GPTHTTPService.swift */; };
 		0D843ADD2B4B992500F4EAD2 /* DataDecoderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D843ADC2B4B992500F4EAD2 /* DataDecoderable.swift */; };
@@ -110,10 +112,12 @@
 		0D66D0DC2B60C2C100F518CE /* PromptSetting+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PromptSetting+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0D66D0DE2B60C2C100F518CE /* ChatRoom+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatRoom+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0D66D0E32B60C42300F518CE /* PromptSetting+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PromptSetting+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		0D66D0EA2B60C98C00F518CE /* GPTPromptSettingVMProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GPTPromptSettingVMProtocol.swift; path = ../../../../../../../../../.Trash/GPTPromptSetting/ViewModel/Protocols/GPTPromptSettingVMProtocol.swift; sourceTree = "<group>"; };
 		0D66D0ED2B60CAB500F518CE /* GPTPromptSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTPromptSettingViewModel.swift; sourceTree = "<group>"; };
 		0D66D0F02B60D4F100F518CE /* GPTPromptSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTPromptSettingViewController.swift; sourceTree = "<group>"; };
 		0D66D0F42B62144000F518CE /* UITextView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extension.swift"; sourceTree = "<group>"; };
+		0D66D0FD2B63528500F518CE /* StubHTTPPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubHTTPPublisher.swift; sourceTree = "<group>"; };
+		0D66D0FF2B6354EF00F518CE /* GPTPromptSettingVMProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTPromptSettingVMProtocol.swift; sourceTree = "<group>"; };
+		0D66D1012B6363A500F518CE /* GPTChattingVMTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTChattingVMTests.swift; sourceTree = "<group>"; };
 		0D843AD72B4B986D00F4EAD2 /* URLSession+HTTPPublishable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+HTTPPublishable.swift"; sourceTree = "<group>"; };
 		0D843ADA2B4B98C900F4EAD2 /* GPTHTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTHTTPService.swift; sourceTree = "<group>"; };
 		0D843ADC2B4B992500F4EAD2 /* DataDecoderable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDecoderable.swift; sourceTree = "<group>"; };
@@ -241,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				0D843AF62B4CE94700F4EAD2 /* ChatBotNetworkTests.swift */,
+				0D66D1012B6363A500F518CE /* GPTChattingVMTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -404,7 +409,7 @@
 		0D66D0E82B60C96D00F518CE /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				0D66D0EA2B60C98C00F518CE /* GPTPromptSettingVMProtocol.swift */,
+				0D66D0FF2B6354EF00F518CE /* GPTPromptSettingVMProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -423,6 +428,14 @@
 				0D66D0F02B60D4F100F518CE /* GPTPromptSettingViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0D66D0FC2B63526D00F518CE /* Stubs */ = {
+			isa = PBXGroup;
+			children = (
+				0D66D0FD2B63528500F518CE /* StubHTTPPublisher.swift */,
+			);
+			path = Stubs;
 			sourceTree = "<group>";
 		};
 		0D843AD92B4B98B200F4EAD2 /* HTTPService */ = {
@@ -487,6 +500,7 @@
 		0D843AF52B4CE94700F4EAD2 /* ChatBotTests */ = {
 			isa = PBXGroup;
 			children = (
+				0D66D0FC2B63526D00F518CE /* Stubs */,
 				0D32603B2B5A354F000C352E /* Tests */,
 				0D843B152B4D169F00F4EAD2 /* Mocks */,
 				0D843B0A2B4D03D200F4EAD2 /* Resources */,
@@ -929,8 +943,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D66D1022B6363A500F518CE /* GPTChattingVMTests.swift in Sources */,
 				0D843B092B4D02DB00F4EAD2 /* MockHTTPPublisher.swift in Sources */,
 				0D843AF72B4CE94700F4EAD2 /* ChatBotNetworkTests.swift in Sources */,
+				0D66D0FE2B63528500F518CE /* StubHTTPPublisher.swift in Sources */,
 				0D843B112B4D0B8100F4EAD2 /* MockHTTPRequest.swift in Sources */,
 				0D843B142B4D142B00F4EAD2 /* JSONFetcher.swift in Sources */,
 			);
@@ -982,6 +998,7 @@
 				0D3260042B576BC9000C352E /* BezierPath+extension.swift in Sources */,
 				0D843B392B511F0A00F4EAD2 /* UIChatBubbleView.swift in Sources */,
 				0D843B342B50CFAD00F4EAD2 /* WaitingMessage.swift in Sources */,
+				0D66D1002B6354EF00F518CE /* GPTPromptSettingVMProtocol.swift in Sources */,
 				0D32601C2B5A1523000C352E /* Repository.swift in Sources */,
 				0D843AD82B4B986D00F4EAD2 /* URLSession+HTTPPublishable.swift in Sources */,
 				0D66D0D42B60AD5500F518CE /* PromptSettingRepositable.swift in Sources */,
@@ -989,7 +1006,6 @@
 				0D66D0D72B60AE2000F518CE /* CoreDataPromptSettingRepository.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
 				0D32601A2B5A0E6C000C352E /* CoreDataRepository.swift in Sources */,
-				0D66D0EB2B60C98C00F518CE /* GPTPromptSettingVMProtocol.swift in Sources */,
 				0DF9976D2B43B15F0055C836 /* GPTMessagable.swift in Sources */,
 				0DF997812B450E8E0055C836 /* Date+Extention.swift in Sources */,
 				0D3260532B5D45C0000C352E /* CoreDataChattingRepository.swift in Sources */,
