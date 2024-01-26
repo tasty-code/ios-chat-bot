@@ -11,7 +11,6 @@ import UIKit
 
 protocol ChatViewDelegate: AnyObject {
     func submitUserMessage(chatView: ChatView, animationData: Message, userMessage: String)
-    func blankCheckTextView(chatView: ChatView)
 }
 
 final class ChatView: UIView {
@@ -54,7 +53,7 @@ final class ChatView: UIView {
         button.setContentCompressionResistancePriority(.required, for: .horizontal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(submitUserAnswer), for: .touchUpInside)
-        
+        button.isEnabled = false
         return button
     }()
     
@@ -89,10 +88,6 @@ extension ChatView {
     // MARK: - private methods
     
     @objc private func submitUserAnswer() {
-        guard !userInputChatTextView.text.isEmpty else { 
-            delegate?.blankCheckTextView(chatView: self)
-            return
-        }
         guard let userMessage = userInputChatTextView.text else {
             return
         }
@@ -156,6 +151,18 @@ extension ChatView {
     
     func toggleSendButton() {
         sendButton.isEnabled.toggle()
+    }
+    
+    func turnOnButton() {
+        sendButton.isEnabled = true
+    }
+    
+    func turnOffButton() {
+        sendButton.isEnabled = false
+    }
+    
+    func isTextViewEmpty() -> Bool {
+        return userInputChatTextView.text.isEmpty ? true : false
     }
     
     func scrollToBottom() {

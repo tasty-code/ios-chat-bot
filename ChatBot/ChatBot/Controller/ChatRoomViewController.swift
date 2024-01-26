@@ -14,7 +14,7 @@ final class ChatRoomViewController: UIViewController {
     private let chatView = ChatView()
     private var endPoint: Endpointable = ChatBotEndpoint()
     private var historyMessages: [Message] = [Message]()
-    
+    private var isWaitingAnswer: Bool = false
     // MARK: - view life cycle
     
     override func loadView() {
@@ -69,6 +69,16 @@ extension ChatRoomViewController {
 extension ChatRoomViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
+        
+        guard !textView.text.isEmpty else {
+            chatView.turnOffButton()
+            return
+        }
+        
+        if !textView.text.isEmpty && isWaitingAnswer == false {
+            chatView.turnOnButton()
+        }
+        
         guard textView.contentSize.height < view.frame.height * 0.1
         else {
             textView.isScrollEnabled = true
@@ -85,11 +95,8 @@ extension ChatRoomViewController: UITextViewDelegate {
 
 extension ChatRoomViewController: ChatViewDelegate {
     
-    func blankCheckTextView(chatView: ChatView) {
-        showAlert(title: "메세지를 입력해주세요", message: "", needErrorHandle: false)
-    }
-    
     func submitUserMessage(chatView: ChatView, animationData: Message, userMessage: String) {
+        isWaitingAnswer = true
         let newMessage = Message(role: RequestBodyConstant.userRole, content: userMessage)
         historyMessages.append(newMessage)
         
@@ -105,13 +112,15 @@ extension ChatRoomViewController: ChatViewDelegate {
             case .success(let data):
                 DispatchQueue.main.async {
                     guard let message = data.choices.first?.message else {
-                        self.showAlert(title: "에러가 발생하였습니다", message: "잠시 후 다시 시도해주세요.", needErrorHandle: true)
                         return
                     }
                     
                     chatView.updateSnapshot(items: [message], isFetched: true)
-                    chatView.toggleSendButton()
                     chatView.scrollToBottom()
+                    self.isWaitingAnswer = false
+                    if chatView.isTextViewEmpty() == false {
+                        chatView.turnOnButton()
+                    }
                 }
             case .failure(let error):
                 DispatchQueue.main.async {
