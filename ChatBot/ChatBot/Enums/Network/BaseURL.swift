@@ -12,7 +12,7 @@ enum BaseURL {
 
     var description: String {
         switch self {
-        case.openAI: "https://api.openai.com/v1/chat/completions"
+        case .openAI: "https://api.openai.com/v1/chat/completions"
         }
     }
 }

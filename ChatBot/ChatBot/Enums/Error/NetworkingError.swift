@@ -14,6 +14,8 @@ enum NetworkingError: Error, CustomDebugStringConvertible {
     case networkError(statusCode: Int)
     case corruptedData
     case codableError(whichTranform: String)
+    case unknownURL
+    case accessKey
     
     var debugDescription: String {
         switch self {
@@ -23,6 +25,8 @@ enum NetworkingError: Error, CustomDebugStringConvertible {
         case .networkError(let statusCode): "통신 에러가 발생했습니다. Code: \(statusCode)"
         case .corruptedData: "손상된 데이터입니다."
         case .codableError(let whichTranform): "데이터를 변환하는데 문제가 생겼습니다.\(whichTranform)"
+        case .unknownURL: "URL이 존재하지 않습니다."
+        case .accessKey: "엑세스키가 잘못되었습니다."
         }
     }
 }

@@ -8,6 +8,7 @@
 import Foundation
 
 // MARK: - AIContentModel
+
 struct AIContentModel: Decodable {
     let id: String
     let object: String
@@ -24,6 +25,7 @@ struct AIContentModel: Decodable {
 }
 
 // MARK: - Choice
+
 struct Choice: Decodable {
     let index: Int
     let message: Message
@@ -35,13 +37,8 @@ struct Choice: Decodable {
     }
 }
 
-// MARK: - Message
-struct Message: Decodable {
-    let role: String
-    let content: String
-}
-
 // MARK: - Usage
+
 struct Usage: Decodable {
     let promptTokens: Int
     let completionTokens: Int
