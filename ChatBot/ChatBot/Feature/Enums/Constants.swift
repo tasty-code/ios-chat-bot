@@ -9,8 +9,8 @@ import Foundation
 
 enum ConstantsForNetworkRequest {
     static let model = "gpt-3.5-turbo-1106"
-    static let defaultMessage = Message(
-        role: "system",
+    static let defaultMessage = ChatMessage(
+        role: .system,
         content: "You are an assistant that occasionally misspells words"
     )
 }
