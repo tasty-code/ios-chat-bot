@@ -8,6 +8,8 @@
 import Foundation
 
 final class GPTChatViewModel {
+    var didMessagesAppend: (([ChatMessage]) -> Void)?
+    
     private let serviceProvider: ServiceProvidable
     private let dataHandler: MessageDataHandler
     
@@ -17,8 +19,6 @@ final class GPTChatViewModel {
             didMessagesAppend?(messages)
         }
     }
-    
-    var didMessagesAppend: (([ChatMessage]) -> Void)?
     
     init(serviceProvider: ServiceProvidable, dataHandler: MessageDataHandler, currentRoom: ChatRoom? = nil) {
         self.serviceProvider = serviceProvider
@@ -47,19 +47,19 @@ final class GPTChatViewModel {
         }
     }
     
-    private func addResponseMessage(_ chatMessage: ChatMessage) {
-        Task { @MainActor in
-            messages[messages.count - 1] = chatMessage
-        }
-    }
-    
     func fetchMessages() {
         guard let currentRoom = currentRoom else { return }
         messages = dataHandler.fetchChats(at: currentRoom)
     }
     
-    func saveMessages() {
-        guard messages.isEmpty == false else { return }
+    private func addResponseMessage(_ chatMessage: ChatMessage) {
+        Task { @MainActor in
+            messages[messages.count - 1] = chatMessage
+            saveMessages()
+        }
+    }
+    
+    private func saveMessages() {
         guard let title = messages.first?.content else { return }
         if currentRoom == nil {
             currentRoom = ChatRoom(title: title)

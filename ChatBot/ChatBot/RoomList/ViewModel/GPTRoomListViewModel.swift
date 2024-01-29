@@ -8,20 +8,19 @@
 import Foundation
 
 final class GPTRoomListViewModel {
-    private let dataHandler: ChatRoomDataHandler
+    var didRoomAppend: (([ChatRoom]) -> Void)?
     
-    init(dataHandler: ChatRoomDataHandler) {
-        self.dataHandler = dataHandler
-    }
+    private let dataHandler: ChatRoomDataHandler
     
     private var roomList: [ChatRoom] = [] {
         didSet {
             didRoomAppend?(roomList)
         }
     }
-    
-    var didRoomAppend: (([ChatRoom]) -> Void)?
-    
+        
+    init(dataHandler: ChatRoomDataHandler) {
+        self.dataHandler = dataHandler
+    }
     
     func fetchRoomList() {
         roomList = dataHandler.fetchChatRoomData()

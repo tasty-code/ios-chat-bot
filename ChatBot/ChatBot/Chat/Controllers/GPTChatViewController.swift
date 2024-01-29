@@ -15,6 +15,12 @@ final class GPTChatViewController: UIViewController {
         case main
     }
     
+    // MARK: - Typealias
+    
+    private typealias CellRegistration = UICollectionView.CellRegistration<MessageCell, ChatMessage>
+    private typealias ChatDataSource = UICollectionViewDiffableDataSource<Section, ChatMessage>
+    private typealias ChatSnapshot = NSDiffableDataSourceSnapshot<Section, ChatMessage>
+    
     // MARK: - UI Components
     
     private lazy var chatCollectionView: UICollectionView = {
@@ -68,15 +74,13 @@ final class GPTChatViewController: UIViewController {
     
     private let viewModel: GPTChatViewModel
     
-    private lazy var dataSource: UICollectionViewDiffableDataSource<Section, ChatMessage> = {
-        let cellRegistration = UICollectionView.CellRegistration<MessageCell, ChatMessage> {
-            cell, indexPath, item in
+    private lazy var dataSource: ChatDataSource = {
+        let cellRegistration = CellRegistration { cell, indexPath, item in
             var configuration = MessageContentConfiguration()
             configuration.message = item
             cell.contentConfiguration = configuration
         }
-        return UICollectionViewDiffableDataSource<Section, ChatMessage>(collectionView: chatCollectionView) {
-            collectionView, indexPath, itemIdentifier in
+        return ChatDataSource(collectionView: chatCollectionView) { collectionView, indexPath, itemIdentifier in
             collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
         }
     }()
@@ -110,10 +114,6 @@ final class GPTChatViewController: UIViewController {
         viewModel.fetchMessages()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        viewModel.saveMessages()
-    }
     // MARK: - Auto Layout
     
     private func configureUI() {
@@ -169,7 +169,7 @@ final class GPTChatViewController: UIViewController {
     }
     
     private func configureSnapshot(with messages: [ChatMessage]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, ChatMessage>()
+        var snapshot = ChatSnapshot()
         snapshot.appendSections([.main])
         snapshot.appendItems(messages)
         dataSource.apply(snapshot, animatingDifferences: true)

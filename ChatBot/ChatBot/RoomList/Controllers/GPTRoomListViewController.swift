@@ -14,6 +14,12 @@ final class GPTRoomListViewController: UIViewController {
     private enum Section {
         case main
     }
+    
+    // MARK: - Typealias
+    
+    private typealias CellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, ChatRoom>
+    private typealias RoomDataSource = UICollectionViewDiffableDataSource<Section, ChatRoom>
+    private typealias RoomSnapshot = NSDiffableDataSourceSnapshot<Section, ChatRoom>
 
     // MARK: - UI Components
     
@@ -24,21 +30,6 @@ final class GPTRoomListViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
-    }()
-    
-    private lazy var dataSource: UICollectionViewDiffableDataSource<Section, ChatRoom> = {
-        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, ChatRoom> { cell, indexPath, itemIdentifier in
-            var configuration = cell.defaultContentConfiguration()
-            configuration.text = itemIdentifier.title
-            configuration.secondaryText = itemIdentifier.date.toString
-            configuration.secondaryTextProperties.color = .systemGray
-            
-            cell.contentConfiguration = configuration
-        }
-        return UICollectionViewDiffableDataSource<Section, ChatRoom>(collectionView: roomListCollectionView) {
-            collectionView, indexPath, itemIdentifier in
-            collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
-        }
     }()
     
     private let navigationTitleLabel: UILabel = {
@@ -52,6 +43,20 @@ final class GPTRoomListViewController: UIViewController {
     // MARK: - Private Property
     
     private let viewModel: GPTRoomListViewModel
+    
+    private lazy var dataSource: RoomDataSource = {
+        let cellRegistration = CellRegistration { cell, indexPath, itemIdentifier in
+            var configuration = cell.defaultContentConfiguration()
+            configuration.text = itemIdentifier.title
+            configuration.secondaryText = itemIdentifier.date.toString
+            configuration.secondaryTextProperties.color = .systemGray
+            
+            cell.contentConfiguration = configuration
+        }
+        return RoomDataSource(collectionView: roomListCollectionView) { collectionView, indexPath, itemIdentifier in
+            collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
+        }
+    }()
     
     // MARK: - Initializer
     
@@ -115,10 +120,10 @@ final class GPTRoomListViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = newChatButton
     }
     
-    // MARK: - Private Method
+    // MARK: - Snapshot
     
     private func configureSnapshot(with roomList: [ChatRoom]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, ChatRoom>()
+        var snapshot = RoomSnapshot()
         snapshot.appendSections([.main])
         snapshot.appendItems(roomList)
         dataSource.apply(snapshot, animatingDifferences: true)
@@ -156,6 +161,8 @@ final class GPTRoomListViewController: UIViewController {
         navigationController?.pushViewController(gptChatViewController, animated: true)
     }
 }
+
+// MARK: - UICollectionViewDelegate
 
 extension GPTRoomListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
