@@ -14,31 +14,44 @@
 		7F195BA12B47BB5D00C99766 /* APIEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F195BA02B47BB5D00C99766 /* APIEndPoint.swift */; };
 		7F195BA32B47BC0600C99766 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F195BA22B47BC0600C99766 /* HTTPMethod.swift */; };
 		7F1ABCC92B4B8CC700864D2D /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1ABCC82B4B8CC700864D2D /* APIError.swift */; };
+		7F2F345D2B61F58F000CBC6E /* DataManagable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2F345C2B61F58F000CBC6E /* DataManagable.swift */; };
+		7F2F345F2B61F604000CBC6E /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2F345E2B61F604000CBC6E /* CoreDataManager.swift */; };
+		7F2F34632B61F943000CBC6E /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7F2F34612B61F943000CBC6E /* DataModel.xcdatamodeld */; };
+		7F2F346A2B61FA67000CBC6E /* RoomEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2F34662B61FA67000CBC6E /* RoomEntity+CoreDataClass.swift */; };
+		7F2F346B2B61FA67000CBC6E /* RoomEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2F34672B61FA67000CBC6E /* RoomEntity+CoreDataProperties.swift */; };
+		7F2F346E2B61FAC9000CBC6E /* GPTRoomListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2F346D2B61FAC9000CBC6E /* GPTRoomListViewModel.swift */; };
 		7F4C9D712B452165006CD685 /* GPTMessageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C9D702B452165006CD685 /* GPTMessageDTO.swift */; };
 		7F4C9D752B452223006CD685 /* GPTMessageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C9D742B452223006CD685 /* GPTMessageable.swift */; };
 		7F4C9D772B4522B5006CD685 /* UserMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C9D762B4522B5006CD685 /* UserMessage.swift */; };
 		7F4C9D792B4522C1006CD685 /* SystemMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C9D782B4522C1006CD685 /* SystemMessage.swift */; };
 		7F4C9D7E2B45262B006CD685 /* AssistantMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C9D7D2B45262B006CD685 /* AssistantMessage.swift */; };
 		7F4C9D802B452A89006CD685 /* GPTRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C9D7F2B452A89006CD685 /* GPTRequestDTO.swift */; };
+		7F5A080A2B5F5AED00617992 /* GPTRoomListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A08092B5F5AED00617992 /* GPTRoomListViewController.swift */; };
+		7F6F93172B6215D800A2ED13 /* ChatRoomDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6F93162B6215D800A2ED13 /* ChatRoomDataHandler.swift */; };
+		7F6F931A2B62179200A2ED13 /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6F93192B62179200A2ED13 /* ChatRoom.swift */; };
+		7F6F931C2B621DCB00A2ED13 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6F931B2B621DCB00A2ED13 /* Date+Extension.swift */; };
+		7F6F931E2B62296E00A2ED13 /* MessageDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6F931D2B62296E00A2ED13 /* MessageDataHandler.swift */; };
+		7F6F93202B62331500A2ED13 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6F931F2B62331500A2ED13 /* ChatMessage.swift */; };
+		7F6F93232B6233B900A2ED13 /* MessageEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6F93212B6233B900A2ED13 /* MessageEntity+CoreDataClass.swift */; };
+		7F6F93242B6233B900A2ED13 /* MessageEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6F93222B6233B900A2ED13 /* MessageEntity+CoreDataProperties.swift */; };
 		7F7A55702B4D043000368247 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A556F2B4D043000368247 /* NetworkManager.swift */; };
 		7F7A55742B4D072B00368247 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A55732B4D072B00368247 /* URLSessionProtocol.swift */; };
 		7F7A55762B4D076A00368247 /* URLSession+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A55752B4D076A00368247 /* URLSession+Extension.swift */; };
 		7F7A557C2B4D0CD800368247 /* ServiceProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A557B2B4D0CD800368247 /* ServiceProvidable.swift */; };
 		7F7A557E2B4D0D4F00368247 /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A557D2B4D0D4F00368247 /* ServiceProvider.swift */; };
-		7F7F43A52B44F0D2000CB9CC /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F7F43A42B44F0D2000CB9CC /* APIKeys.plist */; };
 		7F7F43A82B44F247000CB9CC /* GPTResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7F43A72B44F247000CB9CC /* GPTResponseDTO.swift */; };
 		B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */; };
 		B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */; };
-		B4B3E2C12B42D1BB00818B3C /* GPTChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2C02B42D1BB00818B3C /* GPTChatRoomViewController.swift */; };
+		B4B3E2C12B42D1BB00818B3C /* GPTChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2C02B42D1BB00818B3C /* GPTChatViewController.swift */; };
 		B4B3E2C62B42D1BC00818B3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */; };
 		B4B3E2C92B42D1BC00818B3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */; };
 		DE4EC8DB2B4F9D840077E405 /* RequestEncodable+RequestDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4EC8DA2B4F9D840077E405 /* RequestEncodable+RequestDecodable.swift */; };
 		DE584B302B44EE8C00B04403 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE584B2F2B44EE8C00B04403 /* Bundle+Extension.swift */; };
-		DE652B6A2B52546800407705 /* GPTViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE652B692B52546800407705 /* GPTViewModel.swift */; };
-		DE652B6C2B525BC000407705 /* GPTMessageDTO+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE652B6B2B525BC000407705 /* GPTMessageDTO+Extension.swift */; };
+		DE652B6A2B52546800407705 /* GPTChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE652B692B52546800407705 /* GPTChatViewModel.swift */; };
 		DE7DA4C02B4FFDFC0073D201 /* UITextView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7DA4BF2B4FFDFC0073D201 /* UITextView+Extension.swift */; };
 		DE7DA4C22B4FFFE50073D201 /* GPTChatRoomViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7DA4C12B4FFFE40073D201 /* GPTChatRoomViewController+Extension.swift */; };
 		DEA638532B47BE81006E474C /* GPTEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA638522B47BE81006E474C /* GPTEndPoint.swift */; };
+		DEB0156C2B62479C00DF7EE0 /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = DEB0156B2B62479C00DF7EE0 /* APIKeys.plist */; };
 		DEF3D1DC2B5132CC00FAC500 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF3D1DB2B5132CC00FAC500 /* MessageCell.swift */; };
 		DEF3D1DE2B51332000FAC500 /* MessageContentConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF3D1DD2B51332000FAC500 /* MessageContentConfiguration.swift */; };
 		DEF3D1E02B51333400FAC500 /* MessageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF3D1DF2B51333400FAC500 /* MessageContentView.swift */; };
@@ -53,33 +66,46 @@
 		7F195BA02B47BB5D00C99766 /* APIEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndPoint.swift; sourceTree = "<group>"; };
 		7F195BA22B47BC0600C99766 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		7F1ABCC82B4B8CC700864D2D /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		7F2F345C2B61F58F000CBC6E /* DataManagable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagable.swift; sourceTree = "<group>"; };
+		7F2F345E2B61F604000CBC6E /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		7F2F34622B61F943000CBC6E /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		7F2F34662B61FA67000CBC6E /* RoomEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RoomEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7F2F34672B61FA67000CBC6E /* RoomEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RoomEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7F2F346D2B61FAC9000CBC6E /* GPTRoomListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTRoomListViewModel.swift; sourceTree = "<group>"; };
 		7F4C9D702B452165006CD685 /* GPTMessageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTMessageDTO.swift; sourceTree = "<group>"; };
 		7F4C9D742B452223006CD685 /* GPTMessageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTMessageable.swift; sourceTree = "<group>"; };
 		7F4C9D762B4522B5006CD685 /* UserMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMessage.swift; sourceTree = "<group>"; };
 		7F4C9D782B4522C1006CD685 /* SystemMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemMessage.swift; sourceTree = "<group>"; };
 		7F4C9D7D2B45262B006CD685 /* AssistantMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantMessage.swift; sourceTree = "<group>"; };
 		7F4C9D7F2B452A89006CD685 /* GPTRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTRequestDTO.swift; sourceTree = "<group>"; };
+		7F5A08092B5F5AED00617992 /* GPTRoomListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTRoomListViewController.swift; sourceTree = "<group>"; };
+		7F6F93162B6215D800A2ED13 /* ChatRoomDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomDataHandler.swift; sourceTree = "<group>"; };
+		7F6F93192B62179200A2ED13 /* ChatRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
+		7F6F931B2B621DCB00A2ED13 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		7F6F931D2B62296E00A2ED13 /* MessageDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDataHandler.swift; sourceTree = "<group>"; };
+		7F6F931F2B62331500A2ED13 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		7F6F93212B6233B900A2ED13 /* MessageEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7F6F93222B6233B900A2ED13 /* MessageEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7F7A556F2B4D043000368247 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		7F7A55732B4D072B00368247 /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
 		7F7A55752B4D076A00368247 /* URLSession+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extension.swift"; sourceTree = "<group>"; };
 		7F7A557B2B4D0CD800368247 /* ServiceProvidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProvidable.swift; sourceTree = "<group>"; };
 		7F7A557D2B4D0D4F00368247 /* ServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProvider.swift; sourceTree = "<group>"; };
-		7F7F43A42B44F0D2000CB9CC /* APIKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
 		7F7F43A72B44F247000CB9CC /* GPTResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTResponseDTO.swift; sourceTree = "<group>"; };
 		B4B3E2B92B42D1BB00818B3C /* ChatBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B4B3E2C02B42D1BB00818B3C /* GPTChatRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTChatRoomViewController.swift; sourceTree = "<group>"; };
+		B4B3E2C02B42D1BB00818B3C /* GPTChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTChatViewController.swift; sourceTree = "<group>"; };
 		B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B4B3E2C82B42D1BC00818B3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B4B3E2CA2B42D1BC00818B3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE4EC8DA2B4F9D840077E405 /* RequestEncodable+RequestDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RequestEncodable+RequestDecodable.swift"; sourceTree = "<group>"; };
 		DE584B2F2B44EE8C00B04403 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
-		DE652B692B52546800407705 /* GPTViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTViewModel.swift; sourceTree = "<group>"; };
-		DE652B6B2B525BC000407705 /* GPTMessageDTO+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GPTMessageDTO+Extension.swift"; sourceTree = "<group>"; };
+		DE652B692B52546800407705 /* GPTChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTChatViewModel.swift; sourceTree = "<group>"; };
 		DE7DA4BF2B4FFDFC0073D201 /* UITextView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extension.swift"; sourceTree = "<group>"; };
 		DE7DA4C12B4FFFE40073D201 /* GPTChatRoomViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GPTChatRoomViewController+Extension.swift"; sourceTree = "<group>"; };
 		DEA638522B47BE81006E474C /* GPTEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTEndPoint.swift; sourceTree = "<group>"; };
+		DEB0156B2B62479C00DF7EE0 /* APIKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
 		DEF3D1DB2B5132CC00FAC500 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		DEF3D1DD2B51332000FAC500 /* MessageContentConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContentConfiguration.swift; sourceTree = "<group>"; };
 		DEF3D1DF2B51333400FAC500 /* MessageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContentView.swift; sourceTree = "<group>"; };
@@ -132,6 +158,60 @@
 			path = Error;
 			sourceTree = "<group>";
 		};
+		7F2F34572B61F4C5000CBC6E /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				7F6F93152B62157B00A2ED13 /* DataHandler */,
+				7F2F34582B61F52D000CBC6E /* CoreDataManager */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		7F2F34582B61F52D000CBC6E /* CoreDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				7F2F345B2B61F572000CBC6E /* Implementation */,
+				7F2F345A2B61F568000CBC6E /* Interface */,
+			);
+			path = CoreDataManager;
+			sourceTree = "<group>";
+		};
+		7F2F345A2B61F568000CBC6E /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				7F2F345C2B61F58F000CBC6E /* DataManagable.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		7F2F345B2B61F572000CBC6E /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				7F2F345E2B61F604000CBC6E /* CoreDataManager.swift */,
+			);
+			path = Implementation;
+			sourceTree = "<group>";
+		};
+		7F2F34602B61F92A000CBC6E /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				7F6F93212B6233B900A2ED13 /* MessageEntity+CoreDataClass.swift */,
+				7F6F93222B6233B900A2ED13 /* MessageEntity+CoreDataProperties.swift */,
+				7F2F34662B61FA67000CBC6E /* RoomEntity+CoreDataClass.swift */,
+				7F2F34672B61FA67000CBC6E /* RoomEntity+CoreDataProperties.swift */,
+				7F2F34612B61F943000CBC6E /* DataModel.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		7F2F346C2B61FA8B000CBC6E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7F2F346D2B61FAC9000CBC6E /* GPTRoomListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		7F4C9D6F2B45214D006CD685 /* Messages */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,9 +248,56 @@
 			path = DTOs;
 			sourceTree = "<group>";
 		};
+		7F5A08052B5F5A8B00617992 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				DE584B332B44EF8500B04403 /* Controllers */,
+				DE0D32792B54C9300018CF5E /* ViewModels */,
+				DEF3D1DA2B5132A600FAC500 /* Views */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		7F5A08062B5F5A9100617992 /* RoomList */ = {
+			isa = PBXGroup;
+			children = (
+				7F5A08072B5F5ABE00617992 /* Controllers */,
+				7F2F346C2B61FA8B000CBC6E /* ViewModel */,
+			);
+			path = RoomList;
+			sourceTree = "<group>";
+		};
+		7F5A08072B5F5ABE00617992 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7F5A08092B5F5AED00617992 /* GPTRoomListViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		7F6F93152B62157B00A2ED13 /* DataHandler */ = {
+			isa = PBXGroup;
+			children = (
+				7F6F93182B62178700A2ED13 /* Model */,
+				7F6F93162B6215D800A2ED13 /* ChatRoomDataHandler.swift */,
+				7F6F931D2B62296E00A2ED13 /* MessageDataHandler.swift */,
+			);
+			path = DataHandler;
+			sourceTree = "<group>";
+		};
+		7F6F93182B62178700A2ED13 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7F6F93192B62179200A2ED13 /* ChatRoom.swift */,
+				7F6F931F2B62331500A2ED13 /* ChatMessage.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		7F7A556D2B4D03ED00368247 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				7F2F34572B61F4C5000CBC6E /* CoreData */,
 				7F7A55772B4D0C6C00368247 /* ServiceProvider */,
 				7F7A556E2B4D042000368247 /* Network */,
 			);
@@ -223,6 +350,7 @@
 		7F7F43A62B44F20D000CB9CC /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				7F2F34602B61F92A000CBC6E /* CoreData */,
 				7F195B9C2B47BA6400C99766 /* API */,
 				7F4C9D812B453195006CD685 /* DTOs */,
 				7F4C9D6F2B45214D006CD685 /* Messages */,
@@ -233,7 +361,7 @@
 		B4B3E2B02B42D1BB00818B3C = {
 			isa = PBXGroup;
 			children = (
-				7F7F43A42B44F0D2000CB9CC /* APIKeys.plist */,
+				DEB0156B2B62479C00DF7EE0 /* APIKeys.plist */,
 				B4B3E2BB2B42D1BB00818B3C /* ChatBot */,
 				B4B3E2BA2B42D1BB00818B3C /* Products */,
 			);
@@ -251,9 +379,8 @@
 			isa = PBXGroup;
 			children = (
 				DE584B362B44F02E00B04403 /* Application */,
-				DE584B332B44EF8500B04403 /* Controllers */,
-				DE0D32792B54C9300018CF5E /* ViewModels */,
-				DEF3D1DA2B5132A600FAC500 /* Views */,
+				7F5A08062B5F5A9100617992 /* RoomList */,
+				7F5A08052B5F5A8B00617992 /* Chat */,
 				7F7A556D2B4D03ED00368247 /* Utilities */,
 				7F7F43A62B44F20D000CB9CC /* Models */,
 				7F7A55722B4D06FC00368247 /* Protocols */,
@@ -266,7 +393,7 @@
 		DE0D32792B54C9300018CF5E /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				DE652B692B52546800407705 /* GPTViewModel.swift */,
+				DE652B692B52546800407705 /* GPTChatViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -300,7 +427,7 @@
 		DE584B332B44EF8500B04403 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				B4B3E2C02B42D1BB00818B3C /* GPTChatRoomViewController.swift */,
+				B4B3E2C02B42D1BB00818B3C /* GPTChatViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -311,10 +438,10 @@
 				DE584B2F2B44EE8C00B04403 /* Bundle+Extension.swift */,
 				7F7A55752B4D076A00368247 /* URLSession+Extension.swift */,
 				DE7DA4BF2B4FFDFC0073D201 /* UITextView+Extension.swift */,
-				DE652B6B2B525BC000407705 /* GPTMessageDTO+Extension.swift */,
 				DE7DA4C12B4FFFE40073D201 /* GPTChatRoomViewController+Extension.swift */,
 				7F158D0B2B5A49BD0082EE29 /* JSONEncoder+Extension.swift */,
 				7F158D0F2B5A4A2A0082EE29 /* JSONDecoder+Extension.swift */,
+				7F6F931B2B621DCB00A2ED13 /* Date+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -415,7 +542,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F7F43A52B44F0D2000CB9CC /* APIKeys.plist in Resources */,
+				DEB0156C2B62479C00DF7EE0 /* APIKeys.plist in Resources */,
 				B4B3E2C92B42D1BC00818B3C /* LaunchScreen.storyboard in Resources */,
 				B4B3E2C62B42D1BC00818B3C /* Assets.xcassets in Resources */,
 			);
@@ -430,36 +557,49 @@
 			files = (
 				7F7A55742B4D072B00368247 /* URLSessionProtocol.swift in Sources */,
 				7F7A55702B4D043000368247 /* NetworkManager.swift in Sources */,
+				7F6F93232B6233B900A2ED13 /* MessageEntity+CoreDataClass.swift in Sources */,
+				7F6F93202B62331500A2ED13 /* ChatMessage.swift in Sources */,
+				7F6F931E2B62296E00A2ED13 /* MessageDataHandler.swift in Sources */,
 				7F7A55762B4D076A00368247 /* URLSession+Extension.swift in Sources */,
 				7F7A557C2B4D0CD800368247 /* ServiceProvidable.swift in Sources */,
 				DEF3D1DE2B51332000FAC500 /* MessageContentConfiguration.swift in Sources */,
 				7F158D0A2B5A49890082EE29 /* DataEncodable.swift in Sources */,
+				7F2F345F2B61F604000CBC6E /* CoreDataManager.swift in Sources */,
+				7F2F346A2B61FA67000CBC6E /* RoomEntity+CoreDataClass.swift in Sources */,
 				7F195BA12B47BB5D00C99766 /* APIEndPoint.swift in Sources */,
 				7F4C9D792B4522C1006CD685 /* SystemMessage.swift in Sources */,
-				DE652B6C2B525BC000407705 /* GPTMessageDTO+Extension.swift in Sources */,
+				7F6F931A2B62179200A2ED13 /* ChatRoom.swift in Sources */,
+				7F2F346B2B61FA67000CBC6E /* RoomEntity+CoreDataProperties.swift in Sources */,
 				7F195BA32B47BC0600C99766 /* HTTPMethod.swift in Sources */,
+				7F5A080A2B5F5AED00617992 /* GPTRoomListViewController.swift in Sources */,
 				7F7A557E2B4D0D4F00368247 /* ServiceProvider.swift in Sources */,
 				7F4C9D772B4522B5006CD685 /* UserMessage.swift in Sources */,
-				B4B3E2C12B42D1BB00818B3C /* GPTChatRoomViewController.swift in Sources */,
+				B4B3E2C12B42D1BB00818B3C /* GPTChatViewController.swift in Sources */,
 				7F4C9D712B452165006CD685 /* GPTMessageDTO.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
 				7F7F43A82B44F247000CB9CC /* GPTResponseDTO.swift in Sources */,
 				7F4C9D7E2B45262B006CD685 /* AssistantMessage.swift in Sources */,
 				7F158D0C2B5A49BD0082EE29 /* JSONEncoder+Extension.swift in Sources */,
-				DE652B6A2B52546800407705 /* GPTViewModel.swift in Sources */,
+				DE652B6A2B52546800407705 /* GPTChatViewModel.swift in Sources */,
 				DEF3D1E22B51348200FAC500 /* ChatBubbleView.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
+				7F6F93242B6233B900A2ED13 /* MessageEntity+CoreDataProperties.swift in Sources */,
 				DEF3D1DC2B5132CC00FAC500 /* MessageCell.swift in Sources */,
 				DE4EC8DB2B4F9D840077E405 /* RequestEncodable+RequestDecodable.swift in Sources */,
+				7F2F346E2B61FAC9000CBC6E /* GPTRoomListViewModel.swift in Sources */,
 				7F4C9D802B452A89006CD685 /* GPTRequestDTO.swift in Sources */,
 				7F4C9D752B452223006CD685 /* GPTMessageable.swift in Sources */,
 				DE584B302B44EE8C00B04403 /* Bundle+Extension.swift in Sources */,
+				7F2F34632B61F943000CBC6E /* DataModel.xcdatamodeld in Sources */,
+				7F6F931C2B621DCB00A2ED13 /* Date+Extension.swift in Sources */,
 				7F158D0E2B5A49EB0082EE29 /* DataDecodable.swift in Sources */,
 				7F158D102B5A4A2A0082EE29 /* JSONDecoder+Extension.swift in Sources */,
 				DE7DA4C02B4FFDFC0073D201 /* UITextView+Extension.swift in Sources */,
 				DEF3D1E02B51333400FAC500 /* MessageContentView.swift in Sources */,
 				7F1ABCC92B4B8CC700864D2D /* APIError.swift in Sources */,
+				7F6F93172B6215D800A2ED13 /* ChatRoomDataHandler.swift in Sources */,
 				DE7DA4C22B4FFFE50073D201 /* GPTChatRoomViewController+Extension.swift in Sources */,
+				7F2F345D2B61F58F000CBC6E /* DataManagable.swift in Sources */,
 				DEA638532B47BE81006E474C /* GPTEndPoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -681,6 +821,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7F2F34612B61F943000CBC6E /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7F2F34622B61F943000CBC6E /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 7F2F34622B61F943000CBC6E /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B4B3E2B12B42D1BB00818B3C /* Project object */;
 }

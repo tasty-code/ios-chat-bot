@@ -1,5 +1,5 @@
 //
-//  GPTChatRoomViewController.swift
+//  GPTChatViewController.swift
 //  ChatBot
 //
 //  Created by Tacocat on 1/1/24.
@@ -7,13 +7,19 @@
 
 import UIKit
 
-final class GPTChatRoomViewController: UIViewController {
+final class GPTChatViewController: UIViewController {
     
-    // MARK: NestedType
+    // MARK: - NestedType
     
     private enum Section {
         case main
     }
+    
+    // MARK: - Typealias
+    
+    private typealias CellRegistration = UICollectionView.CellRegistration<MessageCell, ChatMessage>
+    private typealias ChatDataSource = UICollectionViewDiffableDataSource<Section, ChatMessage>
+    private typealias ChatSnapshot = NSDiffableDataSourceSnapshot<Section, ChatMessage>
     
     // MARK: - UI Components
     
@@ -66,22 +72,22 @@ final class GPTChatRoomViewController: UIViewController {
     
     // MARK: - Private Property
     
-    private let viewModel: GPTViewModel
+    private let viewModel: GPTChatViewModel
     
-    private let cellRegistration: UICollectionView.CellRegistration<MessageCell, GPTMessageDTO> = {
-        return UICollectionView.CellRegistration<MessageCell, GPTMessageDTO> {
-            cell, indexPath, item in
+    private lazy var dataSource: ChatDataSource = {
+        let cellRegistration = CellRegistration { cell, indexPath, item in
             var configuration = MessageContentConfiguration()
             configuration.message = item
             cell.contentConfiguration = configuration
         }
+        return ChatDataSource(collectionView: chatCollectionView) { collectionView, indexPath, itemIdentifier in
+            collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
+        }
     }()
-    
-    private lazy var dataSource = configureDataSource()
     
     // MARK: - Initializer
     
-    init(viewModel: GPTViewModel) {
+    init(viewModel: GPTChatViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         
@@ -100,16 +106,22 @@ final class GPTChatRoomViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        userInputTextView.delegate = self
-        setupUI()
+        configureUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.fetchMessages()
     }
     
     // MARK: - Auto Layout
     
-    private func setupUI() {
+    private func configureUI() {
         view.backgroundColor = .white
         view.addSubview(chatCollectionView)
         view.addSubview(userInteractionStackView)
+        
+        userInputTextView.delegate = self
         
         setConstraintsCollectionView()
         setConstraintsStackView()
@@ -156,18 +168,8 @@ final class GPTChatRoomViewController: UIViewController {
         return compositionalLayout
     }
     
-    private func configureDataSource() -> UICollectionViewDiffableDataSource<Section, GPTMessageDTO> {
-        let dataSource = UICollectionViewDiffableDataSource<Section, GPTMessageDTO>(collectionView: chatCollectionView) {
-            (collectionView: UICollectionView, indexPath: IndexPath, item: GPTMessageDTO) -> MessageCell? in
-            let cell = collectionView
-                .dequeueConfiguredReusableCell(using: self.cellRegistration, for: indexPath, item: item)
-            return cell
-        }
-        return dataSource
-    }
-    
-    private func configureSnapshot(with messages: [GPTMessageDTO]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, GPTMessageDTO>()
+    private func configureSnapshot(with messages: [ChatMessage]) {
+        var snapshot = ChatSnapshot()
         snapshot.appendSections([.main])
         snapshot.appendItems(messages)
         dataSource.apply(snapshot, animatingDifferences: true)

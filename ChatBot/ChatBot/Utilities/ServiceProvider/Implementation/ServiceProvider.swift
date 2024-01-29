@@ -21,8 +21,8 @@ final class ServiceProvider: ServiceProvidable {
         self.decoder = decoder
     }
     
-    func excute<E: APIEndPoint, D: ResponseDTODecodable>(for requestDTO: E) async throws -> D {
-        let urlRequest = try requestDTO.makeURLRequest(with: encoder)
+    func excute<E: APIEndPoint, D: ResponseDTODecodable>(for endPoint: E) async throws -> D {
+        let urlRequest = try endPoint.makeURLRequest(with: encoder)
         let data = try await networkManager.fetchData(with: urlRequest)
         let responseDTO = try decoder.decode(to: D.self, from: data)
         return responseDTO

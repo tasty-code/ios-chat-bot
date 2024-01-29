@@ -20,7 +20,7 @@ struct AssistantMessage: GPTMessageable {
         self.toolCalls = toolCalls
     }
     
-    func convertGPTMessageDTO() -> GPTMessageDTO {
-        return GPTMessageDTO(role: role, content: content, name: name, toolCalls: toolCalls)
+    func toChatMessage() -> ChatMessage {
+        return ChatMessage(content: content, role: role)
     }
 }

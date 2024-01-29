@@ -39,7 +39,6 @@ extension APIEndPoint {
         else {
             throw APIError.badURL
         }
-        
         return url
     }
 }

@@ -44,7 +44,10 @@ extension GPTEndPoint: APIEndPoint {
         get throws {
             switch self {
             case .chatbot:
-                guard let apiKey = Bundle.main.gptAPIKey else { throw APIError.notFoundAPIKey }
+                guard let apiKey = Bundle.main.gptAPIKey 
+                else {
+                    throw APIError.notFoundAPIKey
+                }
                 return ["Authorization": "Bearer \(apiKey)",
                         "Content-Type" : "application/json"]
             }

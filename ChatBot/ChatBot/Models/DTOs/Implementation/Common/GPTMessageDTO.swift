@@ -8,7 +8,6 @@
 import Foundation
 
 struct GPTMessageDTO: Codable {
-    let uuid: UUID = UUID()
     let role: MessageRole
     
     var content: String?
@@ -18,6 +17,10 @@ struct GPTMessageDTO: Codable {
     enum CodingKeys: String, CodingKey {
         case role, content, name
         case toolCalls = "tool_calls"
+    }
+    
+    func toChatMessage() -> ChatMessage {
+        return ChatMessage(content: content, role: role)
     }
 }
 

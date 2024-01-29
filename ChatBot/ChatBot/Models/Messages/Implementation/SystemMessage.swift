@@ -18,7 +18,7 @@ struct SystemMessage: GPTMessageable {
         self.name = name
     }
     
-    func convertGPTMessageDTO() -> GPTMessageDTO {
-        return GPTMessageDTO(role: role, content: content, name: name)
+    func toChatMessage() -> ChatMessage {
+        return ChatMessage(content: content, role: role)
     }
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension GPTChatRoomViewController: UITextViewDelegate {
+extension GPTChatViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         guard textView.contentSize.height < view.frame.height * 0.15
         else {

@@ -8,7 +8,7 @@
 import UIKit
 
 struct MessageContentConfiguration: UIContentConfiguration {
-    var message: GPTMessageDTO?
+    var message: ChatMessage?
     
     func makeContentView() -> UIView & UIContentView {
         return MessageContentView(configuration: self)
