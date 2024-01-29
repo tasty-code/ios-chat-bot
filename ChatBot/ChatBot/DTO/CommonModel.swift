@@ -11,6 +11,7 @@ struct Message: Codable, Identifiable {
     let id = UUID()
     let role: Role
     let content: String?
+    let created = Date.now
     
     enum CodingKeys: CodingKey {
         case role

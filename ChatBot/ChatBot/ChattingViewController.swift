@@ -7,16 +7,15 @@
 
 import UIKit
 
-
 // MARK: - ViewController
 
 final class ChattingViewController: UIViewController {
-    
-    private let chatService = ChatService(url: OpenAIURL(path: .chat), httpMethod: .post, contentType: .json)
+    private var chatService: ServiceProvider!
     private var chatRoomView: ChatRoomView!
     
     override func loadView() {
         super.loadView()
+        chatService = ServiceProvider(delegate: self)
         chatRoomView = ChatRoomView(delegate: self)
         view = chatRoomView
     }
@@ -29,13 +28,15 @@ final class ChattingViewController: UIViewController {
 
 extension ChattingViewController: ChatTextInputViewButtonDelegate {
     func sendMessage(_ message: String) {
-        let chatRecord = chatService.addRecord(messages: [Message(role: .user, content: message),
-                                                          Message(role: .assistant, content: "")])
-        chatRoomView.updateCollectionView(data: chatRecord)
-        
         Task {
-            let responseChatRecord = await chatService.sendRequestDTO()
-            chatRoomView.updateCollectionView(data: responseChatRecord)
+            let chatRecord = await chatService.sendRequestDTO(message: message)
+            chatRoomView.updateCollectionView(data: chatRecord)
         }
+    }
+}
+
+extension ChattingViewController: UpdateUIDelegate {
+    func updateUI(message: [Message]) {
+        chatRoomView.updateCollectionView(data: message)
     }
 }
