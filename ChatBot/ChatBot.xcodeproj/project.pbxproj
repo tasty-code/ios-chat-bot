@@ -13,8 +13,8 @@
 		08015EEA2BB2BAFA0068B30C /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08015EE92BB2BAFA0068B30C /* Entities.swift */; };
 		08015EED2BB2BB050068B30C /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08015EEC2BB2BB050068B30C /* UseCase.swift */; };
 		08015EEF2BB2BB0A0068B30C /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08015EEE2BB2BB0A0068B30C /* Network.swift */; };
-		08015EF12BB2BB100068B30C /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08015EF02BB2BB100068B30C /* CoreData.swift */; };
 		08D974922BB2C3890029F221 /* ChatBotUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D974912BB2C3890029F221 /* ChatBotUnitTests.swift */; };
+		08D9749A2BB2C4E40029F221 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D974992BB2C4E40029F221 /* CoreData.swift */; };
 		B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */; };
 		B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */; };
 		B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2C02B42D1BB00818B3C /* ViewController.swift */; };
@@ -36,9 +36,9 @@
 		08015EE92BB2BAFA0068B30C /* Entities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
 		08015EEC2BB2BB050068B30C /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
 		08015EEE2BB2BB0A0068B30C /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
-		08015EF02BB2BB100068B30C /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		08D9748F2BB2C3890029F221 /* ChatBotUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChatBotUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		08D974912BB2C3890029F221 /* ChatBotUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotUnitTests.swift; sourceTree = "<group>"; };
+		08D974992BB2C4E40029F221 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		B4B3E2B92B42D1BB00818B3C /* ChatBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,8 +89,8 @@
 		08015EE42BB2BA7C0068B30C /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				08D974982BB2C4D60029F221 /* PersistencePlatform */,
 				08015EE52BB2BA890068B30C /* NetworkPlatform */,
-				08015EE62BB2BA8E0068B30C /* PersistencePlatform */,
 			);
 			path = Infrastructure;
 			sourceTree = "<group>";
@@ -101,15 +101,6 @@
 				08015EEE2BB2BB0A0068B30C /* Network.swift */,
 			);
 			path = NetworkPlatform;
-			sourceTree = "<group>";
-		};
-		08015EE62BB2BA8E0068B30C /* PersistencePlatform */ = {
-			isa = PBXGroup;
-			children = (
-				08015EF02BB2BB100068B30C /* CoreData.swift */,
-			);
-			name = PersistencePlatform;
-			path = NetworkPlatform/PersistencePlatform;
 			sourceTree = "<group>";
 		};
 		08015EE72BB2BAB90068B30C /* UseCases */ = {
@@ -153,6 +144,14 @@
 				08D974912BB2C3890029F221 /* ChatBotUnitTests.swift */,
 			);
 			path = ChatBotUnitTests;
+			sourceTree = "<group>";
+		};
+		08D974982BB2C4D60029F221 /* PersistencePlatform */ = {
+			isa = PBXGroup;
+			children = (
+				08D974992BB2C4E40029F221 /* CoreData.swift */,
+			);
+			path = PersistencePlatform;
 			sourceTree = "<group>";
 		};
 		B4B3E2B02B42D1BB00818B3C = {
@@ -305,7 +304,7 @@
 				B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */,
 				08015EEF2BB2BB0A0068B30C /* Network.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
-				08015EF12BB2BB100068B30C /* CoreData.swift in Sources */,
+				08D9749A2BB2C4E40029F221 /* CoreData.swift in Sources */,
 				08015EEA2BB2BAFA0068B30C /* Entities.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
 			);
