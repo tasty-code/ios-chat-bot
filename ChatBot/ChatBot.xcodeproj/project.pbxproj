@@ -10,6 +10,10 @@
 		08015EDC2BB2B98D0068B30C /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 08015EDB2BB2B98D0068B30C /* RxBlocking */; };
 		08015EDE2BB2B98D0068B30C /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 08015EDD2BB2B98D0068B30C /* RxCocoa */; };
 		08015EE02BB2B98D0068B30C /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 08015EDF2BB2B98D0068B30C /* RxRelay */; };
+		08015EEA2BB2BAFA0068B30C /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08015EE92BB2BAFA0068B30C /* Entities.swift */; };
+		08015EED2BB2BB050068B30C /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08015EEC2BB2BB050068B30C /* UseCase.swift */; };
+		08015EEF2BB2BB0A0068B30C /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08015EEE2BB2BB0A0068B30C /* Network.swift */; };
+		08015EF12BB2BB100068B30C /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08015EF02BB2BB100068B30C /* CoreData.swift */; };
 		B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */; };
 		B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */; };
 		B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2C02B42D1BB00818B3C /* ViewController.swift */; };
@@ -18,6 +22,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		08015EE92BB2BAFA0068B30C /* Entities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
+		08015EEC2BB2BB050068B30C /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
+		08015EEE2BB2BB0A0068B30C /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		08015EF02BB2BB100068B30C /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		B4B3E2B92B42D1BB00818B3C /* ChatBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -41,6 +49,84 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08015EE22BB2BA720068B30C /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				B4B3E2C02B42D1BB00818B3C /* ViewController.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		08015EE32BB2BA780068B30C /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				08015EE82BB2BAED0068B30C /* Entities */,
+				08015EE72BB2BAB90068B30C /* UseCases */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		08015EE42BB2BA7C0068B30C /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				08015EE52BB2BA890068B30C /* NetworkPlatform */,
+				08015EE62BB2BA8E0068B30C /* PersistencePlatform */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		08015EE52BB2BA890068B30C /* NetworkPlatform */ = {
+			isa = PBXGroup;
+			children = (
+				08015EEE2BB2BB0A0068B30C /* Network.swift */,
+			);
+			path = NetworkPlatform;
+			sourceTree = "<group>";
+		};
+		08015EE62BB2BA8E0068B30C /* PersistencePlatform */ = {
+			isa = PBXGroup;
+			children = (
+				08015EF02BB2BB100068B30C /* CoreData.swift */,
+			);
+			name = PersistencePlatform;
+			path = NetworkPlatform/PersistencePlatform;
+			sourceTree = "<group>";
+		};
+		08015EE72BB2BAB90068B30C /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				08015EEC2BB2BB050068B30C /* UseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		08015EE82BB2BAED0068B30C /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				08015EE92BB2BAFA0068B30C /* Entities.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		08015EF22BB2BB1D0068B30C /* App */ = {
+			isa = PBXGroup;
+			children = (
+				B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */,
+				B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		08015EF32BB2BB250068B30C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */,
+				B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */,
+				B4B3E2CA2B42D1BC00818B3C /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		B4B3E2B02B42D1BB00818B3C = {
 			isa = PBXGroup;
 			children = (
@@ -60,12 +146,11 @@
 		B4B3E2BB2B42D1BB00818B3C /* ChatBot */ = {
 			isa = PBXGroup;
 			children = (
-				B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */,
-				B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */,
-				B4B3E2C02B42D1BB00818B3C /* ViewController.swift */,
-				B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */,
-				B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */,
-				B4B3E2CA2B42D1BC00818B3C /* Info.plist */,
+				08015EF32BB2BB250068B30C /* Resources */,
+				08015EF22BB2BB1D0068B30C /* App */,
+				08015EE22BB2BA720068B30C /* Presentation */,
+				08015EE32BB2BA780068B30C /* Domain */,
+				08015EE42BB2BA7C0068B30C /* Infrastructure */,
 			);
 			path = ChatBot;
 			sourceTree = "<group>";
@@ -148,8 +233,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08015EED2BB2BB050068B30C /* UseCase.swift in Sources */,
 				B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */,
+				08015EEF2BB2BB0A0068B30C /* Network.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
+				08015EF12BB2BB100068B30C /* CoreData.swift in Sources */,
+				08015EEA2BB2BAFA0068B30C /* Entities.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -296,7 +385,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W9647FYSN7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ChatBot/Info.plist;
+				INFOPLIST_FILE = ChatBot/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -324,7 +413,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W9647FYSN7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ChatBot/Info.plist;
+				INFOPLIST_FILE = ChatBot/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
