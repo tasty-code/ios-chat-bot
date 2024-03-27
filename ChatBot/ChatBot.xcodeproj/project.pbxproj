@@ -15,6 +15,8 @@
 		08015EEF2BB2BB0A0068B30C /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08015EEE2BB2BB0A0068B30C /* Network.swift */; };
 		08A039242BB2EE6E00E122C9 /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A039232BB2EE6E00E122C9 /* BaseTestCase.swift */; };
 		08A039272BB2F03D00E122C9 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 08A039262BB2F03D00E122C9 /* Swinject */; };
+		08C841182BB2FA8F00961EBF /* ChatRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C841172BB2FA8F00961EBF /* ChatRequestDTO.swift */; };
+		08C8411A2BB2FA9F00961EBF /* ChatResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C841192BB2FA9F00961EBF /* ChatResponseDTO.swift */; };
 		08C841222BB3775700961EBF /* DependencyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C841212BB3775700961EBF /* DependencyProvider.swift */; };
 		08C841252BB3A6B600961EBF /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C841242BB3A6B600961EBF /* MainCoordinator.swift */; };
 		08C841272BB3AD2F00961EBF /* NewUserCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C841262BB3AD2F00961EBF /* NewUserCoordinator.swift */; };
@@ -43,6 +45,8 @@
 		08015EEC2BB2BB050068B30C /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
 		08015EEE2BB2BB0A0068B30C /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		08A039232BB2EE6E00E122C9 /* BaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
+		08C841172BB2FA8F00961EBF /* ChatRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRequestDTO.swift; sourceTree = "<group>"; };
+		08C841192BB2FA9F00961EBF /* ChatResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponseDTO.swift; sourceTree = "<group>"; };
 		08C841212BB3775700961EBF /* DependencyProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyProvider.swift; sourceTree = "<group>"; };
 		08C841242BB3A6B600961EBF /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		08C841262BB3AD2F00961EBF /* NewUserCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserCoordinator.swift; sourceTree = "<group>"; };
@@ -111,6 +115,7 @@
 		08015EE52BB2BA890068B30C /* NetworkPlatform */ = {
 			isa = PBXGroup;
 			children = (
+				08C841162BB2FA7F00961EBF /* DTO */,
 				08015EEE2BB2BB0A0068B30C /* Network.swift */,
 			);
 			path = NetworkPlatform;
@@ -150,6 +155,23 @@
 				B4B3E2CA2B42D1BC00818B3C /* Info.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		08C841162BB2FA7F00961EBF /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				08C841172BB2FA8F00961EBF /* ChatRequestDTO.swift */,
+				08C841192BB2FA9F00961EBF /* ChatResponseDTO.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		08C8411B2BB2FC0200961EBF /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				08C8411C2BB2FC1C00961EBF /* Repository.swift */,
+			);
+			path = Repositories;
 			sourceTree = "<group>";
 		};
 		08C841232BB3A6A700961EBF /* Coordinators */ = {
@@ -334,11 +356,13 @@
 				B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */,
 				08C841292BB3AEBC00961EBF /* ReturningUserCoordinator.swift in Sources */,
 				08015EEF2BB2BB0A0068B30C /* Network.swift in Sources */,
+				08C8411A2BB2FA9F00961EBF /* ChatResponseDTO.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
 				08C841272BB3AD2F00961EBF /* NewUserCoordinator.swift in Sources */,
 				08D9749A2BB2C4E40029F221 /* CoreData.swift in Sources */,
 				08015EEA2BB2BAFA0068B30C /* ChatMessageEntity.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
+				08C841182BB2FA8F00961EBF /* ChatRequestDTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
