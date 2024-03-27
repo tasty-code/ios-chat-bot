@@ -20,7 +20,7 @@ enum GPTModelFamilies: String, Codable {
 
 // MARK: - APIRole
 enum ChatRole: String, Codable {
-    case system = "system"
-    case user = "user"
-    case assistant = "assistant"
+    case system
+    case user
+    case assistant
 }
