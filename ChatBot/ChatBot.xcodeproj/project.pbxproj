@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		8A7F6FA12BB29E91001C1999 /* ChatResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7F6FA02BB29E91001C1999 /* ChatResponseModel.swift */; };
 		8A7F6FA32BB2B385001C1999 /* ChatCommonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7F6FA22BB2B385001C1999 /* ChatCommonModel.swift */; };
+		8A7F6FA12BB29E91001C1999 /* ChatResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7F6FA02BB29E91001C1999 /* ChatResponseModel.swift */; };
+		8A7F6FA32BB2B385001C1999 /* ChatCommonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7F6FA22BB2B385001C1999 /* ChatCommonModel.swift */; };
+		778303F62BB3B2C400C72C63 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 778303F52BB3B2C400C72C63 /* .swiftlint.yml */; };
 		B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */; };
 		B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */; };
 		B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2C02B42D1BB00818B3C /* ViewController.swift */; };
@@ -17,6 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8A7F6FA02BB29E91001C1999 /* ChatResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponseModel.swift; sourceTree = "<group>"; };
+		8A7F6FA22BB2B385001C1999 /* ChatCommonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCommonModel.swift; sourceTree = "<group>"; };
+		778303F52BB3B2C400C72C63 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		8A7F6FA02BB29E91001C1999 /* ChatResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponseModel.swift; sourceTree = "<group>"; };
 		8A7F6FA22BB2B385001C1999 /* ChatCommonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCommonModel.swift; sourceTree = "<group>"; };
 		B4B3E2B92B42D1BB00818B3C /* ChatBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
