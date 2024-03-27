@@ -8,7 +8,19 @@
 import UIKit
 import RxCocoa
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
+    
+    let coordinator: MainCoordinator
+    
+    init(coordinator: MainCoordinator) {
+        self.coordinator = coordinator
+        super .init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

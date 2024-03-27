@@ -14,6 +14,9 @@
 		08015EED2BB2BB050068B30C /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08015EEC2BB2BB050068B30C /* UseCase.swift */; };
 		08015EEF2BB2BB0A0068B30C /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08015EEE2BB2BB0A0068B30C /* Network.swift */; };
 		08A039242BB2EE6E00E122C9 /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A039232BB2EE6E00E122C9 /* BaseTestCase.swift */; };
+		08C841252BB3A6B600961EBF /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C841242BB3A6B600961EBF /* MainCoordinator.swift */; };
+		08C841272BB3AD2F00961EBF /* NewUserCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C841262BB3AD2F00961EBF /* NewUserCoordinator.swift */; };
+		08C841292BB3AEBC00961EBF /* ReturningUserCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C841282BB3AEBC00961EBF /* ReturningUserCoordinator.swift */; };
 		08D974922BB2C3890029F221 /* ChatBotUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D974912BB2C3890029F221 /* ChatBotUnitTests.swift */; };
 		08D9749A2BB2C4E40029F221 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D974992BB2C4E40029F221 /* CoreData.swift */; };
 		B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */; };
@@ -38,6 +41,9 @@
 		08015EEC2BB2BB050068B30C /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
 		08015EEE2BB2BB0A0068B30C /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		08A039232BB2EE6E00E122C9 /* BaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
+		08C841242BB3A6B600961EBF /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		08C841262BB3AD2F00961EBF /* NewUserCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserCoordinator.swift; sourceTree = "<group>"; };
+		08C841282BB3AEBC00961EBF /* ReturningUserCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturningUserCoordinator.swift; sourceTree = "<group>"; };
 		08D9748F2BB2C3890029F221 /* ChatBotUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChatBotUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		08D974912BB2C3890029F221 /* ChatBotUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotUnitTests.swift; sourceTree = "<group>"; };
 		08D974992BB2C4E40029F221 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
@@ -74,6 +80,7 @@
 		08015EE22BB2BA720068B30C /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				08C841232BB3A6A700961EBF /* Coordinators */,
 				B4B3E2C02B42D1BB00818B3C /* ViewController.swift */,
 			);
 			path = Presentation;
@@ -138,6 +145,16 @@
 				B4B3E2CA2B42D1BC00818B3C /* Info.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		08C841232BB3A6A700961EBF /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				08C841242BB3A6B600961EBF /* MainCoordinator.swift */,
+				08C841262BB3AD2F00961EBF /* NewUserCoordinator.swift */,
+				08C841282BB3AEBC00961EBF /* ReturningUserCoordinator.swift */,
+			);
+			path = Coordinators;
 			sourceTree = "<group>";
 		};
 		08D974902BB2C3890029F221 /* ChatBotUnitTests */ = {
@@ -238,7 +255,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1530;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1530;
 				TargetAttributes = {
 					08D9748E2BB2C3890029F221 = {
 						CreatedOnToolsVersion = 15.3;
@@ -305,9 +322,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				08015EED2BB2BB050068B30C /* UseCase.swift in Sources */,
+				08C841252BB3A6B600961EBF /* MainCoordinator.swift in Sources */,
 				B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */,
+				08C841292BB3AEBC00961EBF /* ReturningUserCoordinator.swift in Sources */,
 				08015EEF2BB2BB0A0068B30C /* Network.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
+				08C841272BB3AD2F00961EBF /* NewUserCoordinator.swift in Sources */,
 				08D9749A2BB2C4E40029F221 /* CoreData.swift in Sources */,
 				08015EEA2BB2BAFA0068B30C /* Entities.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
@@ -342,6 +362,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = VGM28F2FH7;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -365,6 +386,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = VGM28F2FH7;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
