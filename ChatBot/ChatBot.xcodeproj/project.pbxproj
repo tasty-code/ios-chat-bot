@@ -13,6 +13,8 @@
 		08015EEA2BB2BAFA0068B30C /* ChatMessageEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08015EE92BB2BAFA0068B30C /* ChatMessageEntity.swift */; };
 		08015EED2BB2BB050068B30C /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08015EEC2BB2BB050068B30C /* UseCase.swift */; };
 		08015EEF2BB2BB0A0068B30C /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08015EEE2BB2BB0A0068B30C /* Network.swift */; };
+		08880B252BB4177500BA2E86 /* ChatMessageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08880B242BB4177500BA2E86 /* ChatMessageDTO.swift */; };
+		08880B282BB41D3200BA2E86 /* ChatMessageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08880B242BB4177500BA2E86 /* ChatMessageDTO.swift */; };
 		08A039242BB2EE6E00E122C9 /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A039232BB2EE6E00E122C9 /* BaseTestCase.swift */; };
 		08A039272BB2F03D00E122C9 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 08A039262BB2F03D00E122C9 /* Swinject */; };
 		08C841182BB2FA8F00961EBF /* ChatRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C841172BB2FA8F00961EBF /* ChatRequestDTO.swift */; };
@@ -61,6 +63,7 @@
 		08015EE92BB2BAFA0068B30C /* ChatMessageEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageEntity.swift; sourceTree = "<group>"; };
 		08015EEC2BB2BB050068B30C /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
 		08015EEE2BB2BB0A0068B30C /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		08880B242BB4177500BA2E86 /* ChatMessageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageDTO.swift; sourceTree = "<group>"; };
 		08A039232BB2EE6E00E122C9 /* BaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
 		08C841172BB2FA8F00961EBF /* ChatRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRequestDTO.swift; sourceTree = "<group>"; };
 		08C841192BB2FA9F00961EBF /* ChatResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponseDTO.swift; sourceTree = "<group>"; };
@@ -181,6 +184,7 @@
 		08C841162BB2FA7F00961EBF /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				08880B242BB4177500BA2E86 /* ChatMessageDTO.swift */,
 				08C841172BB2FA8F00961EBF /* ChatRequestDTO.swift */,
 				08C841192BB2FA9F00961EBF /* ChatResponseDTO.swift */,
 			);
@@ -365,6 +369,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08880B282BB41D3200BA2E86 /* ChatMessageDTO.swift in Sources */,
 				08C8412C2BB3C6A200961EBF /* AppDelegate.swift in Sources */,
 				08C8412D2BB3C6A200961EBF /* SceneDelegate.swift in Sources */,
 				08C8412E2BB3C6A200961EBF /* DependencyProvider.swift in Sources */,
@@ -391,6 +396,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08015EED2BB2BB050068B30C /* UseCase.swift in Sources */,
+				08880B252BB4177500BA2E86 /* ChatMessageDTO.swift in Sources */,
 				08C841252BB3A6B600961EBF /* MainCoordinator.swift in Sources */,
 				08C841222BB3775700961EBF /* DependencyProvider.swift in Sources */,
 				B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */,

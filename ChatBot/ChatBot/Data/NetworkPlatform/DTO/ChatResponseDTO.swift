@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ChatResponseDTO: Codable {
+struct ChatResponseDTO: Decodable {
     let id: String
     let object: String
     let created: Int
@@ -22,12 +22,18 @@ struct ChatResponseDTO: Codable {
     }
 }
 
-struct ChatChoiceDTO: Codable {
+struct ChatChoiceDTO: Decodable {
     let index: Int
-    let message: ChatMessageDTO?
+    let message: ChatMessageDTO
+    let finishReason: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case index, message
+        case finishReason = "finish_reason"
+    }
 }
 
-struct Usage: Codable {
+struct Usage: Decodable {
     let promptTokens: Int
     let completionTokens: Int
     let totalTokens: Int

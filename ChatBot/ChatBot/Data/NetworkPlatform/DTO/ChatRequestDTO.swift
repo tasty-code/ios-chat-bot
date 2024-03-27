@@ -7,12 +7,8 @@
 
 import Foundation
 
-struct ChatRequestDTO: Codable {
-    let model: String
+struct ChatRequestDTO: Encodable {
+    let model: String = "gpt-3.5-turbo-1106"
     let messages: [ChatMessageDTO]
-}
-
-struct ChatMessageDTO: Codable {
-    let role: String
-    let content: String
+    let stream: Bool = false
 }
