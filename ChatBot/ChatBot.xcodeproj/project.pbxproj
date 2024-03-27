@@ -10,7 +10,7 @@
 		08015EDC2BB2B98D0068B30C /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 08015EDB2BB2B98D0068B30C /* RxBlocking */; };
 		08015EDE2BB2B98D0068B30C /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 08015EDD2BB2B98D0068B30C /* RxCocoa */; };
 		08015EE02BB2B98D0068B30C /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 08015EDF2BB2B98D0068B30C /* RxRelay */; };
-		08015EEA2BB2BAFA0068B30C /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08015EE92BB2BAFA0068B30C /* Entities.swift */; };
+		08015EEA2BB2BAFA0068B30C /* ChatMessageEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08015EE92BB2BAFA0068B30C /* ChatMessageEntity.swift */; };
 		08015EED2BB2BB050068B30C /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08015EEC2BB2BB050068B30C /* UseCase.swift */; };
 		08015EEF2BB2BB0A0068B30C /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08015EEE2BB2BB0A0068B30C /* Network.swift */; };
 		08A039242BB2EE6E00E122C9 /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A039232BB2EE6E00E122C9 /* BaseTestCase.swift */; };
@@ -39,7 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		08015EE92BB2BAFA0068B30C /* Entities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
+		08015EE92BB2BAFA0068B30C /* ChatMessageEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageEntity.swift; sourceTree = "<group>"; };
 		08015EEC2BB2BB050068B30C /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
 		08015EEE2BB2BB0A0068B30C /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		08A039232BB2EE6E00E122C9 /* BaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
@@ -127,7 +127,7 @@
 		08015EE82BB2BAED0068B30C /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				08015EE92BB2BAFA0068B30C /* Entities.swift */,
+				08015EE92BB2BAFA0068B30C /* ChatMessageEntity.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -337,7 +337,7 @@
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
 				08C841272BB3AD2F00961EBF /* NewUserCoordinator.swift in Sources */,
 				08D9749A2BB2C4E40029F221 /* CoreData.swift in Sources */,
-				08015EEA2BB2BAFA0068B30C /* Entities.swift in Sources */,
+				08015EEA2BB2BAFA0068B30C /* ChatMessageEntity.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
