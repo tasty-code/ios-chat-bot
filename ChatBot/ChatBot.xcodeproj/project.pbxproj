@@ -105,14 +105,14 @@
 			path = Domain;
 			sourceTree = "<group>";
 		};
-		08015EE42BB2BA7C0068B30C /* Infrastructure */ = {
+		08015EE42BB2BA7C0068B30C /* Data */ = {
 			isa = PBXGroup;
 			children = (
 				08C8411B2BB2FC0200961EBF /* Repositories */,
 				08D974982BB2C4D60029F221 /* PersistencePlatform */,
 				08015EE52BB2BA890068B30C /* NetworkPlatform */,
 			);
-			path = Infrastructure;
+			path = Data;
 			sourceTree = "<group>";
 		};
 		08015EE52BB2BA890068B30C /* NetworkPlatform */ = {
@@ -229,7 +229,7 @@
 				08015EF22BB2BB1D0068B30C /* App */,
 				08015EE22BB2BA720068B30C /* Presentation */,
 				08015EE32BB2BA780068B30C /* Domain */,
-				08015EE42BB2BA7C0068B30C /* Infrastructure */,
+				08015EE42BB2BA7C0068B30C /* Data */,
 			);
 			path = ChatBot;
 			sourceTree = "<group>";
