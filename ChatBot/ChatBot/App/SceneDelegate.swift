@@ -18,15 +18,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 extension SceneDelegate {
     private func configure(_ windowScene: UIWindowScene) {
-        let navigationController = UINavigationController()
-        
-        DependencyProvider.shared.container.register(UINavigationController.self) { _ in navigationController }
-
+        let navigationController = DependencyProvider.shared.container.resolve(UINavigationController.self)
         let mainCoordinator = DependencyProvider.shared.container.resolve(MainCoordinator.self)
+
         mainCoordinator?.start()
         
         window = UIWindow(windowScene: windowScene)
-        window?.makeKeyAndVisible()
         window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
     }
 }

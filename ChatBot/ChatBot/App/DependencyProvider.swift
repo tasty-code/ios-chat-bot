@@ -16,8 +16,15 @@ final class DependencyProvider {
 }
 
 extension DependencyProvider {
+    
     private func registerDependencies() {
+        let navigationController = UINavigationController()
+        
         // MARK: - Register Coordinator
+        container.register(UINavigationController.self) { resolver in
+            return navigationController
+        }
+        
         container.register(MainCoordinator.self) { resolver in
             let navigationController = resolver.resolve(UINavigationController.self)!
             return MainCoordinator(navigationController: navigationController)
@@ -39,6 +46,7 @@ extension DependencyProvider {
             let viewController = ViewController(coordinator: coordinator)
             return viewController
         }
+
     }
     
     func resolve<Service>(_ serviceType: Service.Type) -> Service {

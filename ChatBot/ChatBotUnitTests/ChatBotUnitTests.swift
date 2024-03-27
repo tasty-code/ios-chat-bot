@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import ChatBot
+@testable import ChatBot
 
 final class ChatBotUnitTests: BaseTestCase {
 
