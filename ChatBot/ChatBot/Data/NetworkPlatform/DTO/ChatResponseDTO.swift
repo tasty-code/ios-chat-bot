@@ -16,7 +16,7 @@ struct ChatResponseDTO: Codable {
     let choices: [ChatChoiceDTO]
     let usage: Usage
 
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case id, object, created, model, choices, usage
         case systemFingerprint = "system_fingerprint"
     }
@@ -32,7 +32,7 @@ struct Usage: Codable {
     let completionTokens: Int
     let totalTokens: Int
 
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case promptTokens = "prompt_tokens"
         case completionTokens = "completion_tokens"
         case totalTokens = "total_tokens"
