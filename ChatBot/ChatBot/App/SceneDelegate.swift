@@ -10,6 +10,8 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
+    let chatManger = ChatManager()
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard
             let windowScene = (scene as? UIWindowScene)
@@ -18,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         window = UIWindow(windowScene: windowScene)
         
-        let mainViewController =  ViewController()
+        let mainViewController =  ViewController(chatManager: chatManger)
         window?.rootViewController = mainViewController
         window?.makeKeyAndVisible()
     }

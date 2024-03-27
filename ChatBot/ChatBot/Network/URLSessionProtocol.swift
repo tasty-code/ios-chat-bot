@@ -8,6 +8,6 @@
 import Foundation
 
 protocol URLSessionProtocol {
-    func requestData(with request: URLRequest, body bodyData: Dictionary<String, String>?) async throws -> (Data, URLResponse)
+    func requestData(with request: URLRequest) async throws -> (Data, URLResponse)
 }
 
