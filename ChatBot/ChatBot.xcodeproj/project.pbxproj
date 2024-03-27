@@ -14,6 +14,8 @@
 		08015EED2BB2BB050068B30C /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08015EEC2BB2BB050068B30C /* UseCase.swift */; };
 		08015EEF2BB2BB0A0068B30C /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08015EEE2BB2BB0A0068B30C /* Network.swift */; };
 		08A039242BB2EE6E00E122C9 /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A039232BB2EE6E00E122C9 /* BaseTestCase.swift */; };
+		08A039272BB2F03D00E122C9 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 08A039262BB2F03D00E122C9 /* Swinject */; };
+		08C841222BB3775700961EBF /* DependencyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C841212BB3775700961EBF /* DependencyProvider.swift */; };
 		08C841252BB3A6B600961EBF /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C841242BB3A6B600961EBF /* MainCoordinator.swift */; };
 		08C841272BB3AD2F00961EBF /* NewUserCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C841262BB3AD2F00961EBF /* NewUserCoordinator.swift */; };
 		08C841292BB3AEBC00961EBF /* ReturningUserCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C841282BB3AEBC00961EBF /* ReturningUserCoordinator.swift */; };
@@ -41,6 +43,7 @@
 		08015EEC2BB2BB050068B30C /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
 		08015EEE2BB2BB0A0068B30C /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		08A039232BB2EE6E00E122C9 /* BaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
+		08C841212BB3775700961EBF /* DependencyProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyProvider.swift; sourceTree = "<group>"; };
 		08C841242BB3A6B600961EBF /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		08C841262BB3AD2F00961EBF /* NewUserCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserCoordinator.swift; sourceTree = "<group>"; };
 		08C841282BB3AEBC00961EBF /* ReturningUserCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturningUserCoordinator.swift; sourceTree = "<group>"; };
@@ -71,6 +74,7 @@
 				08015EE02BB2B98D0068B30C /* RxRelay in Frameworks */,
 				08015EDE2BB2B98D0068B30C /* RxCocoa in Frameworks */,
 				08015EDC2BB2B98D0068B30C /* RxBlocking in Frameworks */,
+				08A039272BB2F03D00E122C9 /* Swinject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,6 +137,7 @@
 			children = (
 				B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */,
 				B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */,
+				08C841212BB3775700961EBF /* DependencyProvider.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -242,6 +247,7 @@
 				08015EDB2BB2B98D0068B30C /* RxBlocking */,
 				08015EDD2BB2B98D0068B30C /* RxCocoa */,
 				08015EDF2BB2B98D0068B30C /* RxRelay */,
+				08A039262BB2F03D00E122C9 /* Swinject */,
 			);
 			productName = ChatBot;
 			productReference = B4B3E2B92B42D1BB00818B3C /* ChatBot.app */;
@@ -277,6 +283,7 @@
 			mainGroup = B4B3E2B02B42D1BB00818B3C;
 			packageReferences = (
 				08015EDA2BB2B98D0068B30C /* XCRemoteSwiftPackageReference "RxSwift" */,
+				08A039252BB2F03D00E122C9 /* XCRemoteSwiftPackageReference "Swinject" */,
 			);
 			productRefGroup = B4B3E2BA2B42D1BB00818B3C /* Products */;
 			projectDirPath = "";
@@ -323,6 +330,7 @@
 			files = (
 				08015EED2BB2BB050068B30C /* UseCase.swift in Sources */,
 				08C841252BB3A6B600961EBF /* MainCoordinator.swift in Sources */,
+				08C841222BB3775700961EBF /* DependencyProvider.swift in Sources */,
 				B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */,
 				08C841292BB3AEBC00961EBF /* ReturningUserCoordinator.swift in Sources */,
 				08015EEF2BB2BB0A0068B30C /* Network.swift in Sources */,
@@ -620,6 +628,14 @@
 				minimumVersion = 6.5.0;
 			};
 		};
+		08A039252BB2F03D00E122C9 /* XCRemoteSwiftPackageReference "Swinject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swinject/Swinject.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -637,6 +653,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 08015EDA2BB2B98D0068B30C /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxRelay;
+		};
+		08A039262BB2F03D00E122C9 /* Swinject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 08A039252BB2F03D00E122C9 /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = Swinject;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
