@@ -48,6 +48,7 @@
 		B4B3E2B02B42D1BB00818B3C = {
 			isa = PBXGroup;
 			children = (
+				778303F52BB3B2C400C72C63 /* .swiftlint.yml */,
 				B4B3E2BB2B42D1BB00818B3C /* ChatBot */,
 				B4B3E2BA2B42D1BB00818B3C /* Products */,
 			);
@@ -83,6 +84,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B4B3E2CD2B42D1BC00818B3C /* Build configuration list for PBXNativeTarget "ChatBot" */;
 			buildPhases = (
+				778303F42BB3B1D800C72C63 /* SwiftLint */,
 				B4B3E2B52B42D1BB00818B3C /* Sources */,
 				B4B3E2B62B42D1BB00818B3C /* Frameworks */,
 				B4B3E2B72B42D1BB00818B3C /* Resources */,
@@ -134,12 +136,35 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				778303F62BB3B2C400C72C63 /* .swiftlint.yml in Resources */,
 				B4B3E2C92B42D1BC00818B3C /* LaunchScreen.storyboard in Resources */,
 				B4B3E2C62B42D1BC00818B3C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		778303F42BB3B1D800C72C63 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B4B3E2B52B42D1BB00818B3C /* Sources */ = {
@@ -205,7 +230,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -268,7 +293,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
