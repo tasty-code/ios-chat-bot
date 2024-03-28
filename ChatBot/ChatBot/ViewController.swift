@@ -48,7 +48,7 @@ extension ViewController {
         chatBubbleView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             $0.width.lessThanOrEqualTo(view.snp.width).multipliedBy(0.7).priority(.high)
-            $0.leading.equalTo(view.snp.leading).inset(10)
+            $0.trailing.equalTo(view.snp.trailing).inset(10)
         }
     }
     
@@ -58,9 +58,9 @@ extension ViewController {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             $0.width.lessThanOrEqualTo(view.snp.width).multipliedBy(0.7).priority(.high)
             if isUser {
-                $0.leading.equalTo(view.snp.leading).inset(10)
-            } else {
                 $0.trailing.equalTo(view.snp.trailing).inset(10)
+            } else {
+                $0.leading.equalTo(view.snp.leading).inset(10)
             }
         }
     }
