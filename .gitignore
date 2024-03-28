@@ -92,3 +92,6 @@ iOSInjectionProject/
 
 # conceal secrets
 *.xcconfig
+
+# ignore project schemes
+*.xcscheme
