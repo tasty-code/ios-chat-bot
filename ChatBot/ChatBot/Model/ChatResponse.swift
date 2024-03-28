@@ -1,5 +1,5 @@
 //
-//  ResponseDTO.swift
+//  ChatResponse.swift
 //  ChatBot
 //
 //  Created by yujaehong on 3/28/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ResponseDTO: Codable {
+struct ChatResponse: Codable {
     let id: String
     let object: String
     let created: Int
@@ -19,7 +19,7 @@ struct ResponseDTO: Codable {
 
 struct Choice: Codable {
     let index: Int
-    let message: MessageDTO
+    let message: Message
     let finishReason: String
     
     enum CodingKeys: String, CodingKey {
