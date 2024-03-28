@@ -27,7 +27,7 @@ extension ChatCompletionReponseDTO.Choice {
     struct Message: Decodable  {
         let role: String
         let content: String?
-        let toolCalls: [ToolCall]
+        let toolCalls: [ToolCall]?
     }
     
     struct LogProbs: Decodable  {
