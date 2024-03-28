@@ -1,5 +1,5 @@
 //
-//  RespnseMessageModel.swift
+//  ResponseMessageModel.swift
 //  ChatBot
 //
 //  Created by 권태호 on 28/03/2024.
