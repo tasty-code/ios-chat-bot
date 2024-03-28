@@ -1,10 +1,10 @@
 struct ChatCompletionReponseDTO {
     let id: String
-    let choices: [Choice]
+    let object: String
     let created: Int
     let model: String
     let systemFingerprint: String
-    let object: String
+    let choices: [Choice]
     let usage: Usage
 }
 
@@ -25,12 +25,9 @@ extension ChatCompletionReponseDTO {
 
 extension ChatCompletionReponseDTO.Choice {
     struct Message {
+        let role: String
         let content: String?
         let toolCalls: [ToolCall]
-        
-        struct ToolCall {}
-        
-        let role: String
     }
     
     struct LogProbs {
@@ -49,5 +46,19 @@ extension ChatCompletionReponseDTO.Choice {
             }
         }
     }
+}
 
+extension ChatCompletionReponseDTO.Choice.Message {
+    struct ToolCall {
+        let id: String
+        let type: String
+        let function: Function
+    }
+}
+
+extension ChatCompletionReponseDTO.Choice.Message.ToolCall {
+    struct Function {
+        let name: String
+        let arguments: String
+    }
 }
