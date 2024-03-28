@@ -18,6 +18,12 @@
 		778304092BB4FBBA00C72C63 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 778304082BB4FBBA00C72C63 /* Then */; };
 		7783040C2BB4FBF500C72C63 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 7783040B2BB4FBF500C72C63 /* Alamofire */; };
 		7783040E2BB4FBF500C72C63 /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 7783040D2BB4FBF500C72C63 /* AlamofireDynamic */; };
+		778304142BB50CFE00C72C63 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778304132BB50CFE00C72C63 /* NetworkResult.swift */; };
+		778304162BB50DCE00C72C63 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778304152BB50DCE00C72C63 /* APIConstants.swift */; };
+		778304182BB50F4500C72C63 /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778304172BB50F4500C72C63 /* NetworkConstants.swift */; };
+		7783041A2BB510E400C72C63 /* TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778304192BB510E400C72C63 /* TargetType.swift */; };
+		7783041D2BB5278D00C72C63 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 7783041C2BB5278D00C72C63 /* .gitkeep */; };
+		778304232BB52A0700C72C63 /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778304222BB52A0700C72C63 /* BaseAPI.swift */; };
 		8A7F6FA12BB29E91001C1999 /* ChatResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7F6FA02BB29E91001C1999 /* ChatResponseModel.swift */; };
 		8A7F6FA32BB2B385001C1999 /* ChatCommonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7F6FA22BB2B385001C1999 /* ChatCommonModel.swift */; };
 		B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */; };
@@ -29,6 +35,12 @@
 
 /* Begin PBXFileReference section */
 		778303F52BB3B2C400C72C63 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		778304132BB50CFE00C72C63 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
+		778304152BB50DCE00C72C63 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
+		778304172BB50F4500C72C63 /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
+		778304192BB510E400C72C63 /* TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
+		7783041C2BB5278D00C72C63 /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		778304222BB52A0700C72C63 /* BaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
 		8A7F6FA02BB29E91001C1999 /* ChatResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponseModel.swift; sourceTree = "<group>"; };
 		8A7F6FA22BB2B385001C1999 /* ChatCommonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCommonModel.swift; sourceTree = "<group>"; };
 		B4B3E2B92B42D1BB00818B3C /* ChatBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,6 +73,86 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7783040F2BB5095500C72C63 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				778304212BB529F800C72C63 /* APIs */,
+				778304122BB50B7100C72C63 /* Foundation */,
+				778304112BB509A600C72C63 /* Model */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		778304102BB5095F00C72C63 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */,
+				B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		778304112BB509A600C72C63 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8A7F6FA02BB29E91001C1999 /* ChatResponseModel.swift */,
+				8A7F6FA22BB2B385001C1999 /* ChatCommonModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		778304122BB50B7100C72C63 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				778304132BB50CFE00C72C63 /* NetworkResult.swift */,
+				778304152BB50DCE00C72C63 /* APIConstants.swift */,
+				778304172BB50F4500C72C63 /* NetworkConstants.swift */,
+				778304192BB510E400C72C63 /* TargetType.swift */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
+		7783041B2BB5275C00C72C63 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				7783041C2BB5278D00C72C63 /* .gitkeep */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		7783041E2BB527F900C72C63 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				B4B3E2C02B42D1BB00818B3C /* ViewController.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		7783041F2BB5281E00C72C63 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */,
+				B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		778304202BB5283800C72C63 /* Supports */ = {
+			isa = PBXGroup;
+			children = (
+				B4B3E2CA2B42D1BC00818B3C /* Info.plist */,
+			);
+			path = Supports;
+			sourceTree = "<group>";
+		};
+		778304212BB529F800C72C63 /* APIs */ = {
+			isa = PBXGroup;
+			children = (
+				778304222BB52A0700C72C63 /* BaseAPI.swift */,
+			);
+			path = APIs;
+			sourceTree = "<group>";
+		};
 		B4B3E2B02B42D1BB00818B3C = {
 			isa = PBXGroup;
 			children = (
@@ -204,11 +296,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				778304182BB50F4500C72C63 /* NetworkConstants.swift in Sources */,
 				8A7F6FA32BB2B385001C1999 /* ChatCommonModel.swift in Sources */,
 				B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */,
+				7783041A2BB510E400C72C63 /* TargetType.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
+				778304142BB50CFE00C72C63 /* NetworkResult.swift in Sources */,
 				8A7F6FA12BB29E91001C1999 /* ChatResponseModel.swift in Sources */,
+				778304162BB50DCE00C72C63 /* APIConstants.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
+				778304232BB52A0700C72C63 /* BaseAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

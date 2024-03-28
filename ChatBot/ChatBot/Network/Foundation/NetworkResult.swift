@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+enum NetworkResult<T> {
+    case success(T)
+    case requestErr
+    case serverErr
+    case networkFail
+    case parsingErr
+}
