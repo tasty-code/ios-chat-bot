@@ -12,6 +12,7 @@ import UIKit
 class ViewController: UIViewController {
     
     let chatBubbleView = ChatBubbleView()
+    let chatLoadingIndicator = ChatLoadingIndicator()
     
     let button = UIButton(type: .roundedRect)
     var isUser: Bool = false
@@ -21,6 +22,13 @@ class ViewController: UIViewController {
         view.backgroundColor = .systemBackground
         button.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
         configureChatBubbleView()
+        
+        view.addSubview(chatLoadingIndicator)
+
+        chatLoadingIndicator.snp.makeConstraints {
+            $0.leading.equalTo(view.snp.leading)
+            $0.centerY.equalTo(view.snp.centerY).inset(30)
+        }
         
         view.addSubview(button)
         button.backgroundColor = .systemBlue
