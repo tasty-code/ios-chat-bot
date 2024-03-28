@@ -1,8 +1,5 @@
-//
-//  JsonDocodableProtocol.swift
-//  ChatBot
-//
-//  Created by Jin-Mac on 3/28/24.
-//
-
 import Foundation
+
+protocol JsonDecodableProtocol {
+    func decode<T: Decodable>(fileName: String, fileType: String) -> Result<T, JsonError>
+}
