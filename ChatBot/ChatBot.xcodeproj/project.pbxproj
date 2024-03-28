@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		70E483942BB5662800931F01 /* OpenAIRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E483932BB5662800931F01 /* OpenAIRequestDTO.swift */; };
+		70E483962BB5A50E00931F01 /* RequestMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E483952BB5A50E00931F01 /* RequestMessageModel.swift */; };
+		70E483982BB5A53A00931F01 /* RespnseMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E483972BB5A53A00931F01 /* RespnseMessageModel.swift */; };
 		B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */; };
 		B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */; };
 		B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2C02B42D1BB00818B3C /* ViewController.swift */; };
@@ -15,6 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		70E483932BB5662800931F01 /* OpenAIRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIRequestDTO.swift; sourceTree = "<group>"; };
+		70E483952BB5A50E00931F01 /* RequestMessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMessageModel.swift; sourceTree = "<group>"; };
+		70E483972BB5A53A00931F01 /* RespnseMessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RespnseMessageModel.swift; sourceTree = "<group>"; };
 		B4B3E2B92B42D1BB00818B3C /* ChatBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +63,9 @@
 				B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */,
 				B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */,
 				B4B3E2C02B42D1BB00818B3C /* ViewController.swift */,
+				70E483932BB5662800931F01 /* OpenAIRequestDTO.swift */,
+				70E483952BB5A50E00931F01 /* RequestMessageModel.swift */,
+				70E483972BB5A53A00931F01 /* RespnseMessageModel.swift */,
 				B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */,
 				B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */,
 				B4B3E2CA2B42D1BC00818B3C /* Info.plist */,
@@ -134,7 +143,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70E483982BB5A53A00931F01 /* RespnseMessageModel.swift in Sources */,
 				B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */,
+				70E483962BB5A50E00931F01 /* RequestMessageModel.swift in Sources */,
+				70E483942BB5662800931F01 /* OpenAIRequestDTO.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
 			);
