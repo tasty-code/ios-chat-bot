@@ -7,51 +7,21 @@
 
 import UIKit
 
-class TestView: UIView {
-    let chatBubbleView: ChatBubbleView = ChatBubbleView()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        self.addSubview(chatBubbleView)
-        
-        chatBubbleView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            chatBubbleView.centerYAnchor.constraint(equalTo: super.centerYAnchor),
-            chatBubbleView.leadingAnchor.constraint(equalTo: super.leadingAnchor),
-            chatBubbleView.trailingAnchor.constraint(equalTo: super.trailingAnchor)
-        ])
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
+/// 말풍선 View
 class ChatBubbleView: UIView {
-    private var isUser: Bool = true
-    private let textLabel: UILabel = {
-        let textLabel = UILabel()
-        textLabel.numberOfLines = 0
-        return textLabel
-    }()
+    private let textLabel = UILabel().then {
+        $0.numberOfLines = 0
+        $0.lineBreakMode = .byWordWrapping
+    }
+    
+    private var isUser: Bool = false {
+        didSet { setNeedsDisplay() }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        configureTextLabel()
-        textLabel.text = """
-안녕하세요.
-"""
-/*
-테스트를 진행하는 중입니다.
-만약 텍스트가 엄청나게 긴 문장을 담아야 하는 경우 이 텍스트는 어떻게 표현이 될까요?
-텍스트 레이블이 실제 영역을 넘어가고 있는 것 같은데 이런 경우는 무엇 때문에 발생하고 어떻게 처리할 수 있을까요?
-그 외에도 줄이 많아지면
-이 것은 어떻게 처리가 될지도
-궁금해집니다.
-알아서 늘어나나요??
-*/
+        configureUI()
     }
     
     required init?(coder: NSCoder) {
@@ -62,7 +32,7 @@ class ChatBubbleView: UIView {
         let context = UIGraphicsGetCurrentContext()
         
         let padding: CGFloat = 10
-        let startX: CGFloat = isUser ? rect.minX + padding : rect.midX - 50
+        let startX: CGFloat = rect.minX + padding
         let startY: CGFloat = rect.minY + padding
         let endX: CGFloat = rect.maxX - padding
         let endY: CGFloat = rect.maxY - padding
@@ -85,27 +55,28 @@ class ChatBubbleView: UIView {
         context?.setFillColor(UIColor.systemGray5.cgColor)
         context?.fillPath()
     }
-    
-    func setUser(_ isUser: Bool) {
-        self.isUser = isUser
-    }
-    
-    private func configureTextLabel() {
+}
+
+// MARK: - UI
+extension ChatBubbleView {
+    private func configureUI() {
         backgroundColor = .clear
         
         addSubview(textLabel)
         
-        textLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            textLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
-            textLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-            textLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
-            textLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20)
-        ])
+        textLabel.snp.makeConstraints {
+            $0.edges.equalTo(self).inset(UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+        }
     }
 }
 
-#Preview("TestView") {
-    let view = TestView()
-    return view
+// MARK: - Public Methods
+extension ChatBubbleView {
+    func setUser(_ isUser: Bool) {
+        self.isUser = isUser
+    }
+    
+    func setText(_ text: String) {
+        textLabel.text = text
+    }
 }
