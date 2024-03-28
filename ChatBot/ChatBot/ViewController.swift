@@ -10,9 +10,15 @@ import UIKit
 class ViewController: UIViewController {
     private var viewModel: ChatViewModel!
     private var repo: MessageRepository!
+    private let apiService = OpenAIService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        repo = MessageRepository()
+        
+        viewModel = ChatViewModel(repository: repo, apiService: apiService)
+        
         setupSendMessageButton()
         setupCheckStoregeButton()
         setupclearRepoButton()
