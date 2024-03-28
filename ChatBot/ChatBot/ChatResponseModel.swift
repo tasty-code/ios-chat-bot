@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: - Welcome
 struct ChatResponseModel: Decodable {
     let id: String
     let object: String
@@ -28,7 +27,6 @@ struct ChatResponseModel: Decodable {
     }
 }
 
-// MARK: - Choice
 struct Choice: Decodable {
     let index: Int
     let message: Message
@@ -43,7 +41,6 @@ struct Choice: Decodable {
     }
 }
 
-// MARK: - Usage
 struct Usage: Decodable {
     let promptTokens: Int
     let completionTokens: Int
