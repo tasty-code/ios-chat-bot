@@ -40,19 +40,9 @@ final class ChatBubbleView: UIView {
         let bubbleWidth: CGFloat = endX - startX
         let bubbleHeight: CGFloat = endY - startY
         
-        let messageBody = CGRect(
-            x: startX,
-            y: startY,
-            width: bubbleWidth,
-            height: bubbleHeight
-        )
+        let messageBody = CGRect(x: startX, y: startY, width: bubbleWidth, height: bubbleHeight)
         
-        context?.addPath(CGPath(
-            roundedRect: messageBody,
-            cornerWidth: 10,
-            cornerHeight: 10,
-            transform: nil)
-        )
+        context?.addPath(CGPath(roundedRect: messageBody, cornerWidth: 10, cornerHeight: 10, transform: nil))
         context?.setFillColor(UIColor.systemGray5.cgColor)
         context?.fillPath()
         

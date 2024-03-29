@@ -40,18 +40,11 @@ final class ChatLoadingIndicator: UIView {
         let bubbleWidth: CGFloat = 92
         let bubbleHeight: CGFloat = bubbleWidth * 0.36
         
-        let messageBody = CGRect(
-            x: startX,
-            y: startY,
-            width: bubbleWidth,
-            height: bubbleHeight
-        )
+        let messageBody = CGRect(x: startX, y: startY, width: bubbleWidth, height: bubbleHeight)
         
         context?.addPath(
-            CGPath(roundedRect: messageBody,
-                   cornerWidth: 10,
-                   cornerHeight: 10,
-                   transform: nil))
+            CGPath(roundedRect: messageBody, cornerWidth: 10, cornerHeight: 10, transform: nil)
+        )
         context?.setFillColor(UIColor.systemGray5.cgColor)
         context?.fillPath()
         
@@ -160,7 +153,9 @@ extension ChatLoadingIndicator {
         override func draw(_ rect: CGRect) {
             let width: CGFloat = 12
             let context = UIGraphicsGetCurrentContext()
-            context?.addEllipse(in: CGRect(x: rect.minX, y: rect.minY, width: width, height: width))
+            context?.addEllipse(
+                in: CGRect(x: rect.minX, y: rect.minY, width: width, height: width)
+            )
             context?.setFillColor(UIColor.systemGray3.cgColor)
             context?.fillPath()
         }
