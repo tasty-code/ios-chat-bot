@@ -54,10 +54,10 @@ class ChatLoadingIndicator: UIView {
         context?.setFillColor(UIColor.systemGray5.cgColor)
         context?.fillPath()
         
-        let tailStartPoint: CGPoint = CGPoint(x: startX, y: startY + bubbleHeight * 0.4)
-        let tailTipPoint: CGPoint = CGPoint(x: startX - 10, y: startY + bubbleHeight * 0.7)
-        let tailEndPoint: CGPoint = CGPoint(x: startX, y: startY + bubbleHeight * 0.65)
-        let tailControlPoint: CGPoint = CGPoint(x: startX - 4, y: startY + bubbleHeight * 0.73)
+        let tailStartPoint = CGPoint(x: startX, y: startY + bubbleHeight * 0.4)
+        let tailTipPoint = CGPoint(x: startX - 10, y: startY + bubbleHeight * 0.7)
+        let tailEndPoint = CGPoint(x: startX, y: startY + bubbleHeight * 0.65)
+        let tailControlPoint = CGPoint(x: startX - 4, y: startY + bubbleHeight * 0.73)
         
         context?.move(to: tailStartPoint)
         context?.addQuadCurve(to: tailTipPoint, control: tailControlPoint)

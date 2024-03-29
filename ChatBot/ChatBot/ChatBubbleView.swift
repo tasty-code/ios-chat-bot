@@ -56,10 +56,10 @@ class ChatBubbleView: UIView {
         context?.setFillColor(UIColor.systemGray5.cgColor)
         context?.fillPath()
         
-        let tailStartPoint: CGPoint = CGPoint(x: isUser ? endX : startX, y: endY - 25)
-        let tailTipPoint: CGPoint = CGPoint(x: isUser ? endX + 10 : startX - 10, y: endY - 15)
-        let tailEndPoint: CGPoint = CGPoint(x: isUser ? endX : startX, y: endY - 15)
-        let tailControlPoint: CGPoint = CGPoint(x: isUser ? endX + 3 : startX - 3, y: endY - 13)
+        let tailStartPoint = CGPoint(x: isUser ? endX : startX, y: endY - 25)
+        let tailTipPoint = CGPoint(x: isUser ? endX + 10 : startX - 10, y: endY - 15)
+        let tailEndPoint = CGPoint(x: isUser ? endX : startX, y: endY - 15)
+        let tailControlPoint = CGPoint(x: isUser ? endX + 3 : startX - 3, y: endY - 13)
         
         context?.move(to: tailStartPoint)
         context?.addQuadCurve(to: tailTipPoint, control: tailControlPoint)
