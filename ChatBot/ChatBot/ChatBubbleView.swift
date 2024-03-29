@@ -40,7 +40,19 @@ class ChatBubbleView: UIView {
         let bubbleWidth: CGFloat = endX - startX
         let bubbleHeight: CGFloat = endY - startY
         
-        context?.addPath(CGPath(roundedRect: CGRect(x: startX, y: startY, width: bubbleWidth, height: bubbleHeight), cornerWidth: 10, cornerHeight: 10, transform: nil))
+        let messageBody = CGRect(
+            x: startX,
+            y: startY,
+            width: bubbleWidth,
+            height: bubbleHeight
+        )
+        
+        context?.addPath(CGPath(
+            roundedRect: messageBody,
+            cornerWidth: 10,
+            cornerHeight: 10,
+            transform: nil)
+        )
         context?.setFillColor(UIColor.systemGray5.cgColor)
         context?.fillPath()
         
@@ -65,7 +77,12 @@ extension ChatBubbleView {
         addSubview(textLabel)
         
         textLabel.snp.makeConstraints {
-            $0.edges.equalTo(self).inset(UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+            $0.edges.equalTo(self).inset(UIEdgeInsets(
+                top: 20,
+                left: 20,
+                bottom: 20,
+                right: 20
+            ))
         }
     }
 }
