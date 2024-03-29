@@ -8,7 +8,7 @@
 import UIKit
 
 /// 말풍선 로딩 인디케이터
-class ChatLoadingIndicator: UIView {
+final class ChatLoadingIndicator: UIView {
     private let leftCircle = Circle()
     private let middleCircle = Circle()
     private let rightCircle = Circle()
@@ -142,7 +142,7 @@ extension ChatLoadingIndicator {
 
 // MARK: - Nested Class
 extension ChatLoadingIndicator {
-    class Circle: UIView {
+    final class Circle: UIView {
         override init(frame: CGRect) {
             super.init(frame: frame)
             self.backgroundColor = .clear

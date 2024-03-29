@@ -8,7 +8,7 @@
 import UIKit
 
 /// 말풍선 View
-class ChatBubbleView: UIView {
+final class ChatBubbleView: UIView {
     private let textLabel = UILabel().then {
         $0.numberOfLines = 0
         $0.lineBreakMode = .byWordWrapping
