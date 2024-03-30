@@ -1,8 +1,8 @@
 import XCTest
 @testable import ChatBot
 
-final class ChatCompletionReponseDTOTests: XCTestCase {
-    private let sut: ChatCompletionReponseDTO.Type = ChatCompletionReponseDTO.self
+final class OpenAIChatReponseDTOTests: XCTestCase {
+    private let sut: OpenAI.Chat.ResponseDTO.Type = OpenAI.Chat.ResponseDTO.self
     
     private var jsonDecoder: JSONDecoder? = nil
     

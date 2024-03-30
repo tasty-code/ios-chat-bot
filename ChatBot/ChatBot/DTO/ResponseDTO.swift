@@ -1,14 +1,20 @@
-struct ChatCompletionReponseDTO: Decodable {
-    let id: String
-    let object: String
-    let created: Int
-    let model: String
-    let systemFingerprint: String
-    let choices: [Choice]
-    let usage: Usage
+enum OpenAI {
+    enum Chat { }
 }
 
-extension ChatCompletionReponseDTO {
+extension OpenAI.Chat {
+    struct ResponseDTO: Decodable {
+        let id: String
+        let object: String
+        let created: Int
+        let model: String
+        let systemFingerprint: String
+        let choices: [Choice]
+        let usage: Usage
+    }
+}
+
+extension OpenAI.Chat.ResponseDTO {
     struct Choice: Decodable  {
         let finishReason: String
         let index: Int
@@ -23,7 +29,7 @@ extension ChatCompletionReponseDTO {
     }
 }
 
-extension ChatCompletionReponseDTO.Choice {
+extension OpenAI.Chat.ResponseDTO.Choice {
     struct Message: Decodable  {
         let role: String
         let content: String?
@@ -48,7 +54,7 @@ extension ChatCompletionReponseDTO.Choice {
     }
 }
 
-extension ChatCompletionReponseDTO.Choice.Message {
+extension OpenAI.Chat.ResponseDTO.Choice.Message {
     struct ToolCall: Decodable  {
         let id: String
         let type: String
@@ -56,7 +62,7 @@ extension ChatCompletionReponseDTO.Choice.Message {
     }
 }
 
-extension ChatCompletionReponseDTO.Choice.Message.ToolCall {
+extension OpenAI.Chat.ResponseDTO.Choice.Message.ToolCall {
     struct Function: Decodable  {
         let name: String
         let arguments: String

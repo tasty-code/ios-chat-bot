@@ -4,7 +4,7 @@ final class JSONLoader {
     static func loadJSON(fileName: String) throws -> Data {
         guard
             let fileLocation = Bundle(
-                for: ChatCompletionReponseDTOTests.self
+                for: OpenAIChatReponseDTOTests.self
             ).path(
                 forResource: fileName,
                 ofType: "json"

@@ -1,7 +1,7 @@
 import XCTest
 @testable import ChatBot
 
-final class ChatCompletionRequestDTOTests: XCTestCase {
+final class OpenAIChatRequestBodyDTOTests: XCTestCase {
     
     private var jsonEncoder: JSONEncoder? = nil
     
