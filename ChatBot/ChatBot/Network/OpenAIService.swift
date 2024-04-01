@@ -12,7 +12,6 @@ class OpenAIService {
         let endpoint = OpenAIEndPoint.chatCompletionsBaseURL
         guard let url = endpoint.url else { return }
     
-        
         var request = URLRequest(url: url)
         request.httpMethod = HTTPMethod.post.rawValue
         request.addValue("Bearer \(APIKeyManager.openAIAPIKey)", forHTTPHeaderField: "Authorization")
