@@ -13,9 +13,15 @@
 		B4B3E2C42B42D1BB00818B3C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4B3E2C22B42D1BB00818B3C /* Main.storyboard */; };
 		B4B3E2C62B42D1BC00818B3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */; };
 		B4B3E2C92B42D1BC00818B3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */; };
-		CE8316662BB52DB100D9371E /* DTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8316652BB52DB100D9371E /* DTO.swift */; };
+		BDD77F8E2BBA9AAA00192556 /* ChatBotResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD77F8D2BBA9AAA00192556 /* ChatBotResponseDTO.swift */; };
+		BDD77F8F2BBA9AAA00192556 /* ChatBotResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD77F8D2BBA9AAA00192556 /* ChatBotResponseDTO.swift */; };
+		BDD77F912BBA9B4400192556 /* ChatBotRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD77F902BBA9B4400192556 /* ChatBotRequestDTO.swift */; };
+		BDD77F922BBA9B4400192556 /* ChatBotRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD77F902BBA9B4400192556 /* ChatBotRequestDTO.swift */; };
+		BDD77F972BBA9B9300192556 /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD77F962BBA9B9300192556 /* Role.swift */; };
+		BDD77F982BBA9B9300192556 /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD77F962BBA9B9300192556 /* Role.swift */; };
+		BDD77F9B2BBA9BC000192556 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD77F9A2BBA9BC000192556 /* Message.swift */; };
+		BDD77F9C2BBA9BC000192556 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD77F9A2BBA9BC000192556 /* Message.swift */; };
 		CE8316712BB58D7500D9371E /* ChatBotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8316702BB58D7500D9371E /* ChatBotTests.swift */; };
-		CE8316772BB58D9000D9371E /* DTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8316652BB52DB100D9371E /* DTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +43,10 @@
 		B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B4B3E2C82B42D1BC00818B3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B4B3E2CA2B42D1BC00818B3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CE8316652BB52DB100D9371E /* DTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTO.swift; sourceTree = "<group>"; };
+		BDD77F8D2BBA9AAA00192556 /* ChatBotResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotResponseDTO.swift; sourceTree = "<group>"; };
+		BDD77F902BBA9B4400192556 /* ChatBotRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotRequestDTO.swift; sourceTree = "<group>"; };
+		BDD77F962BBA9B9300192556 /* Role.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Role.swift; sourceTree = "<group>"; };
+		BDD77F9A2BBA9BC000192556 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		CE83166E2BB58D7500D9371E /* ChatBotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChatBotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE8316702BB58D7500D9371E /* ChatBotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotTests.swift; sourceTree = "<group>"; };
 		CE8316782BB6880700D9371E /* APIKey.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = APIKey.xcconfig; sourceTree = "<group>"; };
@@ -82,11 +91,12 @@
 		B4B3E2BB2B42D1BB00818B3C /* ChatBot */ = {
 			isa = PBXGroup;
 			children = (
+				BDD77F942BBA9B6200192556 /* Infra */,
+				BDD77F932BBA9B5A00192556 /* Domain */,
 				CE8316782BB6880700D9371E /* APIKey.xcconfig */,
 				B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */,
 				B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */,
 				B4B3E2C02B42D1BB00818B3C /* ViewController.swift */,
-				CE8316672BB52DC700D9371E /* Network */,
 				B4B3E2C22B42D1BB00818B3C /* Main.storyboard */,
 				B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */,
 				B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */,
@@ -95,10 +105,52 @@
 			path = ChatBot;
 			sourceTree = "<group>";
 		};
+		BDD77F8C2BBA9A8500192556 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				BDD77F8D2BBA9AAA00192556 /* ChatBotResponseDTO.swift */,
+				BDD77F902BBA9B4400192556 /* ChatBotRequestDTO.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		BDD77F932BBA9B5A00192556 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				BDD77F992BBA9B9A00192556 /* Enum */,
+				BDD77F952BBA9B7100192556 /* Model */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		BDD77F942BBA9B6200192556 /* Infra */ = {
+			isa = PBXGroup;
+			children = (
+				CE8316672BB52DC700D9371E /* Network */,
+			);
+			path = Infra;
+			sourceTree = "<group>";
+		};
+		BDD77F952BBA9B7100192556 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BDD77F9A2BBA9BC000192556 /* Message.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BDD77F992BBA9B9A00192556 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				BDD77F962BBA9B9300192556 /* Role.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
 		CE8316672BB52DC700D9371E /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				CE8316652BB52DB100D9371E /* DTO.swift */,
+				BDD77F8C2BBA9A8500192556 /* DTO */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -212,10 +264,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDD77F8E2BBA9AAA00192556 /* ChatBotResponseDTO.swift in Sources */,
+				BDD77F972BBA9B9300192556 /* Role.swift in Sources */,
 				B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
+				BDD77F912BBA9B4400192556 /* ChatBotRequestDTO.swift in Sources */,
+				BDD77F9B2BBA9BC000192556 /* Message.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
-				CE8316662BB52DB100D9371E /* DTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,8 +278,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDD77F8F2BBA9AAA00192556 /* ChatBotResponseDTO.swift in Sources */,
 				CE8316712BB58D7500D9371E /* ChatBotTests.swift in Sources */,
-				CE8316772BB58D9000D9371E /* DTO.swift in Sources */,
+				BDD77F9C2BBA9BC000192556 /* Message.swift in Sources */,
+				BDD77F922BBA9B4400192556 /* ChatBotRequestDTO.swift in Sources */,
+				BDD77F982BBA9B9300192556 /* Role.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
