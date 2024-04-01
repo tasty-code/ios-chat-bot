@@ -20,9 +20,9 @@
 		F39BA7EB2BB573B10058257C /* GPTResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39BA7EA2BB573B10058257C /* GPTResponseDTO.swift */; };
 		F39BA7EE2BB5740D0058257C /* GPTMessageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39BA7ED2BB5740D0058257C /* GPTMessageDTO.swift */; };
 		F39BA7F02BB5744E0058257C /* GPTBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39BA7EF2BB5744E0058257C /* GPTBody.swift */; };
-		F39BA7F32BB575D90058257C /* JsonDocodableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39BA7F22BB575D90058257C /* JsonDocodableProtocol.swift */; };
+		F39BA7F32BB575D90058257C /* JsonDocoderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39BA7F22BB575D90058257C /* JsonDocoderProtocol.swift */; };
 		F39BA7F52BB5762B0058257C /* JsonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39BA7F42BB5762B0058257C /* JsonError.swift */; };
-		F39BA7F82BB576DE0058257C /* JsonDecodeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39BA7F72BB576DE0058257C /* JsonDecodeable.swift */; };
+		F39BA7F82BB576DE0058257C /* JsonDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39BA7F72BB576DE0058257C /* JsonDecoder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,9 +41,9 @@
 		F39BA7EA2BB573B10058257C /* GPTResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTResponseDTO.swift; sourceTree = "<group>"; };
 		F39BA7ED2BB5740D0058257C /* GPTMessageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTMessageDTO.swift; sourceTree = "<group>"; };
 		F39BA7EF2BB5744E0058257C /* GPTBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTBody.swift; sourceTree = "<group>"; };
-		F39BA7F22BB575D90058257C /* JsonDocodableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDocodableProtocol.swift; sourceTree = "<group>"; };
+		F39BA7F22BB575D90058257C /* JsonDocoderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDocoderProtocol.swift; sourceTree = "<group>"; };
 		F39BA7F42BB5762B0058257C /* JsonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonError.swift; sourceTree = "<group>"; };
-		F39BA7F72BB576DE0058257C /* JsonDecodeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDecodeable.swift; sourceTree = "<group>"; };
+		F39BA7F72BB576DE0058257C /* JsonDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDecoder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,8 +113,8 @@
 		F39BA7F12BB575AA0058257C /* Serializer */ = {
 			isa = PBXGroup;
 			children = (
-				F39BA7F22BB575D90058257C /* JsonDocodableProtocol.swift */,
-				F39BA7F72BB576DE0058257C /* JsonDecodeable.swift */,
+				F39BA7F22BB575D90058257C /* JsonDocoderProtocol.swift */,
+				F39BA7F72BB576DE0058257C /* JsonDecoder.swift */,
 				C79F5A442BB585B4009E3AB4 /* JsonEncoderProtocol.swift */,
 				C79F5A462BB585C4009E3AB4 /* JsonEncoder.swift */,
 			);
@@ -202,11 +202,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				F39BA7EB2BB573B10058257C /* GPTResponseDTO.swift in Sources */,
-				F39BA7F82BB576DE0058257C /* JsonDecodeable.swift in Sources */,
+				F39BA7F82BB576DE0058257C /* JsonDecoder.swift in Sources */,
 				B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */,
 				C79F5A452BB585B4009E3AB4 /* JsonEncoderProtocol.swift in Sources */,
 				F39BA7EE2BB5740D0058257C /* GPTMessageDTO.swift in Sources */,
-				F39BA7F32BB575D90058257C /* JsonDocodableProtocol.swift in Sources */,
+				F39BA7F32BB575D90058257C /* JsonDocoderProtocol.swift in Sources */,
 				C79F5A432BB5851D009E3AB4 /* GPTRequestDTO.swift in Sources */,
 				F39BA7F02BB5744E0058257C /* GPTBody.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,

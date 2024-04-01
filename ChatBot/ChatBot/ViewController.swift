@@ -7,10 +7,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     
-    let jsonDecoder: JsonDecodableProtocol = JsonDecoder(jsonDecoder: JSONDecoder())
-    let jsonEncoder: JsonEncodableProtocol = JsonEncoder(jsonEncoder: JSONEncoder())
+    let jsonDecoder: JsonDecoderProtocol = JsonDecoder(jsonDecoder: JSONDecoder())
+    let jsonEncoder: JsonEncoderProtocol = JsonEncoder(jsonEncoder: JSONEncoder())
     
     override func viewDidLoad() {
         super.viewDidLoad()
