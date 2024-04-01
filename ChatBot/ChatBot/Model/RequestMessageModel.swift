@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RequestMessageModel: Codable {
+struct RequestMessageModel: Encodable {
     let role: MessageRole
     let content: String
 }
