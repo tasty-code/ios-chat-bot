@@ -9,16 +9,12 @@ import Foundation
 
 struct OpenAIEndPoint {
     let path: String
-    var url: URL {
+    var url: URL? {
         var components = URLComponents()
         components.scheme = "https"
         components.host = "api.openai.com"
         components.path = "/" + path
-        
-        guard let url = components.url else {
-            preconditionFailure("URL Error: \(components)")
-        }
-        return url
+        return components.url
     }
 }
 
@@ -30,4 +26,6 @@ enum HTTPMethod: String {
     case get = "GET"
     case post = "POST"
 }
+
+
 

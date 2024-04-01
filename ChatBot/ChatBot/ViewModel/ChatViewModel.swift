@@ -17,12 +17,13 @@ final class ChatViewModel {
     }
 
     func processUserMessage(_ content: String) {
-        let userMessage = Message(role: "user", content: content)
+        let userMessage = RequestMessageModel(role: .user, content: content)
         
         messageRepository.addMessage(userMessage)
         
-        let requestMessages = [RequestMessageModel(role: .user, content: content)]
+        let requestMessages = messageRepository.messagesStorage
         
+
         apiService.sendRequestToOpenAI(requestMessages) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {

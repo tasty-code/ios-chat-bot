@@ -9,12 +9,12 @@ import Foundation
 
 class MessageRepository {
     
-    var messagesStorage: [Message] = []
+    var messagesStorage: [RequestMessageModel] = []
     
-    func addMessage(_ message: Message) {
+    func addMessage(_ message: RequestMessageModel) {
         messagesStorage.append(message)
     }
-    func getMessages() -> [Message] {
+    func getMessages() -> [RequestMessageModel] {
         return messagesStorage
     }
     func clearStorage() {
