@@ -1,7 +1,7 @@
 enum Role: String {
     case user
     case assistant
-    case none
+    case system
     
     init(rawValue: String) {
         switch rawValue {
@@ -10,7 +10,7 @@ enum Role: String {
         case "assistant":
             self = .assistant
         default:
-            self = .none
+            self = .system
         }
     }
 }
