@@ -13,7 +13,7 @@
 		C12E66D62BB3F28800F3F441 /* UserMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66BB2BB3F28800F3F441 /* UserMessage.swift */; };
 		C12E66D72BB3F28800F3F441 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66BD2BB3F28800F3F441 /* Bundle+Extension.swift */; };
 		C12E66D82BB3F28800F3F441 /* URLSession+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66BE2BB3F28800F3F441 /* URLSession+Extension.swift */; };
-		C12E66D92BB3F28800F3F441 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66C02BB3F28800F3F441 /* ViewController.swift */; };
+		C12E66D92BB3F28800F3F441 /* ChatBotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66C02BB3F28800F3F441 /* ChatBotViewController.swift */; };
 		C12E66DB2BB3F28800F3F441 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C12E66C32BB3F28800F3F441 /* Assets.xcassets */; };
 		C12E66DD2BB3F28800F3F441 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66C62BB3F28800F3F441 /* APIService.swift */; };
 		C12E66DE2BB3F28800F3F441 /* APIType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66C72BB3F28800F3F441 /* APIType.swift */; };
@@ -29,6 +29,7 @@
 		C12E66EE2BB4294300F3F441 /* Usage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66ED2BB4294300F3F441 /* Usage.swift */; };
 		C12E66F02BB429AA00F3F441 /* JSONNull.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66EF2BB429AA00F3F441 /* JSONNull.swift */; };
 		C1A0CBCC2BB55663009A000F /* APIToken.plist in Resources */ = {isa = PBXBuildFile; fileRef = C1A0CBCB2BB55663009A000F /* APIToken.plist */; };
+		C1E416662BB9888C00D8C836 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E416652BB9888C00D8C836 /* UIViewController+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,7 +40,7 @@
 		C12E66BB2BB3F28800F3F441 /* UserMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMessage.swift; sourceTree = "<group>"; };
 		C12E66BD2BB3F28800F3F441 /* Bundle+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		C12E66BE2BB3F28800F3F441 /* URLSession+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSession+Extension.swift"; sourceTree = "<group>"; };
-		C12E66C02BB3F28800F3F441 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C12E66C02BB3F28800F3F441 /* ChatBotViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatBotViewController.swift; sourceTree = "<group>"; };
 		C12E66C32BB3F28800F3F441 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C12E66C42BB3F28800F3F441 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C12E66C62BB3F28800F3F441 /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
@@ -56,6 +57,7 @@
 		C12E66ED2BB4294300F3F441 /* Usage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usage.swift; sourceTree = "<group>"; };
 		C12E66EF2BB429AA00F3F441 /* JSONNull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONNull.swift; sourceTree = "<group>"; };
 		C1A0CBCB2BB55663009A000F /* APIToken.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = APIToken.plist; path = ../../../../../../Matthew/Desktop/APIToken.plist; sourceTree = "<group>"; };
+		C1E416652BB9888C00D8C836 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 			children = (
 				C12E66BD2BB3F28800F3F441 /* Bundle+Extension.swift */,
 				C12E66BE2BB3F28800F3F441 /* URLSession+Extension.swift */,
+				C1E416652BB9888C00D8C836 /* UIViewController+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -126,7 +129,7 @@
 		C12E66C12BB3F28800F3F441 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				C12E66C02BB3F28800F3F441 /* ViewController.swift */,
+				C12E66C02BB3F28800F3F441 /* ChatBotViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -242,7 +245,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C12E66D92BB3F28800F3F441 /* ViewController.swift in Sources */,
+				C12E66D92BB3F28800F3F441 /* ChatBotViewController.swift in Sources */,
 				C12E66E02BB3F28800F3F441 /* NetworkError.swift in Sources */,
 				C12E66DF2BB3F28800F3F441 /* HttpMethod.swift in Sources */,
 				C12E66DE2BB3F28800F3F441 /* APIType.swift in Sources */,
@@ -254,6 +257,7 @@
 				C12E66D82BB3F28800F3F441 /* URLSession+Extension.swift in Sources */,
 				C12E66E22BB3F28800F3F441 /* URLSessionProtocol.swift in Sources */,
 				C12E66EE2BB4294300F3F441 /* Usage.swift in Sources */,
+				C1E416662BB9888C00D8C836 /* UIViewController+Extension.swift in Sources */,
 				C12E66D52BB3F28800F3F441 /* RequestChatDTO.swift in Sources */,
 				C12E66F02BB429AA00F3F441 /* JSONNull.swift in Sources */,
 				C12E66EC2BB4291A00F3F441 /* ResponseChoiceDTO.swift in Sources */,
@@ -330,7 +334,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -387,7 +391,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -412,7 +416,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -420,9 +424,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tacocat.ChatBot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -440,7 +448,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -448,9 +456,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tacocat.ChatBot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

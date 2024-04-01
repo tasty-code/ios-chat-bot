@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ChatBotViewController: UIViewController {
     private let chatManager: ChatManager?
     
     init(chatManager: ChatManager?) {
@@ -21,7 +21,7 @@ class ViewController: UIViewController {
 }
 
 // MARK: - Life Cycle
-extension ViewController {
+extension ChatBotViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureBackground()
@@ -30,7 +30,7 @@ extension ViewController {
 }
 
 // MARK: - Private Method
-private extension ViewController {
+private extension ChatBotViewController {
     func configureBackground() {
         view.backgroundColor = .white
     }
@@ -46,7 +46,8 @@ private extension ViewController {
                 print("질문 : \(userMessage)")
                 print("결과 : \(result.choices[0].message.content)")
             } catch {
-                print(error.localizedDescription)
+                let okAction = UIAlertAction(title: "닫기", style: .default)
+                showMessageAlert(message: "\(error.localizedDescription)", action: [okAction])
             }
         }
     }

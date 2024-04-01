@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         window = UIWindow(windowScene: windowScene)
         
-        let mainViewController =  ViewController(chatManager: chatManger)
+        let mainViewController =  ChatBotViewController(chatManager: chatManger)
         window?.rootViewController = mainViewController
         window?.makeKeyAndVisible()
     }
