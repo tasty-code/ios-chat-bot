@@ -6,7 +6,7 @@ struct GPTRequestDTO: Codable {
     let messages: [Message]
     let logprobs: Bool?
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case model, messages, logprobs
     }
 }

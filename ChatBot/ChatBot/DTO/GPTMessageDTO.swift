@@ -6,7 +6,7 @@ struct Message: Codable {
     let content: String?
     let toolCalls: [ToolCall]?
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
             case content, role
             case toolCalls = "tool_calls"
     }
