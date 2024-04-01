@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct OpenAICheatResponseDTO: Codable {
+struct OpenAICheatResponseDTO: Decodable {
     let id: String
     let object: String
     let created: Int
@@ -27,7 +27,7 @@ struct OpenAICheatResponseDTO: Codable {
     }
 }
 
-struct Choice: Codable {
+struct Choice: Decodable {
     let index: Int?
     let message: Message?
     let logprobs: String?
@@ -41,12 +41,12 @@ struct Choice: Codable {
     }
 }
 
-struct Message: Codable {
+struct Message: Decodable {
     let role: String
     let content: String
 }
 
-struct Usage: Codable {
+struct Usage: Decodable {
     let promptTokens: Int
     let completionTokens: Int
     let totalTokens: Int

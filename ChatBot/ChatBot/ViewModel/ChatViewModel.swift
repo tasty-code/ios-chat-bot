@@ -7,25 +7,28 @@
 
 import Foundation
 
-class ChatViewModel {
-    private let repository: MessageRepository
+final class ChatViewModel {
+    private let messageRepository: MessageRepository
     private let apiService: OpenAIService
 
     init(repository: MessageRepository, apiService: OpenAIService) {
-        self.repository = repository
+        self.messageRepository = repository
         self.apiService = apiService
     }
 
     func processUserMessage(_ content: String) {
         let userMessage = Message(role: "user", content: content)
-        repository.addMessage(userMessage)
+        
+        messageRepository.addMessage(userMessage)
+        
         let requestMessages = [RequestMessageModel(role: .user, content: content)]
+        
         apiService.sendRequestToOpenAI(requestMessages) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let receivedMessages):
                     receivedMessages.forEach { responseMessage in
-                        self?.repository.addMessage(responseMessage)
+                        self?.messageRepository.addMessage(responseMessage)
                     }
                 case .failure(let error):
                     print("Error: \(error.localizedDescription)")
