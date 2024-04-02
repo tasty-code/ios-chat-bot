@@ -7,6 +7,8 @@
 
 import UIKit
 
+import SnapKit
+
 /// 말풍선 로딩 인디케이터
 final class ChatLoadingIndicator: UIView {
     private let leftCircle = Circle()

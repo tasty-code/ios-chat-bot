@@ -7,6 +7,9 @@
 
 import UIKit
 
+import SnapKit
+import Then
+
 /// 말풍선 View
 final class ChatBubbleView: UIView {
     private let textLabel = UILabel().then {

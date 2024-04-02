@@ -74,11 +74,3 @@ extension ChatTextView {
         textView.layer.borderWidth = 1.5
     }
 }
-
-/*
-extension ChatTextView {
-    func dismissKeyboard() {
-        textView.resignFirstResponder()
-    }
-}
-*/

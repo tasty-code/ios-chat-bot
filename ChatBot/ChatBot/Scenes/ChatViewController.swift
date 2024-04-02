@@ -45,7 +45,6 @@ extension ChatViewController {
     }
     
     @objc private func dismissKeyboard() {
-//        textInputView.dismissKeyboard()
         view.endEditing(true)
     }
 }
