@@ -18,6 +18,7 @@
 		778304092BB4FBBA00C72C63 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 778304082BB4FBBA00C72C63 /* Then */; };
 		7783040C2BB4FBF500C72C63 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 7783040B2BB4FBF500C72C63 /* Alamofire */; };
 		7783040E2BB4FBF500C72C63 /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 7783040D2BB4FBF500C72C63 /* AlamofireDynamic */; };
+		8A5F18D62BBA8F0800228C85 /* ChatTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5F18D52BBA8F0800228C85 /* ChatTextView.swift */; };
 		778304142BB50CFE00C72C63 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778304132BB50CFE00C72C63 /* NetworkResult.swift */; };
 		778304162BB50DCE00C72C63 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778304152BB50DCE00C72C63 /* APIConstants.swift */; };
 		778304182BB50F4500C72C63 /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778304172BB50F4500C72C63 /* NetworkConstants.swift */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		778303F52BB3B2C400C72C63 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		8A5F18D52BBA8F0800228C85 /* ChatTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTextView.swift; sourceTree = "<group>"; };
 		778304132BB50CFE00C72C63 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		778304152BB50DCE00C72C63 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		778304172BB50F4500C72C63 /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				8A62D83E2BB506C000AE7B21 /* ChatBubbleView.swift */,
 				8A62D8402BB58AF200AE7B21 /* ChatLoadingIndicator.swift */,
 				8A781FC42BB69B49009D1CE5 /* ChatViewController.swift */,
+				8A5F18D52BBA8F0800228C85 /* ChatTextView.swift */,
 			);
 			path = ChatBot;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */,
 				7783041A2BB510E400C72C63 /* TargetType.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
+				8A5F18D62BBA8F0800228C85 /* ChatTextView.swift in Sources */,
 				8A62D8412BB58AF200AE7B21 /* ChatLoadingIndicator.swift in Sources */,
 				778304142BB50CFE00C72C63 /* NetworkResult.swift in Sources */,
 				8A7F6FA12BB29E91001C1999 /* ChatResponseModel.swift in Sources */,
