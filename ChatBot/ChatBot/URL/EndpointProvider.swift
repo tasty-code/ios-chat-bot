@@ -2,12 +2,12 @@ import Foundation
 
 struct Endpoint: EndpointProvidable {
     private let apiHost: String
-    private let urlInfomation: URLInfomation
+    private let urlInformation: URLInformation
     private let scheme: String
     
-    init(apiHost: APIHostType, urlInfomation: URLInfomation, scheme: SchemeType) {
+    init(apiHost: APIHostType, urlInformation: URLInformation, scheme: SchemeType) {
         self.apiHost = apiHost.rawValue
-        self.urlInfomation = urlInfomation
+        self.urlInformation = urlInformation
         self.scheme = scheme.rawValue
     }
     
@@ -15,9 +15,9 @@ struct Endpoint: EndpointProvidable {
         var urlComponent = URLComponents()
         urlComponent.scheme = scheme
         urlComponent.host = apiHost
-        urlComponent.path = urlInfomation.path
-        if urlInfomation.queryItem != nil {
-            urlComponent.queryItems = urlInfomation.queryItem
+        urlComponent.path = urlInformation.path
+        if urlInformation.queryItem != nil {
+            urlComponent.queryItems = urlInformation.queryItem
         }
         return urlComponent.url
     }

@@ -27,7 +27,10 @@
 		F3D2DF8C2BBBFAA900BEECC0 /* SchemeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D2DF8B2BBBFAA900BEECC0 /* SchemeType.swift */; };
 		F3D2DF8E2BBBFAEF00BEECC0 /* EndpointProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D2DF8D2BBBFAEF00BEECC0 /* EndpointProvidable.swift */; };
 		F3D2DF902BBBFB1100BEECC0 /* EndpointProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D2DF8F2BBBFB1100BEECC0 /* EndpointProvider.swift */; };
-		F3D2DF922BBBFB2E00BEECC0 /* URLInfomation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D2DF912BBBFB2E00BEECC0 /* URLInfomation.swift */; };
+		F3D2DF922BBBFB2E00BEECC0 /* URLInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D2DF912BBBFB2E00BEECC0 /* URLInformation.swift */; };
+		F3D2DF952BBC074600BEECC0 /* RequstProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D2DF942BBC074600BEECC0 /* RequstProvidable.swift */; };
+		F3D2DF972BBC075D00BEECC0 /* RequstProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D2DF962BBC075D00BEECC0 /* RequstProvider.swift */; };
+		F3D2DF992BBC078000BEECC0 /* RequstInfomation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D2DF982BBC078000BEECC0 /* RequstInfomation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,7 +56,10 @@
 		F3D2DF8B2BBBFAA900BEECC0 /* SchemeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchemeType.swift; sourceTree = "<group>"; };
 		F3D2DF8D2BBBFAEF00BEECC0 /* EndpointProvidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointProvidable.swift; sourceTree = "<group>"; };
 		F3D2DF8F2BBBFB1100BEECC0 /* EndpointProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointProvider.swift; sourceTree = "<group>"; };
-		F3D2DF912BBBFB2E00BEECC0 /* URLInfomation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLInfomation.swift; sourceTree = "<group>"; };
+		F3D2DF912BBBFB2E00BEECC0 /* URLInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLInformation.swift; sourceTree = "<group>"; };
+		F3D2DF942BBC074600BEECC0 /* RequstProvidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequstProvidable.swift; sourceTree = "<group>"; };
+		F3D2DF962BBC075D00BEECC0 /* RequstProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequstProvider.swift; sourceTree = "<group>"; };
+		F3D2DF982BBC078000BEECC0 /* RequstInfomation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequstInfomation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +95,7 @@
 				B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */,
 				B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */,
 				B4B3E2C02B42D1BB00818B3C /* ViewController.swift */,
+				F3D2DF9A2BBC078700BEECC0 /* Requst */,
 				F3D2DF932BBBFB3500BEECC0 /* URL */,
 				F39BA7F62BB576380058257C /* Error */,
 				F39BA7F12BB575AA0058257C /* Serializer */,
@@ -147,9 +154,19 @@
 				F3D2DF8B2BBBFAA900BEECC0 /* SchemeType.swift */,
 				F3D2DF8D2BBBFAEF00BEECC0 /* EndpointProvidable.swift */,
 				F3D2DF8F2BBBFB1100BEECC0 /* EndpointProvider.swift */,
-				F3D2DF912BBBFB2E00BEECC0 /* URLInfomation.swift */,
+				F3D2DF912BBBFB2E00BEECC0 /* URLInformation.swift */,
 			);
 			path = URL;
+			sourceTree = "<group>";
+		};
+		F3D2DF9A2BBC078700BEECC0 /* Requst */ = {
+			isa = PBXGroup;
+			children = (
+				F3D2DF942BBC074600BEECC0 /* RequstProvidable.swift */,
+				F3D2DF962BBC075D00BEECC0 /* RequstProvider.swift */,
+				F3D2DF982BBC078000BEECC0 /* RequstInfomation.swift */,
+			);
+			path = Requst;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -225,15 +242,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				F39BA7EB2BB573B10058257C /* GPTResponseDTO.swift in Sources */,
+				F3D2DF992BBC078000BEECC0 /* RequstInfomation.swift in Sources */,
 				F39BA7F82BB576DE0058257C /* JsonDecoder.swift in Sources */,
 				F3D2DF8A2BBBFA9400BEECC0 /* APIHostType.swift in Sources */,
 				B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */,
 				C79F5A452BB585B4009E3AB4 /* JsonEncoderProtocol.swift in Sources */,
+				F3D2DF972BBC075D00BEECC0 /* RequstProvider.swift in Sources */,
 				F39BA7EE2BB5740D0058257C /* GPTMessageDTO.swift in Sources */,
 				F39BA7F32BB575D90058257C /* JsonDocoderProtocol.swift in Sources */,
 				C79F5A432BB5851D009E3AB4 /* GPTRequestDTO.swift in Sources */,
 				F39BA7F02BB5744E0058257C /* GPTBody.swift in Sources */,
-				F3D2DF922BBBFB2E00BEECC0 /* URLInfomation.swift in Sources */,
+				F3D2DF922BBBFB2E00BEECC0 /* URLInformation.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
 				F39BA7F52BB5762B0058257C /* JsonError.swift in Sources */,
 				C79F5A472BB585C4009E3AB4 /* JsonEncoder.swift in Sources */,
@@ -241,6 +260,7 @@
 				F3D2DF902BBBFB1100BEECC0 /* EndpointProvider.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
 				F3D2DF8E2BBBFAEF00BEECC0 /* EndpointProvidable.swift in Sources */,
+				F3D2DF952BBC074600BEECC0 /* RequstProvidable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

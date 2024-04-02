@@ -1,6 +1,6 @@
 import Foundation
 
-enum URLInfomation {
+enum URLInformation {
     case completion
     
     var path: String {
