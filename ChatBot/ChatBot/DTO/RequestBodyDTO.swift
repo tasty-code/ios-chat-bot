@@ -1,5 +1,5 @@
 extension OpenAI.Chat {
-    struct RequestBodyDTO: Encodable  {
+    struct RequestBodyDTO: Encodable {
         let model: String
         let stream: Bool
         let messages: [Message]
@@ -7,7 +7,7 @@ extension OpenAI.Chat {
 }
 
 extension OpenAI.Chat.RequestBodyDTO {
-    struct Message: Encodable  {
+    struct Message: Encodable {
         let role: String
         let content: String
     }

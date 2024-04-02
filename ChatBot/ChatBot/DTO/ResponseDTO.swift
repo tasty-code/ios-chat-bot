@@ -15,14 +15,14 @@ extension OpenAI.Chat {
 }
 
 extension OpenAI.Chat.ResponseDTO {
-    struct Choice: Decodable  {
+    struct Choice: Decodable {
         let finishReason: String
         let index: Int
         let message: Message
         let logProbs: LogProbs?
     }
     
-    struct Usage: Decodable  {
+    struct Usage: Decodable {
         let completionTokens: Int
         let promptTokens: Int
         let totalTokens: Int
@@ -30,22 +30,22 @@ extension OpenAI.Chat.ResponseDTO {
 }
 
 extension OpenAI.Chat.ResponseDTO.Choice {
-    struct Message: Decodable  {
+    struct Message: Decodable {
         let role: String
         let content: String?
         let toolCalls: [ToolCall]?
     }
     
-    struct LogProbs: Decodable  {
+    struct LogProbs: Decodable {
         let content: [Content]?
         
-        struct Content: Decodable  {
+        struct Content: Decodable {
             let token: String
             let logprob: Double
             let bytes: [Int]?
             let topLogProbs: [TopLogprob]
             
-            struct TopLogprob: Decodable  {
+            struct TopLogprob: Decodable {
                 let token: String
                 let logProb: Double
                 let bytes: [Int]?
@@ -55,7 +55,7 @@ extension OpenAI.Chat.ResponseDTO.Choice {
 }
 
 extension OpenAI.Chat.ResponseDTO.Choice.Message {
-    struct ToolCall: Decodable  {
+    struct ToolCall: Decodable {
         let id: String
         let type: String
         let function: Function
@@ -63,7 +63,7 @@ extension OpenAI.Chat.ResponseDTO.Choice.Message {
 }
 
 extension OpenAI.Chat.ResponseDTO.Choice.Message.ToolCall {
-    struct Function: Decodable  {
+    struct Function: Decodable {
         let name: String
         let arguments: String
     }
