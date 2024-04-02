@@ -59,6 +59,5 @@ extension URLRequestBuilder {
         self.bodyParameters = bodyParameters
         return self
     }
-    
 }
 

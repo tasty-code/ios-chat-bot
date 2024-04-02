@@ -61,5 +61,3 @@ extension MessageDTO {
                      content: self.content)
     }
 }
-
-

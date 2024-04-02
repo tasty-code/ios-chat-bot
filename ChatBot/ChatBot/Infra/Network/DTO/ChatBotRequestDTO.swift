@@ -5,4 +5,3 @@ struct ChatBotRequestDTO: Encodable {
     let stream: Bool
     let messages: [MessageDTO]
 }
-
