@@ -22,7 +22,7 @@
 		778304162BB50DCE00C72C63 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778304152BB50DCE00C72C63 /* APIConstants.swift */; };
 		778304182BB50F4500C72C63 /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778304172BB50F4500C72C63 /* NetworkConstants.swift */; };
 		7783041A2BB510E400C72C63 /* TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778304192BB510E400C72C63 /* TargetType.swift */; };
-		7783041D2BB5278D00C72C63 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 7783041C2BB5278D00C72C63 /* .gitkeep */; };
+		7783042C2BB692C600C72C63 /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7783042B2BB692C600C72C63 /* BaseAPI.swift */; };
 		778304232BB52A0700C72C63 /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778304222BB52A0700C72C63 /* BaseAPI.swift */; };
 		77CF46B72BBA7E5100ABA128 /* RxAlamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 77CF46B62BBA7E5100ABA128 /* RxAlamofire */; };
 		8A7F6FA12BB29E91001C1999 /* ChatResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7F6FA02BB29E91001C1999 /* ChatResponseModel.swift */; };
@@ -40,7 +40,7 @@
 		778304152BB50DCE00C72C63 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		778304172BB50F4500C72C63 /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
 		778304192BB510E400C72C63 /* TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
-		7783041C2BB5278D00C72C63 /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		7783042B2BB692C600C72C63 /* BaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
 		778304222BB52A0700C72C63 /* BaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
 		8A7F6FA02BB29E91001C1999 /* ChatResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponseModel.swift; sourceTree = "<group>"; };
 		8A7F6FA22BB2B385001C1999 /* ChatCommonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCommonModel.swift; sourceTree = "<group>"; };
@@ -117,7 +117,7 @@
 		7783041B2BB5275C00C72C63 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				7783041C2BB5278D00C72C63 /* .gitkeep */,
+				77CF46C52BBB8AFD00ABA128 /* Constants */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -267,7 +267,6 @@
 				778303F62BB3B2C400C72C63 /* .swiftlint.yml in Resources */,
 				B4B3E2C92B42D1BC00818B3C /* LaunchScreen.storyboard in Resources */,
 				B4B3E2C62B42D1BC00818B3C /* Assets.xcassets in Resources */,
-				7783041D2BB5278D00C72C63 /* .gitkeep in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
