@@ -9,5 +9,5 @@ import Foundation
 
 struct APIConstants {
     
-    static let baseURL = "https://api.openai.com"
+    static let baseURL = Config.baseURL
 }
