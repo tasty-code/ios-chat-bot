@@ -29,6 +29,7 @@
 		77CF46B72BBA7E5100ABA128 /* RxAlamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 77CF46B62BBA7E5100ABA128 /* RxAlamofire */; };
 		77CF46C32BBA97C400ABA128 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CF46C22BBA97C400ABA128 /* NetworkProvider.swift */; };
 		77CF46C92BBB8B3A00ABA128 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CF46C82BBB8B3A00ABA128 /* Config.swift */; };
+		8A4318C52BBC215600482CD0 /* ChatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4318C42BBC215600482CD0 /* ChatCollectionViewCell.swift */; };
 		8A5F18D62BBA8F0800228C85 /* ChatTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5F18D52BBA8F0800228C85 /* ChatTextView.swift */; };
 		8A62D83F2BB506C000AE7B21 /* ChatBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A62D83E2BB506C000AE7B21 /* ChatBubbleView.swift */; };
 		8A62D8412BB58AF200AE7B21 /* ChatLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A62D8402BB58AF200AE7B21 /* ChatLoadingIndicator.swift */; };
@@ -55,6 +56,7 @@
 		77CF46C22BBA97C400ABA128 /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
 		77CF46C42BBB884D00ABA128 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		77CF46C82BBB8B3A00ABA128 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		8A4318C42BBC215600482CD0 /* ChatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCollectionViewCell.swift; sourceTree = "<group>"; };
 		8A5F18D52BBA8F0800228C85 /* ChatTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTextView.swift; sourceTree = "<group>"; };
 		8A62D83E2BB506C000AE7B21 /* ChatBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubbleView.swift; sourceTree = "<group>"; };
 		8A62D8402BB58AF200AE7B21 /* ChatLoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLoadingIndicator.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				8A62D8402BB58AF200AE7B21 /* ChatLoadingIndicator.swift */,
 				8A781FC42BB69B49009D1CE5 /* ChatViewController.swift */,
 				8A5F18D52BBA8F0800228C85 /* ChatTextView.swift */,
+				8A4318C42BBC215600482CD0 /* ChatCollectionViewCell.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				77CF46B32BBA71A800ABA128 /* ChatAPIService.swift in Sources */,
 				7783042C2BB692C600C72C63 /* BaseAPI.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
+				8A4318C52BBC215600482CD0 /* ChatCollectionViewCell.swift in Sources */,
 				77CF46C32BBA97C400ABA128 /* NetworkProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
