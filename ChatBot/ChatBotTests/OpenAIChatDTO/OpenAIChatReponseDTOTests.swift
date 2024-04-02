@@ -16,16 +16,31 @@ final class OpenAIChatReponseDTOTests: XCTestCase {
         self.jsonDecoder = nil
     }
     
-    func test_주어진json데이터를_decoder를_이용해_ChatCompletionReponseDTO타입으로_decoding할때_에러를_던지지_않는다() throws {
+    func test_주어진_JSON데이터를_ResponseDTO로_decoding할_때_데이터가_비어있지_않아야한다() throws {
         // given
         let fileName = "chat-completion-response-sample"
         let targetBundle = Bundle(for: OpenAIChatReponseDTOTests.self)
         let data: Data = try JSONLoader(bundle: targetBundle).loadJSON(fileName: fileName)
         
         // when
-        let result = try self.jsonDecoder?.decode(sut, from: data)
+        let result = try? self.jsonDecoder?.decode(sut, from: data)
         
         // then
-        XCTAssertNoThrow(result)
+        XCTAssertNotNil(result)
+    }
+    
+    func test_주어진_JSON데이터와_decoding된_ResponseDTO의_데이터가_일치_한다() throws {
+        // given
+        let fileName = "chat-completion-response-sample"
+        let data: Data = try JSONLoader.loadJSON(fileName: fileName)
+        
+        // when
+        let result = try? self.jsonDecoder?.decode(sut, from: data)
+        
+        // then
+        XCTAssertEqual(result?.id, "chatcmpl-97c30WvOhMwlHWlOYZNizmehlMTuC")
+        XCTAssertEqual(result?.model, "gpt-3.5-turbo-1106")
+        XCTAssertEqual(result?.choices.first?.message.role, "assistant")
+        XCTAssertEqual(result?.usage.completionTokens, 278)
     }
 }

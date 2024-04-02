@@ -1,7 +1,7 @@
 extension OpenAI.Chat {
-    struct RequestBodyDTO: Encodable {
-        let model: String
-        let stream: Bool
+    struct RequestBodyDTO: Encodable  {
+        let model: String = "gpt-3.5-turbo-1106"
+        let stream: Bool = false
         let messages: [Message]
     }
 }
