@@ -21,7 +21,7 @@ enum RequestInformation {
         switch self {
         case .completion:
             return [ "Content-Type" : "application/json",
-                     "Authorization" : "Bearer API KEY" ]
+                     "Authorization" : "Bearer \(DebugEnvironment.APIKey)" ]
         }
     }
     

@@ -15,6 +15,8 @@ final class ChatGPTViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        printUserQuestion(with: messages[1].content)
+        printChatGPTData(with: messages)
     }
     
     func printUserQuestion(with question: String) {
