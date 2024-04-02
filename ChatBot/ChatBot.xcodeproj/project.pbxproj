@@ -25,6 +25,7 @@
 		7783042C2BB692C600C72C63 /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7783042B2BB692C600C72C63 /* BaseAPI.swift */; };
 		77CF46AF2BBA438E00ABA128 /* ChatAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CF46AE2BBA438E00ABA128 /* ChatAPI.swift */; };
 		77CF46B72BBA7E5100ABA128 /* RxAlamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 77CF46B62BBA7E5100ABA128 /* RxAlamofire */; };
+		77CF46C32BBA97C400ABA128 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CF46C22BBA97C400ABA128 /* NetworkProvider.swift */; };
 		77CF46C92BBB8B3A00ABA128 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CF46C82BBB8B3A00ABA128 /* Config.swift */; };
 		8A7F6FA12BB29E91001C1999 /* ChatResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7F6FA02BB29E91001C1999 /* ChatResponseModel.swift */; };
 		8A7F6FA32BB2B385001C1999 /* ChatCommonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7F6FA22BB2B385001C1999 /* ChatCommonModel.swift */; };
@@ -43,6 +44,7 @@
 		778304192BB510E400C72C63 /* TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
 		7783042B2BB692C600C72C63 /* BaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
 		77CF46AE2BBA438E00ABA128 /* ChatAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAPI.swift; sourceTree = "<group>"; };
+		77CF46C22BBA97C400ABA128 /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
 		77CF46C82BBB8B3A00ABA128 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		8A7F6FA02BB29E91001C1999 /* ChatResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponseModel.swift; sourceTree = "<group>"; };
 		8A7F6FA22BB2B385001C1999 /* ChatCommonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCommonModel.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				778304152BB50DCE00C72C63 /* APIConstants.swift */,
 				778304172BB50F4500C72C63 /* NetworkConstants.swift */,
 				778304192BB510E400C72C63 /* TargetType.swift */,
+				77CF46C22BBA97C400ABA128 /* NetworkProvider.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -322,7 +325,7 @@
 				778304162BB50DCE00C72C63 /* APIConstants.swift in Sources */,
 				7783042C2BB692C600C72C63 /* BaseAPI.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
-				778304232BB52A0700C72C63 /* BaseAPI.swift in Sources */,
+				77CF46C32BBA97C400ABA128 /* NetworkProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
