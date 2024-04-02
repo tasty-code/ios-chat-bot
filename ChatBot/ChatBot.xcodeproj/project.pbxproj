@@ -17,6 +17,7 @@
 		C79F5A4B2BB58636009E3AB4 /* responseData.json in Resources */ = {isa = PBXBuildFile; fileRef = C79F5A492BB58636009E3AB4 /* responseData.json */; };
 		C7DE45392BBC196D0087C6C3 /* Fetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE45382BBC196D0087C6C3 /* Fetchable.swift */; };
 		C7DE453B2BBC19820087C6C3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE453A2BBC19820087C6C3 /* NetworkManager.swift */; };
+		C7DE45442BBC25A40087C6C3 /* DEBUG-Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = C7DE45432BBC25A40087C6C3 /* DEBUG-Keys.plist */; };
 		F39BA7EB2BB573B10058257C /* GPTResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39BA7EA2BB573B10058257C /* GPTResponseDTO.swift */; };
 		F39BA7EE2BB5740D0058257C /* GPTMessageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39BA7ED2BB5740D0058257C /* GPTMessageDTO.swift */; };
 		F39BA7F02BB5744E0058257C /* GPTBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39BA7EF2BB5744E0058257C /* GPTBody.swift */; };
@@ -44,6 +45,7 @@
 		C79F5A4A2BB58636009E3AB4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = en; path = en.lproj/responseData.json; sourceTree = "<group>"; };
 		C7DE45382BBC196D0087C6C3 /* Fetchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fetchable.swift; sourceTree = "<group>"; };
 		C7DE453A2BBC19820087C6C3 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		C7DE45432BBC25A40087C6C3 /* DEBUG-Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DEBUG-Keys.plist"; sourceTree = "<group>"; };
 		F39BA7EA2BB573B10058257C /* GPTResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTResponseDTO.swift; sourceTree = "<group>"; };
 		F39BA7ED2BB5740D0058257C /* GPTMessageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTMessageDTO.swift; sourceTree = "<group>"; };
 		F39BA7EF2BB5744E0058257C /* GPTBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTBody.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				F39BA7EC2BB573BE0058257C /* DTO */,
 				C7DE45332BBC18820087C6C3 /* NetworkService */,
 				F39BA7F62BB576380058257C /* Error */,
+				C7DE45422BBC25880087C6C3 /* Private */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -136,6 +139,14 @@
 				C7DE453A2BBC19820087C6C3 /* NetworkManager.swift */,
 			);
 			path = NetworkManger;
+			sourceTree = "<group>";
+		};
+		C7DE45422BBC25880087C6C3 /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				C7DE45432BBC25A40087C6C3 /* DEBUG-Keys.plist */,
+			);
+			path = Private;
 			sourceTree = "<group>";
 		};
 		F39BA7EC2BB573BE0058257C /* DTO */ = {
@@ -239,6 +250,7 @@
 			files = (
 				B4B3E2C92B42D1BC00818B3C /* LaunchScreen.storyboard in Resources */,
 				C79F5A4B2BB58636009E3AB4 /* responseData.json in Resources */,
+				C7DE45442BBC25A40087C6C3 /* DEBUG-Keys.plist in Resources */,
 				B4B3E2C62B42D1BC00818B3C /* Assets.xcassets in Resources */,
 				B4B3E2C42B42D1BB00818B3C /* Main.storyboard in Resources */,
 			);
