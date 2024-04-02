@@ -1,33 +1,32 @@
 import Foundation
 
 final class JSONLoader {
-    static func loadJSON(fileName: String) throws -> Data {
+    private static let `extension`: String = "json"
+    
+    private let targetBundle: Bundle
+    
+    init(bundle: Bundle) {
+        self.targetBundle = bundle
+    }
+    
+    func loadJSON(fileName: String) throws -> Data {
         guard
-            let fileLocation = Bundle(
-                for: OpenAIChatReponseDTOTests.self
-            ).path(
+            let url = self.targetBundle.url(
                 forResource: fileName,
-                ofType: "json"
+                withExtension: Self.extension
             )
         else {
-            throw BundleResourceError.notFound
+            throw BundleResourceError.notFound(nil)
         }
         
         do {
-            let jsonData = try String(contentsOfFile: fileLocation)
-            guard
-                let data = jsonData.data(using: .utf8)
-            else {
-                throw BundleResourceError.failToDecode
-            }
-            return data
+            return try Data(contentsOf: url)
         } catch {
-            throw BundleResourceError.notFound
+            throw BundleResourceError.notFound(error)
         }
     }
 }
 
 enum BundleResourceError: Error {
-    case notFound
-    case failToDecode
+    case notFound(Error?)
 }
