@@ -10,8 +10,19 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
+    let chatManger = ChatManager()
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard
+            let windowScene = (scene as? UIWindowScene)
+        else {
+            return
+        }
+        window = UIWindow(windowScene: windowScene)
+        
+        let mainViewController =  ChatBotViewController(chatManager: chatManger)
+        window?.rootViewController = mainViewController
+        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) { }
