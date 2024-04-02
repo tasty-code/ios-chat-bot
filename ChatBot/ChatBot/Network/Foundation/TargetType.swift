@@ -18,9 +18,6 @@ protocol TargetType: URLRequestConvertible {
 }
 
 extension TargetType {
-    var baseURL: String {
-        return APIConstants.baseURL
-    }
     
     func asURLRequest() throws -> URLRequest {
         let url = try baseURL.asURL()
@@ -36,7 +33,8 @@ extension TargetType {
         
         switch header {
         case .basic:
-            request.setValue(ContentType.json.rawValue, forHTTPHeaderField: HTTPHeaderField.contentType.rawValue)
+            request.headers.add(name: HTTPHeaderField.contentType.rawValue, value: ContentType.json.rawValue)
+            request.headers.add(.authorization(bearerToken: Config.openAIAPIKey))
         }
         
         return request
