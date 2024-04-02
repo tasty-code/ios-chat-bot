@@ -2,18 +2,16 @@ import Foundation
 
 final class URLRequestBuilder {
     private let baseURL: String
-    private let path: String
+    private var path: String = "/"
     private var headerParameters: [String: String] = [:]
     private var queryParameters: [String: String] = [:]
     private var method: HTTPMethod = .get
     private var bodyParameters: Encodable?
     private let encoder: JSONEncoder = JSONEncoder()
     
-    init(baseURL: String,
-         path: String
+    init(baseURL: String
      ) {
         self.baseURL = baseURL
-        self.path = path
     }
 }
 
@@ -38,6 +36,11 @@ extension URLRequestBuilder {
         urlRequest.httpMethod = method.rawValue
         urlRequest.allHTTPHeaderFields = headerParameters
         return urlRequest
+    }
+    
+    func setPath(_ path: String) -> Self {
+        self.path = path
+        return self
     }
     
     func setHeaderParameters(_ headerParameters: [String: String]) -> Self {

@@ -25,7 +25,8 @@ extension API {
                                          stream: false,
                                          messages: messages.map { MessageDTO(from: $0) })
             
-            return URLRequestBuilder(baseURL: API.baseURL, path: API.path)
+            return URLRequestBuilder(baseURL: API.baseURL)
+                .setPath(API.path)
                 .setMethod(.post)
                 .setHeaderParameters(header)
                 .setBodyParameters(body)
