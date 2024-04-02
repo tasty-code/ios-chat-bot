@@ -19,7 +19,8 @@ final class OpenAIChatReponseDTOTests: XCTestCase {
     func test_주어진json데이터를_decoder를_이용해_ChatCompletionReponseDTO타입으로_decoding할때_에러를_던지지_않는다() throws {
         // given
         let fileName = "chat-completion-response-sample"
-        let data: Data = try JSONLoader.loadJSON(fileName: fileName)
+        let targetBundle = Bundle(for: OpenAIChatReponseDTOTests.self)
+        let data: Data = try JSONLoader(bundle: targetBundle).loadJSON(fileName: fileName)
         
         // when
         let result = try self.jsonDecoder?.decode(sut, from: data)
