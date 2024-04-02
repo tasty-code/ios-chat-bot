@@ -14,12 +14,15 @@ extension API {
     private static let AuthorizationKey = "Authorization"
     
     func toURLRequest() -> URLRequest? {
-        let header = [API.contentTypeKey: API.contentType,
-                      API.AuthorizationKey: Bundle.main.chatBotAPIKey]
+        let header = [
+            API.contentTypeKey: API.contentType,
+            API.AuthorizationKey: Bundle.main.chatBotAPIKey
+        ]
         
         switch self {
         case .chat(let messages):
-            let body = ChatBotRequestDTO(model: API.chatBotModel, stream: false,
+            let body = ChatBotRequestDTO(model: API.chatBotModel, 
+                                         stream: false,
                                          messages: messages.map { MessageDTO(from: $0) })
             
             return URLRequestBuilder(baseURL: API.baseURL, path: API.path)
