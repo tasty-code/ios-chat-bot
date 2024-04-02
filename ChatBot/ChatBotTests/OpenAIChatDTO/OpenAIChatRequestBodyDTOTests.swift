@@ -17,10 +17,10 @@ final class OpenAIChatRequestBodyDTOTests: XCTestCase {
     
     func test_DTO에_정의된_속성들이_JSON으로_encoding될_때_에러가_발생하지_않는다() throws {
         // given
-        let model = "Test"
+        let model = "gpt-3.5-turbo-1106"
         let stream = false
-        let messages = [ChatCompletionRequestDTO.Message(role: "yuni", content: "Hello")]
-        let expectedDTO = ChatCompletionRequestDTO(model: model, stream: stream, messages: messages)
+        let messages = [OpenAI.Chat.RequestBodyDTO.Message(role: "yuni", content: "Hello")]
+        let expectedDTO = OpenAI.Chat.RequestBodyDTO(model: model, stream: stream, messages: messages)
         
         // when
         let encodedData = try jsonEncoder?.encode(expectedDTO)
