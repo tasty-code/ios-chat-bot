@@ -1,7 +1,7 @@
 import Foundation
 
 enum RequestInformation {
-    case completion(model: GPTModel, messages: [Message], Logprobs: Bool?)
+    case completion(model: GPTModel, messages: [Message], logprobs: Bool?)
     
     var url: URL? {
         switch self {

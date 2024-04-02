@@ -1,6 +1,6 @@
 import Foundation
 
-final class RequstProvider: RequestProvidable {
+final class RequestProvider: RequestProvidable {
     private let requestInformation: RequestInformation
     
     init(requestInformation: RequestInformation) {
