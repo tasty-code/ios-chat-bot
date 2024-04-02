@@ -27,6 +27,10 @@
 		BDD77FA22BBAA04100192556 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD77FA02BBAA04100192556 /* HTTPMethod.swift */; };
 		BDD77FA42BBBF01300192556 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD77FA32BBBF01300192556 /* NetworkService.swift */; };
 		BDD77FA52BBBF01300192556 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD77FA32BBBF01300192556 /* NetworkService.swift */; };
+		BDD77FA82BBBF36200192556 /* ChatBotService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD77FA72BBBF36200192556 /* ChatBotService.swift */; };
+		BDD77FA92BBBF36200192556 /* ChatBotService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD77FA72BBBF36200192556 /* ChatBotService.swift */; };
+		BDD77FAB2BBBF53000192556 /* JsonLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD77FAA2BBBF53000192556 /* JsonLoader.swift */; };
+		BDD77FAE2BBBF56900192556 /* chat_bot_output_sample in Resources */ = {isa = PBXBuildFile; fileRef = BDD77FAD2BBBF56900192556 /* chat_bot_output_sample */; };
 		CE5E22AF2BBAA6C7004B7FF7 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E22AE2BBAA6C7004B7FF7 /* API.swift */; };
 		CE5E22B22BBBDE8A004B7FF7 /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E22B12BBBDE8A004B7FF7 /* Bundle+.swift */; };
 		CE8316712BB58D7500D9371E /* ChatBotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8316702BB58D7500D9371E /* ChatBotTests.swift */; };
@@ -58,6 +62,9 @@
 		BDD77F9D2BBA9DD900192556 /* URLRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilder.swift; sourceTree = "<group>"; };
 		BDD77FA02BBAA04100192556 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		BDD77FA32BBBF01300192556 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		BDD77FA72BBBF36200192556 /* ChatBotService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotService.swift; sourceTree = "<group>"; };
+		BDD77FAA2BBBF53000192556 /* JsonLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonLoader.swift; sourceTree = "<group>"; };
+		BDD77FAD2BBBF56900192556 /* chat_bot_output_sample */ = {isa = PBXFileReference; lastKnownFileType = text; path = chat_bot_output_sample; sourceTree = "<group>"; };
 		CE5E22AE2BBAA6C7004B7FF7 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		CE5E22B12BBBDE8A004B7FF7 /* Bundle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+.swift"; sourceTree = "<group>"; };
 		CE83166E2BB58D7500D9371E /* ChatBotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChatBotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,6 +137,7 @@
 		BDD77F932BBA9B5A00192556 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				BDD77FA62BBBF34F00192556 /* UseCase */,
 				BDD77F992BBA9B9A00192556 /* Enum */,
 				BDD77F952BBA9B7100192556 /* Model */,
 			);
@@ -161,6 +169,22 @@
 			path = Enum;
 			sourceTree = "<group>";
 		};
+		BDD77FA62BBBF34F00192556 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				BDD77FA72BBBF36200192556 /* ChatBotService.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		BDD77FAC2BBBF54700192556 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BDD77FAD2BBBF56900192556 /* chat_bot_output_sample */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		CE5E22B02BBBDE69004B7FF7 /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,7 +208,9 @@
 		CE83166F2BB58D7500D9371E /* ChatBotTests */ = {
 			isa = PBXGroup;
 			children = (
+				BDD77FAC2BBBF54700192556 /* Resources */,
 				CE8316702BB58D7500D9371E /* ChatBotTests.swift */,
+				BDD77FAA2BBBF53000192556 /* JsonLoader.swift */,
 			);
 			path = ChatBotTests;
 			sourceTree = "<group>";
@@ -280,6 +306,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDD77FAE2BBBF56900192556 /* chat_bot_output_sample in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +327,7 @@
 				BDD77FA12BBAA04100192556 /* HTTPMethod.swift in Sources */,
 				BDD77F9E2BBA9DD900192556 /* URLRequestBuilder.swift in Sources */,
 				BDD77F9B2BBA9BC000192556 /* Message.swift in Sources */,
+				BDD77FA82BBBF36200192556 /* ChatBotService.swift in Sources */,
 				BDD77FA42BBBF01300192556 /* NetworkService.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
 			);
@@ -310,8 +338,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BDD77F8F2BBA9AAA00192556 /* ChatBotResponseDTO.swift in Sources */,
+				BDD77FA92BBBF36200192556 /* ChatBotService.swift in Sources */,
 				CE8316712BB58D7500D9371E /* ChatBotTests.swift in Sources */,
 				BDD77FA52BBBF01300192556 /* NetworkService.swift in Sources */,
+				BDD77FAB2BBBF53000192556 /* JsonLoader.swift in Sources */,
 				BDD77FA22BBAA04100192556 /* HTTPMethod.swift in Sources */,
 				BDD77F9C2BBA9BC000192556 /* Message.swift in Sources */,
 				BDD77F922BBA9B4400192556 /* ChatBotRequestDTO.swift in Sources */,
