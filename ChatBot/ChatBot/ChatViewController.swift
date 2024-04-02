@@ -7,32 +7,45 @@
 
 import UIKit
 
-class ChatViewController: UIViewController {
-    private let textInputField = UITextField().then {
-        $0.borderStyle = .roundedRect
-        let sendImage = UIImage(systemName: "arrow.up.circle.fill")
-        sendImage?.withTintColor(.systemMint)
-        $0.rightView = UIImageView(image: UIImage(systemName: "arrow.up.circle.fill"))
-        $0.rightViewMode = .always
-    }
+/// 채팅 뷰 컨트롤러
+final class ChatViewController: UIViewController {
+    private let textInputView = ChatTextView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureUI()
+        initializeHideKeyboard()
     }
 }
 
+// MARK: - UI
 extension ChatViewController {
     private func configureUI() {
         view.backgroundColor = .systemBackground
         
-        view.addSubview(textInputField)
+        view.addSubview(textInputView)
         
-        textInputField.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+        textInputView.snp.makeConstraints {
+            $0.bottom.equalTo(view.keyboardLayoutGuide.snp.top)
             $0.width.equalTo(view.safeAreaLayoutGuide.snp.width).inset(20)
             $0.centerX.equalTo(view.safeAreaLayoutGuide.snp.centerX)
         }
+    }
+}
+
+// MARK: - Private Methods
+extension ChatViewController {
+    private func initializeHideKeyboard() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(dismissKeyboard)
+        )
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc private func dismissKeyboard() {
+//        textInputView.dismissKeyboard()
+        view.endEditing(true)
     }
 }
