@@ -102,6 +102,9 @@ iOSInjectionProject/
 .DS_Store
 APIToken.plist
 
+### APIToken ###
+APIToken.plist
+
 ### Secret.xcconfig
 BoxOffice/Secret.xcconfig
 

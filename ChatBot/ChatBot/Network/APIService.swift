@@ -16,7 +16,7 @@ struct APIService {
     }
     
     func fetchData(with urlRequest: URLRequest) async throws  -> APIResult {
-        let (data, response) = try await session.requestData(with: urlRequest, body: nil)
+        let (data, response) = try await session.requestData(with: urlRequest)
         return handleDataTaskCompletion(data: data, response: response)
     }
 }
