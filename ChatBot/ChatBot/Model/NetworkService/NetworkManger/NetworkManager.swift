@@ -10,7 +10,6 @@ class NetworkManager: Fetchable {
     }
     
     private func requestChatGPTCompletionData(with messages: [Message]) -> AnyPublisher<Data, Error> {
-        
         guard let request = RequestProvider(requestInformation: .completion(model: .basic, messages: messages, logprobs: nil)).request else {
             return Fail(error: NetworkError.invalidURL).eraseToAnyPublisher()
         }
