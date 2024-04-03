@@ -16,11 +16,11 @@ final class ChatGPTViewController: UIViewController {
         printChatGPTData(with: messages)
     }
     
-    func printUserQuestion(with question: String) {
+    private func printUserQuestion(with question: String) {
         print("Harry: \(question)")
     }
     
-    func printChatGPTData(with messages: [Message]) {
+    private func printChatGPTData(with messages: [Message]) {
         networkManager.fetchChatGPTCompletionData(type: GPTResponseDTO.self, with: messages)
             .sink(receiveCompletion: { result in
                 switch result {

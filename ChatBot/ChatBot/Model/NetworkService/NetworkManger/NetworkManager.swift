@@ -1,7 +1,7 @@
 import Foundation
 import Combine
 
-class NetworkManager: Fetchable {
+final class NetworkManager: Fetchable {
     
     func fetchChatGPTCompletionData<T: Decodable>(type: T.Type, with messages: [Message]) -> AnyPublisher<T, Error> {
         self.requestChatGPTCompletionData(with: messages)
