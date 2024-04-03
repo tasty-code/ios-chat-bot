@@ -8,11 +8,9 @@
 import Foundation
 
 struct ChatRequest: Codable {
-    let model: GPTModel
-    let stream: Bool
+    var model: String = "gpt-3.5-turbo-1106"
+    var stream: Bool = false
     let messages: [Message]
 }
 
-enum GPTModel: String, Codable {
-    case main = "gpt-3.5-turbo-1106"
-}
+
