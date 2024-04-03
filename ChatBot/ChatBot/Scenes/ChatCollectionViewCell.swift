@@ -36,5 +36,11 @@ extension ChatCollectionViewCell {
     func text(_ string: String, isUser: Bool) {
         chatBubbleView.setText(string)
         chatBubbleView.setUser(isUser)
+        
+        chatBubbleView.snp.remakeConstraints {
+            $0.top.equalTo(self.snp.top)
+            $0.bottom.equalTo(self.snp.bottom)
+            _ = isUser ? $0.trailing.equalTo(self.snp.trailing) : $0.leading.equalTo(self.snp.leading)
+        }
     }
 }
