@@ -7,11 +7,16 @@
 
 import UIKit
 
+import RxSwift
+
 /// 채팅 뷰 컨트롤러
 final class ChatViewController: UIViewController {
-    private let textInputView = ChatTextView()
+    private let chatTextView = ChatTextView()
     private lazy var chatCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
     private var dataSource: UICollectionViewDiffableDataSource<Section, String>?
+    private let service = ChatAPIService()
+    private let bag = DisposeBag()
+    private var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +24,7 @@ final class ChatViewController: UIViewController {
         configureUI()
         setUpChatCollectionView()
         initializeHideKeyboard()
+        registerButton()
     }
 }
 
@@ -28,16 +34,16 @@ extension ChatViewController {
         view.backgroundColor = .systemBackground
         
         view.addSubview(chatCollectionView)
-        view.addSubview(textInputView)
+        view.addSubview(chatTextView)
         
         chatCollectionView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             $0.leading.equalTo(view.safeAreaLayoutGuide.snp.leading)
             $0.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing)
-            $0.bottom.equalTo(textInputView.snp.top)
+            $0.bottom.equalTo(chatTextView.snp.top)
         }
         
-        textInputView.snp.makeConstraints {
+        chatTextView.snp.makeConstraints {
             $0.bottom.equalTo(view.keyboardLayoutGuide.snp.top)
             $0.width.equalTo(view.safeAreaLayoutGuide.snp.width).inset(20)
             $0.centerX.equalTo(view.safeAreaLayoutGuide.snp.centerX)
@@ -47,6 +53,28 @@ extension ChatViewController {
 
 // MARK: - Private Methods
 extension ChatViewController {
+    private func registerButton() {
+        chatTextView.sendButton.rx.tap
+            .subscribe(onNext: {
+                guard let text = self.chatTextView.textView.text else {
+                    return
+                }
+                self.service.createChat(systemContent: "Hello! How can I assist you today?",
+                                   userContent: text)
+                    .subscribe(onSuccess: { result in
+                        guard let message = result?.choices[0].message.content else {
+                            return
+                        }
+                        self.snapshot.appendSections([.main])
+                        self.snapshot.appendItems([message])
+                        self.dataSource?.apply(self.snapshot)
+                    }, onFailure: { error in
+                        print(error)
+                    })
+            })
+            .disposed(by: bag)
+    }
+    
     private func initializeHideKeyboard() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(
             target: self,
@@ -73,7 +101,7 @@ extension ChatViewController {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatCollectionViewCell.className, for: indexPath) as? ChatCollectionViewCell else {
                 return UICollectionViewCell()
             }
-            cell.text(itemIdentifier, isUser: true)
+            cell.text(itemIdentifier, isUser: false)
             return cell
         }
         
@@ -84,7 +112,8 @@ extension ChatViewController {
     }
     
     private func createLayout() -> UICollectionViewCompositionalLayout {
-        let config = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
+        var config = UICollectionLayoutListConfiguration(appearance: .plain)
+        config.showsSeparators = false
         return UICollectionViewCompositionalLayout.list(using: config)
     }
 }

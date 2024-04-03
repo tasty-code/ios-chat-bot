@@ -9,13 +9,13 @@ import UIKit
 
 /// 텍스트필드
 final class ChatTextView: UIStackView {
-    private let sendButton = UIButton(type: .custom).then {
+    private(set) var sendButton = UIButton(type: .custom).then {
         let configuration = UIImage.SymbolConfiguration(pointSize: 30)
         let image = UIImage(systemName: "arrow.up.circle.fill", withConfiguration: configuration)?.withTintColor(.systemCyan, renderingMode: .alwaysOriginal)
         $0.setImage(image, for: .normal)
     }
 
-    private let textView = UITextView()
+    private(set) var textView = UITextView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
