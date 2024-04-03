@@ -14,7 +14,6 @@
 		B4B3E2C62B42D1BC00818B3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */; };
 		B4B3E2C92B42D1BC00818B3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */; };
 		C79F5A432BB5851D009E3AB4 /* GPTRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79F5A422BB5851D009E3AB4 /* GPTRequestDTO.swift */; };
-		C79F5A4B2BB58636009E3AB4 /* responseData.json in Resources */ = {isa = PBXBuildFile; fileRef = C79F5A492BB58636009E3AB4 /* responseData.json */; };
 		C7DE45392BBC196D0087C6C3 /* Fetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE45382BBC196D0087C6C3 /* Fetchable.swift */; };
 		C7DE453B2BBC19820087C6C3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE453A2BBC19820087C6C3 /* NetworkManager.swift */; };
 		C7DE45442BBC25A40087C6C3 /* DEBUG-Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = C7DE45432BBC25A40087C6C3 /* DEBUG-Keys.plist */; };
@@ -43,7 +42,6 @@
 		B4B3E2C82B42D1BC00818B3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B4B3E2CA2B42D1BC00818B3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C79F5A422BB5851D009E3AB4 /* GPTRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTRequestDTO.swift; sourceTree = "<group>"; };
-		C79F5A4A2BB58636009E3AB4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = en; path = en.lproj/responseData.json; sourceTree = "<group>"; };
 		C7DE45382BBC196D0087C6C3 /* Fetchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fetchable.swift; sourceTree = "<group>"; };
 		C7DE453A2BBC19820087C6C3 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C7DE45432BBC25A40087C6C3 /* DEBUG-Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DEBUG-Keys.plist"; sourceTree = "<group>"; };
@@ -95,21 +93,12 @@
 				C7DE45492BBC26820087C6C3 /* App */,
 				C7DE45482BBC26720087C6C3 /* Controller */,
 				C7DE45362BBC189C0087C6C3 /* Model */,
-				C79F5A482BB58605009E3AB4 /* TestJson */,
 				B4B3E2C22B42D1BB00818B3C /* Main.storyboard */,
 				B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */,
 				B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */,
 				B4B3E2CA2B42D1BC00818B3C /* Info.plist */,
 			);
 			path = ChatBot;
-			sourceTree = "<group>";
-		};
-		C79F5A482BB58605009E3AB4 /* TestJson */ = {
-			isa = PBXGroup;
-			children = (
-				C79F5A492BB58636009E3AB4 /* responseData.json */,
-			);
-			path = TestJson;
 			sourceTree = "<group>";
 		};
 		C7DE45332BBC18820087C6C3 /* NetworkService */ = {
@@ -276,7 +265,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4B3E2C92B42D1BC00818B3C /* LaunchScreen.storyboard in Resources */,
-				C79F5A4B2BB58636009E3AB4 /* responseData.json in Resources */,
 				C7DE45442BBC25A40087C6C3 /* DEBUG-Keys.plist in Resources */,
 				B4B3E2C62B42D1BC00818B3C /* Assets.xcassets in Resources */,
 				B4B3E2C42B42D1BB00818B3C /* Main.storyboard in Resources */,
@@ -329,14 +317,6 @@
 				B4B3E2C82B42D1BC00818B3C /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		C79F5A492BB58636009E3AB4 /* responseData.json */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C79F5A4A2BB58636009E3AB4 /* en */,
-			);
-			name = responseData.json;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

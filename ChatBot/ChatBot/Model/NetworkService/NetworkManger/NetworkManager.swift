@@ -3,7 +3,7 @@ import Combine
 
 final class NetworkManager: Fetchable {
     
-    func fetchChatGPTCompletionData<T: Decodable>(type: T.Type, with messages: [Message]) -> AnyPublisher<T, Error> {
+    func fetchChatGPTCompletionData<T: Decodable>(with messages: [Message], type: T.Type) -> AnyPublisher<T, Error> {
         self.requestChatGPTCompletionData(with: messages)
             .decode(type: T.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()

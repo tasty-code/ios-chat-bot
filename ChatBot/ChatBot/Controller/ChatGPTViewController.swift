@@ -21,7 +21,7 @@ final class ChatGPTViewController: UIViewController {
     }
     
     private func printChatGPTData(with messages: [Message]) {
-        networkManager.fetchChatGPTCompletionData(type: GPTResponseDTO.self, with: messages)
+        networkManager.fetchChatGPTCompletionData(with: messages, type: GPTResponseDTO.self)
             .sink(receiveCompletion: { result in
                 switch result {
                 case .failure(let error):
