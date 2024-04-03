@@ -11,6 +11,11 @@
 		999BAB352BB54E4C00FA2B89 /* OpenAIChatRequestBodyDTOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999BAB342BB54E4C00FA2B89 /* OpenAIChatRequestBodyDTOTests.swift */; };
 		999BAB362BB54E5D00FA2B89 /* ResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F428B1BA2BB5036500ED811F /* ResponseDTO.swift */; };
 		999BAB372BB54E5F00FA2B89 /* RequestBodyDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999BAB322BB50A4F00FA2B89 /* RequestBodyDTO.swift */; };
+		999BAB8B2BBCF45E00FA2B89 /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999BAB8A2BBCF45E00FA2B89 /* Bundle+.swift */; };
+		999BAB8D2BBCF4CC00FA2B89 /* OpenAIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999BAB8C2BBCF4CC00FA2B89 /* OpenAIRequest.swift */; };
+		999BAB8F2BBCF6C700FA2B89 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999BAB8E2BBCF6C700FA2B89 /* NetworkService.swift */; };
+		999BAB932BBD0F0E00FA2B89 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999BAB922BBD0F0E00FA2B89 /* ChatViewModel.swift */; };
+		999BAB952BBD358C00FA2B89 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999BAB942BBD358B00FA2B89 /* Requestable.swift */; };
 		B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */; };
 		B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */; };
 		B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2C02B42D1BB00818B3C /* ViewController.swift */; };
@@ -36,6 +41,11 @@
 /* Begin PBXFileReference section */
 		999BAB322BB50A4F00FA2B89 /* RequestBodyDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBodyDTO.swift; sourceTree = "<group>"; };
 		999BAB342BB54E4C00FA2B89 /* OpenAIChatRequestBodyDTOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIChatRequestBodyDTOTests.swift; sourceTree = "<group>"; };
+		999BAB8A2BBCF45E00FA2B89 /* Bundle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+.swift"; sourceTree = "<group>"; };
+		999BAB8C2BBCF4CC00FA2B89 /* OpenAIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIRequest.swift; sourceTree = "<group>"; };
+		999BAB8E2BBCF6C700FA2B89 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		999BAB922BBD0F0E00FA2B89 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		999BAB942BBD358B00FA2B89 /* Requestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
 		B4B3E2B92B42D1BB00818B3C /* ChatBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +105,11 @@
 				B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */,
 				B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */,
 				B4B3E2C02B42D1BB00818B3C /* ViewController.swift */,
+				999BAB8A2BBCF45E00FA2B89 /* Bundle+.swift */,
+				999BAB922BBD0F0E00FA2B89 /* ChatViewModel.swift */,
+				999BAB8C2BBCF4CC00FA2B89 /* OpenAIRequest.swift */,
+				999BAB942BBD358B00FA2B89 /* Requestable.swift */,
+				999BAB8E2BBCF6C700FA2B89 /* NetworkService.swift */,
 				B4B3E2C22B42D1BB00818B3C /* Main.storyboard */,
 				B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */,
 				B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */,
@@ -251,9 +266,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */,
+				999BAB8D2BBCF4CC00FA2B89 /* OpenAIRequest.swift in Sources */,
 				999BAB332BB50A4F00FA2B89 /* RequestBodyDTO.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
+				999BAB8F2BBCF6C700FA2B89 /* NetworkService.swift in Sources */,
+				999BAB952BBD358C00FA2B89 /* Requestable.swift in Sources */,
+				999BAB8B2BBCF45E00FA2B89 /* Bundle+.swift in Sources */,
 				F428B1BB2BB5036500ED811F /* ResponseDTO.swift in Sources */,
+				999BAB932BBD0F0E00FA2B89 /* ChatViewModel.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
