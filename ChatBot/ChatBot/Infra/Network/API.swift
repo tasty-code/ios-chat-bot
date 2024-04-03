@@ -6,13 +6,6 @@ enum API {
 }
 
 extension API {
-    private static let baseURL = "api.openai.com"
-    private static let chatBotModel = "gpt-3.5-turbo-1106"
-    private static let path = "/v1/chat/completions"
-    private static let contentTypeKey = "Content-Type"
-    private static let contentType = "application/json"
-    private static let AuthorizationKey = "Authorization"
-    
     func toURLRequest() -> URLRequest? {
         let header = [
             API.contentTypeKey: API.contentType,
@@ -33,4 +26,13 @@ extension API {
                 .build()
         }
     }
+}
+
+extension API {
+    private static let baseURL = "api.openai.com"
+    private static let chatBotModel = "gpt-3.5-turbo-1106"
+    private static let path = "/v1/chat/completions"
+    private static let contentTypeKey = "Content-Type"
+    private static let contentType = "application/json"
+    private static let AuthorizationKey = "Authorization"
 }
