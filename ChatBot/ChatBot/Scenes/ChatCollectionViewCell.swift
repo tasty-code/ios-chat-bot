@@ -41,6 +41,7 @@ extension ChatCollectionViewCell {
             $0.top.equalTo(self.snp.top)
             $0.bottom.equalTo(self.snp.bottom)
             _ = isUser ? $0.trailing.equalTo(self.snp.trailing) : $0.leading.equalTo(self.snp.leading)
+            _ = isUser ? $0.leading.lessThanOrEqualTo(self.snp.leading) : $0.trailing.lessThanOrEqualTo(self.snp.trailing)
         }
     }
 }
