@@ -13,6 +13,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let jsonDecoder = JSONDecoder()
         jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
         let requester = URLSession.shared
+        // TODO: Literals...!
         let networkManager = NetworkManager(
             requester: requester,
             decoder: jsonDecoder

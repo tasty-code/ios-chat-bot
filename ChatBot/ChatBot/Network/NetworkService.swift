@@ -15,7 +15,9 @@ final class NetworkManager {
     
     private func makeRequest(messages: [OpenAI.Chat.RequestBodyDTO.Message]) -> URLRequest? {
         let requestBody = OpenAI.Chat.RequestBodyDTO(messages: messages)
-        let request = OpenAIRequest(body: try? JSONEncoder().encode(requestBody))
+        // TODO: Data 전달받기
+        let body = try? JSONEncoder().encode(requestBody)
+        let request = OpenAIRequest(body: body)
         return request.toURLRequest()
     }
     

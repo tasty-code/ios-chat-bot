@@ -1,6 +1,6 @@
 import Foundation
 
-protocol Requestable {
+protocol HTTPRequestable {
     var baseURL: String { get }
     var path: String { get }
     var headerParameters: [String: String] { get }
@@ -11,11 +11,11 @@ protocol Requestable {
     func toURLRequest() -> URLRequest?
 }
 
-extension Requestable {
+extension HTTPRequestable {
     private func toURL() -> URL? {
         var components = URLComponents()
         components.scheme = URLScheme.https.rawValue
-        components.host = self.baseURL
+        components.host = self.baseURL 
         components.path = self.path
         components.queryItems = self.queryParameters.map { URLQueryItem(name: $0, value: $1 as? String) }
         return components.url
