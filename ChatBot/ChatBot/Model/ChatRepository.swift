@@ -6,29 +6,32 @@
 //
 
 import Foundation
+import RxSwift
 
 struct ChatRepository {
-    private let apiService: APIService = APIService(session: URLSession.shared)
-    func requestChatResultData(userMessage: String) async throws -> (Result<ResponseChatDTO, NetworkError>) {
+//    private let apiService: APIService = APIService(session: URLSession.shared)
+    let network: Network<ResponseChatDTO>
+    
+    init(network: Network<ResponseChatDTO>) {
+        self.network = network
+    }
+    
+    func requestChatResultData(userMessage: String)-> Observable<ResponseChatDTO> {
         
-        let chat = RequestChatDTO(messages: [
-            Message(role: "system", content: "너는 연애고수야"),
-            Message(role: "user", content: "\(userMessage)")
-        ])
+//        let chat = RequestChatDTO(messages: [
+//            Message(role: "system", content: "너는 연애고수야"),
+//            Message(role: "user", content: "\(userMessage)")
+//        ])
         
-        guard
-            let urlRequest = NetworkURL.makeURLRequest(type: .chatGPT, chat: chat, httpMethod: .post)
-        else {
-            return .failure(.invalidURLRequestError)
-        }
-        
-        let result = try await apiService.fetchData(with: urlRequest)
-        switch result {
-        case .success(let success):
-            return handleDecodedData(data: success)
-        case .failure(let failure):
-            return .failure(failure)
-        }
+        return network.fetchData()
+//        
+//        let result = try await apiService.fetchData(with: urlRequest)
+//        switch result {
+//        case .success(let success):
+//            return handleDecodedData(data: success)
+//        case .failure(let failure):
+//            return .failure(failure)
+//        }
     }
 }
 
