@@ -1,6 +1,6 @@
 import Foundation
 
-class JsonLoader {
+struct JsonLoader {
     static func loadjson(fileName: String) -> Data {
         guard let fileLocation = Bundle(for: ChatBotTests.self).path(forResource: fileName, ofType: "json")
         else {
