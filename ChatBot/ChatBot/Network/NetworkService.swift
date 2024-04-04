@@ -1,38 +1,19 @@
 import Foundation
 import Combine
 
-final class OpenAINetworkManager {
-    private let apiKey: String
-    private let baseURL = "api.openai.com"
-    private let basePath = "/v1/chat/completions"
+final class NetworkManager {
     private let jsonDecoder: JSONDecoder
     
     init(
-        apiKey: String = Bundle.main.apiKey,
-        decoder: JSONDecoder = JSONDecoder()
+        decoder: JSONDecoder
     ) {
-        self.apiKey = apiKey
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         self.jsonDecoder = decoder
     }
     
     private func makeRequest(messages: [OpenAI.Chat.RequestBodyDTO.Message]) -> URLRequest? {
         let requestBody = OpenAI.Chat.RequestBodyDTO(messages: messages)
-        
-        let bodyBinary = try? JSONEncoder().encode(requestBody)
-        
-        let authHeader = HTTPRequest.HeaderField.authorization(.bearer(token: apiKey)).header
-        let contentTypeHeader = HTTPRequest.HeaderField.contentType(.application(.json)).header
-        
-        let request = OpenAIRequest(
-            baseURL: baseURL,
-            path: basePath,
-            headerParameters: [
-                authHeader.key: authHeader.value,
-                contentTypeHeader.key: contentTypeHeader.value
-            ],
-            body: bodyBinary
-        )
+        let request = OpenAIRequest(body: try? JSONEncoder().encode(requestBody))
         return request.toURLRequest()
     }
     

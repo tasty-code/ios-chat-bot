@@ -10,7 +10,11 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = MainViewController()
+        let jsonDecoder = JSONDecoder()
+        jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+        let networkManager = NetworkManager(decoder: jsonDecoder)
+        let viewModel = MainViewModel(networkManager: networkManager)
+        window?.rootViewController = MainViewController(viewModel: viewModel)
         window?.makeKeyAndVisible()
     }
 }

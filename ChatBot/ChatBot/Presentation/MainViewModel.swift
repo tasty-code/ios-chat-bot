@@ -2,7 +2,7 @@ import Combine
 import Foundation
 
 final class MainViewModel {
-    private let networkManager: OpenAINetworkManager
+    private let networkManager: NetworkManager
     private var cancellables = Set<AnyCancellable>()
     
     @Published var userResponse: OpenAI.Chat.ResponseDTO? = nil
@@ -10,7 +10,7 @@ final class MainViewModel {
     @Published var networkError: NetworkError? = nil
     
     init(
-        networkManager: OpenAINetworkManager
+        networkManager: NetworkManager
     ) {
         self.networkManager = networkManager
     }

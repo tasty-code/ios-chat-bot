@@ -2,8 +2,18 @@ import UIKit
 import Combine
 
 final class MainViewController: UIViewController {
-    private let chatViewModel = MainViewModel(networkManager: OpenAINetworkManager())
+    private let viewModel: MainViewModel
     private var cancellables = Set<AnyCancellable>()
+    
+    init(viewModel: MainViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -13,7 +23,7 @@ final class MainViewController: UIViewController {
     }
     
     private func bindViewModel() {
-        chatViewModel.$userResponse
+        viewModel.$userResponse
             .sink { response in
                 if let response = response {
                     if let message = response.choices.first?.message.content {
@@ -23,7 +33,7 @@ final class MainViewController: UIViewController {
             }
             .store(in: &cancellables)
         
-        chatViewModel.$systemResponse
+        viewModel.$systemResponse
             .sink { response in
                 if let response = response {
                     if let message = response.choices.first?.message.content {
@@ -32,7 +42,7 @@ final class MainViewController: UIViewController {
                 }
             }.store(in: &cancellables)
         
-        chatViewModel.$networkError
+        viewModel.$networkError
             .sink { error in
                 if let error = error {
                     print(error)
@@ -42,11 +52,11 @@ final class MainViewController: UIViewController {
     }
     
     private func sendMessageAsUser() {
-        chatViewModel.sendMessage(role: .user, content: "내일 추울까?")
+        viewModel.sendMessage(role: .user, content: "내일 추울까?")
     }
     
     private func sendMessageAsSystem() {
-        chatViewModel.sendMessage(role: .system, content: "내일 추울까?")
+        viewModel.sendMessage(role: .system, content: "내일 추울까?")
     }
 }
 
