@@ -22,7 +22,7 @@ enum ContentType: String {
 
 enum RequestParameter {
     case query(_ query: [String: Any])
-    case queryBody(_ query: [String: Any], _ body: [String: Any])
-    case requestBody(_ body: [String: Any])
+    case queryBody(_ query: [String: Any], _ body: Encodable)
+    case requestBody(_ body: Encodable)
     case requestPlain
 }

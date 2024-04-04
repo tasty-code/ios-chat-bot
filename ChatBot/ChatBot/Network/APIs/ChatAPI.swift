@@ -30,11 +30,13 @@ extension ChatAPI: BaseAPI {
     var parameters: RequestParameter {
         switch self {
         case .createChat(let systemContent, let userContent):
-            let body: [String: Any] = ["model": GPTModelFamilies.main.rawValue,
-                                       "messages": [["role": "system",
-                                                    "content": "\(systemContent)"],
-                                       ["role": "user",
-                                        "content": "\(userContent)"]]]
+            let body = ChatRequestModel(model: GPTModelFamilies.main.rawValue,
+                                         messages: [
+                                            Message(role: .system,
+                                                    content: systemContent),
+                                            Message(role: .user,
+                                                    content: userContent)
+                                         ])
             return .requestBody(body)
         }
     }

@@ -56,10 +56,10 @@ extension TargetType {
             components?.queryItems = queryParams
             request.url = components?.url
             
-            request.httpBody = try JSONSerialization.data(withJSONObject: body, options: [])
+            request.httpBody = try JSONEncoder().encode(body)
             
         case .requestBody(let body):
-            request.httpBody = try JSONSerialization.data(withJSONObject: body, options: [])
+            request.httpBody = try JSONEncoder().encode(body)
             
         case .requestPlain:
             break
