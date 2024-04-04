@@ -19,17 +19,26 @@ final class OpenAINetworkManager {
     private func makeRequest(messages: [OpenAI.Chat.RequestBodyDTO.Message]) -> URLRequest? {
         let requestBody = OpenAI.Chat.RequestBodyDTO(messages: messages)
         
+        let bodyBinary = try? JSONEncoder().encode(requestBody)
+        
+        let authHeader = HTTPRequest.HeaderField.authorization(.bearer(token: apiKey)).header
+        let contentTypeHeader = HTTPRequest.HeaderField.contentType(.application(.json)).header
+        
         let request = OpenAIRequest(
             baseURL: baseURL,
             path: basePath,
-            headerParameters: ["Authorization": "Bearer \(apiKey)",
-                               "Content-Type": "application/json"],
-            bodyParameters: requestBody
+            headerParameters: [
+                authHeader.key: authHeader.value,
+                contentTypeHeader.key: contentTypeHeader.value
+            ],
+            body: bodyBinary
         )
         return request.toURLRequest()
     }
     
-    func requestMessage(messages: [OpenAI.Chat.RequestBodyDTO.Message]) -> AnyPublisher<OpenAI.Chat.ResponseDTO, NetworkError> {
+    func requestMessage(
+        messages: [OpenAI.Chat.RequestBodyDTO.Message]
+    ) -> AnyPublisher<OpenAI.Chat.ResponseDTO, NetworkError> {
         guard let request = makeRequest(messages: messages) else {
             return Fail(error: NetworkError.generic("Failed to create URL request" as! Error)).eraseToAnyPublisher()
         }

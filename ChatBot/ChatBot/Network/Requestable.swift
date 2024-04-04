@@ -6,7 +6,7 @@ protocol Requestable {
     var headerParameters: [String: String] { get }
     var queryParameters: [String: Any] { get }
     var method: HTTPMethodType { get }
-    var bodyParameters: Encodable? { get }
+    var body: Data? { get }
     
     func toURLRequest() -> URLRequest?
 }
@@ -15,9 +15,9 @@ extension Requestable {
     private func toURL() -> URL? {
         var components = URLComponents()
         components.scheme = URLScheme.https.rawValue
-        components.host = baseURL
-        components.path = path
-        components.queryItems = queryParameters.map { URLQueryItem(name: $0, value: $1 as? String) }
+        components.host = self.baseURL
+        components.path = self.path
+        components.queryItems = self.queryParameters.map { URLQueryItem(name: $0, value: $1 as? String) }
         return components.url
     }
     
@@ -26,12 +26,10 @@ extension Requestable {
             return nil
         }
         var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = method.rawValue
-        urlRequest.allHTTPHeaderFields = headerParameters
+        urlRequest.httpMethod = self.method.rawValue
+        urlRequest.allHTTPHeaderFields = self.headerParameters
         
-        if let bodyParameters = bodyParameters {
-            urlRequest.httpBody = try? JSONEncoder().encode(bodyParameters)
-        }
+        urlRequest.httpBody = self.body
         return urlRequest
     }
 }
