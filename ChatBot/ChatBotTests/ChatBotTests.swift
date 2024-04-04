@@ -40,6 +40,7 @@ final class ChatBotTests: XCTestCase {
         let message = Message(role: Role.user,
                               content: "리액티브 프로그래밍이 뭐야?")
         let expectation = XCTestExpectation(description: "postChat")
+        
         let service = ChatBotService(networkService: DefaultNetworkService())
         // when
         Task {
