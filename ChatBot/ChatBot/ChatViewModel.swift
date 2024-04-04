@@ -2,17 +2,23 @@ import Combine
 import Foundation
 
 final class ChatViewModel {
-    let networkManager: OpenAINetworkManager
+    private let networkManager: OpenAINetworkManager
     private var cancellables = Set<AnyCancellable>()
+    
     @Published var userResponse: OpenAI.Chat.ResponseDTO? = nil
     @Published var systemResponse: OpenAI.Chat.ResponseDTO? = nil
     @Published var networkError: NetworkError? = nil
     
-    init(networkManager: OpenAINetworkManager) {
+    init(
+        networkManager: OpenAINetworkManager
+    ) {
         self.networkManager = networkManager
     }
     
-    func sendMessage(role: OpenAI.Chat.RequestBodyDTO.Message.Role, content: String) {
+    func sendMessage(
+        role: OpenAI.Chat.RequestBodyDTO.Message.Role,
+        content: String
+    ) {
         let message = OpenAI.Chat.RequestBodyDTO.Message(role: role, content: content)
         networkManager.requestMessage(messages: [message])
             .sink { completion in

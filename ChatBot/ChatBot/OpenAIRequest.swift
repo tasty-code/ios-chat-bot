@@ -6,12 +6,14 @@ struct OpenAIRequest: Requestable {
     let method: HTTPMethodType
     let bodyParameters: Encodable?
     
-    init(baseURL: String,
-         path: String,
-         headerParameters: [String: String] = [:],
-         queryParameters: [String: Any] = [:],
-         method: HTTPMethodType = .post,
-         bodyParameters: Encodable? = nil) { 
+    init(
+        baseURL: String,
+        path: String,
+        headerParameters: [String: String] = [:],
+        queryParameters: [String: Any] = [:],
+        method: HTTPMethodType = .post,
+        bodyParameters: Encodable? = nil
+    ) {
         self.baseURL = baseURL
         self.path = path
         self.headerParameters = headerParameters

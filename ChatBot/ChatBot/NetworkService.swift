@@ -1,14 +1,6 @@
 import Foundation
 import Combine
 
-enum NetworkError: Error {
-    case error(statusCode: Int, data: Data?)
-    case notConnected
-    case cancelled
-    case generic(Error)
-    case dataError
-}
-
 final class OpenAINetworkManager {
     private let apiKey: String
     private let baseURL = "api.openai.com"
@@ -48,7 +40,7 @@ final class OpenAINetworkManager {
                     throw NetworkError.notConnected
                 }
                 guard (200...299).contains(httpResponse.statusCode) else {
-                    throw NetworkError.error(statusCode: httpResponse.statusCode, data: data)
+                    throw NetworkError.httpResponse(statusCode: httpResponse.statusCode, data: data)
                 }
                 return data
             }

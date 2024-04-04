@@ -1,19 +1,5 @@
 import Foundation
 
-enum URLScheme: String {
-    case http
-    case https
-}
-
-enum HTTPMethodType: String {
-    case get     = "GET"
-    case head    = "HEAD"
-    case post    = "POST"
-    case put     = "PUT"
-    case patch   = "PATCH"
-    case delete  = "DELETE"
-}
-
 protocol Requestable {
     var baseURL: String { get }
     var path: String { get }
