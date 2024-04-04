@@ -1,7 +1,7 @@
 import Combine
 import Foundation
 
-final class ChatViewModel {
+final class MainViewModel {
     private let networkManager: OpenAINetworkManager
     private var cancellables = Set<AnyCancellable>()
     

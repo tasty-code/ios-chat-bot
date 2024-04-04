@@ -1,8 +1,8 @@
 import UIKit
 import Combine
 
-final class ViewController: UIViewController {
-    private let chatViewModel = ChatViewModel(networkManager: OpenAINetworkManager())
+final class MainViewController: UIViewController {
+    private let chatViewModel = MainViewModel(networkManager: OpenAINetworkManager())
     private var cancellables = Set<AnyCancellable>()
     
     override func viewDidLoad() {
