@@ -17,7 +17,7 @@ final class ChatBubbleView: UIView {
         $0.lineBreakMode = .byWordWrapping
     }
     
-    private var isUser: Bool = false {
+    private(set) var isUser: Bool = false {
         didSet { setNeedsDisplay() }
     }
     
