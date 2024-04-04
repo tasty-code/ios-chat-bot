@@ -54,12 +54,12 @@ extension ChatViewController {
 extension ChatViewController {
     private func registerButton() {
         chatTextView.sendButton.rx.tap
-            .subscribe(onNext: {
-                guard let text = self.chatTextView.textView.text else {
+            .subscribe(onNext: { [weak self] in
+                guard let text = self?.chatTextView.textView.text else {
                     return
                 }
                 
-                self.chatViewModel.updateMessage(with: text)
+                self?.chatViewModel.updateMessage(with: text)
             })
             .disposed(by: bag)
     }
