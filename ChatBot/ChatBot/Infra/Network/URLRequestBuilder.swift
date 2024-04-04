@@ -1,6 +1,6 @@
 import Foundation
 
-final class URLRequestBuilder {
+struct URLRequestBuilder {
     private let baseURL: String
     private var path: String = "/"
     private var headerParameters: [String: String] = [:]
@@ -39,28 +39,58 @@ extension URLRequestBuilder {
     }
     
     func setPath(_ path: String) -> Self {
-        self.path = path
-        return self
+        var builder = clone()
+        builder.path = path
+        return builder
     }
     
     func setHeaderParameters(_ headerParameters: [String: String]) -> Self {
-        self.headerParameters = headerParameters
-        return self
+        var builder = clone()
+        builder.headerParameters = headerParameters
+        return builder
     }
     
     func setQueryParameters(_ queryParameters: [String: String]) -> Self {
-        self.queryParameters = queryParameters
-        return self
+        var builder = clone()
+        builder.queryParameters = queryParameters
+        return builder
     }
     
     func setMethod(_ method: HTTPMethod) -> Self {
-        self.method = method
-        return self
+        var builder = clone()
+        builder.method = method
+        return builder
     }
     
-    func setBodyParameters(_ bodyParameters: Encodable) -> Self {
-        self.bodyParameters = bodyParameters
-        return self
+    func setBodyParameters(_ bodyParameters: Encodable?) -> Self {
+        var builder = clone()
+        builder.bodyParameters = bodyParameters
+        return builder
     }
+    
+    private func clone() -> Self {
+        return .init(baseURL: self.baseURL,
+                     path: self.path,
+                     headerParameters: self.headerParameters,
+                     queryParameters: self.queryParameters,
+                     method: self.method,
+                     bodyParameters: self.bodyParameters)
+    }
+    
+    private init(
+        baseURL: String,
+        path: String,
+        headerParameters: [String: String],
+        queryParameters: [String: String],
+        method: HTTPMethod,
+        bodyParameters: Encodable?
+    ) {
+        self.baseURL = baseURL
+        self.path = path
+        self.headerParameters = headerParameters
+        self.queryParameters = queryParameters
+        self.method = method
+        self.bodyParameters = bodyParameters
+    }
+    
 }
-
