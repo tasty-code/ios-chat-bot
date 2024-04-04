@@ -13,8 +13,6 @@ import RxSwift
 final class ChatViewModel {
     private var dataSource: UICollectionViewDiffableDataSource<Section, ChatMessage>?
     private(set) var service = ChatAPIService()
-    
-    private var snapshot = NSDiffableDataSourceSnapshot<Section, ChatMessage>()
 }
 
 // MARK: - Custom Methods
@@ -23,22 +21,18 @@ extension ChatViewModel {
         case main
     }
     
-    private func createSnapShot(with chatMessage: ChatMessage) {
-        let isSection = snapshot.sectionIdentifiers.contains(.main)
-        
-        switch isSection {
-        case true:
-            guard let last = snapshot.itemIdentifiers.last else {
-                return
-            }
-            snapshot.insertItems([chatMessage], afterItem: last)
-            dataSource?.applySnapshotUsingReloadData(snapshot)
-            
-        case false:
-            snapshot.appendSections([.main])
-            snapshot.appendItems([chatMessage])
-            dataSource?.apply(snapshot, animatingDifferences: true)
+    private func applySnapShot(with chatMessage: ChatMessage) {
+        guard var snapshot = dataSource?.snapshot() else {
+            return
         }
+        
+        if let last = snapshot.itemIdentifiers.last {
+            snapshot.insertItems([chatMessage], afterItem: last)
+        } else {
+            snapshot.appendItems([chatMessage])
+        }
+        
+        dataSource?.applySnapshotUsingReloadData(snapshot)
     }
 }
 
@@ -54,11 +48,16 @@ extension ChatViewModel {
             cell.text(itemIdentifier.message, isUser: itemIdentifier.isUser)
             return cell
         }
+        
+        var snapshot = NSDiffableDataSourceSnapshot<Section, ChatMessage>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems([])
+        dataSource?.apply(snapshot, animatingDifferences: true)
     }
     
     func updateMessage(with message: String) {
         let chatMessage = ChatMessage(id: UUID(), isUser: true, message: message)
-        createSnapShot(with: chatMessage)
+        applySnapShot(with: chatMessage)
         
         _ = service.createChat(systemContent: "Hello! How can I assist you today?",
                                 userContent: message)
@@ -69,7 +68,7 @@ extension ChatViewModel {
                 }
                 
                 let chatMessage = ChatMessage(id: UUID(), isUser: false, message: message)
-                self?.createSnapShot(with: chatMessage)
+                self?.applySnapShot(with: chatMessage)
             }, onFailure: { error in
                 print(error)
             })
