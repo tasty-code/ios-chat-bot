@@ -60,6 +60,7 @@ extension ChatViewController {
                 }
                 
                 self?.chatViewModel.updateMessage(with: text)
+                self?.chatTextView.textView.text = ""
             })
             .disposed(by: bag)
     }
