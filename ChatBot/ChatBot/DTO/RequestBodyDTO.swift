@@ -12,3 +12,7 @@ extension OpenAI.Chat.RequestBodyDTO {
         let content: String
     }
 }
+enum Role: String {
+    case user
+    case system
+}
