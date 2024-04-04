@@ -17,7 +17,7 @@ class ChatBotViewController: UIViewController {
     }
     private let chatBotViewModel: ChatBotViewModel
     let disposeBag = DisposeBag()
-    let chatTrigger = PublishSubject<Void>()
+    let chatTrigger = PublishSubject<Message>()
     
     init(chatBotViewModel: ChatBotViewModel) {
         self.chatBotViewModel = chatBotViewModel
@@ -64,7 +64,7 @@ private extension ChatBotViewController {
     
     func bindView() {
         button.rx.tap.bind { [weak self] _ in
-            self?.chatTrigger.onNext(Void())
+            self?.chatTrigger.onNext(Message(role: "user", content: "집언제감?"))
         }.disposed(by: disposeBag)
     }
 }
