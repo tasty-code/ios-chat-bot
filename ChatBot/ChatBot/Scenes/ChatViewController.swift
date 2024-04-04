@@ -13,10 +13,9 @@ import RxSwift
 final class ChatViewController: UIViewController {
     private let chatTextView = ChatTextView()
     private lazy var chatCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
-    private var dataSource: UICollectionViewDiffableDataSource<Section, String>?
-    private let service = ChatAPIService()
+    
+    private let chatViewModel = ChatViewModel()
     private let bag = DisposeBag()
-    private var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,18 +58,8 @@ extension ChatViewController {
                 guard let text = self.chatTextView.textView.text else {
                     return
                 }
-                self.service.createChat(systemContent: "Hello! How can I assist you today?",
-                                   userContent: text)
-                    .subscribe(onSuccess: { result in
-                        guard let message = result?.choices[0].message.content else {
-                            return
-                        }
-                        self.snapshot.appendSections([.main])
-                        self.snapshot.appendItems([message])
-                        self.dataSource?.apply(self.snapshot)
-                    }, onFailure: { error in
-                        print(error)
-                    })
+                
+                self.chatViewModel.updateMessage(with: text)
             })
             .disposed(by: bag)
     }
@@ -90,25 +79,10 @@ extension ChatViewController {
 
 // MARK: - ChatCollectionView
 extension ChatViewController {
-    enum Section {
-        case main
-    }
-
     private func setUpChatCollectionView() {
         chatCollectionView.register(ChatCollectionViewCell.self, forCellWithReuseIdentifier: ChatCollectionViewCell.className)
         
-        dataSource = UICollectionViewDiffableDataSource(collectionView: chatCollectionView) { collectionView, indexPath, itemIdentifier in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatCollectionViewCell.className, for: indexPath) as? ChatCollectionViewCell else {
-                return UICollectionViewCell()
-            }
-            cell.text(itemIdentifier, isUser: false)
-            return cell
-        }
-        
-        var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(["test1", "test2", "test3", "test4"])
-        dataSource?.apply(snapshot, animatingDifferences: false)
+        chatViewModel.setDataSource(collectionView: chatCollectionView)
     }
     
     private func createLayout() -> UICollectionViewCompositionalLayout {
