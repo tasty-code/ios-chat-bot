@@ -8,16 +8,24 @@
 import Foundation
 
 class MessageRepository {
-    
-    var messagesStorage: [RequestMessageModel] = []
+    private var messagesStorage: [RequestMessageModel] = []
+    private let repoQueue = DispatchQueue(label: "repoQueue")
     
     func addMessage(_ message: RequestMessageModel) {
-        messagesStorage.append(message)
+        repoQueue.async {
+            self.messagesStorage.append(message)
+        }
     }
+    
     func getMessages() -> [RequestMessageModel] {
-        return messagesStorage
+        return repoQueue.sync {
+            messagesStorage
+        }
     }
+    
     func clearStorage() {
-        messagesStorage.removeAll()
+        repoQueue.sync {
+            self.messagesStorage.removeAll()
+        }
     }
 }
