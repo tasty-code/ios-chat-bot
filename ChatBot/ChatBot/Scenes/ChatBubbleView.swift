@@ -17,9 +17,11 @@ final class ChatBubbleView: UIView {
         $0.lineBreakMode = .byWordWrapping
     }
     
-    private(set) var isUser: Bool = false {
+    private var isUser: Bool = false {
         didSet { setNeedsDisplay() }
     }
+    
+    private var bubbleViewColor: CGColor = UIColor.systemGray5.cgColor
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -46,7 +48,7 @@ final class ChatBubbleView: UIView {
         let messageBody = CGRect(x: startX, y: startY, width: bubbleWidth, height: bubbleHeight)
         
         context?.addPath(CGPath(roundedRect: messageBody, cornerWidth: 10, cornerHeight: 10, transform: nil))
-        context?.setFillColor(UIColor.systemGray5.cgColor)
+        context?.setFillColor(bubbleViewColor)
         context?.fillPath()
         
         let tailStartPoint = CGPoint(x: isUser ? endX : startX, y: endY - 25)
@@ -57,7 +59,7 @@ final class ChatBubbleView: UIView {
         context?.move(to: tailStartPoint)
         context?.addQuadCurve(to: tailTipPoint, control: tailControlPoint)
         context?.addQuadCurve(to: tailEndPoint, control: tailControlPoint)
-        context?.setFillColor(UIColor.systemGray5.cgColor)
+        context?.setFillColor(bubbleViewColor)
         context?.fillPath()
     }
 }
@@ -84,6 +86,10 @@ extension ChatBubbleView {
 extension ChatBubbleView {
     func setUser(_ isUser: Bool) {
         self.isUser = isUser
+        if isUser {
+            bubbleViewColor = UIColor.systemBlue.cgColor
+            textLabel.textColor = .white
+        }
     }
     
     func setText(_ text: String) {
