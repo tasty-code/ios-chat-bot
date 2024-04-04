@@ -9,6 +9,7 @@ import UIKit
 
 import RxSwift
 
+// 채팅 뷰 모델
 final class ChatViewModel {
     private var dataSource: UICollectionViewDiffableDataSource<Section, ChatMessage>?
     private(set) var service = ChatAPIService()
@@ -16,6 +17,32 @@ final class ChatViewModel {
     private var snapshot = NSDiffableDataSourceSnapshot<Section, ChatMessage>()
 }
 
+// MARK: - Custom Methods
+extension ChatViewModel {
+    enum Section {
+        case main
+    }
+    
+    private func createSnapShot(with chatMessage: ChatMessage) {
+        let isSection = snapshot.sectionIdentifiers.contains(.main)
+        
+        switch isSection {
+        case true:
+            guard let last = snapshot.itemIdentifiers.last else {
+                return
+            }
+            snapshot.insertItems([chatMessage], afterItem: last)
+            dataSource?.applySnapshotUsingReloadData(snapshot)
+            
+        case false:
+            snapshot.appendSections([.main])
+            snapshot.appendItems([chatMessage])
+            dataSource?.apply(snapshot, animatingDifferences: true)
+        }
+    }
+}
+
+// MARK: - Public Methods
 extension ChatViewModel {
     func setDataSource(collectionView: UICollectionView) {
         self.dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
@@ -46,29 +73,5 @@ extension ChatViewModel {
             }, onFailure: { error in
                 print(error)
             })
-    }
-}
-
-extension ChatViewModel {
-    enum Section {
-        case main
-    }
-    
-    private func createSnapShot(with chatMessage: ChatMessage) {
-        let isSection = snapshot.sectionIdentifiers.contains(.main)
-        
-        switch isSection {
-        case true:
-            guard let last = snapshot.itemIdentifiers.last else {
-                return
-            }
-            snapshot.insertItems([chatMessage], afterItem: last)
-            dataSource?.applySnapshotUsingReloadData(snapshot)
-            
-        case false:
-            snapshot.appendSections([.main])
-            snapshot.appendItems([chatMessage])
-            dataSource?.apply(snapshot, animatingDifferences: true)
-        }
     }
 }

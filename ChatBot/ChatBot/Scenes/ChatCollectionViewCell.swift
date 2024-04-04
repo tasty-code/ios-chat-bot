@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// 콜렉션뷰셀
 final class ChatCollectionViewCell: UICollectionViewCell {
     static let className: String = String(describing: ChatCollectionViewCell.self)
     
@@ -14,7 +15,7 @@ final class ChatCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
+        configureUI()
     }
     
     required init?(coder: NSCoder) {
@@ -22,8 +23,9 @@ final class ChatCollectionViewCell: UICollectionViewCell {
     }
 }
 
+// MARK: - UI
 extension ChatCollectionViewCell {
-    private func configure() {
+    private func configureUI() {
         self.addSubview(chatBubbleView)
         
         chatBubbleView.snp.makeConstraints { 
@@ -32,6 +34,7 @@ extension ChatCollectionViewCell {
     }
 }
 
+// MARK: - Public Methods
 extension ChatCollectionViewCell {
     func text(_ string: String, isUser: Bool) {
         chatBubbleView.setText(string)
