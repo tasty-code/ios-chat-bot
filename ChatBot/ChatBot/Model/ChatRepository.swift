@@ -16,15 +16,15 @@ struct ChatRepository {
         self.network = network
     }
     
-    func requestChatResultData(userMessage: String)-> Observable<ResponseChatDTO> {
+    func requestChatResultData(message: Message)-> Observable<ResponseChatDTO> {
         
 //        let chat = RequestChatDTO(messages: [
 //            Message(role: "system", content: "너는 연애고수야"),
 //            Message(role: "user", content: "\(userMessage)")
 //        ])
         
-        return network.fetchData()
-//        
+        return network.fetchData(message: message)
+//
 //        let result = try await apiService.fetchData(with: urlRequest)
 //        switch result {
 //        case .success(let success):

@@ -12,15 +12,12 @@ final class ChatBotViewModel {
     private let chatBotNetwork: ChatBotNetwork
     
     init() {
-        let chat = RequestChatDTO(messages: [
-            Message(role: "system", content: "나는 병신이야"),
-            Message(role: "user", content: "집에가고싶어요..")
-        ])
-        self.chatBotNetwork = ChatBotNetwork(network: Network(NetworkURL.makeURLRequest(type: .chatGPT, chat: chat, httpMethod: .post)!))
+        let provider = NetworkProvider()
+        self.chatBotNetwork = provider.makeChatNetwork()
     }
     
     struct Input {
-        let chatTigger: Observable<Void>
+        let chatTigger: Observable<Message>
     }
     
     struct Output {
@@ -28,8 +25,8 @@ final class ChatBotViewModel {
     }
     
     func transform(input: Input) -> Output {
-        let resultChat = input.chatTigger.flatMapLatest { [unowned self] _ -> Observable<Result<ResponseChatDTO, Error>> in
-            self.chatBotNetwork.requestChatBotMessage().map {
+        let resultChat = input.chatTigger.flatMapLatest { [unowned self] message -> Observable<Result<ResponseChatDTO, Error>> in
+            self.chatBotNetwork.requestChatBotMessage(message: message).map {
                     return .success($0)
                 }
                 .catchError { error in
