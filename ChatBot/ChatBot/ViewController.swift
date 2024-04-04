@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChatbotMainViewController: UIViewController {
+final class ChatbotMainViewController: UIViewController {
     private var viewModel: ChatViewModel
     private var repo: MessageRepository
     private let apiService: OpenAIService
