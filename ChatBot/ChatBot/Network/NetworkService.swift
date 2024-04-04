@@ -2,12 +2,14 @@ import Foundation
 import Combine
 
 final class NetworkManager {
+    private let requester: NetworkRequestable
     private let jsonDecoder: JSONDecoder
     
     init(
+        requester: NetworkRequestable,
         decoder: JSONDecoder
     ) {
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        self.requester = requester
         self.jsonDecoder = decoder
     }
     
@@ -24,7 +26,7 @@ final class NetworkManager {
             return Fail(error: NetworkError.generic("Failed to create URL request" as! Error)).eraseToAnyPublisher()
         }
         
-        return URLSession.shared.dataTaskPublisher(for: request)
+        return requester.dataTaskPublisher(for: request)
             .tryMap { data, response in
                 guard let httpResponse = response as? HTTPURLResponse else {
                     throw NetworkError.notConnected
