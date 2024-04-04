@@ -15,8 +15,8 @@ final class ChatBotNetwork {
         self.network = network
     }
     
-    func requestChatBotMessage() -> Observable<ResponseChatDTO> {
-        return network.fetchData()
+    func requestChatBotMessage(message: Message) -> Observable<ResponseChatDTO> {
+        return network.fetchData(message: message)
     }
 }
 
