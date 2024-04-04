@@ -18,7 +18,13 @@ final class ChatBubbleView: UIView {
     }
     
     private var isUser: Bool = false {
-        didSet { setNeedsDisplay() }
+        willSet {
+            if newValue {
+                bubbleViewColor = UIColor.systemBlue.cgColor
+                textLabel.textColor = .white
+            }
+            setNeedsDisplay()
+        }
     }
     
     private var bubbleViewColor: CGColor = UIColor.systemGray5.cgColor
@@ -86,10 +92,6 @@ extension ChatBubbleView {
 extension ChatBubbleView {
     func setUser(_ isUser: Bool) {
         self.isUser = isUser
-        if isUser {
-            bubbleViewColor = UIColor.systemBlue.cgColor
-            textLabel.textColor = .white
-        }
     }
     
     func setText(_ text: String) {
