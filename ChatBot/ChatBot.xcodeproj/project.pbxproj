@@ -7,13 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9B76B2B02BBBF2F00089676F /* APIToken.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B76B2AF2BBBF2F00089676F /* APIToken.plist */; };
-		C12E66D32BB3F28800F3F441 /* ChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66B82BB3F28800F3F441 /* ChatManager.swift */; };
+		C12E66D32BB3F28800F3F441 /* ChatBotViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66B82BB3F28800F3F441 /* ChatBotViewModel.swift */; };
 		C12E66D42BB3F28800F3F441 /* ChatRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66B92BB3F28800F3F441 /* ChatRepository.swift */; };
 		C12E66D52BB3F28800F3F441 /* RequestChatDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66BA2BB3F28800F3F441 /* RequestChatDTO.swift */; };
-		C12E66D62BB3F28800F3F441 /* UserMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66BB2BB3F28800F3F441 /* UserMessage.swift */; };
+		C12E66D62BB3F28800F3F441 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66BB2BB3F28800F3F441 /* Message.swift */; };
 		C12E66D72BB3F28800F3F441 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66BD2BB3F28800F3F441 /* Bundle+Extension.swift */; };
-		C12E66D82BB3F28800F3F441 /* URLSession+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66BE2BB3F28800F3F441 /* URLSession+Extension.swift */; };
 		C12E66D92BB3F28800F3F441 /* ChatBotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66C02BB3F28800F3F441 /* ChatBotViewController.swift */; };
 		C12E66DB2BB3F28800F3F441 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C12E66C32BB3F28800F3F441 /* Assets.xcassets */; };
 		C12E66DD2BB3F28800F3F441 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66C62BB3F28800F3F441 /* APIService.swift */; };
@@ -21,7 +19,6 @@
 		C12E66DF2BB3F28800F3F441 /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66C82BB3F28800F3F441 /* HttpMethod.swift */; };
 		C12E66E02BB3F28800F3F441 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66C92BB3F28800F3F441 /* NetworkError.swift */; };
 		C12E66E12BB3F28800F3F441 /* NetworkURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66CA2BB3F28800F3F441 /* NetworkURL.swift */; };
-		C12E66E22BB3F28800F3F441 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66CB2BB3F28800F3F441 /* URLSessionProtocol.swift */; };
 		C12E66E32BB3F28800F3F441 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66CD2BB3F28800F3F441 /* AppDelegate.swift */; };
 		C12E66E42BB3F28800F3F441 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66CE2BB3F28800F3F441 /* SceneDelegate.swift */; };
 		C12E66E52BB3F28800F3F441 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C12E66D12BB3F28800F3F441 /* LaunchScreen.storyboard */; };
@@ -29,18 +26,25 @@
 		C12E66EC2BB4291A00F3F441 /* ResponseChoiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66EB2BB4291A00F3F441 /* ResponseChoiceDTO.swift */; };
 		C12E66EE2BB4294300F3F441 /* Usage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66ED2BB4294300F3F441 /* Usage.swift */; };
 		C12E66F02BB429AA00F3F441 /* JSONNull.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66EF2BB429AA00F3F441 /* JSONNull.swift */; };
+		C1865DA12BBE945000DD99C9 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C1865DA02BBE945000DD99C9 /* SnapKit */; };
+		C1865DA32BBE945000DD99C9 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = C1865DA22BBE945000DD99C9 /* SnapKit-Dynamic */; };
+		C1865DA62BBE945D00DD99C9 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = C1865DA52BBE945D00DD99C9 /* Then */; };
+		C1865DA92BBE946D00DD99C9 /* RxAlamofire in Frameworks */ = {isa = PBXBuildFile; productRef = C1865DA82BBE946D00DD99C9 /* RxAlamofire */; };
+		C1865DB22BBE948000DD99C9 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C1865DB12BBE948000DD99C9 /* RxSwift */; };
+		C1865DB62BBE94A600DD99C9 /* APIToken.plist in Resources */ = {isa = PBXBuildFile; fileRef = C1865DB52BBE94A600DD99C9 /* APIToken.plist */; };
+		C1865DB82BBE9C3400DD99C9 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1865DB72BBE9C3400DD99C9 /* Network.swift */; };
+		C1865DBA2BBE9E8600DD99C9 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1865DB92BBE9E8600DD99C9 /* NetworkProvider.swift */; };
+		C1865DBC2BBEB72900DD99C9 /* ChatBotNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1865DBB2BBEB72900DD99C9 /* ChatBotNetwork.swift */; };
 		C1E416662BB9888C00D8C836 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E416652BB9888C00D8C836 /* UIViewController+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9B76B2AF2BBBF2F00089676F /* APIToken.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = APIToken.plist; path = ../../../../../APIToken.plist; sourceTree = "<group>"; };
 		B4B3E2B92B42D1BB00818B3C /* ChatBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C12E66B82BB3F28800F3F441 /* ChatManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatManager.swift; sourceTree = "<group>"; };
+		C12E66B82BB3F28800F3F441 /* ChatBotViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatBotViewModel.swift; sourceTree = "<group>"; };
 		C12E66B92BB3F28800F3F441 /* ChatRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRepository.swift; sourceTree = "<group>"; };
 		C12E66BA2BB3F28800F3F441 /* RequestChatDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestChatDTO.swift; sourceTree = "<group>"; };
-		C12E66BB2BB3F28800F3F441 /* UserMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMessage.swift; sourceTree = "<group>"; };
+		C12E66BB2BB3F28800F3F441 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		C12E66BD2BB3F28800F3F441 /* Bundle+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
-		C12E66BE2BB3F28800F3F441 /* URLSession+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSession+Extension.swift"; sourceTree = "<group>"; };
 		C12E66C02BB3F28800F3F441 /* ChatBotViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatBotViewController.swift; sourceTree = "<group>"; };
 		C12E66C32BB3F28800F3F441 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C12E66C42BB3F28800F3F441 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,7 +53,6 @@
 		C12E66C82BB3F28800F3F441 /* HttpMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
 		C12E66C92BB3F28800F3F441 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		C12E66CA2BB3F28800F3F441 /* NetworkURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkURL.swift; sourceTree = "<group>"; };
-		C12E66CB2BB3F28800F3F441 /* URLSessionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
 		C12E66CD2BB3F28800F3F441 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C12E66CE2BB3F28800F3F441 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C12E66D02BB3F28800F3F441 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -57,6 +60,10 @@
 		C12E66EB2BB4291A00F3F441 /* ResponseChoiceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseChoiceDTO.swift; sourceTree = "<group>"; };
 		C12E66ED2BB4294300F3F441 /* Usage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usage.swift; sourceTree = "<group>"; };
 		C12E66EF2BB429AA00F3F441 /* JSONNull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONNull.swift; sourceTree = "<group>"; };
+		C1865DB52BBE94A600DD99C9 /* APIToken.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = APIToken.plist; sourceTree = "<group>"; };
+		C1865DB72BBE9C3400DD99C9 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		C1865DB92BBE9E8600DD99C9 /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
+		C1865DBB2BBEB72900DD99C9 /* ChatBotNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotNetwork.swift; sourceTree = "<group>"; };
 		C1E416652BB9888C00D8C836 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -65,6 +72,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1865DA12BBE945000DD99C9 /* SnapKit in Frameworks */,
+				C1865DA92BBE946D00DD99C9 /* RxAlamofire in Frameworks */,
+				C1865DA62BBE945D00DD99C9 /* Then in Frameworks */,
+				C1865DA32BBE945000DD99C9 /* SnapKit-Dynamic in Frameworks */,
+				C1865DB22BBE948000DD99C9 /* RxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,12 +103,12 @@
 			isa = PBXGroup;
 			children = (
 				C12E66CF2BB3F28800F3F441 /* App */,
-				C12E66C12BB3F28800F3F441 /* Controller */,
-				C12E66BF2BB3F28800F3F441 /* Extension */,
 				C12E66BC2BB3F28800F3F441 /* Model */,
+				C12E66D22BB3F28800F3F441 /* View */,
+				C1865DBD2BBEC71B00DD99C9 /* ViewModel */,
+				C12E66BF2BB3F28800F3F441 /* Extension */,
 				C12E66CC2BB3F28800F3F441 /* Network */,
 				C12E66C52BB3F28800F3F441 /* Resource */,
-				C12E66D22BB3F28800F3F441 /* View */,
 			);
 			path = ChatBot;
 			sourceTree = "<group>";
@@ -104,10 +116,9 @@
 		C12E66BC2BB3F28800F3F441 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C12E66B82BB3F28800F3F441 /* ChatManager.swift */,
 				C12E66B92BB3F28800F3F441 /* ChatRepository.swift */,
 				C12E66BA2BB3F28800F3F441 /* RequestChatDTO.swift */,
-				C12E66BB2BB3F28800F3F441 /* UserMessage.swift */,
+				C12E66BB2BB3F28800F3F441 /* Message.swift */,
 				C12E66E92BB4283100F3F441 /* ResponseChatDTO.swift */,
 				C12E66EB2BB4291A00F3F441 /* ResponseChoiceDTO.swift */,
 				C12E66ED2BB4294300F3F441 /* Usage.swift */,
@@ -120,18 +131,9 @@
 			isa = PBXGroup;
 			children = (
 				C12E66BD2BB3F28800F3F441 /* Bundle+Extension.swift */,
-				C12E66BE2BB3F28800F3F441 /* URLSession+Extension.swift */,
 				C1E416652BB9888C00D8C836 /* UIViewController+Extension.swift */,
 			);
 			path = Extension;
-			sourceTree = "<group>";
-		};
-		C12E66C12BB3F28800F3F441 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				C12E66C02BB3F28800F3F441 /* ChatBotViewController.swift */,
-			);
-			path = Controller;
 			sourceTree = "<group>";
 		};
 		C12E66C52BB3F28800F3F441 /* Resource */ = {
@@ -139,7 +141,7 @@
 			children = (
 				C12E66C32BB3F28800F3F441 /* Assets.xcassets */,
 				C12E66C42BB3F28800F3F441 /* Info.plist */,
-				9B76B2AF2BBBF2F00089676F /* APIToken.plist */,
+				C1865DB52BBE94A600DD99C9 /* APIToken.plist */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -147,12 +149,14 @@
 		C12E66CC2BB3F28800F3F441 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				C12E66C62BB3F28800F3F441 /* APIService.swift */,
 				C12E66C72BB3F28800F3F441 /* APIType.swift */,
-				C12E66C82BB3F28800F3F441 /* HttpMethod.swift */,
-				C12E66C92BB3F28800F3F441 /* NetworkError.swift */,
 				C12E66CA2BB3F28800F3F441 /* NetworkURL.swift */,
-				C12E66CB2BB3F28800F3F441 /* URLSessionProtocol.swift */,
+				C1865DB72BBE9C3400DD99C9 /* Network.swift */,
+				C12E66C82BB3F28800F3F441 /* HttpMethod.swift */,
+				C1865DBB2BBEB72900DD99C9 /* ChatBotNetwork.swift */,
+				C12E66C62BB3F28800F3F441 /* APIService.swift */,
+				C12E66C92BB3F28800F3F441 /* NetworkError.swift */,
+				C1865DB92BBE9E8600DD99C9 /* NetworkProvider.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -169,9 +173,18 @@
 		C12E66D22BB3F28800F3F441 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C12E66C02BB3F28800F3F441 /* ChatBotViewController.swift */,
 				C12E66D12BB3F28800F3F441 /* LaunchScreen.storyboard */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		C1865DBD2BBEC71B00DD99C9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C12E66B82BB3F28800F3F441 /* ChatBotViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,6 +203,13 @@
 			dependencies = (
 			);
 			name = ChatBot;
+			packageProductDependencies = (
+				C1865DA02BBE945000DD99C9 /* SnapKit */,
+				C1865DA22BBE945000DD99C9 /* SnapKit-Dynamic */,
+				C1865DA52BBE945D00DD99C9 /* Then */,
+				C1865DA82BBE946D00DD99C9 /* RxAlamofire */,
+				C1865DB12BBE948000DD99C9 /* RxSwift */,
+			);
 			productName = ChatBot;
 			productReference = B4B3E2B92B42D1BB00818B3C /* ChatBot.app */;
 			productType = "com.apple.product-type.application";
@@ -218,6 +238,12 @@
 				Base,
 			);
 			mainGroup = B4B3E2B02B42D1BB00818B3C;
+			packageReferences = (
+				C1865D9F2BBE945000DD99C9 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				C1865DA42BBE945D00DD99C9 /* XCRemoteSwiftPackageReference "Then" */,
+				C1865DA72BBE946D00DD99C9 /* XCRemoteSwiftPackageReference "RxAlamofire" */,
+				C1865DAA2BBE948000DD99C9 /* XCRemoteSwiftPackageReference "RxSwift" */,
+			);
 			productRefGroup = B4B3E2BA2B42D1BB00818B3C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -234,7 +260,7 @@
 			files = (
 				C12E66DB2BB3F28800F3F441 /* Assets.xcassets in Resources */,
 				C12E66E52BB3F28800F3F441 /* LaunchScreen.storyboard in Resources */,
-				9B76B2B02BBBF2F00089676F /* APIToken.plist in Resources */,
+				C1865DB62BBE94A600DD99C9 /* APIToken.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,19 +278,20 @@
 				C12E66DD2BB3F28800F3F441 /* APIService.swift in Sources */,
 				C12E66D72BB3F28800F3F441 /* Bundle+Extension.swift in Sources */,
 				C12E66E12BB3F28800F3F441 /* NetworkURL.swift in Sources */,
-				C12E66D32BB3F28800F3F441 /* ChatManager.swift in Sources */,
+				C12E66D32BB3F28800F3F441 /* ChatBotViewModel.swift in Sources */,
 				C12E66E42BB3F28800F3F441 /* SceneDelegate.swift in Sources */,
-				C12E66D82BB3F28800F3F441 /* URLSession+Extension.swift in Sources */,
-				C12E66E22BB3F28800F3F441 /* URLSessionProtocol.swift in Sources */,
+				C1865DBA2BBE9E8600DD99C9 /* NetworkProvider.swift in Sources */,
 				C12E66EE2BB4294300F3F441 /* Usage.swift in Sources */,
 				C1E416662BB9888C00D8C836 /* UIViewController+Extension.swift in Sources */,
+				C1865DBC2BBEB72900DD99C9 /* ChatBotNetwork.swift in Sources */,
 				C12E66D52BB3F28800F3F441 /* RequestChatDTO.swift in Sources */,
+				C1865DB82BBE9C3400DD99C9 /* Network.swift in Sources */,
 				C12E66F02BB429AA00F3F441 /* JSONNull.swift in Sources */,
 				C12E66EC2BB4291A00F3F441 /* ResponseChoiceDTO.swift in Sources */,
 				C12E66EA2BB4283100F3F441 /* ResponseChatDTO.swift in Sources */,
 				C12E66D42BB3F28800F3F441 /* ChatRepository.swift in Sources */,
 				C12E66E32BB3F28800F3F441 /* AppDelegate.swift in Sources */,
-				C12E66D62BB3F28800F3F441 /* UserMessage.swift in Sources */,
+				C12E66D62BB3F28800F3F441 /* Message.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,6 +515,69 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C1865D9F2BBE945000DD99C9 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		C1865DA42BBE945D00DD99C9 /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+		C1865DA72BBE946D00DD99C9 /* XCRemoteSwiftPackageReference "RxAlamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxAlamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.2.0;
+			};
+		};
+		C1865DAA2BBE948000DD99C9 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C1865DA02BBE945000DD99C9 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C1865D9F2BBE945000DD99C9 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		C1865DA22BBE945000DD99C9 /* SnapKit-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C1865D9F2BBE945000DD99C9 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = "SnapKit-Dynamic";
+		};
+		C1865DA52BBE945D00DD99C9 /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C1865DA42BBE945D00DD99C9 /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
+		};
+		C1865DA82BBE946D00DD99C9 /* RxAlamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C1865DA72BBE946D00DD99C9 /* XCRemoteSwiftPackageReference "RxAlamofire" */;
+			productName = RxAlamofire;
+		};
+		C1865DB12BBE948000DD99C9 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C1865DAA2BBE948000DD99C9 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B4B3E2B12B42D1BB00818B3C /* Project object */;
 }
