@@ -113,15 +113,9 @@
 		B4B3E2BB2B42D1BB00818B3C /* ChatBot */ = {
 			isa = PBXGroup;
 			children = (
+				BDD77FB12BBE80A600192556 /* App */,
 				BDD77F942BBA9B6200192556 /* Infra */,
 				BDD77F932BBA9B5A00192556 /* Domain */,
-				CE8316782BB6880700D9371E /* APIKey.xcconfig */,
-				B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */,
-				B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */,
-				B4B3E2C02B42D1BB00818B3C /* ViewController.swift */,
-				B4B3E2C22B42D1BB00818B3C /* Main.storyboard */,
-				B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */,
-				B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */,
 				B4B3E2CA2B42D1BC00818B3C /* Info.plist */,
 			);
 			path = ChatBot;
@@ -187,6 +181,20 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		BDD77FB12BBE80A600192556 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				CE8316782BB6880700D9371E /* APIKey.xcconfig */,
+				B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */,
+				B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */,
+				B4B3E2C02B42D1BB00818B3C /* ViewController.swift */,
+				B4B3E2C22B42D1BB00818B3C /* Main.storyboard */,
+				B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */,
+				B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 		CE5E22B02BBBDE69004B7FF7 /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -198,11 +206,11 @@
 		CE8316672BB52DC700D9371E /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				BDD77F8C2BBA9A8500192556 /* DTO */,
 				BDD77F9D2BBA9DD900192556 /* URLRequestBuilder.swift */,
 				BDD77FA02BBAA04100192556 /* HTTPMethod.swift */,
 				CE5E22AE2BBAA6C7004B7FF7 /* API.swift */,
 				BDD77FA32BBBF01300192556 /* NetworkService.swift */,
+				BDD77F8C2BBA9A8500192556 /* DTO */,
 			);
 			path = Network;
 			sourceTree = "<group>";
