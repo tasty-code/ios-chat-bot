@@ -17,12 +17,7 @@ final class ChatBubbleView: UIView {
         $0.lineBreakMode = .byWordWrapping
     }
     
-    private var isUser: Bool = false {
-        willSet {
-            configureBubble(to: newValue)
-            setNeedsDisplay()
-        }
-    }
+    private var isUser: Bool = false
     
     private var bubbleViewColor: CGColor = UIColor.systemGray5.cgColor
     
@@ -71,6 +66,7 @@ final class ChatBubbleView: UIView {
 extension ChatBubbleView {
     private func configureUI() {
         backgroundColor = .clear
+        contentMode = .redraw
         
         addSubview(textLabel)
         
@@ -100,6 +96,8 @@ extension ChatBubbleView {
 extension ChatBubbleView {
     func setUser(_ isUser: Bool) {
         self.isUser = isUser
+        
+        configureBubble(to: isUser)
     }
     
     func setText(_ text: String) {
