@@ -12,7 +12,7 @@ final class ChatViewModel {
         self.networkManager = networkManager
     }
     
-    func sendMessage(role: String, content: String) {
+    func sendMessage(role: OpenAI.Chat.RequestBodyDTO.Message.Role, content: String) {
         let message = OpenAI.Chat.RequestBodyDTO.Message(role: role, content: content)
         networkManager.requestMessage(messages: [message])
             .sink { completion in
@@ -23,10 +23,13 @@ final class ChatViewModel {
                     self.networkError = error
                 }
             } receiveValue: { response in
-                if role == Role.user.rawValue {
-                    self.userResponse = response
-                } else {
+                switch role {
+                case .system:
                     self.systemResponse = response
+                case .user:
+                    self.userResponse = response
+                default:
+                    break
                 }
             }.store(in: &cancellables)
     }

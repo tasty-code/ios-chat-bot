@@ -42,11 +42,11 @@ final class ViewController: UIViewController {
     }
     
     private func sendMessageAsUser() {
-        chatViewModel.sendMessage(role: Role.user.rawValue, content: "내일 추울까?")
+        chatViewModel.sendMessage(role: .user, content: "내일 추울까?")
     }
     
     private func sendMessageAsSystem() {
-        chatViewModel.sendMessage(role: Role.system.rawValue, content: "내일 추울까?")
+        chatViewModel.sendMessage(role: .system, content: "내일 추울까?")
     }
 }
 
