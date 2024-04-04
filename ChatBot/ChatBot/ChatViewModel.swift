@@ -2,34 +2,32 @@ import Combine
 import Foundation
 
 final class ChatViewModel {
-    private let networkManager: OpenAINetworkManager
+    let networkManager: OpenAINetworkManager
     private var cancellables = Set<AnyCancellable>()
+    @Published var userResponse: OpenAI.Chat.ResponseDTO? = nil
+    @Published var systemResponse: OpenAI.Chat.ResponseDTO? = nil
+    @Published var networkError: NetworkError? = nil
     
     init(networkManager: OpenAINetworkManager) {
         self.networkManager = networkManager
     }
     
-    func sendMessage(role: String, content: String) -> AnyPublisher<String, Error> {
+    func sendMessage(role: String, content: String) {
         let message = OpenAI.Chat.RequestBodyDTO.Message(role: role, content: content)
-        return networkManager.sendMessage(messages: [message])
-        /// tryMap + mapError -> try-catch와 유사
-        /// 에러 발견하면 publish 종료
-            .tryMap { response in
-                guard let firstChoice = response.choices.first,
-                      let content = firstChoice.message.content else {
-                    throw NetworkError.dataError
+        networkManager.requestMessage(messages: [message])
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    self.networkError = error
                 }
-                return content
-            }
-        /// 발생한 에러 NetworkError로 매핑함
-            .mapError { error in
-                if let networkError = error as? NetworkError {
-                    return networkError
+            } receiveValue: { response in
+                if role == Role.user.rawValue {
+                    self.userResponse = response
                 } else {
-                    return NetworkError.generic(error)
+                    self.systemResponse = response
                 }
-            }
-            .eraseToAnyPublisher()
+            }.store(in: &cancellables)
     }
 }
-
