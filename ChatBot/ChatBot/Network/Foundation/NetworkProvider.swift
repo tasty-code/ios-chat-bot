@@ -12,22 +12,35 @@ import RxSwift
 protocol Requestable {
     associatedtype API: BaseAPI
     
-    func request(
+    func request<T: Decodable>(
         _ api: API,
         file: StaticString,
         function: StaticString, line: UInt
-    ) -> Single<DataRequest>
+    ) -> Single<T>
 }
 
 final class NetworkProvider<API: BaseAPI>: Requestable {
     
-    func request(
+    func request<T: Decodable>(
         _ api: API,
         file: StaticString = #file,
         function: StaticString = #function,
         line: UInt = #line
-    ) -> Single<DataRequest> {
-        return AF.rx.request(urlRequest: api)
+    ) -> Single<T> {
+        AF.rx.request(urlRequest: api)
             .asSingle()
+            .flatMap { dataRequest in
+                Single.create { single in
+                    dataRequest.responseDecodable(of: T.self) { response in
+                        switch response.result {
+                        case .success(let model):
+                            single(.success(model))
+                        case .failure(let error):
+                            single(.failure(error))
+                        }
+                    }
+                    return Disposables.create()
+                }
+            }
     }
 }
