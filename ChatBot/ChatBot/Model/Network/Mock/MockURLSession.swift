@@ -23,29 +23,8 @@ final class MockURLSession: URLSessionProtocol {
                 try self.handleHTTPResponse(data: data, httpResponse: response)
             }
             .mapError { error in
-                guard
-                    let networkError = error as? NetworkError
-                else {
-                    return NetworkError.networkError(error)
-                }
-                return networkError
+                error as? NetworkError ?? NetworkError.networkError(error)
             }
             .eraseToAnyPublisher()
-    }
-    
-    func handleHTTPResponse(data: Data, httpResponse: URLResponse) throws -> Data {
-        guard let httpResponse = httpResponse as? HTTPURLResponse else {
-            throw NetworkError.unknownError
-        }
-        switch httpResponse.statusCode {
-        case 300..<400:
-            throw NetworkError.redirectionError
-        case 400..<500:
-            throw NetworkError.clientError
-        case 500..<600:
-            throw NetworkError.serverError
-        default:
-            return data
-        }
     }
 }
