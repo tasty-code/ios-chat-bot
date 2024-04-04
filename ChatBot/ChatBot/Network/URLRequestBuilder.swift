@@ -22,7 +22,7 @@ struct URLRequestBuilder {
         request.addValue("Bearer \(APIKeyManager.openAIAPIKey)", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        let requestDTO = RequestDTO(model: model, message: messages)
+        let requestDTO = RequestDTO(model: model, messages: messages)
         
         do {
             let jsonData = try JSONEncoder().encode(requestDTO)

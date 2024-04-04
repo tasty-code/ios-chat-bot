@@ -8,24 +8,25 @@
 import Foundation
 
 struct RequestDTO: Encodable {
-    let model: GPTModel
-    let message: [RequestMessageModel]
-}
-
-enum GPTModel: Encodable {
-    case gpt3Turbo0125
-    case gpt3Turbo
-    case gpt3Turbo1106
+    var model: GPTModel
+    let messages: [RequestMessageModel]
     
-    func aiModel() -> String {
-        switch self {
-        case GPTModel.gpt3Turbo0125:
-            return "gpt-3.5-turbo-0125"
-        case GPTModel.gpt3Turbo:
-            return "gpt-3.5-turbo"
-        case GPTModel.gpt3Turbo1106:
-            return "gpt-3.5-turbo-1106"
-        }
+    enum CodingKeys: String, CodingKey {
+        case model
+        case messages
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(model, forKey: .model)
+        try container.encode(messages, forKey: .messages)
     }
 }
+
+enum GPTModel: String, Encodable {
+    case gpt3Turbo0125 = "gpt-3.5-turbo-0125"
+    case gpt3Turbo = "gpt-3.5-turbo"
+    case gpt3Turbo1106 = "gpt-3.5-turbo-1106"
     
+}
+
