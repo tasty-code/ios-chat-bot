@@ -108,17 +108,10 @@
 		B4B3E2BB2B42D1BB00818B3C /* ChatBot */ = {
 			isa = PBXGroup;
 			children = (
-				B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */,
-				B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */,
-				B4B3E2C02B42D1BB00818B3C /* ViewController.swift */,
-				999BAB8A2BBCF45E00FA2B89 /* Bundle+.swift */,
-				999BAB922BBD0F0E00FA2B89 /* ChatViewModel.swift */,
-				999BAB8C2BBCF4CC00FA2B89 /* OpenAIRequest.swift */,
-				999BAB942BBD358B00FA2B89 /* Requestable.swift */,
-				999BAB8E2BBCF6C700FA2B89 /* NetworkService.swift */,
-				F4FEE31C2BBE984B00E61FF3 /* NetworkError.swift */,
-				F4FEE31E2BBE98A900E61FF3 /* URLScheme.swift */,
-				F4FEE3202BBE98B800E61FF3 /* HTTPMethodType.swift */,
+				F4FEE3252BBE9B1800E61FF3 /* App */,
+				F4FEE3282BBE9B8E00E61FF3 /* Utility */,
+				F4FEE3272BBE9B5000E61FF3 /* Network */,
+				F4FEE3262BBE9B4800E61FF3 /* Presentation */,
 				B4B3E2C22B42D1BB00818B3C /* Main.storyboard */,
 				B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */,
 				B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */,
@@ -168,6 +161,45 @@
 			isa = PBXGroup;
 			children = (
 				F428B1C92BB52E8600ED811F /* JSONLoader.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		F4FEE3252BBE9B1800E61FF3 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */,
+				B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		F4FEE3262BBE9B4800E61FF3 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				B4B3E2C02B42D1BB00818B3C /* ViewController.swift */,
+				999BAB922BBD0F0E00FA2B89 /* ChatViewModel.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		F4FEE3272BBE9B5000E61FF3 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				999BAB8C2BBCF4CC00FA2B89 /* OpenAIRequest.swift */,
+				999BAB942BBD358B00FA2B89 /* Requestable.swift */,
+				999BAB8E2BBCF6C700FA2B89 /* NetworkService.swift */,
+				F4FEE31C2BBE984B00E61FF3 /* NetworkError.swift */,
+				F4FEE31E2BBE98A900E61FF3 /* URLScheme.swift */,
+				F4FEE3202BBE98B800E61FF3 /* HTTPMethodType.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		F4FEE3282BBE9B8E00E61FF3 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				999BAB8A2BBCF45E00FA2B89 /* Bundle+.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
