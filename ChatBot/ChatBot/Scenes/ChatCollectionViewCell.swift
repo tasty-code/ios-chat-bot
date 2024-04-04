@@ -43,13 +43,8 @@ extension ChatCollectionViewCell {
         chatBubbleView.snp.remakeConstraints {
             $0.top.equalTo(self.snp.top)
             $0.bottom.equalTo(self.snp.bottom)
-            if isUser {
-                $0.trailing.equalTo(self.snp.trailing)
-                $0.leading.greaterThanOrEqualTo(self.snp.leading).multipliedBy(0.75)
-            } else {
-                $0.leading.equalTo(self.snp.leading)
-                $0.trailing.lessThanOrEqualTo(self.snp.trailing).multipliedBy(0.75)
-            }
+            $0.width.lessThanOrEqualTo(self.snp.width).multipliedBy(0.70)
+            _ = isUser ? $0.trailing.equalTo(self.snp.trailing) : $0.leading.equalTo(self.snp.leading)
         }
     }
 }
