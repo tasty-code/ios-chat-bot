@@ -10,21 +10,19 @@ import Foundation
 final class ChatViewModel {
     private let messageRepository: MessageRepository
     private let apiService: OpenAIService
-
+    
+    var onError:((String) -> Void)?
+    
     init(repository: MessageRepository, apiService: OpenAIService) {
         self.messageRepository = repository
         self.apiService = apiService
     }
-
-    func processUserMessage(_ content: String) {
+    
+    func processUserMessage(message content: String, model: GPTModel) {
         let userMessage = RequestMessageModel(role: .user, content: content)
-        
         messageRepository.addMessage(userMessage)
         
-        let requestMessages = messageRepository.messagesStorage
-        
-
-        apiService.sendRequestToOpenAI(requestMessages) { [weak self] result in
+        apiService.sendRequestToOpenAI(messageRepository.getMessages(), model: model, APIkey: APIKeyManager.openAIAPIKey) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let receivedMessages):
@@ -32,7 +30,7 @@ final class ChatViewModel {
                         self?.messageRepository.addMessage(responseMessage)
                     }
                 case .failure(let error):
-                    print("Error: \(error.localizedDescription)")
+                    self?.onError?("Error 발생: 관라자에게 문의해주세요 \(error.localizedDescription)")
                 }
             }
         }
