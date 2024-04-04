@@ -10,20 +10,20 @@ import RxAlamofire
 import Foundation
 
 class Network<T: Decodable> {
-    private let urlRequest: URLRequest
     private let queue: ConcurrentDispatchQueueScheduler
     
-    init(_ urlRequst: URLRequest) {
-        self.urlRequest = urlRequst
+    init() {
         self.queue = ConcurrentDispatchQueueScheduler(qos: .background)
     }
     
-    func fetchData() -> Observable<T> {
-        RxAlamofire.requestData(urlRequest)
+    func fetchData(message: Message) -> Observable<T> {
+        let urlRequest = NetworkURL.makeURLRequest(type: .chatGPT, chat: RequestChatDTO(messages: [message]), httpMethod: .post)!
+        let result = RxAlamofire.requestData(urlRequest)
             .observeOn(queue)
             .debug()
             .map { (response, data) -> T in
                 return try JSONDecoder().decode(T.self, from: data)
             }
+        return result
     }
 }
