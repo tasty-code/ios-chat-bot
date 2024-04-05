@@ -21,6 +21,7 @@ final class ChatTextView: UIStackView {
         super.init(frame: frame)
         setUp()
         configureUI()
+        setDelegate()
     }
     
     required init(coder: NSCoder) {
@@ -37,6 +38,7 @@ extension ChatTextView {
         sendButton.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         sendButton.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         textView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        
         guard let height = textView.font?.lineHeight else {
             return
         }
@@ -72,5 +74,35 @@ extension ChatTextView {
         textView.layer.borderColor = UIColor.systemGray5.cgColor
         textView.layer.cornerRadius = 20
         textView.layer.borderWidth = 1.5
+    }
+}
+
+// MARK: - UITextViewDelegate
+extension ChatTextView: UITextViewDelegate {
+    private func setDelegate() {
+        textView.delegate = self
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        let size = CGSize(width: textView.frame.width, height: .infinity)
+        let estimatedSize = textView.sizeThatFits(size)
+        
+        guard let lineHeight = textView.font?.lineHeight else {
+            return
+        }
+        let maxHeight = lineHeight * 6
+        
+        if estimatedSize.height >= maxHeight {
+            textView.isScrollEnabled = true
+            textView.snp.remakeConstraints {
+                $0.height.equalTo(lineHeight * 6)
+            }
+        } else {
+            textView.isScrollEnabled = false
+            textView.snp.remakeConstraints {
+                $0.height.lessThanOrEqualTo(lineHeight * 6)
+                $0.height.greaterThanOrEqualTo(lineHeight)
+            }
+        }
     }
 }
