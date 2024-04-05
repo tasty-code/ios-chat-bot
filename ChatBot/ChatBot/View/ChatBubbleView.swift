@@ -25,10 +25,12 @@ final class ChatBubbleView: UIView {
   }
   
   private let messageView = MessageView()
-  
-  init(role: Role) {
-    self.role = role
-    super.init(frame: .zero)
+
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    self.backgroundColor = .clear
+    self.configureUI()
+    self.setupConstraints()
   }
   
   required init?(coder: NSCoder) {
@@ -52,14 +54,18 @@ final class ChatBubbleView: UIView {
   }
   
   private func setupConstraints() {
+    
     NSLayoutConstraint.activate([
+      self.widthAnchor.constraint(equalTo: messageView.widthAnchor, constant: 20),
+      self.heightAnchor.constraint(equalTo: messageView.heightAnchor, constant: 15),
       messageView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
       messageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
     ])
   }
   
-  func setRightBubbleView(rect: CGRect, bezierPath: UIBezierPath) {
-    self.backgroundColor = .lightGray
+  func setRightBubbleView(rect: CGRect,bezierPath: UIBezierPath) {
+    self.backgroundColor = .systemBlue
+    messageView.textColor = .white
     let bottom = rect.height
     let right = rect.width
     
@@ -115,7 +121,7 @@ final class ChatBubbleView: UIView {
   }
   
   func setLeftBubbleView(rect: CGRect, bezierPath: UIBezierPath) {
-    self.backgroundColor = .systemBlue
+    self.backgroundColor = .systemGray5
     let bottom = rect.height
     let right = rect.width
     
