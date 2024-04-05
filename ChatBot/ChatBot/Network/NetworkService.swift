@@ -1,7 +1,7 @@
 import Foundation
 import Combine
 
-final class NetworkManager {
+final class NetworkService {
     private let requester: NetworkRequestable
     private let jsonDecoder: JSONDecoder
     

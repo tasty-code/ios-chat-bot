@@ -14,11 +14,11 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
         let requester = URLSession.shared
         // TODO: Literals...!
-        let networkManager = NetworkManager(
+        let networkManager = NetworkService(
             requester: requester,
             decoder: jsonDecoder
         )
-        let viewModel = MainViewModel(networkManager: networkManager)
+        let viewModel = MainViewModel(networkService: networkManager)
         window?.rootViewController = MainViewController(viewModel: viewModel)
         window?.makeKeyAndVisible()
     }

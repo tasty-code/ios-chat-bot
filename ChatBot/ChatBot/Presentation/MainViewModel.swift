@@ -2,7 +2,7 @@ import Combine
 import Foundation
 
 final class MainViewModel {
-    private let networkManager: NetworkManager
+    private let networkService: NetworkService
     private var cancellables = Set<AnyCancellable>()
     
     @Published var userResponse: OpenAI.Chat.ResponseDTO? = nil
@@ -10,9 +10,9 @@ final class MainViewModel {
     @Published var networkError: NetworkError? = nil
     
     init(
-        networkManager: NetworkManager
+        networkService: NetworkService
     ) {
-        self.networkManager = networkManager
+        self.networkService = networkService
     }
     
     func sendMessage(
@@ -20,7 +20,7 @@ final class MainViewModel {
         content: String
     ) {
         let message = OpenAI.Chat.RequestBodyDTO.Message(role: role, content: content)
-        networkManager.requestMessage(messages: [message])
+        networkService.requestMessage(messages: [message])
             .sink { completion in
                 switch completion {
                 case .finished:
