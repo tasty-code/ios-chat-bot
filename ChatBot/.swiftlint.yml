@@ -6,6 +6,7 @@ disabled_rules:
     - nesting
     - todo
     - attributes
+    - empty_enum_arguments
     
 opt_in_rules:
     - let_var_whitespace
