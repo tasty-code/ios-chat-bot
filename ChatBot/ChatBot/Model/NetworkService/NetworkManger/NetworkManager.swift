@@ -1,15 +1,9 @@
 import Foundation
 import Combine
 
-final class NetworkManager: Fetchable {
+final class NetworkManager: Requestable {
     
-    func fetchChatGPTCompletionData<T: Decodable>(with messages: [Message], type: T.Type) -> AnyPublisher<T, Error> {
-        self.requestChatGPTCompletionData(with: messages)
-            .decode(type: T.self, decoder: JSONDecoder())
-            .eraseToAnyPublisher()
-    }
-    
-    private func requestChatGPTCompletionData(with messages: [Message]) -> AnyPublisher<Data, Error> {
+    func requestChatGPTCompletionData(with messages: [Message]) -> AnyPublisher<Data, Error> {
         guard let request = RequestProvider(requestInformation: .completion(model: .basic, messages: messages, logprobs: nil)).request else {
             return Fail(error: NetworkError.invalidURL).eraseToAnyPublisher()
         }
