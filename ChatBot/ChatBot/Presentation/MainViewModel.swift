@@ -6,7 +6,6 @@ final class MainViewModel {
     private var cancellables = Set<AnyCancellable>()
     
     @Published var userResponse: OpenAI.Chat.ResponseDTO? = nil
-    @Published var systemResponse: OpenAI.Chat.ResponseDTO? = nil
     @Published var networkError: NetworkError? = nil
     
     init(
@@ -16,11 +15,12 @@ final class MainViewModel {
     }
     
     func sendMessage(
-        role: OpenAI.Chat.RequestBodyDTO.Message.Role,
         content: String
     ) {
-        let message = OpenAI.Chat.RequestBodyDTO.Message(role: role, content: content)
-        networkService.requestMessage(messages: [message])
+        let message = OpenAI.Chat.RequestBodyDTO.Message(role: .user, content: content)
+        let bodyObject = OpenAI.Chat.RequestBodyDTO(messages: [message])
+        let bodyData = try? JSONEncoder().encode(bodyObject)
+        networkService.requestMessage(body: bodyData)
             .sink { completion in
                 switch completion {
                 case .finished:
@@ -29,14 +29,7 @@ final class MainViewModel {
                     self.networkError = error
                 }
             } receiveValue: { response in
-                switch role {
-                case .system:
-                    self.systemResponse = response
-                case .user:
-                    self.userResponse = response
-                default:
-                    break
-                }
+                self.userResponse = response
             }.store(in: &cancellables)
     }
 }

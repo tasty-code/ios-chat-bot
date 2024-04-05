@@ -13,19 +13,17 @@ final class NetworkService {
         self.jsonDecoder = decoder
     }
     
-    private func makeRequest(messages: [OpenAI.Chat.RequestBodyDTO.Message]) -> URLRequest? {
-        let requestBody = OpenAI.Chat.RequestBodyDTO(messages: messages)
-        // TODO: Data 전달받기
-        let body = try? JSONEncoder().encode(requestBody)
+    private func makeRequest(body: Data?) -> URLRequest? {
         let request = OpenAIRequest(body: body)
         return request.toURLRequest()
     }
     
     func requestMessage(
-        messages: [OpenAI.Chat.RequestBodyDTO.Message]
+        body: Data?
     ) -> AnyPublisher<OpenAI.Chat.ResponseDTO, NetworkError> {
-        guard let request = makeRequest(messages: messages) else {
-            return Fail(error: NetworkError.generic("Failed to create URL request" as! Error)).eraseToAnyPublisher()
+        guard let request = makeRequest(body: body) else {
+            return Fail(error: NetworkError.generic("Failed to create URL request" as! Error))
+                .eraseToAnyPublisher()
         }
         
         return requester.dataTaskPublisher(for: request)

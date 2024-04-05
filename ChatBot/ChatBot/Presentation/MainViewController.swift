@@ -19,28 +19,22 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
         bindViewModel()
         sendMessageAsUser()
-        sendMessageAsSystem()
     }
     
     private func bindViewModel() {
         viewModel.$userResponse
             .sink { response in
                 if let response = response {
-                    if let message = response.choices.first?.message.content {
-                        print("user: \(message)")
+                    guard
+                        let role = response.choices.first?.message.role,
+                        let message = response.choices.first?.message.content
+                    else {
+                        return // TODO: 어떻게 처리하는 것이 정석일까
                     }
+                    print("\(role): \(message)")
                 }
             }
             .store(in: &cancellables)
-        
-        viewModel.$systemResponse
-            .sink { response in
-                if let response = response {
-                    if let message = response.choices.first?.message.content {
-                        print("system: \(message)")
-                    }
-                }
-            }.store(in: &cancellables)
         
         viewModel.$networkError
             .sink { error in
@@ -52,11 +46,7 @@ final class MainViewController: UIViewController {
     }
     
     private func sendMessageAsUser() {
-        viewModel.sendMessage(role: .user, content: "내일 추울까?")
-    }
-    
-    private func sendMessageAsSystem() {
-        viewModel.sendMessage(role: .system, content: "내일 추울까?")
+        viewModel.sendMessage(content: "내일 추울까?")
     }
 }
 
