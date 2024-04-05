@@ -5,5 +5,3 @@ protocol NetworkRequestable {
         for request: URLRequest
     ) -> URLSession.DataTaskPublisher
 }
-
-extension URLSession: NetworkRequestable { }

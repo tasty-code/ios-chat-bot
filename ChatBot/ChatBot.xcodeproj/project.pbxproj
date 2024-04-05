@@ -26,6 +26,7 @@
 		F428B1CA2BB52E8600ED811F /* JSONLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F428B1C92BB52E8600ED811F /* JSONLoader.swift */; };
 		F428B1CC2BB52F5800ED811F /* chat-completion-response-sample.json in Resources */ = {isa = PBXBuildFile; fileRef = F428B1CB2BB52F5800ED811F /* chat-completion-response-sample.json */; };
 		F4A0E9452BBFDE790024097E /* ChatCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A0E9442BBFDE790024097E /* ChatCompletion.swift */; };
+		F4A0E94A2BC009C80024097E /* URLSession+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A0E9492BC009C80024097E /* URLSession+.swift */; };
 		F4FEE31D2BBE984B00E61FF3 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FEE31C2BBE984B00E61FF3 /* NetworkError.swift */; };
 		F4FEE31F2BBE98A900E61FF3 /* URLScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FEE31E2BBE98A900E61FF3 /* URLScheme.swift */; };
 		F4FEE3212BBE98B800E61FF3 /* HTTPRequestMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FEE3202BBE98B800E61FF3 /* HTTPRequestMethod.swift */; };
@@ -65,6 +66,7 @@
 		F428B1C92BB52E8600ED811F /* JSONLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONLoader.swift; sourceTree = "<group>"; };
 		F428B1CB2BB52F5800ED811F /* chat-completion-response-sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "chat-completion-response-sample.json"; sourceTree = "<group>"; };
 		F4A0E9442BBFDE790024097E /* ChatCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCompletion.swift; sourceTree = "<group>"; };
+		F4A0E9492BC009C80024097E /* URLSession+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+.swift"; sourceTree = "<group>"; };
 		F4FEE31C2BBE984B00E61FF3 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		F4FEE31E2BBE98A900E61FF3 /* URLScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLScheme.swift; sourceTree = "<group>"; };
 		F4FEE3202BBE98B800E61FF3 /* HTTPRequestMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequestMethod.swift; sourceTree = "<group>"; };
@@ -113,14 +115,12 @@
 			isa = PBXGroup;
 			children = (
 				F4FEE3252BBE9B1800E61FF3 /* App */,
+				F4A0E94C2BC00AB60024097E /* Resource */,
+				F4A0E94D2BC00AC30024097E /* Supporting */,
 				F4FEE3282BBE9B8E00E61FF3 /* Utility */,
 				F4FEE3272BBE9B5000E61FF3 /* Network */,
-				F4FEE3262BBE9B4800E61FF3 /* Presentation */,
-				B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */,
-				B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */,
-				B4B3E2CA2B42D1BC00818B3C /* Info.plist */,
 				F4A0E9462BBFDE8F0024097E /* Entity */,
-				F4EF7B6A2BB8087A00D77EE3 /* DTO */,
+				F4FEE3262BBE9B4800E61FF3 /* Presentation */,
 			);
 			path = ChatBot;
 			sourceTree = "<group>";
@@ -148,6 +148,51 @@
 				F4A0E9442BBFDE790024097E /* ChatCompletion.swift */,
 			);
 			path = Entity;
+			sourceTree = "<group>";
+		};
+		F4A0E9472BC009810024097E /* RequestComponent */ = {
+			isa = PBXGroup;
+			children = (
+				F4FEE31E2BBE98A900E61FF3 /* URLScheme.swift */,
+				F4FEE3202BBE98B800E61FF3 /* HTTPRequestMethod.swift */,
+				F4FEE3292BBEC8BD00E61FF3 /* HTTPRequestHeader.swift */,
+			);
+			path = RequestComponent;
+			sourceTree = "<group>";
+		};
+		F4A0E9482BC009A00024097E /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				F4FEE31C2BBE984B00E61FF3 /* NetworkError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		F4A0E94B2BC009FF0024097E /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				999BAB942BBD358B00FA2B89 /* HTTPRequestable.swift */,
+				999BAB8C2BBCF4CC00FA2B89 /* OpenAIRequest.swift */,
+				F4A0E9472BC009810024097E /* RequestComponent */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		F4A0E94C2BC00AB60024097E /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		F4A0E94D2BC00AC30024097E /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */,
+				B4B3E2CA2B42D1BC00818B3C /* Info.plist */,
+			);
+			path = Supporting;
 			sourceTree = "<group>";
 		};
 		F4EF7B6A2BB8087A00D77EE3 /* DTO */ = {
@@ -198,14 +243,12 @@
 		F4FEE3272BBE9B5000E61FF3 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				999BAB8C2BBCF4CC00FA2B89 /* OpenAIRequest.swift */,
-				999BAB942BBD358B00FA2B89 /* HTTPRequestable.swift */,
+				F4A0E94B2BC009FF0024097E /* Request */,
 				F4FEE32B2BBECEDA00E61FF3 /* NetworkRequestable.swift */,
+				F4A0E9492BC009C80024097E /* URLSession+.swift */,
 				999BAB8E2BBCF6C700FA2B89 /* NetworkService.swift */,
-				F4FEE3292BBEC8BD00E61FF3 /* HTTPRequestHeader.swift */,
-				F4FEE31C2BBE984B00E61FF3 /* NetworkError.swift */,
-				F4FEE31E2BBE98A900E61FF3 /* URLScheme.swift */,
-				F4FEE3202BBE98B800E61FF3 /* HTTPRequestMethod.swift */,
+				F4A0E9482BC009A00024097E /* Error */,
+				F4EF7B6A2BB8087A00D77EE3 /* DTO */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -330,6 +373,7 @@
 				F428B1BB2BB5036500ED811F /* ResponseDTO.swift in Sources */,
 				F4A0E9452BBFDE790024097E /* ChatCompletion.swift in Sources */,
 				999BAB932BBD0F0E00FA2B89 /* MainViewModel.swift in Sources */,
+				F4A0E94A2BC009C80024097E /* URLSession+.swift in Sources */,
 				F4FEE31D2BBE984B00E61FF3 /* NetworkError.swift in Sources */,
 				F4FEE32A2BBEC8BD00E61FF3 /* HTTPRequestHeader.swift in Sources */,
 				F4FEE31F2BBE98A900E61FF3 /* URLScheme.swift in Sources */,
@@ -501,7 +545,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W9647FYSN7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ChatBot/Info.plist;
+				INFOPLIST_FILE = ChatBot/Supporting/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -530,7 +574,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W9647FYSN7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ChatBot/Info.plist;
+				INFOPLIST_FILE = ChatBot/Supporting/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

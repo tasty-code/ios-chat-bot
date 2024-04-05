@@ -10,11 +10,6 @@ final class NetworkService {
         self.requester = requester
     }
     
-    private func makeRequest(body: Data?) -> URLRequest? {
-        let request = OpenAIRequest(body: body)
-        return request.toURLRequest()
-    }
-    
     func requestMessage(
         body: Data?
     ) -> AnyPublisher<Data, NetworkError> {
@@ -40,6 +35,11 @@ final class NetworkService {
                 return self.convertToNetworkError(from: error)
             }
             .eraseToAnyPublisher()
+    }
+    
+    private func makeRequest(body: Data?) -> URLRequest? {
+        let request = OpenAIRequest(body: body)
+        return request.toURLRequest()
     }
     
     private func convertToNetworkError(from error: Error) -> NetworkError {
