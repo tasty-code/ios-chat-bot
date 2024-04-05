@@ -110,6 +110,7 @@ extension ChatViewController {
 extension ChatViewController {
     private func setUpChatCollectionView() {
         chatCollectionView.register(ChatCollectionViewCell.self, forCellWithReuseIdentifier: ChatCollectionViewCell.className)
+        chatCollectionView.register(ChatLoadingCollectionViewCell.self, forCellWithReuseIdentifier: ChatLoadingCollectionViewCell.className)
         
         chatViewModel.setDataSource(collectionView: chatCollectionView)
     }

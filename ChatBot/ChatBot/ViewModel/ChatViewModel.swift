@@ -14,6 +14,7 @@ final class ChatViewModel {
     private var dataSource: UICollectionViewDiffableDataSource<Section, ChatMessage>?
     private(set) lazy var snapshotPublisher = PublishRelay<[ChatMessage]>()
     private(set) var service = ChatAPIService()
+    private let loadingMessage = ChatMessage(id: UUID(), isUser: false, message: "loading")
 }
 
 // MARK: - Custom Methods
@@ -22,34 +23,58 @@ extension ChatViewModel {
         case main
     }
     
-    private func applySnapShot(with chatMessage: ChatMessage) {
+    private func applySnapShot(with chatMessage: ChatMessage, isAddingLoadingIndicator: Bool) {
         guard var snapshot = dataSource?.snapshot() else {
             return
         }
         
-        if let last = snapshot.itemIdentifiers.last {
-            snapshot.insertItems([chatMessage], afterItem: last)
+        if isAddingLoadingIndicator {
+            if let last = snapshot.itemIdentifiers.last {
+                snapshot.insertItems([chatMessage, loadingMessage], afterItem: last)
+            } else {
+                snapshot.appendItems([chatMessage, loadingMessage])
+            }
         } else {
-            snapshot.appendItems([chatMessage])
+            snapshot.deleteItems([loadingMessage])
+            if let last = snapshot.itemIdentifiers.last {
+                snapshot.insertItems([chatMessage], afterItem: last)
+            }
         }
         
         dataSource?.applySnapshotUsingReloadData(snapshot) { [weak self] in 
             self?.snapshotPublisher.accept(snapshot.itemIdentifiers)
         }
     }
+    
+    private func removeLoadingIndicator() {
+        guard var snapshot = dataSource?.snapshot() else {
+            return
+        }
+        snapshot.deleteItems([loadingMessage])
+        
+        dataSource?.applySnapshotUsingReloadData(snapshot)
+    }
 }
 
 // MARK: - Public Methods
 extension ChatViewModel {
     func setDataSource(collectionView: UICollectionView) {
-        self.dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
+        self.dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { [weak self] collectionView, indexPath, itemIdentifier in
             
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatCollectionViewCell.className, for: indexPath) as? ChatCollectionViewCell else {
-                return UICollectionViewCell()
+            if itemIdentifier.id == self?.loadingMessage.id {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatLoadingCollectionViewCell.className, for: indexPath) as? ChatLoadingCollectionViewCell else {
+                    return UICollectionViewCell()
+                }
+                return cell
+                
+            } else {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatCollectionViewCell.className, for: indexPath) as? ChatCollectionViewCell else {
+                    return UICollectionViewCell()
+                }
+                
+                cell.text(itemIdentifier.message, isUser: itemIdentifier.isUser)
+                return cell
             }
-            
-            cell.text(itemIdentifier.message, isUser: itemIdentifier.isUser)
-            return cell
         }
         
         var snapshot = NSDiffableDataSourceSnapshot<Section, ChatMessage>()
@@ -60,7 +85,7 @@ extension ChatViewModel {
     
     func updateMessage(with message: String) {
         let chatMessage = ChatMessage(id: UUID(), isUser: true, message: message)
-        applySnapShot(with: chatMessage)
+        applySnapShot(with: chatMessage, isAddingLoadingIndicator: true)
         
         _ = service.createChat(systemContent: "Hello! How can I assist you today?",
                                 userContent: message)
@@ -71,9 +96,10 @@ extension ChatViewModel {
                 }
                 
                 let chatMessage = ChatMessage(id: UUID(), isUser: false, message: message)
-                self?.applySnapShot(with: chatMessage)
-            }, onFailure: { error in
+                self?.applySnapShot(with: chatMessage, isAddingLoadingIndicator: false)
+            }, onFailure: { [weak self] error in
                 print(error)
+                self?.removeLoadingIndicator()
             })
     }
 }
