@@ -7,11 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9B9289152BBECEDC00185E35 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9B9289142BBECEDC00185E35 /* SnapKit */; };
-		9B9289182BBECEEB00185E35 /* RxAlamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 9B9289172BBECEEB00185E35 /* RxAlamofire */; };
-		9B92891B2BBECEF900185E35 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 9B92891A2BBECEF900185E35 /* Then */; };
-		9B92891E2BBECF2300185E35 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 9B92891D2BBECF2300185E35 /* RxCocoa */; };
-		9B9289202BBECF2300185E35 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9B92891F2BBECF2300185E35 /* RxSwift */; };
 		9B9289222BBECF5B00185E35 /* APIToken.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B9289212BBECF5B00185E35 /* APIToken.plist */; };
 		C12E66D32BB3F28800F3F441 /* ChatBotViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66B82BB3F28800F3F441 /* ChatBotViewModel.swift */; };
 		C12E66D42BB3F28800F3F441 /* ChatRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66B92BB3F28800F3F441 /* ChatRepository.swift */; };
@@ -32,6 +27,11 @@
 		C12E66EC2BB4291A00F3F441 /* ResponseChoiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66EB2BB4291A00F3F441 /* ResponseChoiceDTO.swift */; };
 		C12E66EE2BB4294300F3F441 /* Usage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66ED2BB4294300F3F441 /* Usage.swift */; };
 		C12E66F02BB429AA00F3F441 /* JSONNull.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66EF2BB429AA00F3F441 /* JSONNull.swift */; };
+		C176AB4A2BBEDD97004DEA01 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = C176AB492BBEDD97004DEA01 /* Then */; };
+		C176AB4D2BBEDDA5004DEA01 /* RxAlamofire in Frameworks */ = {isa = PBXBuildFile; productRef = C176AB4C2BBEDDA5004DEA01 /* RxAlamofire */; };
+		C176AB502BBEDDB1004DEA01 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C176AB4F2BBEDDB1004DEA01 /* SnapKit */; };
+		C176AB532BBEDDC1004DEA01 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = C176AB522BBEDDC1004DEA01 /* RxCocoa */; };
+		C176AB552BBEDDC1004DEA01 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C176AB542BBEDDC1004DEA01 /* RxSwift */; };
 		C1865DB82BBE9C3400DD99C9 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1865DB72BBE9C3400DD99C9 /* Network.swift */; };
 		C1865DBA2BBE9E8600DD99C9 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1865DB92BBE9E8600DD99C9 /* NetworkProvider.swift */; };
 		C1865DBC2BBEB72900DD99C9 /* ChatBotNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1865DBB2BBEB72900DD99C9 /* ChatBotNetwork.swift */; };
@@ -72,11 +72,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B9289152BBECEDC00185E35 /* SnapKit in Frameworks */,
-				9B92891B2BBECEF900185E35 /* Then in Frameworks */,
-				9B9289202BBECF2300185E35 /* RxSwift in Frameworks */,
-				9B92891E2BBECF2300185E35 /* RxCocoa in Frameworks */,
-				9B9289182BBECEEB00185E35 /* RxAlamofire in Frameworks */,
+				C176AB502BBEDDB1004DEA01 /* SnapKit in Frameworks */,
+				C176AB4A2BBEDD97004DEA01 /* Then in Frameworks */,
+				C176AB552BBEDDC1004DEA01 /* RxSwift in Frameworks */,
+				C176AB532BBEDDC1004DEA01 /* RxCocoa in Frameworks */,
+				C176AB4D2BBEDDA5004DEA01 /* RxAlamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,7 +116,6 @@
 		C12E66BC2BB3F28800F3F441 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C12E66B92BB3F28800F3F441 /* ChatRepository.swift */,
 				C12E66BA2BB3F28800F3F441 /* RequestChatDTO.swift */,
 				C12E66BB2BB3F28800F3F441 /* Message.swift */,
 				C12E66E92BB4283100F3F441 /* ResponseChatDTO.swift */,
@@ -183,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				C12E66B82BB3F28800F3F441 /* ChatBotViewModel.swift */,
+				C12E66B92BB3F28800F3F441 /* ChatRepository.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -204,11 +204,11 @@
 			);
 			name = ChatBot;
 			packageProductDependencies = (
-				9B9289142BBECEDC00185E35 /* SnapKit */,
-				9B9289172BBECEEB00185E35 /* RxAlamofire */,
-				9B92891A2BBECEF900185E35 /* Then */,
-				9B92891D2BBECF2300185E35 /* RxCocoa */,
-				9B92891F2BBECF2300185E35 /* RxSwift */,
+				C176AB492BBEDD97004DEA01 /* Then */,
+				C176AB4C2BBEDDA5004DEA01 /* RxAlamofire */,
+				C176AB4F2BBEDDB1004DEA01 /* SnapKit */,
+				C176AB522BBEDDC1004DEA01 /* RxCocoa */,
+				C176AB542BBEDDC1004DEA01 /* RxSwift */,
 			);
 			productName = ChatBot;
 			productReference = B4B3E2B92B42D1BB00818B3C /* ChatBot.app */;
@@ -239,10 +239,10 @@
 			);
 			mainGroup = B4B3E2B02B42D1BB00818B3C;
 			packageReferences = (
-				9B9289132BBECEDC00185E35 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				9B9289162BBECEEB00185E35 /* XCRemoteSwiftPackageReference "RxAlamofire" */,
-				9B9289192BBECEF900185E35 /* XCRemoteSwiftPackageReference "Then" */,
-				9B92891C2BBECF2300185E35 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				C176AB482BBEDD97004DEA01 /* XCRemoteSwiftPackageReference "Then" */,
+				C176AB4B2BBEDDA5004DEA01 /* XCRemoteSwiftPackageReference "RxAlamofire" */,
+				C176AB4E2BBEDDB1004DEA01 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				C176AB512BBEDDC1004DEA01 /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = B4B3E2BA2B42D1BB00818B3C /* Products */;
 			projectDirPath = "";
@@ -435,7 +435,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7VXN2294AY;
+				DEVELOPMENT_TEAM = T92LV6HV88;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChatBot/Resource/Info.plist;
 				"INFOPLIST_FILE[sdk=*]" = ChatBot/Resource/Info.plist;
@@ -468,7 +468,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7VXN2294AY;
+				DEVELOPMENT_TEAM = T92LV6HV88;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChatBot/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -517,23 +517,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		9B9289132BBECEDC00185E35 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.7.1;
-			};
-		};
-		9B9289162BBECEEB00185E35 /* XCRemoteSwiftPackageReference "RxAlamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/RxSwiftCommunity/RxAlamofire.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.2.0;
-			};
-		};
-		9B9289192BBECEF900185E35 /* XCRemoteSwiftPackageReference "Then" */ = {
+		C176AB482BBEDD97004DEA01 /* XCRemoteSwiftPackageReference "Then" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/devxoul/Then.git";
 			requirement = {
@@ -541,7 +525,23 @@
 				minimumVersion = 3.0.0;
 			};
 		};
-		9B92891C2BBECF2300185E35 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+		C176AB4B2BBEDDA5004DEA01 /* XCRemoteSwiftPackageReference "RxAlamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxAlamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.2.0;
+			};
+		};
+		C176AB4E2BBEDDB1004DEA01 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		C176AB512BBEDDC1004DEA01 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
 			requirement = {
@@ -552,29 +552,29 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		9B9289142BBECEDC00185E35 /* SnapKit */ = {
+		C176AB492BBEDD97004DEA01 /* Then */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9B9289132BBECEDC00185E35 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
-		};
-		9B9289172BBECEEB00185E35 /* RxAlamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9B9289162BBECEEB00185E35 /* XCRemoteSwiftPackageReference "RxAlamofire" */;
-			productName = RxAlamofire;
-		};
-		9B92891A2BBECEF900185E35 /* Then */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9B9289192BBECEF900185E35 /* XCRemoteSwiftPackageReference "Then" */;
+			package = C176AB482BBEDD97004DEA01 /* XCRemoteSwiftPackageReference "Then" */;
 			productName = Then;
 		};
-		9B92891D2BBECF2300185E35 /* RxCocoa */ = {
+		C176AB4C2BBEDDA5004DEA01 /* RxAlamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9B92891C2BBECF2300185E35 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			package = C176AB4B2BBEDDA5004DEA01 /* XCRemoteSwiftPackageReference "RxAlamofire" */;
+			productName = RxAlamofire;
+		};
+		C176AB4F2BBEDDB1004DEA01 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C176AB4E2BBEDDB1004DEA01 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		C176AB522BBEDDC1004DEA01 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C176AB512BBEDDC1004DEA01 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxCocoa;
 		};
-		9B92891F2BBECF2300185E35 /* RxSwift */ = {
+		C176AB542BBEDDC1004DEA01 /* RxSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9B92891C2BBECF2300185E35 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			package = C176AB512BBEDDC1004DEA01 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
 		};
 /* End XCSwiftPackageProductDependency section */

@@ -9,8 +9,7 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
-
-    let chatManger = ChatBotViewModel()
+    let chatViewModel = ChatBotViewModel(chatRepository: ChatRepository(provider: NetworkProvider()))
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard
@@ -19,8 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             return
         }
         window = UIWindow(windowScene: windowScene)
-        
-        let mainViewController =  ChatBotViewController(chatBotViewModel: chatManger)
+        let mainViewController =  ChatBotViewController(chatBotViewModel: chatViewModel)
         window?.rootViewController = mainViewController
         window?.makeKeyAndVisible()
     }

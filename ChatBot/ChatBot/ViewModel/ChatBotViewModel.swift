@@ -9,11 +9,10 @@ import Foundation
 import RxSwift
 
 final class ChatBotViewModel {
-    private let chatBotNetwork: ChatBotNetwork
+    private let chatRepository: ChatRepository
     
-    init() {
-        let provider = NetworkProvider()
-        self.chatBotNetwork = provider.makeChatNetwork()
+    init(chatRepository: ChatRepository) {
+        self.chatRepository = chatRepository
     }
     
     struct Input {
@@ -26,12 +25,7 @@ final class ChatBotViewModel {
     
     func transform(input: Input) -> Output {
         let resultChat = input.chatTigger.flatMapLatest { [unowned self] message -> Observable<Result<ResponseChatDTO, Error>> in
-            self.chatBotNetwork.requestChatBotMessage(message: message).map {
-                    return .success($0)
-                }
-                .catchError { error in
-                    return Observable.just(.failure(error))
-                }
+            return self.chatRepository.requestChatResultData(message: message)
         }
         return Output(resultChat: resultChat)
     }
