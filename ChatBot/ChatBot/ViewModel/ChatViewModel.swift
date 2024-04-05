@@ -23,25 +23,14 @@ extension ChatViewModel {
         case main
     }
     
-    private func applySnapShot(with chatMessage: ChatMessage, isAddingLoadingIndicator: Bool) {
+    private func applySnapShot(with chatMessage: ChatMessage, strategy: SnapshotUpdateStrategy) {
         guard var snapshot = dataSource?.snapshot() else {
             return
         }
         
-        if isAddingLoadingIndicator {
-            if let last = snapshot.itemIdentifiers.last {
-                snapshot.insertItems([chatMessage, loadingMessage], afterItem: last)
-            } else {
-                snapshot.appendItems([chatMessage, loadingMessage])
-            }
-        } else {
-            snapshot.deleteItems([loadingMessage])
-            if let last = snapshot.itemIdentifiers.last {
-                snapshot.insertItems([chatMessage], afterItem: last)
-            }
-        }
+        strategy.apply(using: &snapshot, with: chatMessage, loadingMessage: loadingMessage)
         
-        dataSource?.applySnapshotUsingReloadData(snapshot) { [weak self] in 
+        dataSource?.applySnapshotUsingReloadData(snapshot) { [weak self] in
             self?.snapshotPublisher.accept(snapshot.itemIdentifiers)
         }
     }
@@ -85,7 +74,7 @@ extension ChatViewModel {
     
     func updateMessage(with message: String) {
         let chatMessage = ChatMessage(id: UUID(), isUser: true, message: message)
-        applySnapShot(with: chatMessage, isAddingLoadingIndicator: true)
+        applySnapShot(with: chatMessage, strategy: LoadingIndicatorUpdateStrategy())
         
         _ = service.createChat(systemContent: "Hello! How can I assist you today?",
                                 userContent: message)
@@ -96,7 +85,7 @@ extension ChatViewModel {
                 }
                 
                 let chatMessage = ChatMessage(id: UUID(), isUser: false, message: message)
-                self?.applySnapShot(with: chatMessage, isAddingLoadingIndicator: false)
+                self?.applySnapShot(with: chatMessage, strategy: MessageUpdateStrategy())
             }, onFailure: { [weak self] error in
                 print(error)
                 self?.removeLoadingIndicator()
