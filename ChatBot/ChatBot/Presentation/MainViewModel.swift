@@ -6,7 +6,7 @@ final class MainViewModel {
     private var cancellables = Set<AnyCancellable>()
     
     @Published var chatCompletion: ChatCompletion? = nil
-    @Published var networkError: NetworkError? = nil
+    @Published var errorMessage: String? = nil
     
     init(
         networkService: NetworkService
@@ -26,17 +26,21 @@ final class MainViewModel {
         
         networkService.requestMessage(body: bodyData)
             .decode(type: OpenAI.Chat.ResponseDTO.self, decoder: decoder)
-            .sink { completion in
+            .sink { [weak self] completion in
                 switch completion {
                 case .finished:
                     break
                 case .failure(let error):
-                    guard let networkError = error as? NetworkError else { return }
-                    self.networkError = networkError
+                    self?.handleError(error)
                 }
             } receiveValue: { responseDTO in
                 let object = responseDTO.toDomain()
                 self.chatCompletion = object
-            }.store(in: &cancellables)
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func handleError(_ error: Error) {
+        errorMessage = error.localizedDescription
     }
 }

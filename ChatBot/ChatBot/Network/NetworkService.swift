@@ -18,11 +18,10 @@ final class NetworkService {
     func requestMessage(
         body: Data?
     ) -> AnyPublisher<Data, NetworkError> {
-        guard 
+        guard
             let request = makeRequest(body: body)
         else {
-            let error = NetworkError.generic("Failed to create URL request" as! Error)
-            return Fail(error: error)
+            return Fail(error: NetworkError.fileToGenerateRequest)
                 .eraseToAnyPublisher()
         }
         
@@ -36,12 +35,20 @@ final class NetworkService {
                 }
                 return data
             }
-            .mapError { error -> NetworkError in
-                if let decodingError = error as? DecodingError {
-                    return .generic(decodingError)
-                } else {
-                    return .generic(error)
-                }
-            }.eraseToAnyPublisher()
+            .mapError { [weak self] error -> NetworkError in
+                guard let self else { return .generic(error) }
+                return self.convertToNetworkError(from: error)
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    private func convertToNetworkError(from error: Error) -> NetworkError {
+        if let networkError = error as? NetworkError {
+            return networkError
+        } else if let urlError = error as? URLError {
+            return .generic(urlError)
+        } else {
+            return .generic(error)
+        }
     }
 }

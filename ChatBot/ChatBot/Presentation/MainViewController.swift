@@ -1,5 +1,5 @@
-import UIKit
 import Combine
+import UIKit
 
 final class MainViewController: UIViewController {
     private let viewModel: MainViewModel
@@ -28,9 +28,9 @@ final class MainViewController: UIViewController {
             }
             .store(in: &cancellables)
         
-        viewModel.$networkError
-            .sink { [weak self] error in
-                self?.handleError(networkError: error)
+        viewModel.$errorMessage
+            .sink { [weak self] message in
+                self?.handleError(message: message)
             }
             .store(in: &cancellables)
     }
@@ -48,9 +48,9 @@ final class MainViewController: UIViewController {
         print("\(message.role): \(content)")
     }
     
-    private func handleError(networkError: NetworkError?) {
-        if let error = networkError {
-            print(error)
+    private func handleError(message: String?) {
+        if let message {
+            print("Error!", message)
         }
     }
 }
