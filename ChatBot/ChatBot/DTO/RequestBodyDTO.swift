@@ -8,7 +8,28 @@ extension OpenAI.Chat {
 
 extension OpenAI.Chat.RequestBodyDTO {
     struct Message: Encodable {
-        let role: String
+        let role: Role
         let content: String
+    }
+}
+
+extension OpenAI.Chat.RequestBodyDTO.Message {
+    enum Key: CodingKey {
+        case role
+        case content
+    }
+    
+    enum Role: String {
+        case system
+        case assistant
+        case user
+    }
+}
+
+extension OpenAI.Chat.RequestBodyDTO.Message {
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: Key.self)
+        try container.encode(self.role.rawValue, forKey: .role)
+        try container.encode(self.content, forKey: .content)
     }
 }
