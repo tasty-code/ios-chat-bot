@@ -27,8 +27,8 @@
 		F428B1CC2BB52F5800ED811F /* chat-completion-response-sample.json in Resources */ = {isa = PBXBuildFile; fileRef = F428B1CB2BB52F5800ED811F /* chat-completion-response-sample.json */; };
 		F4FEE31D2BBE984B00E61FF3 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FEE31C2BBE984B00E61FF3 /* NetworkError.swift */; };
 		F4FEE31F2BBE98A900E61FF3 /* URLScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FEE31E2BBE98A900E61FF3 /* URLScheme.swift */; };
-		F4FEE3212BBE98B800E61FF3 /* HTTPMethodType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FEE3202BBE98B800E61FF3 /* HTTPMethodType.swift */; };
-		F4FEE32A2BBEC8BD00E61FF3 /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FEE3292BBEC8BD00E61FF3 /* HTTPRequest.swift */; };
+		F4FEE3212BBE98B800E61FF3 /* HTTPRequestMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FEE3202BBE98B800E61FF3 /* HTTPRequestMethod.swift */; };
+		F4FEE32A2BBEC8BD00E61FF3 /* HTTPRequestHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FEE3292BBEC8BD00E61FF3 /* HTTPRequestHeader.swift */; };
 		F4FEE32C2BBECEDA00E61FF3 /* NetworkRequestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FEE32B2BBECEDA00E61FF3 /* NetworkRequestable.swift */; };
 /* End PBXBuildFile section */
 
@@ -65,8 +65,8 @@
 		F428B1CB2BB52F5800ED811F /* chat-completion-response-sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "chat-completion-response-sample.json"; sourceTree = "<group>"; };
 		F4FEE31C2BBE984B00E61FF3 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		F4FEE31E2BBE98A900E61FF3 /* URLScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLScheme.swift; sourceTree = "<group>"; };
-		F4FEE3202BBE98B800E61FF3 /* HTTPMethodType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethodType.swift; sourceTree = "<group>"; };
-		F4FEE3292BBEC8BD00E61FF3 /* HTTPRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequest.swift; sourceTree = "<group>"; };
+		F4FEE3202BBE98B800E61FF3 /* HTTPRequestMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequestMethod.swift; sourceTree = "<group>"; };
+		F4FEE3292BBEC8BD00E61FF3 /* HTTPRequestHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequestHeader.swift; sourceTree = "<group>"; };
 		F4FEE32B2BBECEDA00E61FF3 /* NetworkRequestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -191,10 +191,10 @@
 				999BAB942BBD358B00FA2B89 /* HTTPRequestable.swift */,
 				F4FEE32B2BBECEDA00E61FF3 /* NetworkRequestable.swift */,
 				999BAB8E2BBCF6C700FA2B89 /* NetworkService.swift */,
-				F4FEE3292BBEC8BD00E61FF3 /* HTTPRequest.swift */,
+				F4FEE3292BBEC8BD00E61FF3 /* HTTPRequestHeader.swift */,
 				F4FEE31C2BBE984B00E61FF3 /* NetworkError.swift */,
 				F4FEE31E2BBE98A900E61FF3 /* URLScheme.swift */,
-				F4FEE3202BBE98B800E61FF3 /* HTTPMethodType.swift */,
+				F4FEE3202BBE98B800E61FF3 /* HTTPRequestMethod.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -311,7 +311,7 @@
 				B4B3E2C12B42D1BB00818B3C /* MainViewController.swift in Sources */,
 				999BAB8D2BBCF4CC00FA2B89 /* OpenAIRequest.swift in Sources */,
 				999BAB332BB50A4F00FA2B89 /* RequestBodyDTO.swift in Sources */,
-				F4FEE3212BBE98B800E61FF3 /* HTTPMethodType.swift in Sources */,
+				F4FEE3212BBE98B800E61FF3 /* HTTPRequestMethod.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
 				999BAB8F2BBCF6C700FA2B89 /* NetworkService.swift in Sources */,
 				999BAB952BBD358C00FA2B89 /* HTTPRequestable.swift in Sources */,
@@ -319,7 +319,7 @@
 				F428B1BB2BB5036500ED811F /* ResponseDTO.swift in Sources */,
 				999BAB932BBD0F0E00FA2B89 /* MainViewModel.swift in Sources */,
 				F4FEE31D2BBE984B00E61FF3 /* NetworkError.swift in Sources */,
-				F4FEE32A2BBEC8BD00E61FF3 /* HTTPRequest.swift in Sources */,
+				F4FEE32A2BBEC8BD00E61FF3 /* HTTPRequestHeader.swift in Sources */,
 				F4FEE31F2BBE98A900E61FF3 /* URLScheme.swift in Sources */,
 				F4FEE32C2BBECEDA00E61FF3 /* NetworkRequestable.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
