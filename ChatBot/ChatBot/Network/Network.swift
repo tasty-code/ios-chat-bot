@@ -19,7 +19,7 @@ class Network<T: Decodable> {
     func fetchData(message: Message) -> Observable<T> {
         let urlRequest = NetworkURL.makeURLRequest(type: .chatGPT, chat: RequestChatDTO(messages: [message]), httpMethod: .post)!
         let result = RxAlamofire.requestData(urlRequest)
-            .observeOn(queue)
+            .observe(on: queue)
             .debug()
             .map { (response, data) -> T in
                 return try JSONDecoder().decode(T.self, from: data)

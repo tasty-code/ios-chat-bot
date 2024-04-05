@@ -9,12 +9,14 @@ import UIKit
 import Then
 import SnapKit
 import RxSwift
+import RxCocoa
 
 class ChatBotViewController: UIViewController {
     let button = UIButton().then {
         $0.setTitle("이거", for: .normal)
         $0.setTitleColor(.red, for: .normal)
     }
+    
     private let chatBotViewModel: ChatBotViewModel
     let disposeBag = DisposeBag()
     let chatTrigger = PublishSubject<Message>()
@@ -51,15 +53,20 @@ private extension ChatBotViewController {
     
     func bindViewModel() {
         let input = ChatBotViewModel.Input(chatTigger: chatTrigger)
+        
         let output = chatBotViewModel.transform(input: input)
-        output.resultChat.bind { result in
+        output.resultChat
+            .observe(on: MainScheduler.instance)
+            .bind { result in
             switch result {
-            case .success(let chat):
-                print(chat)
+            case .success(let data):
+                print("RESULT === \(data)")
             case .failure(let error):
-                print(error)
+                let okAction = UIAlertAction(title: "확인", style: .default)
+                self.showMessageAlert(message: "\(error.localizedDescription)", action: [okAction])
             }
-        }.disposed(by: disposeBag)
+        }
+        .disposed(by: disposeBag)
     }
     
     func bindView() {

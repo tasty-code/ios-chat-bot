@@ -15,12 +15,9 @@ struct ChatRepository {
         self.chatBotNetwork = provider.makeChatNetwork()
     }
     
-    func requestChatResultData(message: Message)-> Observable<Result<ResponseChatDTO, Error>> {
+    func requestChatResultData(message: Message) -> Observable<ResponseChatDTO> {
         self.chatBotNetwork.requestChatBotMessage(message: message).map {
-                return .success($0)
-            }
-            .catchError { error in
-                return Observable.just(.failure(error))
-            }
+            return $0
+        }
     }
 }

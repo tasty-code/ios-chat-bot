@@ -15,10 +15,8 @@
 		C12E66D72BB3F28800F3F441 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66BD2BB3F28800F3F441 /* Bundle+Extension.swift */; };
 		C12E66D92BB3F28800F3F441 /* ChatBotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66C02BB3F28800F3F441 /* ChatBotViewController.swift */; };
 		C12E66DB2BB3F28800F3F441 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C12E66C32BB3F28800F3F441 /* Assets.xcassets */; };
-		C12E66DD2BB3F28800F3F441 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66C62BB3F28800F3F441 /* APIService.swift */; };
 		C12E66DE2BB3F28800F3F441 /* APIType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66C72BB3F28800F3F441 /* APIType.swift */; };
 		C12E66DF2BB3F28800F3F441 /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66C82BB3F28800F3F441 /* HttpMethod.swift */; };
-		C12E66E02BB3F28800F3F441 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66C92BB3F28800F3F441 /* NetworkError.swift */; };
 		C12E66E12BB3F28800F3F441 /* NetworkURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66CA2BB3F28800F3F441 /* NetworkURL.swift */; };
 		C12E66E32BB3F28800F3F441 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66CD2BB3F28800F3F441 /* AppDelegate.swift */; };
 		C12E66E42BB3F28800F3F441 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66CE2BB3F28800F3F441 /* SceneDelegate.swift */; };
@@ -27,18 +25,15 @@
 		C12E66EC2BB4291A00F3F441 /* ResponseChoiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66EB2BB4291A00F3F441 /* ResponseChoiceDTO.swift */; };
 		C12E66EE2BB4294300F3F441 /* Usage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66ED2BB4294300F3F441 /* Usage.swift */; };
 		C12E66F02BB429AA00F3F441 /* JSONNull.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66EF2BB429AA00F3F441 /* JSONNull.swift */; };
-		C176AB4A2BBEDD97004DEA01 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = C176AB492BBEDD97004DEA01 /* Then */; };
-		C176AB4D2BBEDDA5004DEA01 /* RxAlamofire in Frameworks */ = {isa = PBXBuildFile; productRef = C176AB4C2BBEDDA5004DEA01 /* RxAlamofire */; };
-		C176AB502BBEDDB1004DEA01 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C176AB4F2BBEDDB1004DEA01 /* SnapKit */; };
-		C176AB532BBEDDC1004DEA01 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = C176AB522BBEDDC1004DEA01 /* RxCocoa */; };
-		C176AB552BBEDDC1004DEA01 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C176AB542BBEDDC1004DEA01 /* RxSwift */; };
 		C1865DB82BBE9C3400DD99C9 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1865DB72BBE9C3400DD99C9 /* Network.swift */; };
 		C1865DBA2BBE9E8600DD99C9 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1865DB92BBE9E8600DD99C9 /* NetworkProvider.swift */; };
 		C1865DBC2BBEB72900DD99C9 /* ChatBotNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1865DBB2BBEB72900DD99C9 /* ChatBotNetwork.swift */; };
 		C1E416662BB9888C00D8C836 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E416652BB9888C00D8C836 /* UIViewController+Extension.swift */; };
+		D28AA74380D6F3CE129AC66D /* Pods_ChatBot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8913FA7C9B8C251C7E4CD5F /* Pods_ChatBot.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6F46BD03BD10D03BC697E016 /* Pods-ChatBot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatBot.release.xcconfig"; path = "Target Support Files/Pods-ChatBot/Pods-ChatBot.release.xcconfig"; sourceTree = "<group>"; };
 		9B9289212BBECF5B00185E35 /* APIToken.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = APIToken.plist; sourceTree = "<group>"; };
 		B4B3E2B92B42D1BB00818B3C /* ChatBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C12E66B82BB3F28800F3F441 /* ChatBotViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatBotViewModel.swift; sourceTree = "<group>"; };
@@ -49,10 +44,8 @@
 		C12E66C02BB3F28800F3F441 /* ChatBotViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatBotViewController.swift; sourceTree = "<group>"; };
 		C12E66C32BB3F28800F3F441 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C12E66C42BB3F28800F3F441 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C12E66C62BB3F28800F3F441 /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		C12E66C72BB3F28800F3F441 /* APIType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIType.swift; sourceTree = "<group>"; };
 		C12E66C82BB3F28800F3F441 /* HttpMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
-		C12E66C92BB3F28800F3F441 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		C12E66CA2BB3F28800F3F441 /* NetworkURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkURL.swift; sourceTree = "<group>"; };
 		C12E66CD2BB3F28800F3F441 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C12E66CE2BB3F28800F3F441 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +58,8 @@
 		C1865DB92BBE9E8600DD99C9 /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
 		C1865DBB2BBEB72900DD99C9 /* ChatBotNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotNetwork.swift; sourceTree = "<group>"; };
 		C1E416652BB9888C00D8C836 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		EF8D881E2721E9C8810C312E /* Pods-ChatBot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatBot.debug.xcconfig"; path = "Target Support Files/Pods-ChatBot/Pods-ChatBot.debug.xcconfig"; sourceTree = "<group>"; };
+		F8913FA7C9B8C251C7E4CD5F /* Pods_ChatBot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatBot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,22 +67,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C176AB502BBEDDB1004DEA01 /* SnapKit in Frameworks */,
-				C176AB4A2BBEDD97004DEA01 /* Then in Frameworks */,
-				C176AB552BBEDDC1004DEA01 /* RxSwift in Frameworks */,
-				C176AB532BBEDDC1004DEA01 /* RxCocoa in Frameworks */,
-				C176AB4D2BBEDDA5004DEA01 /* RxAlamofire in Frameworks */,
+				D28AA74380D6F3CE129AC66D /* Pods_ChatBot.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		82CD0E3CB81B67DDFC983DD6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F8913FA7C9B8C251C7E4CD5F /* Pods_ChatBot.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9FAE753BD9621E64B55604ED /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EF8D881E2721E9C8810C312E /* Pods-ChatBot.debug.xcconfig */,
+				6F46BD03BD10D03BC697E016 /* Pods-ChatBot.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		B4B3E2B02B42D1BB00818B3C = {
 			isa = PBXGroup;
 			children = (
 				B4B3E2BB2B42D1BB00818B3C /* ChatBot */,
 				B4B3E2BA2B42D1BB00818B3C /* Products */,
+				9FAE753BD9621E64B55604ED /* Pods */,
+				82CD0E3CB81B67DDFC983DD6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -153,8 +163,6 @@
 				C1865DB72BBE9C3400DD99C9 /* Network.swift */,
 				C12E66C82BB3F28800F3F441 /* HttpMethod.swift */,
 				C1865DBB2BBEB72900DD99C9 /* ChatBotNetwork.swift */,
-				C12E66C62BB3F28800F3F441 /* APIService.swift */,
-				C12E66C92BB3F28800F3F441 /* NetworkError.swift */,
 				C1865DB92BBE9E8600DD99C9 /* NetworkProvider.swift */,
 			);
 			path = Network;
@@ -194,22 +202,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B4B3E2CD2B42D1BC00818B3C /* Build configuration list for PBXNativeTarget "ChatBot" */;
 			buildPhases = (
+				E671F0AE038BE9FF535377E8 /* [CP] Check Pods Manifest.lock */,
 				B4B3E2B52B42D1BB00818B3C /* Sources */,
 				B4B3E2B62B42D1BB00818B3C /* Frameworks */,
 				B4B3E2B72B42D1BB00818B3C /* Resources */,
+				CD92C4DE6D105F60783833F7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = ChatBot;
-			packageProductDependencies = (
-				C176AB492BBEDD97004DEA01 /* Then */,
-				C176AB4C2BBEDDA5004DEA01 /* RxAlamofire */,
-				C176AB4F2BBEDDB1004DEA01 /* SnapKit */,
-				C176AB522BBEDDC1004DEA01 /* RxCocoa */,
-				C176AB542BBEDDC1004DEA01 /* RxSwift */,
-			);
 			productName = ChatBot;
 			productReference = B4B3E2B92B42D1BB00818B3C /* ChatBot.app */;
 			productType = "com.apple.product-type.application";
@@ -238,12 +241,6 @@
 				Base,
 			);
 			mainGroup = B4B3E2B02B42D1BB00818B3C;
-			packageReferences = (
-				C176AB482BBEDD97004DEA01 /* XCRemoteSwiftPackageReference "Then" */,
-				C176AB4B2BBEDDA5004DEA01 /* XCRemoteSwiftPackageReference "RxAlamofire" */,
-				C176AB4E2BBEDDB1004DEA01 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				C176AB512BBEDDC1004DEA01 /* XCRemoteSwiftPackageReference "RxSwift" */,
-			);
 			productRefGroup = B4B3E2BA2B42D1BB00818B3C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -266,16 +263,56 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		CD92C4DE6D105F60783833F7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChatBot/Pods-ChatBot-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChatBot/Pods-ChatBot-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChatBot/Pods-ChatBot-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E671F0AE038BE9FF535377E8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ChatBot-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B4B3E2B52B42D1BB00818B3C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				C12E66D92BB3F28800F3F441 /* ChatBotViewController.swift in Sources */,
-				C12E66E02BB3F28800F3F441 /* NetworkError.swift in Sources */,
 				C12E66DF2BB3F28800F3F441 /* HttpMethod.swift in Sources */,
 				C12E66DE2BB3F28800F3F441 /* APIType.swift in Sources */,
-				C12E66DD2BB3F28800F3F441 /* APIService.swift in Sources */,
 				C12E66D72BB3F28800F3F441 /* Bundle+Extension.swift in Sources */,
 				C12E66E12BB3F28800F3F441 /* NetworkURL.swift in Sources */,
 				C12E66D32BB3F28800F3F441 /* ChatBotViewModel.swift in Sources */,
@@ -430,12 +467,14 @@
 		};
 		B4B3E2CE2B42D1BC00818B3C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EF8D881E2721E9C8810C312E /* Pods-ChatBot.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T92LV6HV88;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChatBot/Resource/Info.plist;
 				"INFOPLIST_FILE[sdk=*]" = ChatBot/Resource/Info.plist;
@@ -463,12 +502,14 @@
 		};
 		B4B3E2CF2B42D1BC00818B3C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F46BD03BD10D03BC697E016 /* Pods-ChatBot.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T92LV6HV88;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChatBot/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -515,69 +556,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		C176AB482BBEDD97004DEA01 /* XCRemoteSwiftPackageReference "Then" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/devxoul/Then.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
-			};
-		};
-		C176AB4B2BBEDDA5004DEA01 /* XCRemoteSwiftPackageReference "RxAlamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/RxSwiftCommunity/RxAlamofire.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.2.0;
-			};
-		};
-		C176AB4E2BBEDDB1004DEA01 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.7.1;
-			};
-		};
-		C176AB512BBEDDC1004DEA01 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.6.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		C176AB492BBEDD97004DEA01 /* Then */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C176AB482BBEDD97004DEA01 /* XCRemoteSwiftPackageReference "Then" */;
-			productName = Then;
-		};
-		C176AB4C2BBEDDA5004DEA01 /* RxAlamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C176AB4B2BBEDDA5004DEA01 /* XCRemoteSwiftPackageReference "RxAlamofire" */;
-			productName = RxAlamofire;
-		};
-		C176AB4F2BBEDDB1004DEA01 /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C176AB4E2BBEDDB1004DEA01 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
-		};
-		C176AB522BBEDDC1004DEA01 /* RxCocoa */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C176AB512BBEDDC1004DEA01 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxCocoa;
-		};
-		C176AB542BBEDDC1004DEA01 /* RxSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C176AB512BBEDDC1004DEA01 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxSwift;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B4B3E2B12B42D1BB00818B3C /* Project object */;
 }
