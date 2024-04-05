@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15D33E822BBFE96D00F88B25 /* Api_key.plist in Resources */ = {isa = PBXBuildFile; fileRef = 15D33E812BBFE96D00F88B25 /* Api_key.plist */; };
 		1D312FB42BBACF8000169AD3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D312FB12BBACF8000169AD3 /* AppDelegate.swift */; };
 		1D312FB52BBACF8000169AD3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D312FB22BBACF8000169AD3 /* SceneDelegate.swift */; };
 		1D312FBC2BBACFA100169AD3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D312FBA2BBACFA100169AD3 /* ViewController.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		15D33E812BBFE96D00F88B25 /* Api_key.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Api_key.plist; sourceTree = "<group>"; };
 		1D312FB12BBACF8000169AD3 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1D312FB22BBACF8000169AD3 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		1D312FBA2BBACFA100169AD3 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 		1D312FCA2BBACFC200169AD3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				15D33E812BBFE96D00F88B25 /* Api_key.plist */,
 				1D312FC62BBACFC200169AD3 /* Assets.xcassets */,
 				1D312FC72BBACFC200169AD3 /* Info.plist */,
 				1D312FC92BBACFC200169AD3 /* LaunchScreen.storyboard */,
@@ -163,6 +166,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15D33E822BBFE96D00F88B25 /* Api_key.plist in Resources */,
 				1D312FCB2BBACFC200169AD3 /* Assets.xcassets in Resources */,
 				1D312FCD2BBACFC200169AD3 /* LaunchScreen.storyboard in Resources */,
 			);

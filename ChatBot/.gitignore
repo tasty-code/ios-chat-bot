@@ -112,4 +112,7 @@ iOSInjectionProject/
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
 
+## APIKEY
+Api_Key.plist
+
 # End of https://www.toptal.com/developers/gitignore/api/xcode,swift,cocoapods
