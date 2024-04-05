@@ -23,8 +23,6 @@ extension OpenAI.Chat.RequestBodyDTO.Message {
         case system
         case assistant
         case user
-        case tool
-        case function
     }
 }
 

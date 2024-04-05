@@ -25,6 +25,7 @@
 		F428B1C32BB52D1E00ED811F /* OpenAIChatReponseDTOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F428B1C22BB52D1E00ED811F /* OpenAIChatReponseDTOTests.swift */; };
 		F428B1CA2BB52E8600ED811F /* JSONLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F428B1C92BB52E8600ED811F /* JSONLoader.swift */; };
 		F428B1CC2BB52F5800ED811F /* chat-completion-response-sample.json in Resources */ = {isa = PBXBuildFile; fileRef = F428B1CB2BB52F5800ED811F /* chat-completion-response-sample.json */; };
+		F4A0E9452BBFDE790024097E /* ChatCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A0E9442BBFDE790024097E /* ChatCompletion.swift */; };
 		F4FEE31D2BBE984B00E61FF3 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FEE31C2BBE984B00E61FF3 /* NetworkError.swift */; };
 		F4FEE31F2BBE98A900E61FF3 /* URLScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FEE31E2BBE98A900E61FF3 /* URLScheme.swift */; };
 		F4FEE3212BBE98B800E61FF3 /* HTTPRequestMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FEE3202BBE98B800E61FF3 /* HTTPRequestMethod.swift */; };
@@ -63,6 +64,7 @@
 		F428B1C22BB52D1E00ED811F /* OpenAIChatReponseDTOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIChatReponseDTOTests.swift; sourceTree = "<group>"; };
 		F428B1C92BB52E8600ED811F /* JSONLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONLoader.swift; sourceTree = "<group>"; };
 		F428B1CB2BB52F5800ED811F /* chat-completion-response-sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "chat-completion-response-sample.json"; sourceTree = "<group>"; };
+		F4A0E9442BBFDE790024097E /* ChatCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCompletion.swift; sourceTree = "<group>"; };
 		F4FEE31C2BBE984B00E61FF3 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		F4FEE31E2BBE98A900E61FF3 /* URLScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLScheme.swift; sourceTree = "<group>"; };
 		F4FEE3202BBE98B800E61FF3 /* HTTPRequestMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequestMethod.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */,
 				B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */,
 				B4B3E2CA2B42D1BC00818B3C /* Info.plist */,
+				F4A0E9462BBFDE8F0024097E /* Entity */,
 				F4EF7B6A2BB8087A00D77EE3 /* DTO */,
 			);
 			path = ChatBot;
@@ -137,6 +140,14 @@
 				F428B1CB2BB52F5800ED811F /* chat-completion-response-sample.json */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		F4A0E9462BBFDE8F0024097E /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				F4A0E9442BBFDE790024097E /* ChatCompletion.swift */,
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 		F4EF7B6A2BB8087A00D77EE3 /* DTO */ = {
@@ -317,6 +328,7 @@
 				999BAB952BBD358C00FA2B89 /* HTTPRequestable.swift in Sources */,
 				999BAB8B2BBCF45E00FA2B89 /* APIKeyLoader.swift in Sources */,
 				F428B1BB2BB5036500ED811F /* ResponseDTO.swift in Sources */,
+				F4A0E9452BBFDE790024097E /* ChatCompletion.swift in Sources */,
 				999BAB932BBD0F0E00FA2B89 /* MainViewModel.swift in Sources */,
 				F4FEE31D2BBE984B00E61FF3 /* NetworkError.swift in Sources */,
 				F4FEE32A2BBEC8BD00E61FF3 /* HTTPRequestHeader.swift in Sources */,

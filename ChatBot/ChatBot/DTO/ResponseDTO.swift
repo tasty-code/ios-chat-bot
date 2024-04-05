@@ -68,3 +68,25 @@ extension OpenAI.Chat.ResponseDTO.Choice.Message.ToolCall {
         let arguments: String
     }
 }
+
+extension OpenAI.Chat.ResponseDTO {
+    func toDomain() -> ChatCompletion {
+        let choices: [ChatCompletion.Choice] = self.choices.compactMap { choice in
+            guard
+                let role = ChatCompletion.Choice.Message.Role(rawValue: choice.message.role)
+            else {
+                return nil
+            }
+            let message = ChatCompletion.Choice.Message(
+                role: role,
+                content: choice.message.content
+            )
+            return .init(index: choice.index, message: message)
+        }
+        
+        return .init(
+            created: self.created,
+            choices: choices
+        )
+    }
+}

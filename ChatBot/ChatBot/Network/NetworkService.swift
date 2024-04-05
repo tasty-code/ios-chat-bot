@@ -3,14 +3,11 @@ import Combine
 
 final class NetworkService {
     private let requester: NetworkRequestable
-    private let jsonDecoder: JSONDecoder
     
     init(
-        requester: NetworkRequestable,
-        decoder: JSONDecoder
+        requester: NetworkRequestable
     ) {
         self.requester = requester
-        self.jsonDecoder = decoder
     }
     
     private func makeRequest(body: Data?) -> URLRequest? {
@@ -20,9 +17,12 @@ final class NetworkService {
     
     func requestMessage(
         body: Data?
-    ) -> AnyPublisher<OpenAI.Chat.ResponseDTO, NetworkError> {
-        guard let request = makeRequest(body: body) else {
-            return Fail(error: NetworkError.generic("Failed to create URL request" as! Error))
+    ) -> AnyPublisher<Data, NetworkError> {
+        guard 
+            let request = makeRequest(body: body)
+        else {
+            let error = NetworkError.generic("Failed to create URL request" as! Error)
+            return Fail(error: error)
                 .eraseToAnyPublisher()
         }
         
@@ -36,7 +36,6 @@ final class NetworkService {
                 }
                 return data
             }
-            .decode(type: OpenAI.Chat.ResponseDTO.self, decoder: jsonDecoder)
             .mapError { error -> NetworkError in
                 if let decodingError = error as? DecodingError {
                     return .generic(decodingError)

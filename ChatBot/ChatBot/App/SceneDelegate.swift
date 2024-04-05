@@ -10,14 +10,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        let jsonDecoder = JSONDecoder()
-        jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
         let requester = URLSession.shared
-        // TODO: Literals...!
-        let networkManager = NetworkService(
-            requester: requester,
-            decoder: jsonDecoder
-        )
+        let networkManager = NetworkService(requester: requester)
         let viewModel = MainViewModel(networkService: networkManager)
         window?.rootViewController = MainViewController(viewModel: viewModel)
         window?.makeKeyAndVisible()
