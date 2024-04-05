@@ -25,6 +25,7 @@ final class ChatViewController: UIViewController {
         initializeHideKeyboard()
         registerButton()
         bindToModel()
+        observeKeyboardWillShowNotification()
     }
 }
 
@@ -66,6 +67,20 @@ extension ChatViewController {
             .disposed(by: bag)
     }
     
+    private func observeKeyboardWillShowNotification() {
+        _ = NotificationCenter.default.rx.notification(UIResponder.keyboardWillShowNotification)
+            .subscribe(onNext: { [weak self] notification in
+                if let userInfo = notification.userInfo,
+                   let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval,
+                   let animationCurveRaw = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt {
+                    
+                    let animationCurve = UIView.AnimationOptions(rawValue: animationCurveRaw)
+                    self?.animateCollectionView(duration: animationDuration, curve: animationCurve)
+                }
+            })
+            .disposed(by: bag)
+    }
+    
     private func initializeHideKeyboard() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(
             target: self,
@@ -76,6 +91,18 @@ extension ChatViewController {
     
     @objc private func dismissKeyboard() {
         view.endEditing(true)
+    }
+    
+    private func repositionCollectionView(animated: Bool) {
+        let row = chatCollectionView.numberOfItems(inSection: 0)
+        let indexPath = IndexPath(row: row - 1, section: 0)
+        chatCollectionView.scrollToItem(at: indexPath, at: .bottom, animated: animated)
+    }
+    
+    private func animateCollectionView(duration: TimeInterval, curve: UIView.AnimationOptions) {
+        UIView.animate(withDuration: duration, delay: 0, options: curve, animations: { [weak self] in
+            self?.repositionCollectionView(animated: false)
+        }, completion: nil)
     }
 }
 
@@ -95,11 +122,7 @@ extension ChatViewController {
     
     private func bindToModel() {
         _ = chatViewModel.snapshotPublisher.bind(onNext: { [weak self] _ in
-            guard let row = self?.chatCollectionView.numberOfItems(inSection: 0) else {
-                return
-            }
-            let indexPath = IndexPath(row: row - 1, section: 0)
-            self?.chatCollectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
+            self?.repositionCollectionView(animated: true)
         })
         .disposed(by: bag)
     }
