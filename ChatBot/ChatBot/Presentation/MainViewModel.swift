@@ -5,7 +5,7 @@ final class MainViewModel {
     private let networkService: NetworkService
     private var cancellables = Set<AnyCancellable>()
     
-    @Published var userResponse: ChatCompletion? = nil
+    @Published var chatCompletion: ChatCompletion? = nil
     @Published var networkError: NetworkError? = nil
     
     init(
@@ -13,7 +13,7 @@ final class MainViewModel {
     ) {
         self.networkService = networkService
     }
-    
+
     func sendMessage(
         content: String
     ) {
@@ -36,7 +36,7 @@ final class MainViewModel {
                 }
             } receiveValue: { responseDTO in
                 let object = responseDTO.toDomain()
-                self.userResponse = object
+                self.chatCompletion = object
             }.store(in: &cancellables)
     }
 }

@@ -22,31 +22,36 @@ final class MainViewController: UIViewController {
     }
     
     private func bindViewModel() {
-        viewModel.$userResponse
-            .sink { response in
-                if let response = response {
-                    guard
-                        let role = response.choices.first?.message.role,
-                        let message = response.choices.first?.message.content
-                    else {
-                        return // TODO: 어떻게 처리하는 것이 정석일까
-                    }
-                    print("\(role): \(message)")
-                }
+        viewModel.$chatCompletion
+            .sink { [weak self] chatCompletion in
+                self?.handleChatCompletion(chatCompletion)
             }
             .store(in: &cancellables)
         
         viewModel.$networkError
-            .sink { error in
-                if let error = error {
-                    print(error)
-                }
+            .sink { [weak self] error in
+                self?.handleError(networkError: error)
             }
             .store(in: &cancellables)
     }
     
     private func sendMessageAsUser() {
-        viewModel.sendMessage(content: "내일 추울까?")
+        let question = "내일 추울까?"
+        viewModel.sendMessage(content: question)
+    }
+    
+    private func handleChatCompletion(_ chatCompletion: ChatCompletion?) {
+        guard
+            let message = chatCompletion?.choices.first?.message,
+            let content = message.content
+        else { return }
+        print("\(message.role): \(content)")
+    }
+    
+    private func handleError(networkError: NetworkError?) {
+        if let error = networkError {
+            print(error)
+        }
     }
 }
 
