@@ -1,15 +1,13 @@
+protocol StringValueProtocol {
+    var value: String { get }
+}
+
+protocol FieldProtocol {
+    var key: String { get set }
+    var value: String { get set }
+}
+
 enum HTTPRequestHeader {
-    protocol StringValueProtocol {
-        var value: String { get }
-    }
-    
-    protocol FieldProtocol {
-        var key: String { get set }
-        var value: String { get set }
-    }
-
-    typealias Fields = [any FieldProtocol]
-
     struct Authorization: FieldProtocol {
         enum Authorization: StringValueProtocol {
             case bearer(token: String)
@@ -25,11 +23,8 @@ enum HTTPRequestHeader {
         var key: String = "Authorization"
         var value: String
         
-        private var _value: Authorization
-        
         init(_ authorization: Authorization) {
-            self._value = authorization
-            self.value = _value.value
+            self.value = authorization.value
         }
     }
 
@@ -58,14 +53,12 @@ enum HTTPRequestHeader {
         var key: String = "Content-Type"
         var value: String
         
-        private var _value: ContentType
-        
         init(_ contentType: ContentType) {
-            self._value = contentType
-            self.value = _value.value
+            self.value = contentType.value
         }
     }
-
+    
+    typealias Fields = [any FieldProtocol]
 }
 
 extension HTTPRequestHeader.Fields {
