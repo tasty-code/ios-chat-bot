@@ -24,6 +24,7 @@ final class ChatViewController: UIViewController {
         setUpChatCollectionView()
         initializeHideKeyboard()
         registerButton()
+        bindToModel()
     }
 }
 
@@ -90,5 +91,16 @@ extension ChatViewController {
         var config = UICollectionLayoutListConfiguration(appearance: .plain)
         config.showsSeparators = false
         return UICollectionViewCompositionalLayout.list(using: config)
+    }
+    
+    private func bindToModel() {
+        _ = chatViewModel.snapshotPublisher.bind(onNext: { [weak self] _ in
+            guard let row = self?.chatCollectionView.numberOfItems(inSection: 0) else {
+                return
+            }
+            let indexPath = IndexPath(row: row - 1, section: 0)
+            self?.chatCollectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
+        })
+        .disposed(by: bag)
     }
 }

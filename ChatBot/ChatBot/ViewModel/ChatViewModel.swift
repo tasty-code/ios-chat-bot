@@ -7,11 +7,12 @@
 
 import UIKit
 
-import RxSwift
+import RxCocoa
 
 // 채팅 뷰 모델
 final class ChatViewModel {
     private var dataSource: UICollectionViewDiffableDataSource<Section, ChatMessage>?
+    private(set) lazy var snapshotPublisher = PublishRelay<[ChatMessage]>()
     private(set) var service = ChatAPIService()
 }
 
@@ -32,7 +33,9 @@ extension ChatViewModel {
             snapshot.appendItems([chatMessage])
         }
         
-        dataSource?.applySnapshotUsingReloadData(snapshot)
+        dataSource?.applySnapshotUsingReloadData(snapshot) { [weak self] in 
+            self?.snapshotPublisher.accept(snapshot.itemIdentifiers)
+        }
     }
 }
 
