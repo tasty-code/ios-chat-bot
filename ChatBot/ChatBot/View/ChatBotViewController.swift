@@ -60,7 +60,7 @@ private extension ChatBotViewController {
             .bind { result in
             switch result {
             case .success(let data):
-                print("RESULT === \(data)")
+                self.chatBotViewModel.chatList.append(data)
             case .failure(let error):
                 let okAction = UIAlertAction(title: "확인", style: .default)
                 self.showMessageAlert(message: "\(error.localizedDescription)", action: [okAction])

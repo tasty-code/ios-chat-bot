@@ -10,6 +10,7 @@ import RxSwift
 import RxCocoa
 
 final class ChatBotViewModel {
+    var chatList: [ResponseChatDTO] = []
     private let chatRepository: ChatRepository
     
     init(chatRepository: ChatRepository) {
@@ -27,7 +28,9 @@ final class ChatBotViewModel {
     func transform(input: Input) -> Output {
         let resultChat = input.chatTigger.flatMapLatest { [unowned self] message -> Observable<Result<ResponseChatDTO, Error>> in
             return self.chatRepository.requestChatResultData(message: message)
-                .map { return .success($0) }
+                .map {
+                    return .success($0)
+                }
         }.catch { error in
             return Observable.just(.failure(error))
         }

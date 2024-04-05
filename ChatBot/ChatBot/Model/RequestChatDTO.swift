@@ -8,7 +8,7 @@
 import Foundation
 
 struct RequestChatDTO: Encodable {
-    let model: String = "gpt-3.5-turbo-1106ss"
+    let model: String = "gpt-3.5-turbo-1106"
     let stream: Bool = false
     var messages: [Message]
 }
