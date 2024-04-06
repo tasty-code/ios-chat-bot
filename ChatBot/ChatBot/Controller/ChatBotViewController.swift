@@ -9,17 +9,22 @@ import UIKit
 import Combine
 
 final class ChatBotViewController: UIViewController {
-  var chatBubbleView = ChatBubbleView()
-  
+  private lazy var chatCollectionView: ChatCollectionView = {
+    let configure = UICollectionLayoutListConfiguration(appearance: .plain)
+    let layout = UICollectionViewCompositionalLayout.list(using: configure)
+    let collectionView = ChatCollectionView(frame: .zero, collectionViewLayout: layout)
+    return collectionView
+  }()
+  private lazy var dataSource = ChatCollectionViewDataSource(collectionView: chatCollectionView)
   private let chatBotViewModel: ChatViewModel = .init()
   private var cancellable = Set<AnyCancellable>()
   private let input: PassthroughSubject<ChatViewModel.Input, Never> = .init()
   
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .white
-    view.addSubview(chatBubbleView)
+    setupCollectionView()
+    configureUI()
     setupConstraints()
     bind()
   }
@@ -38,12 +43,23 @@ final class ChatBotViewController: UIViewController {
 }
 
 private extension ChatBotViewController {
+  func configureUI() {
+    view.addSubview(chatCollectionView)
+  }
+  
+  func setupCollectionView() {
+    self.chatCollectionView.dataSource = dataSource
+  }
+  
   func setupConstraints() {
-    chatBubbleView.translatesAutoresizingMaskIntoConstraints = false
-    NSLayoutConstraint.activate([
-      chatBubbleView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      chatBubbleView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-    ]
+    chatCollectionView.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate(
+      [
+        chatCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+        chatCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+        chatCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        chatCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50)
+      ]
     )
   }
   
@@ -51,16 +67,23 @@ private extension ChatBotViewController {
     let output = chatBotViewModel.transform(
       input: input.eraseToAnyPublisher()
     )
-    output.sink { event in
+    output.sink { [weak self] event in
       switch event {
       case .fetchChatResponseDidFail(let error):
         print(error.localizedDescription)
       case .fetchChatResponseDidSucceed(let response):
-        print(response.choices[0].message.content)
+        self?.applyChatResponse(response: response)
       case .toggleSendButton(let isEnable):
         print("\(isEnable)")
       }
     }
     .store(in: &cancellable)
+  }
+  
+  func applyChatResponse(response: RequestModel) {
+    var chatCollectionViewSnapshot = ChatCollectionViewSnapshot()
+    chatCollectionViewSnapshot.appendSections([.messages])
+    chatCollectionViewSnapshot.appendItems(response.messages)
+    dataSource.apply(chatCollectionViewSnapshot)
   }
 }
