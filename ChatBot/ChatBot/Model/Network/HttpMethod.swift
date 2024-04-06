@@ -28,7 +28,7 @@ enum HttpMethod<T: Encodable> {
   }
 }
 
-enum HTTPMethodType: String {
+enum HttpMethodType: String {
   case get = "GET"
   case post = "POST"
   case put = "PUT"
@@ -37,6 +37,6 @@ enum HTTPMethodType: String {
 }
 
 struct HttpMethodConfiguration<T: Encodable> {
-  let method: HTTPMethodType
+  let method: HttpMethodType
   let body: T?
 }
