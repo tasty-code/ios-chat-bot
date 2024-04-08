@@ -8,5 +8,5 @@
 struct RequestModel: Codable {
   var model: String = "gpt-3.5-turbo-1106"
   var stream: Bool = false
-  let messages: [Message]
+  var messages: [Message]
 }
