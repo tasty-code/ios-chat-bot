@@ -27,12 +27,14 @@ final class ChatCell: UICollectionViewListCell {
   }
   
   func configureUser(text: String) {
+    systemBubbleView.isHidden = true
     userBubbleView.isHidden = false
     userBubbleView.configureMessage(text: text)
   }
   
   func configureSystem(text: String) {
     systemBubbleView.isHidden = false
+    userBubbleView.isHidden = true
     systemBubbleView.configureMessage(text: text)
   }
 }
