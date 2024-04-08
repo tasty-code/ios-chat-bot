@@ -66,15 +66,16 @@ private extension ChatViewModel {
     guard
       requestModel != nil
     else {
-      requestModel = RequestModel(
-        messages: [
-          Message(
-            role: "system",
-            content: "You are a poetic assistant, skilled in explaining complex programming concepts with creative flair."
-          ),
-          message
-        ]
-      )
+//      requestModel = RequestModel(
+//        messages: [
+//          Message(
+//            role: "system",
+//            content: "You are a poetic assistant, skilled in explaining complex programming concepts with creative flair."
+//          ),
+//          message
+//        ]
+//      )
+      requestModel = MockDataSample.requestData
       return requestModel
     }
     requestModel?.messages.append(message)
