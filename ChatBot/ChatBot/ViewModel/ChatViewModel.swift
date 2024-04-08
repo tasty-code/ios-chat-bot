@@ -60,21 +60,24 @@ private extension ChatViewModel {
             self?.output.send(.fetchChatResponseDidSucceed(response: requestModel))
         }
         .store(in: &cancellables)
+  }
+  
+  func makeBody(message: Message) -> RequestModel? {
+    guard
+      requestModel != nil
+    else {
+      requestModel = RequestModel(
+        messages: [
+          Message(
+            role: "system",
+            content: "You are a poetic assistant, skilled in explaining complex programming concepts with creative flair."
+          ),
+          message
+        ]
+      )
+      return requestModel
     }
-    
-    func makeBody(message: Message) -> RequestModel? {
-        guard
-            requestModel != nil
-        else {
-            requestModel = RequestModel(
-                messages: [
-                    Message(role: "system", content: "You are a poetic assistant, skilled in explaining complex programming concepts with creative flair."),
-                    message
-                ]
-            )
-            return requestModel
-        }
-        requestModel?.messages.append(message)
-        return requestModel
-    }
+    requestModel?.messages.append(message)
+    return requestModel
+  }
 }

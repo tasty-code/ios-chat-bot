@@ -8,12 +8,12 @@
 import Foundation
 
 extension Bundle {
-    var chatBotAPIKey: String {
-        guard 
-            let key = self.object(forInfoDictionaryKey: "ChatBot_API_KEY") as? String
-        else {
-            return ""
-        }
-        return key
+  var chatBotAPIKey: String {
+    guard 
+      let key = self.object(forInfoDictionaryKey: "ChatBot_API_KEY") as? String
+    else {
+      return ""
     }
+    return key
+  }
 }
