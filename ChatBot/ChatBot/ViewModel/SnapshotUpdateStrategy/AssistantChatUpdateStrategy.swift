@@ -1,5 +1,5 @@
 //
-//  MessageUpdateStrategy.swift
+//  AssistantChatUpdateStrategy.swift
 //  ChatBot
 //
 //  Created by Kim EenSung on 4/5/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct MessageUpdateStrategy: SnapshotUpdateStrategy {
+struct AssistantChatUpdateStrategy: SnapshotUpdateStrategy {
     func apply(using snapshot: inout NSDiffableDataSourceSnapshot<ChatViewModel.Section, ChatMessage>, with chatMessage: ChatMessage, loadingMessage: ChatMessage) {
         snapshot.deleteItems([loadingMessage])
         
