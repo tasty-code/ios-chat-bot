@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol URLSessionProtocol {
-  func dataTaskPublisher(for request: URLRequest) -> AnyPublisher<Data,NetworkError>
+  func dataTaskPublisher<T: Decodable>(for request: URLRequest) -> AnyPublisher<T,NetworkError>
   func handleHTTPResponse(data: Data,httpResponse: URLResponse) throws -> Data
 }
 
@@ -34,15 +34,19 @@ extension URLSessionProtocol {
 }
 
 extension URLSession: URLSessionProtocol {
-  func dataTaskPublisher(
+  func dataTaskPublisher<T: Decodable>(
     for request: URLRequest
-  ) -> AnyPublisher<Data, NetworkError> {
+  ) -> AnyPublisher<T, NetworkError> {
     return self.dataTaskPublisher(for: request)
       .tryMap { (data: Data, response: URLResponse) in
         try self.handleHTTPResponse(data: data, httpResponse: response)
       }
       .mapError { error in
         error as? NetworkError ?? NetworkError.networkError(error)
+      }
+      .decode(type: T.self, decoder: JSONHandler.decoder)
+      .mapError { error in
+        error as? NetworkError ?? NetworkError.decodingError
       }
       .eraseToAnyPublisher()
   }
