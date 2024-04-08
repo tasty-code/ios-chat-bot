@@ -3,7 +3,7 @@ import Foundation
 // MARK: - Message
 struct Message: Codable {
     let role: Role
-    let content: String?
+    let content: String
     let toolCalls: [ToolCall]?
     
     private enum CodingKeys: String, CodingKey {
