@@ -8,36 +8,35 @@
 import UIKit
 
 final class MessageView: UILabel {
-  private var width: Double = 0.0
   
   override init(frame: CGRect) {
     super.init(frame: frame)
     configureUI()
+    //    setupConstraints()
   }
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
-  override func drawText(in rect: CGRect) {
-    let insets = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 0)
-    super.drawText(in: rect.inset(by: insets))
-  }
+  //  override func drawText(in rect: CGRect) {
+  //    let insets = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 4)
+  //    super.drawText(in: rect.inset(by: insets))
+  //  }
   
-  func setupSize() {
-    guard let text = self.text as? NSString else { return }
-    
-    width = text.size(
-      withAttributes: [
-        NSAttributedString.Key.font : self.font ?? .preferredFont(forTextStyle: .body)
-      ]
-    ).width
-    
-    if width >= UIScreen.main.bounds.width * 0.75 {
-      width = UIScreen.main.bounds.width * 0.75
-    }
-    setupConstraints()
-  }
+//  func setupSize() {
+//    guard let text = self.text as? NSString else { return }
+//    
+//    let height = text.size(
+//      withAttributes:
+//        [
+//          NSAttributedString.Key.font : self.font ?? .preferredFont(forTextStyle: .body)
+//        ]
+//    ).height
+//    NSLayoutConstraint.activate([
+//      self.heightAnchor.constraint(greaterThanOrEqualToConstant: height),
+//    ])
+//  }
 }
 
 private extension MessageView {
@@ -49,10 +48,9 @@ private extension MessageView {
   }
   
   
-  
-  func setupConstraints() {
-    NSLayoutConstraint.activate([
-      self.widthAnchor.constraint(equalToConstant: width),
-    ])
-  }
+  //  func setupConstraints() {
+  //    NSLayoutConstraint.activate([
+  //      self.widthAnchor.constraint(lessThanOrEqualToConstant: UIScreen.main.bounds.width * 0.75),
+  //    ])
+  //  }
 }
