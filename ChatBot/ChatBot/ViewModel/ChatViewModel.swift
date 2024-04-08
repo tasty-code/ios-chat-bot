@@ -11,10 +11,11 @@ import RxCocoa
 
 // 채팅 뷰 모델
 final class ChatViewModel {
-    private var dataSource: UICollectionViewDiffableDataSource<Section, ChatMessage>?
+    private(set) var dataSource: UICollectionViewDiffableDataSource<Section, ChatMessage>?
     private(set) lazy var snapshotPublisher = PublishRelay<[ChatMessage]>()
     private(set) var service = ChatAPIService()
     private let loadingMessage = ChatMessage(id: UUID(), isUser: false, message: "loading")
+    private(set) var failure = PublishRelay<Bool>()
 }
 
 // MARK: - Custom Methods
@@ -35,7 +36,7 @@ extension ChatViewModel {
         }
     }
     
-    private func removeLoadingIndicator() {
+    func removeLoadingIndicator() {
         guard var snapshot = dataSource?.snapshot() else {
             return
         }
@@ -89,7 +90,7 @@ extension ChatViewModel {
                 self?.applySnapShot(with: chatMessage, strategy: AssistantChatUpdateStrategy())
             }, onFailure: { [weak self] error in
                 print(error)
-                self?.removeLoadingIndicator()
+                self?.failure.accept(true)
             })
     }
 }

@@ -17,7 +17,7 @@ final class ChatCollectionViewCell: UICollectionViewCell {
     private let refreshButton = UIButton().then {
         $0.setImage(UIImage(systemName: "arrow.clockwise"), for: .normal)
         $0.tintColor = .systemRed
-        $0.isHidden = false
+        $0.isHidden = true
     }
     
     override init(frame: CGRect) {
@@ -28,6 +28,11 @@ final class ChatCollectionViewCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        hideRefreshButton()
     }
 }
 
@@ -80,7 +85,11 @@ extension ChatCollectionViewCell {
         delegate?.tapRefreshButton(self)
     }
     
-    func toggleRefreshButton() {
-        refreshButton.isHidden.toggle()
+    func showRefreshButton() {
+        refreshButton.isHidden = false
+    }
+    
+    func hideRefreshButton() {
+        refreshButton.isHidden = true
     }
 }

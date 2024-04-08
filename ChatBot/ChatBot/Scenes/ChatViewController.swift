@@ -25,6 +25,7 @@ final class ChatViewController: UIViewController {
         initializeHideKeyboard()
         registerButton()
         bindToModel()
+        bindToFailure()
         observeKeyboardWillShowNotification()
     }
 }
@@ -65,6 +66,20 @@ extension ChatViewController {
                 self?.chatTextView.textView.text = ""
             })
             .disposed(by: bag)
+    }
+    
+    private func bindToFailure() {
+        _ = chatViewModel.failure.subscribe(onNext: { [weak self] _ in
+            self?.chatViewModel.removeLoadingIndicator()
+            guard let index = self?.chatCollectionView.numberOfItems(inSection: 0) else {
+                return
+            }
+            let indexPath = IndexPath(item: index - 1, section: 0)
+            guard let cell = self?.chatCollectionView.cellForItem(at: indexPath) as? ChatCollectionViewCell else {
+                return
+            }
+            cell.showRefreshButton()
+        })
     }
     
     private func observeKeyboardWillShowNotification() {
@@ -117,8 +132,8 @@ extension ChatViewController {
     }
     
     private func repositionCollectionView(animated: Bool) {
-        let row = chatCollectionView.numberOfItems(inSection: 0)
-        let indexPath = IndexPath(row: row - 1, section: 0)
+        let index = chatCollectionView.numberOfItems(inSection: 0)
+        let indexPath = IndexPath(item: index - 1, section: 0)
         chatCollectionView.scrollToItem(at: indexPath, at: .bottom, animated: animated)
     }
     
@@ -136,5 +151,6 @@ extension ChatViewController: ChatCollectionViewCellDelegate {
             return
         }
         chatViewModel.updateMessage(with: text)
+        chatCollectionViewCell.hideRefreshButton()
     }
 }
