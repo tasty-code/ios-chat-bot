@@ -11,16 +11,19 @@ import UIKit
 final class ChatCollectionViewCell: UICollectionViewCell {
     static let className: String = String(describing: ChatCollectionViewCell.self)
     
-    private let chatBubbleView = ChatBubbleView()
+    weak var delegate: ChatCollectionViewCellDelegate?
+    
+    private(set) var chatBubbleView = ChatBubbleView()
     private let refreshButton = UIButton().then {
         $0.setImage(UIImage(systemName: "arrow.clockwise"), for: .normal)
         $0.tintColor = .systemRed
-        $0.isHidden = true
+        $0.isHidden = false
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
+        setUpRefreshButton()
     }
     
     required init?(coder: NSCoder) {
@@ -60,5 +63,24 @@ extension ChatCollectionViewCell {
             $0.width.lessThanOrEqualTo(self.snp.width).multipliedBy(0.70)
             _ = isUser ? $0.trailing.equalTo(self.snp.trailing) : $0.leading.equalTo(self.snp.leading)
         }
+    }
+}
+
+// MARK: - RefreshButton Configuration
+protocol ChatCollectionViewCellDelegate: AnyObject {
+    func tapRefreshButton(_ chatCollectionViewCell: ChatCollectionViewCell)
+}
+
+extension ChatCollectionViewCell {
+    private func setUpRefreshButton() {
+        refreshButton.addTarget(self, action: #selector(resendChat), for: .touchUpInside)
+    }
+    
+    @objc func resendChat() {
+        delegate?.tapRefreshButton(self)
+    }
+    
+    func toggleRefreshButton() {
+        refreshButton.isHidden.toggle()
     }
 }

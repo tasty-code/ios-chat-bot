@@ -92,6 +92,29 @@ extension ChatViewController {
     @objc private func dismissKeyboard() {
         view.endEditing(true)
     }
+}
+
+// MARK: - ChatCollectionView
+extension ChatViewController {
+    private func setUpChatCollectionView() {
+        chatCollectionView.register(ChatCollectionViewCell.self, forCellWithReuseIdentifier: ChatCollectionViewCell.className)
+        chatCollectionView.register(ChatLoadingCollectionViewCell.self, forCellWithReuseIdentifier: ChatLoadingCollectionViewCell.className)
+        
+        chatViewModel.setDataSource(delegate: self, collectionView: chatCollectionView)
+    }
+    
+    private func createLayout() -> UICollectionViewCompositionalLayout {
+        var config = UICollectionLayoutListConfiguration(appearance: .plain)
+        config.showsSeparators = false
+        return UICollectionViewCompositionalLayout.list(using: config)
+    }
+    
+    private func bindToModel() {
+        _ = chatViewModel.snapshotPublisher.bind(onNext: { [weak self] _ in
+            self?.repositionCollectionView(animated: true)
+        })
+        .disposed(by: bag)
+    }
     
     private func repositionCollectionView(animated: Bool) {
         let row = chatCollectionView.numberOfItems(inSection: 0)
@@ -106,25 +129,12 @@ extension ChatViewController {
     }
 }
 
-// MARK: - ChatCollectionView
-extension ChatViewController {
-    private func setUpChatCollectionView() {
-        chatCollectionView.register(ChatCollectionViewCell.self, forCellWithReuseIdentifier: ChatCollectionViewCell.className)
-        chatCollectionView.register(ChatLoadingCollectionViewCell.self, forCellWithReuseIdentifier: ChatLoadingCollectionViewCell.className)
-        
-        chatViewModel.setDataSource(collectionView: chatCollectionView)
-    }
-    
-    private func createLayout() -> UICollectionViewCompositionalLayout {
-        var config = UICollectionLayoutListConfiguration(appearance: .plain)
-        config.showsSeparators = false
-        return UICollectionViewCompositionalLayout.list(using: config)
-    }
-    
-    private func bindToModel() {
-        _ = chatViewModel.snapshotPublisher.bind(onNext: { [weak self] _ in
-            self?.repositionCollectionView(animated: true)
-        })
-        .disposed(by: bag)
+// MARK: - ChatCollectionViewCellDelegate
+extension ChatViewController: ChatCollectionViewCellDelegate {
+    func tapRefreshButton(_ chatCollectionViewCell: ChatCollectionViewCell) {
+        guard let text = chatCollectionViewCell.chatBubbleView.textLabel.text else {
+            return
+        }
+        chatViewModel.updateMessage(with: text)
     }
 }

@@ -47,7 +47,7 @@ extension ChatViewModel {
 
 // MARK: - Public Methods
 extension ChatViewModel {
-    func setDataSource(collectionView: UICollectionView) {
+    func setDataSource(delegate: ChatCollectionViewCellDelegate, collectionView: UICollectionView) {
         self.dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { [weak self] collectionView, indexPath, itemIdentifier in
             
             if itemIdentifier.id == self?.loadingMessage.id {
@@ -61,6 +61,7 @@ extension ChatViewModel {
                     return UICollectionViewCell()
                 }
                 
+                cell.delegate = delegate
                 cell.text(itemIdentifier.message, isUser: itemIdentifier.isUser)
                 return cell
             }
@@ -74,7 +75,7 @@ extension ChatViewModel {
     
     func updateMessage(with message: String) {
         let chatMessage = ChatMessage(id: UUID(), isUser: true, message: message)
-        applySnapShot(with: chatMessage, strategy: LoadingIndicatorUpdateStrategy())
+        applySnapShot(with: chatMessage, strategy: UserChatUpdateStrategy())
         
         _ = service.createChat(systemContent: "Hello! How can I assist you today?",
                                 userContent: message)
@@ -85,7 +86,7 @@ extension ChatViewModel {
                 }
                 
                 let chatMessage = ChatMessage(id: UUID(), isUser: false, message: message)
-                self?.applySnapShot(with: chatMessage, strategy: MessageUpdateStrategy())
+                self?.applySnapShot(with: chatMessage, strategy: AssistantChatUpdateStrategy())
             }, onFailure: { [weak self] error in
                 print(error)
                 self?.removeLoadingIndicator()
