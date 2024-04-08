@@ -22,12 +22,10 @@ struct NetworkManger {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         let header = ["Authorization": "Bearer \(apiKey)"]
-        print(header)
-        print("apikey\(apiKey)")
         request.allHTTPHeaderFields = header
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        let bodyData = ChatRequest(messages: [.init(role: "system", content: "어렵다"),Message(role: "user", content: "swift 설명해줘 ")])
+        let bodyData = ChatRequest(messages: [.init(role: "system", content: "어렵다"),Message(role: "user", content: "swift언어 설명해줘 ")])
         
         guard let body = try? JSONEncoder().encode(bodyData) else {
             return nil
