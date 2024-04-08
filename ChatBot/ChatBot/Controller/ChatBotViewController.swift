@@ -10,9 +10,11 @@ import Combine
 
 final class ChatBotViewController: UIViewController {
   private lazy var chatCollectionView: ChatCollectionView = {
-    let configure = UICollectionLayoutListConfiguration(appearance: .plain)
+    var configure = UICollectionLayoutListConfiguration(appearance: .plain)
+    configure.showsSeparators = false
     let layout = UICollectionViewCompositionalLayout.list(using: configure)
     let collectionView = ChatCollectionView(frame: .zero, collectionViewLayout: layout)
+    collectionView.allowsSelection = false
     return collectionView
   }()
   private lazy var dataSource = ChatCollectionViewDataSource(collectionView: chatCollectionView)
@@ -73,6 +75,9 @@ private extension ChatBotViewController {
         print(error.localizedDescription)
       case .fetchChatResponseDidSucceed(let response):
         self?.applyChatResponse(response: response)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+          self?.chatCollectionView.srollToBottom()
+        }
       case .toggleSendButton(let isEnable):
         print("\(isEnable)")
       }
