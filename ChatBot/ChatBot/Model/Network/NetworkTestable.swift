@@ -9,26 +9,11 @@ import Foundation
 import Combine
 
 protocol NetworkTestable {
-    func setMockSession(session: URLSessionProtocol) -> NetworkService
-    func makeMockURLSession(fileName: String, statusCode: Int) throws -> MockURLSession
+  func setMockSession(session: URLSessionProtocol) -> NetworkService
 }
 
 extension NetworkTestable {
-    func setMockSession(session: URLSessionProtocol) -> NetworkService {
-        return NetworkService(session: session)
-    }
-    
-    func makeMockURLSession(fileName: String, statusCode: Int) throws -> MockURLSession {
-            let data: Data = JSONHandler.load(fileName: fileName)!
-            let httpResponse = HTTPURLResponse(
-                url: URL(string: "www.naver.com")!,
-                statusCode: statusCode,
-                httpVersion: nil,
-                headerFields: nil
-            )! as URLResponse
-        let response = Just((data, httpResponse))
-            .setFailureType(to: NetworkError.self)
-            .eraseToAnyPublisher()
-        return MockURLSession(response: response)
-    }
+  func setMockSession(session: URLSessionProtocol) -> NetworkService {
+    return NetworkService(session: session)
+  }
 }
