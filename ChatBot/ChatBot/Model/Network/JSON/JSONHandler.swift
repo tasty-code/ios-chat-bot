@@ -9,7 +9,7 @@ import Foundation
 
 enum JSONHandler {
   private static let encoder = JSONEncoder()
-  private static let decoder = JSONDecoder()
+  static let decoder = JSONDecoder()
   
   static func handleEncodedData(data: Encodable) throws -> Data {
     do {
