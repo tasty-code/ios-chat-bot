@@ -10,7 +10,7 @@ import UIKit
 class ChatLoadingCollectionViewCell: UICollectionViewCell {
     static let className = String(describing: ChatLoadingCollectionViewCell.self)
     
-    let chatLoadingIndicator = ChatLoadingIndicator()
+    private let chatLoadingIndicator = ChatLoadingIndicator()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
