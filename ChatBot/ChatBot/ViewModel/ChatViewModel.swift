@@ -8,20 +8,28 @@
 import UIKit
 
 import RxCocoa
+import RxSwift
 
 // 채팅 뷰 모델
 final class ChatViewModel {
     private(set) var dataSource: UICollectionViewDiffableDataSource<Section, ChatMessage>?
     private(set) lazy var snapshotPublisher = PublishRelay<[ChatMessage]>()
     private(set) var service = ChatAPIService()
-    private let loadingMessage = ChatMessage(id: UUID(), isUser: false, message: "loading")
-    private(set) var failure = PublishRelay<Bool>()
+    private lazy var loadingMessage = createMessage(with: "loading", isUser: false)
+    private(set) var networkResult: (any Disposable)?
 }
 
 // MARK: - Custom Methods
 extension ChatViewModel {
     enum Section {
         case main
+    }
+    
+    private func setUpSnapshot() {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, ChatMessage>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems([])
+        dataSource?.apply(snapshot, animatingDifferences: true)
     }
     
     private func applySnapShot(with chatMessage: ChatMessage, strategy: SnapshotUpdateStrategy) {
@@ -36,13 +44,49 @@ extension ChatViewModel {
         }
     }
     
-    func removeLoadingIndicator() {
+    private func requestAssistantChat(with chatMessage: ChatMessage) -> any Disposable {
+        return service.createChat(
+            systemContent: "Hello! How can I assist you today?",
+            userContent: chatMessage.message
+        ).subscribe(
+            onSuccess: { [weak self] response in
+                guard let message = response?.choices[0].message.content,
+                      let chatMessage = self?.createMessage(with: message, isUser: false) else {
+                    return
+                }
+                
+                self?.applySnapShot(with: chatMessage, strategy: AssistantChatUpdateStrategy())
+            }, onFailure: { [weak self] error in
+                print(error)
+                self?.removeLoadingIndicator()
+                self?.toggleRefreshButton(for: chatMessage)
+            }
+        )
+    }
+    
+    private func createMessage(with message: String, isUser: Bool) -> ChatMessage {
+        return ChatMessage(
+            id: UUID(),
+            isUser: isUser,
+            message: message,
+            showRefreshButton: false
+        )
+    }
+    
+    private func toggleRefreshButton(for userChat: ChatMessage) {
         guard var snapshot = dataSource?.snapshot() else {
             return
         }
-        snapshot.deleteItems([loadingMessage])
         
-        dataSource?.applySnapshotUsingReloadData(snapshot)
+        var newChat = userChat
+        newChat.toggleRefreshButton()
+        
+        snapshot.insertItems([newChat], beforeItem: userChat)
+        snapshot.deleteItems([userChat])
+        
+        dataSource?.applySnapshotUsingReloadData(snapshot) { [weak self] in
+            self?.snapshotPublisher.accept(snapshot.itemIdentifiers)
+        }
     }
 }
 
@@ -53,44 +97,49 @@ extension ChatViewModel {
             
             if itemIdentifier.id == self?.loadingMessage.id {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatLoadingCollectionViewCell.className, for: indexPath) as? ChatLoadingCollectionViewCell else {
-                    return UICollectionViewCell()
+                    return ChatLoadingCollectionViewCell()
                 }
                 return cell
                 
             } else {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatCollectionViewCell.className, for: indexPath) as? ChatCollectionViewCell else {
-                    return UICollectionViewCell()
+                    return ChatCollectionViewCell()
                 }
                 
                 cell.delegate = delegate
                 cell.text(itemIdentifier.message, isUser: itemIdentifier.isUser)
+                if itemIdentifier.showRefreshButton {
+                    cell.showRefreshButton()
+                }
                 return cell
             }
         }
         
-        var snapshot = NSDiffableDataSourceSnapshot<Section, ChatMessage>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems([])
-        dataSource?.apply(snapshot, animatingDifferences: true)
+        setUpSnapshot()
     }
     
-    func updateMessage(with message: String) {
-        let chatMessage = ChatMessage(id: UUID(), isUser: true, message: message)
+    func updateUserChat(with message: String) {
+        let chatMessage = createMessage(with: message, isUser: true)
         applySnapShot(with: chatMessage, strategy: UserChatUpdateStrategy())
+        networkResult = requestAssistantChat(with: chatMessage)
+    }
+    
+    func removeLastChat() {
+        guard var snapshot = dataSource?.snapshot(),
+              let last = snapshot.itemIdentifiers.last else {
+            return
+        }
         
-        _ = service.createChat(systemContent: "Hello! How can I assist you today?",
-                                userContent: message)
-            .subscribe(onSuccess: { [weak self] result in
-                
-                guard let message = result?.choices[0].message.content else {
-                    return
-                }
-                
-                let chatMessage = ChatMessage(id: UUID(), isUser: false, message: message)
-                self?.applySnapShot(with: chatMessage, strategy: AssistantChatUpdateStrategy())
-            }, onFailure: { [weak self] error in
-                print(error)
-                self?.failure.accept(true)
-            })
+        snapshot.deleteItems([last])
+        dataSource?.applySnapshotUsingReloadData(snapshot)
+    }
+    
+    func removeLoadingIndicator() {
+        guard var snapshot = dataSource?.snapshot() else {
+            return
+        }
+        snapshot.deleteItems([loadingMessage])
+        
+        dataSource?.applySnapshotUsingReloadData(snapshot)
     }
 }

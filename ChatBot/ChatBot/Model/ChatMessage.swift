@@ -11,4 +11,9 @@ struct ChatMessage: Hashable {
     let id: UUID
     let isUser: Bool
     let message: String
+    private(set) var showRefreshButton: Bool
+    
+    mutating func toggleRefreshButton() {
+        showRefreshButton.toggle()
+    }
 }

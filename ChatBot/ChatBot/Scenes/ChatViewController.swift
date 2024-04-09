@@ -24,8 +24,7 @@ final class ChatViewController: UIViewController {
         setUpChatCollectionView()
         initializeHideKeyboard()
         registerButton()
-        bindToModel()
-        bindToFailure()
+        bindToModelForReposition()
         observeKeyboardWillShowNotification()
     }
 }
@@ -62,24 +61,10 @@ extension ChatViewController {
                     return
                 }
                 
-                self?.chatViewModel.updateMessage(with: text)
+                self?.chatViewModel.updateUserChat(with: text)
                 self?.chatTextView.textView.text = ""
             })
             .disposed(by: bag)
-    }
-    
-    private func bindToFailure() {
-        _ = chatViewModel.failure.subscribe(onNext: { [weak self] _ in
-            self?.chatViewModel.removeLoadingIndicator()
-            guard let index = self?.chatCollectionView.numberOfItems(inSection: 0) else {
-                return
-            }
-            let indexPath = IndexPath(item: index - 1, section: 0)
-            guard let cell = self?.chatCollectionView.cellForItem(at: indexPath) as? ChatCollectionViewCell else {
-                return
-            }
-            cell.showRefreshButton()
-        })
     }
     
     private func observeKeyboardWillShowNotification() {
@@ -124,7 +109,7 @@ extension ChatViewController {
         return UICollectionViewCompositionalLayout.list(using: config)
     }
     
-    private func bindToModel() {
+    private func bindToModelForReposition() {
         _ = chatViewModel.snapshotPublisher.bind(onNext: { [weak self] _ in
             self?.repositionCollectionView(animated: true)
         })
@@ -150,7 +135,7 @@ extension ChatViewController: ChatCollectionViewCellDelegate {
         guard let text = chatCollectionViewCell.chatBubbleView.textLabel.text else {
             return
         }
-        chatViewModel.updateMessage(with: text)
-        chatCollectionViewCell.hideRefreshButton()
+        chatViewModel.removeLastChat()
+        chatViewModel.updateUserChat(with: text)
     }
 }
