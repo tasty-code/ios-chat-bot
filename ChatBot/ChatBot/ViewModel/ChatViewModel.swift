@@ -98,13 +98,13 @@ extension ChatViewModel {
 // MARK: - Snapshots
 extension ChatViewModel {
     func removeLastChat() {
-        var snapshot = snapshot
-        guard let last = snapshot.itemIdentifiers.last else {
-            return
-        }
-        
-        snapshot.deleteItems([last])
-        dataSource?.applySnapshotUsingReloadData(snapshot)
+        let emptyMessage = ChatMessage(
+            id: UUID(),
+            isUser: false,
+            message: "",
+            showRefreshButton: false
+        )
+        applySnapShot(with: emptyMessage, strategy: LastChatRemoveStrategy())
     }
     
     func removeLoadingIndicator() {

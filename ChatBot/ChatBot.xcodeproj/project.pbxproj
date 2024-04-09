@@ -37,6 +37,7 @@
 		8A6899FE2BBE3E9F006031CC /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6899FD2BBE3E9F006031CC /* ChatMessage.swift */; };
 		8A6BE6562BC4F5A800291E78 /* ChatCollectionViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6BE6552BC4F5A800291E78 /* ChatCollectionViewCellDelegate.swift */; };
 		8A6BE6582BC5021900291E78 /* RefreshButtonToggleStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6BE6572BC5021900291E78 /* RefreshButtonToggleStrategy.swift */; };
+		8A6BE65A2BC5044C00291E78 /* LastChatRemoveStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6BE6592BC5044C00291E78 /* LastChatRemoveStrategy.swift */; };
 		8A781FC52BB69B49009D1CE5 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A781FC42BB69B49009D1CE5 /* ChatViewController.swift */; };
 		8A7F6FA12BB29E91001C1999 /* ChatResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7F6FA02BB29E91001C1999 /* ChatResponseModel.swift */; };
 		8A7F6FA32BB2B385001C1999 /* ChatCommonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7F6FA22BB2B385001C1999 /* ChatCommonModel.swift */; };
@@ -71,6 +72,7 @@
 		8A6899FD2BBE3E9F006031CC /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		8A6BE6552BC4F5A800291E78 /* ChatCollectionViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCollectionViewCellDelegate.swift; sourceTree = "<group>"; };
 		8A6BE6572BC5021900291E78 /* RefreshButtonToggleStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshButtonToggleStrategy.swift; sourceTree = "<group>"; };
+		8A6BE6592BC5044C00291E78 /* LastChatRemoveStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastChatRemoveStrategy.swift; sourceTree = "<group>"; };
 		8A781FC42BB69B49009D1CE5 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		8A7F6FA02BB29E91001C1999 /* ChatResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponseModel.swift; sourceTree = "<group>"; };
 		8A7F6FA22BB2B385001C1999 /* ChatCommonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCommonModel.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 				8A81203B2BBFE81000BE0A5C /* AssistantChatUpdateStrategy.swift */,
 				8A81203D2BBFE83000BE0A5C /* UserChatUpdateStrategy.swift */,
 				8A6BE6572BC5021900291E78 /* RefreshButtonToggleStrategy.swift */,
+				8A6BE6592BC5044C00291E78 /* LastChatRemoveStrategy.swift */,
 			);
 			path = SnapshotUpdateStrategy;
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 				77CF46C92BBB8B3A00ABA128 /* Config.swift in Sources */,
 				8A7F6FA32BB2B385001C1999 /* ChatCommonModel.swift in Sources */,
 				8A8120362BBFD37C00BE0A5C /* ChatLoadingCollectionViewCell.swift in Sources */,
+				8A6BE65A2BC5044C00291E78 /* LastChatRemoveStrategy.swift in Sources */,
 				8A6899FE2BBE3E9F006031CC /* ChatMessage.swift in Sources */,
 				8A62D83F2BB506C000AE7B21 /* ChatBubbleView.swift in Sources */,
 				8A781FC52BB69B49009D1CE5 /* ChatViewController.swift in Sources */,
