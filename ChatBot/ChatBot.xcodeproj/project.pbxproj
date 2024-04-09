@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B91052B2BC4D852004AF740 /* ChatBotMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B91052A2BC4D852004AF740 /* ChatBotMessageCell.swift */; };
 		9B9289222BBECF5B00185E35 /* APIToken.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B9289212BBECF5B00185E35 /* APIToken.plist */; };
 		C12E66D32BB3F28800F3F441 /* ChatBotViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66B82BB3F28800F3F441 /* ChatBotViewModel.swift */; };
 		C12E66D42BB3F28800F3F441 /* ChatRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E66B92BB3F28800F3F441 /* ChatRepository.swift */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		6F46BD03BD10D03BC697E016 /* Pods-ChatBot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatBot.release.xcconfig"; path = "Target Support Files/Pods-ChatBot/Pods-ChatBot.release.xcconfig"; sourceTree = "<group>"; };
+		9B91052A2BC4D852004AF740 /* ChatBotMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotMessageCell.swift; sourceTree = "<group>"; };
 		9B9289212BBECF5B00185E35 /* APIToken.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = APIToken.plist; sourceTree = "<group>"; };
 		B4B3E2B92B42D1BB00818B3C /* ChatBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C12E66B82BB3F28800F3F441 /* ChatBotViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatBotViewModel.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				C12E66C02BB3F28800F3F441 /* ChatBotViewController.swift */,
+				9B91052A2BC4D852004AF740 /* ChatBotMessageCell.swift */,
 				C12E66D12BB3F28800F3F441 /* LaunchScreen.storyboard */,
 			);
 			path = View;
@@ -326,6 +329,7 @@
 				C12E66F02BB429AA00F3F441 /* JSONNull.swift in Sources */,
 				C12E66EC2BB4291A00F3F441 /* ResponseChoiceDTO.swift in Sources */,
 				C12E66EA2BB4283100F3F441 /* ResponseChatDTO.swift in Sources */,
+				9B91052B2BC4D852004AF740 /* ChatBotMessageCell.swift in Sources */,
 				C12E66D42BB3F28800F3F441 /* ChatRepository.swift in Sources */,
 				C12E66E32BB3F28800F3F441 /* AppDelegate.swift in Sources */,
 				C12E66D62BB3F28800F3F441 /* Message.swift in Sources */,

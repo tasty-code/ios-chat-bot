@@ -12,10 +12,18 @@ import RxSwift
 import RxCocoa
 
 class ChatBotViewController: UIViewController {
-    let button = UIButton().then {
-        $0.setTitle("이거", for: .normal)
-        $0.setTitleColor(.red, for: .normal)
-    }
+    lazy var chatList: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 10
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        view.register(ChatBotMessageCell.self, forCellWithReuseIdentifier: "cell")
+        view.delegate = self
+        view.dataSource = self
+        view.backgroundColor = .white
+        return view
+    }()
     
     private let chatBotViewModel: ChatBotViewModel
     let disposeBag = DisposeBag()
@@ -35,19 +43,19 @@ class ChatBotViewController: UIViewController {
 extension ChatBotViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureBackground()
+        setupConstraint()
         bindViewModel()
-        bindView()
     }
 }
 
 // MARK: - Private Method
 private extension ChatBotViewController {
-    func configureBackground() {
-        view.backgroundColor = .white
-        self.view.addSubview(button)
-        button.snp.makeConstraints { make in
-            make.centerY.centerX.equalToSuperview()
+    
+    private func setupConstraint() {
+        view.addSubview(chatList)
+        
+        chatList.snp.makeConstraints { make in
+            make.top.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
@@ -58,20 +66,29 @@ private extension ChatBotViewController {
         output.resultChat
             .observe(on: MainScheduler.instance)
             .bind { result in
-            switch result {
-            case .success(let data):
-                self.chatBotViewModel.chatList.append(data)
-            case .failure(let error):
-                let okAction = UIAlertAction(title: "확인", style: .default)
-                self.showMessageAlert(message: "\(error.localizedDescription)", action: [okAction])
+                switch result {
+                case .success(let data):
+                    self.chatBotViewModel.chatList.append(data)
+                case .failure(let error):
+                    let okAction = UIAlertAction(title: "확인", style: .default)
+                    self.showMessageAlert(message: "\(error.localizedDescription)", action: [okAction])
+                }
             }
-        }
-        .disposed(by: disposeBag)
+            .disposed(by: disposeBag)
+    }
+}
+
+extension ChatBotViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.chatBotViewModel.chatList.count
     }
     
-    func bindView() {
-        button.rx.tap.bind { [weak self] _ in
-            self?.chatTrigger.onNext(Message(role: "user", content: "집언제감?"))
-        }.disposed(by: disposeBag)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = chatList.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ChatBotMessageCell
+        cell.setupMessageText(message: chatBotViewModel.chatList[indexPath.row].choices[0].message)
+        return cell
     }
+    
+    
+
 }
