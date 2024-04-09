@@ -8,7 +8,9 @@
 import UIKit
 
 struct RefreshButtonToggleStrategy: SnapshotUpdateStrategy {
-    func apply(using snapshot: inout NSDiffableDataSourceSnapshot<ChatViewModel.Section, ChatMessage>, with chatMessage: ChatMessage, loadingMessage: ChatMessage) {
+    func apply(using snapshot: inout NSDiffableDataSourceSnapshot<ChatViewModel.Section, ChatMessage>, 
+               with chatMessage: ChatMessage,
+               loadingMessage: ChatMessage) {
         var newChat = chatMessage
         newChat.toggleRefreshButton()
         
