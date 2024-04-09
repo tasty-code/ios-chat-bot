@@ -9,7 +9,7 @@ import UIKit
 
 final class ChatInputView: UIView {
   private let chatInputTextView = ChatInputTextView()
-  private let chatSendButton = ChatSendButton()
+  private let chatSendButton = ChatInputSendButton()
   
   override init(frame: CGRect) {
     super.init(frame: frame)
