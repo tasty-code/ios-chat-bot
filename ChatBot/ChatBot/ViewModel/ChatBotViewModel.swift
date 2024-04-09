@@ -10,7 +10,6 @@ import RxSwift
 import RxCocoa
 
 final class ChatBotViewModel {
-    var chatList: [ResponseChatDTO] = []
     private let chatRepository: ChatRepository
     
     init(chatRepository: ChatRepository) {

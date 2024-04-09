@@ -12,6 +12,9 @@ import RxSwift
 import RxCocoa
 
 class ChatBotViewController: UIViewController {
+    
+    var messageList: [Message] = []
+    
     lazy var chatList: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -24,6 +27,27 @@ class ChatBotViewController: UIViewController {
         view.backgroundColor = .white
         return view
     }()
+    
+    lazy var enterButton = UIButton().then {
+        $0.setTitle("􀈢", for: .normal)
+        $0.titleLabel?.font = .systemFont(ofSize: 14)
+        $0.setTitleColor(.blue, for: .normal)
+    }
+    
+    lazy var inputTextField = UITextField().then {
+        $0.layer.cornerRadius = $0.layer.frame.width / 2
+        $0.layer.masksToBounds = false
+        $0.placeholder = "메세지를 입력해주세요."
+    }
+    
+    lazy var inputStackView = UIStackView().then {
+        $0.axis = .horizontal
+         $0.alignment = .leading
+         $0.spacing = 8
+         
+         $0.addArrangedSubview(inputTextField)
+         $0.addArrangedSubview(enterButton)
+    }
     
     private let chatBotViewModel: ChatBotViewModel
     let disposeBag = DisposeBag()
@@ -43,22 +67,29 @@ class ChatBotViewController: UIViewController {
 extension ChatBotViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         setupConstraint()
         bindViewModel()
+        bindView()
     }
 }
 
 // MARK: - Private Method
 private extension ChatBotViewController {
-    
-    private func setupConstraint() {
+    func setupConstraint() {
         view.addSubview(chatList)
+        view.addSubview(inputStackView)
         
         chatList.snp.makeConstraints { make in
-            make.top.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            make.bottom.equalTo(inputStackView.snp.top)
+            
+            inputStackView.snp.makeConstraints { make in
+                make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+            }
         }
     }
-    
+        
     func bindViewModel() {
         let input = ChatBotViewModel.Input(chatTigger: chatTrigger)
         
@@ -68,7 +99,9 @@ private extension ChatBotViewController {
             .bind { result in
                 switch result {
                 case .success(let data):
-                    self.chatBotViewModel.chatList.append(data)
+                    let message = Message(role: "assistant", content: data.choices[0].message.content)
+                    self.messageList.append(message)
+                    print(message)
                 case .failure(let error):
                     let okAction = UIAlertAction(title: "확인", style: .default)
                     self.showMessageAlert(message: "\(error.localizedDescription)", action: [okAction])
@@ -76,19 +109,23 @@ private extension ChatBotViewController {
             }
             .disposed(by: disposeBag)
     }
+    
+    
+    func bindView() {
+        enterButton.rx.tap.bind { [weak self] _ in
+            self?.chatTrigger.onNext(Message(role: "user", content: self?.inputTextField.text ?? ""))
+        }.disposed(by: disposeBag)
+    }
 }
 
 extension ChatBotViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.chatBotViewModel.chatList.count
+        return self.messageList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = chatList.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ChatBotMessageCell
-        cell.setupMessageText(message: chatBotViewModel.chatList[indexPath.row].choices[0].message)
+        cell.setupMessageText(message: messageList[indexPath.row])
         return cell
     }
-    
-    
-
 }
