@@ -58,6 +58,16 @@ extension ChatViewModel {
             showRefreshButton: false
         )
     }
+    
+    private func removeLoadingIndicator() {
+        let emptyMessage = ChatMessage(
+            id: UUID(),
+            isUser: false,
+            message: "",
+            showRefreshButton: false
+        )
+        applySnapShot(with: emptyMessage, strategy: LoadingIndicatorRemoveStrategy())
+    }
 }
 
 // MARK: - Public Methods
@@ -93,10 +103,7 @@ extension ChatViewModel {
         applySnapShot(with: chatMessage, strategy: UserChatUpdateStrategy())
         _ = requestAssistantChat(with: chatMessage)
     }
-}
-
-// MARK: - Snapshots
-extension ChatViewModel {
+    
     func removeLastChat() {
         let emptyMessage = ChatMessage(
             id: UUID(),
@@ -106,17 +113,10 @@ extension ChatViewModel {
         )
         applySnapShot(with: emptyMessage, strategy: LastChatRemoveStrategy())
     }
-    
-    func removeLoadingIndicator() {
-        let emptyMessage = ChatMessage(
-            id: UUID(),
-            isUser: false,
-            message: "",
-            showRefreshButton: false
-        )
-        applySnapShot(with: emptyMessage, strategy: LoadingIndicatorRemoveStrategy())
-    }
-    
+}
+
+// MARK: - Snapshots
+extension ChatViewModel {
     private func setUpSnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, ChatMessage>()
         snapshot.appendSections([.main])
