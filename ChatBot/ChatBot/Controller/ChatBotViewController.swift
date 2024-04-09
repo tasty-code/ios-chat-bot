@@ -22,6 +22,8 @@ final class ChatBotViewController: UIViewController {
   private var cancellable = Set<AnyCancellable>()
   private let input: PassthroughSubject<ChatViewModel.Input, Never> = .init()
   
+  private var chatInputView = ChatInputView()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .white
@@ -47,6 +49,7 @@ final class ChatBotViewController: UIViewController {
 private extension ChatBotViewController {
   func configureUI() {
     view.addSubview(chatCollectionView)
+    view.addSubview(chatInputView)
   }
   
   func setupCollectionView() {
@@ -54,13 +57,19 @@ private extension ChatBotViewController {
   }
   
   func setupConstraints() {
+    chatInputView.translatesAutoresizingMaskIntoConstraints = false
     chatCollectionView.translatesAutoresizingMaskIntoConstraints = false
+    
     NSLayoutConstraint.activate(
       [
         chatCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
         chatCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
         chatCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        chatCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50)
+        chatCollectionView.bottomAnchor.constraint(equalTo: chatInputView.topAnchor),
+        
+        chatInputView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+        chatInputView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        chatInputView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
       ]
     )
   }
