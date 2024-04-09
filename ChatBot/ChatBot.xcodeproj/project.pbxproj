@@ -35,6 +35,7 @@
 		8A62D8412BB58AF200AE7B21 /* ChatLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A62D8402BB58AF200AE7B21 /* ChatLoadingIndicator.swift */; };
 		8A6899FB2BBE2C30006031CC /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6899FA2BBE2C30006031CC /* ChatViewModel.swift */; };
 		8A6899FE2BBE3E9F006031CC /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6899FD2BBE3E9F006031CC /* ChatMessage.swift */; };
+		8A6BE6562BC4F5A800291E78 /* ChatCollectionViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6BE6552BC4F5A800291E78 /* ChatCollectionViewCellDelegate.swift */; };
 		8A781FC52BB69B49009D1CE5 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A781FC42BB69B49009D1CE5 /* ChatViewController.swift */; };
 		8A7F6FA12BB29E91001C1999 /* ChatResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7F6FA02BB29E91001C1999 /* ChatResponseModel.swift */; };
 		8A7F6FA32BB2B385001C1999 /* ChatCommonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7F6FA22BB2B385001C1999 /* ChatCommonModel.swift */; };
@@ -67,6 +68,7 @@
 		8A62D8402BB58AF200AE7B21 /* ChatLoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLoadingIndicator.swift; sourceTree = "<group>"; };
 		8A6899FA2BBE2C30006031CC /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		8A6899FD2BBE3E9F006031CC /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		8A6BE6552BC4F5A800291E78 /* ChatCollectionViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCollectionViewCellDelegate.swift; sourceTree = "<group>"; };
 		8A781FC42BB69B49009D1CE5 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		8A7F6FA02BB29E91001C1999 /* ChatResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponseModel.swift; sourceTree = "<group>"; };
 		8A7F6FA22BB2B385001C1999 /* ChatCommonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCommonModel.swift; sourceTree = "<group>"; };
@@ -157,12 +159,11 @@
 		7783041E2BB527F900C72C63 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				8A6BE6532BC4F57100291E78 /* CollectionViewCells */,
 				8A62D83E2BB506C000AE7B21 /* ChatBubbleView.swift */,
 				8A62D8402BB58AF200AE7B21 /* ChatLoadingIndicator.swift */,
 				8A781FC42BB69B49009D1CE5 /* ChatViewController.swift */,
 				8A5F18D52BBA8F0800228C85 /* ChatTextView.swift */,
-				8A4318C42BBC215600482CD0 /* ChatCollectionViewCell.swift */,
-				8A8120352BBFD37C00BE0A5C /* ChatLoadingCollectionViewCell.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -225,6 +226,24 @@
 				8A6899FD2BBE3E9F006031CC /* ChatMessage.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		8A6BE6532BC4F57100291E78 /* CollectionViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				8A6BE6542BC4F58A00291E78 /* Interface */,
+				8A4318C42BBC215600482CD0 /* ChatCollectionViewCell.swift */,
+				8A8120352BBFD37C00BE0A5C /* ChatLoadingCollectionViewCell.swift */,
+			);
+			path = CollectionViewCells;
+			sourceTree = "<group>";
+		};
+		8A6BE6542BC4F58A00291E78 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				8A6BE6552BC4F5A800291E78 /* ChatCollectionViewCellDelegate.swift */,
+			);
+			path = Interface;
 			sourceTree = "<group>";
 		};
 		8A8120372BBFE7AC00BE0A5C /* SnapshotUpdateStrategy */ = {
@@ -392,6 +411,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A81203C2BBFE81000BE0A5C /* AssistantChatUpdateStrategy.swift in Sources */,
+				8A6BE6562BC4F5A800291E78 /* ChatCollectionViewCellDelegate.swift in Sources */,
 				77CF46B12BBA4CBA00ABA128 /* ChatRequestModel.swift in Sources */,
 				8A6899FB2BBE2C30006031CC /* ChatViewModel.swift in Sources */,
 				778304182BB50F4500C72C63 /* NetworkConstants.swift in Sources */,

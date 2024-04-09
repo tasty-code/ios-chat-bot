@@ -72,10 +72,6 @@ extension ChatCollectionViewCell {
 }
 
 // MARK: - RefreshButton Configuration
-protocol ChatCollectionViewCellDelegate: AnyObject {
-    func tapRefreshButton(_ chatCollectionViewCell: ChatCollectionViewCell)
-}
-
 extension ChatCollectionViewCell {
     private func setUpRefreshButton() {
         refreshButton.addTarget(self, action: #selector(resendChat), for: .touchUpInside)
