@@ -108,9 +108,13 @@ extension ChatViewModel {
     }
     
     func removeLoadingIndicator() {
-        var snapshot = snapshot
-        snapshot.deleteItems([loadingMessage])
-        dataSource?.applySnapshotUsingReloadData(snapshot)
+        let emptyMessage = ChatMessage(
+            id: UUID(),
+            isUser: false,
+            message: "",
+            showRefreshButton: false
+        )
+        applySnapShot(with: emptyMessage, strategy: LoadingIndicatorRemoveStrategy())
     }
     
     private func setUpSnapshot() {
