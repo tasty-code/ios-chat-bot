@@ -12,38 +12,24 @@ import RxSwift
 
 // 채팅 뷰 모델
 final class ChatViewModel {
-    private(set) var dataSource: UICollectionViewDiffableDataSource<Section, ChatMessage>?
-    private(set) lazy var snapshotPublisher = PublishRelay<[ChatMessage]>()
-    private(set) var service = ChatAPIService()
-    private lazy var loadingMessage = createMessage(with: "loading", isUser: false)
-    private(set) var networkResult: (any Disposable)?
-}
-
-// MARK: - Custom Methods
-extension ChatViewModel {
     enum Section {
         case main
     }
     
-    private func setUpSnapshot() {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, ChatMessage>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems([])
-        dataSource?.apply(snapshot, animatingDifferences: true)
-    }
-    
-    private func applySnapShot(with chatMessage: ChatMessage, strategy: SnapshotUpdateStrategy) {
-        guard var snapshot = dataSource?.snapshot() else {
-            return
+    private(set) var dataSource: UICollectionViewDiffableDataSource<Section, ChatMessage>?
+    private(set) lazy var snapshotPublisher = PublishRelay<[ChatMessage]>()
+    private(set) var service = ChatAPIService()
+    private lazy var loadingMessage = createMessage(with: "loading", isUser: false)
+    private var snapshot: NSDiffableDataSourceSnapshot<Section, ChatMessage> {
+        guard let snapshot = dataSource?.snapshot() else {
+            return NSDiffableDataSourceSnapshot<Section, ChatMessage>()
         }
-        
-        strategy.apply(using: &snapshot, with: chatMessage, loadingMessage: loadingMessage)
-        
-        dataSource?.applySnapshotUsingReloadData(snapshot) { [weak self] in
-            self?.snapshotPublisher.accept(snapshot.itemIdentifiers)
-        }
+        return snapshot
     }
-    
+}
+
+// MARK: - Custom Methods
+extension ChatViewModel {
     private func requestAssistantChat(with chatMessage: ChatMessage) -> any Disposable {
         return service.createChat(
             systemContent: "Hello! How can I assist you today?",
@@ -59,7 +45,7 @@ extension ChatViewModel {
             }, onFailure: { [weak self] error in
                 print(error)
                 self?.removeLoadingIndicator()
-                self?.toggleRefreshButton(for: chatMessage)
+                self?.applySnapShot(with: chatMessage, strategy: RefreshButtonToggleStrategy())
             }
         )
     }
@@ -71,22 +57,6 @@ extension ChatViewModel {
             message: message,
             showRefreshButton: false
         )
-    }
-    
-    private func toggleRefreshButton(for userChat: ChatMessage) {
-        guard var snapshot = dataSource?.snapshot() else {
-            return
-        }
-        
-        var newChat = userChat
-        newChat.toggleRefreshButton()
-        
-        snapshot.insertItems([newChat], beforeItem: userChat)
-        snapshot.deleteItems([userChat])
-        
-        dataSource?.applySnapshotUsingReloadData(snapshot) { [weak self] in
-            self?.snapshotPublisher.accept(snapshot.itemIdentifiers)
-        }
     }
 }
 
@@ -121,12 +91,15 @@ extension ChatViewModel {
     func updateUserChat(with message: String) {
         let chatMessage = createMessage(with: message, isUser: true)
         applySnapShot(with: chatMessage, strategy: UserChatUpdateStrategy())
-        networkResult = requestAssistantChat(with: chatMessage)
+        _ = requestAssistantChat(with: chatMessage)
     }
-    
+}
+
+// MARK: - Snapshots
+extension ChatViewModel {
     func removeLastChat() {
-        guard var snapshot = dataSource?.snapshot(),
-              let last = snapshot.itemIdentifiers.last else {
+        var snapshot = snapshot
+        guard let last = snapshot.itemIdentifiers.last else {
             return
         }
         
@@ -135,11 +108,27 @@ extension ChatViewModel {
     }
     
     func removeLoadingIndicator() {
-        guard var snapshot = dataSource?.snapshot() else {
-            return
-        }
+        var snapshot = snapshot
         snapshot.deleteItems([loadingMessage])
-        
         dataSource?.applySnapshotUsingReloadData(snapshot)
+    }
+    
+    private func setUpSnapshot() {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, ChatMessage>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems([])
+        dataSource?.apply(snapshot, animatingDifferences: true)
+    }
+    
+    private func applySnapShot(with chatMessage: ChatMessage, strategy: SnapshotUpdateStrategy) {
+        var snapshot = snapshot
+        strategy.apply(using: &snapshot, with: chatMessage, loadingMessage: loadingMessage)
+        
+        dataSource?.applySnapshotUsingReloadData(snapshot) { [weak self] in
+            guard let items = self?.snapshot.itemIdentifiers else {
+                return
+            }
+            self?.snapshotPublisher.accept(items)
+        }
     }
 }
