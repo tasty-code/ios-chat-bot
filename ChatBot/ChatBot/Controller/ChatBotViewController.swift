@@ -32,6 +32,7 @@ final class ChatBotViewController: UIViewController {
     NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     
+    hideKeyboard()
     setupCollectionView()
     configureUI()
     setupConstraints()
@@ -49,6 +50,17 @@ final class ChatBotViewController: UIViewController {
       )
     )
   }
+}
+
+private extension ChatBotViewController {
+  func hideKeyboard() {
+    let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+    view.addGestureRecognizer(tap)
+  }
+  
+  @objc func dismissKeyboard() {
+    view.endEditing(true)
+  }
   
   @objc func keyboardWillShow(notification: NSNotification) {
     guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
@@ -62,12 +74,6 @@ final class ChatBotViewController: UIViewController {
     self.view.frame.origin.y = 0
   }
   
-  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    self.view.endEditing(true)
-  }
-}
-
-private extension ChatBotViewController {
   func configureUI() {
     view.addSubview(chatCollectionView)
     view.addSubview(chatInputView)
