@@ -15,6 +15,7 @@ final class DetailChatViewController: UIViewController {
     private let apiService: OpenAIService
     
     private var detailChatStackView: UIStackView = DetailChatViewUserInputSectionStackView()
+    private var chatMessageCollectionView = ChatMessageCollectionView()
 
     
     init(viewModel: ChatViewModel, repo: MessageRepository, apiService: OpenAIService) {
@@ -32,6 +33,7 @@ final class DetailChatViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         configureDetailChatStackView()
+        configureCollectionView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,6 +56,19 @@ final class DetailChatViewController: UIViewController {
             detailChatStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             detailChatStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             detailChatStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+        ])
+    }
+    
+    private func configureCollectionView() {
+        view.addSubview(chatMessageCollectionView)
+//           chatMessageCollectionView.dataSource = self
+           chatMessageCollectionView.delegate = self
+        
+        NSLayoutConstraint.activate([
+            chatMessageCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            chatMessageCollectionView.leadingAnchor.constraint(equalTo: detailChatStackView.leadingAnchor),
+            chatMessageCollectionView.trailingAnchor.constraint(equalTo: detailChatStackView.trailingAnchor),
+            chatMessageCollectionView.bottomAnchor.constraint(equalTo: detailChatStackView.topAnchor, constant: -10)
         ])
     }
     // MARK: - keyBoardAction
@@ -97,3 +112,18 @@ extension DetailChatViewController: UITextViewDelegate {
         }
     }
 }
+
+// MARK: - CollectionView
+
+extension DetailChatViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+    }
+    
+    
+}
+
