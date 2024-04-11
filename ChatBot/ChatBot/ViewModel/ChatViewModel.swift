@@ -34,7 +34,9 @@ extension ChatViewModel {
         return service.createChat(
             systemContent: "Hello! How can I assist you today?",
             userContent: chatMessage.message
-        ).subscribe(
+        )
+        .observe(on: MainScheduler.asyncInstance)
+        .subscribe(
             onSuccess: { [weak self] response in
                 guard let message = response?.choices[0].message.content,
                       let chatMessage = self?.createMessage(with: message, isUser: false) else {
