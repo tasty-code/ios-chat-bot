@@ -25,6 +25,7 @@
 		E67855E82BC7B35500488352 /* DetailChatViewUserInputSectionStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67855E72BC7B35500488352 /* DetailChatViewUserInputSectionStackView.swift */; };
 		E67855EA2BC7B84400488352 /* MessageCellStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67855E92BC7B84400488352 /* MessageCellStackView.swift */; };
 		E67855EC2BC7B9AB00488352 /* DetailMessageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67855EB2BC7B9AB00488352 /* DetailMessageCollectionViewCell.swift */; };
+		E67855EE2BC7BA9700488352 /* ChatMessageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67855ED2BC7BA9700488352 /* ChatMessageCollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		E67855E72BC7B35500488352 /* DetailChatViewUserInputSectionStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailChatViewUserInputSectionStackView.swift; sourceTree = "<group>"; };
 		E67855E92BC7B84400488352 /* MessageCellStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellStackView.swift; sourceTree = "<group>"; };
 		E67855EB2BC7B9AB00488352 /* DetailMessageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMessageCollectionViewCell.swift; sourceTree = "<group>"; };
+		E67855ED2BC7BA9700488352 /* ChatMessageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 				E67855E72BC7B35500488352 /* DetailChatViewUserInputSectionStackView.swift */,
 				E67855E92BC7B84400488352 /* MessageCellStackView.swift */,
 				E67855EB2BC7B9AB00488352 /* DetailMessageCollectionViewCell.swift */,
+				E67855ED2BC7BA9700488352 /* ChatMessageCollectionView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E67855EE2BC7BA9700488352 /* ChatMessageCollectionView.swift in Sources */,
 				B4B3E2C12B42D1BB00818B3C /* ChatbotMainViewController.swift in Sources */,
 				70A610432BBE6061009B08ED /* NetworkErrorEnum.swift in Sources */,
 				70E87ED22BBAA6F800E27E43 /* RequestDTO.swift in Sources */,
