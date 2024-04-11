@@ -61,7 +61,7 @@ final class DetailChatViewController: UIViewController {
     
     private func configureCollectionView() {
         view.addSubview(chatMessageCollectionView)
-//           chatMessageCollectionView.dataSource = self
+           chatMessageCollectionView.dataSource = self
            chatMessageCollectionView.delegate = self
         
         NSLayoutConstraint.activate([

@@ -27,6 +27,19 @@ class DetailMessageCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //셀 높이 동적 제어
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        super.preferredLayoutAttributesFitting(layoutAttributes)
+        layoutIfNeeded()
+        
+        let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
+        var newFrame = layoutAttributes.frame
+        newFrame.size.height = ceil(size.height)
+        layoutAttributes.frame = newFrame
+        
+        return layoutAttributes
+    }
+    
     private func setupMessageCollectionViewCell() {
         contentView.addSubview(messageCellStackView)
         messageCellStackView.translatesAutoresizingMaskIntoConstraints = false
