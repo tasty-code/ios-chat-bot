@@ -10,6 +10,15 @@
 		3756D96839324F046B039CE8 /* Pods_ChatBot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86F2885AC45A38F47FDA4AD5 /* Pods_ChatBot.framework */; };
 		84149A5B2BB285B1003595D0 /* ResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84149A5A2BB285B1003595D0 /* ResponseDTO.swift */; };
 		84149A5D2BB2940B003595D0 /* RequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84149A5C2BB2940B003595D0 /* RequestDTO.swift */; };
+		95280FAF2BBD68C90071860A /* NetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95280FAE2BBD68C90071860A /* NetworkRouter.swift */; };
+		95280FB12BBD6C010071860A /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95280FB02BBD6C010071860A /* APIClient.swift */; };
+		95280FB32BBD6C440071860A /* APIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95280FB22BBD6C440071860A /* APIRouter.swift */; };
+		95280FB52BBD6CA10071860A /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95280FB42BBD6CA10071860A /* NetworkResult.swift */; };
+		95280FB72BBD6CF80071860A /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95280FB62BBD6CF80071860A /* APIConstants.swift */; };
+		95280FBB2BBD70AE0071860A /* RequestDTO+DictionaryRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95280FBA2BBD70AE0071860A /* RequestDTO+DictionaryRepresentation.swift */; };
+		95280FBD2BBD70E50071860A /* MessageDTO+DictionaryRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95280FBC2BBD70E50071860A /* MessageDTO+DictionaryRepresentation.swift */; };
+		95280FBF2BBD71390071860A /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95280FBE2BBD71390071860A /* ChatService.swift */; };
+		95280FC12BBE0C880071860A /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95280FC02BBE0C880071860A /* AppConfig.swift */; };
 		95B4F31B2BB2C21E00AB4952 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 95B4F31A2BB2C21E00AB4952 /* .swiftlint.yml */; };
 		95B4F3272BB42ED300AB4952 /* MessageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B4F3262BB42ED300AB4952 /* MessageDTO.swift */; };
 		B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */; };
@@ -23,7 +32,17 @@
 		548DCC0B40D1F4BC4766D293 /* Pods-ChatBot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatBot.release.xcconfig"; path = "Target Support Files/Pods-ChatBot/Pods-ChatBot.release.xcconfig"; sourceTree = "<group>"; };
 		84149A5A2BB285B1003595D0 /* ResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseDTO.swift; sourceTree = "<group>"; };
 		84149A5C2BB2940B003595D0 /* RequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDTO.swift; sourceTree = "<group>"; };
+		843E18412BBD214C003EEF6D /* Configuration.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Configuration.xcconfig; sourceTree = "<group>"; };
 		86F2885AC45A38F47FDA4AD5 /* Pods_ChatBot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatBot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		95280FAE2BBD68C90071860A /* NetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
+		95280FB02BBD6C010071860A /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		95280FB22BBD6C440071860A /* APIRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRouter.swift; sourceTree = "<group>"; };
+		95280FB42BBD6CA10071860A /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
+		95280FB62BBD6CF80071860A /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
+		95280FBA2BBD70AE0071860A /* RequestDTO+DictionaryRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RequestDTO+DictionaryRepresentation.swift"; sourceTree = "<group>"; };
+		95280FBC2BBD70E50071860A /* MessageDTO+DictionaryRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageDTO+DictionaryRepresentation.swift"; sourceTree = "<group>"; };
+		95280FBE2BBD71390071860A /* ChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
+		95280FC02BBE0C880071860A /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		95B4F31A2BB2C21E00AB4952 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		95B4F3262BB42ED300AB4952 /* MessageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDTO.swift; sourceTree = "<group>"; };
 		B4B3E2B92B42D1BB00818B3C /* ChatBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,6 +75,44 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		95280FAA2BBD63A00071860A /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				95280FAE2BBD68C90071860A /* NetworkRouter.swift */,
+				95280FB02BBD6C010071860A /* APIClient.swift */,
+				95280FB22BBD6C440071860A /* APIRouter.swift */,
+				95280FB42BBD6CA10071860A /* NetworkResult.swift */,
+				95280FB62BBD6CF80071860A /* APIConstants.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		95280FB82BBD70870071860A /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				95280FB92BBD708E0071860A /* Extensions */,
+				95280FC02BBE0C880071860A /* AppConfig.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		95280FB92BBD708E0071860A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				95280FBA2BBD70AE0071860A /* RequestDTO+DictionaryRepresentation.swift */,
+				95280FBC2BBD70E50071860A /* MessageDTO+DictionaryRepresentation.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		95280FC32BBE36590071860A /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				95280FBE2BBD71390071860A /* ChatService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		95B4F3282BB43A8E00AB4952 /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -78,8 +135,9 @@
 		95B4F32A2BB43BDB00AB4952 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B4B3E2CA2B42D1BC00818B3C /* Info.plist */,
+				843E18412BBD214C003EEF6D /* Configuration.xcconfig */,
 				B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */,
+				B4B3E2CA2B42D1BC00818B3C /* Info.plist */,
 				B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
@@ -126,8 +184,11 @@
 			children = (
 				95B4F3282BB43A8E00AB4952 /* App */,
 				95B4F3292BB43A9C00AB4952 /* Model */,
+				95280FAA2BBD63A00071860A /* Network */,
+				95280FC32BBE36590071860A /* Service */,
 				95B4F32B2BB4714200AB4952 /* Controller */,
 				95B4F32A2BB43BDB00AB4952 /* Resources */,
+				95280FB82BBD70870071860A /* Util */,
 			);
 			path = ChatBot;
 			sourceTree = "<group>";
@@ -139,11 +200,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B4B3E2CD2B42D1BC00818B3C /* Build configuration list for PBXNativeTarget "ChatBot" */;
 			buildPhases = (
-				95B4F3192BB2C1A100AB4952 /* SwiftLint */,
 				CF48DBE895D16B153F73C922 /* [CP] Check Pods Manifest.lock */,
+				95B4F3192BB2C1A100AB4952 /* SwiftLint */,
 				B4B3E2B52B42D1BB00818B3C /* Sources */,
 				B4B3E2B62B42D1BB00818B3C /* Frameworks */,
 				B4B3E2B72B42D1BB00818B3C /* Resources */,
+				157BC9F75AEC0E5F7B580B83 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -201,6 +263,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		157BC9F75AEC0E5F7B580B83 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChatBot/Pods-ChatBot-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChatBot/Pods-ChatBot-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChatBot/Pods-ChatBot-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		95B4F3192BB2C1A100AB4952 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -249,12 +328,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95280FBB2BBD70AE0071860A /* RequestDTO+DictionaryRepresentation.swift in Sources */,
 				B4B3E2C12B42D1BB00818B3C /* ViewController.swift in Sources */,
+				95280FB72BBD6CF80071860A /* APIConstants.swift in Sources */,
+				95280FB52BBD6CA10071860A /* NetworkResult.swift in Sources */,
+				95280FB32BBD6C440071860A /* APIRouter.swift in Sources */,
 				B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */,
+				95280FC12BBE0C880071860A /* AppConfig.swift in Sources */,
 				84149A5B2BB285B1003595D0 /* ResponseDTO.swift in Sources */,
+				95280FB12BBD6C010071860A /* APIClient.swift in Sources */,
+				95280FAF2BBD68C90071860A /* NetworkRouter.swift in Sources */,
+				95280FBF2BBD71390071860A /* ChatService.swift in Sources */,
 				84149A5D2BB2940B003595D0 /* RequestDTO.swift in Sources */,
 				95B4F3272BB42ED300AB4952 /* MessageDTO.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
+				95280FBD2BBD70E50071860A /* MessageDTO+DictionaryRepresentation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +362,7 @@
 /* Begin XCBuildConfiguration section */
 		B4B3E2CB2B42D1BC00818B3C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 843E18412BBD214C003EEF6D /* Configuration.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -337,6 +426,7 @@
 		};
 		B4B3E2CC2B42D1BC00818B3C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 843E18412BBD214C003EEF6D /* Configuration.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -407,7 +497,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -442,7 +532,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
