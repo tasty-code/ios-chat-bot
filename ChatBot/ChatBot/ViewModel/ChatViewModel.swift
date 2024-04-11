@@ -128,7 +128,7 @@ extension ChatViewModel {
         var snapshot = snapshot
         strategy.apply(using: &snapshot, with: chatMessage, loadingMessage: loadingMessage)
         
-        dataSource?.applySnapshotUsingReloadData(snapshot) { [weak self] in
+        dataSource?.apply(snapshot) { [weak self] in
             guard let items = self?.snapshot.itemIdentifiers else {
                 return
             }
