@@ -13,7 +13,7 @@ class ChatMessageCollectionView: UICollectionView {
           layout.scrollDirection = .vertical
           super.init(frame: .zero, collectionViewLayout: layout)
           
-          self.register(MessageCollectionViewCell.self, forCellWithReuseIdentifier: MessageCollectionViewCell.identifier)
+          self.register(DetailMessageCollectionViewCell.self, forCellWithReuseIdentifier: DetailMessageCollectionViewCell.identifier)
           self.translatesAutoresizingMaskIntoConstraints = false
           self.backgroundColor = .systemBackground
           
