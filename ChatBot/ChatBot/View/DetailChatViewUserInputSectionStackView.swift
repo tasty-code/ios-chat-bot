@@ -52,10 +52,7 @@ class DetailChatViewUserInputSectionStackView: UIStackView {
         doneButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             doneButton.widthAnchor.constraint(equalToConstant: 40),
-            doneButton.heightAnchor.constraint(equalToConstant: 40),
-            doneButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
-            userInputTextView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10)
-            
+            doneButton.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
     
