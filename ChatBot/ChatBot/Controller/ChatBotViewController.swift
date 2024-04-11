@@ -9,6 +9,8 @@ import UIKit
 import Combine
 
 final class ChatBotViewController: UIViewController {
+  static let notificationCenter = NotificationCenter.default
+  
   private lazy var chatCollectionView: ChatCollectionView = {
     var configure = UICollectionLayoutListConfiguration(appearance: .plain)
     configure.showsSeparators = false
@@ -27,6 +29,9 @@ final class ChatBotViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .white
+    NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    
     setupCollectionView()
     configureUI()
     setupConstraints()
@@ -43,6 +48,22 @@ final class ChatBotViewController: UIViewController {
         )
       )
     )
+  }
+  
+  @objc func keyboardWillShow(notification: NSNotification) {
+    guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+      return
+    }
+    
+    self.view.frame.origin.y = 0 - keyboardSize.height
+  }
+  
+  @objc func keyboardWillHide(notification: NSNotification) {
+    self.view.frame.origin.y = 0
+  }
+  
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    self.view.endEditing(true)
   }
 }
 
