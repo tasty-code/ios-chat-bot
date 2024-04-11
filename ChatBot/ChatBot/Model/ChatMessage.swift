@@ -9,7 +9,7 @@ import Foundation
 
 struct ChatMessage: Hashable {
     let id: UUID
-    let isUser: Bool
+    let role: ChatRole
     let message: String
     private(set) var showRefreshButton: Bool
     

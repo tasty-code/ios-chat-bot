@@ -58,14 +58,19 @@ extension ChatCollectionViewCell {
         addSubview(chatBubbleView)
     }
     
-    func text(_ string: String, isUser: Bool) {
+    func text(_ string: String, role: ChatRole) {
         chatBubbleView.setText(string)
         
         chatBubbleView.snp.remakeConstraints {
             $0.top.equalTo(self.snp.top)
             $0.bottom.equalTo(self.snp.bottom)
             $0.width.lessThanOrEqualTo(self.snp.width).multipliedBy(0.70)
-            _ = isUser ? $0.trailing.equalTo(self.snp.trailing) : $0.leading.equalTo(self.snp.leading)
+            switch role {
+            case .user:
+                $0.trailing.equalTo(self.snp.trailing)
+            case .system, .assistant:
+                $0.leading.equalTo(self.snp.leading)
+            }
         }
     }
 }

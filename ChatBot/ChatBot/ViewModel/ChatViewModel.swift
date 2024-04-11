@@ -19,7 +19,7 @@ final class ChatViewModel {
     private(set) var dataSource: UICollectionViewDiffableDataSource<Section, ChatMessage>?
     private(set) lazy var snapshotPublisher = PublishRelay<[ChatMessage]>()
     private(set) var service = ChatAPIService()
-    private lazy var loadingMessage = createMessage(with: "loading", isUser: false)
+    private lazy var loadingMessage = createMessage(with: "loading", role: .assistant)
     private var snapshot: NSDiffableDataSourceSnapshot<Section, ChatMessage> {
         guard let snapshot = dataSource?.snapshot() else {
             return NSDiffableDataSourceSnapshot<Section, ChatMessage>()
@@ -39,7 +39,7 @@ extension ChatViewModel {
         .subscribe(
             onSuccess: { [weak self] response in
                 guard let message = response?.choices[0].message.content,
-                      let chatMessage = self?.createMessage(with: message, isUser: false) else {
+                      let chatMessage = self?.createMessage(with: message, role: .assistant) else {
                     return
                 }
                 
@@ -52,19 +52,28 @@ extension ChatViewModel {
         )
     }
     
-    private func createMessage(with message: String, isUser: Bool) -> ChatMessage {
+    private func createMessage(with message: String, role: ChatRole) -> ChatMessage {
         return ChatMessage(
             id: UUID(),
-            isUser: isUser,
+            role: role,
             message: message,
             showRefreshButton: false
         )
     }
     
+    private func createBubbleView(by role: ChatRole) -> ChatBubbleView {
+        switch role {
+        case .user:
+            return UserChatBubbleView()
+        case .system, .assistant:
+            return AssistantChatBubbleView()
+        }
+    }
+    
     private func removeLoadingIndicator() {
         let emptyMessage = ChatMessage(
             id: UUID(),
-            isUser: false,
+            role: .assistant,
             message: "",
             showRefreshButton: false
         )
@@ -84,15 +93,15 @@ extension ChatViewModel {
                 return cell
                 
             } else {
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatCollectionViewCell.className, for: indexPath) as? ChatCollectionViewCell else {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatCollectionViewCell.className, for: indexPath) as? ChatCollectionViewCell,
+                      let view = self?.createBubbleView(by: itemIdentifier.role)
+                else {
                     return ChatCollectionViewCell()
                 }
                 
-                let view = itemIdentifier.isUser ? UserChatBubbleView() : AssistantChatBubbleView()
-                
                 cell.setChatBubbleView(view)
                 cell.delegate = delegate
-                cell.text(itemIdentifier.message, isUser: itemIdentifier.isUser)
+                cell.text(itemIdentifier.message, role: itemIdentifier.role)
                 
                 if itemIdentifier.showRefreshButton {
                     cell.showRefreshButton()
@@ -105,7 +114,7 @@ extension ChatViewModel {
     }
     
     func updateUserChat(with message: String) {
-        let chatMessage = createMessage(with: message, isUser: true)
+        let chatMessage = createMessage(with: message, role: .user)
         applySnapShot(with: chatMessage, strategy: UserChatUpdateStrategy())
         _ = requestAssistantChat(with: chatMessage)
     }
@@ -113,7 +122,7 @@ extension ChatViewModel {
     func removeLastChat() {
         let emptyMessage = ChatMessage(
             id: UUID(),
-            isUser: false,
+            role: .assistant,
             message: "",
             showRefreshButton: false
         )
