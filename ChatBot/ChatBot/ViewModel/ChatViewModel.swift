@@ -99,13 +99,7 @@ extension ChatViewModel {
                     return ChatCollectionViewCell()
                 }
                 
-                cell.setChatBubbleView(view)
-                cell.delegate = delegate
-                cell.text(itemIdentifier.message, role: itemIdentifier.role)
-                
-                if itemIdentifier.showRefreshButton {
-                    cell.showRefreshButton()
-                }
+                cell.setChatBubbleView(view, with: itemIdentifier, delegate: delegate)
                 return cell
             }
         }
