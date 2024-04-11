@@ -30,8 +30,16 @@ final class DetailChatViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        repo = MessageRepository()
-        viewModel = ChatViewModel(repository: repo, apiService: apiService)
+        self.view.backgroundColor = .white
+        configureDetailChatStackView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        keyboardAppear()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+       keyboardDisappear()
     }
     
     // MARK: - CustomFunc
@@ -48,7 +56,32 @@ final class DetailChatViewController: UIViewController {
             detailChatStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
         ])
     }
-
+    // MARK: - keyBoardAction
+    @objc func keyboardUp(notification:NSNotification) {
+        if let keyboardFrame:NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+           let keyboardRectangle = keyboardFrame.cgRectValue
+            UIView.animate(
+                withDuration: 0.3
+                , animations: {
+                    self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardRectangle.height)
+                }
+            )
+        }
+    }
+    
+    @objc func keyboardDown() {
+        self.view.transform = .identity
+    }
+    
+    private func keyboardAppear() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardUp), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDown), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    private func keyboardDisappear() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
 }
 
 extension DetailChatViewController: UITextViewDelegate {
