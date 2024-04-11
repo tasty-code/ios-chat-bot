@@ -24,6 +24,7 @@
 		B4B3E2C92B42D1BC00818B3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */; };
 		E67855E82BC7B35500488352 /* DetailChatViewUserInputSectionStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67855E72BC7B35500488352 /* DetailChatViewUserInputSectionStackView.swift */; };
 		E67855EA2BC7B84400488352 /* MessageCellStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67855E92BC7B84400488352 /* MessageCellStackView.swift */; };
+		E67855EC2BC7B9AB00488352 /* DetailMessageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67855EB2BC7B9AB00488352 /* DetailMessageCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		B4B3E2CA2B42D1BC00818B3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E67855E72BC7B35500488352 /* DetailChatViewUserInputSectionStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailChatViewUserInputSectionStackView.swift; sourceTree = "<group>"; };
 		E67855E92BC7B84400488352 /* MessageCellStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellStackView.swift; sourceTree = "<group>"; };
+		E67855EB2BC7B9AB00488352 /* DetailMessageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMessageCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 			children = (
 				E67855E72BC7B35500488352 /* DetailChatViewUserInputSectionStackView.swift */,
 				E67855E92BC7B84400488352 /* MessageCellStackView.swift */,
+				E67855EB2BC7B9AB00488352 /* DetailMessageCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 				E67855E82BC7B35500488352 /* DetailChatViewUserInputSectionStackView.swift in Sources */,
 				70E483AE2BB5AEB100931F01 /* ChatViewModel.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
+				E67855EC2BC7B9AB00488352 /* DetailMessageCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
