@@ -13,6 +13,11 @@ import RxCocoa
 
 class ChatBotViewController: UIViewController {
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("tapped view")
+        self.view.endEditing(true)
+    }
+    
     var messageList: [Message] = []
     
     lazy var chatList: UICollectionView = {
@@ -29,21 +34,24 @@ class ChatBotViewController: UIViewController {
     }()
     
     lazy var enterButton = UIButton().then {
-        $0.setTitle("􀈢", for: .normal)
+        $0.setImage(UIImage(systemName: "arrowshape.up.circle"), for: .normal)
+        $0.tintColor = .blue
         $0.titleLabel?.font = .systemFont(ofSize: 14)
         $0.setTitleColor(.blue, for: .normal)
     }
     
     lazy var inputTextField = UITextField().then {
-        $0.layer.cornerRadius = $0.layer.frame.width / 2
+        $0.layer.cornerRadius = 8
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor.black.cgColor
         $0.layer.masksToBounds = false
         $0.placeholder = "메세지를 입력해주세요."
     }
     
     lazy var inputStackView = UIStackView().then {
         $0.axis = .horizontal
-         $0.alignment = .leading
-         $0.spacing = 8
+        $0.alignment = .center
+        $0.distribution = .fillProportionally
          
          $0.addArrangedSubview(inputTextField)
          $0.addArrangedSubview(enterButton)
@@ -85,8 +93,11 @@ private extension ChatBotViewController {
             make.bottom.equalTo(inputStackView.snp.top)
             
             inputStackView.snp.makeConstraints { make in
-                make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+//                make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+                make.leading.trailing.equalTo(view.safeAreaLayoutGuide).offset(20)
+                make.bottom.equalTo(self.view.keyboardLayoutGuide.snp.top)
             }
+            
         }
     }
         
