@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ChatInputView: UIView {
+final class ChatInputView: UIView, UITextViewDelegate {
   private let chatInputTextView = ChatInputTextView()
   private let chatSendButton = ChatInputSendButton()
   
@@ -18,6 +18,16 @@ final class ChatInputView: UIView {
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  private func textViewDidChange(_ textView: ChatInputTextView) {
+    let size = CGSize(width: self.frame.width, height: .infinity)
+    let estimatedSize = textView.sizeThatFits(size)
+    textView.constraints.forEach { constraints in
+      if constraints.firstAttribute == .height {
+        constraints.constant = estimatedSize.height
+      }
+    }
   }
   
   private func configureUI() {
@@ -36,8 +46,8 @@ final class ChatInputView: UIView {
       chatInputTextView.topAnchor.constraint(equalTo: self.topAnchor),
       chatInputTextView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
       
-      chatSendButton.widthAnchor.constraint(equalToConstant: 45),
-      chatSendButton.heightAnchor.constraint(equalToConstant: 45),
+      chatSendButton.widthAnchor.constraint(equalToConstant: 40),
+      chatSendButton.heightAnchor.constraint(equalToConstant: 40),
       chatSendButton.centerYAnchor.constraint(equalTo: chatInputTextView.centerYAnchor),
       chatSendButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15)
     ])
