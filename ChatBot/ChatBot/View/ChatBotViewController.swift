@@ -12,12 +12,6 @@ import RxSwift
 import RxCocoa
 
 class ChatBotViewController: UIViewController {
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("tapped view")
-        self.view.endEditing(true)
-    }
-    
     var messageList: [Message] = []
     
     lazy var chatList: UICollectionView = {
@@ -34,16 +28,23 @@ class ChatBotViewController: UIViewController {
     }()
     
     lazy var enterButton = UIButton().then {
-        $0.setImage(UIImage(systemName: "arrowshape.up.circle"), for: .normal)
-        $0.tintColor = .blue
-        $0.titleLabel?.font = .systemFont(ofSize: 14)
-        $0.setTitleColor(.blue, for: .normal)
+        let view = UIImageView().then {
+            $0.image = UIImage(systemName: "paperplane.circle.fill")
+            $0.tintColor = .systemBlue
+        }
+        
+        view.snp.makeConstraints { make in
+            make.height.width.equalTo(36)
+        }
+        
+        $0.addSubview(view)
     }
     
     lazy var inputTextField = UITextField().then {
-        $0.layer.cornerRadius = 8
+        $0.frame = CGRect(x: 0, y: 0, width: 0, height: 30)
+        $0.layer.cornerRadius = $0.layer.frame.height / 2
         $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor.black.cgColor
+        $0.layer.borderColor = UIColor.lightGray.cgColor
         $0.layer.masksToBounds = false
         $0.placeholder = "메세지를 입력해주세요."
     }
@@ -51,10 +52,10 @@ class ChatBotViewController: UIViewController {
     lazy var inputStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.alignment = .center
+        $0.spacing = 10
         $0.distribution = .fillProportionally
-         
-         $0.addArrangedSubview(inputTextField)
-         $0.addArrangedSubview(enterButton)
+        $0.addArrangedSubview(inputTextField)
+        $0.addArrangedSubview(enterButton)
     }
     
     private let chatBotViewModel: ChatBotViewModel
@@ -79,11 +80,23 @@ extension ChatBotViewController {
         setupConstraint()
         bindViewModel()
         bindView()
+        addTapGesture()
+        inputTextField.addLeftPadding()
     }
 }
 
 // MARK: - Private Method
 private extension ChatBotViewController {
+    func addTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc 
+    func handleTap(_ sender: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
+    
     func setupConstraint() {
         view.addSubview(chatList)
         view.addSubview(inputStackView)
@@ -91,13 +104,18 @@ private extension ChatBotViewController {
         chatList.snp.makeConstraints { make in
             make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             make.bottom.equalTo(inputStackView.snp.top)
-            
-            inputStackView.snp.makeConstraints { make in
-//                make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
-                make.leading.trailing.equalTo(view.safeAreaLayoutGuide).offset(20)
-                make.bottom.equalTo(self.view.keyboardLayoutGuide.snp.top)
-            }
-            
+        }
+        
+        inputTextField.snp.makeConstraints { make in
+            make.width.equalTo(view.snp.width).multipliedBy(0.8)
+            make.height.equalTo(30)
+        }
+        
+        inputStackView.snp.makeConstraints { make in
+            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(20)
+            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-20)
+            make.bottom.equalTo(self.view.keyboardLayoutGuide.snp.top)
+            make.height.equalTo(view.snp.height).multipliedBy(0.07)
         }
     }
         
@@ -124,7 +142,7 @@ private extension ChatBotViewController {
     
     func bindView() {
         enterButton.rx.tap.bind { [weak self] _ in
-            self?.chatTrigger.onNext(Message(role: "user", content: self?.inputTextField.text ?? ""))
+            self?.chatTrigger.onNext(Message(role: "user", content: self?.inputTextField.text ?? "\(self?.inputTextField.text ?? "")"))
         }.disposed(by: disposeBag)
     }
 }
@@ -138,5 +156,13 @@ extension ChatBotViewController: UICollectionViewDelegate, UICollectionViewDataS
         let cell = chatList.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ChatBotMessageCell
         cell.setupMessageText(message: messageList[indexPath.row])
         return cell
+    }
+}
+
+extension UITextField {
+    func addLeftPadding() {
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: self.frame.height))
+        self.leftView = paddingView
+        self.leftViewMode = ViewMode.always
     }
 }
