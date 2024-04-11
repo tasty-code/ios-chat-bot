@@ -86,8 +86,12 @@ extension ChatViewModel {
                     return ChatCollectionViewCell()
                 }
                 
+                let view = itemIdentifier.isUser ? UserChatBubbleView() : AssistantChatBubbleView()
+                
+                cell.setChatBubbleView(view)
                 cell.delegate = delegate
                 cell.text(itemIdentifier.message, isUser: itemIdentifier.isUser)
+                
                 if itemIdentifier.showRefreshButton {
                     cell.showRefreshButton()
                 }

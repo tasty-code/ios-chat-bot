@@ -40,27 +40,26 @@ final class ChatCollectionViewCell: UICollectionViewCell {
 extension ChatCollectionViewCell {
     private func configureUI() {
         self.addSubview(chatBubbleView)
-        self.addSubview(refreshButton)
         
         chatBubbleView.snp.makeConstraints { 
             $0.top.equalTo(self.snp.top)
-            $0.bottom.equalTo(refreshButton.snp.top)
+            $0.bottom.equalTo(self.snp.bottom)
             $0.width.lessThanOrEqualTo(self.snp.width).multipliedBy(0.70)
             $0.trailing.equalTo(self.snp.trailing)
-        }
-        
-        refreshButton.snp.makeConstraints {
-            $0.width.height.equalTo(8)
-            $0.trailing.equalTo(chatBubbleView.snp.leading).inset(10)
         }
     }
 }
 
 // MARK: - Public Methods
 extension ChatCollectionViewCell {
+    func setChatBubbleView(_ view: ChatBubbleView) {
+        chatBubbleView.removeFromSuperview()
+        chatBubbleView = view
+        addSubview(chatBubbleView)
+    }
+    
     func text(_ string: String, isUser: Bool) {
         chatBubbleView.setText(string)
-        chatBubbleView.setUser(isUser)
         
         chatBubbleView.snp.remakeConstraints {
             $0.top.equalTo(self.snp.top)
@@ -83,6 +82,11 @@ extension ChatCollectionViewCell {
     
     func showRefreshButton() {
         refreshButton.isHidden = false
+        addSubview(refreshButton)
+        refreshButton.snp.makeConstraints {
+            $0.width.height.equalTo(8)
+            $0.trailing.equalTo(chatBubbleView.snp.leading).inset(10)
+        }
     }
     
     func hideRefreshButton() {
