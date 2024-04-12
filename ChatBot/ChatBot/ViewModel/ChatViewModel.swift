@@ -12,6 +12,7 @@ final class ChatViewModel {
     private let apiService: OpenAIService
     
     var onError:((String) -> Void)?
+    var onMessagesUpdated: (() -> Void)?
     
     init(repository: MessageRepository, apiService: OpenAIService) {
         self.messageRepository = repository
@@ -29,8 +30,9 @@ final class ChatViewModel {
                     receivedMessages.forEach { responseMessage in
                         self?.messageRepository.addMessage(responseMessage)
                     }
+                    self?.onMessagesUpdated?()
                 case .failure(let error):
-                    self?.onError?("Error 발생: 관라자에게 문의해주세요 \(error.localizedDescription)")
+                    self?.onError?(error.localizedDescription)
                 }
             }
         }

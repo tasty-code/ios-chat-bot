@@ -72,7 +72,7 @@ final class DetailChatViewController: UIViewController {
         ])
     }
     
-    // MARK: - configure
+    // MARK: - configureButton
     private func configureDetailChatStackView() {
         detailChatStackView.doneButton.addTarget(self, action: #selector(doneButtonTapped(_:)), for: .touchUpInside)
     }
@@ -83,6 +83,36 @@ final class DetailChatViewController: UIViewController {
         viewModel.processUserMessage(message: userInput, model: .gpt3Turbo)
         detailChatStackView.userInputTextView.text = ""
     }
+    
+    // MARK: - configureViewModel
+    private func bindViewModel() {
+        viewModel.onMessagesUpdated = { [weak self] in
+            DispatchQueue.main.async {
+                self?.chatMessageCollectionView.reloadData()
+                self?.scrollToBottom()
+            }
+        }
+        viewModel.onError = { [weak self] errorMessage in
+            self?.configureErrorAlert()
+          }
+    }
+    
+    private func scrollToBottom() {
+        DispatchQueue.main.async {
+            if self.viewModel.messageRepository.getMessages().count > 0 {
+                let indexPath = IndexPath(item: self.viewModel.messageRepository.getMessages().count - 1, section: 0)
+                self.chatMessageCollectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
+            }
+        }
+    }
+    
+    private func configureErrorAlert() {
+        let alert = UIAlertController(title: "Error", message: "관리자에게 문의해주세요", preferredStyle: .alert)
+        let action = UIAlertAction(title: "확인", style: .default)
+        alert.addAction(action)
+        present(alert, animated: true)
+    }
+    
     // MARK: - keyBoardAction
     @objc func keyboardUp(notification:NSNotification) {
         if let keyboardFrame:NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
