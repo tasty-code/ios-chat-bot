@@ -34,7 +34,6 @@ final class ChatRoomViewController: UIViewController {
         setupBindings()
     }
     
-    //셀 등록해주기
     private func setupTableView() {
         contentView.collectionView.register(ChatRoomCell.self, forCellWithReuseIdentifier: ChatRoomCell.identifier)
         contentView.collectionView.allowsSelection = false
@@ -43,14 +42,13 @@ final class ChatRoomViewController: UIViewController {
     func initButton() {
         contentView.sendButton.addTarget(self, action: #selector(questionTest), for: .touchUpInside)
     }
-   
     
     @objc func questionTest() {
         guard let query = contentView.chattingTextView.text else { return }
         history += "UserQuestion\(count): \(query)" + " "
+        print("질문:\(query)")
         viewModel.askQuestion(query: query, history: history)
         contentView.chattingTextView.text = ""
-        
     }
     
     private func setupBindings() {
@@ -60,11 +58,10 @@ final class ChatRoomViewController: UIViewController {
                 .sink(receiveValue: { [weak self] answer in
                     guard let self = self else { return }
                     if !answer.isEmpty {
-                          history += "GPTAnswer\(count): \(answer[0].content)" + " "
-                          print("답변: \(history)")
-                          self.count += 1
-                          print("카운트: \(count)")
-                          self.updateSections()
+                        print("호출 두번되나?")
+                        history += "GPTAnswer\(count): \(answer[0].content)" + " "
+                        self.count += 1
+                        self.updateSections()
                     }
                 })
                 .store(in: &bindings)

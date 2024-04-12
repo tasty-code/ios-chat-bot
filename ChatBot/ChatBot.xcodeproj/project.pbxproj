@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */; };
 		B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */; };
-		B4B3E2C12B42D1BB00818B3C /* ChatGPTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2C02B42D1BB00818B3C /* ChatGPTViewController.swift */; };
 		B4B3E2C62B42D1BC00818B3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */; };
 		B4B3E2C92B42D1BC00818B3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */; };
 		C764C3A02BBFC8BD007AA7B8 /* Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C764C39F2BBFC8BD007AA7B8 /* Mapper.swift */; };
@@ -20,11 +19,11 @@
 		C77BCB722BC904AF00DC220B /* ChatBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77BCB712BC904AF00DC220B /* ChatBubbleView.swift */; };
 		C77BCB752BC904D600DC220B /* ChatRoomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77BCB742BC904D600DC220B /* ChatRoomCell.swift */; };
 		C77BCB772BC904E500DC220B /* ChatRoomCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77BCB762BC904E500DC220B /* ChatRoomCellViewModel.swift */; };
+		C77BCB7A2BC90C0900DC220B /* DEBUG-Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = C77BCB782BC90C0900DC220B /* DEBUG-Keys.plist */; };
 		C79F5A432BB5851D009E3AB4 /* GPTRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79F5A422BB5851D009E3AB4 /* GPTRequestDTO.swift */; };
 		C7DE45392BBC196D0087C6C3 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE45382BBC196D0087C6C3 /* Requestable.swift */; };
 		C7DE453B2BBC19820087C6C3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE453A2BBC19820087C6C3 /* NetworkManager.swift */; };
 		C7DE45472BBC26360087C6C3 /* KeyEnviromentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE45462BBC26360087C6C3 /* KeyEnviromentHandler.swift */; };
-		F332A89C2BC90605009DB954 /* DEBUG-Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = F332A89A2BC90605009DB954 /* DEBUG-Keys.plist */; };
 		F332A89E2BC9065C009DB954 /* ChatRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F332A89D2BC9065C009DB954 /* ChatRoomView.swift */; };
 		F332A8A02BC90742009DB954 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F332A89F2BC90742009DB954 /* ActivityIndicatorView.swift */; };
 		F332A8A32BC9085E009DB954 /* ChatRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F332A8A22BC9085E009DB954 /* ChatRoomViewModel.swift */; };
@@ -47,7 +46,6 @@
 		B4B3E2B92B42D1BB00818B3C /* ChatBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B4B3E2C02B42D1BB00818B3C /* ChatGPTViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTViewController.swift; sourceTree = "<group>"; };
 		B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B4B3E2C82B42D1BC00818B3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B4B3E2CA2B42D1BC00818B3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -59,11 +57,11 @@
 		C77BCB712BC904AF00DC220B /* ChatBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubbleView.swift; sourceTree = "<group>"; };
 		C77BCB742BC904D600DC220B /* ChatRoomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomCell.swift; sourceTree = "<group>"; };
 		C77BCB762BC904E500DC220B /* ChatRoomCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomCellViewModel.swift; sourceTree = "<group>"; };
+		C77BCB782BC90C0900DC220B /* DEBUG-Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DEBUG-Keys.plist"; sourceTree = "<group>"; };
 		C79F5A422BB5851D009E3AB4 /* GPTRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTRequestDTO.swift; sourceTree = "<group>"; };
 		C7DE45382BBC196D0087C6C3 /* Requestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
 		C7DE453A2BBC19820087C6C3 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C7DE45462BBC26360087C6C3 /* KeyEnviromentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyEnviromentHandler.swift; sourceTree = "<group>"; };
-		F332A89A2BC90605009DB954 /* DEBUG-Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DEBUG-Keys.plist"; sourceTree = "<group>"; };
 		F332A89D2BC9065C009DB954 /* ChatRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomView.swift; sourceTree = "<group>"; };
 		F332A89F2BC90742009DB954 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		F332A8A22BC9085E009DB954 /* ChatRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomViewModel.swift; sourceTree = "<group>"; };
@@ -112,16 +110,15 @@
 		B4B3E2BB2B42D1BB00818B3C /* ChatBot */ = {
 			isa = PBXGroup;
 			children = (
-				F332A8A12BC90745009DB954 /* Shared */,
 				C7DE45492BBC26820087C6C3 /* App */,
-				C7DE45482BBC26720087C6C3 /* Controller */,
+				F332A8A12BC90745009DB954 /* Shared */,
 				C77BCB6B2BC903F400DC220B /* Presentation */,
 				C77BCB6A2BC903D800DC220B /* Domain */,
 				C7DE45362BBC189C0087C6C3 /* Data */,
+				C77BCB792BC90C0900DC220B /* Private */,
 				B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */,
 				B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */,
 				B4B3E2CA2B42D1BC00818B3C /* Info.plist */,
-				F332A89B2BC90605009DB954 /* Private */,
 			);
 			path = ChatBot;
 			sourceTree = "<group>";
@@ -190,6 +187,14 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		C77BCB792BC90C0900DC220B /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				C77BCB782BC90C0900DC220B /* DEBUG-Keys.plist */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
 		C7DE45332BBC18820087C6C3 /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
@@ -229,14 +234,6 @@
 			path = Constant;
 			sourceTree = "<group>";
 		};
-		C7DE45482BBC26720087C6C3 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				B4B3E2C02B42D1BB00818B3C /* ChatGPTViewController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
 		C7DE45492BBC26820087C6C3 /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,15 +241,6 @@
 				B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */,
 			);
 			path = App;
-			sourceTree = "<group>";
-		};
-		F332A89B2BC90605009DB954 /* Private */ = {
-			isa = PBXGroup;
-			children = (
-				F332A89A2BC90605009DB954 /* DEBUG-Keys.plist */,
-			);
-			name = Private;
-			path = ../../../../../Documents/Jin/SeSAC/SeSAC_PJ/Private;
 			sourceTree = "<group>";
 		};
 		F332A8A12BC90745009DB954 /* Shared */ = {
@@ -363,7 +351,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4B3E2C92B42D1BC00818B3C /* LaunchScreen.storyboard in Resources */,
-				F332A89C2BC90605009DB954 /* DEBUG-Keys.plist in Resources */,
+				C77BCB7A2BC90C0900DC220B /* DEBUG-Keys.plist in Resources */,
 				B4B3E2C62B42D1BC00818B3C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -384,7 +372,6 @@
 				C764C3A02BBFC8BD007AA7B8 /* Mapper.swift in Sources */,
 				F3D2DF8A2BBBFA9400BEECC0 /* APIHostType.swift in Sources */,
 				C764C3A32BBFC8EE007AA7B8 /* DataDecodable.swift in Sources */,
-				B4B3E2C12B42D1BB00818B3C /* ChatGPTViewController.swift in Sources */,
 				F3D2DF972BBC075D00BEECC0 /* RequestProvider.swift in Sources */,
 				F39BA7EE2BB5740D0058257C /* GPTMessageDTO.swift in Sources */,
 				C79F5A432BB5851D009E3AB4 /* GPTRequestDTO.swift in Sources */,
