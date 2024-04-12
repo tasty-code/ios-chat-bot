@@ -17,6 +17,7 @@
 		C764C3A32BBFC8EE007AA7B8 /* DataDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C764C3A22BBFC8EE007AA7B8 /* DataDecodable.swift */; };
 		C764C3A52BBFC8F6007AA7B8 /* DataDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C764C3A42BBFC8F6007AA7B8 /* DataDecoder.swift */; };
 		C764C3A72BBFC90E007AA7B8 /* Mappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C764C3A62BBFC90E007AA7B8 /* Mappable.swift */; };
+		C77BCB6E2BC9042300DC220B /* ChatRoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77BCB6D2BC9042300DC220B /* ChatRoomModel.swift */; };
 		C79F5A432BB5851D009E3AB4 /* GPTRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79F5A422BB5851D009E3AB4 /* GPTRequestDTO.swift */; };
 		C7DE45392BBC196D0087C6C3 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE45382BBC196D0087C6C3 /* Requestable.swift */; };
 		C7DE453B2BBC19820087C6C3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE453A2BBC19820087C6C3 /* NetworkManager.swift */; };
@@ -49,6 +50,7 @@
 		C764C3A22BBFC8EE007AA7B8 /* DataDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDecodable.swift; sourceTree = "<group>"; };
 		C764C3A42BBFC8F6007AA7B8 /* DataDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDecoder.swift; sourceTree = "<group>"; };
 		C764C3A62BBFC90E007AA7B8 /* Mappable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mappable.swift; sourceTree = "<group>"; };
+		C77BCB6D2BC9042300DC220B /* ChatRoomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomModel.swift; sourceTree = "<group>"; };
 		C79F5A422BB5851D009E3AB4 /* GPTRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTRequestDTO.swift; sourceTree = "<group>"; };
 		C7DE45382BBC196D0087C6C3 /* Requestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
 		C7DE453A2BBC19820087C6C3 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -100,7 +102,9 @@
 			children = (
 				C7DE45492BBC26820087C6C3 /* App */,
 				C7DE45482BBC26720087C6C3 /* Controller */,
-				C7DE45362BBC189C0087C6C3 /* Model */,
+				C77BCB6B2BC903F400DC220B /* Presentation */,
+				C77BCB6A2BC903D800DC220B /* Domain */,
+				C7DE45362BBC189C0087C6C3 /* Data */,
 				B4B3E2C22B42D1BB00818B3C /* Main.storyboard */,
 				B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */,
 				B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */,
@@ -127,6 +131,30 @@
 			path = Decoder;
 			sourceTree = "<group>";
 		};
+		C77BCB6A2BC903D800DC220B /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				C77BCB6C2BC9041300DC220B /* Entity */,
+				C764C39E2BBFC8A7007AA7B8 /* Mapper */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		C77BCB6B2BC903F400DC220B /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		C77BCB6C2BC9041300DC220B /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				C77BCB6D2BC9042300DC220B /* ChatRoomModel.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
 		C7DE45332BBC18820087C6C3 /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,10 +165,9 @@
 			path = NetworkService;
 			sourceTree = "<group>";
 		};
-		C7DE45362BBC189C0087C6C3 /* Model */ = {
+		C7DE45362BBC189C0087C6C3 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				C764C39E2BBFC8A7007AA7B8 /* Mapper */,
 				C764C3A12BBFC8C7007AA7B8 /* Decoder */,
 				F39BA7EC2BB573BE0058257C /* DTO */,
 				C7DE45332BBC18820087C6C3 /* NetworkService */,
@@ -148,7 +175,7 @@
 				C7DE45452BBC25FC0087C6C3 /* Constant */,
 				C7DE45422BBC25880087C6C3 /* Private */,
 			);
-			path = Model;
+			path = Data;
 			sourceTree = "<group>";
 		};
 		C7DE45372BBC194E0087C6C3 /* NetworkManger */ = {
@@ -326,6 +353,7 @@
 				F3D2DF902BBBFB1100BEECC0 /* EndpointProvider.swift in Sources */,
 				C7DE45392BBC196D0087C6C3 /* Requestable.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
+				C77BCB6E2BC9042300DC220B /* ChatRoomModel.swift in Sources */,
 				F3D2DF8E2BBBFAEF00BEECC0 /* EndpointProvidable.swift in Sources */,
 				F3D2DF952BBC074600BEECC0 /* RequstProvidable.swift in Sources */,
 				C764C3A72BBFC90E007AA7B8 /* Mappable.swift in Sources */,
