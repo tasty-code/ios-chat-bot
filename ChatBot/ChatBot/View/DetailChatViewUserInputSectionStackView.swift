@@ -17,7 +17,7 @@ class DetailChatViewUserInputSectionStackView: UIStackView {
         return textView
     }()
     
-    private var doneButton: UIButton = {
+     var doneButton: UIButton = {
         let button = UIButton()
         let image = UIImage(systemName: "arrowshape.up")
         button.setImage(image, for: .normal)

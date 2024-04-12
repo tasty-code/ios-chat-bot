@@ -8,7 +8,7 @@
 import Foundation
 
 final class ChatViewModel {
-    private let messageRepository: MessageRepository
+    let messageRepository: MessageRepository
     private let apiService: OpenAIService
     
     var onError:((String) -> Void)?

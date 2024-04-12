@@ -115,15 +115,20 @@ extension DetailChatViewController: UITextViewDelegate {
 
 // MARK: - CollectionView
 
-extension DetailChatViewController: UICollectionViewDelegate {
+extension DetailChatViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return viewModel.messageRepository.getMessages().count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
-    }
-    
-    
+          guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailMessageCollectionViewCell.identifier, for: indexPath) as? DetailMessageCollectionViewCell else {
+              return UICollectionViewCell()
+          }
+          
+          let message = viewModel.messageRepository.getMessages()[indexPath.row]
+          cell.configureMessageCollectionViewCell(with: message)
+          
+          return cell
+    } 
 }
 
