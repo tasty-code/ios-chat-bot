@@ -9,14 +9,14 @@ import UIKit
 
 final class DetailChatViewController: UIViewController {
     // MARK: - Property
-
+    
     private var viewModel: ChatViewModel
     private var repo: MessageRepository
     private let apiService: OpenAIService
     
-    private var detailChatStackView: UIStackView = DetailChatViewUserInputSectionStackView()
+    private var detailChatStackView = DetailChatViewUserInputSectionStackView()
     private var chatMessageCollectionView = ChatMessageCollectionView()
-
+    
     
     init(viewModel: ChatViewModel, repo: MessageRepository, apiService: OpenAIService) {
         self.apiService = apiService
@@ -32,8 +32,9 @@ final class DetailChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        setupDetailChatStackView()
+        setupChatMessageCollectionView()
         configureDetailChatStackView()
-        configureCollectionView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,16 +42,15 @@ final class DetailChatViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-       keyboardDisappear()
+        keyboardDisappear()
     }
     
     // MARK: - Autolayout
-    private func configureDetailChatStackView() {
-        if let stackView = detailChatStackView as? DetailChatViewUserInputSectionStackView {
-            stackView.userInputTextView.delegate = self
-        }
+    private func setupDetailChatStackView() {
         self.view.addSubview(detailChatStackView)
         detailChatStackView.translatesAutoresizingMaskIntoConstraints = false
+        detailChatStackView.userInputTextView.delegate = self
+        
         NSLayoutConstraint.activate([
             detailChatStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             detailChatStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
@@ -59,10 +59,10 @@ final class DetailChatViewController: UIViewController {
         ])
     }
     
-    private func configureCollectionView() {
+    private func setupChatMessageCollectionView() {
         view.addSubview(chatMessageCollectionView)
-           chatMessageCollectionView.dataSource = self
-           chatMessageCollectionView.delegate = self
+        chatMessageCollectionView.dataSource = self
+        chatMessageCollectionView.delegate = self
         
         NSLayoutConstraint.activate([
             chatMessageCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
@@ -71,10 +71,21 @@ final class DetailChatViewController: UIViewController {
             chatMessageCollectionView.bottomAnchor.constraint(equalTo: detailChatStackView.topAnchor, constant: -10)
         ])
     }
+    
+    // MARK: - configure
+    private func configureDetailChatStackView() {
+        detailChatStackView.doneButton.addTarget(self, action: #selector(doneButtonTapped(_:)), for: .touchUpInside)
+    }
+
+    
+    @objc private func doneButtonTapped(_ sender: UIButton) {
+        guard let userInput = detailChatStackView.userInputTextView.text, !userInput.isEmpty else { return }
+        viewModel.processUserMessage(message: userInput, model: .gpt3Turbo)
+    }
     // MARK: - keyBoardAction
     @objc func keyboardUp(notification:NSNotification) {
         if let keyboardFrame:NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-           let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardRectangle = keyboardFrame.cgRectValue
             UIView.animate(
                 withDuration: 0.3
                 , animations: {
@@ -121,15 +132,15 @@ extension DetailChatViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-          guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailMessageCollectionViewCell.identifier, for: indexPath) as? DetailMessageCollectionViewCell else {
-              return UICollectionViewCell()
-          }
-          
-          let message = viewModel.messageRepository.getMessages()[indexPath.row]
-          cell.configureMessageCollectionViewCell(with: message)
-          
-          return cell
-    } 
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailMessageCollectionViewCell.identifier, for: indexPath) as? DetailMessageCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        
+        let message = viewModel.messageRepository.getMessages()[indexPath.row]
+        cell.configureMessageCollectionViewCell(with: message)
+        
+        return cell
+    }
 }
 
 extension DetailChatViewController: UICollectionViewDelegateFlowLayout {
