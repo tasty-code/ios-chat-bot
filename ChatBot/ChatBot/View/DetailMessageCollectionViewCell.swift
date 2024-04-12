@@ -20,7 +20,6 @@ class DetailMessageCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        messageCellStackView.reset()
     }
     
     required init?(coder: NSCoder) {
@@ -46,8 +45,8 @@ class DetailMessageCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             messageCellStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             messageCellStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-            messageCellStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            messageCellStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10)
+            messageCellStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: -5),
+            messageCellStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15)
         ])
     }
     
