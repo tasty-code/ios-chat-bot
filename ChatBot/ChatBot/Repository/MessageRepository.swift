@@ -7,13 +7,19 @@
 
 import Foundation
 
-class MessageRepository {
+protocol MessageRepositoryDeletage: AnyObject {
+    func messageDidUpdate()
+}
+
+class MessageRepository: MessageRepositoryDeletage {
     private var messagesStorage: [RequestMessageModel] = []
     private let repoQueue = DispatchQueue(label: "repoQueue")
+    weak var delegate: MessageRepositoryDeletage?
     
     func addMessage(_ message: RequestMessageModel) {
         repoQueue.async {
             self.messagesStorage.append(message)
+            self.delegate?.messageDidUpdate()
         }
     }
     
@@ -26,6 +32,7 @@ class MessageRepository {
     func clearStorage() {
         repoQueue.sync {
             self.messagesStorage.removeAll()
+            self.delegate?.messageDidUpdate()
         }
     }
 }
