@@ -44,7 +44,7 @@ final class DetailChatViewController: UIViewController {
        keyboardDisappear()
     }
     
-    // MARK: - CustomFunc
+    // MARK: - Autolayout
     private func configureDetailChatStackView() {
         if let stackView = detailChatStackView as? DetailChatViewUserInputSectionStackView {
             stackView.userInputTextView.delegate = self
@@ -130,5 +130,13 @@ extension DetailChatViewController: UICollectionViewDelegate, UICollectionViewDa
           
           return cell
     } 
+}
+
+extension DetailChatViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let message = viewModel.messageRepository.getMessages()[indexPath.row].content
+        
+        return CGSize(width: collectionView.frame.width, height: 100)
+    }
 }
 
