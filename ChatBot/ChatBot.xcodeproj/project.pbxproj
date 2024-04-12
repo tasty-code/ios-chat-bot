@@ -29,6 +29,7 @@
 		F332A89E2BC9065C009DB954 /* ChatRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F332A89D2BC9065C009DB954 /* ChatRoomView.swift */; };
 		F332A8A02BC90742009DB954 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F332A89F2BC90742009DB954 /* ActivityIndicatorView.swift */; };
 		F332A8A32BC9085E009DB954 /* ChatRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F332A8A22BC9085E009DB954 /* ChatRoomViewModel.swift */; };
+		F332A8A52BC908FC009DB954 /* ChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F332A8A42BC908FC009DB954 /* ChatRoomViewController.swift */; };
 		F39BA7EB2BB573B10058257C /* GPTResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39BA7EA2BB573B10058257C /* GPTResponseDTO.swift */; };
 		F39BA7EE2BB5740D0058257C /* GPTMessageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39BA7ED2BB5740D0058257C /* GPTMessageDTO.swift */; };
 		F39BA7F02BB5744E0058257C /* GPTBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39BA7EF2BB5744E0058257C /* GPTBody.swift */; };
@@ -68,6 +69,7 @@
 		F332A89D2BC9065C009DB954 /* ChatRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomView.swift; sourceTree = "<group>"; };
 		F332A89F2BC90742009DB954 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		F332A8A22BC9085E009DB954 /* ChatRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomViewModel.swift; sourceTree = "<group>"; };
+		F332A8A42BC908FC009DB954 /* ChatRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomViewController.swift; sourceTree = "<group>"; };
 		F39BA7EA2BB573B10058257C /* GPTResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTResponseDTO.swift; sourceTree = "<group>"; };
 		F39BA7ED2BB5740D0058257C /* GPTMessageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTMessageDTO.swift; sourceTree = "<group>"; };
 		F39BA7EF2BB5744E0058257C /* GPTBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTBody.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			children = (
 				F332A89D2BC9065C009DB954 /* ChatRoomView.swift */,
 				F332A8A22BC9085E009DB954 /* ChatRoomViewModel.swift */,
+				F332A8A42BC908FC009DB954 /* ChatRoomViewController.swift */,
 				C77BCB702BC9049600DC220B /* Cell */,
 			);
 			path = ChatRoom;
@@ -398,6 +401,7 @@
 				F3D2DF8C2BBBFAA900BEECC0 /* SchemeType.swift in Sources */,
 				F3D2DF902BBBFB1100BEECC0 /* EndpointProvider.swift in Sources */,
 				C7DE45392BBC196D0087C6C3 /* Requestable.swift in Sources */,
+				F332A8A52BC908FC009DB954 /* ChatRoomViewController.swift in Sources */,
 				C77BCB772BC904E500DC220B /* ChatRoomCellViewModel.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
 				C77BCB6E2BC9042300DC220B /* ChatRoomModel.swift in Sources */,
