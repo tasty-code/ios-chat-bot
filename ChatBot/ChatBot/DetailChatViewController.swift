@@ -35,6 +35,7 @@ final class DetailChatViewController: UIViewController {
         setupDetailChatStackView()
         setupChatMessageCollectionView()
         configureDetailChatStackView()
+        bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {

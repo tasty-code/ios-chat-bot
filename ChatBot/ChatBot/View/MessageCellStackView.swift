@@ -44,13 +44,8 @@ class MessageCellStackView: UIStackView {
            let message = content.content
            contentLabel.text = message
            contentLabel.backgroundColor = content.role == .user ? .systemBlue : .systemGray
-           contentLabel.textColor = content.role == .user ? .black : .black
+           contentLabel.textColor = .black
            contentLabel.textAlignment = .left
            senderLabel.text = content.role == .user ? "😁You" : "🤖Bot"
-       }
-       
-       func reset() {
-           contentLabel.text = nil
-           senderLabel.text = nil
        }
 }
