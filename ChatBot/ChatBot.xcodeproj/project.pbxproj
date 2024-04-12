@@ -29,6 +29,8 @@
 		C1865DB82BBE9C3400DD99C9 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1865DB72BBE9C3400DD99C9 /* Network.swift */; };
 		C1865DBA2BBE9E8600DD99C9 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1865DB92BBE9E8600DD99C9 /* NetworkProvider.swift */; };
 		C1865DBC2BBEB72900DD99C9 /* ChatBotNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1865DBB2BBEB72900DD99C9 /* ChatBotNetwork.swift */; };
+		C1C363012BC7D357000AA2D3 /* ChatBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C363002BC7D357000AA2D3 /* ChatBubbleView.swift */; };
+		C1C363032BC7D3BD000AA2D3 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C363022BC7D3BD000AA2D3 /* MessageView.swift */; };
 		C1E416662BB9888C00D8C836 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E416652BB9888C00D8C836 /* UIViewController+Extension.swift */; };
 		D28AA74380D6F3CE129AC66D /* Pods_ChatBot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8913FA7C9B8C251C7E4CD5F /* Pods_ChatBot.framework */; };
 /* End PBXBuildFile section */
@@ -59,6 +61,8 @@
 		C1865DB72BBE9C3400DD99C9 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		C1865DB92BBE9E8600DD99C9 /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
 		C1865DBB2BBEB72900DD99C9 /* ChatBotNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotNetwork.swift; sourceTree = "<group>"; };
+		C1C363002BC7D357000AA2D3 /* ChatBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubbleView.swift; sourceTree = "<group>"; };
+		C1C363022BC7D3BD000AA2D3 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		C1E416652BB9888C00D8C836 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		EF8D881E2721E9C8810C312E /* Pods-ChatBot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatBot.debug.xcconfig"; path = "Target Support Files/Pods-ChatBot/Pods-ChatBot.debug.xcconfig"; sourceTree = "<group>"; };
 		F8913FA7C9B8C251C7E4CD5F /* Pods_ChatBot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatBot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -184,6 +188,8 @@
 			children = (
 				C12E66C02BB3F28800F3F441 /* ChatBotViewController.swift */,
 				9B91052A2BC4D852004AF740 /* ChatBotMessageCell.swift */,
+				C1C363002BC7D357000AA2D3 /* ChatBubbleView.swift */,
+				C1C363022BC7D3BD000AA2D3 /* MessageView.swift */,
 				C12E66D12BB3F28800F3F441 /* LaunchScreen.storyboard */,
 			);
 			path = View;
@@ -313,11 +319,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1C363012BC7D357000AA2D3 /* ChatBubbleView.swift in Sources */,
 				C12E66D92BB3F28800F3F441 /* ChatBotViewController.swift in Sources */,
 				C12E66DF2BB3F28800F3F441 /* HttpMethod.swift in Sources */,
 				C12E66DE2BB3F28800F3F441 /* APIType.swift in Sources */,
 				C12E66D72BB3F28800F3F441 /* Bundle+Extension.swift in Sources */,
 				C12E66E12BB3F28800F3F441 /* NetworkURL.swift in Sources */,
+				C1C363032BC7D3BD000AA2D3 /* MessageView.swift in Sources */,
 				C12E66D32BB3F28800F3F441 /* ChatBotViewModel.swift in Sources */,
 				C12E66E42BB3F28800F3F441 /* SceneDelegate.swift in Sources */,
 				C1865DBA2BBE9E8600DD99C9 /* NetworkProvider.swift in Sources */,

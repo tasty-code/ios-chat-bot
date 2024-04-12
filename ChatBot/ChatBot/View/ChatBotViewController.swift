@@ -15,10 +15,10 @@ class ChatBotViewController: UIViewController {
     var messageList: [Message] = []
     
     lazy var chatList: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 10
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        var config = UICollectionLayoutListConfiguration(appearance: .plain)
+        config.showsSeparators = false
+        let layout = UICollectionViewCompositionalLayout.list(using: config)
+        layout.configuration.boundarySupplementaryItems = []
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.register(ChatBotMessageCell.self, forCellWithReuseIdentifier: "cell")
         view.delegate = self
@@ -130,7 +130,7 @@ private extension ChatBotViewController {
                 case .success(let data):
                     let message = Message(role: "assistant", content: data.choices[0].message.content)
                     self.messageList.append(message)
-                    print(message)
+                    self.chatList.reloadData()
                 case .failure(let error):
                     let okAction = UIAlertAction(title: "확인", style: .default)
                     self.showMessageAlert(message: "\(error.localizedDescription)", action: [okAction])
@@ -142,7 +142,11 @@ private extension ChatBotViewController {
     
     func bindView() {
         enterButton.rx.tap.bind { [weak self] _ in
-            self?.chatTrigger.onNext(Message(role: "user", content: self?.inputTextField.text ?? "\(self?.inputTextField.text ?? "")"))
+            let userMessage = Message(role: "user", content: self?.inputTextField.text ?? "\(self?.inputTextField.text ?? "")")
+            self?.chatTrigger.onNext(userMessage)
+            self?.messageList.append(userMessage)
+            print("==== \(userMessage.content)")
+            self?.chatList.reloadData()
         }.disposed(by: disposeBag)
     }
 }
@@ -154,7 +158,7 @@ extension ChatBotViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = chatList.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ChatBotMessageCell
-        cell.setupMessageText(message: messageList[indexPath.row])
+        cell.setupMessageText(message: messageList[indexPath.row], type: messageList[indexPath.row].role)
         return cell
     }
 }
