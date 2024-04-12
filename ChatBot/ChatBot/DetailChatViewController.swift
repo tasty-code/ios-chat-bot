@@ -13,6 +13,7 @@ final class DetailChatViewController: UIViewController {
     private var viewModel: ChatViewModel
     private var repo: MessageRepository
     private let apiService: OpenAIService
+    private var openAIAPIResponseIndicatorView: UIActivityIndicatorView?
     
     private var detailChatStackView = DetailChatViewUserInputSectionStackView()
     private var chatMessageCollectionView = ChatMessageCollectionView()
@@ -72,6 +73,19 @@ final class DetailChatViewController: UIViewController {
             chatMessageCollectionView.bottomAnchor.constraint(equalTo: detailChatStackView.topAnchor, constant: -10)
         ])
     }
+    // MARK: - Indicator
+    private func configureopenAIAPIResponseIndicator() {
+        openAIAPIResponseIndicatorView = UIActivityIndicatorView(style: .large)
+        openAIAPIResponseIndicatorView?.center = self.view.center
+        self.view.addSubview(openAIAPIResponseIndicatorView!)
+        openAIAPIResponseIndicatorView?.startAnimating()
+    }
+    
+    private func hideOpenAIAPIResponseIndicator() {
+        openAIAPIResponseIndicatorView?.stopAnimating()
+        openAIAPIResponseIndicatorView?.removeFromSuperview()
+    }
+
     
     // MARK: - configureButton
     private func configureDetailChatStackView() {
@@ -80,9 +94,12 @@ final class DetailChatViewController: UIViewController {
 
     
     @objc private func doneButtonTapped(_ sender: UIButton) {
-        guard let userInput = detailChatStackView.userInputTextView.text, !userInput.isEmpty else { return }
-        viewModel.processUserMessage(message: userInput, model: .gpt3Turbo)
+        guard let userInput = detailChatStackView.userInputTextView.text, !userInput.isEmpty else {
+            return //유저 알럿 띄우기
+        }
         detailChatStackView.userInputTextView.text = ""
+        configureopenAIAPIResponseIndicator()
+        viewModel.processUserMessage(message: userInput, model: .gpt3Turbo)
     }
     
     // MARK: - configureViewModel
@@ -91,10 +108,12 @@ final class DetailChatViewController: UIViewController {
             DispatchQueue.main.async {
                 self?.chatMessageCollectionView.reloadData()
                 self?.scrollToBottom()
+                self?.hideOpenAIAPIResponseIndicator()
             }
         }
         viewModel.onError = { [weak self] errorMessage in
             self?.configureErrorAlert()
+            self?.hideOpenAIAPIResponseIndicator()
           }
     }
     
@@ -106,14 +125,13 @@ final class DetailChatViewController: UIViewController {
             }
         }
     }
-    
+    // MARK: - Alert Configure
     private func configureErrorAlert() {
         let alert = UIAlertController(title: "Error", message: "관리자에게 문의해주세요", preferredStyle: .alert)
         let action = UIAlertAction(title: "확인", style: .default)
         alert.addAction(action)
         present(alert, animated: true)
     }
-    
     // MARK: - keyBoardAction
     @objc func keyboardUp(notification:NSNotification) {
         if let keyboardFrame:NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
