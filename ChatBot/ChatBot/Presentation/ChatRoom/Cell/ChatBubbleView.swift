@@ -23,7 +23,7 @@ final class ChatBubbleView: UIView {
         commonInit()
     }
 
-    func commonInit() -> Void {
+    private func commonInit() -> Void {
         layer.addSublayer(bubbleLayer)
         addSubview(chatLabel)
 
@@ -33,7 +33,6 @@ final class ChatBubbleView: UIView {
             chatLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 12.0),
             chatLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -12.0),
             ])
-
     }
 
     override func layoutSubviews() {
@@ -77,6 +76,5 @@ final class ChatBubbleView: UIView {
         bubbleLayer.fillColor = (outcoming == .user) ? UIColor(named: "SunshineYellow")?.cgColor : UIColor(white: 0.90, alpha: 1.0).cgColor
 
         bubbleLayer.path = bezierPath.cgPath
-
     }
 }

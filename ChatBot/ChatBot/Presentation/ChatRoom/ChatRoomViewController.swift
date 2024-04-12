@@ -28,7 +28,7 @@ final class ChatRoomViewController: UIViewController {
     
     override func viewDidLoad() {
         view.backgroundColor = UIColor(named: "NormalPink")
-        initButton()
+        configureButton()
         setupTableView()
         configureDataSource()
         setupBindings()
@@ -39,11 +39,11 @@ final class ChatRoomViewController: UIViewController {
         contentView.collectionView.allowsSelection = false
     }
     
-    func initButton() {
+    private func configureButton() {
         contentView.sendButton.addTarget(self, action: #selector(questionTest), for: .touchUpInside)
     }
     
-    @objc func questionTest() {
+    @objc private func questionTest() {
         guard let query = contentView.chattingTextView.text else { return }
         history += "UserQuestion\(count): \(query)" + " "
         print("질문:\(query)")
@@ -58,7 +58,7 @@ final class ChatRoomViewController: UIViewController {
                 .sink(receiveValue: { [weak self] answer in
                     guard let self = self else { return }
                     if !answer.isEmpty {
-                        print("호출 두번되나?")
+                        print("호출 두번되는 문제가 있음")
                         history += "GPTAnswer\(count): \(answer[0].content)" + " "
                         self.count += 1
                         self.updateSections()

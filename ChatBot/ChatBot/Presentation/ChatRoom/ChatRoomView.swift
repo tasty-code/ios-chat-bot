@@ -19,7 +19,7 @@ final class ChatRoomView: UIView {
         return button
     }()
     
-    lazy var textStackView: UIStackView = {
+    private lazy var textStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fill
