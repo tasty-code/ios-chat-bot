@@ -11,7 +11,7 @@ protocol MessageRepositoryDeletage: AnyObject {
     func messageDidUpdate()
 }
 
-class MessageRepository: MessageRepositoryDeletage {
+class MessageRepository {
     private var messagesStorage: [RequestMessageModel] = []
     private let repoQueue = DispatchQueue(label: "repoQueue")
     weak var delegate: MessageRepositoryDeletage?
