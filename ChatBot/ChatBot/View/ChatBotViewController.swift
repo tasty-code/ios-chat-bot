@@ -11,54 +11,12 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-class ChatBotViewController: UIViewController {
-    var messageList: [Message] = []
-    
-    lazy var chatList: UICollectionView = {
-        var config = UICollectionLayoutListConfiguration(appearance: .plain)
-        config.showsSeparators = false
-        let layout = UICollectionViewCompositionalLayout.list(using: config)
-        layout.configuration.boundarySupplementaryItems = []
-        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        view.register(ChatBotMessageCell.self, forCellWithReuseIdentifier: "cell")
-        view.delegate = self
-        view.dataSource = self
-        view.backgroundColor = .white
-        return view
-    }()
-    
-    lazy var enterButton = UIButton().then {
-        let view = UIImageView().then {
-            $0.image = UIImage(systemName: "paperplane.circle.fill")
-            $0.tintColor = .systemBlue
-        }
-        
-        view.snp.makeConstraints { make in
-            make.height.width.equalTo(36)
-        }
-        
-        $0.addSubview(view)
-    }
-    
-    lazy var inputTextField = UITextField().then {
-        $0.frame = CGRect(x: 0, y: 0, width: 0, height: 30)
-        $0.layer.cornerRadius = $0.layer.frame.height / 2
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor.lightGray.cgColor
-        $0.layer.masksToBounds = false
-        $0.placeholder = "메세지를 입력해주세요."
-    }
-    
-    lazy var inputStackView = UIStackView().then {
-        $0.axis = .horizontal
-        $0.alignment = .center
-        $0.spacing = 10
-        $0.distribution = .fillProportionally
-        $0.addArrangedSubview(inputTextField)
-        $0.addArrangedSubview(enterButton)
-    }
-    
+final class ChatBotViewController: UIViewController {
+    private let chatInputTextView = ChatInputTextView()
+    private lazy var chatList = ChatBotListView()
     private let chatBotViewModel: ChatBotViewModel
+    private var messageList: [Message] = []
+    
     let disposeBag = DisposeBag()
     let chatTrigger = PublishSubject<Message>()
     
@@ -76,52 +34,50 @@ class ChatBotViewController: UIViewController {
 extension ChatBotViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        setupConstraint()
+        chatList.dataSource = self
+        setupView()
+        setupSubview()
         bindViewModel()
         bindView()
         addTapGesture()
-        inputTextField.addLeftPadding()
+        setupConstraint()
     }
 }
 
 // MARK: - Private Method
 private extension ChatBotViewController {
+    func setupView() {
+        view.backgroundColor = .white
+    }
+    
     func addTapGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         view.addGestureRecognizer(tapGesture)
     }
     
-    @objc 
+    @objc
     func handleTap(_ sender: UITapGestureRecognizer) {
         view.endEditing(true)
     }
     
-    func setupConstraint() {
+    func setupSubview() {
         view.addSubview(chatList)
-        view.addSubview(inputStackView)
-        
+        view.addSubview(chatInputTextView)
+    }
+    
+    func setupConstraint() {
         chatList.snp.makeConstraints { make in
             make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            make.bottom.equalTo(inputStackView.snp.top)
+            make.bottom.equalTo(chatInputTextView.snp.top)
         }
         
-        inputTextField.snp.makeConstraints { make in
-            make.width.equalTo(view.snp.width).multipliedBy(0.8)
-            make.height.equalTo(30)
-        }
-        
-        inputStackView.snp.makeConstraints { make in
-            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(20)
-            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-20)
-            make.bottom.equalTo(self.view.keyboardLayoutGuide.snp.top)
-            make.height.equalTo(view.snp.height).multipliedBy(0.07)
+        chatInputTextView.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
-        
+    
     func bindViewModel() {
         let input = ChatBotViewModel.Input(chatTigger: chatTrigger)
-        
         let output = chatBotViewModel.transform(input: input)
         output.resultChat
             .observe(on: MainScheduler.instance)
@@ -139,19 +95,24 @@ private extension ChatBotViewController {
             .disposed(by: disposeBag)
     }
     
-    
     func bindView() {
-        enterButton.rx.tap.bind { [weak self] _ in
-            let userMessage = Message(role: "user", content: self?.inputTextField.text ?? "\(self?.inputTextField.text ?? "")")
+        chatInputTextView.enterButton.rx.tap.bind { [weak self] _ in
+            guard
+                let userInputText = self?.chatInputTextView.inputTextField.text
+            else {
+                return
+            }
+            
+            let userMessage = Message(role: "user", content: userInputText)
+            
             self?.chatTrigger.onNext(userMessage)
             self?.messageList.append(userMessage)
-            print("==== \(userMessage.content)")
             self?.chatList.reloadData()
         }.disposed(by: disposeBag)
     }
 }
 
-extension ChatBotViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension ChatBotViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.messageList.count
     }
@@ -160,13 +121,5 @@ extension ChatBotViewController: UICollectionViewDelegate, UICollectionViewDataS
         let cell = chatList.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ChatBotMessageCell
         cell.setupMessageText(message: messageList[indexPath.row], type: messageList[indexPath.row].role)
         return cell
-    }
-}
-
-extension UITextField {
-    func addLeftPadding() {
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: self.frame.height))
-        self.leftView = paddingView
-        self.leftViewMode = ViewMode.always
     }
 }

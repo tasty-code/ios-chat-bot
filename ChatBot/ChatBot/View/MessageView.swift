@@ -20,6 +20,7 @@ final class MessageView: UILabel {
     }
 }
 
+// MARK: - Private Method
 private extension MessageView {
     func configureUI() {
         self.tintColor = .black

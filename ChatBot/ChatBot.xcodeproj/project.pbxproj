@@ -31,6 +31,11 @@
 		C1865DBC2BBEB72900DD99C9 /* ChatBotNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1865DBB2BBEB72900DD99C9 /* ChatBotNetwork.swift */; };
 		C1C363012BC7D357000AA2D3 /* ChatBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C363002BC7D357000AA2D3 /* ChatBubbleView.swift */; };
 		C1C363032BC7D3BD000AA2D3 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C363022BC7D3BD000AA2D3 /* MessageView.swift */; };
+		C1C363052BC9244F000AA2D3 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C363042BC9244F000AA2D3 /* UITextField+Extension.swift */; };
+		C1C363072BC92539000AA2D3 /* ChatBotListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C363062BC92539000AA2D3 /* ChatBotListView.swift */; };
+		C1C363092BC92BC2000AA2D3 /* ChatInputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C363082BC92BC2000AA2D3 /* ChatInputTextView.swift */; };
+		C1C3630B2BC92C45000AA2D3 /* UserBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C3630A2BC92C45000AA2D3 /* UserBubbleView.swift */; };
+		C1C3630D2BC92C50000AA2D3 /* SystemBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C3630C2BC92C50000AA2D3 /* SystemBubbleView.swift */; };
 		C1E416662BB9888C00D8C836 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E416652BB9888C00D8C836 /* UIViewController+Extension.swift */; };
 		D28AA74380D6F3CE129AC66D /* Pods_ChatBot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8913FA7C9B8C251C7E4CD5F /* Pods_ChatBot.framework */; };
 /* End PBXBuildFile section */
@@ -63,6 +68,11 @@
 		C1865DBB2BBEB72900DD99C9 /* ChatBotNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotNetwork.swift; sourceTree = "<group>"; };
 		C1C363002BC7D357000AA2D3 /* ChatBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubbleView.swift; sourceTree = "<group>"; };
 		C1C363022BC7D3BD000AA2D3 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		C1C363042BC9244F000AA2D3 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		C1C363062BC92539000AA2D3 /* ChatBotListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotListView.swift; sourceTree = "<group>"; };
+		C1C363082BC92BC2000AA2D3 /* ChatInputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInputTextView.swift; sourceTree = "<group>"; };
+		C1C3630A2BC92C45000AA2D3 /* UserBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBubbleView.swift; sourceTree = "<group>"; };
+		C1C3630C2BC92C50000AA2D3 /* SystemBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemBubbleView.swift; sourceTree = "<group>"; };
 		C1E416652BB9888C00D8C836 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		EF8D881E2721E9C8810C312E /* Pods-ChatBot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatBot.debug.xcconfig"; path = "Target Support Files/Pods-ChatBot/Pods-ChatBot.debug.xcconfig"; sourceTree = "<group>"; };
 		F8913FA7C9B8C251C7E4CD5F /* Pods_ChatBot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatBot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -147,6 +157,7 @@
 			children = (
 				C12E66BD2BB3F28800F3F441 /* Bundle+Extension.swift */,
 				C1E416652BB9888C00D8C836 /* UIViewController+Extension.swift */,
+				C1C363042BC9244F000AA2D3 /* UITextField+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -187,7 +198,11 @@
 			isa = PBXGroup;
 			children = (
 				C12E66C02BB3F28800F3F441 /* ChatBotViewController.swift */,
+				C1C363082BC92BC2000AA2D3 /* ChatInputTextView.swift */,
+				C1C363062BC92539000AA2D3 /* ChatBotListView.swift */,
 				9B91052A2BC4D852004AF740 /* ChatBotMessageCell.swift */,
+				C1C3630A2BC92C45000AA2D3 /* UserBubbleView.swift */,
+				C1C3630C2BC92C50000AA2D3 /* SystemBubbleView.swift */,
 				C1C363002BC7D357000AA2D3 /* ChatBubbleView.swift */,
 				C1C363022BC7D3BD000AA2D3 /* MessageView.swift */,
 				C12E66D12BB3F28800F3F441 /* LaunchScreen.storyboard */,
@@ -322,15 +337,19 @@
 				C1C363012BC7D357000AA2D3 /* ChatBubbleView.swift in Sources */,
 				C12E66D92BB3F28800F3F441 /* ChatBotViewController.swift in Sources */,
 				C12E66DF2BB3F28800F3F441 /* HttpMethod.swift in Sources */,
+				C1C3630D2BC92C50000AA2D3 /* SystemBubbleView.swift in Sources */,
 				C12E66DE2BB3F28800F3F441 /* APIType.swift in Sources */,
+				C1C363072BC92539000AA2D3 /* ChatBotListView.swift in Sources */,
 				C12E66D72BB3F28800F3F441 /* Bundle+Extension.swift in Sources */,
 				C12E66E12BB3F28800F3F441 /* NetworkURL.swift in Sources */,
+				C1C3630B2BC92C45000AA2D3 /* UserBubbleView.swift in Sources */,
 				C1C363032BC7D3BD000AA2D3 /* MessageView.swift in Sources */,
 				C12E66D32BB3F28800F3F441 /* ChatBotViewModel.swift in Sources */,
 				C12E66E42BB3F28800F3F441 /* SceneDelegate.swift in Sources */,
 				C1865DBA2BBE9E8600DD99C9 /* NetworkProvider.swift in Sources */,
 				C12E66EE2BB4294300F3F441 /* Usage.swift in Sources */,
 				C1E416662BB9888C00D8C836 /* UIViewController+Extension.swift in Sources */,
+				C1C363092BC92BC2000AA2D3 /* ChatInputTextView.swift in Sources */,
 				C1865DBC2BBEB72900DD99C9 /* ChatBotNetwork.swift in Sources */,
 				C12E66D52BB3F28800F3F441 /* RequestChatDTO.swift in Sources */,
 				C1865DB82BBE9C3400DD99C9 /* Network.swift in Sources */,
@@ -338,6 +357,7 @@
 				C12E66EC2BB4291A00F3F441 /* ResponseChoiceDTO.swift in Sources */,
 				C12E66EA2BB4283100F3F441 /* ResponseChatDTO.swift in Sources */,
 				9B91052B2BC4D852004AF740 /* ChatBotMessageCell.swift in Sources */,
+				C1C363052BC9244F000AA2D3 /* UITextField+Extension.swift in Sources */,
 				C12E66D42BB3F28800F3F441 /* ChatRepository.swift in Sources */,
 				C12E66E32BB3F28800F3F441 /* AppDelegate.swift in Sources */,
 				C12E66D62BB3F28800F3F441 /* Message.swift in Sources */,

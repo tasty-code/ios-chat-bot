@@ -9,37 +9,6 @@ import UIKit
 import Then
 import SnapKit
 
-final class UserBubbleView: ChatBubbleView {
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        contentMode = .redraw
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func draw(_ rect: CGRect) {
-        setRightBubbleView(rect: rect)
-    }
-}
-
-final class SystemBubbleView: ChatBubbleView {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        contentMode = .redraw
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func draw(_ rect: CGRect) {
-        setLeftBubbleView(rect: rect)
-    }
-}
-
 final class ChatBotMessageCell: UICollectionViewListCell {
     private let userBubbleView = UserBubbleView()
     private let systemBubbleView = SystemBubbleView()
@@ -54,8 +23,25 @@ final class ChatBotMessageCell: UICollectionViewListCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    private func setupConstraint() {
+}
+
+// MARK: - Public Method
+extension ChatBotMessageCell {
+    func setupMessageText(message: Message, type: String) {
+        switch type {
+        case "user":
+            self.configureUser(text: message.content)
+        case "assistant":
+            self.configureSystem(text: message.content)
+        default:
+            break
+        }
+    }
+}
+
+// MARK: - Private Method
+private extension ChatBotMessageCell {
+    func setupConstraint() {
         self.contentView.addSubview(userBubbleView)
         self.contentView.addSubview(systemBubbleView)
     }
@@ -74,8 +60,6 @@ final class ChatBotMessageCell: UICollectionViewListCell {
     
     
     func setupUserConstraints() {
-        
-        userBubbleView.translatesAutoresizingMaskIntoConstraints = false
         userBubbleView.snp.makeConstraints { make in
             make.trailing.equalToSuperview().offset(-10)
             make.top.equalToSuperview().offset(5)
@@ -90,17 +74,4 @@ final class ChatBotMessageCell: UICollectionViewListCell {
             make.bottom.equalToSuperview().offset(-5)
         }
     }
-    
-    func setupMessageText(message: Message, type: String) {
-        switch type {
-        case "user":
-            self.configureUser(text: message.content)
-        case "assistant":
-            self.configureSystem(text: message.content)
-        default:
-            break
-        }
-    }
-    
 }
-
