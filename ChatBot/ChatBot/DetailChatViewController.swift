@@ -81,6 +81,7 @@ final class DetailChatViewController: UIViewController {
     @objc private func doneButtonTapped(_ sender: UIButton) {
         guard let userInput = detailChatStackView.userInputTextView.text, !userInput.isEmpty else { return }
         viewModel.processUserMessage(message: userInput, model: .gpt3Turbo)
+        detailChatStackView.userInputTextView.text = ""
     }
     // MARK: - keyBoardAction
     @objc func keyboardUp(notification:NSNotification) {
