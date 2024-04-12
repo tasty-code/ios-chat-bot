@@ -8,8 +8,7 @@
 import Foundation
 
 enum NetworkURL {
-    static func makeURLRequest(type: APIType, chat: RequestChatDTO,  httpMethod: HttpMethod = .get) -> URLRequest? {
-    
+    static func makeURLRequest(type: APIType, chat: RequestChatDTO, httpMethod: HttpMethod = .get) -> URLRequest? {
         let urlComponents = makeURLComponents(type: type)
         
         guard
