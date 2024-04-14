@@ -78,12 +78,12 @@ final class DetailChatViewController: UIViewController {
         ])
     }
     // MARK: - Indicator
-    private func showIndicator() {
+    private func showOpenAIAPIResponseIndicator() {
         self.view.addSubview(openAIAPIResponseIndicatorView)
         openAIAPIResponseIndicatorView.startAnimating()
     }
     
-    func hideOpenAIAPIResponseIndicator() {
+   private func hideOpenAIAPIResponseIndicator() {
         openAIAPIResponseIndicatorView.stopAnimating()
         openAIAPIResponseIndicatorView.removeFromSuperview()
     }
@@ -100,9 +100,15 @@ final class DetailChatViewController: UIViewController {
             return
         }
         detailChatStackView.userInputTextView.text = ""
-        showIndicator()
+        
+        DispatchQueue.main.async {
+            self.showOpenAIAPIResponseIndicator()
+        }
+        
         viewModel.processUserMessage(message: userInput, model: .gpt3Turbo) { [weak self] in
-            self?.hideOpenAIAPIResponseIndicator()
+            DispatchQueue.main.async {
+                self?.hideOpenAIAPIResponseIndicator()
+            }
         }
     }
     
@@ -117,7 +123,9 @@ final class DetailChatViewController: UIViewController {
         
         DispatchQueue.main.async {
             self.viewModel.onError = { [weak self] errorMessage in
-                self?.configureErrorAlert()
+                DispatchQueue.main.async {
+                    self?.configureErrorAlert()
+                }
             }
         }
     }
@@ -200,12 +208,11 @@ extension DetailChatViewController: UICollectionViewDelegate, UICollectionViewDa
 
 extension DetailChatViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        //        let message = viewModel.messageRepository.getMessages()[indexPath.row].content
-        let width = collectionView.frame.width - 20
-        //        let size = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
-        //        let attributes = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15)]
-        //        let boundingRectSize = NSString(string: message).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
-        return CGSize(width: width, height: 30000)
-    }
+          let message = viewModel.messageRepository.getMessages()[indexPath.row].content
+          let width = collectionView.frame.width - 40
+          let size = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
+          let attributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)]
+          let estimatedFrame = NSString(string: message).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
+          return CGSize(width: width, height: estimatedFrame.height + 20)
+      }
 }

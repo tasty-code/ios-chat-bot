@@ -22,26 +22,22 @@ final class ChatViewModel {
     func processUserMessage(message content: String, model: GPTModel, completion: @escaping () -> Void) {
         let userMessage = RequestMessageModel(role: .user, content: content)
         messageRepository.addMessage(userMessage)
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.onMessagesUpdated?()
-        }
+        self.onMessagesUpdated?()
         
         apiService.sendRequestToOpenAI(messageRepository.getMessages(),
                                        model: model,
                                        APIkey: APIKeyManager.openAIAPIKey) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let receivedMessages):
-                    receivedMessages.forEach { responseMessage in
-                        self?.messageRepository.addMessage(responseMessage)
-                    }
-                    self?.onMessagesUpdated?()
-                case .failure(let error):
-                    self?.onError?(error.localizedDescription)
+            switch result {
+            case .success(let receivedMessages):
+                receivedMessages.forEach { responseMessage in
+                    self?.messageRepository.addMessage(responseMessage)
                 }
-                completion()
+                self?.onMessagesUpdated?()
+            case .failure(let error):
+                self?.onError?(error.localizedDescription)
             }
+            completion()
         }
     }
 }
+
