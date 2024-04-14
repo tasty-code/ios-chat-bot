@@ -13,7 +13,7 @@ final class ChatViewModel {
   private let networkService: NetworkService
   private let output: PassthroughSubject<Output, Never> = .init()
   private var cancellables: Set<AnyCancellable> = .init()
-  var requestDTO: [Message] = []
+  var requestDTO: [RequestDTO] = []
   
   enum Input {
     case sendButtonTapped(message: Message)
@@ -21,7 +21,7 @@ final class ChatViewModel {
   
   enum Output {
     case fetchChatResponseDidFail(error: NetworkError)
-    case fetchChatResponseDidSucceed(response: [Message])
+    case fetchChatResponseDidSucceed(response: [RequestDTO])
     case toggleSendButton(isEnable: Bool)
   }
   
@@ -51,13 +51,18 @@ private extension ChatViewModel {
     .sink { [weak self] completion in
       switch completion {
       case .finished:
-        self?.output.send(.toggleSendButton(isEnable: false))
+        self?.output.send(.toggleSendButton(isEnable: true))
       case .failure(let error):
         self?.output.send(.fetchChatResponseDidFail(error: error))
       }
     } receiveValue: { [weak self] response in
       self?.requestDTO.removeLast()
-      self?.requestDTO.append(response.choices[0].message)
+      self?.requestDTO.append(
+        RequestDTO(
+          id: UUID(),
+          message: response.choices[0].message
+        )
+      )
       guard let requestDTO = self?.requestDTO else { return }
       self?.output.send(.fetchChatResponseDidSucceed(response: requestDTO))
     }
@@ -65,7 +70,7 @@ private extension ChatViewModel {
   }
   
   func makeBody(message: Message) -> RequestModel? {
-    let responseMessage = Message(role: "assistant", content: "")
+    let responseMessage = Message(role: "assistant", content: "● ● ●")
     guard
       requestModel != nil
     else {
@@ -78,13 +83,20 @@ private extension ChatViewModel {
           message
         ]
       )
-      requestDTO.append(message)
-      requestDTO.append(responseMessage)
+      setRequestDTO(message, responseMessage)
       return requestModel
     }
-    requestDTO.append(message)
-    requestDTO.append(responseMessage)
+    setRequestDTO(message, responseMessage)
     return requestModel
+  }
+  
+  func setRequestDTO(_ message: Message, _ responseMessage: Message) {
+    requestDTO.append(
+      RequestDTO(id: UUID(), message: message)
+    )
+    requestDTO.append(
+      RequestDTO(id: UUID(), message: responseMessage)
+    )
   }
 }
 
