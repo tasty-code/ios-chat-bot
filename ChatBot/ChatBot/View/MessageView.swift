@@ -21,7 +21,6 @@ final class MessageView: UILabel {
 
 private extension MessageView {
   func configureUI() {
-    self.translatesAutoresizingMaskIntoConstraints = false
     self.backgroundColor = .clear
     self.textAlignment = .left
     self.numberOfLines = 0
