@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2770189E2BCBF4A20040A6A9 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2770189D2BCBF4A20040A6A9 /* UIViewController+.swift */; };
 		27EFEA4F2BBC174D004A3426 /* ChatBotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EFEA4E2BBC174D004A3426 /* ChatBotTests.swift */; };
 		27EFEA562BBD3EDB004A3426 /* ChatBotNetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EFEA552BBD3EDB004A3426 /* ChatBotNetworkTests.swift */; };
 		27EFEA612BBD6D75004A3426 /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EFEA602BBD6D75004A3426 /* Bundle+.swift */; };
@@ -53,6 +54,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2770189D2BCBF4A20040A6A9 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		27EFEA4C2BBC174D004A3426 /* ChatBotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChatBotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		27EFEA4E2BBC174D004A3426 /* ChatBotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotTests.swift; sourceTree = "<group>"; };
 		27EFEA552BBD3EDB004A3426 /* ChatBotNetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotNetworkTests.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 			children = (
 				27EFEA602BBD6D75004A3426 /* Bundle+.swift */,
 				27EFEA6B2BBD7B32004A3426 /* URLSession+.swift */,
+				2770189D2BCBF4A20040A6A9 /* UIViewController+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 				893621262BC40E5500EFB2C7 /* ChatInputSendButton.swift in Sources */,
 				89A49A6C2BB4274B00C643D3 /* Message.swift in Sources */,
 				27EFEA612BBD6D75004A3426 /* Bundle+.swift in Sources */,
+				2770189E2BCBF4A20040A6A9 /* UIViewController+.swift in Sources */,
 				893621242BC4017F00EFB2C7 /* ChatInputTextView.swift in Sources */,
 				89A49A642BB4233C00C643D3 /* ResponseModel.swift in Sources */,
 				27EFEA6E2BBD7B53004A3426 /* NetworkService.swift in Sources */,

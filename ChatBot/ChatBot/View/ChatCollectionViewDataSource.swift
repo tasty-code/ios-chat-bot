@@ -11,10 +11,10 @@ enum MessageSection {
   case messages
 }
 
-typealias ChatCollectionViewSnapshot = NSDiffableDataSourceSnapshot<MessageSection, Message>
+typealias ChatCollectionViewSnapshot = NSDiffableDataSourceSnapshot<MessageSection, RequestDTO>
 
-final class ChatCollectionViewDataSource: UICollectionViewDiffableDataSource<MessageSection, Message> {
-  static let cellProvider: CellProvider = { collectionView, indexPath, message in
+final class ChatCollectionViewDataSource: UICollectionViewDiffableDataSource<MessageSection, RequestDTO> {
+  static let cellProvider: CellProvider = { collectionView, indexPath, model in
     guard
       let cell = collectionView.dequeueReusableCell(
         withReuseIdentifier: ChatCell.identifier,
@@ -23,13 +23,13 @@ final class ChatCollectionViewDataSource: UICollectionViewDiffableDataSource<Mes
     else {
       return ChatCell()
     }
-    
+    let message = model.message
     guard message.role != "user" else {
       cell.configureUser(text: message.content)
       return cell
     }
     
-    cell.configureSystem(text: message.content, isLoading: true)
+    cell.configureSystem(text: message.content)
     return cell
   }
   
