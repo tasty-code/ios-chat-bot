@@ -32,7 +32,7 @@ final class ChatCell: UICollectionViewListCell {
     userBubbleView.configureMessage(text: text)
   }
   
-  func configureSystem(text: String, isLoading: Bool) {
+  func configureSystem(text: String) {
     systemBubbleView.isHidden = false
     userBubbleView.isHidden = true
     systemBubbleView.configureMessage(text: text)
@@ -54,6 +54,8 @@ private extension ChatCell {
         userBubbleView.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
         userBubbleView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5),
         userBubbleView.widthAnchor.constraint(lessThanOrEqualToConstant: UIScreen.main.bounds.width * 0.75),
+        userBubbleView.widthAnchor.constraint(greaterThanOrEqualToConstant: UIScreen.main.bounds.width * 0.1),
+        userBubbleView.heightAnchor.constraint(greaterThanOrEqualToConstant: UIScreen.main.bounds.width * 0.1),
       ]
     )
   }
@@ -64,7 +66,8 @@ private extension ChatCell {
         systemBubbleView.widthAnchor.constraint(lessThanOrEqualToConstant: UIScreen.main.bounds.width * 0.75),
         systemBubbleView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
         systemBubbleView.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
-        systemBubbleView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5)
+        systemBubbleView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5),
+        systemBubbleView.widthAnchor.constraint(greaterThanOrEqualToConstant: UIScreen.main.bounds.width * 0.1),
       ]
     )
   }
