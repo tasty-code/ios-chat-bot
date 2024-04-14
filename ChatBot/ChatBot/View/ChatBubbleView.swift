@@ -8,38 +8,14 @@
 import UIKit
 
 final class UserBubbleView: ChatBubbleView {
-  private var bezierPath: UIBezierPath?
-  
   override func draw(_ rect: CGRect) {
-    guard
-      bezierPath != nil
-    else {
-      let bezierPath = UIBezierPath()
-      self.bezierPath = bezierPath
-      setRightBubbleView(rect: rect, bezierPath: bezierPath)
-      bezierPath.close()
-      backgroundColor?.setFill()
-      bezierPath.fill()
-      return
-    }
+    setRightBubbleView(rect: rect)
   }
 }
 
 final class SystemBubbleView: ChatBubbleView {
-  private var bezierPath: UIBezierPath?
-  
   override func draw(_ rect: CGRect) {
-    guard 
-      bezierPath != nil
-    else {
-      let bezierPath = UIBezierPath()
-      self.bezierPath = bezierPath
-      setLeftBubbleView(rect: rect, bezierPath: bezierPath)
-      bezierPath.close()
-      backgroundColor?.setFill()
-      bezierPath.fill()
-      return
-    }
+    setLeftBubbleView(rect: rect)
   }
 }
 
@@ -48,9 +24,10 @@ class ChatBubbleView: UIView {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
+    contentMode = .redraw
     self.backgroundColor = .clear
     self.configureUI()
-    self.setupConstraints()
+    setupConstraints()
   }
   
   required init?(coder: NSCoder) {
@@ -59,7 +36,6 @@ class ChatBubbleView: UIView {
   
   func configureMessage(text: String) {
     messageView.text = text
-    messageView.setupSize()
   }
 }
 
@@ -67,25 +43,25 @@ private extension ChatBubbleView {
   func configureUI() {
     self.addSubview(messageView)
     messageView.translatesAutoresizingMaskIntoConstraints = false
+    self.translatesAutoresizingMaskIntoConstraints = false
   }
   
   func setupConstraints() {
     NSLayoutConstraint.activate(
       [
-        self.widthAnchor.constraint(equalTo: messageView.widthAnchor, constant: 20),
         self.heightAnchor.constraint(equalTo: messageView.heightAnchor, constant: 15),
         messageView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-        messageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+        messageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+        messageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
       ]
     )
   }
   
-  func setRightBubbleView(rect: CGRect,bezierPath: UIBezierPath) {
-    self.backgroundColor = .systemBlue
+  func setRightBubbleView(rect: CGRect) {
+    let bezierPath = UIBezierPath()
     messageView.textColor = .white
     let bottom = rect.height
     let right = rect.width
-    
     bezierPath.move(
       to: CGPoint(x: right - 22, y: bottom)
     )
@@ -134,14 +110,15 @@ private extension ChatBubbleView {
       controlPoint1: CGPoint(x: right - 16, y: bottom),
       controlPoint2: CGPoint(x: right - 19, y: bottom)
     )
-    
+    bezierPath.close()
+    UIColor(cgColor: UIColor.systemBlue.cgColor).setFill()
+    bezierPath.fill()
   }
   
-  func setLeftBubbleView(rect: CGRect, bezierPath: UIBezierPath) {
-    self.backgroundColor = .systemGray5
+  func setLeftBubbleView(rect: CGRect) {
+    let bezierPath = UIBezierPath()
     let bottom = rect.height
     let right = rect.width
-    
     bezierPath.move(
       to: CGPoint(x: 22, y: bottom)
     )
@@ -190,5 +167,9 @@ private extension ChatBubbleView {
       controlPoint1: CGPoint(x: 16, y: bottom),
       controlPoint2: CGPoint(x: 19, y: bottom)
     )
+    bezierPath.close()
+    UIColor(cgColor: UIColor.systemGray5.cgColor).setFill()
+    bezierPath.fill()
   }
 }
+
