@@ -19,11 +19,17 @@ final class ChatViewModel {
         self.apiService = apiService
     }
     
-    func processUserMessage(message content: String, model: GPTModel) {
+    func processUserMessage(message content: String, model: GPTModel, completion: @escaping () -> Void) {
         let userMessage = RequestMessageModel(role: .user, content: content)
         messageRepository.addMessage(userMessage)
         
-        apiService.sendRequestToOpenAI(messageRepository.getMessages(), model: model, APIkey: APIKeyManager.openAIAPIKey) { [weak self] result in
+        DispatchQueue.main.async { [weak self] in
+            self?.onMessagesUpdated?()
+        }
+        
+        apiService.sendRequestToOpenAI(messageRepository.getMessages(),
+                                       model: model,
+                                       APIkey: APIKeyManager.openAIAPIKey) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let receivedMessages):
@@ -34,6 +40,7 @@ final class ChatViewModel {
                 case .failure(let error):
                     self?.onError?(error.localizedDescription)
                 }
+                completion()
             }
         }
     }

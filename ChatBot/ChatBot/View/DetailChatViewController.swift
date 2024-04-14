@@ -13,7 +13,11 @@ final class DetailChatViewController: UIViewController {
     private var viewModel: ChatViewModel
     private var repo: MessageRepository
     private let apiService: OpenAIService
-    private var openAIAPIResponseIndicatorView: UIActivityIndicatorView?
+    private lazy var openAIAPIResponseIndicatorView: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.center = self.view.center
+        return indicator
+    }()
     
     private var detailChatStackView = DetailChatViewUserInputSectionStackView()
     private var chatMessageCollectionView = ChatMessageCollectionView()
@@ -74,32 +78,32 @@ final class DetailChatViewController: UIViewController {
         ])
     }
     // MARK: - Indicator
-    private func configureopenAIAPIResponseIndicator() {
-        openAIAPIResponseIndicatorView = UIActivityIndicatorView(style: .large)
-        openAIAPIResponseIndicatorView?.center = self.view.center
-        self.view.addSubview(openAIAPIResponseIndicatorView!)
-        openAIAPIResponseIndicatorView?.startAnimating()
+    private func showIndicator() {
+        self.view.addSubview(openAIAPIResponseIndicatorView)
+        openAIAPIResponseIndicatorView.startAnimating()
     }
     
-    private func hideOpenAIAPIResponseIndicator() {
-        openAIAPIResponseIndicatorView?.stopAnimating()
-        openAIAPIResponseIndicatorView?.removeFromSuperview()
+    func hideOpenAIAPIResponseIndicator() {
+        openAIAPIResponseIndicatorView.stopAnimating()
+        openAIAPIResponseIndicatorView.removeFromSuperview()
     }
-
+    
     
     // MARK: - configureButton
     private func configureDetailChatStackView() {
         detailChatStackView.doneButton.addTarget(self, action: #selector(doneButtonTapped(_:)), for: .touchUpInside)
     }
-
+    
     
     @objc private func doneButtonTapped(_ sender: UIButton) {
         guard let userInput = detailChatStackView.userInputTextView.text, !userInput.isEmpty else {
-            return //유저 알럿 띄우기
+            return
         }
         detailChatStackView.userInputTextView.text = ""
-        configureopenAIAPIResponseIndicator()
-        viewModel.processUserMessage(message: userInput, model: .gpt3Turbo)
+        showIndicator()
+        viewModel.processUserMessage(message: userInput, model: .gpt3Turbo) { [weak self] in
+            self?.hideOpenAIAPIResponseIndicator()
+        }
     }
     
     // MARK: - configureViewModel
@@ -108,13 +112,14 @@ final class DetailChatViewController: UIViewController {
             DispatchQueue.main.async {
                 self?.chatMessageCollectionView.reloadData()
                 self?.scrollToBottom()
-                self?.hideOpenAIAPIResponseIndicator()
             }
         }
-        viewModel.onError = { [weak self] errorMessage in
-            self?.configureErrorAlert()
-            self?.hideOpenAIAPIResponseIndicator()
-          }
+        
+        DispatchQueue.main.async {
+            self.viewModel.onError = { [weak self] errorMessage in
+                self?.configureErrorAlert()
+            }
+        }
     }
     
     private func scrollToBottom() {
@@ -196,11 +201,11 @@ extension DetailChatViewController: UICollectionViewDelegate, UICollectionViewDa
 extension DetailChatViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-//        let message = viewModel.messageRepository.getMessages()[indexPath.row].content
+        //        let message = viewModel.messageRepository.getMessages()[indexPath.row].content
         let width = collectionView.frame.width - 20
-//        let size = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
-//        let attributes = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15)]
-//        let boundingRectSize = NSString(string: message).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
+        //        let size = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
+        //        let attributes = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15)]
+        //        let boundingRectSize = NSString(string: message).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
         return CGSize(width: width, height: 30000)
     }
 }
