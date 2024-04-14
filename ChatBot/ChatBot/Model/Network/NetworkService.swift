@@ -12,7 +12,11 @@ struct NetworkService: NetworkTestable {
   
   private let session: URLSessionProtocol
   
-  init(session: URLSessionProtocol = MockURLSession(statusCode: 200)) {
+//  init(session: URLSessionProtocol = MockURLSession(statusCode: 200)) {
+//    self.session = session
+//  }
+  
+  init(session: URLSessionProtocol = URLSession.shared) {
     self.session = session
   }
   
@@ -29,3 +33,4 @@ struct NetworkService: NetworkTestable {
       .eraseToAnyPublisher()
   }
 }
+
