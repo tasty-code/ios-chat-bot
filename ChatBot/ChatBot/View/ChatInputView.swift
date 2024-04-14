@@ -24,7 +24,6 @@ final class ChatInputView: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     configureUI()
-    self.chatInputTextView.delegate = self
   }
   
   required init?(coder: NSCoder) {
@@ -63,17 +62,5 @@ private extension ChatInputView {
       chatSendButton.centerYAnchor.constraint(equalTo: chatInputTextView.centerYAnchor),
       chatSendButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15)
     ])
-  }
-}
-
-extension ChatInputView: UITextViewDelegate {
-  func textViewDidChange(_ textView: UITextView) {
-    guard 
-      textView.text.isEmpty
-    else {
-      self.chatSendButton.isEnabled = true
-      return
-    }
-    self.chatSendButton.isEnabled = false
   }
 }

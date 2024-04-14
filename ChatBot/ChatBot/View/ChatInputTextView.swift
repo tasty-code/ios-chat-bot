@@ -8,8 +8,19 @@
 import UIKit
 
 final class ChatInputTextView: UITextView {
+  
   override init(frame: CGRect, textContainer: NSTextContainer?) {
     super.init(frame: frame, textContainer: textContainer)
+    configureUI()
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+}
+
+private extension ChatInputTextView {
+  func configureUI() {
     self.font = .preferredFont(forTextStyle: .body)
     self.layer.borderWidth = 1
     self.layer.cornerRadius = 17
@@ -17,9 +28,5 @@ final class ChatInputTextView: UITextView {
     self.isScrollEnabled = false
     self.textContainerInset.left = 10
     self.textContainerInset.right = 10
-  }
-  
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
   }
 }
