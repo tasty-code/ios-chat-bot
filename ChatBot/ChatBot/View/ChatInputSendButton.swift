@@ -10,7 +10,6 @@ import UIKit
 final class ChatInputSendButton: UIButton {
   override init(frame: CGRect) {
     super.init(frame: frame)
-    self.isEnabled = false
     self.setBackgroundImage(UIImage(systemName: "arrow.up.circle.fill"), for: .normal)
   }
   
