@@ -83,9 +83,11 @@ private extension ChatViewModel {
           message
         ]
       )
+      requestModel?.messages.append(message)
       setRequestDTO(message, responseMessage)
       return requestModel
     }
+    requestModel?.messages.append(message)
     setRequestDTO(message, responseMessage)
     return requestModel
   }
