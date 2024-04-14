@@ -25,11 +25,13 @@ extension ChatCollectionView {
   }
   
   func srollToBottom() {
-    guard self.numberOfSections > 0 else { return }
-    let indexPath = IndexPath(
-      item: self.numberOfItems(inSection: numberOfSections - 1) - 1,
-      section: numberOfSections - 1
-    )
-    self.scrollToItem(at: indexPath, at: .bottom, animated: true)
+    DispatchQueue.main.async {
+      guard self.numberOfSections > 0 else { return }
+      let indexPath = IndexPath(
+        item: self.numberOfItems(inSection: self.numberOfSections - 1) - 1,
+        section: self.numberOfSections - 1
+      )
+      self.scrollToItem(at: indexPath, at: .bottom, animated: true)
+    }
   }
 }

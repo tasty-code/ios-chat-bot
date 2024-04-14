@@ -13,7 +13,7 @@ final class ChatCell: UICollectionViewListCell {
   }
   
   private let userBubbleView = UserBubbleView()
-  private let systemBubbleView = SystemBubbleView()
+  private var systemBubbleView = SystemBubbleView()
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -32,7 +32,7 @@ final class ChatCell: UICollectionViewListCell {
     userBubbleView.configureMessage(text: text)
   }
   
-  func configureSystem(text: String) {
+  func configureSystem(text: String, isLoading: Bool) {
     systemBubbleView.isHidden = false
     userBubbleView.isHidden = true
     systemBubbleView.configureMessage(text: text)
@@ -52,7 +52,8 @@ private extension ChatCell {
       [
         userBubbleView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
         userBubbleView.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
-        userBubbleView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5)
+        userBubbleView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5),
+        userBubbleView.widthAnchor.constraint(lessThanOrEqualToConstant: UIScreen.main.bounds.width * 0.75),
       ]
     )
   }
@@ -60,6 +61,7 @@ private extension ChatCell {
   func setupSystemConstraints() {
     NSLayoutConstraint.activate(
       [
+        systemBubbleView.widthAnchor.constraint(lessThanOrEqualToConstant: UIScreen.main.bounds.width * 0.75),
         systemBubbleView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
         systemBubbleView.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
         systemBubbleView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5)

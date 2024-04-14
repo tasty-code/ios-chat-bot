@@ -16,11 +16,20 @@ typealias ChatCollectionViewSnapshot = NSDiffableDataSourceSnapshot<MessageSecti
 final class ChatCollectionViewDataSource: UICollectionViewDiffableDataSource<MessageSection, Message> {
   static let cellProvider: CellProvider = { collectionView, indexPath, message in
     guard
-      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatCell.identifier, for: indexPath) as? ChatCell
+      let cell = collectionView.dequeueReusableCell(
+        withReuseIdentifier: ChatCell.identifier,
+        for: indexPath
+      ) as? ChatCell
     else {
       return ChatCell()
     }
-    message.role == "user" ? cell.configureUser(text: message.content) : cell.configureSystem(text: message.content)
+    
+    guard message.role != "user" else {
+      cell.configureUser(text: message.content)
+      return cell
+    }
+    
+    cell.configureSystem(text: message.content, isLoading: true)
     return cell
   }
   

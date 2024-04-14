@@ -37,18 +37,15 @@ final class ChatBotViewController: UIViewController {
     configureUI()
     setupConstraints()
     bind()
+    chatInputView.setChatSendButton { [weak self] message in
+      self?.input.send(.sendButtonTapped(message: message))
+      guard let requestDTO = self?.chatBotViewModel.requestDTO else { return }
+      self?.applyChatResponse(response: requestDTO)
+    }
   }
-  
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    input.send(
-      .sendButtonTapped(
-        message: Message(
-          role: "user",
-          content: "Compose a poem that explains the concept of recursion in programming."
-        )
-      )
-    )
+
+  deinit {
+    NotificationCenter.default.removeObserver(self)
   }
 }
 
@@ -58,12 +55,16 @@ private extension ChatBotViewController {
     view.addGestureRecognizer(tap)
   }
   
-  @objc func dismissKeyboard() {
+  @objc 
+  func dismissKeyboard() {
     view.endEditing(true)
   }
   
-  @objc func keyboardWillShow(notification: NSNotification) {
-    guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+  @objc 
+  func keyboardWillShow(notification: NSNotification) {
+    guard
+      let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+    else {
       return
     }
     
@@ -92,7 +93,7 @@ private extension ChatBotViewController {
         chatCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
         chatCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
         chatCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        chatCollectionView.bottomAnchor.constraint(equalTo: chatInputView.topAnchor),
+        chatCollectionView.bottomAnchor.constraint(equalTo: chatInputView.topAnchor, constant: -10),
         
         chatInputView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
         chatInputView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -111,20 +112,18 @@ private extension ChatBotViewController {
         print(error.localizedDescription)
       case .fetchChatResponseDidSucceed(let response):
         self?.applyChatResponse(response: response)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-          self?.chatCollectionView.srollToBottom()
-        }
+        self?.chatCollectionView.srollToBottom()
       case .toggleSendButton(let isEnable):
-        print("\(isEnable)")
+        self?.chatInputView.isEnable = isEnable
       }
     }
     .store(in: &cancellable)
   }
   
-  func applyChatResponse(response: RequestModel) {
+  func applyChatResponse(response: [Message]) {
     var chatCollectionViewSnapshot = ChatCollectionViewSnapshot()
     chatCollectionViewSnapshot.appendSections([.messages])
-    chatCollectionViewSnapshot.appendItems(response.messages)
+    chatCollectionViewSnapshot.appendItems(response)
     dataSource.apply(chatCollectionViewSnapshot)
   }
 }

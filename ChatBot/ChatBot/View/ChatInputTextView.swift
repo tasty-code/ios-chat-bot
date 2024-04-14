@@ -10,10 +10,10 @@ import UIKit
 final class ChatInputTextView: UITextView {
   override init(frame: CGRect, textContainer: NSTextContainer?) {
     super.init(frame: frame, textContainer: textContainer)
-    self.font = .systemFont(ofSize: 17)
-    self.layer.borderWidth = 2
+    self.font = .preferredFont(forTextStyle: .body)
+    self.layer.borderWidth = 1
     self.layer.cornerRadius = 17
-    self.layer.borderColor = CGColor(red: 0.1, green: 0.1, blue: 0.5, alpha: 1)
+    self.layer.borderColor = UIColor.systemGray2.cgColor
     self.isScrollEnabled = false
     self.textContainerInset.left = 10
     self.textContainerInset.right = 10
@@ -22,6 +22,4 @@ final class ChatInputTextView: UITextView {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
-
 }
