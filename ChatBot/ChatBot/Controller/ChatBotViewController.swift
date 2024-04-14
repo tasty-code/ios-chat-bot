@@ -9,8 +9,7 @@ import UIKit
 import Combine
 
 final class ChatBotViewController: UIViewController {
-  static let notificationCenter = NotificationCenter.default
-  
+
   private lazy var chatCollectionView: ChatCollectionView = {
     var configure = UICollectionLayoutListConfiguration(appearance: .plain)
     configure.showsSeparators = false
@@ -23,25 +22,16 @@ final class ChatBotViewController: UIViewController {
   private let chatBotViewModel: ChatViewModel = .init()
   private var cancellable = Set<AnyCancellable>()
   private let input: PassthroughSubject<ChatViewModel.Input, Never> = .init()
-  
-  private var chatInputView = ChatInputView()
+  private let chatInputView = ChatInputView()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .white
-    NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-    
-    hideKeyboard()
+    setupKeyboardNotification()
     setupCollectionView()
     configureUI()
     setupConstraints()
     bind()
-    chatInputView.setChatSendButton { [weak self] message in
-      self?.input.send(.sendButtonTapped(message: message))
-      guard let requestDTO = self?.chatBotViewModel.requestDTO else { return }
-      self?.applyChatResponse(response: requestDTO)
-    }
+    setupChatInputView()
   }
 
   deinit {
@@ -50,32 +40,8 @@ final class ChatBotViewController: UIViewController {
 }
 
 private extension ChatBotViewController {
-  func hideKeyboard() {
-    let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-    view.addGestureRecognizer(tap)
-  }
-  
-  @objc 
-  func dismissKeyboard() {
-    view.endEditing(true)
-  }
-  
-  @objc 
-  func keyboardWillShow(notification: NSNotification) {
-    guard
-      let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
-    else {
-      return
-    }
-    
-    self.view.frame.origin.y = 0 - keyboardSize.height
-  }
-  
-  @objc func keyboardWillHide(notification: NSNotification) {
-    self.view.frame.origin.y = 0
-  }
-  
   func configureUI() {
+    view.backgroundColor = .white
     view.addSubview(chatCollectionView)
     view.addSubview(chatInputView)
   }
@@ -94,12 +60,19 @@ private extension ChatBotViewController {
         chatCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
         chatCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         chatCollectionView.bottomAnchor.constraint(equalTo: chatInputView.topAnchor, constant: -10),
-        
         chatInputView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
         chatInputView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         chatInputView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
       ]
     )
+  }
+  
+  func setupChatInputView() {
+    chatInputView.setChatSendButton { [weak self] message in
+      self?.input.send(.sendButtonTapped(message: message))
+      guard let requestDTO = self?.chatBotViewModel.requestDTO else { return }
+      self?.applyChatResponse(response: requestDTO)
+    }
   }
   
   func bind() {
@@ -112,7 +85,6 @@ private extension ChatBotViewController {
         print(error.localizedDescription)
       case .fetchChatResponseDidSucceed(let response):
         self?.applyChatResponse(response: response)
-        self?.chatCollectionView.srollToBottom()
       case .toggleSendButton(let isEnable):
         self?.chatInputView.isEnable = isEnable
       }
@@ -120,10 +92,11 @@ private extension ChatBotViewController {
     .store(in: &cancellable)
   }
   
-  func applyChatResponse(response: [Message]) {
+  func applyChatResponse(response: [RequestDTO]) {
     var chatCollectionViewSnapshot = ChatCollectionViewSnapshot()
     chatCollectionViewSnapshot.appendSections([.messages])
     chatCollectionViewSnapshot.appendItems(response)
     dataSource.apply(chatCollectionViewSnapshot)
+    chatCollectionView.srollToBottom()
   }
 }
