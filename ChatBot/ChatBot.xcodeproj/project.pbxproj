@@ -19,9 +19,13 @@
 		70E87ED22BBAA6F800E27E43 /* RequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E87ED12BBAA6F800E27E43 /* RequestDTO.swift */; };
 		B4B3E2BD2B42D1BB00818B3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */; };
 		B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */; };
-		B4B3E2C12B42D1BB00818B3C /* ChatbotMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2C02B42D1BB00818B3C /* ChatbotMainViewController.swift */; };
+		B4B3E2C12B42D1BB00818B3C /* DetailChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3E2C02B42D1BB00818B3C /* DetailChatViewController.swift */; };
 		B4B3E2C62B42D1BC00818B3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */; };
 		B4B3E2C92B42D1BC00818B3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4B3E2C72B42D1BC00818B3C /* LaunchScreen.storyboard */; };
+		E67855E82BC7B35500488352 /* DetailChatViewUserInputSectionStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67855E72BC7B35500488352 /* DetailChatViewUserInputSectionStackView.swift */; };
+		E67855EA2BC7B84400488352 /* MessageCellStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67855E92BC7B84400488352 /* MessageCellStackView.swift */; };
+		E67855EC2BC7B9AB00488352 /* DetailMessageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67855EB2BC7B9AB00488352 /* DetailMessageCollectionViewCell.swift */; };
+		E67855EE2BC7BA9700488352 /* ChatMessageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67855ED2BC7BA9700488352 /* ChatMessageCollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,10 +42,14 @@
 		B4B3E2B92B42D1BB00818B3C /* ChatBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4B3E2BC2B42D1BB00818B3C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B4B3E2BE2B42D1BB00818B3C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B4B3E2C02B42D1BB00818B3C /* ChatbotMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatbotMainViewController.swift; sourceTree = "<group>"; };
+		B4B3E2C02B42D1BB00818B3C /* DetailChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailChatViewController.swift; sourceTree = "<group>"; };
 		B4B3E2C52B42D1BC00818B3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B4B3E2C82B42D1BC00818B3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B4B3E2CA2B42D1BC00818B3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E67855E72BC7B35500488352 /* DetailChatViewUserInputSectionStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailChatViewUserInputSectionStackView.swift; sourceTree = "<group>"; };
+		E67855E92BC7B84400488352 /* MessageCellStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellStackView.swift; sourceTree = "<group>"; };
+		E67855EB2BC7B9AB00488352 /* DetailMessageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMessageCollectionViewCell.swift; sourceTree = "<group>"; };
+		E67855ED2BC7BA9700488352 /* ChatMessageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,10 +144,22 @@
 				70E483A32BB5AB3900931F01 /* Model */,
 				70E483A22BB5AB3700931F01 /* Repository */,
 				70E483A12BB5AB3400931F01 /* Network */,
-				B4B3E2C02B42D1BB00818B3C /* ChatbotMainViewController.swift */,
+				E67855E62BC7B31700488352 /* View */,
 				B4B3E2CA2B42D1BC00818B3C /* Info.plist */,
 			);
 			path = ChatBot;
+			sourceTree = "<group>";
+		};
+		E67855E62BC7B31700488352 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B4B3E2C02B42D1BB00818B3C /* DetailChatViewController.swift */,
+				E67855E72BC7B35500488352 /* DetailChatViewUserInputSectionStackView.swift */,
+				E67855E92BC7B84400488352 /* MessageCellStackView.swift */,
+				E67855EB2BC7B9AB00488352 /* DetailMessageCollectionViewCell.swift */,
+				E67855ED2BC7BA9700488352 /* ChatMessageCollectionView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,7 +232,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B4B3E2C12B42D1BB00818B3C /* ChatbotMainViewController.swift in Sources */,
+				E67855EE2BC7BA9700488352 /* ChatMessageCollectionView.swift in Sources */,
+				B4B3E2C12B42D1BB00818B3C /* DetailChatViewController.swift in Sources */,
 				70A610432BBE6061009B08ED /* NetworkErrorEnum.swift in Sources */,
 				70E87ED22BBAA6F800E27E43 /* RequestDTO.swift in Sources */,
 				70E4839C2BB5A88900931F01 /* RequestMessageModel.swift in Sources */,
@@ -220,11 +241,14 @@
 				70E483A72BB5ABBA00931F01 /* APIKeyManager.swift in Sources */,
 				70A610412BBE6034009B08ED /* URLRequestBuilder.swift in Sources */,
 				70E483A02BB5A8E700931F01 /* MessageRepository.swift in Sources */,
+				E67855EA2BC7B84400488352 /* MessageCellStackView.swift in Sources */,
 				70E4839A2BB5A88000931F01 /* OpenAICheatResponseDTO.swift in Sources */,
 				70E483AB2BB5AC7900931F01 /* OpenAIService.swift in Sources */,
 				70E483A92BB5ABC400931F01 /* OpenAIEndPoint.swift in Sources */,
+				E67855E82BC7B35500488352 /* DetailChatViewUserInputSectionStackView.swift in Sources */,
 				70E483AE2BB5AEB100931F01 /* ChatViewModel.swift in Sources */,
 				B4B3E2BF2B42D1BB00818B3C /* SceneDelegate.swift in Sources */,
+				E67855EC2BC7B9AB00488352 /* DetailMessageCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
