@@ -209,7 +209,7 @@ extension DetailChatViewController: UICollectionViewDelegate, UICollectionViewDa
 extension DetailChatViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
           let message = viewModel.messageRepository.getMessages()[indexPath.row].content
-          let width = collectionView.frame.width - 40
+          let width = collectionView.frame.width
           let size = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
           let attributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)]
           let estimatedFrame = NSString(string: message).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
