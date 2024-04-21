@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MessageView: UILabel {
+final class MessageLabel: UILabel {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -19,7 +19,7 @@ final class MessageView: UILabel {
   }
 }
 
-private extension MessageView {
+private extension MessageLabel {
   func configureUI() {
     self.backgroundColor = .clear
     self.textAlignment = .left
