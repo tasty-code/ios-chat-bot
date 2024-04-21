@@ -12,7 +12,7 @@ final class ChatCell: UICollectionViewListCell {
     return String(describing: self)
   }
   
-  private let userBubbleView = UserBubbleView()
+  private var userBubbleView = UserBubbleView()
   private var systemBubbleView = SystemBubbleView()
   
   override init(frame: CGRect) {
@@ -24,6 +24,12 @@ final class ChatCell: UICollectionViewListCell {
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    configureUser(text: "")
+    configureSystem(text: "")
   }
   
   func configureUser(text: String) {

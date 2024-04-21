@@ -16,30 +16,30 @@ final class ChattingView: UIView {
     collectionView.allowsSelection = false
     return collectionView
   }()
-  
+
   private lazy var dataSource = ChatCollectionViewDataSource(collectionView: chatCollectionView)
-  
+
   private let chatInputView = ChatInputView()
-  
+
   override init(frame: CGRect) {
     super.init(frame: frame)
     configureUI()
     setupCollectionView()
     setupConstraints()
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   func setChatSendButton(completion: @escaping (_ message: Message) -> Void) {
     chatInputView.setChatSendButton(completion: completion)
   }
-  
+
   func isSendButtonEnable(_ isEnable: Bool) {
     chatInputView.isEnable = isEnable
   }
-  
+
   func applyChatResponse(response: [RequestDTO]) {
     var chatCollectionViewSnapshot = ChatCollectionViewSnapshot()
     chatCollectionViewSnapshot.appendSections([.messages])
@@ -55,15 +55,15 @@ private extension ChattingView {
     self.addSubview(chatCollectionView)
     self.addSubview(chatInputView)
   }
-  
+
   func setupCollectionView() {
     self.chatCollectionView.dataSource = dataSource
   }
-  
+
   func setupConstraints() {
     chatInputView.translatesAutoresizingMaskIntoConstraints = false
     chatCollectionView.translatesAutoresizingMaskIntoConstraints = false
-    
+
     NSLayoutConstraint.activate(
       [
         chatCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
