@@ -8,7 +8,7 @@
 import UIKit
 
 final class UserBubbleView: UIView {
-  var messageView: MessageLabel = .init()
+  var messageLabel: MessageLabel = .init()
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -29,7 +29,7 @@ final class UserBubbleView: UIView {
 extension UserBubbleView: ChatBubbleMakable { }
 
 final class SystemBubbleView: UIView {
-  var messageView: MessageLabel = .init()
+  var messageLabel: MessageLabel = .init()
   
   override init(frame: CGRect) {
     super.init(frame: frame)

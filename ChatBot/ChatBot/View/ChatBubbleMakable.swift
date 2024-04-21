@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ChatBubbleMakable where Self: UIView {
-  var messageView: MessageLabel { get }
+  var messageLabel: MessageLabel { get }
   func configureUI()
   func setupConstraints()
   func setRightBubbleView(rect: CGRect)
@@ -18,29 +18,29 @@ protocol ChatBubbleMakable where Self: UIView {
 
 extension ChatBubbleMakable {
   func configureUI() {
-    self.addSubview(messageView)
-    messageView.translatesAutoresizingMaskIntoConstraints = false
+    self.addSubview(messageLabel)
+    messageLabel.translatesAutoresizingMaskIntoConstraints = false
     self.translatesAutoresizingMaskIntoConstraints = false
   }
   
   func setupConstraints() {
     NSLayoutConstraint.activate(
       [
-        self.heightAnchor.constraint(equalTo: messageView.heightAnchor, constant: 15),
-        messageView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-        messageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
-        messageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+        self.heightAnchor.constraint(equalTo: messageLabel.heightAnchor, constant: 15),
+        messageLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+        messageLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+        messageLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
       ]
     )
   }
   
   func configureMessage(text: String) {
-    messageView.text = text
+    messageLabel.text = text
   }
   
   func setRightBubbleView(rect: CGRect) {
     let path = UIBezierPath()
-    messageView.textColor = .white
+    messageLabel.textColor = .white
     let bottom = rect.height
     let right = rect.width
     path.move(
