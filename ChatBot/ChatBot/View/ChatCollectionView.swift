@@ -24,7 +24,7 @@ extension ChatCollectionView {
     self.register(ChatCell.self, forCellWithReuseIdentifier: ChatCell.identifier)
   }
   
-  func srollToBottom() {
+  func scrollToBottom() {
     DispatchQueue.main.async {
       guard self.numberOfSections > 0 else { return }
       let indexPath = IndexPath(

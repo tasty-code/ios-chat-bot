@@ -9,27 +9,16 @@ import UIKit
 import Combine
 
 final class ChatBotViewController: UIViewController {
-
-  private lazy var chatCollectionView: ChatCollectionView = {
-    var configure = UICollectionLayoutListConfiguration(appearance: .plain)
-    configure.showsSeparators = false
-    let layout = UICollectionViewCompositionalLayout.list(using: configure)
-    let collectionView = ChatCollectionView(frame: .zero, collectionViewLayout: layout)
-    collectionView.allowsSelection = false
-    return collectionView
-  }()
-  private lazy var dataSource = ChatCollectionViewDataSource(collectionView: chatCollectionView)
-  private let chatBotViewModel: ChatViewModel = .init()
-  private var cancellable = Set<AnyCancellable>()
-  private let input: PassthroughSubject<ChatViewModel.Input, Never> = .init()
-  private let chatInputView = ChatInputView()
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
+  private let chatBotViewModel: ChatViewModel = .init()
+  private let chattingView: ChattingView = .init()
+  private var cancellable: Set<AnyCancellable> = .init()
+  private let input: PassthroughSubject<ChatViewModel.Input, Never> = .init()
+  
+  override func loadView() {
+    super.loadView()
+    self.view = chattingView
     setupKeyboardNotification()
-    setupCollectionView()
-    configureUI()
-    setupConstraints()
     bind()
     setupChatInputView()
   }
@@ -40,38 +29,11 @@ final class ChatBotViewController: UIViewController {
 }
 
 private extension ChatBotViewController {
-  func configureUI() {
-    view.backgroundColor = .white
-    view.addSubview(chatCollectionView)
-    view.addSubview(chatInputView)
-  }
-  
-  func setupCollectionView() {
-    self.chatCollectionView.dataSource = dataSource
-  }
-  
-  func setupConstraints() {
-    chatInputView.translatesAutoresizingMaskIntoConstraints = false
-    chatCollectionView.translatesAutoresizingMaskIntoConstraints = false
-    
-    NSLayoutConstraint.activate(
-      [
-        chatCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-        chatCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-        chatCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        chatCollectionView.bottomAnchor.constraint(equalTo: chatInputView.topAnchor, constant: -10),
-        chatInputView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-        chatInputView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        chatInputView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-      ]
-    )
-  }
-  
   func setupChatInputView() {
-    chatInputView.setChatSendButton { [weak self] message in
+    chattingView.setChatSendButton { [weak self] message in
       self?.input.send(.sendButtonTapped(message: message))
       guard let requestDTO = self?.chatBotViewModel.requestDTO else { return }
-      self?.applyChatResponse(response: requestDTO)
+      self?.chattingView.applyChatResponse(response: requestDTO)
     }
   }
   
@@ -84,19 +46,11 @@ private extension ChatBotViewController {
       case .fetchChatResponseDidFail(let error):
         print(error.localizedDescription)
       case .fetchChatResponseDidSucceed(let response):
-        self?.applyChatResponse(response: response)
+        self?.chattingView.applyChatResponse(response: response)
       case .toggleSendButton(let isEnable):
-        self?.chatInputView.isEnable = isEnable
+        self?.chattingView.isSendButtonEnable(isEnable)
       }
     }
     .store(in: &cancellable)
-  }
-  
-  func applyChatResponse(response: [RequestDTO]) {
-    var chatCollectionViewSnapshot = ChatCollectionViewSnapshot()
-    chatCollectionViewSnapshot.appendSections([.messages])
-    chatCollectionViewSnapshot.appendItems(response)
-    dataSource.apply(chatCollectionViewSnapshot)
-    chatCollectionView.srollToBottom()
   }
 }
