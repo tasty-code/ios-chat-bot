@@ -17,12 +17,6 @@ final class ChatCollectionView: UICollectionView {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-}
-
-extension ChatCollectionView {
-  func setupChatCell() {
-    self.register(ChatCell.self, forCellWithReuseIdentifier: ChatCell.identifier)
-  }
   
   func scrollToBottom() {
     DispatchQueue.main.async {
@@ -33,5 +27,11 @@ extension ChatCollectionView {
       )
       self.scrollToItem(at: indexPath, at: .bottom, animated: true)
     }
+  }
+}
+
+private extension ChatCollectionView {
+  func setupChatCell() {
+    self.register(ChatCell.self, forCellWithReuseIdentifier: ChatCell.identifier)
   }
 }
