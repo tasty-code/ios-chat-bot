@@ -9,11 +9,11 @@ import Foundation
 import Combine
 
 final class ChatViewModel {
-  
   private var requestModel: RequestModel?
   private let networkService: NetworkService
   private let output: PassthroughSubject<Output, Never> = .init()
   private var cancellables: Set<AnyCancellable> = .init()
+  var requestDTO: [RequestDTO] = []
   
   enum Input {
     case sendButtonTapped(message: Message)
@@ -21,7 +21,7 @@ final class ChatViewModel {
   
   enum Output {
     case fetchChatResponseDidFail(error: NetworkError)
-    case fetchChatResponseDidSucceed(response: ResponseModel)
+    case fetchChatResponseDidSucceed(response: [RequestDTO])
     case toggleSendButton(isEnable: Bool)
   }
   
@@ -33,7 +33,8 @@ final class ChatViewModel {
     input.sink { [weak self] event in
       switch event {
       case .sendButtonTapped(let message):
-        self?.fetchChatBotData(message: message)
+        guard let body = self?.makeBody(message: message) else { return }
+        self?.fetchChatBotData(body: body)
       }
     }.store(in: &cancellables)
     return output.eraseToAnyPublisher()
@@ -41,8 +42,7 @@ final class ChatViewModel {
 }
 
 private extension ChatViewModel {
-  func fetchChatBotData(message: Message) {
-    let body = makeBody(message: message)
+  func fetchChatBotData(body: RequestModel) {
     self.output.send(.toggleSendButton(isEnable: false))
     networkService.fetchChatBotResponse(
       type: .chatbot,
@@ -56,12 +56,21 @@ private extension ChatViewModel {
         self?.output.send(.fetchChatResponseDidFail(error: error))
       }
     } receiveValue: { [weak self] response in
-      self?.output.send(.fetchChatResponseDidSucceed(response: response))
+      self?.requestDTO.removeLast()
+      self?.requestDTO.append(
+        RequestDTO(
+          id: UUID(),
+          message: response.choices[0].message
+        )
+      )
+      guard let requestDTO = self?.requestDTO else { return }
+      self?.output.send(.fetchChatResponseDidSucceed(response: requestDTO))
     }
     .store(in: &cancellables)
   }
   
   func makeBody(message: Message) -> RequestModel? {
+    let responseMessage = Message(role: "assistant", content: "● ● ●")
     guard
       requestModel != nil
     else {
@@ -74,9 +83,22 @@ private extension ChatViewModel {
           message
         ]
       )
+      requestModel?.messages.append(message)
+      setRequestDTO(message, responseMessage)
       return requestModel
     }
     requestModel?.messages.append(message)
+    setRequestDTO(message, responseMessage)
     return requestModel
   }
+  
+  func setRequestDTO(_ message: Message, _ responseMessage: Message) {
+    requestDTO.append(
+      RequestDTO(id: UUID(), message: message)
+    )
+    requestDTO.append(
+      RequestDTO(id: UUID(), message: responseMessage)
+    )
+  }
 }
+

@@ -11,40 +11,44 @@ import Combine
 final class ChatBotViewController: UIViewController {
   
   private let chatBotViewModel: ChatViewModel = .init()
-  private var cancellable = Set<AnyCancellable>()
+  private let chattingView: ChattingView = .init()
+  private var cancellable: Set<AnyCancellable> = .init()
   private let input: PassthroughSubject<ChatViewModel.Input, Never> = .init()
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
+  override func loadView() {
+    super.loadView()
+    self.view = chattingView
+    setupKeyboardNotification()
     bind()
+    setupChatInputView()
   }
-  
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    input.send(
-      .sendButtonTapped(
-        message: Message(
-          role: "user",
-          content: "Compose a poem that explains the concept of recursion in programming."
-        )
-      )
-    )
+
+  deinit {
+    NotificationCenter.default.removeObserver(self)
   }
 }
 
 private extension ChatBotViewController {
+  func setupChatInputView() {
+    chattingView.setChatSendButton { [weak self] message in
+      self?.input.send(.sendButtonTapped(message: message))
+      guard let requestDTO = self?.chatBotViewModel.requestDTO else { return }
+      self?.chattingView.applyChatResponse(response: requestDTO)
+    }
+  }
+  
   func bind() {
     let output = chatBotViewModel.transform(
       input: input.eraseToAnyPublisher()
     )
-    output.sink { event in
+    output.sink { [weak self] event in
       switch event {
       case .fetchChatResponseDidFail(let error):
         print(error.localizedDescription)
       case .fetchChatResponseDidSucceed(let response):
-        print(response.choices[0].message.content)
+        self?.chattingView.applyChatResponse(response: response)
       case .toggleSendButton(let isEnable):
-        print("\(isEnable)")
+        self?.chattingView.isSendButtonEnable(isEnable)
       }
     }
     .store(in: &cancellable)
